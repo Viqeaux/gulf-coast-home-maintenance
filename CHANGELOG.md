@@ -15,10 +15,18 @@ Newest first.
 
 ---
 
+## [Unreleased]
+
+- Moved to <https://gulfcoasthomemaintenance.com>. The old
+  `viqeaux.github.io` address redirects, so printed links and existing
+  subscriptions keep working.
+- Guide links inside calendar events now point at the custom domain. No
+  `SEQUENCE` bump was needed for this, because `GUIDES` is still empty and no
+  event carries a link yet — the first curated video is what will require it.
+
 ## [1.0.0] — 2026-08-13
 
-First public release. Live at
-<https://viqeaux.github.io/gulf-coast-home-maintenance/>.
+First public release, at `viqeaux.github.io/gulf-coast-home-maintenance`.
 
 ### Calendar feeds
 

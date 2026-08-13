@@ -34,11 +34,10 @@ VERSION = "1.0.0"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
-# Where the site is served from. Change this to the custom domain once it is
-# pointed at Pages, then rebuild and bump SEQUENCE so existing subscribers pick
-# up the new guide links. GitHub keeps redirecting the old address either way,
-# so nothing breaks in the gap.
-SITE_URL = "https://viqeaux.github.io/gulf-coast-home-maintenance/"
+# Where the site is served from, and what goes into the guide links inside each
+# calendar event. GitHub redirects the old viqeaux.github.io address here, so
+# anything already pointing at the old one keeps working.
+SITE_URL = "https://gulfcoasthomemaintenance.com/"
 
 # GitHub Pages can only serve a site from the repo root or from /docs — not from
 # an arbitrary folder — so the build lands in docs/ and Pages needs no config.
