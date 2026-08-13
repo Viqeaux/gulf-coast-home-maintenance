@@ -15,3 +15,8 @@ gulf-coast-maintenance-calendar-content.md
 
 __pycache__/
 *.pyc
+
+# The photographic master. optimize_images.py resizes it into the hero-*.jpg
+# files that actually get served, so the 3 MB original would be dead weight in
+# a repo that GitHub Pages serves. Keep it locally as the source of truth.
+docs/img/hero.png

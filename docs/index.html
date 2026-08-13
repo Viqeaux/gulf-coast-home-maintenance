@@ -169,21 +169,44 @@
     background: var(--deep); color: var(--on-deep);
     padding: 4.5rem 0 4rem;
   }
-  .hero::after {  /* horizon glow */
-    content: ""; position: absolute; inset: auto -10% -60% -10%; height: 70%;
-    background: radial-gradient(60% 100% at 50% 0%,
-      color-mix(in srgb, var(--accent) 34%, transparent), transparent 70%);
-    pointer-events: none;
+  /* The photograph sits well back behind a scrim. It is there to say "you live
+     here" — live oak and Spanish moss do that instantly — not to be looked at.
+     The gradient is heaviest on the left so the headline always has ground. */
+  .hero-media { position: absolute; inset: 0; overflow: hidden; }
+  .hero-media img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 62% 42%;
+    display: block;
   }
-  .hero .contour {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    opacity: .16; pointer-events: none;
+  .hero-media::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(100deg,
+        color-mix(in srgb, var(--deep) 94%, transparent) 0%,
+        color-mix(in srgb, var(--deep) 82%, transparent) 34%,
+        color-mix(in srgb, var(--deep) 34%, transparent) 72%,
+        color-mix(in srgb, var(--deep) 18%, transparent) 100%),
+      linear-gradient(to bottom,
+        color-mix(in srgb, var(--deep) 45%, transparent) 0%,
+        color-mix(in srgb, var(--deep) 10%, transparent) 38%,
+        color-mix(in srgb, var(--deep) 78%, transparent) 88%,
+        var(--deep) 100%);
+  }
+  /* Older engines without color-mix would show an unreadable hero, so fall back
+     to a flat scrim rather than a transparent one. */
+  @supports not (background: color-mix(in srgb, red 50%, transparent)) {
+    .hero-media::after { background: rgba(14,36,41,.86); }
   }
   .hero .wrap { position: relative; z-index: 2; }
   .hero .label { color: var(--sand); }
-  .hero h1 { color: #fff; }
-  .hero .deck { color: var(--on-deep-mute); font-size: clamp(1.02rem, 2.3vw, 1.18rem); max-width: 33rem; }
-  .hero .deck strong { color: var(--on-deep); font-weight: 600; }
+  /* Hero copy sits over a photograph, so it runs brighter than the muted tone
+     used on flat dark sections, and carries a soft shadow as insurance where
+     the canopy behind it lightens. */
+  .hero h1 { color: #fff; text-shadow: 0 2px 24px rgba(8,24,28,.55); }
+  .hero .deck {
+    color: #d8d3c7; font-size: clamp(1.02rem, 2.3vw, 1.18rem); max-width: 33rem;
+    text-shadow: 0 1px 14px rgba(8,24,28,.7);
+  }
+  .hero .deck strong { color: #fff; font-weight: 600; }
   .rule-sm {
     width: 3rem; height: 2px; background: var(--sand);
     margin: 0 0 1.4rem; border: 0;
@@ -399,17 +422,11 @@
 
 <!-- ===================== hero ===================== -->
 <header class="hero">
-  <svg class="contour" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <g fill="none" stroke="#ffffff" stroke-width="1">
-      <path d="M-50 330 Q 150 300 350 322 T 750 314 T 1250 300"/>
-      <path d="M-50 352 Q 150 320 350 344 T 750 336 T 1250 320"/>
-      <path d="M-50 375 Q 150 341 350 367 T 750 358 T 1250 341"/>
-      <path d="M-50 399 Q 150 363 350 391 T 750 381 T 1250 363"/>
-      <path d="M-50 424 Q 150 386 350 416 T 750 405 T 1250 386"/>
-      <path d="M-50 118 Q 200 92 420 112 T 840 104 T 1250 88" opacity=".55"/>
-      <path d="M-50 146 Q 200 116 420 139 T 840 130 T 1250 112" opacity=".4"/>
-    </g>
-  </svg>
+  <div class="hero-media" aria-hidden="true">
+    <img src="img/hero-1600.jpg"
+         srcset="img/hero-900.jpg 900w, img/hero-1600.jpg 1600w"
+         sizes="100vw" alt="" fetchpriority="high" decoding="async">
+  </div>
 
   <div class="wrap">
     <p class="label">The Gulf Coast Home Maintenance Calendar</p>
