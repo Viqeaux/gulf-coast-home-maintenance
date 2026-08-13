@@ -389,6 +389,22 @@
   }
   .preview-warning strong { color: var(--must); display: block; margin-bottom: .25rem; }
 
+  /* Shown only to Android visitors. The Google Calendar app can claim links to
+     calendar.google.com and then cannot act on them, so these users may tap the
+     main button and land nowhere. This gives them the working route without
+     making everyone else read about it. */
+  .android-note {
+    background: var(--paper); border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent); border-radius: 3px;
+    padding: 1.1rem 1.25rem; margin-bottom: 1.6rem;
+    font: 15px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--muted);
+  }
+  .android-note strong { color: var(--ink); }
+  .android-note ol { margin: .6rem 0 0; padding-left: 1.15rem; }
+  .android-note li { margin-bottom: .3rem; }
+  .android-note a { color: var(--accent); }
+
   .howto { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.75rem 2.25rem; margin-top: 2rem; }
   .howto h3 { font-size: .98rem; }
   .howto p, .howto li { color: var(--muted); font-size: .93rem; margin: 0 0 .55rem; }
@@ -812,6 +828,28 @@
         'public <code>https://</code> address first. Download still works, and importing ' +
         'a downloaded file is a good way to check the events read correctly.';
       document.querySelector('#calendars .deck').insertAdjacentElement('afterend', banner);
+    }
+
+    // Android can route calendar.google.com links into the Google Calendar app,
+    // which has no way to subscribe to a URL — the app just opens and sits
+    // there. It depends on a per-device "open supported links" setting, so it
+    // hits some Android users and not others, and neither we nor they can tell
+    // in advance. Give them the route that never depends on it.
+    var isAndroid = /android/i.test(navigator.userAgent);
+    if (publicHost && isAndroid) {
+      var note = document.createElement('div');
+      note.className = 'android-note';
+      note.innerHTML =
+        '<strong>On Android, tap the button below first.</strong> ' +
+        'If Google Calendar opens and nothing gets added, the app intercepted the ' +
+        'link and can\'t subscribe. Then do this instead:' +
+        '<ol>' +
+          '<li>Tap <strong>Copy feed URL</strong> on the tier you want.</li>' +
+          '<li>Open <a href="https://calendar.google.com/calendar/u/0/r/settings/addbyurl" ' +
+            'target="_blank" rel="noopener">Google Calendar’s add-by-URL page</a>.</li>' +
+          '<li>Paste it in and tap <strong>Add calendar</strong>.</li>' +
+        '</ol>';
+      document.querySelector('#calendars .deck').insertAdjacentElement('afterend', note);
     }
 
     var base = location.href.replace(/[#?].*$/, '').replace(/[^\/]*$/, '');
