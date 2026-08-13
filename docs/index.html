@@ -18,8 +18,12 @@
     --bg:        #f4efe4;
     --paper:     #fffdf7;
     --paper-2:   #efe8d9;
-    --deep:      #0e2429;   /* the dark bands */
+    --deep:      #0e2429;   /* hero and footer ground */
     --deep-2:    #143139;
+    /* The alternating band is its own token because in dark mode it cannot just
+       borrow --deep: the page ground is already near-black there, so the two
+       would be indistinguishable and the alternation would disappear. */
+    --band-bg:   #0e2429;
     --on-deep:   #e8e2d4;
     --on-deep-mute: #93a5a6;
     --ink:       #15201f;
@@ -32,6 +36,9 @@
     --should:    #14606e;
     --above:     #5b6f34;
     --on-tier:   #fffdf7;
+    /* --must is tuned for the paper ground and goes muddy on the deep one, so
+       the dark sections use a lifted version of the same hue. */
+    --must-lift: #e08a72;
     --shadow:    0 1px 2px rgba(21,32,31,.05), 0 10px 30px -12px rgba(21,32,31,.22);
     --shadow-lg: 0 2px 4px rgba(21,32,31,.06), 0 24px 60px -20px rgba(21,32,31,.32);
   }
@@ -42,6 +49,7 @@
       --paper-2:   #1c2b30;
       --deep:      #08181c;
       --deep-2:    #0e262c;
+      --band-bg:   #050e10;
       --on-deep:   #e2ddd0;
       --on-deep-mute: #8fa2a3;
       --ink:       #e8e3d6;
@@ -64,6 +72,7 @@
     --paper-2:   #1c2b30;
     --deep:      #08181c;
     --deep-2:    #0e262c;
+    --band-bg:   #050e10;
     --on-deep:   #e2ddd0;
     --on-deep-mute: #8fa2a3;
     --ink:       #e8e3d6;
@@ -126,16 +135,36 @@
     letter-spacing: .16em; color: var(--accent);
     display: block; margin-bottom: .7rem;
   }
-  .on-deep .sec-no { color: var(--sand); }
 
-  section { padding: 4.25rem 0; }
-  section + section { border-top: 1px solid var(--rule-soft); }
-  .band {
-    background: var(--deep); color: var(--on-deep);
-    border-top: none !important;
+  /* Sections alternate between the paper ground and the deep one. Anything that
+     paints itself reads these four tokens rather than naming a colour, so a
+     component works on either ground without a variant. */
+  section {
+    padding: 4.25rem 0;
+    --surface: var(--bg);
+    --on-surface: var(--ink);
+    --on-surface-mute: var(--muted);
+    --hairline: var(--rule-soft);
+    --marker: var(--must);
+    background: var(--surface);
+    color: var(--on-surface);
   }
-  .band h2, .band h3 { color: var(--on-deep); }
-  .band p, .band .muted { color: var(--on-deep-mute); }
+  section.band {
+    --surface: var(--band-bg);
+    --on-surface: var(--on-deep);
+    --on-surface-mute: var(--on-deep-mute);
+    --hairline: color-mix(in srgb, var(--on-deep) 17%, transparent);
+    --marker: var(--sand);
+  }
+  @supports not (background: color-mix(in srgb, red 50%, transparent)) {
+    section.band { --hairline: #33454a; }
+  }
+  .band h2, .band h3 { color: var(--on-surface); }
+  .band p, .band .muted { color: var(--on-surface-mute); }
+  .band .sec-no { color: var(--sand); }
+  /* A rule only earns its place between two sections of the same ground; where
+     the ground changes, the change is the divider. */
+  section:not(.band) + section:not(.band) { border-top: 1px solid var(--rule-soft); }
 
   /* --- sticky bar ------------------------------------------------------- */
   .topbar {
@@ -257,27 +286,44 @@
   .figure .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .figure svg { display: block; min-width: 34rem; width: 100%; height: auto; }
   .figcaption {
-    font-size: .87rem; color: var(--on-deep-mute); margin: .9rem 0 0;
-    padding-top: .9rem; border-top: 1px solid color-mix(in srgb, var(--on-deep) 16%, transparent);
+    font-size: .87rem; color: var(--on-surface-mute); margin: .9rem 0 0;
+    padding-top: .9rem; border-top: 1px solid var(--hairline);
   }
-  .diag-month { font: 600 11px ui-sans-serif, system-ui, sans-serif; letter-spacing: .1em; fill: var(--on-deep-mute); }
-  .diag-band-label { font: 600 11px ui-sans-serif, system-ui, sans-serif; letter-spacing: .12em; fill: var(--on-deep); }
-  .diag-note { font: 600 10px ui-sans-serif, system-ui, sans-serif; letter-spacing: .1em; fill: var(--sand); }
-  .diag-grid { stroke: color-mix(in srgb, var(--on-deep) 13%, transparent); stroke-width: 1; }
-  .diag-marker { stroke: var(--sand); stroke-width: 1.5; stroke-dasharray: 3 3; }
+  .diag-month { font: 600 11px ui-sans-serif, system-ui, sans-serif; letter-spacing: .1em; fill: var(--on-surface-mute); }
+  .diag-band-label { font: 600 11px ui-sans-serif, system-ui, sans-serif; letter-spacing: .12em; fill: var(--on-surface); }
+  .diag-note { font: 600 10px ui-sans-serif, system-ui, sans-serif; letter-spacing: .1em; fill: var(--marker); }
+  .diag-grid { stroke: var(--hairline); stroke-width: 1; }
+  .diag-marker { stroke: var(--marker); stroke-width: 1.5; stroke-dasharray: 3 3; }
 
   /* --- factor cards ----------------------------------------------------- */
+  /* Four cells, so the track count has to divide into four exactly — auto-fit
+     lands on three at some widths and leaves an empty cell showing the grid's
+     own background as a block. */
   .factors {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr));
+    display: grid; grid-template-columns: 1fr;
     gap: 1px; margin-top: 2rem;
-    background: var(--rule-soft); border: 1px solid var(--rule-soft);
+    background: var(--hairline); border: 1px solid var(--hairline);
   }
-  .factor { background: var(--bg); padding: 1.5rem 1.4rem; }
+  @media (min-width: 34rem) { .factors { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 60rem) { .factors { grid-template-columns: repeat(4, 1fr); } }
+  .factor { background: var(--surface); padding: 1.5rem 1.4rem; }
   .factor svg { color: var(--accent); margin-bottom: .85rem; display: block; }
-  .factor h3 { font-size: 1rem; }
-  .factor p { font-size: .93rem; color: var(--muted); margin: 0; }
+  .band .factor svg { color: var(--sand); }
+  .factor h3 { font-size: 1rem; color: var(--on-surface); }
+  .factor p { font-size: .93rem; color: var(--on-surface-mute); margin: 0; }
 
   /* --- tiers ------------------------------------------------------------ */
+  /* Cards keep their own paper ground wherever they sit, so they have to reset
+     the section's surface tokens. Custom properties inherit, so this makes
+     rules like `.band h3 { color: var(--on-surface) }` resolve correctly for
+     content inside a light card on a dark section. */
+  .tier, .month-card, .buy, .preview-warning, .android-note {
+    --surface: var(--paper);
+    --on-surface: var(--ink);
+    --on-surface-mute: var(--muted);
+    --hairline: var(--rule-soft);
+  }
+
   .tier {
     background: var(--paper); border: 1px solid var(--rule);
     border-left: 3px solid var(--tier-color); border-radius: 3px;
@@ -335,9 +381,9 @@
     display: grid; grid-template-columns: 11.5rem 1fr 4.6rem;
     align-items: center; gap: .9rem; padding: .5rem 0;
   }
-  .ls + .ls { border-top: 1px solid var(--rule-soft); }
-  .ls .name { font-size: .93rem; }
-  .ls .track { position: relative; height: 9px; background: var(--rule-soft); border-radius: 9px; }
+  .ls + .ls { border-top: 1px solid var(--hairline); }
+  .ls .name { font-size: .93rem; color: var(--on-surface); }
+  .ls .track { position: relative; height: 9px; background: var(--hairline); border-radius: 9px; }
   .ls .fill {
     position: absolute; top: 0; bottom: 0; border-radius: 9px;
     background: linear-gradient(90deg,
@@ -345,8 +391,15 @@
   }
   .ls .yrs {
     font: 600 12px ui-sans-serif, system-ui, sans-serif;
-    color: var(--muted); text-align: right; white-space: nowrap;
+    color: var(--on-surface-mute); text-align: right; white-space: nowrap;
   }
+  .band .ls .fill { background: linear-gradient(90deg,
+      color-mix(in srgb, var(--accent) 45%, transparent), var(--accent)); }
+  /* Keep the short-lifespan items reading as a warning on the deep ground too —
+     that contrast is the whole point of the chart. */
+  .band .ls--short .fill { background: linear-gradient(90deg,
+      color-mix(in srgb, var(--must-lift) 45%, transparent), var(--must-lift)); }
+  .band .ls--short .yrs { color: var(--must-lift); }
   .ls--short .fill { background: linear-gradient(90deg,
       color-mix(in srgb, var(--must) 55%, transparent), var(--must)); }
   .ls--short .yrs { color: var(--must); }
@@ -357,7 +410,7 @@
   .scale .ticks {
     grid-column: 2; display: flex; justify-content: space-between;
     font: 600 10px ui-sans-serif, system-ui, sans-serif;
-    letter-spacing: .1em; color: var(--muted);
+    letter-spacing: .1em; color: var(--on-surface-mute);
   }
   @media (max-width: 34rem) {
     .ls { grid-template-columns: 1fr 3.9rem; row-gap: .3rem; }
@@ -406,12 +459,19 @@
   .android-note a { color: var(--accent); }
 
   .howto { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.75rem 2.25rem; margin-top: 2rem; }
-  .howto h3 { font-size: .98rem; }
-  .howto p, .howto li { color: var(--muted); font-size: .93rem; margin: 0 0 .55rem; }
+  .howto h3 { font-size: .98rem; color: var(--on-surface); }
+  .howto p, .howto li { color: var(--on-surface-mute); font-size: .93rem; margin: 0 0 .55rem; }
+  .howto strong, .howto em { color: var(--on-surface); }
   .howto ol { padding-left: 1.1rem; margin: .3rem 0 .55rem; }
   .howto li { margin-bottom: .2rem; }
 
-  footer { background: var(--deep); color: var(--on-deep-mute); padding: 3rem 0 3.5rem; font-size: .87rem; }
+  /* The last section is also dark, so the footer needs a hairline to read as a
+     separate thing rather than more of the same block. */
+  footer {
+    background: var(--deep); color: var(--on-deep-mute);
+    padding: 3rem 0 3.5rem; font-size: .87rem;
+    border-top: 1px solid color-mix(in srgb, var(--on-deep) 17%, transparent);
+  }
   footer .disclaimer { font-style: italic; margin-bottom: 1rem; max-width: 34rem; }
   footer .mark .label { color: var(--on-deep); }
   code {
@@ -470,7 +530,7 @@
 </header>
 
 <!-- ===================== the year ===================== -->
-<section class="band">
+<section>
   <div class="wrap">
     <span class="sec-no">01 — The pressures</span>
     <h2>The Gulf Coast year</h2>
@@ -539,7 +599,7 @@
 </section>
 
 <!-- ===================== why ===================== -->
-<section>
+<section class="band">
   <div class="wrap">
     <span class="sec-no">02 — Why it's different here</span>
     <h2>Four things that break the national averages</h2>
@@ -634,7 +694,7 @@
 </section>
 
 <!-- ===================== watch list ===================== -->
-<section id="edition">
+<section id="edition" class="band">
   <div class="wrap">
     <span class="sec-no">04 — The back page</span>
     <h2>The Big Ticket Watch List</h2>
@@ -738,7 +798,7 @@
 </section>
 
 <!-- ===================== how to ===================== -->
-<section>
+<section class="band">
   <div class="wrap">
     <span class="sec-no">06 — Getting them on your phone</span>
     <h2>However you keep your calendar</h2>
