@@ -3,12 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gulf Coast Home Maintenance — Digital Calendars</title>
-<meta name="description" content="Three subscribe-able maintenance calendars for Gulf Coast homeowners. Must Do, Should Do, Going Above.">
+<title>The Gulf Coast Home Maintenance Calendar</title>
+<meta name="description" content="A home maintenance calendar built for the Gulf Coast — salt air, humidity, termites, and hurricane season. Twelve months, three tiers, plus free calendars for your phone.">
+<meta property="og:title" content="The Gulf Coast Home Maintenance Calendar">
+<meta property="og:description" content="Generic maintenance advice assumes a climate you don't live in. This one is built for South Mississippi and the Gulf Coast.">
+<meta property="og:type" content="website">
 <style>
   :root {
     --bg: #f7f4ee;
     --panel: #ffffff;
+    --panel-2: #f1ece2;
     --ink: #1d2426;
     --muted: #5c6668;
     --rule: #ddd6c9;
@@ -23,6 +27,7 @@
     :root:not([data-theme="light"]) {
       --bg: #14191a;
       --panel: #1c2325;
+      --panel-2: #222a2c;
       --ink: #eae5db;
       --muted: #9aa5a6;
       --rule: #2e3739;
@@ -37,6 +42,7 @@
   :root[data-theme="dark"] {
     --bg: #14191a;
     --panel: #1c2325;
+    --panel-2: #222a2c;
     --ink: #eae5db;
     --muted: #9aa5a6;
     --rule: #2e3739;
@@ -49,35 +55,53 @@
   }
 
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font: 17px/1.6 ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font: 17px/1.65 ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
     -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.25rem 5rem; }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; }
+  .sans { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
 
-  header { border-bottom: 1px solid var(--rule); padding-bottom: 1.75rem; margin-bottom: 2.25rem; }
   .eyebrow {
-    font: 600 12px/1.4 ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
-    letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 .6rem;
+    font: 600 12px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 .7rem;
   }
-  h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.15; margin: 0 0 .75rem; letter-spacing: -.01em; }
-  .lede { color: var(--muted); margin: 0; font-size: 1.05rem; }
 
-  .preview-warning {
-    background: var(--panel);
-    border: 1px solid var(--must);
-    border-left: 4px solid var(--must);
-    border-radius: 4px;
-    padding: 1rem 1.2rem;
-    margin-bottom: 1.75rem;
-    font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
-    color: var(--muted);
+  /* ---------- hero ---------- */
+  .hero { padding: 4rem 0 3rem; border-bottom: 1px solid var(--rule); }
+  h1 {
+    font-size: clamp(2rem, 6vw, 3.1rem); line-height: 1.1;
+    margin: 0 0 1rem; letter-spacing: -.015em;
   }
-  .preview-warning strong { color: var(--must); display: block; margin-bottom: .25rem; }
+  .hero .lede { font-size: clamp(1.05rem, 2.4vw, 1.2rem); color: var(--muted); margin: 0 0 1.6rem; }
+  .hero .lede strong { color: var(--ink); font-weight: 600; }
 
+  h2 {
+    font: 700 clamp(1.4rem, 3.6vw, 1.85rem)/1.2 ui-serif, Georgia, serif;
+    margin: 0 0 .9rem; letter-spacing: -.01em;
+  }
+  h3 {
+    font: 700 1.1rem/1.35 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    margin: 0 0 .4rem;
+  }
+  section { padding: 3.25rem 0; border-bottom: 1px solid var(--rule); }
+  section > p:last-child { margin-bottom: 0; }
+  p { margin: 0 0 1rem; }
+  .muted { color: var(--muted); }
+
+  /* ---------- why ---------- */
+  .why-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1.5rem 2rem; margin-top: 1.75rem;
+  }
+  .why-grid h3 { color: var(--accent); }
+  .why-grid p { font-size: .95rem; color: var(--muted); margin: 0; }
+
+  /* ---------- tiers ---------- */
   .tier {
     background: var(--panel);
     border: 1px solid var(--rule);
@@ -85,108 +109,277 @@
     border-radius: 4px;
     box-shadow: var(--shadow);
     padding: 1.4rem 1.5rem 1.5rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.1rem;
   }
   .tier--must   { --tier-color: var(--must); }
   .tier--should { --tier-color: var(--should); }
   .tier--above  { --tier-color: var(--above); }
-
-  .tier h2 {
-    font: 700 1.25rem/1.3 ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
-    margin: 0 0 .35rem; color: var(--tier-color); letter-spacing: -.01em;
-  }
-  .tier p { margin: 0 0 1.1rem; color: var(--muted); }
+  .tier h3 { color: var(--tier-color); font-size: 1.2rem; letter-spacing: -.01em; }
+  .tier p { margin: 0 0 1rem; color: var(--muted); }
+  .tier p:last-child { margin-bottom: 0; }
   .count {
     font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
     letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
-    display: block; margin-bottom: 1.1rem;
+    display: block; margin-bottom: 1rem;
   }
 
+  /* ---------- sample month ---------- */
+  .sample {
+    background: var(--panel); border: 1px solid var(--rule);
+    border-radius: 4px; box-shadow: var(--shadow);
+    padding: 1.6rem 1.6rem 1.3rem; margin-top: 1.5rem;
+  }
+  .sample .month {
+    font: 700 13px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
+    margin: 0 0 .2rem;
+  }
+  .sample .banner {
+    font: 600 .95rem/1.4 ui-sans-serif, system-ui, sans-serif;
+    color: var(--must); margin: 0 0 1.1rem;
+  }
+  .sample dl { margin: 0; }
+  .sample dt {
+    font: 700 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .12em; text-transform: uppercase; margin-bottom: .3rem;
+  }
+  .sample dd { margin: 0 0 1rem; font-size: .97rem; color: var(--muted); }
+  .sample dd:last-child { margin-bottom: 0; }
+  .dt--must { color: var(--must); }
+  .dt--should { color: var(--should); }
+  .dt--above { color: var(--above); }
+
+  /* ---------- watch list ---------- */
+  .table-scroll { overflow-x: auto; margin-top: 1.5rem; -webkit-overflow-scrolling: touch; }
+  table { border-collapse: collapse; width: 100%; min-width: 30rem; font-size: .95rem; }
+  th, td { text-align: left; padding: .55rem .8rem; border-bottom: 1px solid var(--rule); }
+  th {
+    font: 600 11px/1.3 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+    border-bottom: 1px solid var(--ink);
+  }
+  td:last-child { color: var(--accent); font-weight: 600; white-space: nowrap; }
+  .table-note { font-size: .9rem; color: var(--muted); margin-top: 1rem; }
+
+  /* ---------- buy ---------- */
+  .buy {
+    background: var(--panel-2); border: 1px solid var(--rule);
+    border-radius: 4px; padding: 1.75rem 1.6rem; margin-top: 1.5rem; text-align: center;
+  }
+  .buy p { color: var(--muted); }
+  .buy p:last-child { margin-bottom: 0; }
+  .soon {
+    display: inline-block;
+    font: 600 13px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); border: 1px dashed var(--rule);
+    padding: .8rem 1.2rem; border-radius: 3px;
+  }
+
+  /* ---------- buttons ---------- */
   .actions { display: flex; flex-wrap: wrap; gap: .55rem; }
   a.btn {
-    font: 600 14px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
-    text-decoration: none; padding: .7rem 1rem; border-radius: 3px;
+    font: 600 14px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    text-decoration: none; padding: .75rem 1.05rem; border-radius: 3px;
     border: 1px solid var(--rule); color: var(--ink); background: transparent;
-    transition: background .15s ease, border-color .15s ease;
+    transition: border-color .15s ease, filter .15s ease;
   }
-  a.btn:hover { border-color: var(--tier-color); }
+  a.btn:hover { border-color: var(--tier-color, var(--accent)); }
   a.btn--primary {
-    background: var(--tier-color); border-color: var(--tier-color);
+    background: var(--tier-color, var(--accent)); border-color: var(--tier-color, var(--accent));
     color: var(--on-tier);
   }
   a.btn--primary:hover { filter: brightness(1.08); }
+  a.btn--lg { padding: .95rem 1.6rem; font-size: 15px; }
 
-  .note {
-    margin-top: 2.5rem; padding-top: 1.75rem; border-top: 1px solid var(--rule);
-    color: var(--muted); font-size: .95rem;
+  /* ---------- misc ---------- */
+  .preview-warning {
+    background: var(--panel); border: 1px solid var(--must); border-left: 4px solid var(--must);
+    border-radius: 4px; padding: 1rem 1.2rem; margin-bottom: 1.75rem;
+    font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--muted);
   }
-  .note h3 {
-    font: 700 13px/1.4 ui-sans-serif, system-ui, sans-serif;
-    letter-spacing: .1em; text-transform: uppercase; color: var(--ink);
-    margin: 1.5rem 0 .5rem;
-  }
-  .note h3:first-child { margin-top: 0; }
-  .note ol { padding-left: 1.2rem; margin: .4rem 0; }
-  .note li { margin-bottom: .3rem; }
+  .preview-warning strong { color: var(--must); display: block; margin-bottom: .25rem; }
+
+  .howto h3 { margin-top: 1.6rem; }
+  .howto ol { padding-left: 1.2rem; }
+  .howto li { margin-bottom: .3rem; }
+  .howto p, .howto li { color: var(--muted); font-size: .97rem; }
+
+  footer { padding: 2.5rem 0 4rem; color: var(--muted); font-size: .87rem; }
+  footer .disclaimer { font-style: italic; margin-bottom: .75rem; }
   code {
     font: 13px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
     background: var(--panel); border: 1px solid var(--rule);
     padding: .1rem .35rem; border-radius: 3px; word-break: break-all;
   }
-  footer {
-    margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule);
-    color: var(--muted); font-size: .85rem; font-style: italic;
-  }
 </style>
 </head>
 <body>
+
 <div class="wrap">
 
-  <header>
-    <p class="eyebrow">The Gulf Coast Home Maintenance Calendar</p>
-    <h1>Put it on your phone.</h1>
+  <header class="hero">
+    <p class="eyebrow">South Mississippi &amp; the Gulf Coast</p>
+    <h1>Your house is on a different schedule than the internet thinks.</h1>
     <p class="lede">
-      Three calendars, one per tier — the same twelve months that are on your wall.
-      Subscribe to one, or all three. They repeat every year, forever.
+      Most home maintenance advice is written for a climate you don't live in. Down here
+      the A/C runs nine months a year, termites swarm every spring, and hurricane season
+      has a deadline your insurance actually enforces.
+      <strong>This calendar is built for that.</strong>
     </p>
+    <div class="actions">
+      <a class="btn btn--primary btn--lg" href="#calendars">Get the free phone calendars</a>
+      <a class="btn btn--lg" href="#print">See the full edition</a>
+    </div>
   </header>
 
-  <section class="tier tier--must">
-    <h2>Must Do</h2>
-    <p>Safety, or skipping it costs you thousands. If you do nothing else, do these twelve things.</p>
-    <span class="count">12 reminders a year</span>
-    <div class="actions" data-file="gulf-coast-must-do.ics"></div>
+  <section>
+    <h2>Why the Gulf Coast is its own problem</h2>
+    <p class="muted">
+      The national averages assume mild summers, dry air, and a roof that isn't being
+      sandblasted with salt. Four things here break that math.
+    </p>
+    <div class="why-grid">
+      <div>
+        <h3>Salt air</h3>
+        <p>Corrodes condenser coils, fasteners, and flashing years ahead of schedule.</p>
+      </div>
+      <div>
+        <h3>Humidity</h3>
+        <p>Drives mold, rot, and pests into crawlspaces and wall cavities you never look at.</p>
+      </div>
+      <div>
+        <h3>Termites</h3>
+        <p>Formosan and native subterranean colonies are endemic — and damage is almost never covered by insurance.</p>
+      </div>
+      <div>
+        <h3>Hurricane season</h3>
+        <p>June 1 to November 30, with a flood insurance waiting period that makes May the real deadline.</p>
+      </div>
+    </div>
   </section>
 
-  <section class="tier tier--should">
-    <h2>Should Do</h2>
-    <p>Protects your home's value and makes what you own last longer.</p>
-    <span class="count">12 reminders a year</span>
-    <div class="actions" data-file="gulf-coast-should-do.ics"></div>
-  </section>
-
-  <section class="tier tier--above">
-    <h2>Going Above</h2>
-    <p>For the homeowner who wants to stay ahead of everything.</p>
-    <span class="count">12 reminders a year</span>
-    <div class="actions" data-file="gulf-coast-going-above.ics"></div>
-  </section>
-
-  <div class="note">
-    <h3>Start with Must Do</h3>
-    <p>Add the others when you're ready. Nobody does all of this the first year.</p>
-
-    <h3>Subscribe, don't download</h3>
-    <p>
-      A subscription keeps updating as the calendar improves. A downloaded file is
-      a snapshot — it never changes again, and duplicates pile up if you import twice.
+  <section>
+    <h2>Twelve months, three tiers</h2>
+    <p class="muted">
+      The tiers exist so you can start without drowning. Nobody does all of this the first year.
     </p>
 
-    <h3>Google Calendar on a phone</h3>
+    <div class="tier tier--must">
+      <h3>Must Do</h3>
+      <p>Safety, or skipping it costs you thousands. If you do nothing else, do these twelve things.</p>
+    </div>
+    <div class="tier tier--should">
+      <h3>Should Do</h3>
+      <p>Protects your home's value and makes what you own last longer.</p>
+    </div>
+    <div class="tier tier--above">
+      <h3>Going Above</h3>
+      <p>For the homeowner who wants to stay ahead of everything.</p>
+    </div>
+
+    <h2 style="margin-top:2.5rem">What a month looks like</h2>
+    <div class="sample">
+      <p class="month">May</p>
+      <p class="banner">Hurricane prep month. Season opens June 1.</p>
+      <dl>
+        <dt class="dt--must">Must</dt>
+        <dd>
+          Verify your insurance <em>before</em> the season starts: wind, and flood if you carry it.
+          Flood policies generally take 30 days to take effect. Photograph every room and the
+          exterior for your claim file. Trim limbs back from the roof.
+        </dd>
+        <dt class="dt--should">Should</dt>
+        <dd>Test the generator. Restock supplies. Check that shutters or plywood are on hand and fit.</dd>
+        <dt class="dt--above">Above</dt>
+        <dd>Inspect soffit vents and roof edges. Secure sheds, fencing, and anything that becomes a projectile.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="print">
+    <h2>The Big Ticket Watch List</h2>
+    <p class="muted">
+      The back page of the full edition, and the reason people keep it. You fill in the
+      year each thing was installed. It tells you when to start saving instead of when to
+      start panicking.
+    </p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Item</th><th>Typical Gulf Coast life</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Roof — asphalt shingle</td><td>12–15 years</td></tr>
+          <tr><td>Water heater — tank</td><td>8–10 years</td></tr>
+          <tr><td>A/C condenser (outdoor)</td><td>10–12 years</td></tr>
+          <tr><td>Furnace / air handler</td><td>15–18 years</td></tr>
+          <tr><td>Exterior caulk &amp; sealants</td><td>2–4 years</td></tr>
+          <tr><td>Windows</td><td>15–25 years</td></tr>
+          <tr><td>Septic tank — pump out</td><td>every 3–5 years</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">
+      Shorter than what you'll find online, on purpose. Salt air, humidity, and UV wear
+      coastal homes faster than national averages assume. The full edition carries the
+      whole list, plus a page on how to find out when each one was installed.
+    </p>
+
+    <div class="buy">
+      <h3 style="margin-bottom:.5rem">The complete edition</h3>
+      <p>
+        Undated, so it never expires and never goes on sale in January — twelve months,
+        all three tiers, the full Big Ticket Watch List, the page on how to date everything
+        in your house, and a first-month checklist for what you only do once.
+      </p>
+      <!-- ETSY LINK GOES HERE: set SHOP_URL in the script at the bottom of this file. -->
+      <p id="buy-slot"><span class="soon">Coming soon</span></p>
+    </div>
+  </section>
+
+  <section id="calendars">
+    <h2>Free calendars for your phone</h2>
+    <p class="muted">
+      The same twelve months, as three calendars you can subscribe to. Free, no signup.
+      Pick a tier — or take all three and let the colors sort them out.
+    </p>
+
+    <div class="tier tier--must">
+      <h3>Must Do</h3>
+      <span class="count">12 reminders a year</span>
+      <div class="actions" data-file="gulf-coast-must-do.ics"></div>
+    </div>
+    <div class="tier tier--should">
+      <h3>Should Do</h3>
+      <span class="count">12 reminders a year</span>
+      <div class="actions" data-file="gulf-coast-should-do.ics"></div>
+    </div>
+    <div class="tier tier--above">
+      <h3>Going Above</h3>
+      <span class="count">12 reminders a year</span>
+      <div class="actions" data-file="gulf-coast-going-above.ics"></div>
+    </div>
+  </section>
+
+  <section class="howto">
+    <h2>Getting them onto your phone</h2>
+
+    <h3>Start with Must Do</h3>
+    <p>Add the others when you're ready. The whole point of the tiers is that you don't have to do everything at once.</p>
+
+    <h3>Subscribe rather than download</h3>
     <p>
-      The Google Calendar app can't add a subscription itself. Do it once from a
-      browser — phone or computer — and it shows up on every device signed into
-      that account.
+      A subscription keeps updating as the calendar improves — including the how-to videos
+      being added to each task. A downloaded file is a snapshot: it never changes again, and
+      it duplicates itself if you import it twice.
+    </p>
+
+    <h3>Google Calendar</h3>
+    <p>
+      The Google Calendar app can't add a subscription itself. Do it once from a browser —
+      phone or computer — and it appears on every device signed into that account.
     </p>
     <ol>
       <li>Tap <strong>Add to Google Calendar</strong> above.</li>
@@ -194,35 +387,50 @@
       <li>In the app, open the menu and switch the new calendar on.</li>
     </ol>
     <p>
-      Google refreshes subscribed calendars slowly — sometimes up to a day. Nothing
-      here is urgent to the hour, so it doesn't matter.
+      Google refreshes subscribed calendars slowly, sometimes up to a day. Nothing here is
+      urgent to the hour, so it doesn't matter. A newly added calendar may show its web
+      address as the name until Google's first refresh — that's normal, and it corrects itself.
     </p>
 
     <h3>Apple Calendar or Outlook</h3>
-    <p>Use <strong>Subscribe</strong>, which opens your default calendar app directly.</p>
+    <p>Use <strong>Subscribe</strong>, which hands off to your default calendar app.</p>
 
     <h3>Reminders are yours to set</h3>
     <p>
-      These arrive as all-day events with no alert. Add your own notification on the
-      calendar once and it applies to everything in it.
+      These arrive as all-day events with no alert, so they never wake you up. Add one
+      notification on the calendar itself and it applies to all twelve months.
     </p>
-  </div>
+  </section>
 
   <footer>
-    General maintenance guidance, not a substitute for a licensed inspector,
-    contractor, or your insurance policy terms.
+    <p class="disclaimer">
+      General maintenance guidance, not a substitute for a licensed inspector, contractor,
+      or your insurance policy terms.
+    </p>
+    <p>The Gulf Coast Home Maintenance Calendar</p>
   </footer>
 
 </div>
 
 <script>
-  // Build the subscribe links from wherever this page is actually hosted, so the
-  // same files work on any domain without editing.
-  //
-  // Subscribing only works from a public HTTPS origin: Google's servers fetch the
-  // .ics themselves, so file://, localhost, and http:// are all unreachable to
-  // them. Rather than render a button that silently does nothing, say so.
+  // ---------------------------------------------------------------------------
+  // Paste your Etsy listing URL here to turn "Coming soon" into a buy button.
+  var SHOP_URL = "";
+  // ---------------------------------------------------------------------------
+
   (function () {
+    if (SHOP_URL) {
+      document.getElementById('buy-slot').innerHTML =
+        '<a class="btn btn--primary btn--lg" href="' + SHOP_URL +
+        '" target="_blank" rel="noopener">Get the complete edition</a>';
+    }
+
+    // Subscribe links are built from wherever this page is hosted, so the files
+    // work on any domain without editing.
+    //
+    // Subscribing only works from a public HTTPS origin: Google fetches the .ics
+    // from its own servers, so file://, localhost, and http:// are unreachable to
+    // it. Rather than render a button that silently does nothing, say so.
     var local = /^(localhost|127\.0\.0\.1|\[::1\]|.*\.local)$/i.test(location.hostname);
     var publicHost = location.protocol === 'https:' && !local;
 
@@ -234,17 +442,16 @@
       banner.className = 'preview-warning';
       banner.innerHTML =
         '<strong>Preview only — subscribing won\'t work yet.</strong> ' + why +
-        ' Google fetches the calendar file from its own servers, so it has to be ' +
-        'on a public <code>https://</code> address first. Download still works, ' +
-        'and importing a downloaded file is a good way to check the events read ' +
-        'correctly.';
-      document.querySelector('header').insertAdjacentElement('afterend', banner);
+        ' Google fetches the calendar file from its own servers, so it has to be on a ' +
+        'public <code>https://</code> address first. Download still works, and importing ' +
+        'a downloaded file is a good way to check the events read correctly.';
+      document.getElementById('calendars').insertAdjacentElement('afterbegin', banner);
     }
 
-    var base = location.href.replace(/[^\/]*$/, '');
+    var base = location.href.replace(/[#?].*$/, '').replace(/[^\/]*$/, '');
     var bare = base.replace(/^https?:\/\//, '');
 
-    document.querySelectorAll('.actions').forEach(function (box) {
+    document.querySelectorAll('.actions[data-file]').forEach(function (box) {
       var file = box.getAttribute('data-file');
       var https = base + file;
       var webcal = 'webcal://' + bare + file;
