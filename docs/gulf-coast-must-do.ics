@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Gulf Coast Home Maintenance//Perpetual Edition//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:Gulf Coast Home Maintenance — Must Do
+X-WR-CALNAME:Must Do — Gulf Coast Home Maintenance
 X-WR-CALDESC:Safety\, or skipping it costs you thousands. If you do nothing
   else\, do these twelve things. General maintenance guidance\, not a subst
  itute for a licensed inspector\, contractor\, or your insurance policy ter
@@ -11,6 +11,8 @@ X-WR-CALDESC:Safety\, or skipping it costs you thousands. If you do nothing
 X-WR-TIMEZONE:America/Chicago
 REFRESH-INTERVAL;VALUE=DURATION:P1D
 X-PUBLISHED-TTL:P1D
+COLOR:firebrick
+X-APPLE-CALENDAR-COLOR:#9C3722
 BEGIN:VEVENT
 UID:2026-jan-detectors@gulfcoast-home-maintenance
 DTSTAMP:20260813T000000Z

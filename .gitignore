@@ -8,7 +8,10 @@
 gulf-coast-maintenance-calendar-content.md
 
 # Local Claude Code settings — machine-specific, not useful to anyone else.
+# The .tmp.* pattern matters: Claude Code writes settings atomically via a temp
+# file, and `git add -A` fails outright if it indexes one mid-write.
 .claude/settings.local.json
+.claude/*.tmp.*
 
 __pycache__/
 *.pyc

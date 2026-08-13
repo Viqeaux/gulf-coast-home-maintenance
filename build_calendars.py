@@ -38,10 +38,20 @@ DISCLAIMER = (
     "contractor, or your insurance policy terms."
 )
 
+# Calendar names lead with the tier because sidebars truncate. "Gulf Coast Home
+# Mainten..." is what a subscriber actually sees otherwise, which hides the one
+# word that distinguishes the three feeds from each other.
+#
+# COLOR is RFC 7986 (CSS3 color names) and X-APPLE-CALENDAR-COLOR is Apple's
+# hex equivalent, both matched to the print tiers. Apple and some other clients
+# honor them. Google ignores both and assigns its own color per subscriber, so
+# the tier has to be legible from the name alone.
+
 TIERS = {
     "must": {
         "file": "gulf-coast-must-do.ics",
-        "name": "Gulf Coast Home Maintenance — Must Do",
+        "name": "Must Do — Gulf Coast Home Maintenance",
+        "color": ("firebrick", "#9C3722"),
         "desc": (
             "Safety, or skipping it costs you thousands. If you do nothing "
             "else, do these twelve things. " + DISCLAIMER
@@ -49,7 +59,8 @@ TIERS = {
     },
     "should": {
         "file": "gulf-coast-should-do.ics",
-        "name": "Gulf Coast Home Maintenance — Should Do",
+        "name": "Should Do — Gulf Coast Home Maintenance",
+        "color": ("teal", "#1F5F6B"),
         "desc": (
             "Protects your home's value and makes what you own last longer. "
             + DISCLAIMER
@@ -57,7 +68,8 @@ TIERS = {
     },
     "above": {
         "file": "gulf-coast-going-above.ics",
-        "name": "Gulf Coast Home Maintenance — Going Above",
+        "name": "Going Above — Gulf Coast Home Maintenance",
+        "color": ("olivedrab", "#5D6B3A"),
         "desc": (
             "For the homeowner who wants to stay ahead of everything. "
             + DISCLAIMER
@@ -395,6 +407,8 @@ def build_calendar(tier_key):
         "X-WR-TIMEZONE:America/Chicago",
         "REFRESH-INTERVAL;VALUE=DURATION:P1D",
         "X-PUBLISHED-TTL:P1D",
+        "COLOR:" + tier["color"][0],
+        "X-APPLE-CALENDAR-COLOR:" + tier["color"][1],
     ]
     for month, day, task_tier, slug, title, body in TASKS:
         if task_tier != tier_key:
