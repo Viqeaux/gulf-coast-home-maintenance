@@ -177,20 +177,28 @@
   }
 
   /* ---------- buttons ---------- */
-  .actions { display: flex; flex-wrap: wrap; gap: .55rem; }
-  a.btn {
+  /* .btn covers both <a> and <button> — the copy control is a real button so it
+     is reachable by keyboard and announced correctly, not a link to nowhere. */
+  .actions { display: flex; flex-wrap: wrap; gap: .55rem; align-items: center; }
+  .btn {
     font: 600 14px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
     text-decoration: none; padding: .75rem 1.05rem; border-radius: 3px;
     border: 1px solid var(--rule); color: var(--ink); background: transparent;
     transition: border-color .15s ease, filter .15s ease;
+    cursor: pointer; -webkit-appearance: none; appearance: none;
   }
-  a.btn:hover { border-color: var(--tier-color, var(--accent)); }
-  a.btn--primary {
+  .btn:hover { border-color: var(--tier-color, var(--accent)); }
+  .btn:focus-visible { outline: 2px solid var(--tier-color, var(--accent)); outline-offset: 2px; }
+  .btn--primary {
     background: var(--tier-color, var(--accent)); border-color: var(--tier-color, var(--accent));
     color: var(--on-tier);
   }
-  a.btn--primary:hover { filter: brightness(1.08); }
-  a.btn--lg { padding: .95rem 1.6rem; font-size: 15px; }
+  .btn--primary:hover { filter: brightness(1.08); }
+  .btn--lg { padding: .95rem 1.6rem; font-size: 15px; }
+  .btn--copied {
+    border-color: var(--tier-color, var(--accent));
+    color: var(--tier-color, var(--accent));
+  }
 
   /* ---------- misc ---------- */
   .preview-warning {
@@ -395,6 +403,14 @@
     <h3>Apple Calendar or Outlook</h3>
     <p>Use <strong>Subscribe</strong>, which hands off to your default calendar app.</p>
 
+    <h3>Any other calendar app</h3>
+    <p>
+      Outlook on the web, Thunderbird, Proton and most others ask you to paste a feed
+      address rather than click a link. Use <strong>Copy feed URL</strong>, then find the
+      option called <em>Subscribe from web</em>, <em>Add from URL</em>, or <em>New calendar
+      from internet</em> and paste it there.
+    </p>
+
     <h3>Reminders are yours to set</h3>
     <p>
       These arrive as all-day events with no alert, so they never wake you up. Add one
@@ -465,7 +481,49 @@
 
       box.innerHTML = subscribe +
         '<a class="btn' + (publicHost ? '' : ' btn--primary') + '" href="' +
-        https + '" download>Download .ics</a>';
+        https + '" download>Download .ics</a>' +
+        '<button class="btn" type="button" data-url="' + https + '">Copy feed URL</button>';
+    });
+
+    // The two subscribe buttons only cover Google and apps that register the
+    // webcal:// handler. Everything else — Outlook on the web, Thunderbird,
+    // Proton — wants an https:// feed address pasted into a box, so hand it over
+    // directly rather than making people dig it out of the download link.
+    document.querySelectorAll('.actions button[data-url]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var url = btn.getAttribute('data-url');
+
+        var done = function (ok) {
+          btn.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+          btn.classList.add('btn--copied');
+          setTimeout(function () {
+            btn.textContent = 'Copy feed URL';
+            btn.classList.remove('btn--copied');
+          }, 2000);
+        };
+
+        // navigator.clipboard needs a secure context and can still be refused by
+        // permissions policy, so fall back to a selected textarea, and finally to
+        // a prompt the user can copy out of by hand.
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(function () { done(true); }, fallback);
+        } else {
+          fallback();
+        }
+
+        function fallback() {
+          var ta = document.createElement('textarea');
+          ta.value = url;
+          ta.setAttribute('readonly', '');
+          ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+          document.body.appendChild(ta);
+          ta.select();
+          var ok = false;
+          try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+          document.body.removeChild(ta);
+          if (ok) { done(true); } else { window.prompt('Copy this feed address:', url); done(false); }
+        }
+      });
     });
   })();
 </script>
