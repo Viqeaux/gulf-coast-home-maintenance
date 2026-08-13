@@ -1,0 +1,214 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Gulf Coast Home Maintenance//Perpetual Edition//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Gulf Coast Home Maintenance — Must Do
+X-WR-CALDESC:Safety\, or skipping it costs you thousands. If you do nothing
+  else\, do these twelve things. General maintenance guidance\, not a subst
+ itute for a licensed inspector\, contractor\, or your insurance policy ter
+ ms.
+X-WR-TIMEZONE:America/Chicago
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2026-jan-detectors@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260101
+DTEND;VALUE=DATE:20260102
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Test smoke and CO detectors
+DESCRIPTION:Test every smoke and carbon monoxide detector. Replace the batt
+ eries. Replace any detector over 10 years old.\n\nWhy: sensors degrade wit
+ h age whether or not the unit still chirps\, and a detector past its rated
+  life can pass a button test and still fail in a real fire.\n\nGeneral mai
+ ntenance guidance\, not a substitute for a licensed inspector\, contractor
+ \, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-feb-termite-inspection@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260201
+DTEND;VALUE=DATE:20260202
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Schedule the annual termite inspection
+DESCRIPTION:Book it now\, before spring swarm season fills the schedule.\n\
+ nWhy: Formosan and native subterranean termites are endemic across the Gul
+ f Coast\, and damage is almost never covered by homeowners insurance. An a
+ nnual inspection is the cheapest insurance you can buy.\n\nGeneral mainten
+ ance guidance\, not a substitute for a licensed inspector\, contractor\, o
+ r your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-mar-hvac-service@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260301
+DTEND;VALUE=DATE:20260302
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Service the HVAC before cooling season
+DESCRIPTION:Get a professional service call before the cooling season start
+ s.\n\nWhy: down here the system runs eight or nine months a year\, roughly
+  double the load it was rated against. Service is what buys back the years
+  that heat takes off.\n\nGeneral maintenance guidance\, not a substitute f
+ or a licensed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-apr-swarm-season@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260401
+DTEND;VALUE=DATE:20260402
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Swarm season — watch for termites
+DESCRIPTION:Watch for winged termites indoors and around lights. Check for 
+ mud tubes along the slab\, piers\, and foundation walls.\n\nWhy: a swarm i
+ s the one time termites are visible to you. Mud tubes mean an active colon
+ y is already feeding on the house.\n\nGeneral maintenance guidance\, not a
+  substitute for a licensed inspector\, contractor\, or your insurance poli
+ cy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-may-insurance-hurricane-prep@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260501
+DTEND;VALUE=DATE:20260502
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Verify insurance — season opens June 1
+DESCRIPTION:Verify your coverage BEFORE the season starts: wind\, and flood
+  if you carry it. Photograph every room and the full exterior for your cla
+ im file. Trim limbs back from the roof.\n\nWhy: flood policies generally t
+ ake 30 days to take effect\, so June 1 is already too late to start. Photo
+ s taken before a storm are what get a claim paid after one.\n\nGeneral mai
+ ntenance guidance\, not a substitute for a licensed inspector\, contractor
+ \, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-jun-condensate-line@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260601
+DTEND;VALUE=DATE:20260602
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Clear the A/C condensate drain line
+DESCRIPTION:Flush the condensate drain line and check the overflow pan and 
+ float switch.\n\nWhy: a clogged condensate line is one of the most common 
+ causes of ceiling damage on the coast. The unit keeps running and quietly 
+ drains into your drywall.\n\nGeneral maintenance guidance\, not a substitu
+ te for a licensed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-jul-leak-hunt@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260701
+DTEND;VALUE=DATE:20260702
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Hunt for leaks
+DESCRIPTION:Check under every sink\, behind every toilet\, and around the b
+ ase of the water heater.\n\nWhy: slow leaks are found by looking\, not by 
+ waiting. In this humidity a cabinet leak becomes mold long before it becom
+ es a stain you notice.\n\nGeneral maintenance guidance\, not a substitute 
+ for a licensed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-aug-peak-season-check@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260801
+DTEND;VALUE=DATE:20260802
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Peak season — re-check kit and plan
+DESCRIPTION:Re-check your supply kit\, your documents\, and your evacuation
+  plan. Confirm your insurance is still active and paid.\n\nWhy: this is th
+ e peak of the season. A lapsed policy or an expired document is something 
+ you want to find now\, not while you are packing.\n\nGeneral maintenance g
+ uidance\, not a substitute for a licensed inspector\, contractor\, or your
+  insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-sep-dryer-vent@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260901
+DTEND;VALUE=DATE:20260902
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Clean the dryer vent
+DESCRIPTION:Clean the full dryer vent run\, not just the lint trap.\n\nWhy:
+  dryer lint is a leading cause of house fires\, and coastal humidity makes
+  it pack into the duct harder and faster.\n\nGeneral maintenance guidance\
+ , not a substitute for a licensed inspector\, contractor\, or your insuran
+ ce policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-oct-flush-water-heater@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261002
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Flush the water heater
+DESCRIPTION:Drain and flush the tank to clear sediment.\n\nWhy: sediment in
+ sulates the burner from the water and cooks the tank from the inside. Gulf
+  Coast water heaters are already short-lived\; this is most of the differe
+ nce between 8 years and 12.\n\nGeneral maintenance guidance\, not a substi
+ tute for a licensed inspector\, contractor\, or your insurance policy term
+ s.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-nov-post-season-inspection@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20261130
+DTEND;VALUE=DATE:20261201
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Post-season inspection — season closed
+DESCRIPTION:Walk the roof line and the whole property for storm damage. Fil
+ e any claims now\, not in spring.\n\nWhy: hurricane season closes November
+  30. Insurers get much harder to convince about damage the longer you wait
+ \, and most policies require prompt notice.\n\nGeneral maintenance guidanc
+ e\, not a substitute for a licensed inspector\, contractor\, or your insur
+ ance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-dec-freeze-prep@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Freeze prep — protect the pipes
+DESCRIPTION:Insulate exposed pipes\, cover spigots\, and confirm you know w
+ here the main shutoff is.\n\nWhy: coastal homes are built for heat\, not c
+ old. A hard freeze here bursts pipes that would be fine anywhere north of 
+ us.\n\nGeneral maintenance guidance\, not a substitute for a licensed insp
+ ector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+END:VCALENDAR

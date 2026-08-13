@@ -1,0 +1,211 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Gulf Coast Home Maintenance//Perpetual Edition//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Gulf Coast Home Maintenance — Should Do
+X-WR-CALDESC:Protects your home's value and makes what you own last longer.
+  General maintenance guidance\, not a substitute for a licensed inspector\
+ , contractor\, or your insurance policy terms.
+X-WR-TIMEZONE:America/Chicago
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2026-jan-freeze-prep@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260101
+DTEND;VALUE=DATE:20260102
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Freeze prep — find your water shutoff
+DESCRIPTION:Locate your main water shutoff and make sure you can actually t
+ urn it. Cover outdoor spigots.\n\nWhy: coastal plumbing is often run throu
+ gh uninsulated exterior walls because it rarely needs to survive a freeze.
+  When one comes\, knowing where the shutoff is turns a flooded house into 
+ a wet floor.\n\nGeneral maintenance guidance\, not a substitute for a lice
+ nsed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-feb-hvac-filter@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260201
+DTEND;VALUE=DATE:20260202
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Replace the HVAC filter\, test the A/C
+DESCRIPTION:Swap the filter and run the air conditioning briefly.\n\nWhy: f
+ inding a cooling problem in February means an appointment. Finding it in J
+ uly means a wait list\, a premium\, and a hot house.\n\nGeneral maintenanc
+ e guidance\, not a substitute for a licensed inspector\, contractor\, or y
+ our insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-mar-gutters@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260301
+DTEND;VALUE=DATE:20260302
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Clear the gutters\, check the downspouts
+DESCRIPTION:Clear the gutters and confirm every downspout discharges away f
+ rom the foundation\, not against it.\n\nWhy: water dumped at the foundatio
+ n is the start of settling\, slab cracks\, and a wet crawlspace — all of
+  them expensive\, all of them avoidable with a splash block.\n\nGeneral ma
+ intenance guidance\, not a substitute for a licensed inspector\, contracto
+ r\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-apr-wash-exterior@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260401
+DTEND;VALUE=DATE:20260402
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Wash the exterior\, inspect the siding
+DESCRIPTION:Wash the house down and inspect siding\, brick\, and soffits fo
+ r damage or gaps.\n\nWhy: salt air and humidity feed mildew and rot\, and 
+ washing is how you find the soft spot behind it. Open soffits are also how
+  squirrels and wasps get into the attic.\n\nGeneral maintenance guidance\,
+  not a substitute for a licensed inspector\, contractor\, or your insuranc
+ e policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-may-generator-supplies@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260501
+DTEND;VALUE=DATE:20260502
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Test the generator\, restock supplies
+DESCRIPTION:Start and load-test the generator. Restock water\, batteries\, 
+ and fuel. Confirm shutters or plywood are on hand and actually fit your op
+ enings.\n\nWhy: a generator that has sat with old fuel since last season w
+ ill not start when you need it\, and plywood cut to the wrong window is pl
+ ywood you cannot use.\n\nGeneral maintenance guidance\, not a substitute f
+ or a licensed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-jun-condenser-coils@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260601
+DTEND;VALUE=DATE:20260602
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Clean the condenser\, clear vegetation
+DESCRIPTION:Clean the outdoor condenser coils and cut vegetation back two f
+ eet on all sides of the unit.\n\nWhy: a coil that cannot breathe makes the
+  compressor work harder in the hottest months\, which is exactly how a 12-
+ year unit becomes an 8-year unit.\n\nGeneral maintenance guidance\, not a 
+ substitute for a licensed inspector\, contractor\, or your insurance polic
+ y terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-jul-crawlspace@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260701
+DTEND;VALUE=DATE:20260702
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Inspect the crawlspace
+DESCRIPTION:Inspect the crawlspace or under-house area for moisture\, pests
+ \, and vapor barrier damage.\n\nWhy: it is the part of the house nobody lo
+ oks at and the part humidity attacks hardest. Rot and pests both start dow
+ n there.\n\nGeneral maintenance guidance\, not a substitute for a licensed
+  inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-aug-gutters-again@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260801
+DTEND;VALUE=DATE:20260802
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Clear the gutters again
+DESCRIPTION:Clear the gutters a second time.\n\nWhy: summer storms fill the
+ m fast\, and a full gutter in a tropical downpour sends the whole roof's w
+ ater straight down your wall.\n\nGeneral maintenance guidance\, not a subs
+ titute for a licensed inspector\, contractor\, or your insurance policy te
+ rms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-sep-roof-inspection@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260901
+DTEND;VALUE=DATE:20260902
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Inspect the roof from the ground
+DESCRIPTION:Inspect the roof from the ground with binoculars after the summ
+ er storm run. Look for lifted\, curled\, or missing shingles.\n\nWhy: you 
+ can see almost everything that matters from the driveway\, and nobody has 
+ ever fallen off a driveway.\n\nGeneral maintenance guidance\, not a substi
+ tute for a licensed inspector\, contractor\, or your insurance policy term
+ s.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-oct-weatherstripping@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261002
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Check weatherstripping and seals
+DESCRIPTION:Check weatherstripping\, door sweeps\, and the attic hatch seal
+ .\n\nWhy: those gaps are your largest uncontrolled air exchange\, which on
+  the coast means you are paying to dehumidify the outdoors.\n\nGeneral mai
+ ntenance guidance\, not a substitute for a licensed inspector\, contractor
+ \, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-nov-filter-heat-test@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Replace the filter\, test the heat
+DESCRIPTION:Replace the HVAC filter and run the heat once.\n\nWhy: the burn
+ er or heat strips have sat unused since spring. Better to smell the dust b
+ urn off in November than to find a dead system during a cold snap.\n\nGene
+ ral maintenance guidance\, not a substitute for a licensed inspector\, con
+ tractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-dec-gfci-breakers@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+RRULE:FREQ=YEARLY
+SEQUENCE:0
+SUMMARY:Test GFCI outlets\, label the panel
+DESCRIPTION:Press test and reset on every GFCI outlet. Label the breaker pa
+ nel if it is not already labeled.\n\nWhy: a GFCI that will not trip is not
+  protecting anyone\, and a labeled panel is what lets you kill the right c
+ ircuit in a hurry.\n\nGeneral maintenance guidance\, not a substitute for 
+ a licensed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+END:VCALENDAR

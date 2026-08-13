@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gulf Coast Home Maintenance — Digital Calendars</title>
+<meta name="description" content="Three subscribe-able maintenance calendars for Gulf Coast homeowners. Must Do, Should Do, Going Above.">
+<style>
+  :root {
+    --bg: #f7f4ee;
+    --panel: #ffffff;
+    --ink: #1d2426;
+    --muted: #5c6668;
+    --rule: #ddd6c9;
+    --accent: #1f5f6b;
+    --must: #9c3722;
+    --should: #1f5f6b;
+    --above: #5d6b3a;
+    --on-tier: #ffffff;
+    --shadow: 0 1px 2px rgba(29,36,38,.06), 0 8px 24px rgba(29,36,38,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14191a;
+      --panel: #1c2325;
+      --ink: #eae5db;
+      --muted: #9aa5a6;
+      --rule: #2e3739;
+      --accent: #6fb3bf;
+      --must: #e08a72;
+      --should: #6fb3bf;
+      --above: #a8bd74;
+      --on-tier: #14191a;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14191a;
+    --panel: #1c2325;
+    --ink: #eae5db;
+    --muted: #9aa5a6;
+    --rule: #2e3739;
+    --accent: #6fb3bf;
+    --must: #e08a72;
+    --should: #6fb3bf;
+    --above: #a8bd74;
+    --on-tier: #14191a;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.6 ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.25rem 5rem; }
+
+  header { border-bottom: 1px solid var(--rule); padding-bottom: 1.75rem; margin-bottom: 2.25rem; }
+  .eyebrow {
+    font: 600 12px/1.4 ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 .6rem;
+  }
+  h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.15; margin: 0 0 .75rem; letter-spacing: -.01em; }
+  .lede { color: var(--muted); margin: 0; font-size: 1.05rem; }
+
+  .preview-warning {
+    background: var(--panel);
+    border: 1px solid var(--must);
+    border-left: 4px solid var(--must);
+    border-radius: 4px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.75rem;
+    font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+    color: var(--muted);
+  }
+  .preview-warning strong { color: var(--must); display: block; margin-bottom: .25rem; }
+
+  .tier {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--tier-color);
+    border-radius: 4px;
+    box-shadow: var(--shadow);
+    padding: 1.4rem 1.5rem 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .tier--must   { --tier-color: var(--must); }
+  .tier--should { --tier-color: var(--should); }
+  .tier--above  { --tier-color: var(--above); }
+
+  .tier h2 {
+    font: 700 1.25rem/1.3 ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+    margin: 0 0 .35rem; color: var(--tier-color); letter-spacing: -.01em;
+  }
+  .tier p { margin: 0 0 1.1rem; color: var(--muted); }
+  .count {
+    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+    display: block; margin-bottom: 1.1rem;
+  }
+
+  .actions { display: flex; flex-wrap: wrap; gap: .55rem; }
+  a.btn {
+    font: 600 14px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+    text-decoration: none; padding: .7rem 1rem; border-radius: 3px;
+    border: 1px solid var(--rule); color: var(--ink); background: transparent;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  a.btn:hover { border-color: var(--tier-color); }
+  a.btn--primary {
+    background: var(--tier-color); border-color: var(--tier-color);
+    color: var(--on-tier);
+  }
+  a.btn--primary:hover { filter: brightness(1.08); }
+
+  .note {
+    margin-top: 2.5rem; padding-top: 1.75rem; border-top: 1px solid var(--rule);
+    color: var(--muted); font-size: .95rem;
+  }
+  .note h3 {
+    font: 700 13px/1.4 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--ink);
+    margin: 1.5rem 0 .5rem;
+  }
+  .note h3:first-child { margin-top: 0; }
+  .note ol { padding-left: 1.2rem; margin: .4rem 0; }
+  .note li { margin-bottom: .3rem; }
+  code {
+    font: 13px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
+    background: var(--panel); border: 1px solid var(--rule);
+    padding: .1rem .35rem; border-radius: 3px; word-break: break-all;
+  }
+  footer {
+    margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule);
+    color: var(--muted); font-size: .85rem; font-style: italic;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">The Gulf Coast Home Maintenance Calendar</p>
+    <h1>Put it on your phone.</h1>
+    <p class="lede">
+      Three calendars, one per tier — the same twelve months that are on your wall.
+      Subscribe to one, or all three. They repeat every year, forever.
+    </p>
+  </header>
+
+  <section class="tier tier--must">
+    <h2>Must Do</h2>
+    <p>Safety, or skipping it costs you thousands. If you do nothing else, do these twelve things.</p>
+    <span class="count">12 reminders a year</span>
+    <div class="actions" data-file="gulf-coast-must-do.ics"></div>
+  </section>
+
+  <section class="tier tier--should">
+    <h2>Should Do</h2>
+    <p>Protects your home's value and makes what you own last longer.</p>
+    <span class="count">12 reminders a year</span>
+    <div class="actions" data-file="gulf-coast-should-do.ics"></div>
+  </section>
+
+  <section class="tier tier--above">
+    <h2>Going Above</h2>
+    <p>For the homeowner who wants to stay ahead of everything.</p>
+    <span class="count">12 reminders a year</span>
+    <div class="actions" data-file="gulf-coast-going-above.ics"></div>
+  </section>
+
+  <div class="note">
+    <h3>Start with Must Do</h3>
+    <p>Add the others when you're ready. Nobody does all of this the first year.</p>
+
+    <h3>Subscribe, don't download</h3>
+    <p>
+      A subscription keeps updating as the calendar improves. A downloaded file is
+      a snapshot — it never changes again, and duplicates pile up if you import twice.
+    </p>
+
+    <h3>Google Calendar on a phone</h3>
+    <p>
+      The Google Calendar app can't add a subscription itself. Do it once from a
+      browser — phone or computer — and it shows up on every device signed into
+      that account.
+    </p>
+    <ol>
+      <li>Tap <strong>Add to Google Calendar</strong> above.</li>
+      <li>Confirm <strong>Add</strong> when Google asks.</li>
+      <li>In the app, open the menu and switch the new calendar on.</li>
+    </ol>
+    <p>
+      Google refreshes subscribed calendars slowly — sometimes up to a day. Nothing
+      here is urgent to the hour, so it doesn't matter.
+    </p>
+
+    <h3>Apple Calendar or Outlook</h3>
+    <p>Use <strong>Subscribe</strong>, which opens your default calendar app directly.</p>
+
+    <h3>Reminders are yours to set</h3>
+    <p>
+      These arrive as all-day events with no alert. Add your own notification on the
+      calendar once and it applies to everything in it.
+    </p>
+  </div>
+
+  <footer>
+    General maintenance guidance, not a substitute for a licensed inspector,
+    contractor, or your insurance policy terms.
+  </footer>
+
+</div>
+
+<script>
+  // Build the subscribe links from wherever this page is actually hosted, so the
+  // same files work on any domain without editing.
+  //
+  // Subscribing only works from a public HTTPS origin: Google's servers fetch the
+  // .ics themselves, so file://, localhost, and http:// are all unreachable to
+  // them. Rather than render a button that silently does nothing, say so.
+  (function () {
+    var local = /^(localhost|127\.0\.0\.1|\[::1\]|.*\.local)$/i.test(location.hostname);
+    var publicHost = location.protocol === 'https:' && !local;
+
+    if (!publicHost) {
+      var why = location.protocol !== 'http:' && location.protocol !== 'https:'
+        ? 'This page is open as a local file.'
+        : 'This page is being served from ' + location.host + '.';
+      var banner = document.createElement('div');
+      banner.className = 'preview-warning';
+      banner.innerHTML =
+        '<strong>Preview only — subscribing won\'t work yet.</strong> ' + why +
+        ' Google fetches the calendar file from its own servers, so it has to be ' +
+        'on a public <code>https://</code> address first. Download still works, ' +
+        'and importing a downloaded file is a good way to check the events read ' +
+        'correctly.';
+      document.querySelector('header').insertAdjacentElement('afterend', banner);
+    }
+
+    var base = location.href.replace(/[^\/]*$/, '');
+    var bare = base.replace(/^https?:\/\//, '');
+
+    document.querySelectorAll('.actions').forEach(function (box) {
+      var file = box.getAttribute('data-file');
+      var https = base + file;
+      var webcal = 'webcal://' + bare + file;
+      var google = 'https://calendar.google.com/calendar/u/0/r?cid=' +
+                   encodeURIComponent(webcal);
+
+      var subscribe = publicHost
+        ? '<a class="btn btn--primary" href="' + google + '" target="_blank" rel="noopener">Add to Google Calendar</a>' +
+          '<a class="btn" href="' + webcal + '">Subscribe (Apple / Outlook)</a>'
+        : '';
+
+      box.innerHTML = subscribe +
+        '<a class="btn' + (publicHost ? '' : ' btn--primary') + '" href="' +
+        https + '" download>Download .ics</a>';
+    });
+  })();
+</script>
+</body>
+</html>

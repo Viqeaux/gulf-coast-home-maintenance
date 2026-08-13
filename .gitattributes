@@ -1,0 +1,11 @@
+# RFC 5545 requires CRLF line endings, and GitHub Pages serves whatever bytes are
+# stored in the repo. This machine has core.autocrlf=true, which would quietly
+# rewrite the calendar files to LF on commit and publish a malformed feed.
+# -text disables all conversion so the .ics bytes survive the round trip intact.
+*.ics -text
+
+# Keep the rest normalized as usual.
+*.py text
+*.md text
+*.html text
+*.json text

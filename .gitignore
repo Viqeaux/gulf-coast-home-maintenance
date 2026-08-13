@@ -1,0 +1,14 @@
+# GitHub Pages needs a public repo on the free tier, so everything committed here
+# is world-readable. The print edition's exclusive content stays out of it.
+#
+# The twelve months of tasks are public no matter what — they have to be, they're
+# inside the .ics files Google fetches. What the content draft adds on top is the
+# part people are paying for: the Big Ticket Watch List lifespans, the "How to
+# find out" page, the first-month checklist, and the design and pricing notes.
+gulf-coast-maintenance-calendar-content.md
+
+# Local Claude Code settings — machine-specific, not useful to anyone else.
+.claude/settings.local.json
+
+__pycache__/
+*.pyc
