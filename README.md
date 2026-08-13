@@ -1,23 +1,34 @@
 # Gulf Coast Home Maintenance — Digital Companion
 
-The three subscribe-able calendar feeds that accompany the printed wall calendar.
+Three subscribe-able calendar feeds and the landing page that hands them out.
 
 Built to the spec in `gulf-coast-maintenance-calendar-content.md`, which is kept
 out of this repo on purpose — see [.gitignore](.gitignore) for why.
 
 ```
-build_calendars.py   all content + the ICS generator (edit this)
-docs/
+build_calendars.py   all task content + the ICS generator (edit this)
+optimize_images.py   resizes the hero photo for the web
+docs/                published by GitHub Pages, exactly as-is
   gulf-coast-must-do.ics       12 events
   gulf-coast-should-do.ics     12 events
   gulf-coast-going-above.ics   12 events
   index.html                   the landing page the QR code points to
+  img/hero-1600.jpg            hero, desktop
+  img/hero-900.jpg             hero, mobile
+  img/hero.png                 the master — local only, not published
+  .nojekyll                    stops Pages running the site through Jekyll
 ```
 
-Regenerate after any edit:
+Regenerate after editing task content:
 
 ```bash
 python build_calendars.py
+```
+
+Regenerate after replacing `docs/img/hero.png`:
+
+```bash
+python optimize_images.py
 ```
 
 ## What the events look like
@@ -38,8 +49,8 @@ series starts, not when it ends — subscribers see this year and every year aft
 ## Publishing
 
 The landing page builds its own subscribe links from whatever URL it's served
-from, so there is nothing to find-and-replace. Upload the four files in `docs/`
-to the same directory on any static host and it works.
+from, so there is nothing to find-and-replace. Upload the contents of `docs/`
+to any static host, keeping the same layout, and it works.
 
 Two requirements from Google:
 

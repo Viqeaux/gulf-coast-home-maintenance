@@ -11,15 +11,19 @@
 <meta name="theme-color" content="#0e2429">
 <style>
   /* =========================================================================
-     Palette. Light is the primary design; dark mirrors it. Every colour is
-     defined on bare :root first so nothing depends on a media query resolving.
+     Palette. Light is the primary design and is defined on bare :root, so the
+     page is never dependent on a media query resolving. Dark redefines only the
+     tokens, nothing else.
+
+     There is deliberately no [data-theme] override: this page has no theme
+     toggle, so such a block could never match, and keeping a second copy of the
+     dark palette in sync by hand is how the two quietly drift apart.
      ========================================================================= */
   :root {
     --bg:        #f4efe4;
     --paper:     #fffdf7;
     --paper-2:   #efe8d9;
     --deep:      #0e2429;   /* hero and footer ground */
-    --deep-2:    #143139;
     /* The alternating band is its own token because in dark mode it cannot just
        borrow --deep: the page ground is already near-black there, so the two
        would be indistinguishable and the alternation would disappear. */
@@ -43,12 +47,11 @@
     --shadow-lg: 0 2px 4px rgba(21,32,31,.06), 0 24px 60px -20px rgba(21,32,31,.32);
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
+    :root {
       --bg:        #0d1618;
       --paper:     #162226;
       --paper-2:   #1c2b30;
       --deep:      #08181c;
-      --deep-2:    #0e262c;
       --band-bg:   #050e10;
       --on-deep:   #e2ddd0;
       --on-deep-mute: #8fa2a3;
@@ -65,28 +68,6 @@
       --shadow:    0 1px 2px rgba(0,0,0,.5), 0 10px 30px -12px rgba(0,0,0,.6);
       --shadow-lg: 0 2px 4px rgba(0,0,0,.5), 0 24px 60px -20px rgba(0,0,0,.7);
     }
-  }
-  :root[data-theme="dark"] {
-    --bg:        #0d1618;
-    --paper:     #162226;
-    --paper-2:   #1c2b30;
-    --deep:      #08181c;
-    --deep-2:    #0e262c;
-    --band-bg:   #050e10;
-    --on-deep:   #e2ddd0;
-    --on-deep-mute: #8fa2a3;
-    --ink:       #e8e3d6;
-    --muted:     #9aa8a6;
-    --rule:      #2a393d;
-    --rule-soft: #223034;
-    --accent:    #63b4c0;
-    --sand:      #d9a441;
-    --must:      #e08a72;
-    --should:    #63b4c0;
-    --above:     #a4bb70;
-    --on-tier:   #0d1618;
-    --shadow:    0 1px 2px rgba(0,0,0,.5), 0 10px 30px -12px rgba(0,0,0,.6);
-    --shadow-lg: 0 2px 4px rgba(0,0,0,.5), 0 24px 60px -20px rgba(0,0,0,.7);
   }
 
   /* ========================================================================= */
@@ -106,7 +87,6 @@
   }
 
   .wrap { max-width: 50rem; margin: 0 auto; padding: 0 1.35rem; }
-  .wrap--tight { max-width: 44rem; }
 
   /* --- type ------------------------------------------------------------- */
   .label {
@@ -861,10 +841,29 @@
   // ---------------------------------------------------------------------------
 
   (function () {
+    var COPY_LABEL = 'Copy feed URL';
+    var calendars = document.getElementById('calendars');
+
     if (SHOP_URL) {
-      document.getElementById('buy-slot').innerHTML =
-        '<a class="btn btn--primary btn--lg" href="' + SHOP_URL +
-        '" target="_blank" rel="noopener">Get the complete edition</a>';
+      // Built as a node rather than an HTML string: SHOP_URL is pasted in by
+      // hand, and a stray quote in it would otherwise break out of the markup.
+      var buy = document.createElement('a');
+      buy.className = 'btn btn--primary btn--lg';
+      buy.href = SHOP_URL;
+      buy.target = '_blank';
+      buy.rel = 'noopener';
+      buy.textContent = 'Get the complete edition';
+      var slot = document.getElementById('buy-slot');
+      slot.textContent = '';
+      slot.appendChild(buy);
+    }
+
+    // Both notices go in the same place, above the tier cards.
+    function notice(className, html) {
+      var el = document.createElement('div');
+      el.className = className;
+      el.innerHTML = html;
+      calendars.querySelector('.deck').insertAdjacentElement('afterend', el);
     }
 
     // Subscribe links are built from wherever this page is hosted, so the files
@@ -877,17 +876,14 @@
     var publicHost = location.protocol === 'https:' && !local;
 
     if (!publicHost) {
-      var why = location.protocol !== 'http:' && location.protocol !== 'https:'
-        ? 'This page is open as a local file.'
-        : 'This page is being served from ' + location.host + '.';
-      var banner = document.createElement('div');
-      banner.className = 'preview-warning';
-      banner.innerHTML =
-        '<strong>Preview only — subscribing won\'t work yet.</strong> ' + why +
+      notice('preview-warning',
+        '<strong>Preview only — subscribing won\'t work yet.</strong> ' +
+        (/^https?:$/.test(location.protocol)
+          ? 'This page is being served from ' + location.host + '.'
+          : 'This page is open as a local file.') +
         ' Google fetches the calendar file from its own servers, so it has to be on a ' +
         'public <code>https://</code> address first. Download still works, and importing ' +
-        'a downloaded file is a good way to check the events read correctly.';
-      document.querySelector('#calendars .deck').insertAdjacentElement('afterend', banner);
+        'a downloaded file is a good way to check the events read correctly.');
     }
 
     // Android can route calendar.google.com links into the Google Calendar app,
@@ -895,21 +891,17 @@
     // there. It depends on a per-device "open supported links" setting, so it
     // hits some Android users and not others, and neither we nor they can tell
     // in advance. Give them the route that never depends on it.
-    var isAndroid = /android/i.test(navigator.userAgent);
-    if (publicHost && isAndroid) {
-      var note = document.createElement('div');
-      note.className = 'android-note';
-      note.innerHTML =
+    if (publicHost && /android/i.test(navigator.userAgent)) {
+      notice('android-note',
         '<strong>On Android, tap the button below first.</strong> ' +
         'If Google Calendar opens and nothing gets added, the app intercepted the ' +
         'link and can\'t subscribe. Then do this instead:' +
         '<ol>' +
-          '<li>Tap <strong>Copy feed URL</strong> on the tier you want.</li>' +
+          '<li>Tap <strong>' + COPY_LABEL + '</strong> on the tier you want.</li>' +
           '<li>Open <a href="https://calendar.google.com/calendar/u/0/r/settings/addbyurl" ' +
             'target="_blank" rel="noopener">Google Calendar’s add-by-URL page</a>.</li>' +
           '<li>Paste it in and tap <strong>Add calendar</strong>.</li>' +
-        '</ol>';
-      document.querySelector('#calendars .deck').insertAdjacentElement('afterend', note);
+        '</ol>');
     }
 
     var base = location.href.replace(/[#?].*$/, '').replace(/[^\/]*$/, '');
@@ -917,61 +909,64 @@
 
     document.querySelectorAll('.actions[data-file]').forEach(function (box) {
       var file = box.getAttribute('data-file');
-      var https = base + file;
+      var feed = base + file;
       var webcal = 'webcal://' + bare + file;
-      var google = 'https://calendar.google.com/calendar/u/0/r?cid=' +
-                   encodeURIComponent(webcal);
 
-      var subscribe = publicHost
-        ? '<a class="btn btn--primary" href="' + google + '" target="_blank" rel="noopener">Add to Google Calendar</a>' +
+      box.innerHTML = (publicHost
+        ? '<a class="btn btn--primary" href="https://calendar.google.com/calendar/u/0/r?cid=' +
+            encodeURIComponent(webcal) + '" target="_blank" rel="noopener">Add to Google Calendar</a>' +
           '<a class="btn" href="' + webcal + '">Subscribe (Apple / Outlook)</a>'
-        : '';
-
-      box.innerHTML = subscribe +
+        : '') +
         '<a class="btn' + (publicHost ? '' : ' btn--primary') + '" href="' +
-        https + '" download>Download .ics</a>' +
-        '<button class="btn" type="button" data-url="' + https + '">Copy feed URL</button>';
+          feed + '" download>Download .ics</a>' +
+        '<button class="btn" type="button" data-url="' + feed + '">' + COPY_LABEL + '</button>';
     });
 
     // The two subscribe buttons only cover Google and apps that register the
     // webcal:// handler. Everything else — Outlook on the web, Thunderbird,
     // Proton — wants an https:// feed address pasted into a box, so hand it over
     // directly rather than making people dig it out of the download link.
-    document.querySelectorAll('.actions button[data-url]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var url = btn.getAttribute('data-url');
+    //
+    // One delegated listener rather than one per button, so it keeps working no
+    // matter how many tiers the page grows.
+    calendars.addEventListener('click', function (event) {
+      var btn = event.target.closest('button[data-url]');
+      if (!btn) { return; }
+      var url = btn.getAttribute('data-url');
 
-        var done = function (ok) {
-          btn.textContent = ok ? 'Copied' : 'Press Ctrl+C';
-          btn.classList.add('btn--copied');
-          setTimeout(function () {
-            btn.textContent = 'Copy feed URL';
-            btn.classList.remove('btn--copied');
-          }, 2000);
-        };
+      function done(ok) {
+        btn.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+        btn.classList.add('btn--copied');
+        // Clear any pending reset first: without this, a second click inherits
+        // the first timer and the label snaps back early.
+        clearTimeout(btn._resetTimer);
+        btn._resetTimer = setTimeout(function () {
+          btn.textContent = COPY_LABEL;
+          btn.classList.remove('btn--copied');
+        }, 2000);
+      }
 
-        // navigator.clipboard needs a secure context and can still be refused by
-        // permissions policy, so fall back to a selected textarea, and finally to
-        // a prompt the user can copy out of by hand.
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(url).then(function () { done(true); }, fallback);
-        } else {
-          fallback();
-        }
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = url;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        document.body.removeChild(ta);
+        if (ok) { done(true); } else { window.prompt('Copy this feed address:', url); done(false); }
+      }
 
-        function fallback() {
-          var ta = document.createElement('textarea');
-          ta.value = url;
-          ta.setAttribute('readonly', '');
-          ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
-          document.body.appendChild(ta);
-          ta.select();
-          var ok = false;
-          try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
-          document.body.removeChild(ta);
-          if (ok) { done(true); } else { window.prompt('Copy this feed address:', url); done(false); }
-        }
-      });
+      // navigator.clipboard needs a secure context and can still be refused by
+      // permissions policy, so fall back to a selected textarea, and finally to
+      // a prompt the user can copy out of by hand.
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () { done(true); }, fallback);
+      } else {
+        fallback();
+      }
     });
   })();
 </script>

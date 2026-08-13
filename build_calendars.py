@@ -7,15 +7,16 @@ Twelve all-day events each, recurring yearly with no end date, matching the
 undated print edition.
 
 Run:  python build_calendars.py
-Out:  dist/gulf-coast-must-do.ics
-      dist/gulf-coast-should-do.ics
-      dist/gulf-coast-going-above.ics
+Out:  docs/gulf-coast-must-do.ics
+      docs/gulf-coast-should-do.ics
+      docs/gulf-coast-going-above.ics
 
 Editing content: change TASKS below and re-run. If subscribers already have the
 feed, bump SEQUENCE so calendar clients treat it as an update.
 """
 
 import os
+from datetime import date, timedelta
 
 # --- Build constants -------------------------------------------------------
 
@@ -334,9 +335,6 @@ TASKS = [
 
 # --- ICS generation --------------------------------------------------------
 
-MONTH_DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-
-
 def escape(text):
     """Escape a value per RFC 5545 section 3.3.11."""
     out = text.replace("\\", "\\\\")
@@ -364,25 +362,22 @@ def fold(line):
     return "\r\n ".join(pieces)
 
 
-def next_day(month, day):
-    """Return (month, day) one day after the given date, ignoring leap years."""
-    if day < MONTH_DAYS[month - 1]:
-        return month, day + 1
-    if month == 12:
-        return 1, 1
-    return month + 1, 1
+def stamp(day):
+    """Format a date as an RFC 5545 DATE value."""
+    return "{0}{1:02d}{2:02d}".format(day.year, day.month, day.day)
 
 
 def build_event(month, day, slug, title, body):
-    end_month, end_day = next_day(month, day)
-    end_year = ANCHOR_YEAR + 1 if (end_month, end_day) == (1, 1) and month == 12 \
-        else ANCHOR_YEAR
-    lines = [
+    # An all-day event's DTEND is exclusive, so it is the following day. Letting
+    # the date module carry the month and year rollovers keeps leap years right
+    # without a table of month lengths to maintain.
+    start = date(ANCHOR_YEAR, month, day)
+    return [
         "BEGIN:VEVENT",
         "UID:{0}-{1}@{2}".format(ANCHOR_YEAR, slug, UID_DOMAIN),
         "DTSTAMP:" + DTSTAMP,
-        "DTSTART;VALUE=DATE:{0}{1:02d}{2:02d}".format(ANCHOR_YEAR, month, day),
-        "DTEND;VALUE=DATE:{0}{1:02d}{2:02d}".format(end_year, end_month, end_day),
+        "DTSTART;VALUE=DATE:" + stamp(start),
+        "DTEND;VALUE=DATE:" + stamp(start + timedelta(days=1)),
         "RRULE:FREQ=YEARLY",
         "SEQUENCE:{0}".format(SEQUENCE),
         "SUMMARY:" + escape(title),
@@ -391,10 +386,10 @@ def build_event(month, day, slug, title, body):
         "CATEGORIES:Home Maintenance",
         "END:VEVENT",
     ]
-    return [fold(line) for line in lines]
 
 
 def build_calendar(tier_key):
+    """Return the .ics text for one tier, and how many events it holds."""
     tier = TIERS[tier_key]
     lines = [
         "BEGIN:VCALENDAR",
@@ -402,31 +397,31 @@ def build_calendar(tier_key):
         "PRODID:-//Gulf Coast Home Maintenance//Perpetual Edition//EN",
         "CALSCALE:GREGORIAN",
         "METHOD:PUBLISH",
-        fold("X-WR-CALNAME:" + tier["name"]),
-        fold("X-WR-CALDESC:" + escape(tier["desc"])),
+        "X-WR-CALNAME:" + escape(tier["name"]),
+        "X-WR-CALDESC:" + escape(tier["desc"]),
         "X-WR-TIMEZONE:America/Chicago",
         "REFRESH-INTERVAL;VALUE=DURATION:P1D",
         "X-PUBLISHED-TTL:P1D",
         "COLOR:" + tier["color"][0],
         "X-APPLE-CALENDAR-COLOR:" + tier["color"][1],
     ]
-    for month, day, task_tier, slug, title, body in TASKS:
-        if task_tier != tier_key:
-            continue
+    events = [t for t in TASKS if t[2] == tier_key]
+    for month, day, _, slug, title, body in events:
         lines.extend(build_event(month, day, slug, title, body))
     lines.append("END:VCALENDAR")
-    return "\r\n".join(lines) + "\r\n"
+
+    # Fold once, here, rather than at each place a line is built — every line in
+    # the file has to obey the 75-octet limit, so nowhere else has to remember.
+    return "\r\n".join(fold(line) for line in lines) + "\r\n", len(events)
 
 
 def main():
-    if not os.path.isdir(OUT_DIR):
-        os.makedirs(OUT_DIR)
+    os.makedirs(OUT_DIR, exist_ok=True)
     for tier_key in ("must", "should", "above"):
-        text = build_calendar(tier_key)
+        text, count = build_calendar(tier_key)
         path = os.path.join(OUT_DIR, TIERS[tier_key]["file"])
         with open(path, "wb") as handle:
             handle.write(text.encode("utf-8"))
-        count = sum(1 for t in TASKS if t[2] == tier_key)
         print("{0}  {1} events".format(path, count))
 
 
