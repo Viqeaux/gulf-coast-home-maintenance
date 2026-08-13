@@ -124,6 +124,31 @@ each with a `DTSTART`, an `RRULE`, and a description that reads correctly after
 the line wrapping. The generator handles RFC 5545 escaping and 75-octet folding;
 what it can't check is whether the words are right.
 
+## Cutting a version
+
+Versions are tracked in [CHANGELOG.md](CHANGELOG.md), which explains what counts
+as major, minor, and patch here. To release:
+
+1. Rebuild if task content changed: `python build_calendars.py`
+2. Add the entry at the top of `CHANGELOG.md`
+3. Update the version in the footer of `docs/index.html`
+4. Commit, then tag and push:
+
+```bash
+git tag -a v1.0.1 -m "Short description" && git push origin main --follow-tags
+```
+
+Two things that are easy to conflate:
+
+- **The version number is for you.** It tracks the project and appears in the
+  page footer so a tester can tell you which build they were looking at.
+- **`SEQUENCE` is for subscribers.** It lives in `build_calendars.py` and is what
+  tells a calendar client an event actually changed. Bump it whenever you edit
+  task content — a version bump alone does not do it, and a `SEQUENCE` bump is
+  not needed for a design-only release.
+
+To see what a released version contained: `git show v1.0.0 --stat`.
+
 ---
 
 *General maintenance guidance, not a substitute for a licensed inspector,

@@ -453,6 +453,10 @@
     border-top: 1px solid color-mix(in srgb, var(--on-deep) 17%, transparent);
   }
   footer .disclaimer { font-style: italic; margin-bottom: 1rem; max-width: 34rem; }
+  footer .version {
+    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .12em; opacity: .55; margin: 0;
+  }
   footer .mark .label { color: var(--on-deep); }
   code {
     font: 13px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
@@ -831,6 +835,9 @@
       General maintenance guidance, not a substitute for a licensed inspector, contractor,
       or your insurance policy terms.
     </p>
+    <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
+         a tester can say which version they were looking at. -->
+    <p class="version">v1.0.0</p>
   </div>
 </footer>
 
