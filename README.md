@@ -6,18 +6,24 @@ Built to the spec in `gulf-coast-maintenance-calendar-content.md`, which is kept
 out of this repo on purpose — see [.gitignore](.gitignore) for why.
 
 ```
-build_calendars.py   all task content + the ICS generator (edit this)
+build_calendars.py   task content, curated video links, and the generator
+check_links.py       finds curated videos that have gone dead
 optimize_images.py   resizes the hero photo for the web
 docs/                published by GitHub Pages, exactly as-is
   gulf-coast-must-do.ics       12 events
   gulf-coast-should-do.ics     12 events
   gulf-coast-going-above.ics   12 events
   index.html                   the landing page the QR code points to
+  guides/index.html            generated — one anchor per task
+  theme.css                    the palette, shared by both pages
   img/hero-1600.jpg            hero, desktop
   img/hero-900.jpg             hero, mobile
   img/hero.png                 the master — local only, not published
   .nojekyll                    stops Pages running the site through Jekyll
 ```
+
+`docs/guides/index.html` is generated — edit `build_calendars.py`, not the HTML.
+`docs/index.html` is hand-written.
 
 Regenerate after editing task content:
 
@@ -123,6 +129,39 @@ has a quoting mistake, so it's worth a look at the output — 12 events per file
 each with a `DTSTART`, an `RRULE`, and a description that reads correctly after
 the line wrapping. The generator handles RFC 5545 escaping and 75-octet folding;
 what it can't check is whether the words are right.
+
+## Adding a how-to video
+
+Videos are other people's, linked rather than republished. They live in the
+`GUIDES` table in `build_calendars.py`, keyed by task slug:
+
+```python
+GUIDES = {
+    "oct-flush-water-heater": [
+        ("Flushing a tank water heater", "https://www.youtube.com/watch?v=...",
+         "This Old House"),
+    ],
+}
+```
+
+Then `python build_calendars.py` and `python check_links.py`.
+
+A task with no entry gets no link in its calendar event, so the list can be
+filled in a few at a time without anyone following a link to an empty section.
+
+**Calendar events link to our guides page, never straight to YouTube.** Two
+reasons, both of which matter more than they look:
+
+- A dead video gets fixed in one place. A URL baked into the feed only reaches
+  subscribers on their next refresh, which can take a day.
+- Someone following that link was just reminded to do this exact job. That is
+  the most motivated visitor the site will ever get, and they should land on it
+  rather than be handed to YouTube.
+
+**Videos disappear silently** — deleted, set to private, or region-blocked — and
+the URL keeps returning a healthy page that says "Video unavailable". That is
+why `check_links.py` checks YouTube through its oEmbed endpoint rather than by
+HTTP status. Run it after editing `GUIDES`, and every month or two regardless.
 
 ## Cutting a version
 

@@ -1,0 +1,63 @@
+/* =============================================================================
+   Shared palette for every page on the site.
+
+   Light is the primary design and is defined on bare :root, so nothing depends
+   on a media query resolving. Dark redefines only the tokens.
+
+   This lives in one file on purpose. Two hand-synced copies of a palette drift
+   apart — one page gets a new token, the other does not, and the mismatch only
+   shows up in whichever colour scheme you were not looking at.
+
+   There is deliberately no [data-theme] override: the site has no theme toggle,
+   so such a block could never match.
+   ============================================================================= */
+:root {
+  --bg:        #f4efe4;
+  --paper:     #fffdf7;
+  --paper-2:   #efe8d9;
+  --deep:      #0e2429;   /* hero and footer ground */
+  /* The alternating band is its own token because in dark mode it cannot just
+     borrow --deep: the page ground is already near-black there, so the two
+     would be indistinguishable and the alternation would disappear. */
+  --band-bg:   #0e2429;
+  --on-deep:   #e8e2d4;
+  --on-deep-mute: #93a5a6;
+  --ink:       #15201f;
+  --muted:     #5b6a68;
+  --rule:      #d9cfba;
+  --rule-soft: #e7dfcd;
+  --accent:    #0f5e6b;
+  --sand:      #c08b2e;
+  --must:      #a33520;
+  --should:    #14606e;
+  --above:     #5b6f34;
+  --on-tier:   #fffdf7;
+  /* --must is tuned for the paper ground and goes muddy on the deep one, so the
+     dark sections use a lifted version of the same hue. */
+  --must-lift: #e08a72;
+  --shadow:    0 1px 2px rgba(21,32,31,.05), 0 10px 30px -12px rgba(21,32,31,.22);
+  --shadow-lg: 0 2px 4px rgba(21,32,31,.06), 0 24px 60px -20px rgba(21,32,31,.32);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:        #0d1618;
+    --paper:     #162226;
+    --paper-2:   #1c2b30;
+    --deep:      #08181c;
+    --band-bg:   #050e10;
+    --on-deep:   #e2ddd0;
+    --on-deep-mute: #8fa2a3;
+    --ink:       #e8e3d6;
+    --muted:     #9aa8a6;
+    --rule:      #2a393d;
+    --rule-soft: #223034;
+    --accent:    #63b4c0;
+    --sand:      #d9a441;
+    --must:      #e08a72;
+    --should:    #63b4c0;
+    --above:     #a4bb70;
+    --on-tier:   #0d1618;
+    --shadow:    0 1px 2px rgba(0,0,0,.5), 0 10px 30px -12px rgba(0,0,0,.6);
+    --shadow-lg: 0 2px 4px rgba(0,0,0,.5), 0 24px 60px -20px rgba(0,0,0,.7);
+  }
+}

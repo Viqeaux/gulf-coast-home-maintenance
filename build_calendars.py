@@ -28,7 +28,17 @@ ANCHOR_YEAR = 2026
 SEQUENCE = 0
 DTSTAMP = "20260813T000000Z"
 
+# Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
+# and the footer of docs/index.html.
+VERSION = "1.0.0"
+
 UID_DOMAIN = "gulfcoast-home-maintenance"
+
+# Where the site is served from. Change this to the custom domain once it is
+# pointed at Pages, then rebuild and bump SEQUENCE so existing subscribers pick
+# up the new guide links. GitHub keeps redirecting the old address either way,
+# so nothing breaks in the gap.
+SITE_URL = "https://viqeaux.github.io/gulf-coast-home-maintenance/"
 
 # GitHub Pages can only serve a site from the repo root or from /docs — not from
 # an arbitrary folder — so the build lands in docs/ and Pages needs no config.
@@ -333,6 +343,24 @@ TASKS = [
      "update a year keeps it honest."),
 ]
 
+# --- Curated guides --------------------------------------------------------
+# Videos other people made, chosen because they are good, keyed by task slug.
+#
+# The calendar events link to our own guides page rather than straight to
+# YouTube, for two reasons. A dead video then gets fixed in one place instead of
+# being baked into a feed that subscribers only re-read once a day. And the
+# person arriving is someone who was just reminded to do this exact job — that
+# visit should land on our site, not be handed to YouTube.
+#
+#   "task-slug": [("What the video shows", "https://...", "Who made it"), ...]
+#
+# A task with no entry here simply gets no guide link in its calendar event, so
+# this can be filled in a few at a time. Run check_links.py after editing to
+# catch anything that has since been deleted or made private.
+
+GUIDES = {
+}
+
 # --- ICS generation --------------------------------------------------------
 
 def escape(text):
@@ -367,11 +395,23 @@ def stamp(day):
     return "{0}{1:02d}{2:02d}".format(day.year, day.month, day.day)
 
 
+def guide_url(slug):
+    """Public address of a task's section on the guides page."""
+    return SITE_URL + "guides/#" + slug
+
+
 def build_event(month, day, slug, title, body):
     # An all-day event's DTEND is exclusive, so it is the following day. Letting
     # the date module carry the month and year rollovers keeps leap years right
     # without a table of month lengths to maintain.
     start = date(ANCHOR_YEAR, month, day)
+
+    # Only tasks that actually have a guide get a link, so nobody follows one to
+    # an empty section while the list is still being filled in.
+    description = body + "\n\n" + DISCLAIMER
+    if GUIDES.get(slug):
+        description = body + "\n\nHow to: " + guide_url(slug) + "\n\n" + DISCLAIMER
+
     return [
         "BEGIN:VEVENT",
         "UID:{0}-{1}@{2}".format(ANCHOR_YEAR, slug, UID_DOMAIN),
@@ -381,7 +421,7 @@ def build_event(month, day, slug, title, body):
         "RRULE:FREQ=YEARLY",
         "SEQUENCE:{0}".format(SEQUENCE),
         "SUMMARY:" + escape(title),
-        "DESCRIPTION:" + escape(body + "\n\n" + DISCLAIMER),
+        "DESCRIPTION:" + escape(description),
         "TRANSP:TRANSPARENT",
         "CATEGORIES:Home Maintenance",
         "END:VEVENT",
@@ -415,6 +455,200 @@ def build_calendar(tier_key):
     return "\r\n".join(fold(line) for line in lines) + "\r\n", len(events)
 
 
+# --- Guides page -----------------------------------------------------------
+
+# Braces in the CSS are doubled because this goes through str.format.
+GUIDES_TEMPLATE = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How-to guides — Gulf Coast Home Maintenance</title>
+<meta name="description" content="A picked video for each task on the Gulf Coast Home Maintenance calendar.">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="../theme.css">
+<style>
+  * {{ box-sizing: border-box; }}
+  body {{
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.65 ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+    -webkit-font-smoothing: antialiased;
+  }}
+  .wrap {{ max-width: 46rem; margin: 0 auto; padding: 0 1.35rem; }}
+  a {{ color: var(--accent); }}
+
+  header {{ background: var(--deep); color: var(--on-deep); padding: 3rem 0 2.5rem; }}
+  header a.back {{
+    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--sand); text-decoration: none;
+  }}
+  header a.back:hover {{ text-decoration: underline; }}
+  header h1 {{
+    font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.1;
+    margin: 1rem 0 .9rem; letter-spacing: -.02em; color: #fff;
+  }}
+  header p {{ color: var(--on-deep-mute); margin: 0; max-width: 34rem; }}
+  .count {{
+    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--sand); margin-top: 1.25rem !important;
+  }}
+
+  .month {{ padding: 2.75rem 0 .5rem; border-top: 1px solid var(--rule-soft); }}
+  .month:first-of-type {{ border-top: 0; }}
+  .month h2 {{
+    font: 700 clamp(1.4rem, 3.5vw, 1.8rem)/1.2 ui-serif, Georgia, serif;
+    margin: 0 0 1.25rem; letter-spacing: -.015em;
+  }}
+
+  .task {{
+    background: var(--paper); border: 1px solid var(--rule);
+    border-left: 3px solid var(--tier-color); border-radius: 3px;
+    box-shadow: var(--shadow); padding: 1.3rem 1.45rem; margin-bottom: 1rem;
+    scroll-margin-top: 1.5rem;
+  }}
+  .task--must {{ --tier-color: var(--must); }}
+  .task--should {{ --tier-color: var(--should); }}
+  .task--above {{ --tier-color: var(--above); }}
+  .task:target {{ box-shadow: 0 0 0 2px var(--tier-color), var(--shadow); }}
+  .tier-tag {{
+    font: 700 10px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--tier-color); margin: 0 0 .45rem;
+  }}
+  .task h3 {{
+    font: 700 1.1rem/1.35 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    margin: 0 0 .55rem; letter-spacing: -.005em;
+  }}
+  .task p {{ margin: 0 0 .65rem; font-size: .96rem; color: var(--muted); }}
+  .task p:last-child {{ margin-bottom: 0; }}
+
+  .videos {{ list-style: none; margin: .9rem 0 0; padding: 0; }}
+  .videos li {{ border-top: 1px solid var(--rule-soft); padding: .65rem 0 0; margin-top: .65rem; }}
+  .videos li:first-child {{ border-top: 0; margin-top: 0; }}
+  .videos a {{
+    font: 600 .95rem/1.4 ui-sans-serif, system-ui, sans-serif;
+    text-decoration: none;
+  }}
+  .videos a:hover {{ text-decoration: underline; }}
+  .source {{
+    display: block; font: 400 12px/1.4 ui-sans-serif, system-ui, sans-serif;
+    color: var(--muted); margin-top: .15rem;
+  }}
+  .pending {{
+    font: 600 12px/1.4 ui-sans-serif, system-ui, sans-serif;
+    color: var(--muted); opacity: .8; margin-top: .8rem !important;
+  }}
+
+  footer {{
+    background: var(--deep); color: var(--on-deep-mute);
+    padding: 2.5rem 0 3rem; margin-top: 3rem; font-size: .87rem;
+  }}
+  footer p {{ margin: 0 0 .8rem; max-width: 34rem; }}
+  footer .disclaimer {{ font-style: italic; }}
+  footer .version {{
+    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .12em; opacity: .55; margin: 0;
+  }}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="back" href="../">&#8592; Gulf Coast Home Maintenance</a>
+    <h1>How to do each of these</h1>
+    <p>
+      One picked video per task, from people who explain it well. Your calendar
+      links straight to the task you were just reminded about.
+    </p>
+    <p class="count">{covered} of {total} tasks covered so far</p>
+  </div>
+</header>
+
+<main class="wrap">
+{body}
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="disclaimer">{disclaimer}</p>
+    <p>
+      Videos are other people&#8217;s work, linked and not republished. If one of
+      these has stopped working, it is worth telling us.
+    </p>
+    <p class="version">v{version}</p>
+  </div>
+</footer>
+
+</body>
+</html>
+"""
+
+MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July",
+               "August", "September", "October", "November", "December"]
+
+TIER_ORDER = {"must": 0, "should": 1, "above": 2}
+TIER_WORD = {"must": "Must", "should": "Should", "above": "Above"}
+
+
+def html_escape(text):
+    return (text.replace("&", "&amp;").replace("<", "&lt;")
+                .replace(">", "&gt;").replace('"', "&quot;"))
+
+
+def guide_section(task):
+    """One task block: heading, the why, and whatever videos are picked."""
+    month, _, tier, slug, title, body = task
+    # The body is "instruction\n\nWhy: ...". Split so each reads as its own line.
+    parts = [p.strip() for p in body.split("\n\n") if p.strip()]
+    out = [
+        '      <article class="task task--{0}" id="{1}">'.format(tier, slug),
+        '        <p class="tier-tag">{0}</p>'.format(TIER_WORD[tier]),
+        '        <h3>{0}</h3>'.format(html_escape(title)),
+    ]
+    for part in parts:
+        out.append('        <p>{0}</p>'.format(html_escape(part)))
+
+    videos = GUIDES.get(slug) or []
+    if videos:
+        out.append('        <ul class="videos">')
+        for label, url, source in videos:
+            out.append(
+                '          <li><a href="{0}" target="_blank" rel="noopener">{1}</a>'
+                '<span class="source">{2}</span></li>'.format(
+                    html_escape(url), html_escape(label), html_escape(source)))
+        out.append('        </ul>')
+    else:
+        out.append('        <p class="pending">No guide picked yet.</p>')
+
+    out.append('      </article>')
+    return out
+
+
+def build_guides():
+    """Return the guides page HTML, and how many tasks have a video."""
+    tasks = sorted(TASKS, key=lambda t: (t[0], TIER_ORDER[t[2]]))
+    covered = sum(1 for t in TASKS if GUIDES.get(t[3]))
+
+    body = []
+    for index, name in enumerate(MONTH_NAMES, start=1):
+        body.append('    <section class="month">')
+        body.append('      <h2>{0}</h2>'.format(name))
+        for task in [t for t in tasks if t[0] == index]:
+            body.extend(guide_section(task))
+        body.append('    </section>')
+
+    return GUIDES_TEMPLATE.format(
+        disclaimer=html_escape(DISCLAIMER),
+        version=VERSION,
+        covered=covered,
+        total=len(TASKS),
+        body="\n".join(body),
+    ), covered
+
+
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     for tier_key in ("must", "should", "above"):
@@ -423,6 +657,15 @@ def main():
         with open(path, "wb") as handle:
             handle.write(text.encode("utf-8"))
         print("{0}  {1} events".format(path, count))
+
+    guides_dir = os.path.join(OUT_DIR, "guides")
+    os.makedirs(guides_dir, exist_ok=True)
+    html, covered = build_guides()
+    guides_path = os.path.join(guides_dir, "index.html")
+    with open(guides_path, "w", encoding="utf-8", newline="\n") as handle:
+        handle.write(html)
+    print("{0}  {1} of {2} tasks have a guide".format(
+        guides_path, covered, len(TASKS)))
 
 
 if __name__ == "__main__":
