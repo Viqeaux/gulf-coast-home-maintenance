@@ -348,10 +348,41 @@
   .buy h3 { font-size: 1.2rem; margin-bottom: .55rem; }
   .buy p { color: var(--muted); max-width: 30rem; margin-left: auto; margin-right: auto; font-size: .97rem; }
   .buy p:last-child { margin-bottom: 0; }
-  .soon {
-    display: inline-block; font: 600 12px/1 ui-sans-serif, system-ui, sans-serif;
-    letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
-    border: 1px dashed var(--rule); padding: .85rem 1.3rem; border-radius: 2px;
+  /* --- waitlist signup -------------------------------------------------- */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .signup { margin: 0; }
+  .signup-ask {
+    font: 600 .95rem/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink) !important; margin: 0 0 .8rem !important;
+  }
+  .signup-row {
+    display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center;
+    max-width: 27rem; margin: 0 auto;
+  }
+  .signup-row input {
+    flex: 1 1 12rem; min-width: 0;
+    font: 400 15px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: .8rem .9rem; border-radius: 2px;
+    border: 1px solid var(--rule); background: var(--bg); color: var(--ink);
+  }
+  .signup-row input:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
+  }
+  .signup-row .btn { flex: 0 0 auto; }
+  .signup-note {
+    font: 400 12.5px/1.5 ui-sans-serif, system-ui, sans-serif;
+    color: var(--muted) !important; margin: .75rem 0 0 !important;
+  }
+  .signup-done {
+    font: 400 .95rem/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--muted) !important; margin: 0 !important;
+  }
+  .signup-done strong { display: block; color: var(--accent); margin-bottom: .2rem; }
+  @media (max-width: 26rem) {
+    .signup-row input, .signup-row .btn { flex: 1 1 100%; }
   }
 
   /* --- misc ------------------------------------------------------------- */
@@ -690,8 +721,33 @@
         three tiers, the full Big Ticket Watch List, the page on how to date everything you
         own, and a first-month checklist for what you only do once.
       </p>
-      <!-- ETSY LINK GOES HERE: set SHOP_URL in the script at the bottom of this file. -->
-      <p id="buy-slot"><span class="soon">Coming soon</span></p>
+      <!-- Until there is somewhere to buy it, this slot collects a waitlist.
+           Setting SHOP_URL at the bottom of this file replaces the whole thing
+           with the buy button, which is the right outcome — once it is for sale
+           the waitlist has done its job. -->
+      <div id="buy-slot">
+        <form class="signup" method="post" target="ml-sink"
+              action="https://assets.mailerlite.com/jsonp/2575029/forms/195731645629727806/subscribe">
+          <p class="signup-ask">Not out yet. I'll email you once when it is.</p>
+          <div class="signup-row">
+            <label class="sr-only" for="signup-email">Your email address</label>
+            <input id="signup-email" type="email" name="fields[email]" required
+                   autocomplete="email" placeholder="you@example.com">
+            <button class="btn btn--primary" type="submit">Tell me when it's ready</button>
+          </div>
+          <p class="signup-note">One email at launch. Nothing else, and you can leave any time.</p>
+          <input type="hidden" name="ml-submit" value="1">
+          <input type="hidden" name="anticsrf" value="true">
+        </form>
+        <p class="signup-done" hidden>
+          <strong>Nearly there — check your email.</strong>
+          You'll have a confirmation link waiting; the list won't have you until you click it.
+        </p>
+      </div>
+      <!-- Posting into a hidden frame keeps the visitor on the page. MailerLite's
+           own embed targets _blank, which would throw them into a raw JSON
+           response in a new tab. -->
+      <iframe name="ml-sink" title="Signup handler" hidden></iframe>
     </div>
   </div>
 </section>
@@ -809,6 +865,26 @@
       var slot = document.getElementById('buy-slot');
       slot.textContent = '';
       slot.appendChild(buy);
+    }
+
+    // Waitlist. The form posts straight to MailerLite through a hidden frame,
+    // so there is no library to load and the visitor never leaves the page. We
+    // cannot read the response across origins, but the frame firing `load`
+    // confirms the request completed — and double opt-in means the real
+    // confirmation is the email they are about to get either way.
+    var signup = document.querySelector('.signup');
+    if (signup) {
+      signup.addEventListener('submit', function () {
+        var sink = document.querySelector('iframe[name="ml-sink"]');
+        var swap = function () {
+          signup.hidden = true;
+          document.querySelector('.signup-done').hidden = false;
+        };
+        sink.addEventListener('load', swap, { once: true });
+        // If the frame never reports back, show it anyway rather than leaving
+        // them staring at a form that looks like it did nothing.
+        setTimeout(swap, 2500);
+      });
     }
 
     // Both notices go in the same place, above the tier cards.
