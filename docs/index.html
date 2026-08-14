@@ -403,16 +403,12 @@
   }
   .buy p { color: var(--muted); max-width: 30rem; margin-left: auto; margin-right: auto; font-size: .97rem; }
   .buy p:last-child { margin-bottom: 0; }
-  /* --- waitlist signup -------------------------------------------------- */
+  /* --- signup ----------------------------------------------------------- */
   .sr-only {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
     overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
   }
   .signup { margin: 0; }
-  .signup-ask {
-    font: 600 .95rem/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-    color: var(--ink) !important; margin: 0 0 .8rem !important;
-  }
   .signup-row {
     display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center;
     max-width: 27rem; margin: 0 auto;
@@ -438,6 +434,28 @@
   .signup-done strong { display: block; color: var(--accent); margin-bottom: .2rem; }
   @media (max-width: 26rem) {
     .signup-row input, .signup-row .btn { flex: 1 1 100%; }
+  }
+
+  /* The signup sits at the end of the free calendars rather than in the buy
+     card it started in. It began as a waitlist for the kit, the buy button
+     retired that job, and what is left is a general "tell me about the next
+     one" list. The moment to ask is right after someone has been handed three
+     free things, not while they are deciding whether to spend $12.99.
+
+     Deliberately not a fourth tier card, but distinguished without changing the
+     ground: no colored left bar, an uncolored heading, and no shadow, so it
+     sits flatter than the three cards above it. The ground stays --paper so the
+     --bg field keeps reading as inset. On --paper-2 both the field's fill and
+     its --rule border land within 1.2 of the block behind them, which leaves
+     the input invisible until it takes focus. */
+  .followup {
+    background: var(--paper); border: 1px solid var(--rule);
+    border-radius: 3px; padding: 1.75rem 1.6rem; margin-top: 2.25rem;
+    text-align: center;
+  }
+  .followup-blurb {
+    color: var(--muted); font-size: .97rem;
+    max-width: 30rem; margin: 0 auto 1.25rem;
   }
 
   /* --- misc ------------------------------------------------------------- */
@@ -787,35 +805,13 @@
            thing you click. -->
       <div class="buy-action">
         <p class="buy-price"><span class="amt">$12.99</span><span class="per">one time, no subscription</span></p>
-        <!-- Until the Etsy listing exists, this slot collects a waitlist. Setting
-             SHOP_URL at the bottom of this file replaces the whole thing with the
-             buy button, which is the right outcome: once the kit is purchasable
-             the waitlist has done its job. -->
-      <div id="buy-slot">
-        <form class="signup" method="post" target="ml-sink"
-              action="https://assets.mailerlite.com/jsonp/2575029/forms/195731645629727806/subscribe">
-          <p class="signup-ask">Not listed yet. I'll email you once when it is.</p>
-          <div class="signup-row">
-            <label class="sr-only" for="signup-email">Your email address</label>
-            <input id="signup-email" type="email" name="fields[email]" required
-                   autocomplete="email" placeholder="you@example.com">
-            <button class="btn btn--primary" type="submit">Tell me when it's ready</button>
-          </div>
-          <p class="signup-note">One email at launch. Nothing else, and you can leave any time.</p>
-          <input type="hidden" name="ml-submit" value="1">
-          <input type="hidden" name="anticsrf" value="true">
-        </form>
-        <p class="signup-done" hidden>
-          <strong>Nearly there, check your email.</strong>
-          You'll have a confirmation link waiting; the list won't have you until you click it.
-        </p>
-      </div>
+        <!-- The script at the bottom of this file writes the buy button in here
+             from SHOP_URL. Emptying SHOP_URL puts the slot back to "not listed
+             yet" and hides the price, so the card never shows a number with
+             nothing to click. -->
+        <div id="buy-slot"></div>
         <p class="buy-note">Instant download &middot; Two PDFs &middot; Print at home on letter paper</p>
       </div>
-      <!-- Posting into a hidden frame keeps the visitor on the page. MailerLite's
-           own embed targets _blank, which would throw them into a raw JSON
-           response in a new tab. -->
-      <iframe name="ml-sink" title="Signup handler" hidden></iframe>
     </div>
   </div>
 </section>
@@ -844,6 +840,34 @@
         <h3>Going Above <span class="badge badge--free">Free</span> <span class="badge">12 reminders a year</span></h3>
         <div class="actions" data-file="gulf-coast-going-above.ics"></div>
       </div>
+    </div>
+
+    <div class="followup">
+      <h3>Hear about the next one</h3>
+      <p class="followup-blurb">
+        I'm still building tools like this. Leave your email and I'll tell you when
+        there's something new. That is all the list is for.
+      </p>
+      <form class="signup" method="post" target="ml-sink"
+            action="https://assets.mailerlite.com/jsonp/2575029/forms/195731645629727806/subscribe">
+        <div class="signup-row">
+          <label class="sr-only" for="signup-email">Your email address</label>
+          <input id="signup-email" type="email" name="fields[email]" required
+                 autocomplete="email" placeholder="you@example.com">
+          <button class="btn btn--primary" type="submit">Keep me posted</button>
+        </div>
+        <p class="signup-note">Only when there's something new, which is not often. Leave any time.</p>
+        <input type="hidden" name="ml-submit" value="1">
+        <input type="hidden" name="anticsrf" value="true">
+      </form>
+      <p class="signup-done" hidden>
+        <strong>Nearly there, check your email.</strong>
+        You'll have a confirmation link waiting; the list won't have you until you click it.
+      </p>
+      <!-- Posting into a hidden frame keeps the visitor on the page. MailerLite's
+           own embed targets _blank, which would throw them into a raw JSON
+           response in a new tab. -->
+      <iframe name="ml-sink" title="Signup handler" hidden></iframe>
     </div>
   </div>
 </section>
@@ -918,9 +942,11 @@
   // calendar feeds on this page stay free and are not sold anywhere.
   //
   // This is the listing URL rather than the shop URL, so buyers land on the
-  // product instead of a shop front they have to search. Setting it swaps the
-  // waitlist for a buy button, which is the right trade once there is something
-  // to buy.
+  // product instead of a shop front they have to search. Emptying it hides the
+  // price and puts the slot back to "not listed yet". It no longer has anything
+  // to do with the signup: that used to live in this slot and now sits with the
+  // free calendars, where it is a general list rather than a waitlist for one
+  // product.
   //
   // The price lives in one place, the .buy-price line in the markup above, so
   // changing it does not mean hunting through the script as well.
@@ -940,18 +966,17 @@
       buy.target = '_blank';
       buy.rel = 'noopener';
       buy.textContent = 'Get the kit on Etsy';
-      var slot = document.getElementById('buy-slot');
-      slot.textContent = '';
-      slot.appendChild(buy);
+      document.getElementById('buy-slot').appendChild(buy);
     } else {
-      // No listing yet, so the slot holds a waitlist. A price and a download
-      // promise above it would be advertising something nobody can buy.
+      // No listing, so hide the price and the download promise: both would be
+      // advertising something nobody can buy.
       document.querySelectorAll('.buy-price, .buy-note').forEach(function (el) {
         el.hidden = true;
       });
+      document.getElementById('buy-slot').textContent = 'Not listed yet.';
     }
 
-    // Waitlist. The form posts straight to MailerLite through a hidden frame,
+    // The signup posts straight to MailerLite through a hidden frame,
     // so there is no library to load and the visitor never leaves the page. We
     // cannot read the response across origins, but the frame firing `load`
     // confirms the request completed, and double opt-in means the real
