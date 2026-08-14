@@ -27,6 +27,42 @@ Newest first.
 
 ---
 
+## [1.6.0], 2026-08-14
+
+### Added
+
+- **A signup for future releases, at the end of the free calendars.** The site
+  has had no way to hear about anything since the kit listed. The MailerLite
+  form was still in the markup but inside `#buy-slot`, and the script wipes that
+  slot to write the buy button in whenever `SHOP_URL` is set, so the form only
+  ever rendered in the one state the site will not be in again. Minor rather
+  than patch: this is a capability the live site did not have.
+- It is no longer a waitlist for the kit. The heading is "Hear about the next
+  one" and the note promises only when there is something new, which is not
+  often. The old copy promised one email at launch, the wrong promise for a list
+  that outlives the launch.
+
+### Changed
+
+- The ask sits after the three free calendars rather than inside the buy card,
+  which is the goodwill moment: someone who has just been handed three free
+  things, not someone deciding whether to spend $12.99.
+- The block is styled to not read as a fourth tier card. No colored left bar, an
+  uncolored heading, no shadow. It keeps the `--paper` ground on purpose: the
+  field is defined by its `--rule` border, and on `--paper-2` that border and
+  the fill both land within 1.2 of the block behind them, which leaves the input
+  invisible until it takes focus.
+- `#buy-slot` is empty in the markup now, and the no-listing branch writes "Not
+  listed yet" into it rather than falling back to a waitlist that no longer
+  exists there.
+
+### Note for the shop owner
+
+- The MailerLite group is still named "Complete edition waitlist" and now
+  collects general signups. Renaming it is a change in the MailerLite account,
+  not in this repo. The form endpoint is a form ID and does not move when the
+  group is renamed, so no code change follows.
+
 ## [1.5.4], 2026-08-14
 
 ### Changed
