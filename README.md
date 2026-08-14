@@ -1,14 +1,21 @@
-# Gulf Coast Home Maintenance — Digital Companion
+# Gulf Coast Home Maintenance
 
-Three subscribe-able calendar feeds and the landing page that hands them out.
+The printable calendar that gets sold, three subscribe-able calendar feeds, and
+the landing page that hands the feeds out.
 
 Built to the spec in `gulf-coast-maintenance-calendar-content.md`, which is kept
 out of this repo on purpose — see [.gitignore](.gitignore) for why.
 
 ```
-build_calendars.py   task content, curated video links, and the generator
+build_calendars.py   task content, curated video links, and the feed generator
+build_pdf.py         the printable edition — the product
+product_content.py   the paid-only pages — local only, not published
 check_links.py       finds curated videos that have gone dead
 optimize_images.py   resizes the hero photo for the web
+product/             built by build_pdf.py — local only, except the listing copy
+  Gulf-Coast-Home-Maintenance-Calendar.pdf   20 pages, US Letter
+  listing/                                   Etsy photos, 00-hero.png first
+  etsy-listing.md                            the copy to paste into Etsy
 docs/                published by GitHub Pages, exactly as-is
   gulf-coast-must-do.ics       12 events
   gulf-coast-should-do.ics     12 events
@@ -35,6 +42,12 @@ Regenerate after replacing `docs/img/hero.png`:
 
 ```bash
 python optimize_images.py
+```
+
+Rebuild the product and its listing images:
+
+```bash
+python build_pdf.py
 ```
 
 ## What the events look like
@@ -183,19 +196,76 @@ the URL keeps returning a healthy page that says "Video unavailable". That is
 why `check_links.py` checks YouTube through its oEmbed endpoint rather than by
 HTTP status. Run it after editing `GUIDES`, and every month or two regardless.
 
+## The printable edition
+
+`build_pdf.py` builds the free download: a 20-page US Letter PDF, plus the
+images for the Etsy listing. It needs three packages that the rest of the
+project does not — `reportlab`, `segno` for the QR code, and `pypdfium2` to
+turn pages into listing photos:
+
+```bash
+python -m pip install "reportlab<4.1" segno pypdfium2
+```
+
+The `<4.1` pin is not cosmetic. Newer reportlab calls `md5(usedforsecurity=…)`,
+which needs Python 3.9, and the `python` on this machine is 3.8. If you move to
+a newer interpreter, drop the pin.
+
+The pages are: cover, how it works, the Gulf Coast year, your first month, the
+twelve months, the Big Ticket Watch List, how to date what you own, the free
+phone calendars, and the licence.
+
+Two sources feed it, and the split is the whole design:
+
+- **`build_calendars.py`** holds the twelve months of tasks, shared with the
+  `.ics` feeds. Editing a task changes the print edition and the digital one
+  together, so the two cannot drift apart and say different things.
+- **`product_content.py`** holds the pages the feeds do not carry — the Watch
+  List lifespans, the dating page, the first-month checklist, the licence.
+
+The PDF and the listing images are gitignored, but only as build artifacts.
+Nothing in them is held back — the calendar is a free download — and they are
+not served from `docs/` either, so committing them would put binaries in the
+repo that nothing reads.
+
+Interior pages are white on purpose. It is a print-at-home file, and a
+full-bleed tinted page costs the reader a cartridge to save us nothing. The
+serif is Times, one of the fourteen fonts every PDF reader already has, so
+nothing that could substitute badly on someone else's printer is embedded; the
+sans is Bitstream Vera, which ships inside reportlab under a licence that
+allows it.
+
 ## Selling it
 
 The Etsy shop is **GulfCoastHomeCare** — `etsy.com/shop/GulfCoastHomeCare`. The
 name is shorter than the domain because Etsy caps shop names at 20 characters
 with no spaces; "Gulf Coast" was the half worth keeping intact.
 
-When there is a published listing, paste its URL into `SHOP_URL` at the bottom
-of `docs/index.html`. That swaps the waitlist for a buy button, which is the
-right trade — once the thing is purchasable the waitlist has done its job.
+**The calendar is the free download, not the product.** It goes up at the
+lowest price Etsy allows — there is no $0 there, the floor is $0.20 — because a
+free listing is how a new shop gets found. Views, favourites and reviews
+accumulate far faster on something free, and that standing is what the paid kit
+inherits when it lists later. The kit is the thing that will be for sale.
 
-Use the **listing** URL rather than the shop URL, so buyers land on the product
-instead of a shop front they have to search. And don't link the shop at all
-until something is listed: an empty shop reads as abandoned.
+The listing copy — title, description, all thirteen tags, the price reasoning,
+and the photo order — lives in
+[product/etsy-listing.md](product/etsy-listing.md). The first photo is composed
+at 4:3 rather than being a page render, because Etsy crops the search-grid
+thumbnail to 4:3 and would otherwise slice the title off the cover.
+
+When there is a published listing, paste its URL into `SHOP_URL` at the bottom
+of `docs/index.html`. That swaps the waitlist for a download button, which is
+the right trade — once the thing is downloadable the waitlist has done its job,
+and it can start collecting against the kit instead.
+
+Use the **listing** URL rather than the shop URL, so people land on the
+download instead of a shop front they have to search. And don't link the shop
+at all until something is listed: an empty shop reads as abandoned.
+
+One thing to watch later: Etsy's fee-avoidance policy forbids using a listing
+to route buyers somewhere else to purchase. Naming the domain is harmless while
+the site sells nothing. When the kit is for sale on both, revisit the FAQ line
+in the listing copy that mentions it.
 
 ## Cutting a version
 
