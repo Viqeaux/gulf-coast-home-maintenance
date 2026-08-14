@@ -3,7 +3,7 @@
 Check every curated guide link in build_calendars.GUIDES still works.
 
 Videos get deleted, set to private, or taken down by their uploader, and none of
-that announces itself — the link keeps returning a perfectly healthy page that
+that announces itself. The link keeps returning a perfectly healthy page that
 says "Video unavailable". So YouTube links are checked through the oEmbed
 endpoint, which returns an error for anything that can no longer be watched.
 Everything else is checked by HTTP status.
@@ -59,7 +59,7 @@ def check(url):
         try:
             with fetch(probe) as response:
                 data = json.loads(response.read().decode("utf-8"))
-            return True, "ok — " + data.get("title", "")[:60]
+            return True, "ok, " + data.get("title", "")[:60]
         except urllib.error.HTTPError as error:
             if error.code in (401, 403, 404):
                 return False, "UNAVAILABLE (deleted, private, or blocked)"
@@ -69,12 +69,12 @@ def check(url):
 
     try:
         with fetch(url, method="HEAD") as response:
-            return True, "ok — HTTP {0}".format(response.status)
+            return True, "ok, HTTP {0}".format(response.status)
     except urllib.error.HTTPError as error:
         if error.code in (403, 405):                    # some hosts refuse HEAD
             try:
                 with fetch(url) as response:
-                    return True, "ok — HTTP {0}".format(response.status)
+                    return True, "ok, HTTP {0}".format(response.status)
             except Exception as inner:
                 return False, "{0} on retry".format(type(inner).__name__)
         return False, "HTTP {0}".format(error.code)
@@ -88,7 +88,7 @@ def main():
     checked = 0
 
     if not GUIDES:
-        print("No guides curated yet — nothing to check.")
+        print("No guides curated yet, so there is nothing to check.")
         print("Add entries to GUIDES in build_calendars.py.")
         return 0
 

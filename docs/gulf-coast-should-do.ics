@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Gulf Coast Home Maintenance//Perpetual Edition//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:Should Do — Gulf Coast Home Maintenance
+X-WR-CALNAME:Should Do\, Gulf Coast Home Maintenance
 X-WR-CALDESC:Protects your home's value and makes what you own last longer.
   General maintenance guidance\, not a substitute for a licensed inspector\
  , contractor\, or your insurance policy terms.
@@ -18,14 +18,15 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260101
 DTEND;VALUE=DATE:20260102
 RRULE:FREQ=YEARLY
-SEQUENCE:0
-SUMMARY:Freeze prep — find your water shutoff
+SEQUENCE:1
+SUMMARY:Freeze prep\, find your water shutoff
 DESCRIPTION:Locate your main water shutoff and make sure you can actually t
  urn it. Cover outdoor spigots.\n\nWhy: coastal plumbing is often run throu
  gh uninsulated exterior walls because it rarely needs to survive a freeze.
   When one comes\, knowing where the shutoff is turns a flooded house into 
- a wet floor.\n\nGeneral maintenance guidance\, not a substitute for a lice
- nsed inspector\, contractor\, or your insurance policy terms.
+ a wet floor.\n\nHow to: https://gulfcoasthomemaintenance.com/guides/#jan-f
+ reeze-prep\n\nGeneral maintenance guidance\, not a substitute for a licens
+ ed inspector\, contractor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -35,13 +36,14 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260201
 DTEND;VALUE=DATE:20260202
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Replace the HVAC filter\, test the A/C
 DESCRIPTION:Swap the filter and run the air conditioning briefly.\n\nWhy: f
  inding a cooling problem in February means an appointment. Finding it in J
- uly means a wait list\, a premium\, and a hot house.\n\nGeneral maintenanc
- e guidance\, not a substitute for a licensed inspector\, contractor\, or y
- our insurance policy terms.
+ uly means a wait list\, a premium\, and a hot house.\n\nHow to: https://gu
+ lfcoasthomemaintenance.com/guides/#feb-hvac-filter\n\nGeneral maintenance 
+ guidance\, not a substitute for a licensed inspector\, contractor\, or you
+ r insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -51,14 +53,15 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260301
 DTEND;VALUE=DATE:20260302
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Clear the gutters\, check the downspouts
 DESCRIPTION:Clear the gutters and confirm every downspout discharges away f
  rom the foundation\, not against it.\n\nWhy: water dumped at the foundatio
- n is the start of settling\, slab cracks\, and a wet crawlspace — all of
-  them expensive\, all of them avoidable with a splash block.\n\nGeneral ma
- intenance guidance\, not a substitute for a licensed inspector\, contracto
- r\, or your insurance policy terms.
+ n is the start of settling\, slab cracks\, and a wet crawlspace. All of th
+ em expensive\, all of them avoidable with a splash block.\n\nHow to: https
+ ://gulfcoasthomemaintenance.com/guides/#mar-gutters\n\nGeneral maintenance
+  guidance\, not a substitute for a licensed inspector\, contractor\, or yo
+ ur insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -68,12 +71,13 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260401
 DTEND;VALUE=DATE:20260402
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Wash the exterior\, inspect the siding
 DESCRIPTION:Wash the house down and inspect siding\, brick\, and soffits fo
  r damage or gaps.\n\nWhy: salt air and humidity feed mildew and rot\, and 
  washing is how you find the soft spot behind it. Open soffits are also how
-  squirrels and wasps get into the attic.\n\nGeneral maintenance guidance\,
+  squirrels and wasps get into the attic.\n\nHow to: https://gulfcoasthomem
+ aintenance.com/guides/#apr-wash-exterior\n\nGeneral maintenance guidance\,
   not a substitute for a licensed inspector\, contractor\, or your insuranc
  e policy terms.
 TRANSP:TRANSPARENT
@@ -85,14 +89,16 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260501
 DTEND;VALUE=DATE:20260502
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Test the generator\, restock supplies
 DESCRIPTION:Start and load-test the generator. Restock water\, batteries\, 
  and fuel. Confirm shutters or plywood are on hand and actually fit your op
  enings.\n\nWhy: a generator that has sat with old fuel since last season w
  ill not start when you need it\, and plywood cut to the wrong window is pl
- ywood you cannot use.\n\nGeneral maintenance guidance\, not a substitute f
- or a licensed inspector\, contractor\, or your insurance policy terms.
+ ywood you cannot use.\n\nHow to: https://gulfcoasthomemaintenance.com/guid
+ es/#may-generator-supplies\n\nGeneral maintenance guidance\, not a substit
+ ute for a licensed inspector\, contractor\, or your insurance policy terms
+ .
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -102,14 +108,15 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260601
 DTEND;VALUE=DATE:20260602
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Clean the condenser\, clear vegetation
 DESCRIPTION:Clean the outdoor condenser coils and cut vegetation back two f
  eet on all sides of the unit.\n\nWhy: a coil that cannot breathe makes the
   compressor work harder in the hottest months\, which is exactly how a 12-
- year unit becomes an 8-year unit.\n\nGeneral maintenance guidance\, not a 
- substitute for a licensed inspector\, contractor\, or your insurance polic
- y terms.
+ year unit becomes an 8-year unit.\n\nHow to: https://gulfcoasthomemaintena
+ nce.com/guides/#jun-condenser-coils\n\nGeneral maintenance guidance\, not 
+ a substitute for a licensed inspector\, contractor\, or your insurance pol
+ icy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -119,13 +126,14 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260701
 DTEND;VALUE=DATE:20260702
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Inspect the crawlspace
 DESCRIPTION:Inspect the crawlspace or under-house area for moisture\, pests
  \, and vapor barrier damage.\n\nWhy: it is the part of the house nobody lo
  oks at and the part humidity attacks hardest. Rot and pests both start dow
- n there.\n\nGeneral maintenance guidance\, not a substitute for a licensed
-  inspector\, contractor\, or your insurance policy terms.
+ n there.\n\nHow to: https://gulfcoasthomemaintenance.com/guides/#jul-crawl
+ space\n\nGeneral maintenance guidance\, not a substitute for a licensed in
+ spector\, contractor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -135,11 +143,12 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260801
 DTEND;VALUE=DATE:20260802
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Clear the gutters again
 DESCRIPTION:Clear the gutters a second time.\n\nWhy: summer storms fill the
  m fast\, and a full gutter in a tropical downpour sends the whole roof's w
- ater straight down your wall.\n\nGeneral maintenance guidance\, not a subs
+ ater straight down your wall.\n\nHow to: https://gulfcoasthomemaintenance.
+ com/guides/#aug-gutters-again\n\nGeneral maintenance guidance\, not a subs
  titute for a licensed inspector\, contractor\, or your insurance policy te
  rms.
 TRANSP:TRANSPARENT
@@ -151,14 +160,15 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260901
 DTEND;VALUE=DATE:20260902
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Inspect the roof from the ground
 DESCRIPTION:Inspect the roof from the ground with binoculars after the summ
  er storm run. Look for lifted\, curled\, or missing shingles.\n\nWhy: you 
  can see almost everything that matters from the driveway\, and nobody has 
- ever fallen off a driveway.\n\nGeneral maintenance guidance\, not a substi
- tute for a licensed inspector\, contractor\, or your insurance policy term
- s.
+ ever fallen off a driveway.\n\nHow to: https://gulfcoasthomemaintenance.co
+ m/guides/#sep-roof-inspection\n\nGeneral maintenance guidance\, not a subs
+ titute for a licensed inspector\, contractor\, or your insurance policy te
+ rms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -168,13 +178,14 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20261001
 DTEND;VALUE=DATE:20261002
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Check weatherstripping and seals
 DESCRIPTION:Check weatherstripping\, door sweeps\, and the attic hatch seal
  .\n\nWhy: those gaps are your largest uncontrolled air exchange\, which on
-  the coast means you are paying to dehumidify the outdoors.\n\nGeneral mai
- ntenance guidance\, not a substitute for a licensed inspector\, contractor
- \, or your insurance policy terms.
+  the coast means you are paying to dehumidify the outdoors.\n\nHow to: htt
+ ps://gulfcoasthomemaintenance.com/guides/#oct-weatherstripping\n\nGeneral 
+ maintenance guidance\, not a substitute for a licensed inspector\, contrac
+ tor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -184,13 +195,14 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20261101
 DTEND;VALUE=DATE:20261102
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Replace the filter\, test the heat
 DESCRIPTION:Replace the HVAC filter and run the heat once.\n\nWhy: the burn
  er or heat strips have sat unused since spring. Better to smell the dust b
- urn off in November than to find a dead system during a cold snap.\n\nGene
- ral maintenance guidance\, not a substitute for a licensed inspector\, con
- tractor\, or your insurance policy terms.
+ urn off in November than to find a dead system during a cold snap.\n\nHow 
+ to: https://gulfcoasthomemaintenance.com/guides/#nov-filter-heat-test\n\nG
+ eneral maintenance guidance\, not a substitute for a licensed inspector\, 
+ contractor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -200,12 +212,13 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Test GFCI outlets\, label the panel
 DESCRIPTION:Press test and reset on every GFCI outlet. Label the breaker pa
  nel if it is not already labeled.\n\nWhy: a GFCI that will not trip is not
   protecting anyone\, and a labeled panel is what lets you kill the right c
- ircuit in a hurry.\n\nGeneral maintenance guidance\, not a substitute for 
+ ircuit in a hurry.\n\nHow to: https://gulfcoasthomemaintenance.com/guides/
+ #dec-gfci-breakers\n\nGeneral maintenance guidance\, not a substitute for 
  a licensed inspector\, contractor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance

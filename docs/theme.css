@@ -5,7 +5,7 @@
    on a media query resolving. Dark redefines only the tokens.
 
    This lives in one file on purpose. Two hand-synced copies of a palette drift
-   apart — one page gets a new token, the other does not, and the mismatch only
+   apart. One page gets a new token, the other does not, and the mismatch only
    shows up in whichever colour scheme you were not looking at.
 
    There is deliberately no [data-theme] override: the site has no theme toggle,

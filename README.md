@@ -4,15 +4,15 @@ The printable calendar that gets sold, three subscribe-able calendar feeds, and
 the landing page that hands the feeds out.
 
 Built to the spec in `gulf-coast-maintenance-calendar-content.md`, which is kept
-out of this repo on purpose — see [.gitignore](.gitignore) for why.
+out of this repo on purpose, see [.gitignore](.gitignore) for why.
 
 ```
 build_calendars.py   task content, curated video links, and the feed generator
-build_pdf.py         the printable edition — the product
-product_content.py   the paid-only pages — local only, not published
+build_pdf.py         the printable edition, the product
+product_content.py   the paid-only pages, local only, not published
 check_links.py       finds curated videos that have gone dead
 optimize_images.py   resizes the hero photo for the web
-product/             built by build_pdf.py — local only, except the listing copy
+product/             built by build_pdf.py. Local only, except the listing copy
   Gulf-Coast-Home-Maintenance-Calendar.pdf   20 pages, US Letter
   listing/                                   Etsy photos, 00-hero.png first
   etsy-listing.md                            the copy to paste into Etsy
@@ -21,15 +21,15 @@ docs/                published by GitHub Pages, exactly as-is
   gulf-coast-should-do.ics     12 events
   gulf-coast-going-above.ics   12 events
   index.html                   the landing page the QR code points to
-  guides/index.html            generated — one anchor per task
+  guides/index.html            generated, one anchor per task
   theme.css                    the palette, shared by both pages
   img/hero-1600.jpg            hero, desktop
   img/hero-900.jpg             hero, mobile
-  img/hero.png                 the master — local only, not published
+  img/hero.png                 the master, local only, not published
   .nojekyll                    stops Pages running the site through Jekyll
 ```
 
-`docs/guides/index.html` is generated — edit `build_calendars.py`, not the HTML.
+`docs/guides/index.html` is generated, edit `build_calendars.py`, not the HTML.
 `docs/index.html` is hand-written.
 
 Regenerate after editing task content:
@@ -53,17 +53,17 @@ python build_pdf.py
 ## What the events look like
 
 - One all-day event per task, no alert attached.
-- `RRULE:FREQ=YEARLY` with no `UNTIL` — repeats forever, matching the undated print edition.
+- `RRULE:FREQ=YEARLY` with no `UNTIL`. Repeats forever, matching the undated print edition.
 - Anchored to the 1st of each month, with two deliberate exceptions: **May 1**
   (hurricane prep, leaving room for the 30-day flood insurance window before June 1)
   and **November 30** (season close / post-season inspection).
 - Description holds the task, the reason it matters, and the disclaimer. The
-  how-to video link goes here later — add it to the body text in `TASKS`.
+  how-to video link goes here later. Add it to the body text in `TASKS`.
 - Marked `TRANSP:TRANSPARENT`, so they don't make you look busy to anyone who
   checks your availability.
 
 The first occurrence is anchored to 2026 (`ANCHOR_YEAR`). That only sets where the
-series starts, not when it ends — subscribers see this year and every year after.
+series starts, not when it ends. Subscribers see this year and every year after.
 
 ## Publishing
 
@@ -73,14 +73,13 @@ to any static host, keeping the same layout, and it works.
 
 Two requirements from Google:
 
-1. **HTTPS, publicly reachable.** Google's servers fetch the file themselves —
-   it can't be behind a login, a private repo, or localhost.
+1. **HTTPS, publicly reachable.** Google's servers fetch the file themselves. It can't be behind a login, a private repo, or localhost.
 2. **Served as `text/calendar`.** GitHub Pages, Netlify, and Cloudflare Pages all
    do this for `.ics` automatically. Some hosts serve it as `text/plain`, which
    Google rejects.
 
 Then point the back-cover QR code at the landing page URL, not at an `.ics` file
-directly — the page is what lets someone pick a tier and gives them instructions.
+directly. The page is what lets someone pick a tier and gives them instructions.
 
 ### GitHub Pages
 
@@ -95,20 +94,20 @@ about a minute; Google then picks it up on its own slower schedule.
 
 ### Why subscribing does nothing until it's hosted
 
-Google doesn't read the calendar file from your browser — it stores the URL and
+Google doesn't read the calendar file from your browser, it stores the URL and
 its own servers go fetch it. So a file opened from your hard drive, or served
 from `localhost`, is invisible to Google. Pressing **Add to Google Calendar**
 in that state just opens Google Calendar and adds nothing, with no error.
 
 The landing page checks for this: off a public HTTPS origin it hides the two
 subscribe buttons, leaves **Download .ics**, and explains why. If you ever see
-that banner on the real site, the host is the problem — most likely it's serving
+that banner on the real site, the host is the problem, most likely it's serving
 over `http://` or the domain isn't public yet.
 
 ## What has been checked on real devices
 
 Everything up to the point where the operating system takes over is verified
-automatically — the feeds parse, the links are well formed, the files serve as
+automatically. The feeds parse, the links are well formed, the files serve as
 `text/calendar`. The last hop is the part no amount of local testing can prove,
 because it depends on what the device decides to do with the link.
 
@@ -121,7 +120,7 @@ because it depends on what the device decides to do with the link.
 The Android case is the one that matters, because it decides whether the
 Android-only card on the landing page earns its place. Android can hand a
 `calendar.google.com` link to the Google Calendar app, which cannot subscribe to
-a URL — but whether it does depends on a per-device setting, so it will hit some
+a URL, but whether it does depends on a per-device setting, so it will hit some
 visitors and not others. If it turns out to be rare, that card is noise and
 should go.
 
@@ -136,7 +135,7 @@ hand: Google Calendar → **Other calendars** → **+** → **From URL** → pas
 
 Two things worth telling buyers up front, because both generate support email:
 
-- **Google refreshes subscribed calendars slowly** — up to a day, occasionally
+- **Google refreshes subscribed calendars slowly**, up to a day, occasionally
   longer. Nothing in this calendar is time-critical to the hour.
 - **Subscribing is not importing.** Import is a one-time copy that never updates
   and duplicates itself if you do it twice. Subscribing is what lets you improve
@@ -158,7 +157,7 @@ When you publish a change to a feed people already subscribe to:
 ## Verifying a change
 
 `python build_calendars.py` will happily produce a malformed file if the content
-has a quoting mistake, so it's worth a look at the output — 12 events per file,
+has a quoting mistake, so it's worth a look at the output, 12 events per file,
 each with a `DTSTART`, an `RRULE`, and a description that reads correctly after
 the line wrapping. The generator handles RFC 5545 escaping and 75-octet folding;
 what it can't check is whether the words are right.
@@ -191,7 +190,7 @@ reasons, both of which matter more than they look:
   the most motivated visitor the site will ever get, and they should land on it
   rather than be handed to YouTube.
 
-**Videos disappear silently** — deleted, set to private, or region-blocked — and
+**Videos disappear silently**. Deleted, set to private, or region-blocked, and
 the URL keeps returning a healthy page that says "Video unavailable". That is
 why `check_links.py` checks YouTube through its oEmbed endpoint rather than by
 HTTP status. Run it after editing `GUIDES`, and every month or two regardless.
@@ -200,7 +199,7 @@ HTTP status. Run it after editing `GUIDES`, and every month or two regardless.
 
 `build_pdf.py` builds the free download: a 20-page US Letter PDF, plus the
 images for the Etsy listing. It needs three packages that the rest of the
-project does not — `reportlab`, `segno` for the QR code, and `pypdfium2` to
+project does not. `reportlab`, `segno` for the QR code, and `pypdfium2` to
 turn pages into listing photos:
 
 ```bash
@@ -220,11 +219,11 @@ Two sources feed it, and the split is the whole design:
 - **`build_calendars.py`** holds the twelve months of tasks, shared with the
   `.ics` feeds. Editing a task changes the print edition and the digital one
   together, so the two cannot drift apart and say different things.
-- **`product_content.py`** holds the pages the feeds do not carry — the Watch
+- **`product_content.py`** holds the pages the feeds do not carry, the Watch
   List lifespans, the dating page, the first-month checklist, the licence.
 
 The PDF and the listing images are gitignored, but only as build artifacts.
-Nothing in them is held back — the calendar is a free download — and they are
+Nothing in them is held back. The calendar is a free download, and they are
 not served from `docs/` either, so committing them would put binaries in the
 repo that nothing reads.
 
@@ -237,25 +236,25 @@ allows it.
 
 ## Selling it
 
-The Etsy shop is **GulfCoastHomeCare** — `etsy.com/shop/GulfCoastHomeCare`. The
+The Etsy shop is **GulfCoastHomeCare**, `etsy.com/shop/GulfCoastHomeCare`. The
 name is shorter than the domain because Etsy caps shop names at 20 characters
 with no spaces; "Gulf Coast" was the half worth keeping intact.
 
 **The calendar is the free download, not the product.** It goes up at the
-lowest price Etsy allows — there is no $0 there, the floor is $0.20 — because a
+lowest price Etsy allows. There is no $0 there, the floor is $0.20, because a
 free listing is how a new shop gets found. Views, favourites and reviews
 accumulate far faster on something free, and that standing is what the paid kit
 inherits when it lists later. The kit is the thing that will be for sale.
 
-The listing copy — title, description, all thirteen tags, the price reasoning,
-and the photo order — lives in
+The listing copy. Title, description, all thirteen tags, the price reasoning,
+and the photo order, lives in
 [product/etsy-listing.md](product/etsy-listing.md). The first photo is composed
 at 4:3 rather than being a page render, because Etsy crops the search-grid
 thumbnail to 4:3 and would otherwise slice the title off the cover.
 
 When there is a published listing, paste its URL into `SHOP_URL` at the bottom
 of `docs/index.html`. That swaps the waitlist for a download button, which is
-the right trade — once the thing is downloadable the waitlist has done its job,
+the right trade. Once the thing is downloadable the waitlist has done its job,
 and it can start collecting against the kit instead.
 
 Use the **listing** URL rather than the shop URL, so people land on the
@@ -287,7 +286,7 @@ Two things that are easy to conflate:
   page footer so a tester can tell you which build they were looking at.
 - **`SEQUENCE` is for subscribers.** It lives in `build_calendars.py` and is what
   tells a calendar client an event actually changed. Bump it whenever you edit
-  task content — a version bump alone does not do it, and a `SEQUENCE` bump is
+  task content. A version bump alone does not do it, and a `SEQUENCE` bump is
   not needed for a design-only release.
 
 To see what a released version contained: `git show v1.0.0 --stat`.

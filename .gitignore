@@ -12,7 +12,11 @@ gulf-coast-maintenance-calendar-content.md
 # — but it is not served from docs/ either, so committing it would put a binary
 # in the repo that nothing reads. Its source, product_content.py, is tracked,
 # and so is the listing copy sitting beside these.
+# The kit is the paid product and this repo is public, so neither the built PDF
+# nor the HTML it is rendered from belongs in git. Both rebuild in a second from
+# build_printables.py.
 product/*.pdf
+product/*.html
 product/listing/
 
 # Local Claude Code settings — machine-specific, not useful to anyone else.

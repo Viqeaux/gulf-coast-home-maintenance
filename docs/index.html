@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Gulf Coast Home Maintenance Calendar</title>
-<meta name="description" content="A home maintenance calendar built for the Gulf Coast — salt air, humidity, termites, and hurricane season. Twelve months, three tiers, plus free calendars for your phone.">
+<meta name="description" content="A home maintenance calendar built for the Gulf Coast. Salt air, humidity, termites, and hurricane season. Twelve months, three tiers, plus free calendars for your phone.">
 <meta property="og:title" content="The Gulf Coast Home Maintenance Calendar">
-<meta property="og:description" content="Generic maintenance advice assumes a climate you don't live in. This one is built for the Gulf Coast — Texas to Florida.">
+<meta property="og:description" content="Generic maintenance advice assumes a climate you don't live in. This one is built for the Gulf Coast, Texas to Florida.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0e2429">
 <link rel="stylesheet" href="theme.css">
@@ -50,7 +50,7 @@
   .muted { color: var(--muted); }
   .deck { font-size: 1.06rem; color: var(--muted); max-width: 36rem; }
 
-  /* section numbering — the field-guide device */
+  /* section numbering, the field-guide device */
   .sec-no {
     font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
     letter-spacing: .16em; color: var(--accent);
@@ -119,9 +119,9 @@
     background: var(--deep); color: var(--on-deep);
     padding: 4.5rem 0 4rem;
   }
-  /* The photograph sits well back behind a scrim. It is there to say "you live
-     here" — live oak and Spanish moss do that instantly — not to be looked at.
-     The gradient is heaviest on the left so the headline always has ground. */
+  /* The photograph sits well back behind a scrim. Its job is to say "you live
+     here", which live oak and Spanish moss do instantly. It is not there to be
+     looked at, so the gradient is heaviest on the left where the headline sits. */
   .hero-media { position: absolute; inset: 0; overflow: hidden; }
   .hero-media img {
     width: 100%; height: 100%; object-fit: cover; object-position: 62% 42%;
@@ -217,7 +217,7 @@
   .diag-marker { stroke: var(--marker); stroke-width: 1.5; stroke-dasharray: 3 3; }
 
   /* --- factor cards ----------------------------------------------------- */
-  /* Four cells, so the track count has to divide into four exactly — auto-fit
+  /* Four cells, so the track count has to divide into four exactly, auto-fit
      lands on three at some widths and leaves an empty cell showing the grid's
      own background as a block. */
   .factors {
@@ -316,8 +316,7 @@
   }
   .band .ls .fill { background: linear-gradient(90deg,
       color-mix(in srgb, var(--accent) 45%, transparent), var(--accent)); }
-  /* Keep the short-lifespan items reading as a warning on the deep ground too —
-     that contrast is the whole point of the chart. */
+  /* Keep the short-lifespan items reading as a warning on the deep ground too. That contrast is the whole point of the chart. */
   .band .ls--short .fill { background: linear-gradient(90deg,
       color-mix(in srgb, var(--must-lift) 45%, transparent), var(--must-lift)); }
   .band .ls--short .yrs { color: var(--must-lift); }
@@ -346,6 +345,11 @@
     box-shadow: var(--shadow-lg); padding: 2rem 1.8rem; margin-top: 2.25rem; text-align: center;
   }
   .buy h3 { font-size: 1.2rem; margin-bottom: .55rem; }
+  .buy-price {
+    font: 700 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--sand);
+    margin: 0 0 .5rem !important;
+  }
   .buy p { color: var(--muted); max-width: 30rem; margin-left: auto; margin-right: auto; font-size: .97rem; }
   .buy p:last-child { margin-bottom: 0; }
   /* --- waitlist signup -------------------------------------------------- */
@@ -489,7 +493,7 @@
 <!-- ===================== the year ===================== -->
 <section>
   <div class="wrap">
-    <span class="sec-no">01 — The pressures</span>
+    <span class="sec-no">01 / The pressures</span>
     <h2>The Gulf Coast year</h2>
     <p class="deck">
       Four overlapping seasons your house has to survive, and they don't line up with the
@@ -561,7 +565,7 @@
 <!-- ===================== why ===================== -->
 <section class="band">
   <div class="wrap">
-    <span class="sec-no">02 — Why it's different here</span>
+    <span class="sec-no">02 / Why it's different here</span>
     <h2>Four things that break the national averages</h2>
     <p class="deck">
       Those averages assume mild summers, dry air, and a roof that isn't being sandblasted
@@ -588,7 +592,7 @@
           <ellipse cx="12" cy="13" rx="4" ry="6"/><path d="M12 7V4M9 4.5 12 4l3 .5M4 10h4M16 10h4M4.5 15H8M16 15h3.5M6 20l2.6-2M18 20l-2.6-2"/>
         </svg>
         <h3>Termites</h3>
-        <p>Formosan and native subterranean colonies are endemic — and the damage is almost never covered by insurance.</p>
+        <p>Formosan and native subterranean colonies are endemic, and the damage is almost never covered by insurance.</p>
       </div>
       <div class="factor">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -604,7 +608,7 @@
 <!-- ===================== tiers + sample ===================== -->
 <section>
   <div class="wrap">
-    <span class="sec-no">03 — How it works</span>
+    <span class="sec-no">03 / How it works</span>
     <h2>Twelve months, three tiers</h2>
     <p class="deck">
       The tiers exist so you can start without drowning. Nobody does all of this the first year.
@@ -656,7 +660,7 @@
 <!-- ===================== watch list ===================== -->
 <section id="edition" class="band">
   <div class="wrap">
-    <span class="sec-no">04 — The back page</span>
+    <span class="sec-no">04 / The kit</span>
     <h2>The Big Ticket Watch List</h2>
     <p class="deck">
       Every expensive thing in your house is already on a clock. You write in the year it
@@ -675,7 +679,7 @@
         <span class="yrs">5–7 yr</span>
       </div>
       <div class="ls">
-        <span class="name">Water heater — tank</span>
+        <span class="name">Water heater, tank</span>
         <span class="track"><span class="fill" style="left:20%;width:5%"></span></span>
         <span class="yrs">8–10 yr</span>
       </div>
@@ -685,7 +689,7 @@
         <span class="yrs">10–12 yr</span>
       </div>
       <div class="ls">
-        <span class="name">Roof — asphalt shingle</span>
+        <span class="name">Roof, asphalt shingle</span>
         <span class="track"><span class="fill" style="left:30%;width:7.5%"></span></span>
         <span class="yrs">12–15 yr</span>
       </div>
@@ -700,7 +704,7 @@
         <span class="yrs">15–25 yr</span>
       </div>
       <div class="ls">
-        <span class="name">Roof — metal</span>
+        <span class="name">Roof, metal</span>
         <span class="track"><span class="fill" style="left:75%;width:25%"></span></span>
         <span class="yrs">30–40 yr</span>
       </div>
@@ -710,7 +714,7 @@
     </div>
 
     <p class="muted" style="margin-top:1.6rem;font-size:.93rem">
-      Your caulk fails seven times before your roof does — which is exactly why it's the
+      Your caulk fails seven times before your roof does, which is exactly why it's the
       thing nobody budgets for. These numbers run shorter than the national ones on purpose:
       salt, humidity, and UV wear coastal homes faster than those averages assume. The full
       edition carries the whole list, plus a page on how to date everything in your house
@@ -718,20 +722,22 @@
     </p>
 
     <div class="buy">
-      <h3>The complete edition</h3>
+      <p class="buy-price">$7.99 on Etsy</p>
+      <h3>The printable kit</h3>
       <p>
-        Undated, so it never expires and never goes on sale in January — twelve months, all
-        three tiers, the full Big Ticket Watch List, the page on how to date everything you
-        own, and a first-month checklist for what you only do once.
+        Eighteen pages, undated, so it never expires and never goes on sale in January.
+        Twelve months with step-by-step detail, the full seventeen-item Watch List with
+        room to fill in your own years, the page on how to date everything you own, and a
+        first-month checklist for what you only do once.
       </p>
-      <!-- Until there is somewhere to get it, this slot collects a waitlist.
-           Setting SHOP_URL at the bottom of this file replaces the whole thing
-           with the download button, which is the right outcome — once it is
-           downloadable the waitlist has done its job. -->
+      <!-- Until the Etsy listing exists, this slot collects a waitlist. Setting
+           SHOP_URL at the bottom of this file replaces the whole thing with the
+           buy button, which is the right outcome: once the kit is purchasable
+           the waitlist has done its job. -->
       <div id="buy-slot">
         <form class="signup" method="post" target="ml-sink"
               action="https://assets.mailerlite.com/jsonp/2575029/forms/195731645629727806/subscribe">
-          <p class="signup-ask">Not out yet. I'll email you once when it is.</p>
+          <p class="signup-ask">Not listed yet. I'll email you once when it is.</p>
           <div class="signup-row">
             <label class="sr-only" for="signup-email">Your email address</label>
             <input id="signup-email" type="email" name="fields[email]" required
@@ -743,7 +749,7 @@
           <input type="hidden" name="anticsrf" value="true">
         </form>
         <p class="signup-done" hidden>
-          <strong>Nearly there — check your email.</strong>
+          <strong>Nearly there, check your email.</strong>
           You'll have a confirmation link waiting; the list won't have you until you click it.
         </p>
       </div>
@@ -758,7 +764,7 @@
 <!-- ===================== calendars ===================== -->
 <section id="calendars">
   <div class="wrap">
-    <span class="sec-no">05 — Free</span>
+    <span class="sec-no">05 / Free</span>
     <h2>Put it on your phone</h2>
     <p class="deck">
       The same twelve months, as three calendars you can subscribe to. Free, no signup,
@@ -785,7 +791,7 @@
 <!-- ===================== how to ===================== -->
 <section class="band">
   <div class="wrap">
-    <span class="sec-no">06 — Getting them on your phone</span>
+    <span class="sec-no">06 / Getting them on your phone</span>
     <h2>However you keep your calendar</h2>
 
     <div class="howto">
@@ -795,18 +801,18 @@
       </div>
       <div>
         <h3>Subscribe rather than download</h3>
-        <p>A subscription keeps updating as the calendar improves, including the how-to videos being added to each task. A downloaded file is a snapshot — it never changes, and it duplicates itself if you import it twice.</p>
+        <p>A subscription keeps updating as the calendar improves, including the how-to videos being added to each task. A downloaded file is a snapshot. It never changes, and it duplicates itself if you import it twice.</p>
       </div>
       <div>
         <h3>Google Calendar, including Android</h3>
-        <p>Android uses Google Calendar, so this is the button for it too. The app itself can't add a subscription — do it once from a browser and it appears on every device on that account.</p>
+        <p>Android uses Google Calendar, so this is the button for it too. The app itself can't add a subscription. Do it once from a browser and it appears on every device on that account.</p>
         <ol>
           <li>Tap <strong>Add to Google Calendar</strong>.</li>
           <li>Confirm <strong>Add</strong> when Google asks.</li>
           <li>In the app, open the menu and switch it on.</li>
         </ol>
-        <p>Google refreshes slowly, sometimes up to a day. A new calendar may show its web address as the name until then — that's normal.</p>
-        <p><strong>If the Google Calendar app opens and nothing happens</strong> — most likely on Android — it intercepted the link, and the app can't subscribe. Use <strong>Copy feed URL</strong> instead, then add it from a browser with <em>Other calendars</em> → <em>+</em> → <em>From URL</em>. On a phone, turn on your browser's desktop-site setting first.</p>
+        <p>Google refreshes slowly, sometimes up to a day. A new calendar may show its web address as the name until then, which is normal.</p>
+        <p><strong>If the Google Calendar app opens and nothing happens,</strong> most likely on Android, it intercepted the link and cannot subscribe. Use <strong>Copy feed URL</strong> instead, then add it from a browser with <em>Other calendars</em> → <em>+</em> → <em>From URL</em>. On a phone, turn on your browser's desktop-site setting first.</p>
       </div>
       <div>
         <h3>Apple Calendar or Outlook</h3>
@@ -848,13 +854,15 @@
 
 <script>
   // ---------------------------------------------------------------------------
-  // Setting this swaps the waitlist for a download button. Leave it empty until
-  // there is a published listing to send people to — an empty Etsy shop reads
-  // as abandoned, and the waitlist is doing more for you in the meantime.
+  // The Etsy listing for the printable kit, which is the paid product at $7.99.
+  // The calendar feeds on this page stay free and are not sold anywhere.
   //
-  // The calendar itself is free; the listing exists so the shop has something
-  // to be found by. Prefer the listing URL over the shop URL, so people land on
-  // the download rather than on a shop front they have to search:
+  // Setting this swaps the waitlist for a buy button. Leave it empty until the
+  // listing is actually published: an empty shop reads as abandoned, and the
+  // waitlist is doing more for you in the meantime.
+  //
+  // Use the listing URL, not the shop URL, so buyers land on the product rather
+  // than a shop front they have to search:
   //   listing  https://www.etsy.com/listing/<id>/<slug>
   //   shop     https://www.etsy.com/shop/GulfCoastHomeCare
   var SHOP_URL = "";
@@ -872,7 +880,7 @@
       buy.href = SHOP_URL;
       buy.target = '_blank';
       buy.rel = 'noopener';
-      buy.textContent = 'Download it free on Etsy';
+      buy.textContent = 'Get the kit on Etsy, $7.99';
       var slot = document.getElementById('buy-slot');
       slot.textContent = '';
       slot.appendChild(buy);
@@ -881,7 +889,7 @@
     // Waitlist. The form posts straight to MailerLite through a hidden frame,
     // so there is no library to load and the visitor never leaves the page. We
     // cannot read the response across origins, but the frame firing `load`
-    // confirms the request completed — and double opt-in means the real
+    // confirms the request completed, and double opt-in means the real
     // confirmation is the email they are about to get either way.
     var signup = document.querySelector('.signup');
     if (signup) {
@@ -917,7 +925,7 @@
 
     if (!publicHost) {
       notice('preview-warning',
-        '<strong>Preview only — subscribing won\'t work yet.</strong> ' +
+        '<strong>Preview only, subscribing won\'t work yet.</strong> ' +
         (/^https?:$/.test(location.protocol)
           ? 'This page is being served from ' + location.host + '.'
           : 'This page is open as a local file.') +
@@ -927,7 +935,7 @@
     }
 
     // Android can route calendar.google.com links into the Google Calendar app,
-    // which has no way to subscribe to a URL — the app just opens and sits
+    // which has no way to subscribe to a URL. The app just opens and sits
     // there. It depends on a per-device "open supported links" setting, so it
     // hits some Android users and not others, and neither we nor they can tell
     // in advance. Give them the route that never depends on it.
@@ -963,8 +971,8 @@
     });
 
     // The two subscribe buttons only cover Google and apps that register the
-    // webcal:// handler. Everything else — Outlook on the web, Thunderbird,
-    // Proton — wants an https:// feed address pasted into a box, so hand it over
+    // webcal:// handler. Everything else (Outlook on the web, Thunderbird,
+    // Proton) wants an https:// feed address pasted into a box, so hand it over
     // directly rather than making people dig it out of the download link.
     //
     // One delegated listener rather than one per button, so it keeps working no

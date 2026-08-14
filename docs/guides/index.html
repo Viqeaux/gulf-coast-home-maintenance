@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How-to guides — Gulf Coast Home Maintenance</title>
+<title>How-to guides, Gulf Coast Home Maintenance</title>
 <meta name="description" content="A picked video for each task on the Gulf Coast Home Maintenance calendar.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="../theme.css">
@@ -76,10 +76,27 @@
     display: block; font: 400 12px/1.4 ui-sans-serif, system-ui, sans-serif;
     color: var(--muted); margin-top: .15rem;
   }
-  .pending {
-    font: 600 12px/1.4 ui-sans-serif, system-ui, sans-serif;
-    color: var(--muted); opacity: .8; margin-top: .8rem !important;
+  .need, .watch, .pro-note {
+    font: 400 .9rem/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    margin: .8rem 0 0 !important; padding: .55rem .75rem; border-radius: 3px;
   }
+  .need { background: var(--paper-2); color: var(--muted); }
+  .need span, .watch span {
+    font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+    font-size: 10px; display: block; margin-bottom: .15rem;
+  }
+  .need span { color: var(--ink); }
+  .watch { background: var(--paper-2); border-left: 3px solid var(--must); color: var(--muted); }
+  .watch span { color: var(--must); }
+  .pro-note {
+    padding: 0; background: none; color: var(--accent); font-weight: 600; font-size: .85rem;
+  }
+  .steps { margin: .9rem 0 0; padding-left: 1.15rem; }
+  .steps li {
+    font: 400 .95rem/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink); margin-bottom: .45rem; padding-left: .15rem;
+  }
+  .steps li::marker { color: var(--tier-color); font-weight: 700; }
 
   footer {
     background: var(--deep); color: var(--on-deep-mute);
@@ -100,10 +117,11 @@
     <a class="back" href="../">&#8592; Gulf Coast Home Maintenance</a>
     <h1>How to do each of these</h1>
     <p>
-      One picked video per task, from people who explain it well. Your calendar
-      links straight to the task you were just reminded about.
+      Step by step for all thirty-six, including what to have to hand and where
+      people go wrong. Your calendar links straight to the task you were just
+      reminded about.
     </p>
-    <p class="count">0 of 36 tasks covered so far</p>
+    <p class="count">36 of 36 tasks covered</p>
   </div>
 </header>
 
@@ -115,21 +133,43 @@
         <h3>Test smoke and CO detectors</h3>
         <p>Test every smoke and carbon monoxide detector. Replace the batteries. Replace any detector over 10 years old.</p>
         <p>Why: sensors degrade with age whether or not the unit still chirps, and a detector past its rated life can pass a button test and still fail in a real fire.</p>
-        <p class="pending">No guide picked yet.</p>
+        <p class="need"><span>You need</span> Step ladder · Fresh batteries</p>
+        <ol class="steps">
+          <li>Press and hold the test button on each unit until it sounds.</li>
+          <li>Replace batteries in anything weak or chirping, usually a 9V or two AAs.</li>
+          <li>Check the manufacture date printed on the back. Over ten years old means replace the whole unit, however well it tests.</li>
+          <li>Confirm coverage: one inside each bedroom, one outside each sleeping area, and at least one on every floor.</li>
+          <li>Vacuum the vents to clear dust, which is the usual cause of false alarms.</li>
+        </ol>
+        <p class="watch"><span>Watch out</span> An intermittent chirp usually means a low battery. A chirp that continues after a fresh battery usually means the sensor has reached end of life.</p>
       </article>
       <article class="task task--should" id="jan-freeze-prep">
         <p class="tier-tag">Should</p>
-        <h3>Freeze prep — find your water shutoff</h3>
+        <h3>Freeze prep, find your water shutoff</h3>
         <p>Locate your main water shutoff and make sure you can actually turn it. Cover outdoor spigots.</p>
         <p>Why: coastal plumbing is often run through uninsulated exterior walls because it rarely needs to survive a freeze. When one comes, knowing where the shutoff is turns a flooded house into a wet floor.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Find the main shutoff. Commonly near the water heater, in the garage, or in a meter box by the street.</li>
+          <li>Turn it fully off and back on. Old gate valves seize, and you want to find that out now rather than during a burst.</li>
+          <li>Tag it so anyone in the house can find it without you.</li>
+          <li>Fit insulated caps on outdoor spigots.</li>
+          <li>If your shutoff is at the street, buy a meter key and keep it somewhere you will remember.</li>
+        </ol>
       </article>
       <article class="task task--above" id="jan-attic-check">
         <p class="tier-tag">Above</p>
         <h3>Check the attic after winter rain</h3>
         <p>Look for daylight through the roof deck, damp or matted insulation, and water stains on the framing.</p>
         <p>Why: a small roof leak shows up in the attic long before it shows up on your ceiling. Winter rain is the easiest time to catch one.</p>
-        <p class="pending">No guide picked yet.</p>
+        <p class="need"><span>You need</span> Flashlight · Dust mask</p>
+        <ol class="steps">
+          <li>Go up in daylight with the attic light off and look for pinholes of daylight through the roof deck.</li>
+          <li>Look for dark staining on the rafters and the underside of the decking.</li>
+          <li>Press the insulation in several places. Damp or matted means water is getting in.</li>
+          <li>Check around plumbing vents and any chimney flashing, the usual culprits.</li>
+          <li>Photograph anything suspect so you can compare next year.</li>
+        </ol>
+        <p class="watch"><span>Watch out</span> Step only on the joists. The material between them will not hold you, and the fall is through a ceiling.</p>
       </article>
     </section>
     <section class="month">
@@ -139,21 +179,41 @@
         <h3>Schedule the annual termite inspection</h3>
         <p>Book it now, before spring swarm season fills the schedule.</p>
         <p>Why: Formosan and native subterranean termites are endemic across the Gulf Coast, and damage is almost never covered by homeowners insurance. An annual inspection is the cheapest insurance you can buy.</p>
-        <p class="pending">No guide picked yet.</p>
+        <p class="pro-note">This one is a job for a professional. What follows is what to ask for.</p>
+        <ol class="steps">
+          <li>Get quotes from two or three licensed pest control companies.</li>
+          <li>Ask whether the price is inspection only or includes a bond, and exactly what the bond pays for: treatment, repairs, or both.</li>
+          <li>Book before March. Schedules fill as soon as swarming starts.</li>
+          <li>Clear access to the perimeter, the crawlspace hatch, and garage walls before they arrive.</li>
+          <li>Keep the written report. It matters when you sell.</li>
+        </ol>
       </article>
       <article class="task task--should" id="feb-hvac-filter">
         <p class="tier-tag">Should</p>
         <h3>Replace the HVAC filter, test the A/C</h3>
         <p>Swap the filter and run the air conditioning briefly.</p>
         <p>Why: finding a cooling problem in February means an appointment. Finding it in July means a wait list, a premium, and a hot house.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Note the size printed on the edge of the old filter before you throw it out.</li>
+          <li>Slide the new one in with the arrow pointing toward the unit.</li>
+          <li>Set the thermostat to cool, several degrees below room temperature.</li>
+          <li>Let it run ten to fifteen minutes. Air at the vents should be noticeably cold and the outdoor unit should be running.</li>
+          <li>Listen for grinding, rattling, or the system starting and stopping repeatedly.</li>
+        </ol>
       </article>
       <article class="task task--above" id="feb-caulk">
         <p class="tier-tag">Above</p>
         <h3>Walk the exterior and re-caulk</h3>
         <p>Re-caulk gaps around windows, doors, and any penetration through the wall.</p>
         <p>Why: caulk is the cheapest material on the house and the first line against wind-driven rain. On the coast it fails in 2–4 years.</p>
-        <p class="pending">No guide picked yet.</p>
+        <p class="need"><span>You need</span> Exterior-grade caulk · Caulk gun · Utility knife</p>
+        <ol class="steps">
+          <li>Walk the perimeter and look at every window, every door, and every pipe or wire that passes through a wall.</li>
+          <li>Cut out any caulk that is cracked, shrunken, or pulling away.</li>
+          <li>Clean and dry the gap. New caulk will not stick to dust.</li>
+          <li>Run a fresh bead and tool it smooth with a wet fingertip.</li>
+          <li>Leave the small weep holes at the bottom of window frames open. They are meant to drain and sealing them traps water in the wall.</li>
+        </ol>
       </article>
     </section>
     <section class="month">
@@ -163,69 +223,130 @@
         <h3>Service the HVAC before cooling season</h3>
         <p>Get a professional service call before the cooling season starts.</p>
         <p>Why: down here the system runs eight or nine months a year, roughly double the load it was rated against. Service is what buys back the years that heat takes off.</p>
-        <p class="pending">No guide picked yet.</p>
+        <p class="pro-note">This one is a job for a professional. What follows is what to ask for.</p>
+        <ol class="steps">
+          <li>Book a licensed technician before the first genuinely hot week.</li>
+          <li>Ask them to check refrigerant charge, the capacitor, the contactor, coil condition, and the condensate line.</li>
+          <li>Ask for the measured readings rather than an assurance that it is fine.</li>
+          <li>Get the age of the equipment and their estimate of remaining life.</li>
+          <li>Put that estimate straight onto your Watch List.</li>
+        </ol>
       </article>
       <article class="task task--should" id="mar-gutters">
         <p class="tier-tag">Should</p>
         <h3>Clear the gutters, check the downspouts</h3>
         <p>Clear the gutters and confirm every downspout discharges away from the foundation, not against it.</p>
-        <p>Why: water dumped at the foundation is the start of settling, slab cracks, and a wet crawlspace — all of them expensive, all of them avoidable with a splash block.</p>
-        <p class="pending">No guide picked yet.</p>
+        <p>Why: water dumped at the foundation is the start of settling, slab cracks, and a wet crawlspace. All of them expensive, all of them avoidable with a splash block.</p>
+        <p class="need"><span>You need</span> Ladder · Gloves · Garden hose</p>
+        <ol class="steps">
+          <li>Scoop debris out by hand, moving the ladder often rather than reaching.</li>
+          <li>Flush with a hose from the end furthest from the downspout.</li>
+          <li>Watch that the water runs away freely and does not back up.</li>
+          <li>Confirm every downspout discharges at least four to six feet from the foundation. Add an extension if it does not.</li>
+          <li>Note any sagging sections or loose fasteners for repair.</li>
+        </ol>
+        <p class="watch"><span>Watch out</span> Have someone steady the ladder, and never rest it against the gutter itself. It will bend and you will come down with it.</p>
       </article>
       <article class="task task--above" id="mar-grading">
         <p class="tier-tag">Above</p>
         <h3>Check the grading around the house</h3>
         <p>Walk the perimeter after a hard rain. Look for settling, cracks, and standing water.</p>
         <p>Why: the ground should fall away from the house. Gulf Coast soils shift, and grading that worked at closing may not work three years later.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Walk the perimeter during or straight after heavy rain, when problems show.</li>
+          <li>Look for water pooling within a few feet of the wall.</li>
+          <li>The ground should fall roughly six inches over the first ten feet away from the house.</li>
+          <li>Note settled trenches over utility lines. They channel water back to the wall.</li>
+          <li>Fill low spots with compacted soil. Mulch washes away and holds moisture against the foundation.</li>
+        </ol>
       </article>
     </section>
     <section class="month">
       <h2>April</h2>
       <article class="task task--must" id="apr-swarm-season">
         <p class="tier-tag">Must</p>
-        <h3>Swarm season — watch for termites</h3>
+        <h3>Swarm season, watch for termites</h3>
         <p>Watch for winged termites indoors and around lights. Check for mud tubes along the slab, piers, and foundation walls.</p>
         <p>Why: a swarm is the one time termites are visible to you. Mud tubes mean an active colony is already feeding on the house.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Check window sills and light fixtures for discarded wings after warm, humid evenings. That is often the only sign you get.</li>
+          <li>Look along the slab edge, piers, and foundation walls for mud tubes about the width of a pencil.</li>
+          <li>Break a tube open. If it is rebuilt within a few days, the colony is active.</li>
+          <li>Tap suspect trim and baseboards. Hollow or papery means damage behind it.</li>
+          <li>Call your pest company immediately if you find any of the above.</li>
+        </ol>
+        <p class="watch"><span>Watch out</span> Winged ants swarm at the same time and look similar. Termites have straight antennae, two pairs of wings the same length, and no pinched waist.</p>
       </article>
       <article class="task task--should" id="apr-wash-exterior">
         <p class="tier-tag">Should</p>
         <h3>Wash the exterior, inspect the siding</h3>
         <p>Wash the house down and inspect siding, brick, and soffits for damage or gaps.</p>
         <p>Why: salt air and humidity feed mildew and rot, and washing is how you find the soft spot behind it. Open soffits are also how squirrels and wasps get into the attic.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Wash from the bottom up with a garden hose and mild detergent.</li>
+          <li>If you use a pressure washer, keep it on a low setting and never aim upward under siding laps. You will drive water into the wall.</li>
+          <li>As you work, look for soft spots, cracks, and gaps you cannot see from a distance.</li>
+          <li>Check soffits for holes. Wasps, squirrels, and birds all use them.</li>
+          <li>Note anything needing paint or caulk while you can still see it wet.</li>
+        </ol>
       </article>
       <article class="task task--above" id="apr-spigots-irrigation">
         <p class="tier-tag">Above</p>
         <h3>Check spigots and service irrigation</h3>
         <p>Check hose bibs and outdoor spigots for leaks. Service the irrigation system if you have one.</p>
-        <p>Why: a spigot that weeps against the foundation all summer does quiet, steady damage — and shows up on the water bill.</p>
-        <p class="pending">No guide picked yet.</p>
+        <p>Why: a spigot that weeps against the foundation all summer does quiet, steady damage, and shows up on the water bill.</p>
+        <ol class="steps">
+          <li>Turn each outdoor spigot fully on and look for weeping at the handle or where the pipe enters the wall.</li>
+          <li>Replace worn hose washers. A few cents fixes most drips.</li>
+          <li>Run each irrigation zone in turn and watch for broken heads and geysers.</li>
+          <li>Adjust any head spraying the house, the drive, or the pavement.</li>
+          <li>Check the backflow preventer if you have one.</li>
+        </ol>
       </article>
     </section>
     <section class="month">
       <h2>May</h2>
       <article class="task task--must" id="may-insurance-hurricane-prep">
         <p class="tier-tag">Must</p>
-        <h3>Verify insurance — season opens June 1</h3>
+        <h3>Verify insurance, season opens June 1</h3>
         <p>Verify your coverage BEFORE the season starts: wind, and flood if you carry it. Photograph every room and the full exterior for your claim file. Trim limbs back from the roof.</p>
         <p>Why: flood policies generally take 30 days to take effect, so June 1 is already too late to start. Photos taken before a storm are what get a claim paid after one.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Call your agent. Confirm wind coverage, your deductible (often a percentage of the insured value rather than a flat sum), and whether you carry flood at all.</li>
+          <li>If you need flood cover, buy it now. NFIP policies generally take 30 days to take effect, so June 1 is already too late.</li>
+          <li>Walk every room filming or photographing, opening closets and cabinets as you go.</li>
+          <li>Photograph all four elevations of the house and the roof from the ground.</li>
+          <li>Store all of it off the property: cloud storage, or email it to yourself.</li>
+          <li>Trim limbs so nothing overhangs the roof.</li>
+        </ol>
+        <p class="watch"><span>Watch out</span> Percentage deductibles surprise people. On a $300,000 home a 2% wind deductible is $6,000 out of your pocket before the policy pays anything.</p>
       </article>
       <article class="task task--should" id="may-generator-supplies">
         <p class="tier-tag">Should</p>
         <h3>Test the generator, restock supplies</h3>
         <p>Start and load-test the generator. Restock water, batteries, and fuel. Confirm shutters or plywood are on hand and actually fit your openings.</p>
         <p>Why: a generator that has sat with old fuel since last season will not start when you need it, and plywood cut to the wrong window is plywood you cannot use.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Start the generator and run it under load for twenty to thirty minutes.</li>
+          <li>Drain old fuel or treat it with stabiliser. Ethanol fuel degrades within months and is the usual reason one will not start.</li>
+          <li>Restock: a gallon of water per person per day for a week, batteries, medications, and cash.</li>
+          <li>Test-fit shutters or plywood on at least one opening, and label every piece to the window it fits.</li>
+          <li>Confirm your evacuation route and where you would actually go.</li>
+        </ol>
+        <p class="watch"><span>Watch out</span> Never run a generator indoors, in a garage, or near an open window. Carbon monoxide from generators kills people after every major storm.</p>
       </article>
       <article class="task task--above" id="may-secure-exterior">
         <p class="tier-tag">Above</p>
         <h3>Inspect roof edges, secure loose items</h3>
         <p>Inspect soffit vents and roof edges. Secure sheds, fencing, and anything that becomes a projectile.</p>
         <p>Why: most wind damage starts at an edge. Once wind gets under the roof edge or through an open soffit, it works on the whole roof.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Look up under the roof edge for lifted shingles and open or loose soffit panels.</li>
+          <li>Have loose flashing and drip edge refastened before the season.</li>
+          <li>Anchor sheds, and check fence posts for movement.</li>
+          <li>Write the list of what comes indoors once a storm is named, so nobody has to think about it later.</li>
+          <li>Remove dead limbs, which come down first.</li>
+        </ol>
       </article>
     </section>
     <section class="month">
@@ -235,21 +356,43 @@
         <h3>Clear the A/C condensate drain line</h3>
         <p>Flush the condensate drain line and check the overflow pan and float switch.</p>
         <p>Why: a clogged condensate line is one of the most common causes of ceiling damage on the coast. The unit keeps running and quietly drains into your drywall.</p>
-        <p class="pending">No guide picked yet.</p>
+        <p class="need"><span>You need</span> Wet/dry vacuum · Distilled vinegar</p>
+        <ol class="steps">
+          <li>Turn the system off at the thermostat and at the breaker.</li>
+          <li>Find the PVC drain line at the indoor unit, and its outdoor end.</li>
+          <li>Hold the wet/dry vacuum to the outdoor end and run it two to three minutes to pull the blockage out.</li>
+          <li>Pour a cup of distilled vinegar into the access port on the indoor side to clear the slime that causes it.</li>
+          <li>Check the overflow pan is dry and the float switch moves freely.</li>
+          <li>Restore power and confirm water is draining outside.</li>
+        </ol>
+        <p class="watch"><span>Watch out</span> If the pan has standing water, the line was already blocked and the ceiling below may have been getting wet for a while.</p>
       </article>
       <article class="task task--should" id="jun-condenser-coils">
         <p class="tier-tag">Should</p>
         <h3>Clean the condenser, clear vegetation</h3>
         <p>Clean the outdoor condenser coils and cut vegetation back two feet on all sides of the unit.</p>
         <p>Why: a coil that cannot breathe makes the compressor work harder in the hottest months, which is exactly how a 12-year unit becomes an 8-year unit.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Cut power at the outdoor disconnect box, not just the thermostat.</li>
+          <li>Clear leaves, grass clippings, and dirt from around the base.</li>
+          <li>Rinse the coil fins gently with a hose from the inside outward. Never a pressure washer, it flattens the fins permanently.</li>
+          <li>Straighten bent fins with a fin comb if you have one.</li>
+          <li>Cut vegetation back two feet on all sides.</li>
+          <li>Restore power and let it run.</li>
+        </ol>
       </article>
       <article class="task task--above" id="jun-attic-ventilation">
         <p class="tier-tag">Above</p>
         <h3>Check attic ventilation and insulation</h3>
         <p>Check that soffit and ridge vents are clear, and measure insulation depth.</p>
         <p>Why: a poorly vented attic bakes the roof deck from underneath and shortens shingle life, on top of what it costs you in cooling.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>From outside, check the soffit vents are not painted over or blocked.</li>
+          <li>In the attic, confirm baffles are keeping insulation clear of the eaves so air can actually move.</li>
+          <li>Measure insulation depth. Thirteen to sixteen inches of blown fibreglass is a reasonable target in this climate.</li>
+          <li>Confirm bathroom fans vent outside and not into the attic, which is common and quietly destructive.</li>
+          <li>Note the temperature. An attic far hotter than outside means the ventilation is not working.</li>
+        </ol>
       </article>
     </section>
     <section class="month">
@@ -259,45 +402,83 @@
         <h3>Hunt for leaks</h3>
         <p>Check under every sink, behind every toilet, and around the base of the water heater.</p>
         <p>Why: slow leaks are found by looking, not by waiting. In this humidity a cabinet leak becomes mold long before it becomes a stain you notice.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Empty the cabinet under every sink and run a dry paper towel along each supply line and trap. Paper finds what fingers miss.</li>
+          <li>Look for buckled cabinet floors and dark rings, which are evidence of a leak that has already dried.</li>
+          <li>Check behind each toilet at the supply valve, and where the base meets the floor. Rock the bowl gently; movement means a failing seal.</li>
+          <li>Look at the water heater base and its drip pan.</li>
+          <li>Read the water meter with everything off, wait an hour, and read it again. Movement means a leak you have not found yet.</li>
+        </ol>
       </article>
       <article class="task task--should" id="jul-crawlspace">
         <p class="tier-tag">Should</p>
         <h3>Inspect the crawlspace</h3>
         <p>Inspect the crawlspace or under-house area for moisture, pests, and vapor barrier damage.</p>
         <p>Why: it is the part of the house nobody looks at and the part humidity attacks hardest. Rot and pests both start down there.</p>
-        <p class="pending">No guide picked yet.</p>
+        <p class="need"><span>You need</span> Flashlight · Old clothes · Dust mask</p>
+        <ol class="steps">
+          <li>Look for standing water and consistently damp soil.</li>
+          <li>Check the vapour barrier is intact, overlapped, and still covering the ground.</li>
+          <li>Look up. Dark staining, sagging insulation, and rusted duct straps all mean moisture.</li>
+          <li>Check piers and foundation walls for mud tubes.</li>
+          <li>Note rodent droppings and chewed insulation.</li>
+        </ol>
+        <p class="watch"><span>Watch out</span> Wasps and snakes both like crawlspaces. If you smell gas or sewage, come out and call someone rather than investigating.</p>
       </article>
       <article class="task task--above" id="jul-humidity">
         <p class="tier-tag">Above</p>
         <h3>Check indoor humidity</h3>
         <p>Measure indoor relative humidity. Aim for 45–55%. Run a dehumidifier if you are above that.</p>
         <p>Why: above 60% indoors you are growing mold and inviting dust mites, whatever the thermostat says.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Put an inexpensive hygrometer in the main living area and another in the least used room.</li>
+          <li>Read over several days rather than once, humidity swings with the weather.</li>
+          <li>Above 60% indoors, run a dehumidifier or have your A/C sizing checked. An oversized unit cools fast and never runs long enough to dry the air.</li>
+          <li>Check bathroom fans actually pull by holding a tissue to the grille.</li>
+          <li>Look for condensation on windows and on supply vents.</li>
+        </ol>
       </article>
     </section>
     <section class="month">
       <h2>August</h2>
       <article class="task task--must" id="aug-peak-season-check">
         <p class="tier-tag">Must</p>
-        <h3>Peak season — re-check kit and plan</h3>
+        <h3>Peak season, re-check kit and plan</h3>
         <p>Re-check your supply kit, your documents, and your evacuation plan. Confirm your insurance is still active and paid.</p>
         <p>Why: this is the peak of the season. A lapsed policy or an expired document is something you want to find now, not while you are packing.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Re-read the declarations page of your policy and confirm it is paid and active.</li>
+          <li>Refresh water and food, and check expiry dates on batteries and medication.</li>
+          <li>Confirm your evacuation destination and route, and tell someone out of state what it is.</li>
+          <li>Photograph or scan IDs, the deed, vehicle titles, and policies. Store them in the cloud.</li>
+          <li>Fill vehicles and draw cash when a storm enters the Gulf, not once it has a name and everyone else is queuing.</li>
+        </ol>
       </article>
       <article class="task task--should" id="aug-gutters-again">
         <p class="tier-tag">Should</p>
         <h3>Clear the gutters again</h3>
         <p>Clear the gutters a second time.</p>
         <p>Why: summer storms fill them fast, and a full gutter in a tropical downpour sends the whole roof's water straight down your wall.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Clear the gutters again. Summer storms fill them faster than autumn leaves do.</li>
+          <li>Flush through and confirm flow at every downspout.</li>
+          <li>Check downspout extensions have not been kicked or mown out of position.</li>
+          <li>Look for shingle granules collecting in the gutter. A heavy amount means the roof is wearing out.</li>
+          <li>Note any section that has begun to sag.</li>
+        </ol>
       </article>
       <article class="task task--above" id="aug-photograph-valuables">
         <p class="tier-tag">Above</p>
         <h3>Photograph big-ticket items</h3>
         <p>Photograph big-ticket items and store the photos somewhere off-site or in the cloud.</p>
         <p>Why: proof of ownership is what turns a claim into a payment, and it is worthless if it only exists on a phone that went with the house.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Photograph appliances, electronics, tools, and furniture room by room.</li>
+          <li>Capture the model and serial plate on anything major, close enough to read.</li>
+          <li>Keep receipts for big purchases in the same folder.</li>
+          <li>Upload to cloud storage rather than leaving it on the phone that travels with you.</li>
+          <li>Give someone off the coast access, in case you cannot get to it.</li>
+        </ol>
       </article>
     </section>
     <section class="month">
@@ -307,21 +488,44 @@
         <h3>Clean the dryer vent</h3>
         <p>Clean the full dryer vent run, not just the lint trap.</p>
         <p>Why: dryer lint is a leading cause of house fires, and coastal humidity makes it pack into the duct harder and faster.</p>
-        <p class="pending">No guide picked yet.</p>
+        <p class="need"><span>You need</span> Dryer vent brush kit · Screwdriver · Vacuum</p>
+        <ol class="steps">
+          <li>Unplug the dryer. If it is gas, shut the gas valve too.</li>
+          <li>Pull it out and disconnect the duct from the back.</li>
+          <li>Brush and vacuum the entire run, working from both the dryer end and the exterior hood.</li>
+          <li>Check the exterior flap opens freely. It should not be screened, because screens trap lint immediately.</li>
+          <li>Replace any foil accordion duct with rigid or semi-rigid metal.</li>
+          <li>Reconnect, push back, and run the dryer while you check for strong airflow outside.</li>
+        </ol>
+        <p class="watch"><span>Watch out</span> Foil accordion duct is a known fire risk and is not permitted under many codes. If yours has it, replacing it is the single most useful thing here.</p>
       </article>
       <article class="task task--should" id="sep-roof-inspection">
         <p class="tier-tag">Should</p>
         <h3>Inspect the roof from the ground</h3>
         <p>Inspect the roof from the ground with binoculars after the summer storm run. Look for lifted, curled, or missing shingles.</p>
         <p>Why: you can see almost everything that matters from the driveway, and nobody has ever fallen off a driveway.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Walk all four sides with binoculars in good light.</li>
+          <li>Look for lifted, curled, cracked, or missing shingles.</li>
+          <li>Check the ridge and hip caps, which fail first.</li>
+          <li>Look at flashing around chimneys, vents, and in the valleys.</li>
+          <li>Look for dark patches, which usually mean lost granules.</li>
+          <li>Photograph anything you find, dated, for comparison and for any claim.</li>
+        </ol>
+        <p class="watch"><span>Watch out</span> Stay off the roof. Everything that matters is visible from the ground, and a fall costs far more than a repair.</p>
       </article>
       <article class="task task--above" id="sep-sump-drainage">
         <p class="tier-tag">Above</p>
         <h3>Test the sump pump, clear drainage</h3>
         <p>Test the sump pump if you have one. Clear drainage swales and ditches.</p>
         <p>Why: a sump pump that has not run in months is a sump pump you should not assume works. Blocked ditches move the water to your yard.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Pour a bucket of water into the sump pit and confirm the pump starts and empties it.</li>
+          <li>Check the discharge line runs well away from the house and is not blocked.</li>
+          <li>Clear leaves and silt from drainage swales and ditches.</li>
+          <li>Confirm the check valve is not letting water run back into the pit.</li>
+          <li>Test the battery backup if you have one, since the power tends to go at the same time as the rain arrives.</li>
+        </ol>
       </article>
     </section>
     <section class="month">
@@ -331,69 +535,127 @@
         <h3>Flush the water heater</h3>
         <p>Drain and flush the tank to clear sediment.</p>
         <p>Why: sediment insulates the burner from the water and cooks the tank from the inside. Gulf Coast water heaters are already short-lived; this is most of the difference between 8 years and 12.</p>
-        <p class="pending">No guide picked yet.</p>
+        <p class="need"><span>You need</span> Garden hose · Flathead screwdriver</p>
+        <ol class="steps">
+          <li>Turn off power at the breaker for an electric heater, or set the gas valve to pilot for gas.</li>
+          <li>Close the cold water supply valve on top of the tank.</li>
+          <li>Attach a hose to the drain valve at the base and run it somewhere that can take scalding water.</li>
+          <li>Open a hot tap somewhere in the house to break the vacuum.</li>
+          <li>Open the drain valve and let it run until the water is clear. Expect sediment, and expect it to take a while.</li>
+          <li>Close the drain, refill fully with that hot tap still open until water runs steady, then restore power or gas.</li>
+        </ol>
+        <p class="watch"><span>Watch out</span> The water is hot enough to scald badly. Let the tank cool for a few hours first. Never restore power to an electric heater before it is full: the element burns out in seconds.</p>
       </article>
       <article class="task task--should" id="oct-weatherstripping">
         <p class="tier-tag">Should</p>
         <h3>Check weatherstripping and seals</h3>
         <p>Check weatherstripping, door sweeps, and the attic hatch seal.</p>
         <p>Why: those gaps are your largest uncontrolled air exchange, which on the coast means you are paying to dehumidify the outdoors.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Close each exterior door on a strip of paper. If it pulls out with no resistance, the seal has gone.</li>
+          <li>Replace worn weatherstripping and door sweeps.</li>
+          <li>Check the attic hatch has a gasket and insulation on its back face.</li>
+          <li>Feel around outlets on exterior walls for draughts.</li>
+          <li>Check the door from the garage into the house seals and self-closes.</li>
+        </ol>
       </article>
       <article class="task task--above" id="oct-chimney">
         <p class="tier-tag">Above</p>
         <h3>Service the fireplace or chimney</h3>
         <p>Service the fireplace or chimney before first use.</p>
         <p>Why: an unused flue collects nests, debris, and moisture damage over a long warm season.</p>
-        <p class="pending">No guide picked yet.</p>
+        <p class="pro-note">This one is a job for a professional. What follows is what to ask for.</p>
+        <ol class="steps">
+          <li>Have a sweep inspect and clean before the first fire of the year.</li>
+          <li>Ask them to check the cap, the crown, and the flashing while they are up there.</li>
+          <li>Confirm the damper opens and closes fully.</li>
+          <li>Look for nests and debris, which accumulate over a long warm season.</li>
+          <li>Check the firebox for cracked mortar.</li>
+        </ol>
       </article>
     </section>
     <section class="month">
       <h2>November</h2>
       <article class="task task--must" id="nov-post-season-inspection">
         <p class="tier-tag">Must</p>
-        <h3>Post-season inspection — season closed</h3>
+        <h3>Post-season inspection, season closed</h3>
         <p>Walk the roof line and the whole property for storm damage. File any claims now, not in spring.</p>
         <p>Why: hurricane season closes November 30. Insurers get much harder to convince about damage the longer you wait, and most policies require prompt notice.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Walk all four elevations and the roof line with binoculars.</li>
+          <li>Photograph anything new and compare against the photographs you took in May.</li>
+          <li>Check the fence, shed, and window screens.</li>
+          <li>Look in the attic for daylight or staining that was not there before.</li>
+          <li>File any claim now. Most policies require prompt notice, and insurers get harder to convince the longer you wait.</li>
+        </ol>
       </article>
       <article class="task task--should" id="nov-filter-heat-test">
         <p class="tier-tag">Should</p>
         <h3>Replace the filter, test the heat</h3>
         <p>Replace the HVAC filter and run the heat once.</p>
         <p>Why: the burner or heat strips have sat unused since spring. Better to smell the dust burn off in November than to find a dead system during a cold snap.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Replace the filter.</li>
+          <li>Set the thermostat to heat, a few degrees above room temperature.</li>
+          <li>Expect a burning-dust smell for the first few minutes. That is normal.</li>
+          <li>Confirm warm air at the vents within a few minutes.</li>
+          <li>If it will not fire, or you smell gas at any point, shut it down and call someone.</li>
+        </ol>
       </article>
       <article class="task task--above" id="nov-gutters-fascia">
         <p class="tier-tag">Above</p>
         <h3>Clear gutters, check fascia and trim</h3>
         <p>Clear the gutters after leaf drop. Check the fascia and trim for rot.</p>
         <p>Why: fascia is where a gutter that overflowed all year finally shows the damage, and rotten fascia is how the gutter comes off in the next storm.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Clear the gutters once the leaves have finished dropping.</li>
+          <li>Look closely at the fascia board behind the gutter for soft, dark, or peeling wood.</li>
+          <li>Press it with a screwdriver. If the tip sinks in, it is rotten.</li>
+          <li>Check the drip edge is present and tucked under the shingles.</li>
+          <li>Note repairs for spring rather than starting them in the wet.</li>
+        </ol>
       </article>
     </section>
     <section class="month">
       <h2>December</h2>
       <article class="task task--must" id="dec-freeze-prep">
         <p class="tier-tag">Must</p>
-        <h3>Freeze prep — protect the pipes</h3>
+        <h3>Freeze prep, protect the pipes</h3>
         <p>Insulate exposed pipes, cover spigots, and confirm you know where the main shutoff is.</p>
         <p>Why: coastal homes are built for heat, not cold. A hard freeze here bursts pipes that would be fine anywhere north of us.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Fit foam sleeves on exposed pipes in the garage, crawlspace, and along exterior walls.</li>
+          <li>Cover spigots with insulated caps.</li>
+          <li>Disconnect and drain garden hoses. A hose left connected is the single most common cause of a burst pipe.</li>
+          <li>Confirm you know where the main shutoff is and that it still turns.</li>
+          <li>On a hard freeze night, open the cabinet doors under sinks and let the tap furthest from the meter drip.</li>
+        </ol>
       </article>
       <article class="task task--should" id="dec-gfci-breakers">
         <p class="tier-tag">Should</p>
         <h3>Test GFCI outlets, label the panel</h3>
         <p>Press test and reset on every GFCI outlet. Label the breaker panel if it is not already labeled.</p>
         <p>Why: a GFCI that will not trip is not protecting anyone, and a labeled panel is what lets you kill the right circuit in a hurry.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Press TEST on every GFCI outlet, kitchen, bathrooms, garage, and outdoors. The power should cut immediately.</li>
+          <li>Press RESET to restore it.</li>
+          <li>Replace any that will not trip, or will not reset.</li>
+          <li>Remember one GFCI often protects several ordinary outlets downstream, so test those too.</li>
+          <li>Label the panel: switch breakers off one at a time and write down what stops working.</li>
+        </ol>
       </article>
       <article class="task task--above" id="dec-watch-list">
         <p class="tier-tag">Above</p>
         <h3>Update the Big Ticket Watch List</h3>
         <p>Update your Big Ticket Watch List with anything you replaced or serviced this year.</p>
         <p>Why: the list is what turns a surprise roof into a planned roof. One update a year keeps it honest.</p>
-        <p class="pending">No guide picked yet.</p>
+        <ol class="steps">
+          <li>Get out the Watch List.</li>
+          <li>Enter this year against anything you replaced or had serviced.</li>
+          <li>Update the 'start watching in' column for those items.</li>
+          <li>Mark anything now within five years of its expected life.</li>
+          <li>Decide a monthly amount to set aside for whichever item is closest.</li>
+        </ol>
       </article>
     </section>
 </main>

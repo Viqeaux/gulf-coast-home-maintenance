@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Gulf Coast Home Maintenance//Perpetual Edition//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:Going Above — Gulf Coast Home Maintenance
+X-WR-CALNAME:Going Above\, Gulf Coast Home Maintenance
 X-WR-CALDESC:For the homeowner who wants to stay ahead of everything. Gener
  al maintenance guidance\, not a substitute for a licensed inspector\, cont
  ractor\, or your insurance policy terms.
@@ -18,14 +18,14 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260101
 DTEND;VALUE=DATE:20260102
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Check the attic after winter rain
 DESCRIPTION:Look for daylight through the roof deck\, damp or matted insula
  tion\, and water stains on the framing.\n\nWhy: a small roof leak shows up
   in the attic long before it shows up on your ceiling. Winter rain is the 
- easiest time to catch one.\n\nGeneral maintenance guidance\, not a substit
- ute for a licensed inspector\, contractor\, or your insurance policy terms
- .
+ easiest time to catch one.\n\nHow to: https://gulfcoasthomemaintenance.com
+ /guides/#jan-attic-check\n\nGeneral maintenance guidance\, not a substitut
+ e for a licensed inspector\, contractor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -35,13 +35,14 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260201
 DTEND;VALUE=DATE:20260202
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Walk the exterior and re-caulk
 DESCRIPTION:Re-caulk gaps around windows\, doors\, and any penetration thro
  ugh the wall.\n\nWhy: caulk is the cheapest material on the house and the 
  first line against wind-driven rain. On the coast it fails in 2–4 years.
- \n\nGeneral maintenance guidance\, not a substitute for a licensed inspect
- or\, contractor\, or your insurance policy terms.
+ \n\nHow to: https://gulfcoasthomemaintenance.com/guides/#feb-caulk\n\nGene
+ ral maintenance guidance\, not a substitute for a licensed inspector\, con
+ tractor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -51,13 +52,14 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260301
 DTEND;VALUE=DATE:20260302
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Check the grading around the house
 DESCRIPTION:Walk the perimeter after a hard rain. Look for settling\, crack
  s\, and standing water.\n\nWhy: the ground should fall away from the house
  . Gulf Coast soils shift\, and grading that worked at closing may not work
-  three years later.\n\nGeneral maintenance guidance\, not a substitute for
-  a licensed inspector\, contractor\, or your insurance policy terms.
+  three years later.\n\nHow to: https://gulfcoasthomemaintenance.com/guides
+ /#mar-grading\n\nGeneral maintenance guidance\, not a substitute for a lic
+ ensed inspector\, contractor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -67,13 +69,14 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260401
 DTEND;VALUE=DATE:20260402
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Check spigots and service irrigation
 DESCRIPTION:Check hose bibs and outdoor spigots for leaks. Service the irri
  gation system if you have one.\n\nWhy: a spigot that weeps against the fou
- ndation all summer does quiet\, steady damage — and shows up on the wate
- r bill.\n\nGeneral maintenance guidance\, not a substitute for a licensed 
- inspector\, contractor\, or your insurance policy terms.
+ ndation all summer does quiet\, steady damage\, and shows up on the water 
+ bill.\n\nHow to: https://gulfcoasthomemaintenance.com/guides/#apr-spigots-
+ irrigation\n\nGeneral maintenance guidance\, not a substitute for a licens
+ ed inspector\, contractor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -83,13 +86,15 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260501
 DTEND;VALUE=DATE:20260502
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Inspect roof edges\, secure loose items
 DESCRIPTION:Inspect soffit vents and roof edges. Secure sheds\, fencing\, a
  nd anything that becomes a projectile.\n\nWhy: most wind damage starts at 
  an edge. Once wind gets under the roof edge or through an open soffit\, it
-  works on the whole roof.\n\nGeneral maintenance guidance\, not a substitu
- te for a licensed inspector\, contractor\, or your insurance policy terms.
+  works on the whole roof.\n\nHow to: https://gulfcoasthomemaintenance.com/
+ guides/#may-secure-exterior\n\nGeneral maintenance guidance\, not a substi
+ tute for a licensed inspector\, contractor\, or your insurance policy term
+ s.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -99,13 +104,14 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260601
 DTEND;VALUE=DATE:20260602
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Check attic ventilation and insulation
 DESCRIPTION:Check that soffit and ridge vents are clear\, and measure insul
  ation depth.\n\nWhy: a poorly vented attic bakes the roof deck from undern
  eath and shortens shingle life\, on top of what it costs you in cooling.\n
- \nGeneral maintenance guidance\, not a substitute for a licensed inspector
- \, contractor\, or your insurance policy terms.
+ \nHow to: https://gulfcoasthomemaintenance.com/guides/#jun-attic-ventilati
+ on\n\nGeneral maintenance guidance\, not a substitute for a licensed inspe
+ ctor\, contractor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -115,13 +121,14 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260701
 DTEND;VALUE=DATE:20260702
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Check indoor humidity
 DESCRIPTION:Measure indoor relative humidity. Aim for 45–55%. Run a dehum
  idifier if you are above that.\n\nWhy: above 60% indoors you are growing m
- old and inviting dust mites\, whatever the thermostat says.\n\nGeneral mai
- ntenance guidance\, not a substitute for a licensed inspector\, contractor
- \, or your insurance policy terms.
+ old and inviting dust mites\, whatever the thermostat says.\n\nHow to: htt
+ ps://gulfcoasthomemaintenance.com/guides/#jul-humidity\n\nGeneral maintena
+ nce guidance\, not a substitute for a licensed inspector\, contractor\, or
+  your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -131,13 +138,14 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260801
 DTEND;VALUE=DATE:20260802
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Photograph big-ticket items
 DESCRIPTION:Photograph big-ticket items and store the photos somewhere off-
  site or in the cloud.\n\nWhy: proof of ownership is what turns a claim int
  o a payment\, and it is worthless if it only exists on a phone that went w
- ith the house.\n\nGeneral maintenance guidance\, not a substitute for a li
- censed inspector\, contractor\, or your insurance policy terms.
+ ith the house.\n\nHow to: https://gulfcoasthomemaintenance.com/guides/#aug
+ -photograph-valuables\n\nGeneral maintenance guidance\, not a substitute f
+ or a licensed inspector\, contractor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -147,11 +155,12 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20260901
 DTEND;VALUE=DATE:20260902
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Test the sump pump\, clear drainage
 DESCRIPTION:Test the sump pump if you have one. Clear drainage swales and d
  itches.\n\nWhy: a sump pump that has not run in months is a sump pump you 
- should not assume works. Blocked ditches move the water to your yard.\n\nG
+ should not assume works. Blocked ditches move the water to your yard.\n\nH
+ ow to: https://gulfcoasthomemaintenance.com/guides/#sep-sump-drainage\n\nG
  eneral maintenance guidance\, not a substitute for a licensed inspector\, 
  contractor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
@@ -163,12 +172,13 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20261001
 DTEND;VALUE=DATE:20261002
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Service the fireplace or chimney
 DESCRIPTION:Service the fireplace or chimney before first use.\n\nWhy: an u
  nused flue collects nests\, debris\, and moisture damage over a long warm 
- season.\n\nGeneral maintenance guidance\, not a substitute for a licensed 
- inspector\, contractor\, or your insurance policy terms.
+ season.\n\nHow to: https://gulfcoasthomemaintenance.com/guides/#oct-chimne
+ y\n\nGeneral maintenance guidance\, not a substitute for a licensed inspec
+ tor\, contractor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -178,13 +188,14 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20261101
 DTEND;VALUE=DATE:20261102
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Clear gutters\, check fascia and trim
 DESCRIPTION:Clear the gutters after leaf drop. Check the fascia and trim fo
  r rot.\n\nWhy: fascia is where a gutter that overflowed all year finally s
  hows the damage\, and rotten fascia is how the gutter comes off in the nex
- t storm.\n\nGeneral maintenance guidance\, not a substitute for a licensed
-  inspector\, contractor\, or your insurance policy terms.
+ t storm.\n\nHow to: https://gulfcoasthomemaintenance.com/guides/#nov-gutte
+ rs-fascia\n\nGeneral maintenance guidance\, not a substitute for a license
+ d inspector\, contractor\, or your insurance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT
@@ -194,13 +205,14 @@ DTSTAMP:20260813T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 RRULE:FREQ=YEARLY
-SEQUENCE:0
+SEQUENCE:1
 SUMMARY:Update the Big Ticket Watch List
 DESCRIPTION:Update your Big Ticket Watch List with anything you replaced or
   serviced this year.\n\nWhy: the list is what turns a surprise roof into a
-  planned roof. One update a year keeps it honest.\n\nGeneral maintenance g
- uidance\, not a substitute for a licensed inspector\, contractor\, or your
-  insurance policy terms.
+  planned roof. One update a year keeps it honest.\n\nHow to: https://gulfc
+ oasthomemaintenance.com/guides/#dec-watch-list\n\nGeneral maintenance guid
+ ance\, not a substitute for a licensed inspector\, contractor\, or your in
+ surance policy terms.
 TRANSP:TRANSPARENT
 CATEGORIES:Home Maintenance
 END:VEVENT

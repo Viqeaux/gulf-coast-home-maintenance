@@ -4,18 +4,18 @@ Versions use [semantic versioning](https://semver.org): `MAJOR.MINOR.PATCH`.
 
 What each part means **for this project specifically**:
 
-- **MAJOR** — something existing subscribers would notice as a break. Changing a
+- **MAJOR:** something existing subscribers would notice as a break. Changing a
   task's `slug`, renaming or removing a feed file, or moving the site to a new
   address. These orphan calendars people already added, so they should be rare.
-- **MINOR** — new content or new capability. A new task, how-to video links,
+- **MINOR:** new content or new capability. A new task, how-to video links,
   a new page section, a new way to subscribe.
-- **PATCH** — fixes and wording. Corrections, design tweaks, copy edits.
+- **PATCH:** fixes and wording. Corrections, design tweaks, copy edits.
 
 **When to cut one.** Don't wait to be asked, and don't tag every commit. Cut a
 version when a coherent piece of work lands and the site is verified working:
 
 - a visitor-facing feature is finished (a page, a form, a new way to subscribe)
-- calendar content changes — that one also needs a `SEQUENCE` bump
+- calendar content changes, which also needs a `SEQUENCE` bump
 - infrastructure moves, like the domain switch
 - a batch of fixes has accumulated
 
@@ -27,9 +27,9 @@ Newest first.
 
 ---
 
-## [1.2.0] — 2026-08-13
+## [1.2.0], 2026-08-13
 
-The printable edition — the free download the shop will lead with.
+The printable edition. The free download the shop will lead with.
 
 ### Added
 
@@ -39,14 +39,14 @@ The printable edition — the free download the shop will lead with.
   licence. The twelve months come from the same `TASKS` list as the `.ics`
   feeds, so the print edition and the digital one cannot drift apart and say
   different things. The rest comes from `product_content.py`. The built PDF and
-  its images are gitignored as build artifacts — a second to regenerate, and
+  its images are gitignored as build artifacts, a second to regenerate, and
   not served from `docs/`, so committing them would put binaries in the repo
   that nothing reads.
 - **Listing images**, rendered from the real pages so a preview cannot show
   something the file does not contain. The first one is composed at 4:3, since
   Etsy crops the search thumbnail to 4:3 and would slice the title off a
   portrait page.
-- **`product/etsy-listing.md`** — the listing copy, tags, the reasoning for
+- **`product/etsy-listing.md`**. The listing copy, tags, the reasoning for
   listing it free, and what to do after it goes live.
 - Each month task now carries a tick box and a line for the date it was done.
   That is what makes an undated calendar worth keeping rather than reprinting.
@@ -60,7 +60,7 @@ The printable edition — the free download the shop will lead with.
 ### Fixed
 
 - The seasons diagram on the landing page drew hurricane season running
-  through **December**. Six columns, not seven — it now agrees with its own
+  through **December**. Six columns, not seven. It now agrees with its own
   caption and with the 183-day figure above it.
 
 ### Notes
@@ -69,7 +69,7 @@ The printable edition — the free download the shop will lead with.
 - `SHOP_URL` is still empty. The listing has to exist before the button can
   point anywhere, and an empty shop reads as abandoned.
 
-## [1.1.0] — 2026-08-13
+## [1.1.0], 2026-08-13
 
 Guides, a waitlist, and the move to a real domain.
 
@@ -84,7 +84,7 @@ Guides, a waitlist, and the move to a real domain.
 - **`check_links.py`**, which finds curated videos that have gone dead. It asks
   YouTube's oEmbed endpoint rather than checking HTTP status, because a deleted
   or private video still serves a healthy page that happens to say "Video
-  unavailable" — the failure a status check sails straight past.
+  unavailable". The failure a status check sails straight past.
 - **Waitlist for the complete edition**, posting to MailerLite from a native
   form with no third-party code on the page. It sits in the buy slot, so
   setting `SHOP_URL` later replaces it with the buy button.
@@ -105,13 +105,13 @@ Guides, a waitlist, and the move to a real domain.
 - Still unverified on real hardware: the Apple `webcal://` handoff and Android
   link interception.
 
-## [1.0.0] — 2026-08-13
+## [1.0.0], 2026-08-13
 
 First public release, at `viqeaux.github.io/gulf-coast-home-maintenance`.
 
 ### Calendar feeds
 
-- Three subscribe-able `.ics` feeds — Must Do, Should Do, Going Above — with
+- Three subscribe-able `.ics` feeds. Must Do, Should Do, Going Above, with
   twelve all-day events each, recurring yearly with no end date so they match
   the undated print edition.
 - Anchored to the 1st of each month, with two deliberate exceptions: **May 1**,

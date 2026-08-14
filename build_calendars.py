@@ -18,6 +18,8 @@ feed, bump SEQUENCE so calendar clients treat it as an update.
 import os
 from datetime import date, timedelta
 
+from task_steps import STEPS
+
 # --- Build constants -------------------------------------------------------
 
 # Anchor year for the first occurrence. The events recur yearly forever, so this
@@ -25,7 +27,8 @@ from datetime import date, timedelta
 ANCHOR_YEAR = 2026
 
 # Bump on every content change you publish, so subscribers pick up the edit.
-SEQUENCE = 0
+# 1. Every event gained a link to its guide.
+SEQUENCE = 1
 DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
@@ -39,8 +42,8 @@ UID_DOMAIN = "gulfcoast-home-maintenance"
 # anything already pointing at the old one keeps working.
 SITE_URL = "https://gulfcoasthomemaintenance.com/"
 
-# GitHub Pages can only serve a site from the repo root or from /docs — not from
-# an arbitrary folder — so the build lands in docs/ and Pages needs no config.
+# GitHub Pages can only serve a site from the repo root or from /docs, not from
+# an arbitrary folder, so the build lands in docs/ and Pages needs no config.
 OUT_DIR = "docs"
 
 DISCLAIMER = (
@@ -60,7 +63,7 @@ DISCLAIMER = (
 TIERS = {
     "must": {
         "file": "gulf-coast-must-do.ics",
-        "name": "Must Do — Gulf Coast Home Maintenance",
+        "name": "Must Do, Gulf Coast Home Maintenance",
         "color": ("firebrick", "#9C3722"),
         "desc": (
             "Safety, or skipping it costs you thousands. If you do nothing "
@@ -69,7 +72,7 @@ TIERS = {
     },
     "should": {
         "file": "gulf-coast-should-do.ics",
-        "name": "Should Do — Gulf Coast Home Maintenance",
+        "name": "Should Do, Gulf Coast Home Maintenance",
         "color": ("teal", "#1F5F6B"),
         "desc": (
             "Protects your home's value and makes what you own last longer. "
@@ -78,7 +81,7 @@ TIERS = {
     },
     "above": {
         "file": "gulf-coast-going-above.ics",
-        "name": "Going Above — Gulf Coast Home Maintenance",
+        "name": "Going Above, Gulf Coast Home Maintenance",
         "color": ("olivedrab", "#5D6B3A"),
         "desc": (
             "For the homeowner who wants to stay ahead of everything. "
@@ -102,7 +105,7 @@ TASKS = [
      "a detector past its rated life can pass a button test and still fail in "
      "a real fire."),
     (1, 1, "should", "jan-freeze-prep",
-     "Freeze prep — find your water shutoff",
+     "Freeze prep, find your water shutoff",
      "Locate your main water shutoff and make sure you can actually turn it. "
      "Cover outdoor spigots.\n\n"
      "Why: coastal plumbing is often run through uninsulated exterior walls "
@@ -146,7 +149,7 @@ TASKS = [
      "Clear the gutters and confirm every downspout discharges away from the "
      "foundation, not against it.\n\n"
      "Why: water dumped at the foundation is the start of settling, slab "
-     "cracks, and a wet crawlspace — all of them expensive, all of them "
+     "cracks, and a wet crawlspace. All of them expensive, all of them "
      "avoidable with a splash block."),
     (3, 1, "above", "mar-grading",
      "Check the grading around the house",
@@ -157,7 +160,7 @@ TASKS = [
 
     # APRIL
     (4, 1, "must", "apr-swarm-season",
-     "Swarm season — watch for termites",
+     "Swarm season, watch for termites",
      "Watch for winged termites indoors and around lights. Check for mud tubes "
      "along the slab, piers, and foundation walls.\n\n"
      "Why: a swarm is the one time termites are visible to you. Mud tubes mean "
@@ -174,11 +177,11 @@ TASKS = [
      "Check hose bibs and outdoor spigots for leaks. Service the irrigation "
      "system if you have one.\n\n"
      "Why: a spigot that weeps against the foundation all summer does quiet, "
-     "steady damage — and shows up on the water bill."),
+     "steady damage, and shows up on the water bill."),
 
     # MAY
     (5, 1, "must", "may-insurance-hurricane-prep",
-     "Verify insurance — season opens June 1",
+     "Verify insurance, season opens June 1",
      "Verify your coverage BEFORE the season starts: wind, and flood if you "
      "carry it. Photograph every room and the full exterior for your claim "
      "file. Trim limbs back from the roof.\n\n"
@@ -244,7 +247,7 @@ TASKS = [
 
     # AUGUST
     (8, 1, "must", "aug-peak-season-check",
-     "Peak season — re-check kit and plan",
+     "Peak season, re-check kit and plan",
      "Re-check your supply kit, your documents, and your evacuation plan. "
      "Confirm your insurance is still active and paid.\n\n"
      "Why: this is the peak of the season. A lapsed policy or an expired "
@@ -301,7 +304,7 @@ TASKS = [
 
     # NOVEMBER
     (11, 30, "must", "nov-post-season-inspection",
-     "Post-season inspection — season closed",
+     "Post-season inspection, season closed",
      "Walk the roof line and the whole property for storm damage. File any "
      "claims now, not in spring.\n\n"
      "Why: hurricane season closes November 30. Insurers get much harder to "
@@ -323,7 +326,7 @@ TASKS = [
 
     # DECEMBER
     (12, 1, "must", "dec-freeze-prep",
-     "Freeze prep — protect the pipes",
+     "Freeze prep, protect the pipes",
      "Insulate exposed pipes, cover spigots, and confirm you know where the "
      "main shutoff is.\n\n"
      "Why: coastal homes are built for heat, not cold. A hard freeze here "
@@ -348,7 +351,7 @@ TASKS = [
 # The calendar events link to our own guides page rather than straight to
 # YouTube, for two reasons. A dead video then gets fixed in one place instead of
 # being baked into a feed that subscribers only re-read once a day. And the
-# person arriving is someone who was just reminded to do this exact job — that
+# person arriving is someone who was just reminded to do this exact job, that
 # visit should land on our site, not be handed to YouTube.
 #
 #   "task-slug": [("What the video shows", "https://...", "Who made it"), ...]
@@ -399,16 +402,21 @@ def guide_url(slug):
     return SITE_URL + "guides/#" + slug
 
 
+def has_guide(slug):
+    """True when the guides page has anything to show for this task."""
+    return bool(STEPS.get(slug) or GUIDES.get(slug))
+
+
 def build_event(month, day, slug, title, body):
     # An all-day event's DTEND is exclusive, so it is the following day. Letting
     # the date module carry the month and year rollovers keeps leap years right
     # without a table of month lengths to maintain.
     start = date(ANCHOR_YEAR, month, day)
 
-    # Only tasks that actually have a guide get a link, so nobody follows one to
-    # an empty section while the list is still being filled in.
+    # Only tasks with something on the guides page get a link, so nobody follows
+    # one to an empty section. Steps count, not just videos.
     description = body + "\n\n" + DISCLAIMER
-    if GUIDES.get(slug):
+    if has_guide(slug):
         description = body + "\n\nHow to: " + guide_url(slug) + "\n\n" + DISCLAIMER
 
     return [
@@ -449,7 +457,7 @@ def build_calendar(tier_key):
         lines.extend(build_event(month, day, slug, title, body))
     lines.append("END:VCALENDAR")
 
-    # Fold once, here, rather than at each place a line is built — every line in
+    # Fold once, here, rather than at each place a line is built, every line in
     # the file has to obey the 75-octet limit, so nowhere else has to remember.
     return "\r\n".join(fold(line) for line in lines) + "\r\n", len(events)
 
@@ -462,7 +470,7 @@ GUIDES_TEMPLATE = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How-to guides — Gulf Coast Home Maintenance</title>
+<title>How-to guides, Gulf Coast Home Maintenance</title>
 <meta name="description" content="A picked video for each task on the Gulf Coast Home Maintenance calendar.">
 <meta name="robots" content="index, follow">
 <link rel="stylesheet" href="../theme.css">
@@ -535,10 +543,27 @@ GUIDES_TEMPLATE = """<!doctype html>
     display: block; font: 400 12px/1.4 ui-sans-serif, system-ui, sans-serif;
     color: var(--muted); margin-top: .15rem;
   }}
-  .pending {{
-    font: 600 12px/1.4 ui-sans-serif, system-ui, sans-serif;
-    color: var(--muted); opacity: .8; margin-top: .8rem !important;
+  .need, .watch, .pro-note {{
+    font: 400 .9rem/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    margin: .8rem 0 0 !important; padding: .55rem .75rem; border-radius: 3px;
   }}
+  .need {{ background: var(--paper-2); color: var(--muted); }}
+  .need span, .watch span {{
+    font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+    font-size: 10px; display: block; margin-bottom: .15rem;
+  }}
+  .need span {{ color: var(--ink); }}
+  .watch {{ background: var(--paper-2); border-left: 3px solid var(--must); color: var(--muted); }}
+  .watch span {{ color: var(--must); }}
+  .pro-note {{
+    padding: 0; background: none; color: var(--accent); font-weight: 600; font-size: .85rem;
+  }}
+  .steps {{ margin: .9rem 0 0; padding-left: 1.15rem; }}
+  .steps li {{
+    font: 400 .95rem/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink); margin-bottom: .45rem; padding-left: .15rem;
+  }}
+  .steps li::marker {{ color: var(--tier-color); font-weight: 700; }}
 
   footer {{
     background: var(--deep); color: var(--on-deep-mute);
@@ -559,10 +584,11 @@ GUIDES_TEMPLATE = """<!doctype html>
     <a class="back" href="../">&#8592; Gulf Coast Home Maintenance</a>
     <h1>How to do each of these</h1>
     <p>
-      One picked video per task, from people who explain it well. Your calendar
-      links straight to the task you were just reminded about.
+      Step by step for all thirty-six, including what to have to hand and where
+      people go wrong. Your calendar links straight to the task you were just
+      reminded about.
     </p>
-    <p class="count">{covered} of {total} tasks covered so far</p>
+    <p class="count">{covered} of {total} tasks covered</p>
   </div>
 </header>
 
@@ -610,6 +636,25 @@ def guide_section(task):
     for part in parts:
         out.append('        <p>{0}</p>'.format(html_escape(part)))
 
+    detail = STEPS.get(slug) or {}
+
+    if detail.get("need"):
+        out.append('        <p class="need"><span>You need</span> {0}</p>'.format(
+            html_escape(" · ".join(detail["need"]))))
+
+    if detail.get("steps"):
+        if detail.get("pro"):
+            out.append('        <p class="pro-note">This one is a job for a '
+                       'professional. What follows is what to ask for.</p>')
+        out.append('        <ol class="steps">')
+        for step in detail["steps"]:
+            out.append('          <li>{0}</li>'.format(html_escape(step)))
+        out.append('        </ol>')
+
+    if detail.get("watch"):
+        out.append('        <p class="watch"><span>Watch out</span> {0}</p>'.format(
+            html_escape(detail["watch"])))
+
     videos = GUIDES.get(slug) or []
     if videos:
         out.append('        <ul class="videos">')
@@ -619,8 +664,6 @@ def guide_section(task):
                 '<span class="source">{2}</span></li>'.format(
                     html_escape(url), html_escape(label), html_escape(source)))
         out.append('        </ul>')
-    else:
-        out.append('        <p class="pending">No guide picked yet.</p>')
 
     out.append('      </article>')
     return out
@@ -629,7 +672,7 @@ def guide_section(task):
 def build_guides():
     """Return the guides page HTML, and how many tasks have a video."""
     tasks = sorted(TASKS, key=lambda t: (t[0], TIER_ORDER[t[2]]))
-    covered = sum(1 for t in TASKS if GUIDES.get(t[3]))
+    covered = sum(1 for t in TASKS if has_guide(t[3]))
 
     body = []
     for index, name in enumerate(MONTH_NAMES, start=1):
