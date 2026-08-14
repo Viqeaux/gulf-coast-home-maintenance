@@ -33,7 +33,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.5.3"
+VERSION = "1.5.4"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 

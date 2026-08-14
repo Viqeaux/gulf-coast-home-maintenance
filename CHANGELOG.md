@@ -27,6 +27,25 @@ Newest first.
 
 ---
 
+## [1.5.4], 2026-08-14
+
+### Changed
+
+- **The free calendars now say so three times over.** The $12.99 kit sits
+  directly above them, and a reader scanning down carries that price with them
+  and assumes the feeds are priced too. "Free" was in the section only twice
+  before, as a small section label and as one word mid-sentence in the deck,
+  and both are easy to miss at scanning speed. There is now a solid pill in the
+  heading, a deck that opens on it and names the wrong idea outright ("not a
+  sample of the kit above and not a trial"), and a badge on each of the three
+  tier cards beside the tier name. Six mentions, up from two. The deck also
+  swaps "no signup" alone for "no signup, no card", since the card is the thing
+  a suspicious reader actually wants ruled out.
+- The pill and the badges take their color from `--accent` against `--paper`,
+  the pair the topbar link already uses, so they invert with the palette
+  instead of needing a dark-scheme variant. 7.4:1 on the light ground and 6.8:1
+  on the dark one.
+
 ## [1.5.3], 2026-08-14
 
 ### Fixed
