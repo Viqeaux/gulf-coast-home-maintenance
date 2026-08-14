@@ -1,22 +1,32 @@
 # Gulf Coast Home Maintenance
 
-The printable calendar that gets sold, three subscribe-able calendar feeds, and
-the landing page that hands the feeds out.
+Two products from one set of content:
+
+- **The calendar** is free. Three subscribe-able `.ics` feeds, plus the landing
+  page and how-to guides that hand them out. Lives on
+  <https://gulfcoasthomemaintenance.com>.
+- **The kit** is paid. Every printable page, 27 of them, sold on Etsy at $12.99.
+  Built locally and never committed, because this repo is public.
 
 Built to the spec in `gulf-coast-maintenance-calendar-content.md`, which is kept
 out of this repo on purpose, see [.gitignore](.gitignore) for why.
 
 ```
-build_calendars.py   task content, curated video links, and the feed generator
-build_pdf.py         the printable edition, the product
-product_content.py   the paid-only pages, local only, not published
-check_links.py       finds curated videos that have gone dead
-optimize_images.py   resizes the hero photo for the web
-product/             built by build_pdf.py. Local only, except the listing copy
-  Gulf-Coast-Home-Maintenance-Calendar.pdf   20 pages, US Letter
-  listing/                                   Etsy photos, 00-hero.png first
-  etsy-listing.md                            the copy to paste into Etsy
-docs/                published by GitHub Pages, exactly as-is
+build_calendars.py        the 36 tasks, video links, and the feed generator
+task_steps.py             step by step detail for each task
+kit_sections.py           the "if you have one" pages, kit only
+build_printables.py       renders the kit to HTML then PDF, via headless Chrome
+build_listing_images.py   renders Etsy photos from the real kit pages
+check_links.py            finds curated videos that have gone dead
+optimize_images.py        resizes the hero photo for the web
+
+product/                  the paid kit. Gitignored except the listing copy
+  gulf-coast-home-maintenance-kit.pdf    27 pages, US Letter
+  gulf-coast-home-maintenance-kit.html   what the PDF is rendered from
+  listing/                               Etsy photos, 00-hero.png first
+  etsy-listing.md                        title, tags and copy to paste in
+
+docs/                     published by GitHub Pages, exactly as-is
   gulf-coast-must-do.ics       12 events
   gulf-coast-should-do.ics     12 events
   gulf-coast-going-above.ics   12 events
@@ -26,28 +36,29 @@ docs/                published by GitHub Pages, exactly as-is
   img/hero-1600.jpg            hero, desktop
   img/hero-900.jpg             hero, mobile
   img/hero.png                 the master, local only, not published
+  CNAME                        the custom domain
   .nojekyll                    stops Pages running the site through Jekyll
 ```
 
-`docs/guides/index.html` is generated, edit `build_calendars.py`, not the HTML.
-`docs/index.html` is hand-written.
+`docs/guides/index.html` and everything in `product/` are generated. Edit the
+Python, not the output. `docs/index.html` is hand-written.
 
-Regenerate after editing task content:
+Rebuild the feeds and the guides page, after editing tasks or steps:
 
 ```bash
 python build_calendars.py
 ```
 
-Regenerate after replacing `docs/img/hero.png`:
+Rebuild the kit and its Etsy photos, after editing anything it contains:
+
+```bash
+python build_printables.py && python build_listing_images.py
+```
+
+Rebuild the web hero, after replacing `docs/img/hero.png`:
 
 ```bash
 python optimize_images.py
-```
-
-Rebuild the product and its listing images:
-
-```bash
-python build_pdf.py
 ```
 
 ## What the events look like
@@ -195,44 +206,57 @@ the URL keeps returning a healthy page that says "Video unavailable". That is
 why `check_links.py` checks YouTube through its oEmbed endpoint rather than by
 HTTP status. Run it after editing `GUIDES`, and every month or two regardless.
 
-## The printable edition
+## The kit
 
-`build_pdf.py` builds the free download: a 20-page US Letter PDF, plus the
-images for the Etsy listing. It needs three packages that the rest of the
-project does not. `reportlab`, `segno` for the QR code, and `pypdfium2` to
-turn pages into listing photos:
-
-```bash
-python -m pip install "reportlab<4.1" segno pypdfium2
-```
-
-The `<4.1` pin is not cosmetic. Newer reportlab calls `md5(usedforsecurity=…)`,
-which needs Python 3.9, and the `python` on this machine is 3.8. If you move to
-a newer interpreter, drop the pin.
+`build_printables.py` builds the paid product: a 27-page US Letter PDF, laid out
+in HTML and CSS and rendered by headless Chrome. No extra Python packages, and
+nothing to install beyond a browser you already have.
 
 The pages are: cover, how it works, the Gulf Coast year, your first month, the
-twelve months, the Big Ticket Watch List, how to date what you own, the free
-phone calendars, and the licence.
+twelve months with step by step detail, the Big Ticket Watch List, how to date
+what you own, and seven "if you have one" sections.
 
-Two sources feed it, and the split is the whole design:
+Three sources feed it:
 
 - **`build_calendars.py`** holds the twelve months of tasks, shared with the
-  `.ics` feeds. Editing a task changes the print edition and the digital one
-  together, so the two cannot drift apart and say different things.
-- **`product_content.py`** holds the pages the feeds do not carry, the Watch
-  List lifespans, the dating page, the first-month checklist, the licence.
+  `.ics` feeds. Editing a task changes the kit and the calendar together, so the
+  two cannot drift apart and say different things.
+- **`task_steps.py`** holds the step by step detail, shared with the free guides
+  page.
+- **`kit_sections.py`** holds the conditional sections, which are kit only.
 
-The PDF and the listing images are gitignored, but only as build artifacts.
-Nothing in them is held back. The calendar is a free download, and they are
-not served from `docs/` either, so committing them would put binaries in the
-repo that nothing reads.
+**Everything in `product/` is gitignored, and that matters here.** This repo is
+public and the kit is the paid product, so committing the PDF would publish it
+as a free download. The HTML it renders from is excluded for the same reason.
 
-Interior pages are white on purpose. It is a print-at-home file, and a
-full-bleed tinted page costs the reader a cartridge to save us nothing. The
-serif is Times, one of the fourteen fonts every PDF reader already has, so
-nothing that could substitute badly on someone else's printer is embedded; the
-sans is Bitstream Vera, which ships inside reportlab under a licence that
-allows it.
+Three constraints drive the design, in order:
+
+1. **It has to survive a home printer.** Consumer printers cannot reach the
+   paper edge, so nothing bleeds. Everything sits inside a 0.6in margin.
+2. **Ink is the buyer's money.** Large dark fills streak, print slowly and empty
+   a cartridge, so the pages work through type, white space and hairlines. That
+   also happens to look more expensive than decoration would.
+3. **It has to read in grayscale.** Tier is carried by label, weight and
+   position as well as color, so a black and white print loses nothing.
+
+A page whose content overflows its sheet is silently truncated in the PDF and
+invisible in the HTML. The month pages are close to full, so check after editing
+content: open the built HTML and compare each `.sheet` scroll height against the
+page box. `TWO_PAGE_MONTHS` in the builder exists because May measured over.
+
+## Listing images
+
+`build_listing_images.py` renders the Etsy photos from the real kit pages, so a
+preview cannot show something the file does not contain.
+
+Each page image is 2040 x 2640. That comes from sizing the Chrome window to the
+sheet exactly, 816 x 1056 CSS pixels, and raising the device scale factor.
+Setting a larger window instead renders the page at actual size in the corner of
+a bigger canvas and pads the rest with white.
+
+`00-hero.png` is composed at 4:3 rather than being a page render, because Etsy
+crops the search-grid thumbnail to 4:3 and would otherwise slice the title off
+the cover.
 
 ## Selling it
 
@@ -240,26 +264,19 @@ The Etsy shop is **GulfCoastHomeCare**, `etsy.com/shop/GulfCoastHomeCare`. The
 name is shorter than the domain because Etsy caps shop names at 20 characters
 with no spaces; "Gulf Coast" was the half worth keeping intact.
 
-**The calendar is the free download, not the product.** It goes up at the
-lowest price Etsy allows. There is no $0 there, the floor is $0.20, because a
-free listing is how a new shop gets found. Views, favourites and reviews
-accumulate far faster on something free, and that standing is what the paid kit
-inherits when it lists later. The kit is the thing that will be for sale.
-
-The listing copy. Title, description, all thirteen tags, the price reasoning,
-and the photo order, lives in
-[product/etsy-listing.md](product/etsy-listing.md). The first photo is composed
-at 4:3 rather than being a page render, because Etsy crops the search-grid
-thumbnail to 4:3 and would otherwise slice the title off the cover.
+**The calendar is free and the kit is the product.** The three feeds are given
+away from the site and are not sold anywhere. The kit lists on Etsy at $12.99.
+The reasoning for that price, along with the title, description, all thirteen
+tags, and the photo order, lives in
+[product/etsy-listing.md](product/etsy-listing.md).
 
 When there is a published listing, paste its URL into `SHOP_URL` at the bottom
-of `docs/index.html`. That swaps the waitlist for a download button, which is
-the right trade. Once the thing is downloadable the waitlist has done its job,
-and it can start collecting against the kit instead.
+of `docs/index.html`. That swaps the waitlist for a buy button, which is the
+right trade: once the kit is purchasable the waitlist has done its job.
 
-Use the **listing** URL rather than the shop URL, so people land on the
-download instead of a shop front they have to search. And don't link the shop
-at all until something is listed: an empty shop reads as abandoned.
+Use the **listing** URL rather than the shop URL, so buyers land on the product
+instead of a shop front they have to search. And don't link the shop at all
+until something is listed: an empty shop reads as abandoned.
 
 One thing to watch later: Etsy's fee-avoidance policy forbids using a listing
 to route buyers somewhere else to purchase. Naming the domain is harmless while

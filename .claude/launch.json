@@ -10,7 +10,7 @@
     {
       "name": "print-preview",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "8766", "--directory", "print"],
+      "runtimeArgs": ["-m", "http.server", "8766", "--directory", "product"],
       "port": 8766
     }
   ]

@@ -187,7 +187,7 @@ STEPS = {
     "may-generator-supplies": {
         "steps": [
             "Start the generator and run it under load for twenty to thirty minutes.",
-            "Drain old fuel or treat it with stabiliser. Ethanol fuel degrades within months "
+            "Drain old fuel or treat it with stabilizer. Ethanol fuel degrades within months "
             "and is the usual reason one will not start.",
             "Restock: a gallon of water per person per day for a week, batteries, "
             "medications, and cash.",
@@ -241,7 +241,7 @@ STEPS = {
             "From outside, check the soffit vents are not painted over or blocked.",
             "In the attic, confirm baffles are keeping insulation clear of the eaves so air "
             "can actually move.",
-            "Measure insulation depth. Thirteen to sixteen inches of blown fibreglass is a "
+            "Measure insulation depth. Thirteen to sixteen inches of blown fiberglass is a "
             "reasonable target in this climate.",
             "Confirm bathroom fans vent outside and not into the attic, which is common and "
             "quietly destructive.",
@@ -268,7 +268,7 @@ STEPS = {
         "need": ["Flashlight", "Old clothes", "Dust mask"],
         "steps": [
             "Look for standing water and consistently damp soil.",
-            "Check the vapour barrier is intact, overlapped, and still covering the ground.",
+            "Check the vapor barrier is intact, overlapped, and still covering the ground.",
             "Look up. Dark staining, sagging insulation, and rusted duct straps all mean "
             "moisture.",
             "Check piers and foundation walls for mud tubes.",
@@ -299,12 +299,12 @@ STEPS = {
             "Photograph or scan IDs, the deed, vehicle titles, and policies. Store them in "
             "the cloud.",
             "Fill vehicles and draw cash when a storm enters the Gulf, not once it has a name "
-            "and everyone else is queuing.",
+            "and everyone else is in line.",
         ],
     },
     "aug-gutters-again": {
         "steps": [
-            "Clear the gutters again. Summer storms fill them faster than autumn leaves do.",
+            "Clear the gutters again. Summer storms fill them faster than fall leaves do.",
             "Flush through and confirm flow at every downspout.",
             "Check downspout extensions have not been kicked or mown out of position.",
             "Look for shingle granules collecting in the gutter. A heavy amount means the "
@@ -371,10 +371,10 @@ STEPS = {
             "Close the cold water supply valve on top of the tank.",
             "Attach a hose to the drain valve at the base and run it somewhere that can take "
             "scalding water.",
-            "Open a hot tap somewhere in the house to break the vacuum.",
+            "Open a hot faucet somewhere in the house to break the vacuum.",
             "Open the drain valve and let it run until the water is clear. Expect sediment, "
             "and expect it to take a while.",
-            "Close the drain, refill fully with that hot tap still open until water runs "
+            "Close the drain, refill fully with that hot faucet still open until water runs "
             "steady, then restore power or gas.",
         ],
         "watch": "The water is hot enough to scald badly. Let the tank cool for a few hours "
@@ -387,7 +387,7 @@ STEPS = {
             "resistance, the seal has gone.",
             "Replace worn weatherstripping and door sweeps.",
             "Check the attic hatch has a gasket and insulation on its back face.",
-            "Feel around outlets on exterior walls for draughts.",
+            "Feel around outlets on exterior walls for drafts.",
             "Check the door from the garage into the house seals and self-closes.",
         ],
     },
@@ -442,7 +442,7 @@ STEPS = {
             "Disconnect and drain garden hoses. A hose left connected is the single most "
             "common cause of a burst pipe.",
             "Confirm you know where the main shutoff is and that it still turns.",
-            "On a hard freeze night, open the cabinet doors under sinks and let the tap "
+            "On a hard freeze night, open the cabinet doors under sinks and let the faucet "
             "furthest from the meter drip.",
         ],
     },

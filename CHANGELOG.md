@@ -27,6 +27,63 @@ Newest first.
 
 ---
 
+## [1.3.0], 2026-08-14
+
+The kit becomes the paid product, and every task gains step by step detail.
+
+### Added
+
+- **Step by step detail for all 36 tasks** in `task_steps.py`, with what to
+  have to hand, the order to do it in, and the mistake that costs money. Free on
+  the guides page, and printed in the kit. Where a task is genuinely a
+  hire-someone job it says so, and the steps become what to ask for.
+- **Seven "if you have one" sections** in `kit_sections.py`, kit only: septic,
+  well water, pool, generator, raised or pier foundations, storm shutters, and
+  waterfront. Written for this coast rather than in general, so the septic page
+  leads with the high water table and the pool page says not to drain it before
+  a storm.
+- **`build_printables.py`**, which lays the kit out in HTML and CSS and renders
+  it through headless Chrome. Replaces a parallel reportlab builder from another
+  session, which was solving the same problem with a different product strategy.
+- **`build_listing_images.py`**, which renders the Etsy photos from the real kit
+  pages so a preview cannot show something the file does not contain.
+- **The Gulf Coast Year** is now a page in the kit. It was described in the
+  listing copy while existing only on the website, which would have been
+  misrepresenting the product.
+
+### Changed
+
+- **The calendar is free, the kit is paid.** The three feeds are given away and
+  are not sold anywhere; the printable kit lists on Etsy at $12.99. A previous
+  session had built the printable as the free download, so the buy slot, the
+  section labels, the README and the listing copy all move with it.
+- **Every em dash is gone**, 162 of them, from everything generated. Not a find
+  and replace: a comma would have left splices wherever a dash joined two
+  clauses, so short asides took commas, independent clauses took full stops, and
+  definitions took colons.
+- **British spellings and vocabulary corrected to American**, 31 in all. The
+  product claims local expertise, and a reader in Gulfport being told to go
+  under the house with a torch and clear the autumn leaves undercuts that.
+- `SEQUENCE` goes to 1. Every event description now carries a link to its guide,
+  so this is the first release that changes what subscribers see.
+
+### Fixed
+
+- The Watch List table and the "watch out" callout shared a CSS class name, so
+  the table inherited a red left border it was never meant to have.
+- A stray space before a period in the Watch List footnote, left by the em dash
+  pass where a dash spanned two Python string literals.
+- Listing images rendered at actual size in the corner of an oversized canvas.
+  The Chrome window has to match the sheet exactly and resolution has to come
+  from the device scale factor.
+
+### Notes
+
+- The kit and its HTML are gitignored. This repo is public, and committing the
+  PDF would publish the paid product as a free download.
+- `SHOP_URL` is still empty. The listing has to exist before the button can
+  point anywhere.
+
 ## [1.2.0], 2026-08-13
 
 The printable edition. The free download the shop will lead with.

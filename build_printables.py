@@ -11,7 +11,7 @@ Design constraints, in priority order:
    cartridge. So the page earns its keep through type, white space and hairlines
    rather than through decoration, which also happens to look more expensive.
 3. It has to read in grayscale. Plenty of people print black and white, so
-   colour is never the only thing distinguishing one tier from another; weight
+   color is never the only thing distinguishing one tier from another; weight
    and position carry it too.
 
 This builds the KIT, which is the paid product: every printable page. The free
@@ -27,6 +27,7 @@ import subprocess
 import sys
 
 from build_calendars import TASKS, VERSION
+from kit_sections import SECTIONS
 from task_steps import STEPS
 
 # The repo is public and this is the paid product, so the build lands in
@@ -183,6 +184,64 @@ def first_month_page():
 TWO_PAGE_MONTHS = {5}
 
 
+def year_page():
+    """The seasons diagram. Same information as the one on the site, redrawn for
+    paper: solid bands on white rather than tinted bands on a dark ground."""
+    months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+              "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+    # 12 columns across the plot area, which starts after the row labels.
+    x0, width = 150.0, 750.0
+    col = width / 12.0
+
+    grid = "".join(
+        '          <line x1="{0:.1f}" y1="34" x2="{0:.1f}" y2="250"/>\n'.format(
+            x0 + i * col) for i in range(13))
+    labels = "".join(
+        '          <text x="{0:.1f}" y="24">{1}</text>\n'.format(
+            x0 + (i + 0.5) * col, name) for i, name in enumerate(months))
+
+    def band(start_month, months_long, y, fill):
+        return ('          <rect x="{0:.1f}" y="{1}" width="{2:.1f}" height="30" '
+                'rx="2" fill="{3}"/>\n'.format(
+                    x0 + (start_month - 1) * col, y, months_long * col, fill))
+
+    bands = (
+        band(6, 6, 46, "#9c3722") +     # hurricane, June 1 to Nov 30
+        band(5, 5, 92, "#a8761f") +     # heat and humidity, May to September
+        band(3, 3, 138, "#56682f") +    # termite swarm, March to May
+        band(1, 2, 184, "#14606e") +    # freeze, January and February
+        band(12, 1, 184, "#14606e")     # and December
+    )
+
+    # May 1 is where the insurance deadline actually falls.
+    marker_x = x0 + 4 * col
+    return page(
+        '    <p class="eyebrow">Why the months are ordered this way</p>\n'
+        '    <h2>The Gulf Coast year</h2>\n'
+        '    <p class="lede">Four overlapping seasons your house has to survive, and '
+        'they do not line up with the ones on an ordinary calendar.</p>\n'
+        '    <div class="figure">\n'
+        '      <svg viewBox="0 0 920 300" width="100%">\n'
+        '        <g class="diag-grid">\n{0}        </g>\n'
+        '        <g class="diag-month" text-anchor="middle">\n{1}        </g>\n'
+        '        <g class="diag-row" text-anchor="end">\n'
+        '          <text x="138" y="66">HURRICANE</text>\n'
+        '          <text x="138" y="112">HEAT &amp; HUMIDITY</text>\n'
+        '          <text x="138" y="158">TERMITE SWARM</text>\n'
+        '          <text x="138" y="204">FREEZE RISK</text>\n'
+        '        </g>\n{2}'
+        '        <line class="diag-marker" x1="{3:.1f}" y1="34" x2="{3:.1f}" y2="258"/>\n'
+        '        <text class="diag-note" x="{3:.1f}" y="276" text-anchor="middle">'
+        'INSURE BEFORE MAY 1</text>\n'
+        '      </svg>\n'
+        '    </div>\n'
+        '    <p class="pull">A flood policy generally takes 30 days to take effect. '
+        'That is the whole reason hurricane prep sits in May and not in June: by the '
+        'time the season opens, buying cover is already too late to help you.</p>\n'.format(
+            grid, labels, bands, marker_x),
+        foot="The year")
+
+
 def month_pages(index):
     """Return the sheets for one month, usually one, sometimes two."""
     name = MONTHS[index - 1]
@@ -271,7 +330,7 @@ def watch_list_page():
         '    <p class="lede">Everything expensive in your house is already on a clock. '
         'Fill in the year each one went in, add the lifespan, and you will know what to '
         'start saving for, instead of finding out the hard way.</p>\n'
-        '    <table class="watch">\n'
+        '    <table class="watch-list">\n'
         '      <thead><tr>\n'
         '        <th>Item</th><th>Year installed</th>\n'
         '        <th>Typical Gulf&nbsp;Coast life</th><th>Start watching in</th>\n'
@@ -280,8 +339,8 @@ def watch_list_page():
         '    </table>\n'
         '    <p class="footnote"><strong>Why these run shorter than the numbers online.</strong> '
         'Salt air, high humidity and hard UV wear coastal homes faster than national averages '
-        'assume. These are adjusted for the Gulf Coast. They are guidelines, not guarantees '
-        '. A well-maintained roof outlives a neglected one.</p>\n'.format(rows),
+        'assume. These are adjusted for the Gulf Coast. They are guidelines rather than '
+        'guarantees, and a well-maintained roof outlives a neglected one.</p>\n'.format(rows),
         foot="Page 15")
 
 
@@ -466,31 +525,83 @@ CSS = """
     display: inline-block; margin-right: 6pt; color: var(--ink);
   }
   .watch { border-left: 1.5pt solid var(--must); padding-left: 8pt; }
+  /* Inline label on a task, but a full-width section note reads better with the
+     label on its own line above the text. */
+  .watch--block span { display: block; margin-bottom: 4pt; }
   .watch span { color: var(--must); }
   .pro {
     font: italic 8.5pt/1.4 Georgia, serif; color: var(--accent); margin: 0 0 6pt;
   }
 
   /* --- watch list ------------------------------------------------------ */
-  table.watch { width: 100%; border-collapse: collapse; margin-bottom: 16pt; }
-  table.watch th {
+  table.watch-list { width: 100%; border-collapse: collapse; margin-bottom: 16pt; }
+  table.watch-list th {
     font: 700 6.5pt/1.3 "Segoe UI", system-ui, sans-serif;
     letter-spacing: .13em; text-transform: uppercase; color: var(--muted);
     text-align: left; padding: 0 6pt 6pt 0; border-bottom: 1.25pt solid var(--ink);
   }
-  table.watch td {
+  table.watch-list td {
     padding: 0; height: 21pt; border-bottom: 0.5pt solid var(--hair);
     font-size: 9.5pt; vertical-align: middle;
   }
-  table.watch .item { color: var(--ink); padding-right: 8pt; width: 2.5in; }
-  table.watch .life { color: var(--accent); font-weight: bold; width: 1.35in; padding: 0 8pt; }
+  table.watch-list .item { color: var(--ink); padding-right: 8pt; width: 2.5in; }
+  table.watch-list .life { color: var(--accent); font-weight: bold; width: 1.35in; padding: 0 8pt; }
   /* The blank columns are the point of the page, give them room to write. */
-  table.watch .fill { width: 1.2in; }
+  table.watch-list .fill { width: 1.2in; }
   .footnote {
     font-size: 8.5pt; line-height: 1.45; color: var(--muted);
     border-top: 0.5pt solid var(--hair); padding-top: 9pt; margin: 0;
   }
   .footnote strong { color: var(--ink); }
+
+  /* --- year diagram ----------------------------------------------------- */
+  .figure { margin: 24pt 0 0; }
+  .diag-grid line { stroke: #ded6c6; stroke-width: 0.75; }
+  .diag-month {
+    font: 700 9pt "Segoe UI", system-ui, sans-serif;
+    letter-spacing: .08em; fill: var(--muted);
+  }
+  .diag-row {
+    font: 700 9pt "Segoe UI", system-ui, sans-serif;
+    letter-spacing: .08em; fill: var(--ink);
+  }
+  .diag-marker { stroke: var(--must); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .diag-note {
+    font: 700 8.5pt "Segoe UI", system-ui, sans-serif;
+    letter-spacing: .1em; fill: var(--must);
+  }
+
+  /* --- conditional sections -------------------------------------------- */
+  .checklist--tight li { padding: 8pt 0; font-size: 10.5pt; }
+  .sub-label {
+    font: 700 7pt/1 "Segoe UI", system-ui, sans-serif;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--accent);
+    margin: 20pt 0 10pt; padding-bottom: 5pt; border-bottom: 1pt solid var(--ink);
+  }
+  .when-row {
+    display: flex; gap: 14pt; padding: 8pt 0;
+    border-bottom: 0.5pt solid var(--hair);
+  }
+  .when-label {
+    flex: 0 0 1.5in; margin: 0;
+    font: 700 8.5pt/1.35 "Segoe UI", system-ui, sans-serif; color: var(--ink);
+  }
+  .when-text { margin: 0; font-size: 9.5pt; line-height: 1.42; }
+  ul.plain { list-style: none; margin: 0; padding: 0; }
+  ul.plain li {
+    position: relative; padding: 5pt 0 5pt 14pt; font-size: 9.5pt; line-height: 1.42;
+  }
+  /* A rule rather than a bullet glyph: it reads as a field guide and prints
+     identically on any printer, whatever it does with dingbats. */
+  ul.plain li::before {
+    content: ""; position: absolute; left: 0; top: 11pt;
+    width: 7pt; height: 0.75pt; background: var(--muted);
+  }
+  .watch--block {
+    margin-top: 20pt; padding: 10pt 0 0 10pt;
+    border-left: 1.5pt solid var(--must); border-top: 0.5pt solid var(--hair);
+    font-size: 9pt;
+  }
 
   /* --- how to find out ------------------------------------------------- */
   .find { padding: 11pt 0; border-bottom: 0.5pt solid var(--hair); }
@@ -516,13 +627,66 @@ DOCUMENT = """<!doctype html>
 """
 
 
+def conditional_intro_page():
+    items = ""
+    for section in SECTIONS:
+        items += ('      <li><span class="box"></span>{0}</li>\n'
+                  .format(esc(section["title"].replace("If you ", "")
+                                              .replace("If your ", "your ")
+                                              .capitalize())))
+    return page(
+        '    <p class="eyebrow">The rest of the house</p>\n'
+        '    <h2>If you have one of these</h2>\n'
+        '    <p class="lede">The twelve months cover what every house on this coast '
+        'needs. These pages cover what yours might have on top of that. Tick what '
+        'applies to you and skip the rest.</p>\n'
+        '    <ul class="checklist checklist--tight">\n{0}    </ul>\n'
+        '    <p class="pull">None of this is on the month pages on purpose. A '
+        'checklist that lists jobs you cannot do, for equipment you do not own, is '
+        'a checklist people stop reading.</p>\n'.format(items),
+        foot="If you have one")
+
+
+def conditional_page(section, number):
+    when = ""
+    for label, text in section["when"]:
+        when += ('        <div class="when-row">\n'
+                 '          <p class="when-label">{0}</p>\n'
+                 '          <p class="when-text">{1}</p>\n'
+                 '        </div>\n'.format(esc(label), esc(text)))
+
+    always = ""
+    for item in section.get("always", []):
+        always += '          <li>{0}</li>\n'.format(esc(item))
+
+    watch = ""
+    if section.get("watch"):
+        watch = ('      <p class="watch watch--block"><span>Watch out</span>{0}</p>\n'
+                 .format(esc(section["watch"])))
+
+    return page(
+        '    <p class="eyebrow">Only if it applies</p>\n'
+        '    <h2>{0}</h2>\n'
+        '    <p class="lede">{1}</p>\n'
+        '      <p class="sub-label">When</p>\n'
+        '{2}'
+        '      <p class="sub-label">Year round</p>\n'
+        '        <ul class="plain">\n{3}        </ul>\n'
+        '{4}'.format(esc(section["title"]), esc(section["lead"]), when, always, watch),
+        foot=section["title"].replace("If you have ", "").replace("If you are ", "")
+                             .replace("If your ", "").replace("a ", "").capitalize())
+
+
 # --- assembly --------------------------------------------------------------
 
 def build_html():
-    pages = [cover_page(), tiers_page(), first_month_page()]
+    pages = [cover_page(), tiers_page(), year_page(), first_month_page()]
     for index in range(1, 13):
         pages.extend(month_pages(index))
     pages += [watch_list_page(), how_to_find_out_page()]
+    pages.append(conditional_intro_page())
+    for number, section in enumerate(SECTIONS, start=1):
+        pages.append(conditional_page(section, number))
     return DOCUMENT.format(css=CSS, body="\n".join(pages),
                            version=VERSION, disclaimer=DISCLAIMER), len(pages)
 
