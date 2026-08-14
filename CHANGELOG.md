@@ -11,18 +11,57 @@ What each part means **for this project specifically**:
   a new page section, a new way to subscribe.
 - **PATCH** — fixes and wording. Corrections, design tweaks, copy edits.
 
+**When to cut one.** Don't wait to be asked, and don't tag every commit. Cut a
+version when a coherent piece of work lands and the site is verified working:
+
+- a visitor-facing feature is finished (a page, a form, a new way to subscribe)
+- calendar content changes — that one also needs a `SEQUENCE` bump
+- infrastructure moves, like the domain switch
+- a batch of fixes has accumulated
+
+Not for a half-finished feature, and not for a commit that only touches build
+scripts or notes. If a change is worth someone reloading the site for, it is
+worth a version.
+
 Newest first.
 
 ---
 
-## [Unreleased]
+## [1.1.0] — 2026-08-13
 
-- Moved to <https://gulfcoasthomemaintenance.com>. The old
-  `viqeaux.github.io` address redirects, so printed links and existing
-  subscriptions keep working.
-- Guide links inside calendar events now point at the custom domain. No
-  `SEQUENCE` bump was needed for this, because `GUIDES` is still empty and no
-  event carries a link yet — the first curated video is what will require it.
+Guides, a waitlist, and the move to a real domain.
+
+### Added
+
+- **How-to guides page** at `/guides/`, with a stable anchor for every one of
+  the 36 tasks. Calendar events will link here rather than straight to YouTube,
+  so a dead video is fixed in one place and the visitor lands on this site
+  instead of being handed to Google. Curated links live in `GUIDES` in
+  `build_calendars.py`; tasks without one get no link at all, so it can be
+  filled in gradually.
+- **`check_links.py`**, which finds curated videos that have gone dead. It asks
+  YouTube's oEmbed endpoint rather than checking HTTP status, because a deleted
+  or private video still serves a healthy page that happens to say "Video
+  unavailable" — the failure a status check sails straight past.
+- **Waitlist for the complete edition**, posting to MailerLite from a native
+  form with no third-party code on the page. It sits in the buy slot, so
+  setting `SHOP_URL` later replaces it with the buy button.
+
+### Changed
+
+- **Moved to <https://gulfcoasthomemaintenance.com>** with HTTPS enforced. The
+  `viqeaux.github.io` address redirects, so existing subscriptions and anything
+  already written down keep working untouched.
+- The palette moved to `docs/theme.css`, shared by both pages, so the two
+  cannot drift apart.
+
+### Notes
+
+- The three `.ics` files are byte-identical to 1.0.0. `GUIDES` is still empty,
+  so no event carries a guide link yet, and no `SEQUENCE` bump was needed. The
+  first curated video is the change that will require one.
+- Still unverified on real hardware: the Apple `webcal://` handoff and Android
+  link interception.
 
 ## [1.0.0] — 2026-08-13
 
