@@ -33,7 +33,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.5.0"
+VERSION = "1.5.1"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -599,10 +599,7 @@ GUIDES_TEMPLATE = """<!doctype html>
 <footer>
   <div class="wrap">
     <p class="disclaimer">{disclaimer}</p>
-    <p>
-      Videos are other people&#8217;s work, linked and not republished. If one of
-      these has stopped working, it is worth telling us.
-    </p>
+{video_note}
     <p class="version">v{version}</p>
   </div>
 </footer>
@@ -682,12 +679,24 @@ def build_guides():
             body.extend(guide_section(task))
         body.append('    </section>')
 
+    # The footer only discusses linked videos once any exist. Before that, a
+    # line about other people's work and dead links would describe nothing on
+    # the page.
+    video_note = ""
+    if any(GUIDES.values()):
+        video_note = (
+            '    <p>\n'
+            '      Videos are other people&#8217;s work, linked and not republished. '
+            'If one of\n      these has stopped working, it is worth telling us.\n'
+            '    </p>')
+
     return GUIDES_TEMPLATE.format(
         disclaimer=html_escape(DISCLAIMER),
         version=VERSION,
         covered=covered,
         total=len(TASKS),
         body="\n".join(body),
+        video_note=video_note,
     ), covered
 
 

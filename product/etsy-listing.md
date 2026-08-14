@@ -105,12 +105,62 @@ Please do not resell the file, share it as a file, or list it anywhere as your o
 
 FREE CALENDARS FOR YOUR PHONE
 
-The same twelve months are also available free as three subscribe-able calendars, one per level, that drop into Google, Apple or Outlook and repeat every year. No purchase needed. The last page of the PDF shows you where to get them.
+The same twelve months are also available free as three subscribe-able calendars, one per level, that drop into Google, Apple or Outlook and repeat every year. No purchase needed. Subscribe free at gulfcoasthomemaintenance.com.
 
 If anything is wrong with your download, message me and I will fix it, and the fix reaches everyone rather than just you.
 
 General maintenance guidance, not a substitute for a licensed inspector, contractor, or your insurance policy terms.
 ```
+
+## Shop tagline
+
+*Etsy caps this around 55 characters. This is 44.*
+
+```
+Practical home care tools for the Gulf Coast
+```
+
+"Tools" rather than "calendars", so a second and third product do not make it
+wrong.
+
+## About your shop
+
+The origin is true and is the strongest thing in the listing: a first house at
+forty-five, and a list kept for himself before it was ever a product. Keep the
+age. It is the detail that tells a buyer this was taken seriously.
+
+```
+I bought my first house at forty-five.
+
+Nobody hands you a manual with the keys. I wanted to do it properly, so I started keeping a list of what needed doing and when, and I added to it every time I found something out the hard way.
+
+The trouble was that every home maintenance checklist I could find had been written for somewhere else. They assume mild summers, dry air, and a roof that is not being sandblasted with salt. Down here the A/C runs nine months a year, termites swarm every spring, and a flood policy takes thirty days to take effect, which means June is already too late to buy one.
+
+So my list turned into a calendar built for this coast. Twelve months of what to do and when, in the order the Gulf Coast actually asks for it, at three levels of effort so the first year is not overwhelming. Then the Big Ticket Watch List, because the expensive surprises are the ones nobody budgets for.
+
+I made all of it for myself. It was only after living with it for a while that I realized how much I would have wanted this the week I moved in, and that anyone else buying a house down here is starting exactly where I started.
+
+The calendars for your phone are free and always will be. They are at gulfcoasthomemaintenance.com, and they need no purchase. The printable kit is for people who would rather have it on paper, and it carries the pages the free calendars cannot.
+
+If anything in it is wrong or unclear, message me. I would rather fix it than have you work around it.
+```
+
+## Featured video
+
+Reuse `product/listing/video.mp4`. Fourteen seconds, silent, square, and it
+shows the real pages. Worth replacing once there is more than one product and
+the shop video should show the range rather than the kit.
+
+## Featured photos
+
+No workspace to photograph, so these show the work instead. From
+`product/listing/`:
+
+- `02-watch-list.png`, the page people keep
+- `04-the-year.png`, the diagram that proves the region is understood
+- `06-septic.png`, evidence of depth past the twelve months
+
+Not the cover, which is already the listing thumbnail.
 
 ## Tags
 
@@ -152,8 +202,9 @@ they read titles, so the image is where that objection actually gets killed.
 The title is the backup.
 
 Suggested order: the 4:3 hero, the cover, the Watch List (the page people keep),
-a month page, the May hurricane page, the Gulf Coast Year diagram, one of the
-conditional sections, and the free phone calendars last as a bonus.
+the May hurricane page, the Gulf Coast Year diagram, How To Find Out, the septic
+section, Your First Month, then the levels page. That is the nine files in
+`product/listing/`, in their numbered order.
 
 ## Category and attributes
 
@@ -203,8 +254,8 @@ which are labeled anyway.
 
 **What are the free phone calendars?**
 Three subscribe-able calendars, one per level, that put the same twelve months
-into Google, Apple or Outlook and repeat every year. The last page of the PDF
-shows you where. They are free and need no purchase.
+into Google, Apple or Outlook and repeat every year. Subscribe free at
+gulfcoasthomemaintenance.com. They need no purchase.
 
 **Can I give this to my clients?**
 Yes, and please do. Print a stack for closings. The only ask is that you send

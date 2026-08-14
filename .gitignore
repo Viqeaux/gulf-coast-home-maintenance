@@ -32,3 +32,8 @@ __pycache__/
 # files that actually get served, so the 3 MB original would be dead weight in
 # a repo that GitHub Pages serves. Keep it locally as the source of truth.
 docs/img/hero.png
+
+# Shop logo and banner: public marketing assets, but build artifacts all the
+# same. build_brand.py remakes them in seconds, and binaries nothing in the
+# repo reads do not belong in it.
+product/brand/

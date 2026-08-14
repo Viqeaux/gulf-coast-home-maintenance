@@ -18,7 +18,7 @@ import shutil
 import subprocess
 import sys
 
-from build_printables import BASENAME, CHROME_CANDIDATES, OUT_DIR, build_html
+from build_printables import CHROME_CANDIDATES, OUT_DIR, build_html
 
 LISTING_DIR = os.path.join(OUT_DIR, "listing")
 

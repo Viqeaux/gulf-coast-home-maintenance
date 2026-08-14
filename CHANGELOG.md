@@ -27,6 +27,41 @@ Newest first.
 
 ---
 
+## [1.5.1], 2026-08-14
+
+Audit pass. Stale claims found and corrected, some of them live.
+
+### Fixed
+
+- **The site said the kit was eighteen pages.** It is twenty-seven, and the
+  wrong number sat directly above the buy button. The blurb now also mentions
+  the seven conditional sections and the fillable file, neither of which the
+  site had caught up with.
+- **The listing copy claimed the last page of the PDF points to the free
+  calendars.** No such page exists; it died with the removed reportlab builder.
+  Both places now point at gulfcoasthomemaintenance.com instead. The same copy
+  suggested featuring a phone-calendars photo that was never rendered.
+- **The kit footers printed wrong page numbers**, "Page 15" on a sheet that is
+  eighteenth of twenty-seven. Footers now carry section names, which cannot go
+  stale the way numbers already had, twice.
+- The site still described the guides as pairing each task with a video, and
+  promised how-to videos on the way. The guides are step-by-step text, and no
+  videos exist yet. The guides page footer likewise discussed dead video links
+  with zero videos on the page; that line now appears only once one does.
+- "See the full edition" button, two product renames behind the buy section it
+  scrolls to.
+
+### Removed
+
+- A stray fill-test PDF from `product/`, an unused import, an unused parameter.
+
+### Notes
+
+- The three feeds are byte-identical before and after, verified by hash.
+  Subscribers see nothing.
+- The corrected kit PDFs need re-uploading to the Etsy listing, and two lines
+  of the live description need the same edit as the copy here.
+
 ## [1.5.0], 2026-08-14
 
 The kit is on sale, and the site points at it.

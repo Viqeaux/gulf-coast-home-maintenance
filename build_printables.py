@@ -162,7 +162,7 @@ def tiers_page():
         '    <p class="pull">Nobody does all of this the first year. Working down the '
         '<em>Must do</em> line for twelve months puts you ahead of most homeowners on '
         'this coast.</p>\n'.format(rows),
-        foot="Page 1")
+        foot="How to use this")
 
 
 def first_month_page():
@@ -175,7 +175,7 @@ def first_month_page():
         '    <p class="lede">One-time jobs. They never repeat, which is exactly why '
         'they get forgotten. Do these once and the rest of the year is easier.</p>\n'
         '    <ul class="checklist">\n{0}    </ul>\n'.format(items),
-        foot="Page 2")
+        foot="Your first month")
 
 
 # Months whose three tasks carry too much detail for one sheet. Measured, not
@@ -344,7 +344,7 @@ def watch_list_page():
         'Salt air, high humidity and hard UV wear coastal homes faster than national averages '
         'assume. These are adjusted for the Gulf Coast. They are guidelines rather than '
         'guarantees, and a well-maintained roof outlives a neglected one.</p>\n'.format(rows),
-        foot="Page 15")
+        foot="The Watch List")
 
 
 def how_to_find_out_page():
@@ -364,7 +364,7 @@ def how_to_find_out_page():
         '    <p class="pull">Still cannot tell? Write <em>unknown</em> and put this year '
         'in the last column. Have it looked at once, note the condition, and you have a '
         'baseline from here on. Unknown is a starting point, not a dead end.</p>\n'.format(blocks),
-        foot="Page 16")
+        foot="How to find out")
 
 
 # --- design ----------------------------------------------------------------
@@ -650,7 +650,7 @@ def conditional_intro_page():
         foot="If you have one")
 
 
-def conditional_page(section, number):
+def conditional_page(section):
     when = ""
     for label, text in section["when"]:
         when += ('        <div class="when-row">\n'
@@ -688,8 +688,8 @@ def build_html():
         pages.extend(month_pages(index))
     pages += [watch_list_page(), how_to_find_out_page()]
     pages.append(conditional_intro_page())
-    for number, section in enumerate(SECTIONS, start=1):
-        pages.append(conditional_page(section, number))
+    for section in SECTIONS:
+        pages.append(conditional_page(section))
     return DOCUMENT.format(css=CSS, body="\n".join(pages),
                            version=VERSION, disclaimer=DISCLAIMER), len(pages)
 
