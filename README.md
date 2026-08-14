@@ -92,6 +92,26 @@ subscribe buttons, leaves **Download .ics**, and explains why. If you ever see
 that banner on the real site, the host is the problem — most likely it's serving
 over `http://` or the domain isn't public yet.
 
+## What has been checked on real devices
+
+Everything up to the point where the operating system takes over is verified
+automatically — the feeds parse, the links are well formed, the files serve as
+`text/calendar`. The last hop is the part no amount of local testing can prove,
+because it depends on what the device decides to do with the link.
+
+| Path | Status |
+|---|---|
+| Desktop browser → Google Calendar | Confirmed working |
+| iPhone → **Subscribe (Apple / Outlook)** | Confirmed working, 2026-08-13 |
+| Android → **Add to Google Calendar** | **Not yet tested** |
+
+The Android case is the one that matters, because it decides whether the
+Android-only card on the landing page earns its place. Android can hand a
+`calendar.google.com` link to the Google Calendar app, which cannot subscribe to
+a URL — but whether it does depends on a per-device setting, so it will hit some
+visitors and not others. If it turns out to be rare, that card is noise and
+should go.
+
 ## Adding a calendar in Google Calendar
 
 The mobile app can't subscribe to a URL. It has to be done once from a browser,
