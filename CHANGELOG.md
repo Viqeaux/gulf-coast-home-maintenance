@@ -27,6 +27,25 @@ Newest first.
 
 ---
 
+## [1.5.3], 2026-08-14
+
+### Fixed
+
+- **The price and the reassurance line sat left of centre on desktop.** Not the
+  button, which was centred correctly all along. `.buy p` caps those paragraphs
+  at 30rem and centres them with auto side margins, and the shorthand
+  `margin: 0 0 1.35rem` added in 1.5.2 zeroed those margins, dropping both
+  against the left edge of a wider card. Auto restored on the sides.
+- **The button ignored its `min-width`.** An anchor is inline, and min-width
+  does not apply to inline elements, so it rendered at 219px rather than the
+  272px intended. Now `inline-block`.
+
+### Changed
+
+- The price is the brand's brick red rather than ink, so it reads as a price at
+  a glance instead of as more type. It is the palette's existing red, not a
+  discount red, and it lifts to the paler variant on the dark scheme.
+
 ## [1.5.2], 2026-08-14
 
 The buy card reads as something for sale.

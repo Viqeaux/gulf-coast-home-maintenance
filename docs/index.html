@@ -354,11 +354,14 @@
     margin-top: 1.6rem; padding-top: 1.5rem;
     border-top: 1px solid var(--rule);
   }
-  .buy-price { margin: 0 0 1.35rem !important; }
+  /* The auto side margins matter: .buy p caps these at 30rem, so a shorthand
+     margin that zeroes left and right drops them against the left edge of a
+     wider card instead of centering them. */
+  .buy-price { margin: 0 auto 1.35rem !important; }
   .buy-price .amt {
     display: block;
-    font: 700 2.6rem/1 ui-serif, Georgia, serif;
-    color: var(--ink); letter-spacing: -.02em;
+    font: 700 2.7rem/1 ui-serif, Georgia, serif;
+    color: var(--must); letter-spacing: -.02em;
   }
   .buy-price .per {
     display: block; margin-top: .35rem;
@@ -366,13 +369,16 @@
     color: var(--muted);
   }
   .buy-note {
-    margin: .9rem 0 0 !important;
+    margin: .9rem auto 0 !important;
     font: 400 .82rem/1.5 ui-sans-serif, system-ui, sans-serif;
     color: var(--muted) !important;
   }
   /* A buy button should look heavier than a nav link, and wide enough to hold
      its own against a 2.6rem price directly above it. */
   #buy-slot .btn--lg {
+    /* inline-block, or min-width is ignored: it does not apply to inline
+       elements, and an anchor is inline unless told otherwise. */
+    display: inline-block;
     padding: 1.1rem 2.4rem; font-size: 16.5px; border-radius: 3px;
     min-width: 17rem; letter-spacing: .01em;
     box-shadow: 0 2px 0 color-mix(in srgb, var(--accent) 62%, black);
@@ -887,7 +893,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.5.2</p>
+    <p class="version">v1.5.3</p>
   </div>
 </footer>
 
