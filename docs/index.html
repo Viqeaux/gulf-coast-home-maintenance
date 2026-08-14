@@ -49,6 +49,7 @@
   p { margin: 0 0 1.05rem; }
   .muted { color: var(--muted); }
   .deck { font-size: 1.06rem; color: var(--muted); max-width: 36rem; }
+  .deck strong { color: var(--ink); font-weight: 600; }
 
   /* section numbering, the field-guide device */
   .sec-no {
@@ -263,6 +264,19 @@
     letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
     border: 1px solid var(--rule); padding: .32rem .45rem; border-radius: 2px;
   }
+  /* The free feeds sit immediately below the $12.99 kit, which is exactly where
+     a scanner assumes the price carries down. "Free" is repeated at the heading
+     and again on every card so no one has to read a sentence to learn it. Both
+     take their color from --accent against --paper, so the pair inverts with
+     the palette and stays legible in dark mode. */
+  .free-tag {
+    font: 700 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase;
+    background: var(--accent); color: var(--paper);
+    padding: .42rem .58rem; border-radius: 2px;
+    display: inline-block; vertical-align: .28em; white-space: nowrap;
+  }
+  .tier .badge--free { color: var(--accent); border-color: var(--accent); }
   .tier p { margin: .45rem 0 0; color: var(--muted); font-size: .97rem; }
   .tier .actions { margin-top: 1.15rem; }
 
@@ -810,23 +824,24 @@
 <section id="calendars">
   <div class="wrap">
     <span class="sec-no">05 / Free</span>
-    <h2>Put it on your phone</h2>
+    <h2>Put it on your phone <span class="free-tag">Free</span></h2>
     <p class="deck">
-      The same twelve months, as three calendars you can subscribe to. Free, no signup,
-      and they repeat every year forever.
+      <strong>All three of these are free.</strong> Not a sample of the kit above and
+      not a trial. The same twelve months, as calendars you subscribe to once: no
+      signup, no card, and they repeat every year forever.
     </p>
 
     <div style="margin-top:2rem">
       <div class="tier tier--must">
-        <h3>Must Do <span class="badge">12 reminders a year</span></h3>
+        <h3>Must Do <span class="badge badge--free">Free</span> <span class="badge">12 reminders a year</span></h3>
         <div class="actions" data-file="gulf-coast-must-do.ics"></div>
       </div>
       <div class="tier tier--should">
-        <h3>Should Do <span class="badge">12 reminders a year</span></h3>
+        <h3>Should Do <span class="badge badge--free">Free</span> <span class="badge">12 reminders a year</span></h3>
         <div class="actions" data-file="gulf-coast-should-do.ics"></div>
       </div>
       <div class="tier tier--above">
-        <h3>Going Above <span class="badge">12 reminders a year</span></h3>
+        <h3>Going Above <span class="badge badge--free">Free</span> <span class="badge">12 reminders a year</span></h3>
         <div class="actions" data-file="gulf-coast-going-above.ics"></div>
       </div>
     </div>
