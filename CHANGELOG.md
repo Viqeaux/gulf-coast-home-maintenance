@@ -27,6 +27,27 @@ Newest first.
 
 ---
 
+## [1.5.0], 2026-08-14
+
+The kit is on sale, and the site points at it.
+
+### Changed
+
+- **`SHOP_URL` is set**, so the buy slot now shows a button to the Etsy listing
+  instead of the waitlist. The waitlist did its job: it collected interest while
+  there was nothing to sell, and it steps aside the moment there is.
+- **The price on the site is $12.99**, corrected from $7.99. It was written
+  before the search data settled the question, and was still sitting in three
+  places: the price line, the button label, and a comment.
+- The price is now stated once, in the markup. The button no longer repeats it,
+  so changing it later means editing one line rather than hunting for the rest.
+
+### Notes
+
+- The button uses the listing URL rather than the shop URL, so buyers land on
+  the product rather than a shop front they have to search.
+- Still unverified: Android link interception, which needs a real phone.
+
 ## [1.4.0], 2026-08-14
 
 A fillable copy of the kit, so a buyer can type into it or print it blank.

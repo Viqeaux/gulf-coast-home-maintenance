@@ -722,7 +722,7 @@
     </p>
 
     <div class="buy">
-      <p class="buy-price">$7.99 on Etsy</p>
+      <p class="buy-price">$12.99 on Etsy</p>
       <h3>The printable kit</h3>
       <p>
         Eighteen pages, undated, so it never expires and never goes on sale in January.
@@ -848,24 +848,23 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.4.0</p>
+    <p class="version">v1.5.0</p>
   </div>
 </footer>
 
 <script>
   // ---------------------------------------------------------------------------
-  // The Etsy listing for the printable kit, which is the paid product at $7.99.
-  // The calendar feeds on this page stay free and are not sold anywhere.
+  // The Etsy listing for the printable kit, which is the paid product. The
+  // calendar feeds on this page stay free and are not sold anywhere.
   //
-  // Setting this swaps the waitlist for a buy button. Leave it empty until the
-  // listing is actually published: an empty shop reads as abandoned, and the
-  // waitlist is doing more for you in the meantime.
+  // This is the listing URL rather than the shop URL, so buyers land on the
+  // product instead of a shop front they have to search. Setting it swaps the
+  // waitlist for a buy button, which is the right trade once there is something
+  // to buy.
   //
-  // Use the listing URL, not the shop URL, so buyers land on the product rather
-  // than a shop front they have to search:
-  //   listing  https://www.etsy.com/listing/<id>/<slug>
-  //   shop     https://www.etsy.com/shop/GulfCoastHomeCare
-  var SHOP_URL = "";
+  // The price lives in one place, the .buy-price line in the markup above, so
+  // changing it does not mean hunting through the script as well.
+  var SHOP_URL = "https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast";
   // ---------------------------------------------------------------------------
 
   (function () {
@@ -880,7 +879,7 @@
       buy.href = SHOP_URL;
       buy.target = '_blank';
       buy.rel = 'noopener';
-      buy.textContent = 'Get the kit on Etsy, $7.99';
+      buy.textContent = 'Get the kit on Etsy';
       var slot = document.getElementById('buy-slot');
       slot.textContent = '';
       slot.appendChild(buy);
