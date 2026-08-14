@@ -50,9 +50,9 @@ Newest first.
 
 ### Fixed
 
-- **The price and the reassurance line sat left of centre on desktop.** Not the
-  button, which was centred correctly all along. `.buy p` caps those paragraphs
-  at 30rem and centres them with auto side margins, and the shorthand
+- **The price and the reassurance line sat left of center on desktop.** Not the
+  button, which was centered correctly all along. `.buy p` caps those paragraphs
+  at 30rem and centers them with auto side margins, and the shorthand
   `margin: 0 0 1.35rem` added in 1.5.2 zeroed those margins, dropping both
   against the left edge of a wider card. Auto restored on the sides.
 - **The button ignored its `min-width`.** An anchor is inline, and min-width
@@ -243,7 +243,7 @@ The printable edition. The free download the shop will lead with.
 - **`build_pdf.py`**, which builds the 20-page US Letter PDF: cover, how it
   works, the Gulf Coast year, your first month, the twelve months, the Big
   Ticket Watch List, how to date what you own, the phone calendars, and the
-  licence. The twelve months come from the same `TASKS` list as the `.ics`
+  license. The twelve months come from the same `TASKS` list as the `.ics`
   feeds, so the print edition and the digital one cannot drift apart and say
   different things. The rest comes from `product_content.py`. The built PDF and
   its images are gitignored as build artifacts, a second to regenerate, and
@@ -327,7 +327,7 @@ First public release, at `viqeaux.github.io/gulf-coast-home-maintenance`.
 - Every event carries the task, the reason it matters, and the disclaimer.
 - Calendar names lead with the tier, because sidebars truncate and the tier is
   the only thing distinguishing the three feeds.
-- Tier colours declared for clients that honour them. Google assigns its own
+- Tier colors declared for clients that honor them. Google assigns its own
   per subscriber and ignores the file, which is why the name has to carry it.
 
 ### Landing page
@@ -353,7 +353,7 @@ First public release, at `viqeaux.github.io/gulf-coast-home-maintenance`.
 
 ### Known and unverified
 
-- The Apple `webcal://` handoff and the Android link-interception behaviour are
+- The Apple `webcal://` handoff and the Android link-interception behavior are
   reasoned about but have never been observed on real hardware.
 - The Etsy link is not set. `SHOP_URL` in `docs/index.html` is empty, so the
   purchase slot reads "Coming soon".

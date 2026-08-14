@@ -120,7 +120,7 @@ the PDF. Measure `.sheet` scroll height against the page box after content
 edits. `TWO_PAGE_MONTHS` exists because May measured over.
 
 **CSS shorthand `margin` overwrites the sides.** Cost two rounds of "it looks
-off-centre". And `min-width` does nothing on an inline element, which an anchor
+off-center". And `min-width` does nothing on an inline element, which an anchor
 is by default.
 
 ## Market data, from Etsy Marketplace Insights
@@ -155,7 +155,7 @@ for other climates are a later product line, not a rebrand.
 **The listing is done.** Files, title, description, tags, category, price,
 photos, video, shop icon and banner are all live and current. The description
 matches [product/etsy-listing.md](product/etsy-listing.md), including the
-personal-use licence that deliberately withholds bulk client printing and
+personal-use license that deliberately withholds bulk client printing and
 redirects agents to message about the coming edition.
 
 **Site:**
@@ -185,7 +185,7 @@ redirects agents to message about the coming edition.
 3. **The realtor edition.** The best opportunity in the data: 9,400 searches
    against 31k listings, twenty times the ratio of anything else. Agents are
    local by definition, so the regional angle helps rather than limits, and they
-   buy in bulk and repeatedly. The kit's licence already points agents here, so
+   buy in bulk and repeatedly. The kit's license already points agents here, so
    there may be messages waiting. **One decision is blocking the build:** manual
    personalisation via Etsy's personalisation field, which justifies $39 to $59
    but needs a rebuild per order, versus a blank "Compliments of ___" line that
