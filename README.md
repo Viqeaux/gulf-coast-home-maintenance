@@ -163,6 +163,20 @@ the URL keeps returning a healthy page that says "Video unavailable". That is
 why `check_links.py` checks YouTube through its oEmbed endpoint rather than by
 HTTP status. Run it after editing `GUIDES`, and every month or two regardless.
 
+## Selling it
+
+The Etsy shop is **GulfCoastHomeCare** — `etsy.com/shop/GulfCoastHomeCare`. The
+name is shorter than the domain because Etsy caps shop names at 20 characters
+with no spaces; "Gulf Coast" was the half worth keeping intact.
+
+When there is a published listing, paste its URL into `SHOP_URL` at the bottom
+of `docs/index.html`. That swaps the waitlist for a buy button, which is the
+right trade — once the thing is purchasable the waitlist has done its job.
+
+Use the **listing** URL rather than the shop URL, so buyers land on the product
+instead of a shop front they have to search. And don't link the shop at all
+until something is listed: an empty shop reads as abandoned.
+
 ## Cutting a version
 
 Versions are tracked in [CHANGELOG.md](CHANGELOG.md), which explains what counts

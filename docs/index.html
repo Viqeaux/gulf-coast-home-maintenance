@@ -845,7 +845,14 @@
 
 <script>
   // ---------------------------------------------------------------------------
-  // Paste your Etsy listing URL here to turn "Coming soon" into a buy button.
+  // Setting this swaps the waitlist for a buy button. Leave it empty until there
+  // is a published listing to send people to — an empty Etsy shop reads as
+  // abandoned, and the waitlist is doing more for you in the meantime.
+  //
+  // Prefer the listing URL over the shop URL, so buyers land on the product
+  // rather than on a shop front they have to search:
+  //   listing  https://www.etsy.com/listing/<id>/<slug>
+  //   shop     https://www.etsy.com/shop/GulfCoastHomeCare
   var SHOP_URL = "";
   // ---------------------------------------------------------------------------
 
