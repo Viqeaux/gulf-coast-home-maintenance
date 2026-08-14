@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.5.3**. Everything below is live unless marked otherwise.
+Current version **v1.6.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -32,10 +32,11 @@ the strongest thing in the listing. Do not embellish it.
 - **Repo:** <https://github.com/Viqeaux/gulf-coast-home-maintenance>, **public**.
 - **Etsy shop:** GulfCoastHomeCare
 - **Etsy listing:** <https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast>
-- **Email:** MailerLite, group still named "Complete edition waitlist", double
-  opt-in on. That waitlist is retired, since the kit is now buyable and the site
-  shows a buy button in its place. See the first outstanding item: it is being
-  repurposed as a general "hear about new tools" signup.
+- **Email:** MailerLite, group **"General Signups"**, double opt-in on. It began
+  as a waitlist for the kit and the buy button retired that job, so in 1.6.0 it
+  became a general "hear about the next one" list living at the end of the free
+  calendar section. The form endpoint is a form ID, so renaming the group did
+  not move it and no code depends on the name.
 
 ## Build
 
@@ -158,21 +159,13 @@ matches [product/etsy-listing.md](product/etsy-listing.md), including the
 personal-use license that deliberately withholds bulk client printing and
 redirects agents to message about the coming edition.
 
-**Site:**
-
-1. **A "future releases" signup.** The waitlist is retired: it existed to
-   collect interest while there was nothing to buy, and the buy button replaced
-   it when the kit listed. Chad wants a general signup in its place, for people
-   who want to hear about new tools. The pieces are mostly there. The MailerLite
-   form still posts correctly and its markup is still in `docs/index.html`, but
-   it only renders when `SHOP_URL` is empty, so it needs lifting out of the buy
-   slot into its own place, probably near the free calendars where the
-   already-interested reader is. The MailerLite group is still named "Complete
-   edition waitlist" and should be renamed to match.
+**The site has nothing open.** The future-releases signup was the last item and
+it shipped in 1.6.0, so the site can reach an interested visitor again. Nothing
+on it is known to be broken or missing.
 
 **Unverified:**
 
-2. **Android link interception.** A friend was going to test and never reported
+1. **Android link interception.** A friend was going to test and never reported
    back. Android can hand a `calendar.google.com` link to the Google Calendar
    app, which cannot subscribe. It depends on a per-device setting, so it hits
    some visitors and not others. The site shows an Android-only card with the
@@ -182,18 +175,20 @@ redirects agents to message about the coming edition.
 
 **Next products, in order:**
 
-3. **The realtor edition.** The best opportunity in the data: 9,400 searches
+2. **The realtor edition.** The best opportunity in the data: 9,400 searches
    against 31k listings, twenty times the ratio of anything else. Agents are
    local by definition, so the regional angle helps rather than limits, and they
    buy in bulk and repeatedly. The kit's license already points agents here, so
    there may be messages waiting. **One decision is blocking the build:** manual
-   personalisation via Etsy's personalisation field, which justifies $39 to $59
+   personalization via Etsy's personalization field, which justifies $39 to $59
    but needs a rebuild per order, versus a blank "Compliments of ___" line that
-   scales with no work per sale. Chad will decide, and has not yet.
-4. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
+   scales with no work per sale. **Chad is deliberately leaving this for later,
+   as of 2026-08-14.** Do not keep re-raising it. Nothing else about the product
+   is blocked, so it can move the day he calls it.
+3. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
    plumbing is done. Adding entries puts links on the guides page and into the
    calendar events. **Adding the first one requires a `SEQUENCE` bump**, since
    it changes what subscribers see. `check_links.py` finds dead ones.
-5. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
+4. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
    South regional rather than coastal-only, so a Texas or Florida edition is a
-   retiming and a relabelling, not a rewrite.
+   retiming and a relabeling, not a rewrite.
