@@ -16,13 +16,20 @@ limits are noted where they bite.
 **Digital, instant download.** Answer *yes* to "Is this a digital file?" during
 setup. There is no shipping profile and no physical variant.
 
-## File to upload
+## Files to upload
 
-`product/gulf-coast-home-maintenance-kit.pdf`, about 380 KB, well under Etsy's
-20 MB per-file cap.
+Two, in this order. Etsy allows five, and both are well under the 20 MB cap.
 
-One file, not a zip. A zip makes someone on a phone do work before they can see
-what they downloaded.
+| File | |
+|---|---|
+| `product/gulf-coast-home-maintenance-kit.pdf` | ~390 KB, the print version |
+| `product/gulf-coast-home-maintenance-kit-fillable.pdf` | ~1.1 MB, type and save |
+
+Separate files, not a zip. A zip makes someone on a phone do work before they
+can see what they bought, and it hides the fact that there are two versions.
+
+The print version goes first, because it is what most buyers want and Etsy lists
+files in upload order.
 
 ## Title
 
@@ -77,9 +84,24 @@ It also makes a genuinely useful closing gift. Agents, print a stack.
 
 WHAT YOU GET
 
-One PDF, 27 pages, sized for US Letter. Print the whole thing or just the pages that apply to your house. The interior pages are white on purpose, so printing it does not cost you a cartridge, and every level is labeled as well as colored so black and white loses nothing.
+Two files, both 27 pages, US Letter size (8.5 x 11 inches), portrait. Use whichever suits you.
+
+1. A PRINT version. Clean pages, ready to print and write on by hand.
+2. A FILLABLE version. Type into the Watch List, tick the boxes on screen, and save it. Update it each December instead of printing the whole thing again.
+
+Both open in any PDF reader, with no special software or fonts to install.
+
+Print the whole thing, or just the pages that apply to your house. Interior pages are white on purpose, so printing does not cost you a cartridge, and every level is labeled as well as colored, so black and white loses nothing.
+
+One honest note on the fillable version: typing and saving works in Adobe Reader and most desktop PDF apps. Some phone apps will let you type but cannot save what you typed, so fill it in on a computer if you want to keep it.
 
 Instant download the moment checkout completes. Nothing is mailed.
+
+HOW YOU MAY USE IT
+
+Print as many copies as you like for your own home. Real estate agents and home inspectors are welcome to print copies for clients, and I would be glad if you did.
+
+Please do not resell the file, share it as a file, or list it anywhere as your own. If someone wants a copy, send them the listing.
 
 FREE CALENDARS FOR YOUR PHONE
 
@@ -103,7 +125,7 @@ home maintenance
 housewarming gift
 new home gift
 hurricane prep
-coastal homeowner
+fillable pdf
 first time buyer
 undated calendar
 home care planner
@@ -167,6 +189,13 @@ the Watch List is where the value is.
 **Is it dated?**
 No, deliberately. There is no year and no weekday grid, so the same printout
 works every year. Each task has a box to tick.
+
+**Can I type into it, or do I have to print it?**
+Either. There are two files. The print version is for printing and writing on by
+hand. The fillable version lets you type into the Watch List and tick boxes on
+screen, then save. Saving works in Adobe Reader and most desktop PDF apps; some
+phone apps will let you type but cannot save, so use a computer if you want to
+keep it.
 
 **Do I need a color printer?**
 No. Plain US Letter paper, and black and white loses only the level colors,

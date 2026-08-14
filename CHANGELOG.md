@@ -27,6 +27,37 @@ Newest first.
 
 ---
 
+## [1.4.0], 2026-08-14
+
+A fillable copy of the kit, so a buyer can type into it or print it blank.
+
+### Added
+
+- **`build_fillable.py`**, which produces a second file with 97 real form
+  fields: the 34 Watch List blanks, every task checkbox, the first-month
+  checklist, the conditional contents page, and the notes lines. Shipped
+  alongside the print version rather than replacing it, so anyone printing at
+  home still gets clean pages.
+
+  Chrome's print-to-PDF emits no form fields, so they cannot come from the HTML.
+  The generator marks each blank, headless Chrome reports where it actually
+  landed, and reportlab stamps invisible fields there for pypdf to merge on.
+  Measuring rather than calculating means the fields follow the layout when the
+  design changes.
+
+### Changed
+
+- The listing now ships two files and says so. The description previously
+  stated the file was not fillable, which is no longer true, and `fillable pdf`
+  replaces `coastal homeowner` in the tags.
+
+### Notes
+
+- Verified by round trip rather than by eye: values written into fields, saved,
+  reopened and read back. Confirmed on real hardware too.
+- Desktop readers save form data reliably; some phone apps allow typing but not
+  saving. The listing copy says so plainly rather than letting a buyer find out.
+
 ## [1.3.0], 2026-08-14
 
 The kit becomes the paid product, and every task gains step by step detail.

@@ -168,7 +168,7 @@ def tiers_page():
 def first_month_page():
     items = ""
     for job in FIRST_MONTH:
-        items += ('      <li><span class="box"></span>{0}</li>\n'.format(esc(job)))
+        items += ('      <li><span class="box" data-fill="check"></span>{0}</li>\n'.format(esc(job)))
     return page(
         '    <p class="eyebrow">Before the months begin</p>\n'
         '    <h2>Your first month</h2>\n'
@@ -290,7 +290,7 @@ def _month_sheet(name, index, tasks, part=0):
 
         blocks += (
             '      <div class="task tier--{0}">\n'
-            '        <p class="tier-tag">{1}<span class="box box--task"></span></p>\n'
+            '        <p class="tier-tag">{1}<span class="box box--task" data-fill="check"></span></p>\n'
             '        <h3>{2}</h3>\n'
             '        <p class="do">{3}</p>\n'
             '{4}{5}'
@@ -304,7 +304,7 @@ def _month_sheet(name, index, tasks, part=0):
     if part == 2 or len(tasks) < 3:
         notes = ('    <div class="notes">\n'
                  '      <p class="notes-label">Notes</p>\n'
-                 + ('      <div class="rule-line"></div>\n' * 5) +
+                 + ('      <div class="rule-line" data-fill="text"></div>\n' * 5) +
                  '    </div>\n')
 
     return page(
@@ -314,14 +314,17 @@ def _month_sheet(name, index, tasks, part=0):
 
 
 def watch_list_page():
+    # data-fill marks the blanks. build_fillable.py measures them in the browser
+    # and stamps real form fields at those positions, so the same layout serves
+    # the print file and the fillable one.
     rows = ""
     for item, life in WATCH_LIST:
         rows += (
             '        <tr>\n'
             '          <td class="item">{0}</td>\n'
-            '          <td class="fill"></td>\n'
+            '          <td class="fill" data-fill="text"></td>\n'
             '          <td class="life">{1}</td>\n'
-            '          <td class="fill"></td>\n'
+            '          <td class="fill" data-fill="text"></td>\n'
             '        </tr>\n'.format(esc(item), esc(life)))
 
     return page(
@@ -630,7 +633,7 @@ DOCUMENT = """<!doctype html>
 def conditional_intro_page():
     items = ""
     for section in SECTIONS:
-        items += ('      <li><span class="box"></span>{0}</li>\n'
+        items += ('      <li><span class="box" data-fill="check"></span>{0}</li>\n'
                   .format(esc(section["title"].replace("If you ", "")
                                               .replace("If your ", "your ")
                                               .capitalize())))

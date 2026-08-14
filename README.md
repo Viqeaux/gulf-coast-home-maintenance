@@ -16,15 +16,17 @@ build_calendars.py        the 36 tasks, video links, and the feed generator
 task_steps.py             step by step detail for each task
 kit_sections.py           the "if you have one" pages, kit only
 build_printables.py       renders the kit to HTML then PDF, via headless Chrome
+build_fillable.py         stamps form fields onto a second, typeable copy
 build_listing_images.py   renders Etsy photos from the real kit pages
 check_links.py            finds curated videos that have gone dead
 optimize_images.py        resizes the hero photo for the web
 
 product/                  the paid kit. Gitignored except the listing copy
-  gulf-coast-home-maintenance-kit.pdf    27 pages, US Letter
-  gulf-coast-home-maintenance-kit.html   what the PDF is rendered from
-  listing/                               Etsy photos, 00-hero.png first
-  etsy-listing.md                        title, tags and copy to paste in
+  gulf-coast-home-maintenance-kit.pdf           27 pages, print version
+  gulf-coast-home-maintenance-kit-fillable.pdf  same pages, typeable
+  gulf-coast-home-maintenance-kit.html          what the PDF renders from
+  listing/                                      Etsy photos, 00-hero first
+  etsy-listing.md                               title, tags, copy to paste
 
 docs/                     published by GitHub Pages, exactly as-is
   gulf-coast-must-do.ics       12 events
@@ -49,10 +51,10 @@ Rebuild the feeds and the guides page, after editing tasks or steps:
 python build_calendars.py
 ```
 
-Rebuild the kit and its Etsy photos, after editing anything it contains:
+Rebuild the kit, its fillable twin, and its Etsy photos:
 
 ```bash
-python build_printables.py && python build_listing_images.py
+python build_printables.py && python build_fillable.py && python build_listing_images.py
 ```
 
 Rebuild the web hero, after replacing `docs/img/hero.png`:
@@ -243,6 +245,31 @@ A page whose content overflows its sheet is silently truncated in the PDF and
 invisible in the HTML. The month pages are close to full, so check after editing
 content: open the built HTML and compare each `.sheet` scroll height against the
 page box. `TWO_PAGE_MONTHS` in the builder exists because May measured over.
+
+## The fillable version
+
+`build_fillable.py` produces a second file that a buyer can type into and save.
+It is a separate file rather than a replacement, so anyone printing at home gets
+clean pages with no form widgets.
+
+Chrome's print-to-PDF emits no form fields at all, so they cannot come from the
+HTML. Instead the generator marks each blank with `data-fill`, this script loads
+the document in headless Chrome and lets the **browser report where each one
+landed**, and reportlab stamps invisible AcroForm fields at those rectangles for
+pypdf to merge on. Measuring beats calculating: the CSS owns the layout, and
+hand-worked coordinates go stale the moment a margin changes.
+
+Two things that are easy to get wrong here:
+
+- **Merge direction.** Cloning from the overlay and merging the base page in
+  underneath keeps `/AcroForm` in the document catalog. Doing it the other way
+  copies the widgets onto the pages but leaves that dictionary behind, and a PDF
+  whose fields are not listed there is one most readers quietly refuse to fill.
+- **`set_need_appearances_writer(True)`.** Without it some readers show typed
+  text only while the field has focus.
+
+Verify by round-tripping rather than by eye: write a value into a field, save,
+reopen, and read it back.
 
 ## Listing images
 
