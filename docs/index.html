@@ -344,11 +344,42 @@
     background: var(--paper); border: 1px solid var(--rule); border-radius: 3px;
     box-shadow: var(--shadow-lg); padding: 2rem 1.8rem; margin-top: 2.25rem; text-align: center;
   }
-  .buy h3 { font-size: 1.2rem; margin-bottom: .55rem; }
-  .buy-price {
-    font: 700 11px/1 ui-sans-serif, system-ui, sans-serif;
-    letter-spacing: .16em; text-transform: uppercase; color: var(--sand);
-    margin: 0 0 .5rem !important;
+  .buy h3 { font-size: 1.35rem; margin-bottom: .55rem; }
+  .buy-blurb { max-width: 32rem; margin-left: auto; margin-right: auto; }
+
+  /* The price belongs next to the button. Set as a small uppercase label above
+     the heading it read as a section eyebrow, because that is exactly how the
+     eyebrows are styled, and it sat five lines from the thing you click. */
+  .buy-action {
+    margin-top: 1.6rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  .buy-price { margin: 0 0 1.35rem !important; }
+  .buy-price .amt {
+    display: block;
+    font: 700 2.6rem/1 ui-serif, Georgia, serif;
+    color: var(--ink); letter-spacing: -.02em;
+  }
+  .buy-price .per {
+    display: block; margin-top: .35rem;
+    font: 400 .85rem/1.4 ui-sans-serif, system-ui, sans-serif;
+    color: var(--muted);
+  }
+  .buy-note {
+    margin: .9rem 0 0 !important;
+    font: 400 .82rem/1.5 ui-sans-serif, system-ui, sans-serif;
+    color: var(--muted) !important;
+  }
+  /* A buy button should look heavier than a nav link, and wide enough to hold
+     its own against a 2.6rem price directly above it. */
+  #buy-slot .btn--lg {
+    padding: 1.1rem 2.4rem; font-size: 16.5px; border-radius: 3px;
+    min-width: 17rem; letter-spacing: .01em;
+    box-shadow: 0 2px 0 color-mix(in srgb, var(--accent) 62%, black);
+  }
+  #buy-slot .btn--lg:hover { filter: brightness(1.06); }
+  @supports not (background: color-mix(in srgb, red 50%, transparent)) {
+    #buy-slot .btn--lg { box-shadow: 0 2px 0 #0a3f48; }
   }
   .buy p { color: var(--muted); max-width: 30rem; margin-left: auto; margin-right: auto; font-size: .97rem; }
   .buy p:last-child { margin-bottom: 0; }
@@ -722,19 +753,24 @@
     </p>
 
     <div class="buy">
-      <p class="buy-price">$12.99 on Etsy</p>
       <h3>The printable kit</h3>
-      <p>
-        Twenty-seven pages, undated, so it never expires and never goes on sale in January.
-        Twelve months with step-by-step detail, the full seventeen-item Watch List, seven
-        sections for whatever your house happens to have, the page on how to date
-        everything you own, and a first-month checklist for what you only do once. Two
-        files: one to print, one you can type into and save.
+      <p class="buy-blurb">
+        Twenty-seven pages, undated, so it never expires and never goes on sale in
+        January. Twelve months with step-by-step detail, the full seventeen-item Watch
+        List, seven sections for whatever your house happens to have, the page on how
+        to date everything you own, and a first-month checklist for what you only do
+        once.
       </p>
-      <!-- Until the Etsy listing exists, this slot collects a waitlist. Setting
-           SHOP_URL at the bottom of this file replaces the whole thing with the
-           buy button, which is the right outcome: once the kit is purchasable
-           the waitlist has done its job. -->
+
+      <!-- Price sits with the button rather than above the heading. Up there it was
+           styled like a section label and read as one, and it was five lines from the
+           thing you click. -->
+      <div class="buy-action">
+        <p class="buy-price"><span class="amt">$12.99</span><span class="per">one time, no subscription</span></p>
+        <!-- Until the Etsy listing exists, this slot collects a waitlist. Setting
+             SHOP_URL at the bottom of this file replaces the whole thing with the
+             buy button, which is the right outcome: once the kit is purchasable
+             the waitlist has done its job. -->
       <div id="buy-slot">
         <form class="signup" method="post" target="ml-sink"
               action="https://assets.mailerlite.com/jsonp/2575029/forms/195731645629727806/subscribe">
@@ -753,6 +789,8 @@
           <strong>Nearly there, check your email.</strong>
           You'll have a confirmation link waiting; the list won't have you until you click it.
         </p>
+      </div>
+        <p class="buy-note">Instant download &middot; Two PDFs &middot; Print at home on letter paper</p>
       </div>
       <!-- Posting into a hidden frame keeps the visitor on the page. MailerLite's
            own embed targets _blank, which would throw them into a raw JSON
@@ -849,7 +887,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.5.1</p>
+    <p class="version">v1.5.2</p>
   </div>
 </footer>
 
@@ -884,6 +922,12 @@
       var slot = document.getElementById('buy-slot');
       slot.textContent = '';
       slot.appendChild(buy);
+    } else {
+      // No listing yet, so the slot holds a waitlist. A price and a download
+      // promise above it would be advertising something nobody can buy.
+      document.querySelectorAll('.buy-price, .buy-note').forEach(function (el) {
+        el.hidden = true;
+      });
     }
 
     // Waitlist. The form posts straight to MailerLite through a hidden frame,

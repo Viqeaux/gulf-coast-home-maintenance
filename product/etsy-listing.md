@@ -80,7 +80,7 @@ WHO IT IS FOR
 
 First time buyers, anyone who just moved to the coast, and anyone who has owned a coastal house long enough to have been surprised by it. Texas to Florida.
 
-It also makes a genuinely useful closing gift. Agents, print a stack.
+It also makes a genuinely useful closing gift.
 
 WHAT YOU GET
 
@@ -99,9 +99,11 @@ Instant download the moment checkout completes. Nothing is mailed.
 
 HOW YOU MAY USE IT
 
-Print as many copies as you like for your own home. Real estate agents and home inspectors are welcome to print copies for clients, and I would be glad if you did.
+This is a personal use license. Print as many copies as you need for your own home, and update the fillable version as often as you like.
 
 Please do not resell the file, share it as a file, or list it anywhere as your own. If someone wants a copy, send them the listing.
+
+Real estate agents and inspectors: an agent edition made for client gifting is coming. Message me and you will hear about it first.
 
 FREE CALENDARS FOR YOUR PHONE
 
@@ -258,8 +260,9 @@ into Google, Apple or Outlook and repeat every year. Subscribe free at
 gulfcoasthomemaintenance.com. They need no purchase.
 
 **Can I give this to my clients?**
-Yes, and please do. Print a stack for closings. The only ask is that you send
-people the link rather than the file, so they always get the current version.
+A printed copy as a closing or housewarming gift, gladly. For copies across
+many clients, message me: an agent edition with a client-gifting license is
+coming, and asking is how you hear about it first.
 
 ---
 

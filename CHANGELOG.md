@@ -27,6 +27,31 @@ Newest first.
 
 ---
 
+## [1.5.2], 2026-08-14
+
+The buy card reads as something for sale.
+
+### Changed
+
+- **The price moved to sit with the button.** It had been a small uppercase
+  label above the heading, which is exactly how the section eyebrows are
+  styled, so it read as a category label rather than a price, and it sat five
+  lines from the thing you click. It is now 2.6rem serif immediately above the
+  button, with "one time, no subscription" under it.
+- **The button carries weight**, wide enough to hold its own against the price
+  and with a solid drop edge, so it reads as a control rather than a link.
+- **A reassurance line under the button**: instant download, two PDFs, prints
+  on letter paper. That is the "what happens if I click" question answered
+  where it gets asked.
+- A rule separates the description from the price, so the card has a pitch half
+  and a purchase half rather than one undifferentiated column.
+
+### Notes
+
+- The waitlist path still works: with `SHOP_URL` empty the price and the
+  download promise hide themselves, since advertising a price above a form for
+  something nobody can buy would be worse than the old layout.
+
 ## [1.5.1], 2026-08-14
 
 Audit pass. Stale claims found and corrected, some of them live.
