@@ -724,10 +724,10 @@
         three tiers, the full Big Ticket Watch List, the page on how to date everything you
         own, and a first-month checklist for what you only do once.
       </p>
-      <!-- Until there is somewhere to buy it, this slot collects a waitlist.
+      <!-- Until there is somewhere to get it, this slot collects a waitlist.
            Setting SHOP_URL at the bottom of this file replaces the whole thing
-           with the buy button, which is the right outcome — once it is for sale
-           the waitlist has done its job. -->
+           with the download button, which is the right outcome — once it is
+           downloadable the waitlist has done its job. -->
       <div id="buy-slot">
         <form class="signup" method="post" target="ml-sink"
               action="https://assets.mailerlite.com/jsonp/2575029/forms/195731645629727806/subscribe">
@@ -842,18 +842,19 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.1.0</p>
+    <p class="version">v1.2.0</p>
   </div>
 </footer>
 
 <script>
   // ---------------------------------------------------------------------------
-  // Setting this swaps the waitlist for a buy button. Leave it empty until there
-  // is a published listing to send people to — an empty Etsy shop reads as
-  // abandoned, and the waitlist is doing more for you in the meantime.
+  // Setting this swaps the waitlist for a download button. Leave it empty until
+  // there is a published listing to send people to — an empty Etsy shop reads
+  // as abandoned, and the waitlist is doing more for you in the meantime.
   //
-  // Prefer the listing URL over the shop URL, so buyers land on the product
-  // rather than on a shop front they have to search:
+  // The calendar itself is free; the listing exists so the shop has something
+  // to be found by. Prefer the listing URL over the shop URL, so people land on
+  // the download rather than on a shop front they have to search:
   //   listing  https://www.etsy.com/listing/<id>/<slug>
   //   shop     https://www.etsy.com/shop/GulfCoastHomeCare
   var SHOP_URL = "";
@@ -871,7 +872,7 @@
       buy.href = SHOP_URL;
       buy.target = '_blank';
       buy.rel = 'noopener';
-      buy.textContent = 'Get the complete edition';
+      buy.textContent = 'Download it free on Etsy';
       var slot = document.getElementById('buy-slot');
       slot.textContent = '';
       slot.appendChild(buy);

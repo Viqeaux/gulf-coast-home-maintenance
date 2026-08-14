@@ -27,6 +27,48 @@ Newest first.
 
 ---
 
+## [1.2.0] — 2026-08-13
+
+The printable edition — the free download the shop will lead with.
+
+### Added
+
+- **`build_pdf.py`**, which builds the 20-page US Letter PDF: cover, how it
+  works, the Gulf Coast year, your first month, the twelve months, the Big
+  Ticket Watch List, how to date what you own, the phone calendars, and the
+  licence. The twelve months come from the same `TASKS` list as the `.ics`
+  feeds, so the print edition and the digital one cannot drift apart and say
+  different things. The rest comes from `product_content.py`. The built PDF and
+  its images are gitignored as build artifacts — a second to regenerate, and
+  not served from `docs/`, so committing them would put binaries in the repo
+  that nothing reads.
+- **Listing images**, rendered from the real pages so a preview cannot show
+  something the file does not contain. The first one is composed at 4:3, since
+  Etsy crops the search thumbnail to 4:3 and would slice the title off a
+  portrait page.
+- **`product/etsy-listing.md`** — the listing copy, tags, the reasoning for
+  listing it free, and what to do after it goes live.
+- Each month task now carries a tick box and a line for the date it was done.
+  That is what makes an undated calendar worth keeping rather than reprinting.
+
+### Changed
+
+- The buy slot on the landing page becomes **"Download it free on Etsy"** when
+  `SHOP_URL` is set, rather than a buy button. The calendar is the free front
+  door; the kit is what will be for sale.
+
+### Fixed
+
+- The seasons diagram on the landing page drew hurricane season running
+  through **December**. Six columns, not seven — it now agrees with its own
+  caption and with the 183-day figure above it.
+
+### Notes
+
+- The three `.ics` files are byte-identical to 1.1.0, so no `SEQUENCE` bump.
+- `SHOP_URL` is still empty. The listing has to exist before the button can
+  point anywhere, and an empty shop reads as abandoned.
+
 ## [1.1.0] — 2026-08-13
 
 Guides, a waitlist, and the move to a real domain.
