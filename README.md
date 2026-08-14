@@ -18,6 +18,7 @@ kit_sections.py           the "if you have one" pages, kit only
 build_printables.py       renders the kit to HTML then PDF, via headless Chrome
 build_fillable.py         stamps form fields onto a second, typeable copy
 build_listing_images.py   renders Etsy photos from the real kit pages
+build_video.py            the 14 second silent Etsy listing video
 check_links.py            finds curated videos that have gone dead
 optimize_images.py        resizes the hero photo for the web
 
@@ -284,6 +285,12 @@ a bigger canvas and pads the rest with white.
 `00-hero.png` is composed at 4:3 rather than being a page render, because Etsy
 crops the search-grid thumbnail to 4:3 and would otherwise slice the title off
 the cover.
+
+`build_video.py` makes the listing video from the same renders, so it cannot
+show a page the file does not contain. Etsy plays these silently and caps them
+at 15 seconds, so it runs 14, square at 1080, with no audio track and a caption
+on every shot. Nothing can be narrated and nothing can be lingered over, which
+is why each shot makes exactly one point.
 
 ## Selling it
 
