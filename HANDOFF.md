@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.7.0**. Everything below is live unless marked otherwise.
+Current version **v1.9.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -182,9 +182,10 @@ has **no custom option fields on purpose**, so nothing at checkout promises the
 buyer anything that depends on you being awake. Read the "Why no custom options"
 section before adding any.
 
-**The site has nothing open.** The future-releases signup was the last item and
-it shipped in 1.6.0, so the site can reach an interested visitor again. Nothing
-on it is known to be broken or missing.
+**The site was reviewed end to end in 1.9.0** for security and branding. Most
+of what came out of it is fixed and shipped. What is left needs Chad's hands or
+Chad's decision, and is listed under "Waiting on Chad" below. Nothing on the
+site is known to be broken.
 
 **Pinterest is built but not launched.** `build_pins.py` makes the six pins and
 [product/pinterest.md](product/pinterest.md) holds the boards, the copy for
@@ -198,6 +199,80 @@ Chad's hands.
 of `docs/index.html` and has to be deployed before pressing Verify. Until the
 claim goes through, pins carry no shop attribution and site traffic does not
 show up in Pinterest analytics.
+
+## Waiting on Chad, from the 1.9.0 review
+
+In priority order. The first two are the ones that matter.
+
+**1. The domain has no SPF, DMARC or MX record.** Verified against public DNS:
+no TXT records at all, no `_dmarc`, no MX. Anyone can send mail as
+`anything@gulfcoasthomemaintenance.com` and nothing says they may not. The
+scenario is a fake "your download link" to the MailerLite list or to Etsy
+buyers, carrying this domain as the return address. DNS is on Cloudflare, so
+this is three records and five minutes:
+
+| Type | Name | Value |
+|---|---|---|
+| MX | `@` | `.` with priority `0`, the null MX, meaning this domain receives no mail |
+| TXT | `@` | `v=spf1 -all` |
+| TXT | `_dmarc` | `v=DMARC1; p=reject; rua=mailto:lege.chad@gmail.com` |
+
+If mail ever gets sent *from* the domain, loosen SPF then. Do not skip it now
+on the grounds that it might change later.
+
+**2. The public repo still rebuilds both paid products.** `build_printables.py`
+holds `WATCH_LIST` and `FIRST_MONTH`, `kit_sections.py` the seven conditional
+sections, `task_steps.py` all thirty-six step-by-steps. A clone plus
+`python build_printables.py` is the $12.99 kit; `build_agent_edition.py` is the
+$39 one. `.gitignore` protects the built PDF, which was never the thing worth
+protecting. `product_content.py` also sits in history at commit `8a9f1f1` with
+the lifespans and the license in it.
+
+Nobody is doing this today: zero stars, zero forks, and the site does not link
+to the repo. It is also permanent and it grows with every bit of marketing that
+works. **The recommended fix is to move the site to Cloudflare Pages**, which
+is free, supports private repositories, and can set real response headers,
+which GitHub Pages cannot. DNS is already on Cloudflare. See
+"Hosting" in [README.md](README.md). GitHub Pro at about $4 a month and a
+private repo is the smaller-change alternative. Doing nothing is defensible;
+doing nothing without deciding is not.
+
+**3. Both Etsy descriptions need one line re-pasted.** "What to have to hand" is
+British and was corrected to "on hand" in
+[product/etsy-listing.md](product/etsy-listing.md) and
+[product/etsy-listing-realtor.md](product/etsy-listing-realtor.md). The files
+are right; the live listings still say the old thing until the description is
+pasted in again.
+
+**4. The kit PDFs need rebuilding and re-uploading.** `kit_sections.py` had
+"Check the skirting and any flood vents are intact", which wants a "that" in
+American usage. Rebuild with `build_printables.py` then `build_fillable.py`,
+and replace the files on the listing. Low urgency, worth folding into the next
+time the kit changes for another reason.
+
+**5. Decide how Pinterest gets measured, before it launches.** There is no
+analytics of any kind, so there is no way to tell whether the pins did anything.
+The zero-tracker profile is a real asset and the privacy page now says so out
+loud, so anything added should be cookieless and consent-free, and should
+instrument three events only: Etsy click, feed subscribe, signup submit. If the
+answer is "add nothing", the fallback is Etsy's own traffic-source report plus
+MailerLite signup counts. Either is fine. Deciding after the launch is not.
+
+**6. Small repository hygiene.** Issues and the Wiki are enabled on a public
+repo that is not an open source project, so anyone can publish text under the
+brand's GitHub presence. The description reads "Home maintenance Calendar" and
+the homepage field is empty. All three are settings-page work, and all three
+stop mattering if the repo goes private.
+
+**7. The gifting line in the kit's FAQ is still an open decision.**
+[product/etsy-listing.md](product/etsy-listing.md) answers "Can I give this to
+my clients?" with "A printed copy as a closing or housewarming gift, gladly."
+That is written permission for a single copy of exactly what the $39 edition
+sells. It may well be the right call, since it keeps a warm pre-sale question
+warm and the upsell follows immediately. It was flagged rather than changed:
+published permissions are hard to take back, and this one is Chad's call. Do
+not improvise a stance on gifting in a customer reply either. Answer the
+question actually asked, and if someone asks outright, ask Chad.
 
 **Unverified:**
 

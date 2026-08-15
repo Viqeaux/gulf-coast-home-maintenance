@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found, Gulf Coast Home Maintenance</title>
+<meta name="robots" content="noindex, follow">
+<!-- Same policy as the rest of the site, tightened where this page has less to
+     do: no script and no form here, so neither is allowed at all. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; object-src 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0e2429">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icon-180.png">
+<!-- Absolute paths throughout. GitHub Pages serves this file for any missing
+     address at any depth, so a relative href would resolve against the wrong
+     directory for exactly the visitors who are already lost. -->
+<link rel="stylesheet" href="/theme.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; background: var(--deep); color: var(--on-deep);
+    font: 17px/1.65 ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex; align-items: center; justify-content: center;
+    padding: 3rem 1.35rem;
+  }
+  .card { max-width: 34rem; }
+  .mark { display: flex; align-items: center; gap: .55rem; margin-bottom: 1.6rem; }
+  .mark span {
+    font: 600 11px/1.4 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--on-deep);
+  }
+  .code {
+    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--sand);
+    margin: 0 0 .8rem;
+  }
+  h1 {
+    font-size: clamp(1.9rem, 5.5vw, 2.7rem); line-height: 1.08;
+    letter-spacing: -.022em; color: #fff; margin: 0 0 1rem; font-weight: 700;
+  }
+  p { color: var(--on-deep-mute); margin: 0 0 1.6rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .btn {
+    font: 600 14px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    text-decoration: none; padding: .8rem 1.1rem; border-radius: 2px;
+    border: 1px solid rgba(232,226,212,.32); color: var(--on-deep);
+    transition: border-color .15s ease, filter .15s ease;
+  }
+  .btn:hover { border-color: var(--on-deep); }
+  .btn:focus-visible { outline: 2px solid var(--sand); outline-offset: 2px; }
+  .btn--primary {
+    background: var(--sand); border-color: var(--sand); color: var(--deep);
+  }
+  .btn--primary:hover { filter: brightness(1.08); }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <span class="mark">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--sand)">
+      <path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5V14h4v5.5"/>
+    </svg>
+    <span>Gulf Coast Home Maintenance</span>
+  </span>
+
+  <p class="code">Error 404</p>
+  <h1>That page isn't here.</h1>
+  <p>
+    Either the address has a typo in it or something moved. The free calendars and
+    the guides are both still where they were.
+  </p>
+
+  <div class="actions">
+    <a class="btn btn--primary" href="/#calendars">Free phone calendars</a>
+    <a class="btn" href="/guides/">How-to guides</a>
+    <a class="btn" href="/">Start over</a>
+  </div>
+</div>
+
+</body>
+</html>

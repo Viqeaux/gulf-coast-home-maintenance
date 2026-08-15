@@ -15,9 +15,11 @@ It is the same house that sits in the site header, redrawn solid, so the shop
 and the site read as the same thing.
 
 Run:  python build_brand.py
-Out:  product/brand/shop-icon.png     1000 square, for the shop icon
-      product/brand/shop-banner.png   3360 x 840, the big banner
-      product/brand/icon-sizes.png    proof it survives being small
+Out:  product/brand/shop-icon.png        1000 square, for the shop icon
+      product/brand/shop-banner.png      3360 x 840, the big banner
+      product/brand/pinterest-cover.png        1600 x 900, flat profile cover
+      product/brand/pinterest-cover-photo.png  1600 x 900, over the hero photo
+      product/brand/icon-sizes.png       proof it survives being small
 """
 
 import os
@@ -28,6 +30,16 @@ import sys
 from build_printables import CHROME_CANDIDATES
 
 OUT_DIR = os.path.join("product", "brand")
+
+# The site's own icons, unlike everything else here, are served rather than
+# uploaded, so they land in docs/ and are committed. OUT_DIR gets wiped on every
+# run, which is exactly why they cannot live in it.
+SITE_DIR = "docs"
+
+# The served hero, reached from inside OUT_DIR where the markup is written. It
+# is already 1600 x 900, which is exactly the cover's aspect, so nothing is
+# cropped away by using it.
+PHOTO = "../../docs/img/hero-1600.jpg"
 
 DEEP = "#0e2429"
 SAND = "#d9a441"
@@ -46,6 +58,26 @@ ICON = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="{
     <path d="{house}" fill="{sand}"/>
   </g>
 </svg>"""
+
+# The favicon carries no width or height, so it scales to whatever slot the
+# browser puts it in. The glyph runs larger than the shop icon's 0.62: a tab
+# favicon is 16 px, and at that size the shop icon's generous margin reads as a
+# dark square with something indistinct inside it.
+#
+# Deliberately not theme-aware. A favicon that inverts is a favicon people stop
+# recognizing, and the deep ground is the brand's own anyway.
+# The {dims} slot is empty for the served file, so it scales to whatever slot
+# the browser gives it. It is filled in when Chrome rasterizes the PNGs: an SVG
+# opened as a top-level document with no intrinsic size is laid out at the
+# default replaced-element size, which rendered a white page with a sliver of
+# the icon down one edge.
+FAVICON = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"{dims}>
+  <rect width="100" height="100" fill="{deep}"/>
+  <g transform="translate(50 52) scale(0.74) translate(-50 -50)">
+    <path d="{house}" fill="{sand}"/>
+  </g>
+</svg>
+"""
 
 BANNER = """<!doctype html><html><head><meta charset="utf-8"><style>
   @font-face {{ font-family: x; src: local("Georgia"); }}
@@ -76,6 +108,99 @@ BANNER = """<!doctype html><html><head><meta charset="utf-8"><style>
       <p class="name">Gulf Coast<br>Home Care</p>
       <div class="rule"></div>
       <p class="tag">Tools for people who own a house down here</p>
+    </div>
+  </div>
+</body></html>"""
+
+# The Pinterest profile cover. 16:9, uploaded at 1600 x 900 for retina. Older
+# guides say 1200 x 600, which is out of date: Pinterest displays 16:9 now and
+# crops a 2:1 image top and bottom.
+#
+# It does not repeat the shop name, the way the Etsy banner does. Pinterest
+# already prints the profile name in large type right beside this, so a second
+# copy of it would spend the whole image saying what is said above it anyway.
+# The cover's job is the thing the name cannot carry: where this is for, and
+# what it is about.
+#
+# Everything sits centered and well inside the edges. Pinterest narrows the
+# crop on phones, and a composition that runs to the corners loses its ends.
+COVER = """<!doctype html><html><head><meta charset="utf-8"><style>
+  html, body {{ margin:0; padding:0; }}
+  .cover {{
+    width:{w}px; height:{h}px; background:{deep};
+    display:flex; flex-direction:column; align-items:center;
+    justify-content:center; text-align:center;
+  }}
+  .mark {{ width:132px; height:132px; margin:0 0 40px; }}
+  .head {{
+    font-family:Georgia, serif; font-size:96px; line-height:1.04;
+    letter-spacing:-.02em; color:#fff; margin:0 0 30px; font-weight:normal;
+  }}
+  .rule {{ width:132px; height:6px; background:{sand}; margin:0 0 32px; }}
+  .tag {{
+    font-family:"Segoe UI", system-ui, sans-serif; font-size:27px;
+    letter-spacing:.15em; text-transform:uppercase; color:{muted}; margin:0;
+  }}
+</style></head><body>
+  <div class="cover">
+    <svg class="mark" viewBox="0 0 100 100">
+      <g transform="translate(50 52) scale(0.9) translate(-50 -50)">
+        <path d="{house}" fill="{sand}"/>
+      </g>
+    </svg>
+    <p class="head">Built for the Gulf&nbsp;Coast</p>
+    <div class="rule"></div>
+    <p class="tag">Texas to Florida &middot; Heat, humidity, termites, hurricane season</p>
+  </div>
+</body></html>"""
+
+# The same cover over the site's hero photograph, which is already exactly 16:9.
+# Pinterest is a visual surface and a flat card is the weaker play there, so
+# this is the one to reach for first. The scrim is the site's own, so a visitor
+# who arrives here from a pin recognizes the same place.
+#
+# No house mark on this one. There is already a house in the photograph, and a
+# second one floating above it in gold reads as clutter rather than as a logo.
+COVER_PHOTO = """<!doctype html><html><head><meta charset="utf-8"><style>
+  html, body {{ margin:0; padding:0; background:{deep}; }}
+  .cover {{
+    position:relative; width:{w}px; height:{h}px; overflow:hidden;
+    background:{deep};
+  }}
+  .cover img {{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:62% 42%;
+  }}
+  .scrim {{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(to bottom,
+        rgba(14,36,41,.55) 0%, rgba(14,36,41,.30) 30%,
+        rgba(14,36,41,.86) 78%, rgba(14,36,41,.97) 100%);
+  }}
+  .say {{
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center;
+  }}
+  .head {{
+    font-family:Georgia, serif; font-size:96px; line-height:1.04;
+    letter-spacing:-.02em; color:#fff; margin:0 0 28px; font-weight:normal;
+    text-shadow:0 2px 22px rgba(14,36,41,.75);
+  }}
+  .rule {{ width:132px; height:6px; background:{sand}; margin:0 0 30px; }}
+  .tag {{
+    font-family:"Segoe UI", system-ui, sans-serif; font-size:27px;
+    letter-spacing:.15em; text-transform:uppercase; color:#cfd8d4; margin:0;
+    text-shadow:0 2px 16px rgba(14,36,41,.85);
+  }}
+</style></head><body>
+  <div class="cover">
+    <img src="{photo}" alt="">
+    <div class="scrim"></div>
+    <div class="say">
+      <p class="head">Built for the Gulf&nbsp;Coast</p>
+      <div class="rule"></div>
+      <p class="tag">Texas to Florida &middot; Heat, humidity, termites, hurricane season</p>
     </div>
   </div>
 </body></html>"""
@@ -116,6 +241,38 @@ def shot(chrome, src, out, width, height):
     ], check=True, capture_output=True, timeout=120)
 
 
+def build_site_icons(chrome):
+    """Write the icons the site itself serves, into docs/.
+
+    Three files rather than one, because the three consumers want different
+    things. Modern browsers take the SVG and scale it. iOS ignores SVG entirely
+    and wants a 180 px PNG for a home screen shortcut. Android's install prompt
+    and most link unfurlers want 512.
+
+    No .ico. It exists for browsers nobody on this site is running, and the
+    bare /favicon.ico request 404s harmlessly when a link element is present.
+    """
+    os.makedirs(SITE_DIR, exist_ok=True)
+
+    svg_path = os.path.join(SITE_DIR, "favicon.svg")
+    with open(svg_path, "w", encoding="utf-8", newline="\n") as handle:
+        handle.write(FAVICON.format(dims="", deep=DEEP, sand=SAND, house=HOUSE))
+    print("  {0:<34} {1:>9,} bytes  scalable, every modern browser".format(
+        svg_path, os.path.getsize(svg_path)))
+
+    for size, label in ((180, "apple touch icon"), (512, "Android and unfurlers")):
+        src = os.path.join(SITE_DIR, "_icon.svg")
+        with open(src, "w", encoding="utf-8") as handle:
+            handle.write(FAVICON.format(
+                dims=' width="{0}" height="{0}"'.format(size),
+                deep=DEEP, sand=SAND, house=HOUSE))
+        out = os.path.join(SITE_DIR, "icon-{0}.png".format(size))
+        shot(chrome, src, out, size, size)
+        os.remove(src)
+        print("  {0:<34} {1:>9,} bytes  {2}".format(
+            out, os.path.getsize(out), label))
+
+
 def main():
     chrome = find_chrome()
     if not chrome:
@@ -132,6 +289,13 @@ def main():
         ("shop-banner", BANNER.format(w=3360, h=840, deep=DEEP, sand=SAND,
                                       paper=PAPER, muted=MUTED, house=HOUSE),
          3360, 840, "big banner"),
+        ("pinterest-cover", COVER.format(w=1600, h=900, deep=DEEP, sand=SAND,
+                                         muted=MUTED, house=HOUSE),
+         1600, 900, "Pinterest profile cover, 16:9"),
+        ("pinterest-cover-photo",
+         COVER_PHOTO.format(w=1600, h=900, deep=DEEP, sand=SAND, house=HOUSE,
+                            photo=PHOTO),
+         1600, 900, "Pinterest profile cover over the hero photo"),
     ]
 
     for name, markup, w, h, label in jobs:
@@ -154,6 +318,9 @@ def main():
     os.remove(src)
     print("  {0:<34} {1:>9,} bytes  legibility check".format(
         out, os.path.getsize(out)))
+
+    # These are site assets, not shop uploads, so they are committed and served.
+    build_site_icons(chrome)
     return 0
 
 

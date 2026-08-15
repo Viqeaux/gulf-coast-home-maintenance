@@ -6,7 +6,7 @@ Kept apart from build_calendars.py because this is the bulk of the writing and
 it changes for different reasons than the schedule does.
 
 Each entry may carry:
-    need    things to have to hand before starting (omit if none)
+    need    things to have on hand before starting (omit if none)
     steps   the actual sequence, in order
     watch   a caution. Safety, or the mistake that costs money
     pro     True when this is a hire-someone job, so the steps are about

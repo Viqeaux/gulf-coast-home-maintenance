@@ -95,7 +95,7 @@ WHAT YOU GET
 
 Four files. Two documents, each in a print version and a type-and-save version.
 
-1. THE FULL KIT, 27 pages, branded throughout. Twelve months of tasks, three a month at three levels of effort, each with step by step instructions, what to have to hand, and where people go wrong. The Big Ticket Watch List, seventeen things in a house that are already on a clock, with lifespans adjusted for salt air, humidity and UV. How To Find Out, for dating a water heater or a roof in five minutes. Your First Month. The Gulf Coast Year. And seven extra sections for whatever the house happens to have: septic, well water, pool, generator, raised or pier foundations, storm shutters, and waterfront.
+1. THE FULL KIT, 27 pages, branded throughout. Twelve months of tasks, three a month at three levels of effort, each with step by step instructions, what to have on hand, and where people go wrong. The Big Ticket Watch List, seventeen things in a house that are already on a clock, with lifespans adjusted for salt air, humidity and UV. How To Find Out, for dating a water heater or a roof in five minutes. Your First Month. The Gulf Coast Year. And seven extra sections for whatever the house happens to have: septic, well water, pool, generator, raised or pier foundations, storm shutters, and waterfront.
 
 2. THE LEAVE-BEHIND, four pages, drawn from the same kit. Because handing over 27 pages twenty times is 540 sheets, and nobody does that twice. This is the version you print in a stack and give out at the table: the Gulf Coast Year diagram, Your First Month, and the Big Ticket Watch List, behind your own cover. Four sheets a client. Give this one out, and email the full 27 to anyone who wants the rest.
 

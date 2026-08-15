@@ -1,0 +1,7 @@
+# Everything here is meant to be found. The calendar feeds are welcome to be
+# crawled too: they are the free product, and a crawler reading one costs
+# nothing and occasionally puts the tasks in front of someone.
+User-agent: *
+Allow: /
+
+Sitemap: https://gulfcoasthomemaintenance.com/sitemap.xml

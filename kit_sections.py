@@ -141,7 +141,7 @@ SECTIONS = [
              "Check piers and posts for settling, cracking, or shims that have "
              "worked loose."),
             ("Before hurricane season",
-             "Check the skirting and any flood vents are intact and clear."),
+             "Check that the skirting and any flood vents are intact and clear."),
         ],
         "always": [
             "Keep the vapor barrier intact and overlapped across the ground.",

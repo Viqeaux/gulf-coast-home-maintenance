@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Three pages. Hand-maintained on purpose: a site this size does not need a
+     generator, and a stale generated sitemap is worse than a short accurate
+     one. Update lastmod when a page's content actually changes, not on every
+     release. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://gulfcoasthomemaintenance.com/</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://gulfcoasthomemaintenance.com/guides/</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gulfcoasthomemaintenance.com/privacy.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+</urlset>

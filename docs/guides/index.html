@@ -4,8 +4,34 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How-to guides, Gulf Coast Home Maintenance</title>
-<meta name="description" content="A picked video for each task on the Gulf Coast Home Maintenance calendar.">
+<meta name="description" content="Step by step for all thirty-six Gulf Coast home maintenance tasks: what to have on hand, how to do it, and where people go wrong.">
 <meta name="robots" content="index, follow">
+<link rel="canonical" href="https://gulfcoasthomemaintenance.com/guides/">
+
+<!-- Every calendar event deep links here, and this page holds more of the work
+     than the home page does, so a shared or pinned link to it needs to look
+     like something. Absolute URLs: scrapers resolve these against their own
+     host, not against this page. -->
+<meta property="og:title" content="How to do each of these, Gulf Coast Home Maintenance">
+<meta property="og:description" content="Step by step for all thirty-six tasks: what to have on hand, how to do it, and where people go wrong.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://gulfcoasthomemaintenance.com/guides/">
+<meta property="og:site_name" content="Gulf Coast Home Maintenance">
+<meta property="og:image" content="https://gulfcoasthomemaintenance.com/img/hero-1600.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="A live oak hung with Spanish moss over the roof of a Gulf Coast house at sunset.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0e2429">
+
+<!-- Pages cannot set headers, so the policy travels in the document. See the
+     longer note in docs/index.html for why 'unsafe-inline' is here and why
+     frame-ancestors is not. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../icon-180.png">
 <link rel="stylesheet" href="../theme.css">
 <style>
   * { box-sizing: border-box; }
@@ -98,12 +124,85 @@
   }
   .steps li::marker { color: var(--tier-color); font-weight: 700; }
 
+  /* --- tailpiece ------------------------------------------------------- */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .tailpiece {
+    background: var(--paper-2); border-top: 1px solid var(--rule);
+    margin-top: 3rem; padding: 3rem 0;
+  }
+  .tailpiece h2 {
+    font: 700 clamp(1.4rem, 3.5vw, 1.8rem)/1.2 ui-serif, Georgia, serif;
+    margin: 0 0 .7rem; letter-spacing: -.015em;
+  }
+  .tailpiece h3 {
+    font: 700 1.05rem/1.3 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    margin: 0 0 .4rem;
+  }
+  .tail-blurb {
+    color: var(--muted); font-size: .96rem; max-width: 32rem; margin: 0 0 1.2rem;
+  }
+  .tail-actions { margin: 0 0 1rem; }
+  .tail-btn {
+    display: inline-block;
+    font: 600 14px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    text-decoration: none; padding: .85rem 1.3rem; border-radius: 2px;
+    background: var(--accent); border: 1px solid var(--accent); color: var(--paper);
+    cursor: pointer; -webkit-appearance: none; appearance: none;
+    transition: filter .15s ease;
+  }
+  .tail-btn:hover { filter: brightness(1.09); text-decoration: none; }
+  .tail-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .tail-kit { color: var(--muted); font-size: .92rem; margin: 0; max-width: 32rem; }
+
+  /* Separated by a rule rather than by a second card: the list is a smaller
+     ask than the calendars above it and should not compete with them. */
+  .tail-signup {
+    margin-top: 2.25rem; padding-top: 1.9rem; border-top: 1px solid var(--rule);
+  }
+  .signup { margin: 0; }
+  .signup-row { display: flex; gap: .5rem; flex-wrap: wrap; max-width: 27rem; }
+  /* --muted rather than --rule for the boundary. On this block's --paper-2
+     ground a --rule hairline is 1.2:1 and the field's own fill is 1.1:1, so
+     the input is invisible until it takes focus. WCAG 1.4.11 wants 3:1 for a
+     control boundary; --muted is 4.6:1 here and 5.9:1 in dark. Same change is
+     in docs/index.html, for the same reason. */
+  .signup-row input {
+    flex: 1 1 12rem; min-width: 0;
+    font: 400 15px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: .8rem .9rem; border-radius: 2px;
+    border: 1px solid var(--muted); background: var(--bg); color: var(--ink);
+  }
+  .signup-row input:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
+  }
+  .signup-note {
+    font: 400 12.5px/1.5 ui-sans-serif, system-ui, sans-serif;
+    color: var(--muted); margin: .75rem 0 0; max-width: 32rem;
+  }
+  .signup-done {
+    font: 400 .95rem/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--muted); margin: 0;
+  }
+  .signup-done strong { display: block; color: var(--accent); margin-bottom: .2rem; }
+  @media (max-width: 26rem) {
+    .signup-row input, .signup-row .tail-btn { flex: 1 1 100%; }
+  }
+
   footer {
     background: var(--deep); color: var(--on-deep-mute);
-    padding: 2.5rem 0 3rem; margin-top: 3rem; font-size: .87rem;
+    padding: 2.5rem 0 3rem; font-size: .87rem;
   }
   footer p { margin: 0 0 .8rem; max-width: 34rem; }
   footer .disclaimer { font-style: italic; }
+  footer .foot-links {
+    display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.1rem;
+    font: 400 .87rem/1 ui-sans-serif, system-ui, sans-serif;
+  }
+  footer .foot-links a { color: var(--sand); text-decoration: none; }
+  footer .foot-links a:hover { text-decoration: underline; }
   footer .version {
     font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
     letter-spacing: .12em; opacity: .55; margin: 0;
@@ -117,7 +216,7 @@
     <a class="back" href="../">&#8592; Gulf Coast Home Maintenance</a>
     <h1>How to do each of these</h1>
     <p>
-      Step by step for all thirty-six, including what to have to hand and where
+      Step by step for all thirty-six, including what to have on hand and where
       people go wrong. Your calendar links straight to the task you were just
       reminded about.
     </p>
@@ -660,13 +759,1475 @@
     </section>
 </main>
 
+<!-- Somewhere to go. This page carries more of the work than the home page
+     does and it used to hold exactly one link, the back arrow at the top,
+     while every one of the thirty-six calendar events deep links into it. That
+     meant twelve times a year a subscriber landed on the most useful thing
+     here and found no next step at all.
+
+     Order is deliberate: the free calendars first, because someone who arrived
+     from a search does not have them and someone who arrived from a reminder
+     loses nothing by seeing the offer; the kit second and quietly, in one
+     sentence; the list last, which is where it sits on the home page too. -->
+<section class="tailpiece">
+  <div class="wrap">
+    <h2>Keep them coming</h2>
+    <p class="tail-blurb">
+      These same thirty-six jobs are three free calendars you subscribe to once.
+      They arrive in the month they matter, and every reminder links back to the
+      guide for it. No signup and no card.
+    </p>
+    <p class="tail-actions"><a class="tail-btn" href="../#calendars">Get the free calendars</a></p>
+    <p class="tail-kit">
+      If you would rather have it on paper, there is a
+      <a href="../#edition">printable kit</a> as well, twenty-seven pages and
+      undated.
+    </p>
+
+    <div class="tail-signup">
+      <h3>Hear about the next one</h3>
+      <p class="tail-blurb">
+        I'm still building tools like this. Leave your email and I'll tell you
+        when there's something new. That is all the list is for.
+      </p>
+      <form class="signup" method="post" target="ml-sink"
+            action="https://assets.mailerlite.com/jsonp/2575029/forms/195731645629727806/subscribe">
+        <div class="signup-row">
+          <label class="sr-only" for="signup-email">Your email address</label>
+          <input id="signup-email" type="email" name="fields[email]" required
+                 autocomplete="email" placeholder="you@example.com">
+          <button class="tail-btn tail-btn--solid" type="submit">Keep me posted</button>
+        </div>
+        <!-- Honeypot, same as the home page. Off screen rather than hidden,
+             disabled before submit so MailerLite never sees it. -->
+        <div class="sr-only" aria-hidden="true">
+          <label for="signup-website">Leave this field empty</label>
+          <input id="signup-website" type="text" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <p class="signup-note">
+          Only when there's something new, which is not often. Leave any time.
+          <a href="../privacy.html">What happens to your email.</a>
+        </p>
+        <input type="hidden" name="ml-submit" value="1">
+        <input type="hidden" name="anticsrf" value="true">
+      </form>
+      <p class="signup-done" hidden>
+        <strong>Nearly there, check your email.</strong>
+        You'll have a confirmation link waiting; the list won't have you until you click it.
+      </p>
+      <iframe name="ml-sink" title="Signup handler" hidden></iframe>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <p class="disclaimer">General maintenance guidance, not a substitute for a licensed inspector, contractor, or your insurance policy terms.</p>
 
-    <p class="version">v1.8.0</p>
+    <p class="foot-links">
+      <a href="../">Home</a>
+      <a href="../#calendars">Free calendars</a>
+      <a href="../privacy.html">Privacy</a>
+    </p>
+    <p class="version">v1.9.0</p>
   </div>
 </footer>
+
+<script>
+  // The only script on this page. Same contract as the home page: post to
+  // MailerLite through a hidden frame so the visitor never leaves, and swap the
+  // form for the check-your-email line once the frame reports back.
+  (function () {
+    var signup = document.querySelector('.signup');
+    if (!signup) { return; }
+    signup.addEventListener('submit', function (event) {
+      var hp = signup.querySelector('input[name="website"]');
+      var done = document.querySelector('.signup-done');
+      if (hp && hp.value) {
+        event.preventDefault();
+        signup.hidden = true;
+        done.hidden = false;
+        return;
+      }
+      if (hp) { hp.disabled = true; }
+      var sink = document.querySelector('iframe[name="ml-sink"]');
+      var swap = function () { signup.hidden = true; done.hidden = false; };
+      sink.addEventListener('load', swap, { once: true });
+      setTimeout(swap, 2500);
+    });
+  })();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#page",
+      "url": "https://gulfcoasthomemaintenance.com/guides/",
+      "name": "How to do each of these",
+      "description": "Step by step for all thirty-six Gulf Coast home maintenance tasks.",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://gulfcoasthomemaintenance.com/",
+        "name": "Gulf Coast Home Maintenance"
+      }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#jan-detectors",
+      "name": "Test smoke and CO detectors",
+      "description": "Test every smoke and carbon monoxide detector. Replace the batteries. Replace any detector over 10 years old.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#jan-detectors",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Press and hold the test button on each unit until it sounds."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Replace batteries in anything weak or chirping, usually a 9V or two AAs."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Check the manufacture date printed on the back. Over ten years old means replace the whole unit, however well it tests."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Confirm coverage: one inside each bedroom, one outside each sleeping area, and at least one on every floor."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Vacuum the vents to clear dust, which is the usual cause of false alarms."
+        }
+      ],
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Step ladder"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Fresh batteries"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#jan-freeze-prep",
+      "name": "Freeze prep, find your water shutoff",
+      "description": "Locate your main water shutoff and make sure you can actually turn it. Cover outdoor spigots.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#jan-freeze-prep",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Find the main shutoff. Commonly near the water heater, in the garage, or in a meter box by the street."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Turn it fully off and back on. Old gate valves seize, and you want to find that out now rather than during a burst."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Tag it so anyone in the house can find it without you."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Fit insulated caps on outdoor spigots."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "If your shutoff is at the street, buy a meter key and keep it somewhere you will remember."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#jan-attic-check",
+      "name": "Check the attic after winter rain",
+      "description": "Look for daylight through the roof deck, damp or matted insulation, and water stains on the framing.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#jan-attic-check",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Go up in daylight with the attic light off and look for pinholes of daylight through the roof deck."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Look for dark staining on the rafters and the underside of the decking."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Press the insulation in several places. Damp or matted means water is getting in."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Check around plumbing vents and any chimney flashing, the usual culprits."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Photograph anything suspect so you can compare next year."
+        }
+      ],
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Flashlight"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Dust mask"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#feb-termite-inspection",
+      "name": "Schedule the annual termite inspection",
+      "description": "Book it now, before spring swarm season fills the schedule.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#feb-termite-inspection",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Get quotes from two or three licensed pest control companies."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Ask whether the price is inspection only or includes a bond, and exactly what the bond pays for: treatment, repairs, or both."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Book before March. Schedules fill as soon as swarming starts."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Clear access to the perimeter, the crawlspace hatch, and garage walls before they arrive."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Keep the written report. It matters when you sell."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#feb-hvac-filter",
+      "name": "Replace the HVAC filter, test the A/C",
+      "description": "Swap the filter and run the air conditioning briefly.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#feb-hvac-filter",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Note the size printed on the edge of the old filter before you throw it out."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Slide the new one in with the arrow pointing toward the unit."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Set the thermostat to cool, several degrees below room temperature."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Let it run ten to fifteen minutes. Air at the vents should be noticeably cold and the outdoor unit should be running."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Listen for grinding, rattling, or the system starting and stopping repeatedly."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#feb-caulk",
+      "name": "Walk the exterior and re-caulk",
+      "description": "Re-caulk gaps around windows, doors, and any penetration through the wall.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#feb-caulk",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Walk the perimeter and look at every window, every door, and every pipe or wire that passes through a wall."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Cut out any caulk that is cracked, shrunken, or pulling away."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Clean and dry the gap. New caulk will not stick to dust."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Run a fresh bead and tool it smooth with a wet fingertip."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Leave the small weep holes at the bottom of window frames open. They are meant to drain and sealing them traps water in the wall."
+        }
+      ],
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Exterior-grade caulk"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Caulk gun"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Utility knife"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#mar-hvac-service",
+      "name": "Service the HVAC before cooling season",
+      "description": "Get a professional service call before the cooling season starts.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#mar-hvac-service",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Book a licensed technician before the first genuinely hot week."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Ask them to check refrigerant charge, the capacitor, the contactor, coil condition, and the condensate line."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Ask for the measured readings rather than an assurance that it is fine."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Get the age of the equipment and their estimate of remaining life."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Put that estimate straight onto your Watch List."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#mar-gutters",
+      "name": "Clear the gutters, check the downspouts",
+      "description": "Clear the gutters and confirm every downspout discharges away from the foundation, not against it.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#mar-gutters",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Scoop debris out by hand, moving the ladder often rather than reaching."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Flush with a hose from the end furthest from the downspout."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Watch that the water runs away freely and does not back up."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Confirm every downspout discharges at least four to six feet from the foundation. Add an extension if it does not."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Note any sagging sections or loose fasteners for repair."
+        }
+      ],
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Ladder"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Gloves"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Garden hose"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#mar-grading",
+      "name": "Check the grading around the house",
+      "description": "Walk the perimeter after a hard rain. Look for settling, cracks, and standing water.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#mar-grading",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Walk the perimeter during or straight after heavy rain, when problems show."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Look for water pooling within a few feet of the wall."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "The ground should fall roughly six inches over the first ten feet away from the house."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Note settled trenches over utility lines. They channel water back to the wall."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Fill low spots with compacted soil. Mulch washes away and holds moisture against the foundation."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#apr-swarm-season",
+      "name": "Swarm season, watch for termites",
+      "description": "Watch for winged termites indoors and around lights. Check for mud tubes along the slab, piers, and foundation walls.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#apr-swarm-season",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Check window sills and light fixtures for discarded wings after warm, humid evenings. That is often the only sign you get."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Look along the slab edge, piers, and foundation walls for mud tubes about the width of a pencil."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Break a tube open. If it is rebuilt within a few days, the colony is active."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Tap suspect trim and baseboards. Hollow or papery means damage behind it."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Call your pest company immediately if you find any of the above."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#apr-wash-exterior",
+      "name": "Wash the exterior, inspect the siding",
+      "description": "Wash the house down and inspect siding, brick, and soffits for damage or gaps.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#apr-wash-exterior",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Wash from the bottom up with a garden hose and mild detergent."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "If you use a pressure washer, keep it on a low setting and never aim upward under siding laps. You will drive water into the wall."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "As you work, look for soft spots, cracks, and gaps you cannot see from a distance."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Check soffits for holes. Wasps, squirrels, and birds all use them."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Note anything needing paint or caulk while you can still see it wet."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#apr-spigots-irrigation",
+      "name": "Check spigots and service irrigation",
+      "description": "Check hose bibs and outdoor spigots for leaks. Service the irrigation system if you have one.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#apr-spigots-irrigation",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Turn each outdoor spigot fully on and look for weeping at the handle or where the pipe enters the wall."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Replace worn hose washers. A few cents fixes most drips."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Run each irrigation zone in turn and watch for broken heads and geysers."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Adjust any head spraying the house, the drive, or the pavement."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Check the backflow preventer if you have one."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#may-insurance-hurricane-prep",
+      "name": "Verify insurance, season opens June 1",
+      "description": "Verify your coverage BEFORE the season starts: wind, and flood if you carry it. Photograph every room and the full exterior for your claim file. Trim limbs back from the roof.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#may-insurance-hurricane-prep",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Call your agent. Confirm wind coverage, your deductible (often a percentage of the insured value rather than a flat sum), and whether you carry flood at all."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "If you need flood cover, buy it now. NFIP policies generally take 30 days to take effect, so June 1 is already too late."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Walk every room filming or photographing, opening closets and cabinets as you go."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Photograph all four elevations of the house and the roof from the ground."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Store all of it off the property: cloud storage, or email it to yourself."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "text": "Trim limbs so nothing overhangs the roof."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#may-generator-supplies",
+      "name": "Test the generator, restock supplies",
+      "description": "Start and load-test the generator. Restock water, batteries, and fuel. Confirm shutters or plywood are on hand and actually fit your openings.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#may-generator-supplies",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Start the generator and run it under load for twenty to thirty minutes."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Drain old fuel or treat it with stabilizer. Ethanol fuel degrades within months and is the usual reason one will not start."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Restock: a gallon of water per person per day for a week, batteries, medications, and cash."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Test-fit shutters or plywood on at least one opening, and label every piece to the window it fits."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Confirm your evacuation route and where you would actually go."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#may-secure-exterior",
+      "name": "Inspect roof edges, secure loose items",
+      "description": "Inspect soffit vents and roof edges. Secure sheds, fencing, and anything that becomes a projectile.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#may-secure-exterior",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Look up under the roof edge for lifted shingles and open or loose soffit panels."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Have loose flashing and drip edge refastened before the season."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Anchor sheds, and check fence posts for movement."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Write the list of what comes indoors once a storm is named, so nobody has to think about it later."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Remove dead limbs, which come down first."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#jun-condensate-line",
+      "name": "Clear the A/C condensate drain line",
+      "description": "Flush the condensate drain line and check the overflow pan and float switch.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#jun-condensate-line",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Turn the system off at the thermostat and at the breaker."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Find the PVC drain line at the indoor unit, and its outdoor end."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Hold the wet/dry vacuum to the outdoor end and run it two to three minutes to pull the blockage out."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Pour a cup of distilled vinegar into the access port on the indoor side to clear the slime that causes it."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Check the overflow pan is dry and the float switch moves freely."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "text": "Restore power and confirm water is draining outside."
+        }
+      ],
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Wet/dry vacuum"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Distilled vinegar"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#jun-condenser-coils",
+      "name": "Clean the condenser, clear vegetation",
+      "description": "Clean the outdoor condenser coils and cut vegetation back two feet on all sides of the unit.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#jun-condenser-coils",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Cut power at the outdoor disconnect box, not just the thermostat."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Clear leaves, grass clippings, and dirt from around the base."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Rinse the coil fins gently with a hose from the inside outward. Never a pressure washer, it flattens the fins permanently."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Straighten bent fins with a fin comb if you have one."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Cut vegetation back two feet on all sides."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "text": "Restore power and let it run."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#jun-attic-ventilation",
+      "name": "Check attic ventilation and insulation",
+      "description": "Check that soffit and ridge vents are clear, and measure insulation depth.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#jun-attic-ventilation",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "From outside, check the soffit vents are not painted over or blocked."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "In the attic, confirm baffles are keeping insulation clear of the eaves so air can actually move."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Measure insulation depth. Thirteen to sixteen inches of blown fiberglass is a reasonable target in this climate."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Confirm bathroom fans vent outside and not into the attic, which is common and quietly destructive."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Note the temperature. An attic far hotter than outside means the ventilation is not working."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#jul-leak-hunt",
+      "name": "Hunt for leaks",
+      "description": "Check under every sink, behind every toilet, and around the base of the water heater.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#jul-leak-hunt",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Empty the cabinet under every sink and run a dry paper towel along each supply line and trap. Paper finds what fingers miss."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Look for buckled cabinet floors and dark rings, which are evidence of a leak that has already dried."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Check behind each toilet at the supply valve, and where the base meets the floor. Rock the bowl gently; movement means a failing seal."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Look at the water heater base and its drip pan."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Read the water meter with everything off, wait an hour, and read it again. Movement means a leak you have not found yet."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#jul-crawlspace",
+      "name": "Inspect the crawlspace",
+      "description": "Inspect the crawlspace or under-house area for moisture, pests, and vapor barrier damage.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#jul-crawlspace",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Look for standing water and consistently damp soil."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Check the vapor barrier is intact, overlapped, and still covering the ground."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Look up. Dark staining, sagging insulation, and rusted duct straps all mean moisture."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Check piers and foundation walls for mud tubes."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Note rodent droppings and chewed insulation."
+        }
+      ],
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Flashlight"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Old clothes"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Dust mask"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#jul-humidity",
+      "name": "Check indoor humidity",
+      "description": "Measure indoor relative humidity. Aim for 45–55%. Run a dehumidifier if you are above that.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#jul-humidity",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Put an inexpensive hygrometer in the main living area and another in the least used room."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Read over several days rather than once, humidity swings with the weather."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Above 60% indoors, run a dehumidifier or have your A/C sizing checked. An oversized unit cools fast and never runs long enough to dry the air."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Check bathroom fans actually pull by holding a tissue to the grille."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Look for condensation on windows and on supply vents."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#aug-peak-season-check",
+      "name": "Peak season, re-check kit and plan",
+      "description": "Re-check your supply kit, your documents, and your evacuation plan. Confirm your insurance is still active and paid.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#aug-peak-season-check",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Re-read the declarations page of your policy and confirm it is paid and active."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Refresh water and food, and check expiry dates on batteries and medication."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Confirm your evacuation destination and route, and tell someone out of state what it is."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Photograph or scan IDs, the deed, vehicle titles, and policies. Store them in the cloud."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Fill vehicles and draw cash when a storm enters the Gulf, not once it has a name and everyone else is in line."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#aug-gutters-again",
+      "name": "Clear the gutters again",
+      "description": "Clear the gutters a second time.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#aug-gutters-again",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Clear the gutters again. Summer storms fill them faster than fall leaves do."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Flush through and confirm flow at every downspout."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Check downspout extensions have not been kicked or mown out of position."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Look for shingle granules collecting in the gutter. A heavy amount means the roof is wearing out."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Note any section that has begun to sag."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#aug-photograph-valuables",
+      "name": "Photograph big-ticket items",
+      "description": "Photograph big-ticket items and store the photos somewhere off-site or in the cloud.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#aug-photograph-valuables",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Photograph appliances, electronics, tools, and furniture room by room."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Capture the model and serial plate on anything major, close enough to read."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Keep receipts for big purchases in the same folder."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Upload to cloud storage rather than leaving it on the phone that travels with you."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Give someone off the coast access, in case you cannot get to it."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#sep-dryer-vent",
+      "name": "Clean the dryer vent",
+      "description": "Clean the full dryer vent run, not just the lint trap.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#sep-dryer-vent",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Unplug the dryer. If it is gas, shut the gas valve too."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Pull it out and disconnect the duct from the back."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Brush and vacuum the entire run, working from both the dryer end and the exterior hood."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Check the exterior flap opens freely. It should not be screened, because screens trap lint immediately."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Replace any foil accordion duct with rigid or semi-rigid metal."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "text": "Reconnect, push back, and run the dryer while you check for strong airflow outside."
+        }
+      ],
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Dryer vent brush kit"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Screwdriver"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Vacuum"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#sep-roof-inspection",
+      "name": "Inspect the roof from the ground",
+      "description": "Inspect the roof from the ground with binoculars after the summer storm run. Look for lifted, curled, or missing shingles.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#sep-roof-inspection",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Walk all four sides with binoculars in good light."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Look for lifted, curled, cracked, or missing shingles."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Check the ridge and hip caps, which fail first."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Look at flashing around chimneys, vents, and in the valleys."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Look for dark patches, which usually mean lost granules."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "text": "Photograph anything you find, dated, for comparison and for any claim."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#sep-sump-drainage",
+      "name": "Test the sump pump, clear drainage",
+      "description": "Test the sump pump if you have one. Clear drainage swales and ditches.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#sep-sump-drainage",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Pour a bucket of water into the sump pit and confirm the pump starts and empties it."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Check the discharge line runs well away from the house and is not blocked."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Clear leaves and silt from drainage swales and ditches."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Confirm the check valve is not letting water run back into the pit."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Test the battery backup if you have one, since the power tends to go at the same time as the rain arrives."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#oct-flush-water-heater",
+      "name": "Flush the water heater",
+      "description": "Drain and flush the tank to clear sediment.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#oct-flush-water-heater",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Turn off power at the breaker for an electric heater, or set the gas valve to pilot for gas."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Close the cold water supply valve on top of the tank."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Attach a hose to the drain valve at the base and run it somewhere that can take scalding water."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Open a hot faucet somewhere in the house to break the vacuum."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Open the drain valve and let it run until the water is clear. Expect sediment, and expect it to take a while."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "text": "Close the drain, refill fully with that hot faucet still open until water runs steady, then restore power or gas."
+        }
+      ],
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Garden hose"
+        },
+        {
+          "@type": "HowToSupply",
+          "name": "Flathead screwdriver"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#oct-weatherstripping",
+      "name": "Check weatherstripping and seals",
+      "description": "Check weatherstripping, door sweeps, and the attic hatch seal.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#oct-weatherstripping",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Close each exterior door on a strip of paper. If it pulls out with no resistance, the seal has gone."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Replace worn weatherstripping and door sweeps."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Check the attic hatch has a gasket and insulation on its back face."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Feel around outlets on exterior walls for drafts."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Check the door from the garage into the house seals and self-closes."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#oct-chimney",
+      "name": "Service the fireplace or chimney",
+      "description": "Service the fireplace or chimney before first use.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#oct-chimney",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Have a sweep inspect and clean before the first fire of the year."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Ask them to check the cap, the crown, and the flashing while they are up there."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Confirm the damper opens and closes fully."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Look for nests and debris, which accumulate over a long warm season."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Check the firebox for cracked mortar."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#nov-post-season-inspection",
+      "name": "Post-season inspection, season closed",
+      "description": "Walk the roof line and the whole property for storm damage. File any claims now, not in spring.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#nov-post-season-inspection",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Walk all four elevations and the roof line with binoculars."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Photograph anything new and compare against the photographs you took in May."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Check the fence, shed, and window screens."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Look in the attic for daylight or staining that was not there before."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "File any claim now. Most policies require prompt notice, and insurers get harder to convince the longer you wait."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#nov-filter-heat-test",
+      "name": "Replace the filter, test the heat",
+      "description": "Replace the HVAC filter and run the heat once.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#nov-filter-heat-test",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Replace the filter."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Set the thermostat to heat, a few degrees above room temperature."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Expect a burning-dust smell for the first few minutes. That is normal."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Confirm warm air at the vents within a few minutes."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "If it will not fire, or you smell gas at any point, shut it down and call someone."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#nov-gutters-fascia",
+      "name": "Clear gutters, check fascia and trim",
+      "description": "Clear the gutters after leaf drop. Check the fascia and trim for rot.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#nov-gutters-fascia",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Clear the gutters once the leaves have finished dropping."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Look closely at the fascia board behind the gutter for soft, dark, or peeling wood."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Press it with a screwdriver. If the tip sinks in, it is rotten."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Check the drip edge is present and tucked under the shingles."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Note repairs for spring rather than starting them in the wet."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#dec-freeze-prep",
+      "name": "Freeze prep, protect the pipes",
+      "description": "Insulate exposed pipes, cover spigots, and confirm you know where the main shutoff is.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#dec-freeze-prep",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Fit foam sleeves on exposed pipes in the garage, crawlspace, and along exterior walls."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Cover spigots with insulated caps."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Disconnect and drain garden hoses. A hose left connected is the single most common cause of a burst pipe."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Confirm you know where the main shutoff is and that it still turns."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "On a hard freeze night, open the cabinet doors under sinks and let the faucet furthest from the meter drip."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#dec-gfci-breakers",
+      "name": "Test GFCI outlets, label the panel",
+      "description": "Press test and reset on every GFCI outlet. Label the breaker panel if it is not already labeled.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#dec-gfci-breakers",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Press TEST on every GFCI outlet, kitchen, bathrooms, garage, and outdoors. The power should cut immediately."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Press RESET to restore it."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Replace any that will not trip, or will not reset."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Remember one GFCI often protects several ordinary outlets downstream, so test those too."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Label the panel: switch breakers off one at a time and write down what stops working."
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://gulfcoasthomemaintenance.com/guides/#dec-watch-list",
+      "name": "Update the Big Ticket Watch List",
+      "description": "Update your Big Ticket Watch List with anything you replaced or serviced this year.",
+      "url": "https://gulfcoasthomemaintenance.com/guides/#dec-watch-list",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "text": "Get out the Watch List."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "text": "Enter this year against anything you replaced or had serviced."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "text": "Update the 'start watching in' column for those items."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "text": "Mark anything now within five years of its expected life."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "text": "Decide a monthly amount to set aside for whichever item is closest."
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 </body>
 </html>

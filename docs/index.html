@@ -23,6 +23,28 @@
 <meta property="og:image:alt" content="A live oak hung with Spanish moss over the roof of a Gulf Coast house at sunset.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0e2429">
+<link rel="canonical" href="https://gulfcoasthomemaintenance.com/">
+
+<!-- GitHub Pages cannot set response headers, so the policy has to travel in
+     the document. A meta CSP is enforced exactly like the header version with
+     one exception: frame-ancestors is ignored here, so clickjacking protection
+     is not available on this host at all. There is nothing to click-jack on a
+     page with no authenticated actions, which is why that is acceptable rather
+     than merely unavoidable.
+
+     'unsafe-inline' is required because the stylesheet and the script are both
+     inline in this file. That is a deliberate trade: one request instead of
+     three. The directive still does the job that matters here, which is that
+     no third-party origin can load code, and any future analytics snippet or
+     pasted widget fails loudly instead of silently exfiltrating the signup.
+
+     form-action names MailerLite explicitly. If the signup ever moves, this
+     line moves with it or the form silently stops submitting. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
 <link rel="stylesheet" href="theme.css">
 <style>
   /* Palette lives in theme.css, shared with the guides page. */
@@ -248,6 +270,24 @@
   .factor h3 { font-size: 1rem; color: var(--on-surface); }
   .factor p { font-size: .93rem; color: var(--on-surface-mute); margin: 0; }
 
+  /* --- agent points ----------------------------------------------------- */
+  /* Three cells, so the track count divides exactly at both widths. Same
+     hairline grid as .factors rather than a new card style: this section sits
+     on the paper ground and does not need to shout over the kit above it. */
+  .points {
+    display: grid; grid-template-columns: 1fr;
+    gap: 1px; margin-top: 2rem;
+    background: var(--hairline); border: 1px solid var(--hairline);
+  }
+  @media (min-width: 46rem) { .points { grid-template-columns: repeat(3, 1fr); } }
+  .point { background: var(--surface); padding: 1.5rem 1.4rem; }
+  .point .pn {
+    font: 700 1.45rem/1 ui-serif, Georgia, serif;
+    color: var(--accent); letter-spacing: -.02em; margin: 0 0 .55rem;
+  }
+  .point h3 { font-size: 1rem; color: var(--on-surface); margin-bottom: .4rem; }
+  .point p { font-size: .93rem; color: var(--on-surface-mute); margin: 0; }
+
   /* --- tiers ------------------------------------------------------------ */
   /* Cards keep their own paper ground wherever they sit, so they have to reset
      the section's surface tokens. Custom properties inherit, so this makes
@@ -422,16 +462,34 @@
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
     overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
   }
+  /* Off screen until focused, rather than hidden: a skip link that display:none
+     hides is a skip link no keyboard reaches. z-index clears the sticky bar,
+     which is 50. */
+  .skip {
+    position: absolute; left: .6rem; top: -4rem; z-index: 60;
+    background: var(--accent); color: var(--paper);
+    font: 600 13px/1 ui-sans-serif, system-ui, sans-serif;
+    padding: .75rem 1rem; border-radius: 2px; text-decoration: none;
+    transition: top .12s ease;
+  }
+  .skip:focus { top: .6rem; }
   .signup { margin: 0; }
   .signup-row {
     display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center;
     max-width: 27rem; margin: 0 auto;
   }
+  /* The border is --muted, not --rule. A --rule hairline against --paper is
+     1.5:1 and the field's own fill is 1.1:1 against it, so the input was a
+     rectangle you could only find by clicking where you guessed it was. WCAG
+     1.4.11 asks 3:1 for the boundary of a control; --muted is 5.6:1 on paper
+     and 6.6:1 in dark, and it is the token already used for text at this
+     weight, so nothing new enters the palette. --rule stays correct for rules
+     between things, which is what it is named for. */
   .signup-row input {
     flex: 1 1 12rem; min-width: 0;
     font: 400 15px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
     padding: .8rem .9rem; border-radius: 2px;
-    border: 1px solid var(--rule); background: var(--bg); color: var(--ink);
+    border: 1px solid var(--muted); background: var(--bg); color: var(--ink);
   }
   .signup-row input:focus-visible {
     outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
@@ -485,15 +543,26 @@
      calendar.google.com and then cannot act on them, so these users may tap the
      main button and land nowhere. This gives them the working route without
      making everyone else read about it. */
+  /* A details element, so it costs one line until someone needs it. The
+     summary keeps a comfortable tap target and its own focus ring, since on
+     this section it is the only thing between a visitor and the buttons. */
   .android-note {
     background: var(--paper); border: 1px solid var(--rule);
     border-left: 3px solid var(--accent); border-radius: 3px;
-    padding: 1.1rem 1.25rem; margin-bottom: 1.6rem;
+    padding: .35rem .4rem; margin-bottom: 1.6rem;
     font: 15px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
     color: var(--muted);
   }
+  .android-note summary {
+    cursor: pointer; padding: .65rem .85rem; border-radius: 2px;
+    font-weight: 600; color: var(--ink); list-style-position: outside;
+  }
+  .android-note summary::marker { color: var(--accent); }
+  .android-note summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .android-note[open] summary { margin-bottom: .1rem; }
+  .android-note p, .android-note ol { margin: 0 .85rem .6rem; }
   .android-note strong { color: var(--ink); }
-  .android-note ol { margin: .6rem 0 0; padding-left: 1.15rem; }
+  .android-note ol { padding-left: 1.15rem; margin-top: .5rem; }
   .android-note li { margin-bottom: .3rem; }
   .android-note a { color: var(--accent); }
 
@@ -505,14 +574,34 @@
   .howto ol { padding-left: 1.1rem; margin: .3rem 0 .55rem; }
   .howto li { margin-bottom: .2rem; }
 
-  /* The last section is also dark, so the footer needs a hairline to read as a
-     separate thing rather than more of the same block. */
+  /* --- who made this ---------------------------------------------------- */
+  /* Narrower than the deck and set at reading size. This is the one place on
+     the page written in the first person, so it is allowed to look like prose
+     rather than like a product section. */
+  .byline { max-width: 34rem; margin-top: 1.6rem; }
+  .byline p { color: var(--muted); }
+  .byline .sig {
+    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin-top: 1.5rem;
+  }
+
+  /* The section above the footer used to be dark, which is why this hairline
+     exists. It now sits under a paper section, where the ground change is
+     already the divider and the rule is simply invisible. Kept because the
+     order of sections is not guaranteed to stay this way. */
   footer {
     background: var(--deep); color: var(--on-deep-mute);
     padding: 3rem 0 3.5rem; font-size: .87rem;
     border-top: 1px solid color-mix(in srgb, var(--on-deep) 17%, transparent);
   }
   footer .disclaimer { font-style: italic; margin-bottom: 1rem; max-width: 34rem; }
+  footer .foot-links {
+    display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.1rem;
+    font: 400 .87rem/1 ui-sans-serif, system-ui, sans-serif;
+  }
+  footer .foot-links a { color: var(--sand); text-decoration: none; }
+  footer .foot-links a:hover { text-decoration: underline; }
   footer .version {
     font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
     letter-spacing: .12em; opacity: .55; margin: 0;
@@ -524,8 +613,121 @@
     padding: .1rem .35rem; border-radius: 2px; word-break: break-all;
   }
 </style>
+
+<!-- Structured data. The prices here are duplicated from the .buy-price markup
+     below and from the Etsy listings, so all three move together or none do.
+     If SHOP_URL or AGENT_URL is ever emptied, delete that product's block too:
+     the script hides the price and the button, but this would keep telling
+     search engines the thing is for sale.
+
+     Deliberately no aggregateRating and no review. Inventing either is both
+     against Google's guidelines and the fastest way to lose the one thing this
+     brand is actually selling, which is being straight with people. Add real
+     ones once Etsy has them. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://gulfcoasthomemaintenance.com/#website",
+      "url": "https://gulfcoasthomemaintenance.com/",
+      "name": "Gulf Coast Home Maintenance",
+      "description": "A home maintenance calendar built for the Gulf Coast, Texas to Florida.",
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Product",
+      "name": "The Gulf Coast Home Maintenance Kit",
+      "description": "A 27 page undated printable home maintenance kit built for Gulf Coast homes, Texas to Florida. Twelve months of tasks at three levels of effort, the Big Ticket Watch List, and seven sections for whatever the house happens to have.",
+      "brand": { "@type": "Brand", "name": "Gulf Coast Home Maintenance" },
+      "category": "Calendars & Planners",
+      "url": "https://gulfcoasthomemaintenance.com/#edition",
+      "image": "https://gulfcoasthomemaintenance.com/img/hero-1600.jpg",
+      "offers": {
+        "@type": "Offer",
+        "price": "12.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "The Gulf Coast Home Maintenance Kit, Agent Edition",
+      "description": "The full 27 page kit branded with a realtor's name and brokerage on every page, plus a four page leave-behind for the closing table. Licensed to print for every client you close.",
+      "brand": { "@type": "Brand", "name": "Gulf Coast Home Maintenance" },
+      "category": "Calendars & Planners",
+      "url": "https://gulfcoasthomemaintenance.com/#agents",
+      "image": "https://gulfcoasthomemaintenance.com/img/hero-1600.jpg",
+      "offers": {
+        "@type": "Offer",
+        "price": "39.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are the phone calendars really free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and they stay free. All three tiers are subscribe-able calendars with no signup, no card, and no trial. They are not a sample of the printable kit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the kit dated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, deliberately. There is no year and no weekday grid, so the same printout works every year and it never goes stale in January. Each task has a box to tick."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will this work outside the Gulf Coast?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Some of it. The structure works anywhere, but the timing, the lifespans and about half the tasks are specific to long humid summers, termite pressure and hurricane season. Inland Gulf South, most of it still applies. Further north, the Big Ticket Watch List is where the value is."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a color printer for the kit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Plain US Letter paper, and black and white loses only the level colors, which are labeled anyway. Interior pages are white on purpose so printing does not cost you a cartridge."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is hurricane prep in May rather than June?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A flood policy generally takes 30 days to take effect. Buy one in June and you are uninsured for the opening weeks of the season, so May 1 is the real deadline."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I give the kit to my clients?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The kit carries a personal use license for one household. For copies across many clients there is an agent edition, branded with your name and brokerage and licensed to print for every client you close."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
+
+<a class="skip" href="#start">Skip to content</a>
 
 <!-- ===================== sticky bar ===================== -->
 <div class="topbar">
@@ -539,6 +741,11 @@
     <a class="cta" href="#calendars">Free calendars</a>
   </div>
 </div>
+
+<!-- The hero opens main rather than sitting outside it: the h1 is in there, and
+     a skip link that lands past the headline has skipped the content. A header
+     element nested inside main is a section header, not a second banner. -->
+<main id="start">
 
 <!-- ===================== hero ===================== -->
 <header class="hero">
@@ -852,6 +1059,34 @@
       and licensed to print for every client you close.
     </p>
 
+    <!-- The kit's card has a diagram, a sample month and a lifespan chart
+         standing behind it. This one had a paragraph. Three points, because
+         the objections are always the same three: what do I actually hand
+         over, how much work is it for me, and am I allowed to. -->
+    <div class="points">
+      <div class="point">
+        <p class="pn">4 pages</p>
+        <h3>Not twenty-seven, twenty times</h3>
+        <p>Twenty closings at twenty-seven pages is 540 sheets, and nobody does
+        that twice. The leave-behind is four pages for the closing table. The
+        full kit is there for the client who asks for it.</p>
+      </div>
+      <div class="point">
+        <p class="pn">Once</p>
+        <h3>Type your details in and save</h3>
+        <p>Your name and brokerage are form fields, so you fill them once and
+        keep the file. Or send a logo and I'll build your copies and send them
+        back, at no extra charge.</p>
+      </div>
+      <div class="point">
+        <p class="pn">Every client</p>
+        <h3>Licensed for exactly this</h3>
+        <p>The $12.99 kit is licensed for one household, which is why it does
+        not cover a stack for your clients. This one does, for every client you
+        close, for as long as you're closing them.</p>
+      </div>
+    </div>
+
     <div class="buy">
       <h3>Branded for your brokerage</h3>
       <p class="buy-blurb">
@@ -916,7 +1151,21 @@
                  autocomplete="email" placeholder="you@example.com">
           <button class="btn btn--primary" type="submit">Keep me posted</button>
         </div>
-        <p class="signup-note">Only when there's something new, which is not often. Leave any time.</p>
+        <!-- Honeypot. Off screen rather than hidden, because a bot filling
+             fields by name never looks at the CSS, while type="hidden" is the
+             one thing some of them do skip. Nobody using a keyboard or a screen
+             reader can reach it: no tab stop, and aria-hidden takes it out of
+             the accessibility tree. The script disables it before submitting,
+             so MailerLite never receives a field it did not ask for. -->
+        <div class="sr-only" aria-hidden="true">
+          <label for="signup-website">Leave this field empty</label>
+          <input id="signup-website" type="text" name="website"
+                 tabindex="-1" autocomplete="off">
+        </div>
+        <p class="signup-note">
+          Only when there's something new, which is not often. Leave any time.
+          <a href="privacy.html">What happens to your email.</a>
+        </p>
         <input type="hidden" name="ml-submit" value="1">
         <input type="hidden" name="anticsrf" value="true">
       </form>
@@ -978,6 +1227,39 @@
   </div>
 </section>
 
+<!-- ===================== who ===================== -->
+<!-- The origin lived only in the Etsy About section, which meant the site asked
+     for $12.99 and $39 from an anonymous voice. These are the same words as the
+     shop's About, trimmed, not embellished. The age is the detail that tells a
+     reader this was taken seriously, so it stays. -->
+<section id="who">
+  <div class="wrap">
+    <span class="sec-no">08 / Who made this</span>
+    <h2>I built this for my own house first</h2>
+    <div class="byline">
+      <p>
+        I bought my first house at forty-five. Nobody hands you a manual with the
+        keys, so I started keeping a list of what needed doing and when, and I
+        added to it every time I found something out the hard way.
+      </p>
+      <p>
+        The trouble was that every maintenance checklist I could find had been
+        written for somewhere else. So my list turned into a calendar built for
+        this coast, at three levels of effort, because the first year should not
+        be overwhelming.
+      </p>
+      <p>
+        It was only after living with it for a while that I realized how much I
+        would have wanted this the week I moved in. If anything in it is wrong or
+        unclear, tell me. I would rather fix it than have you work around it.
+      </p>
+      <p class="sig">Chad &middot; Gulf Coast Home Maintenance</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
 <footer>
   <div class="wrap">
     <span class="mark" style="margin-bottom:1.25rem">
@@ -990,9 +1272,13 @@
       General maintenance guidance, not a substitute for a licensed inspector, contractor,
       or your insurance policy terms.
     </p>
+    <p class="foot-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="guides/">How-to guides</a>
+    </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.8.0</p>
+    <p class="version">v1.9.0</p>
   </div>
 </footer>
 
@@ -1060,7 +1346,20 @@
     // confirmation is the email they are about to get either way.
     var signup = document.querySelector('.signup');
     if (signup) {
-      signup.addEventListener('submit', function () {
+      signup.addEventListener('submit', function (event) {
+        // Anything in the honeypot means this is not a person. Say nothing
+        // about why: a bot that gets told it failed is a bot that gets fixed.
+        var hp = signup.querySelector('input[name="website"]');
+        if (hp && hp.value) {
+          event.preventDefault();
+          signup.hidden = true;
+          document.querySelector('.signup-done').hidden = false;
+          return;
+        }
+        // Disabled controls are not submitted, so MailerLite never sees a
+        // parameter it has no field for.
+        if (hp) { hp.disabled = true; }
+
         var sink = document.querySelector('iframe[name="ml-sink"]');
         var swap = function () {
           signup.hidden = true;
@@ -1073,9 +1372,11 @@
       });
     }
 
-    // Both notices go in the same place, above the tier cards.
-    function notice(className, html) {
-      var el = document.createElement('div');
+    // Both notices go in the same place, above the tier cards. The tag varies
+    // because one of them is a disclosure: the preview warning is always worth
+    // reading, the Android note only matters to the people it happens to.
+    function notice(tag, className, html) {
+      var el = document.createElement(tag);
       el.className = className;
       el.innerHTML = html;
       calendars.querySelector('.deck').insertAdjacentElement('afterend', el);
@@ -1091,7 +1392,7 @@
     var publicHost = location.protocol === 'https:' && !local;
 
     if (!publicHost) {
-      notice('preview-warning',
+      notice('div', 'preview-warning',
         '<strong>Preview only, subscribing won\'t work yet.</strong> ' +
         (/^https?:$/.test(location.protocol)
           ? 'This page is being served from ' + location.host + '.'
@@ -1105,12 +1406,19 @@
     // which has no way to subscribe to a URL. The app just opens and sits
     // there. It depends on a per-device "open supported links" setting, so it
     // hits some Android users and not others, and neither we nor they can tell
-    // in advance. Give them the route that never depends on it.
+    // in advance.
+    //
+    // A closed disclosure rather than an open card. How often interception
+    // actually happens is still unmeasured, so this was a paragraph of
+    // troubleshooting sitting on top of the buttons for every Android visitor,
+    // most of whom never needed it. Collapsed, it costs one line and is still
+    // right there at the moment someone taps a button and nothing happens.
+    // If it turns out to be common, promote it back.
     if (publicHost && /android/i.test(navigator.userAgent)) {
-      notice('android-note',
-        '<strong>On Android, tap the button below first.</strong> ' +
-        'If Google Calendar opens and nothing gets added, the app intercepted the ' +
-        'link and can\'t subscribe. Then do this instead:' +
+      notice('details', 'android-note',
+        '<summary>On Android and nothing happened? Tap here.</summary>' +
+        '<p>Google Calendar can claim the link, and the app itself cannot ' +
+        'subscribe to a calendar. This route always works:</p>' +
         '<ol>' +
           '<li>Tap <strong>' + COPY_LABEL + '</strong> on the tier you want.</li>' +
           '<li>Open <a href="https://calendar.google.com/calendar/u/0/r/settings/addbyurl" ' +
@@ -1122,19 +1430,45 @@
     var base = location.href.replace(/[#?].*$/, '').replace(/[^\/]*$/, '');
     var bare = base.replace(/^https?:\/\//, '');
 
+    // Built as nodes rather than as an HTML string. Every address here is
+    // derived from location.href, so string concatenation would be putting a
+    // value nobody controls inside a quoted attribute. It is not reachable on
+    // GitHub Pages, which 404s any path that is not a real file, but the whole
+    // point of building it this way is that it stops depending on the host.
+    function tierLink(className, href, text, newTab) {
+      var a = document.createElement('a');
+      a.className = className;
+      a.href = href;
+      a.textContent = text;
+      if (newTab) { a.target = '_blank'; a.rel = 'noopener'; }
+      return a;
+    }
+
     document.querySelectorAll('.actions[data-file]').forEach(function (box) {
       var file = box.getAttribute('data-file');
       var feed = base + file;
       var webcal = 'webcal://' + bare + file;
 
-      box.innerHTML = (publicHost
-        ? '<a class="btn btn--primary" href="https://calendar.google.com/calendar/u/0/r?cid=' +
-            encodeURIComponent(webcal) + '" target="_blank" rel="noopener">Add to Google Calendar</a>' +
-          '<a class="btn" href="' + webcal + '">Subscribe (Apple / Outlook)</a>'
-        : '') +
-        '<a class="btn' + (publicHost ? '' : ' btn--primary') + '" href="' +
-          feed + '" download>Download .ics</a>' +
-        '<button class="btn" type="button" data-url="' + feed + '">' + COPY_LABEL + '</button>';
+      box.textContent = '';
+
+      if (publicHost) {
+        box.appendChild(tierLink('btn btn--primary',
+          'https://calendar.google.com/calendar/u/0/r?cid=' + encodeURIComponent(webcal),
+          'Add to Google Calendar', true));
+        box.appendChild(tierLink('btn', webcal, 'Subscribe (Apple / Outlook)'));
+      }
+
+      var download = tierLink('btn' + (publicHost ? '' : ' btn--primary'),
+                              feed, 'Download .ics');
+      download.setAttribute('download', '');
+      box.appendChild(download);
+
+      var copy = document.createElement('button');
+      copy.className = 'btn';
+      copy.type = 'button';
+      copy.setAttribute('data-url', feed);
+      copy.textContent = COPY_LABEL;
+      box.appendChild(copy);
     });
 
     // The two subscribe buttons only cover Google and apps that register the

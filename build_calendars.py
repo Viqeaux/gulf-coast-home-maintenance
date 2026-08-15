@@ -15,6 +15,7 @@ Editing content: change TASKS below and re-run. If subscribers already have the
 feed, bump SEQUENCE so calendar clients treat it as an update.
 """
 
+import json
 import os
 from datetime import date, timedelta
 
@@ -33,7 +34,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.8.0"
+VERSION = "1.9.0"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -41,6 +42,10 @@ UID_DOMAIN = "gulfcoast-home-maintenance"
 # calendar event. GitHub redirects the old viqeaux.github.io address here, so
 # anything already pointing at the old one keeps working.
 SITE_URL = "https://gulfcoasthomemaintenance.com/"
+
+# Named once so the guides page's own canonical, structured data and event deep
+# links cannot drift apart from each other.
+GUIDES_URL = SITE_URL + "guides/"
 
 # GitHub Pages can only serve a site from the repo root or from /docs, not from
 # an arbitrary folder, so the build lands in docs/ and Pages needs no config.
@@ -471,8 +476,34 @@ GUIDES_TEMPLATE = """<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How-to guides, Gulf Coast Home Maintenance</title>
-<meta name="description" content="A picked video for each task on the Gulf Coast Home Maintenance calendar.">
+<meta name="description" content="Step by step for all thirty-six Gulf Coast home maintenance tasks: what to have on hand, how to do it, and where people go wrong.">
 <meta name="robots" content="index, follow">
+<link rel="canonical" href="https://gulfcoasthomemaintenance.com/guides/">
+
+<!-- Every calendar event deep links here, and this page holds more of the work
+     than the home page does, so a shared or pinned link to it needs to look
+     like something. Absolute URLs: scrapers resolve these against their own
+     host, not against this page. -->
+<meta property="og:title" content="How to do each of these, Gulf Coast Home Maintenance">
+<meta property="og:description" content="Step by step for all thirty-six tasks: what to have on hand, how to do it, and where people go wrong.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://gulfcoasthomemaintenance.com/guides/">
+<meta property="og:site_name" content="Gulf Coast Home Maintenance">
+<meta property="og:image" content="https://gulfcoasthomemaintenance.com/img/hero-1600.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="A live oak hung with Spanish moss over the roof of a Gulf Coast house at sunset.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0e2429">
+
+<!-- Pages cannot set headers, so the policy travels in the document. See the
+     longer note in docs/index.html for why 'unsafe-inline' is here and why
+     frame-ancestors is not. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../icon-180.png">
 <link rel="stylesheet" href="../theme.css">
 <style>
   * {{ box-sizing: border-box; }}
@@ -565,12 +596,85 @@ GUIDES_TEMPLATE = """<!doctype html>
   }}
   .steps li::marker {{ color: var(--tier-color); font-weight: 700; }}
 
+  /* --- tailpiece ------------------------------------------------------- */
+  .sr-only {{
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }}
+  .tailpiece {{
+    background: var(--paper-2); border-top: 1px solid var(--rule);
+    margin-top: 3rem; padding: 3rem 0;
+  }}
+  .tailpiece h2 {{
+    font: 700 clamp(1.4rem, 3.5vw, 1.8rem)/1.2 ui-serif, Georgia, serif;
+    margin: 0 0 .7rem; letter-spacing: -.015em;
+  }}
+  .tailpiece h3 {{
+    font: 700 1.05rem/1.3 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    margin: 0 0 .4rem;
+  }}
+  .tail-blurb {{
+    color: var(--muted); font-size: .96rem; max-width: 32rem; margin: 0 0 1.2rem;
+  }}
+  .tail-actions {{ margin: 0 0 1rem; }}
+  .tail-btn {{
+    display: inline-block;
+    font: 600 14px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    text-decoration: none; padding: .85rem 1.3rem; border-radius: 2px;
+    background: var(--accent); border: 1px solid var(--accent); color: var(--paper);
+    cursor: pointer; -webkit-appearance: none; appearance: none;
+    transition: filter .15s ease;
+  }}
+  .tail-btn:hover {{ filter: brightness(1.09); text-decoration: none; }}
+  .tail-btn:focus-visible {{ outline: 2px solid var(--accent); outline-offset: 2px; }}
+  .tail-kit {{ color: var(--muted); font-size: .92rem; margin: 0; max-width: 32rem; }}
+
+  /* Separated by a rule rather than by a second card: the list is a smaller
+     ask than the calendars above it and should not compete with them. */
+  .tail-signup {{
+    margin-top: 2.25rem; padding-top: 1.9rem; border-top: 1px solid var(--rule);
+  }}
+  .signup {{ margin: 0; }}
+  .signup-row {{ display: flex; gap: .5rem; flex-wrap: wrap; max-width: 27rem; }}
+  /* --muted rather than --rule for the boundary. On this block's --paper-2
+     ground a --rule hairline is 1.2:1 and the field's own fill is 1.1:1, so
+     the input is invisible until it takes focus. WCAG 1.4.11 wants 3:1 for a
+     control boundary; --muted is 4.6:1 here and 5.9:1 in dark. Same change is
+     in docs/index.html, for the same reason. */
+  .signup-row input {{
+    flex: 1 1 12rem; min-width: 0;
+    font: 400 15px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: .8rem .9rem; border-radius: 2px;
+    border: 1px solid var(--muted); background: var(--bg); color: var(--ink);
+  }}
+  .signup-row input:focus-visible {{
+    outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
+  }}
+  .signup-note {{
+    font: 400 12.5px/1.5 ui-sans-serif, system-ui, sans-serif;
+    color: var(--muted); margin: .75rem 0 0; max-width: 32rem;
+  }}
+  .signup-done {{
+    font: 400 .95rem/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--muted); margin: 0;
+  }}
+  .signup-done strong {{ display: block; color: var(--accent); margin-bottom: .2rem; }}
+  @media (max-width: 26rem) {{
+    .signup-row input, .signup-row .tail-btn {{ flex: 1 1 100%; }}
+  }}
+
   footer {{
     background: var(--deep); color: var(--on-deep-mute);
-    padding: 2.5rem 0 3rem; margin-top: 3rem; font-size: .87rem;
+    padding: 2.5rem 0 3rem; font-size: .87rem;
   }}
   footer p {{ margin: 0 0 .8rem; max-width: 34rem; }}
   footer .disclaimer {{ font-style: italic; }}
+  footer .foot-links {{
+    display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.1rem;
+    font: 400 .87rem/1 ui-sans-serif, system-ui, sans-serif;
+  }}
+  footer .foot-links a {{ color: var(--sand); text-decoration: none; }}
+  footer .foot-links a:hover {{ text-decoration: underline; }}
   footer .version {{
     font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
     letter-spacing: .12em; opacity: .55; margin: 0;
@@ -584,7 +688,7 @@ GUIDES_TEMPLATE = """<!doctype html>
     <a class="back" href="../">&#8592; Gulf Coast Home Maintenance</a>
     <h1>How to do each of these</h1>
     <p>
-      Step by step for all thirty-six, including what to have to hand and where
+      Step by step for all thirty-six, including what to have on hand and where
       people go wrong. Your calendar links straight to the task you were just
       reminded about.
     </p>
@@ -596,13 +700,108 @@ GUIDES_TEMPLATE = """<!doctype html>
 {body}
 </main>
 
+<!-- Somewhere to go. This page carries more of the work than the home page
+     does and it used to hold exactly one link, the back arrow at the top,
+     while every one of the thirty-six calendar events deep links into it. That
+     meant twelve times a year a subscriber landed on the most useful thing
+     here and found no next step at all.
+
+     Order is deliberate: the free calendars first, because someone who arrived
+     from a search does not have them and someone who arrived from a reminder
+     loses nothing by seeing the offer; the kit second and quietly, in one
+     sentence; the list last, which is where it sits on the home page too. -->
+<section class="tailpiece">
+  <div class="wrap">
+    <h2>Keep them coming</h2>
+    <p class="tail-blurb">
+      These same thirty-six jobs are three free calendars you subscribe to once.
+      They arrive in the month they matter, and every reminder links back to the
+      guide for it. No signup and no card.
+    </p>
+    <p class="tail-actions"><a class="tail-btn" href="../#calendars">Get the free calendars</a></p>
+    <p class="tail-kit">
+      If you would rather have it on paper, there is a
+      <a href="../#edition">printable kit</a> as well, twenty-seven pages and
+      undated.
+    </p>
+
+    <div class="tail-signup">
+      <h3>Hear about the next one</h3>
+      <p class="tail-blurb">
+        I'm still building tools like this. Leave your email and I'll tell you
+        when there's something new. That is all the list is for.
+      </p>
+      <form class="signup" method="post" target="ml-sink"
+            action="https://assets.mailerlite.com/jsonp/2575029/forms/195731645629727806/subscribe">
+        <div class="signup-row">
+          <label class="sr-only" for="signup-email">Your email address</label>
+          <input id="signup-email" type="email" name="fields[email]" required
+                 autocomplete="email" placeholder="you@example.com">
+          <button class="tail-btn tail-btn--solid" type="submit">Keep me posted</button>
+        </div>
+        <!-- Honeypot, same as the home page. Off screen rather than hidden,
+             disabled before submit so MailerLite never sees it. -->
+        <div class="sr-only" aria-hidden="true">
+          <label for="signup-website">Leave this field empty</label>
+          <input id="signup-website" type="text" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <p class="signup-note">
+          Only when there's something new, which is not often. Leave any time.
+          <a href="../privacy.html">What happens to your email.</a>
+        </p>
+        <input type="hidden" name="ml-submit" value="1">
+        <input type="hidden" name="anticsrf" value="true">
+      </form>
+      <p class="signup-done" hidden>
+        <strong>Nearly there, check your email.</strong>
+        You'll have a confirmation link waiting; the list won't have you until you click it.
+      </p>
+      <iframe name="ml-sink" title="Signup handler" hidden></iframe>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <p class="disclaimer">{disclaimer}</p>
 {video_note}
+    <p class="foot-links">
+      <a href="../">Home</a>
+      <a href="../#calendars">Free calendars</a>
+      <a href="../privacy.html">Privacy</a>
+    </p>
     <p class="version">v{version}</p>
   </div>
 </footer>
+
+<script>
+  // The only script on this page. Same contract as the home page: post to
+  // MailerLite through a hidden frame so the visitor never leaves, and swap the
+  // form for the check-your-email line once the frame reports back.
+  (function () {{
+    var signup = document.querySelector('.signup');
+    if (!signup) {{ return; }}
+    signup.addEventListener('submit', function (event) {{
+      var hp = signup.querySelector('input[name="website"]');
+      var done = document.querySelector('.signup-done');
+      if (hp && hp.value) {{
+        event.preventDefault();
+        signup.hidden = true;
+        done.hidden = false;
+        return;
+      }}
+      if (hp) {{ hp.disabled = true; }}
+      var sink = document.querySelector('iframe[name="ml-sink"]');
+      var swap = function () {{ signup.hidden = true; done.hidden = false; }};
+      sink.addEventListener('load', swap, {{ once: true }});
+      setTimeout(swap, 2500);
+    }});
+  }})();
+</script>
+
+<script type="application/ld+json">
+{structured}
+</script>
 
 </body>
 </html>
@@ -666,6 +865,62 @@ def guide_section(task):
     return out
 
 
+def build_structured_data(tasks):
+    """JSON-LD for the guides page: one HowTo per task that has steps.
+
+    Only tasks with a real sequence get a HowTo. A HowTo with no steps is not
+    a how-to, and claiming one is the sort of thing that gets structured data
+    ignored across a whole site rather than just on one page.
+
+    Serialized with json.dumps rather than assembled as text, so a quote or a
+    backslash inside a step cannot break out of the script element. The one
+    sequence json.dumps will not escape for us is "</", which would close the
+    script early, so that is handled after.
+    """
+    graph = [{
+        "@type": "WebPage",
+        "@id": GUIDES_URL + "#page",
+        "url": GUIDES_URL,
+        "name": "How to do each of these",
+        "description": "Step by step for all thirty-six Gulf Coast home "
+                       "maintenance tasks.",
+        "inLanguage": "en-US",
+        "isPartOf": {"@type": "WebSite", "url": SITE_URL,
+                     "name": "Gulf Coast Home Maintenance"},
+    }]
+
+    for month, _, tier, slug, title, body in tasks:
+        detail = STEPS.get(slug) or {}
+        if not detail.get("steps"):
+            continue
+
+        # The body is "instruction\n\nWhy: ...". The first part is the plain
+        # description of the job, which is what a HowTo wants.
+        summary = [p.strip() for p in body.split("\n\n") if p.strip()]
+
+        howto = {
+            "@type": "HowTo",
+            "@id": guide_url(slug),
+            "name": title,
+            "description": summary[0] if summary else title,
+            "url": guide_url(slug),
+            "step": [
+                {"@type": "HowToStep", "position": index, "text": step}
+                for index, step in enumerate(detail["steps"], start=1)
+            ],
+        }
+        if detail.get("need"):
+            howto["supply"] = [
+                {"@type": "HowToSupply", "name": item} for item in detail["need"]
+            ]
+        graph.append(howto)
+
+    payload = json.dumps(
+        {"@context": "https://schema.org", "@graph": graph},
+        indent=2, ensure_ascii=False)
+    return payload.replace("</", "<\\/")
+
+
 def build_guides():
     """Return the guides page HTML, and how many tasks have a video."""
     tasks = sorted(TASKS, key=lambda t: (t[0], TIER_ORDER[t[2]]))
@@ -697,6 +952,7 @@ def build_guides():
         total=len(TASKS),
         body="\n".join(body),
         video_note=video_note,
+        structured=build_structured_data(tasks),
     ), covered
 
 

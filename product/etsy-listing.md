@@ -55,7 +55,7 @@ This is a 27 page printable kit built for Gulf Coast homes, Texas to Florida. Un
 
 WHAT IS INSIDE
 
-• Twelve months of tasks, three a month at three levels of effort, each with step by step instructions, what to have to hand, and where people go wrong
+• Twelve months of tasks, three a month at three levels of effort, each with step by step instructions, what to have on hand, and where people go wrong
 • The Big Ticket Watch List. Seventeen things in your house that are already on a clock, with lifespans adjusted for salt air, humidity and UV, and room to write in the year yours went in
 • How To Find Out. How to date a water heater, an A/C unit, a roof or an appliance in about five minutes each, even when the previous owner left you nothing
 • Your First Month. Ten one time jobs to do before anything goes wrong

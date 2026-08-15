@@ -27,6 +27,91 @@ Newest first.
 
 ---
 
+## [1.9.0], 2026-08-15
+
+Came out of a security and branding review of the whole site. Nothing here
+changes what a subscriber sees: all three feeds are byte-identical to 1.8.0 and
+`SEQUENCE` stays at 1.
+
+### Added
+
+- **The brand has a face.** `build_brand.py` now writes `docs/favicon.svg`,
+  `docs/icon-180.png` and `docs/icon-512.png` from the house glyph it was
+  already drawing for the shop icon, and both pages reference them. Every
+  browser tab, bookmark and home screen shortcut was a blank document icon
+  before this. The favicon runs the glyph at 0.74 rather than the shop icon's
+  0.62: at 16 px the shop version's margin reads as a dark square with something
+  indistinct in it.
+- **Somewhere to go from the guides page.** It carried 4,642 words across all
+  thirty-six tasks and exactly one link, the back arrow, while every calendar
+  event deep links into it. Twelve times a year a subscriber landed on the most
+  useful page on the site and found no next step. It now ends with the free
+  calendars, one quiet line about the kit, and the signup, in that order.
+- **A privacy page**, at `docs/privacy.html`. The site collects email addresses
+  and hands them to a third party and had no privacy notice at all. It also says
+  plainly that nothing here watches visitors, which is true and is worth saying.
+- **A branded 404**, at `docs/404.html`, with absolute paths throughout: Pages
+  serves it for a missing address at any depth, so relative links would resolve
+  against the wrong directory for exactly the people who are already lost.
+- **`robots.txt` and `sitemap.xml`**, and a canonical tag on every page. The
+  canonicals matter most: the old `viqeaux.github.io` address still resolves,
+  and without them it can compete with the real domain for the same content.
+- **Structured data.** `Product` for both editions, `FAQPage` on the home page,
+  and a `HowTo` for each of the thirty-six tasks on the guides page, generated
+  from `STEPS` so it cannot drift from the page it describes. No invented
+  ratings or reviews: those go in when Etsy has real ones.
+- **The origin on the site.** "I built this for my own house first" now sits
+  above the footer, in the same words as the Etsy About section. The site was
+  asking $12.99 and $39 from an anonymous voice while the strongest thing in the
+  project sat on another website.
+- **Three points arguing for the agent edition.** The kit's card had a diagram, a
+  sample month and a lifespan chart standing behind it; the $39 product had a
+  paragraph. The objections are always the same three, so there are three
+  answers: what you actually hand over, how much work it is, and whether you are
+  allowed to.
+- **A honeypot on the signup**, on both pages. Disabled before submit, so
+  MailerLite never receives a field it has no definition for.
+
+### Changed
+
+- **A Content Security Policy on both pages**, plus a referrer policy. GitHub
+  Pages cannot set response headers, so it travels in the document. The page
+  loads no third-party code today and the point of the policy is to keep that
+  true: a pasted widget or an analytics snippet now fails loudly instead of
+  quietly reading the signup. `frame-ancestors` is ignored in a meta tag, so
+  clickjacking protection is not available on this host at all, which is
+  acceptable on a page with no authenticated actions and is written down rather
+  than assumed.
+- **The subscribe buttons are built as nodes**, not as an HTML string. Every
+  address in them comes from `location.href`. It was not reachable on Pages,
+  which 404s any path that is not a real file, but the point of the rewrite is
+  that it no longer depends on the host to be true.
+- **The Android note is a disclosure**, not an open card. How often Google
+  Calendar actually intercepts the link is still unmeasured, so this was a
+  paragraph of troubleshooting sitting on the buttons for every Android visitor,
+  most of whom never needed it. Collapsed it costs one line and is still there
+  at the moment someone taps a button and nothing happens.
+- **`<main>` and a skip link** on the home page. The guides page already had a
+  main landmark; the home page had no way past the header for anyone using a
+  keyboard or a screen reader. `main` opens at the hero, because a skip link
+  that lands past the `h1` has skipped the content.
+
+### Fixed
+
+- **"What to have to hand" is British.** It was live on the guides page and in
+  both Etsy descriptions, while the home page already said "on hand", so the
+  site contradicted itself. For a product whose whole claim is knowing this
+  coast, that is exactly the tell that undercuts it. Both listings need the
+  corrected description pasted in by hand.
+- `kit_sections.py` read "Check the skirting and any flood vents are intact",
+  which wants a "that" in American usage. This one is inside the kit, so the
+  PDFs need rebuilding and re-uploading.
+
+Minor rather than patch: new pages, new capability on the guides page, and a new
+section on the home page. No task content changed.
+
+---
+
 ## [1.8.0], 2026-08-15
 
 ### Added
@@ -298,7 +383,7 @@ The kit becomes the paid product, and every task gains step by step detail.
 ### Added
 
 - **Step by step detail for all 36 tasks** in `task_steps.py`, with what to
-  have to hand, the order to do it in, and the mistake that costs money. Free on
+  have on hand, the order to do it in, and the mistake that costs money. Free on
   the guides page, and printed in the kit. Where a task is genuinely a
   hire-someone job it says so, and the steps become what to ask for.
 - **Seven "if you have one" sections** in `kit_sections.py`, kit only: septic,
