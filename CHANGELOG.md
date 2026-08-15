@@ -27,6 +27,38 @@ Newest first.
 
 ---
 
+## [1.13.0], 2026-08-15
+
+### Added
+
+- **A hurricane season countdown in the hero**, above the buttons, linking to
+  the binder. It states whichever of three facts is next rather than printing
+  all of them: how long until the season starts, until the September 10 peak,
+  or until it ends on November 30. Today it reads "Peak of hurricane season is
+  in 26 days."
+- **Days, not a ticking clock.** Seconds counting down to a six month season is
+  theatre, and days is both the unit a reader can act on and the unit the whole
+  product is organized around. It states a fact and links to the thing that
+  answers it rather than manufacturing alarm, for the same reason the structured
+  data carries no invented rating.
+- Hidden in the markup until the script has a real number. A countdown showing a
+  blank or a stale figure is worse than no countdown, and anyone without
+  scripting still gets the season dates from the stat strip directly below it.
+
+### Notes on the implementation
+
+- **Compared as local calendar days, never as raw timestamps.** Subtracting two
+  `Date` objects and dividing by 86400000 is off by an hour across a daylight
+  saving change, which is enough to round a day the wrong way, and it would show
+  a reader in Galveston at 11pm a different number from one in Pensacola ten
+  minutes later. Both ends normalize to UTC midnight of their local date.
+- **Verified against all 365 days of a year**, by extracting the shipped
+  function and running it against stubbed dates rather than checking today and
+  assuming. All seven branches read correctly, including the two nobody would
+  see for months: November 30 says "Today is the last day of hurricane season",
+  and December rolls to the following June rather than reporting a negative.
+  Singular and plural are right at the boundaries, so May 31 reads "1 day".
+
 ## [1.12.1], 2026-08-15
 
 ### Changed

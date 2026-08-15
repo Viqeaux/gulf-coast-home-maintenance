@@ -251,6 +251,47 @@
     margin: 0 0 1.4rem; border: 0;
   }
 
+  /* Hurricane season countdown. Days, not a ticking clock: seconds counting
+     down to a six month season is theatre, and the number a reader can act on
+     is the one measured in days, which is also the unit the whole product is
+     organized around. It states a fact and links to the thing that answers it
+     rather than manufacturing alarm, which is the same reason there is no
+     invented rating in the structured data. */
+  .season {
+    display: inline-flex; align-items: center; gap: .55rem; flex-wrap: wrap;
+    margin: 1.6rem 0 0; padding: .55rem .85rem;
+    background: color-mix(in srgb, var(--deep) 62%, transparent);
+    border: 1px solid color-mix(in srgb, var(--on-deep) 24%, transparent);
+    border-radius: 3px;
+    font: 500 13.5px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: #ded8cb; text-shadow: 0 1px 10px rgba(8,24,28,.7);
+  }
+  .season-num { color: #fff; font-weight: 700; }
+  .season-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex: none;
+    background: var(--must-lift);
+    animation: season-pulse 2.4s ease-out infinite;
+  }
+  .season-link {
+    color: var(--sand); text-decoration: none; white-space: nowrap;
+    border-bottom: 1px solid color-mix(in srgb, var(--sand) 45%, transparent);
+  }
+  .season-link:hover { border-bottom-color: var(--sand); }
+  @keyframes season-pulse {
+    0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--must-lift) 65%, transparent); }
+    70%  { box-shadow: 0 0 0 7px color-mix(in srgb, var(--must-lift) 0%, transparent); }
+    100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--must-lift) 0%, transparent); }
+  }
+  @supports not (background: color-mix(in srgb, red 50%, transparent)) {
+    .season { background: rgba(14,36,41,.62); border-color: #3d4f52; }
+    .season-link { border-bottom-color: #7a5c22; }
+    @keyframes season-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(224,138,114,.65); }
+      70%  { box-shadow: 0 0 0 7px rgba(224,138,114,0); }
+      100% { box-shadow: 0 0 0 0 rgba(224,138,114,0); }
+    }
+  }
+
   /* stat strip under hero */
   .stats {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
@@ -841,6 +882,18 @@
       A/C runs nine months a year, termites swarm every spring, and hurricane season has a
       deadline your insurance actually enforces.
       <strong>This calendar is built for that.</strong>
+    </p>
+
+    <!-- Filled in by the script at the bottom of this file. The number depends
+         on the day the page is read, so there is nothing honest to ship in the
+         markup, and it stays hidden until the script has a real one: a
+         countdown showing a blank or a stale figure is worse than no countdown
+         at all. Anyone without scripting still gets the season dates from the
+         stat strip below. -->
+    <p class="season" hidden>
+      <span class="season-dot" aria-hidden="true"></span>
+      <span class="season-text"></span>
+      <a class="season-link" href="#binder">Get the checklist</a>
     </p>
 
     <div class="actions" style="margin-top:1.9rem">
@@ -1435,7 +1488,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.12.1</p>
+    <p class="version">v1.13.0</p>
   </div>
 </footer>
 
@@ -1680,6 +1733,79 @@
         fallback();
       }
     });
+  })();
+
+  // ---------------------------------------------------------------------------
+  // Hurricane season countdown in the hero.
+  //
+  // Three facts matter across the year, and only one of them is worth showing on
+  // any given day: when the season starts, when it peaks, and when it ends. This
+  // picks the right one rather than printing all three, so the line is always
+  // the next thing the reader has to care about.
+  //
+  // Compared as local calendar days, never as raw timestamps. Subtracting two
+  // Date objects and dividing by 86400000 is wrong across a daylight saving
+  // change by an hour, which is enough to round a day the wrong way, and it
+  // would show a reader in Galveston at 11pm a different number from one in
+  // Pensacola ten minutes later. Normalizing both ends to UTC midnight of their
+  // local calendar date removes both problems.
+  //
+  // Dates from binder_pages.py and the hero stat strip: June 1 to November 30,
+  // peaking around September 10. If those ever move, they move together.
+  // ---------------------------------------------------------------------------
+  (function () {
+    var el = document.querySelector('.season');
+    if (!el) return;
+
+    var SEASON_START = [5, 1];    // June 1, month is zero based
+    var PEAK         = [8, 10];   // September 10
+    var SEASON_END   = [10, 30];  // November 30
+
+    var now = new Date();
+    var year = now.getFullYear();
+
+    function on(spec, y) { return new Date(y, spec[0], spec[1]); }
+    function daysUntil(target) {
+      return Math.round(
+        (Date.UTC(target.getFullYear(), target.getMonth(), target.getDate())
+         - Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
+    }
+    function days(n) { return n + (n === 1 ? ' day' : ' days'); }
+
+    // Built as nodes rather than an HTML string, matching the buy buttons above.
+    var text = el.querySelector('.season-text');
+    function render(before, strong, after) {
+      text.textContent = '';
+      if (before) text.appendChild(document.createTextNode(before));
+      var b = document.createElement('strong');
+      b.className = 'season-num';
+      b.textContent = strong;
+      text.appendChild(b);
+      if (after) text.appendChild(document.createTextNode(after));
+    }
+
+    var toStart = daysUntil(on(SEASON_START, year));
+    var toPeak  = daysUntil(on(PEAK, year));
+    var toEnd   = daysUntil(on(SEASON_END, year));
+
+    if (toStart > 0) {
+      render('Hurricane season starts in ', days(toStart), '.');
+    } else if (toStart === 0) {
+      render('Hurricane season starts ', 'today', '.');
+    } else if (toPeak > 0) {
+      render('Peak of hurricane season is in ', days(toPeak), '.');
+    } else if (toPeak === 0) {
+      render('Today is the ', 'peak', ' of hurricane season.');
+    } else if (toEnd > 0) {
+      render('', days(toEnd), ' left in hurricane season.');
+    } else if (toEnd === 0) {
+      render('Today is the ', 'last day', ' of hurricane season.');
+    } else {
+      // December, so the next season is next year's.
+      render('Hurricane season starts in ', days(daysUntil(on(SEASON_START, year + 1))), '.');
+    }
+
+    el.hidden = false;
   })();
 </script>
 </body>

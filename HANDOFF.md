@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.10.0**. Everything below is live unless marked otherwise.
+Current version **v1.13.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -104,6 +104,14 @@ content reaches instead.
 
 **`docs/index.html` is hand-written. Everything in `docs/guides/` and
 `product/` is generated.** Edit the Python, not the output.
+
+**The hero's hurricane season countdown hardcodes three dates**, in the script
+at the bottom of `docs/index.html`: June 1, September 10, November 30. The same
+three appear in the hero stat strip and in `binder_pages.py`. If the season
+framing ever changes they all move together. The line picks whichever of the
+three is next rather than printing all of them, so every branch matters: it was
+checked against all 365 days of a year, and the December branch rolls to the
+following June.
 
 ## Rules that are not obvious
 
@@ -215,12 +223,17 @@ sheet, 1,876 uniquely named AcroForm fields with `/AcroForm` in the catalog and
 every widget on its page. Peak of season is September 10, so what is left is
 worth doing in the next three weeks rather than eventually:
 
-1. **Mail the MailerLite list.** It has not been mailed since the kit launched,
-   and this is the first genuinely seasonal reason to send anything. The list
-   is warm, it costs nothing, and unlike the tag work below it is not blocked.
-   Do this one first.
+1. ~~Mail the MailerLite list.~~ **Dead for now: the list has no subscribers**,
+   confirmed by Chad on 2026-08-15. Do not rank this again until it does. It is
+   worth reading as a result rather than a detail: the signup has been live
+   since 1.6.0 and Pinterest since 2026-08-15, and between them they have
+   produced nobody. **The shop's constraint is traffic, not conversion or
+   price.** Nothing on the site is broken; there is simply almost nobody
+   arriving. Any future session weighing what to build should weigh it against
+   that, because another product sells to the same empty room.
 2. Add a cross-sell line to the kit's description, the way the kit already
-   points at the realtor edition.
+   points at the realtor edition. **Chad is leaving this for later, as of
+   2026-08-15.**
 3. **Run the tag list through Etsy Marketplace Insights. Blocked until roughly
    2026-08-22:** Chad is out of Insights searches until then. Do not send a
    session at this before that date. Every keyword on the binder listing is
