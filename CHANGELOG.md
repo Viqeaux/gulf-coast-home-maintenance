@@ -27,6 +27,57 @@ Newest first.
 
 ---
 
+## [1.10.0], 2026-08-15
+
+**The step-by-step detail is kit only now.** Chad's call, and it corrects a
+split that had been the wrong way round since the guides page shipped.
+
+### Changed
+
+- **`docs/guides/` no longer prints `STEPS`.** The tools to have on hand, the
+  numbered steps and the caution were free to anyone with the URL, which is the
+  material the $12.99 kit is sold on. All of it comes off the site. The page
+  drops from 101 KB to 40 KB, and all 186 steps, 8 tool lists and 11 cautions
+  were checked against every published file afterwards to confirm none of them
+  survive anywhere, feeds included.
+- **The page is now the schedule rather than the method.** It keeps the task,
+  the one-line instruction and the "why", which the `.ics` feeds publish to
+  every subscriber anyway, so withholding them here would have hidden nothing
+  and left thirty-six live calendar events pointing at empty anchors. Retitled
+  from "How to do each of these" to "What is on the calendar", because a title
+  promising how-to would be advertising something the page no longer carries.
+- **The structured data is an `ItemList`, not thirty-six `HowTo` blocks.** A
+  `HowTo` carries its steps in the markup, so leaving that in would have
+  republished the whole thing in a tidier form than the page ever had.
+  Structured data is published content, not metadata about it.
+- The page now opens with a pointer to the kit for anyone who came looking for
+  the method, once at the top rather than under all thirty-six tasks, where it
+  would read as thirty-six adverts.
+- The home page's "Not sure how to do one?" block promised step-by-step detail
+  that is no longer there. It now points at the kit for the method and at the
+  contents page for the schedule.
+
+### Kept deliberately
+
+- **All thirty-six anchors.** Every guide link inside all three feeds was
+  checked against the rebuilt page: 36 of 36 still resolve. Nobody's calendar
+  breaks.
+- **`has_guide()` unchanged**, though it now reads oddly. It gates the link
+  inside every event's `DESCRIPTION`, so narrowing it to check `GUIDES` alone
+  would strip that link from all thirty-six events and force a `SEQUENCE` bump
+  for no gain. There is a comment on the function saying so.
+- **Curated video links**, when there are any. Those are other people's work,
+  linked and not republished, so they were never the kit's to withhold.
+
+Feeds are byte-identical to 1.9.0 and `SEQUENCE` stays at 1.
+
+**Known wrinkle, deliberately not fixed here.** Each event's description still
+labels the link "How to:", which is no longer quite what it leads to. Correcting
+it changes all three feeds, so it is worth bundling with the first curated video,
+which needs a `SEQUENCE` bump anyway.
+
+---
+
 ## [1.9.0], 2026-08-15
 
 Came out of a security and branding review of the whole site. Nothing here

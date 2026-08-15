@@ -3,10 +3,15 @@
 Two products from one set of content:
 
 - **The calendar** is free. Three subscribe-able `.ics` feeds, plus the landing
-  page and how-to guides that hand them out. Lives on
+  page and the calendar contents page that hand them out. Lives on
   <https://gulfcoasthomemaintenance.com>.
 - **The kit** is paid. Every printable page, 27 of them, sold on Etsy at $12.99.
   Built locally and never committed, because this repo is public.
+
+**The step-by-step detail is kit only and does not go on the site.** `STEPS` in
+[task_steps.py](task_steps.py) is imported by `build_printables.py` and is
+deliberately *not* rendered by `build_calendars.py`. See "What the site may
+publish" below before adding anything to the calendar contents page.
 
 Built to the spec in `gulf-coast-maintenance-calendar-content.md`, which is kept
 out of this repo on purpose, see [.gitignore](.gitignore) for why.
@@ -40,7 +45,7 @@ docs/                     published by GitHub Pages, exactly as-is
   gulf-coast-should-do.ics     12 events
   gulf-coast-going-above.ics   12 events
   index.html                   the landing page the QR code points to
-  guides/index.html            generated, one anchor per task
+  guides/index.html            generated. The schedule, not the method
   privacy.html                 hand-written, linked from both footers
   404.html                     Pages serves this for any missing address
   theme.css                    the palette, shared by every page
@@ -59,7 +64,7 @@ docs/                     published by GitHub Pages, exactly as-is
 `docs/guides/index.html` and everything in `product/` are generated. Edit the
 Python, not the output. `docs/index.html` is hand-written.
 
-Rebuild the feeds and the guides page, after editing tasks or steps:
+Rebuild the feeds and the calendar contents page, after editing tasks:
 
 ```bash
 python build_calendars.py
@@ -329,6 +334,37 @@ grey card. They are absolute URLs on purpose: every scraper resolves them
 against its own host rather than the page's. The guides page carries its own
 set, because every calendar event deep links into it and it is the page most
 likely to get shared on its own.
+
+## What the site may publish
+
+The line runs between the schedule and the method, and it is not obvious from
+reading the code, so it is written down here.
+
+**Free, and on the site.** The twelve months themselves: each task, the
+one-line instruction, and the "why". These are inside the `.ics` files that
+Google and Apple fetch on a subscriber's behalf, so they are public by
+construction. Withholding them from `docs/guides/index.html` would hide nothing
+and would leave thirty-six live calendar events pointing at empty anchors.
+
+**Paid, and kit only.** Everything in `STEPS`: the tools to have on hand, the
+numbered steps, the caution, and the "this is a hire-someone job" detail. Also
+everything in `kit_sections.py`, the Big Ticket Watch List, How To Find Out and
+Your First Month. `build_calendars.py` imports `STEPS` solely to decide whether
+a task gets an anchor, and never prints its contents.
+
+Two traps worth knowing:
+
+1. **Structured data is published content.** A `HowTo` block carries its steps
+   in the markup, so emitting one would republish exactly what was taken off the
+   page, in a tidier form. The page emits `WebPage` and an `ItemList` of task
+   names only.
+2. **`has_guide()` gates the link inside every event's `DESCRIPTION`.**
+   Narrowing it to check `GUIDES` alone would strip that link from all
+   thirty-six events, change all three feeds, and force a `SEQUENCE` bump. Leave
+   it as it is.
+
+The home page's Watch List chart shows eight of the seventeen items on purpose.
+That is a teaser for the kit, and it predates this split.
 
 ## Hosting
 

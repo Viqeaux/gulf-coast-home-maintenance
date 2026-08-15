@@ -34,7 +34,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.9.0"
+VERSION = "1.10.0"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -408,7 +408,15 @@ def guide_url(slug):
 
 
 def has_guide(slug):
-    """True when the guides page has anything to show for this task."""
+    """True when the calendar contents page has an anchor for this task.
+
+    Do not "tidy" this to check GUIDES alone now that STEPS is no longer
+    rendered. This gates the link inside every event's DESCRIPTION, so
+    narrowing it would strip the link out of all thirty-six events, change all
+    three feeds, and force a SEQUENCE bump for no visitor-facing gain. Every
+    task has STEPS, so today this is True for all of them, which is correct:
+    the page carries an anchor for every task whether or not a video exists.
+    """
     return bool(STEPS.get(slug) or GUIDES.get(slug))
 
 
@@ -475,12 +483,12 @@ GUIDES_TEMPLATE = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- "How-to guides" as a title targeted nothing at all. This names the subject
-     and the states, in that order, because the search phrasing is a state name
-     rather than "Gulf Coast". The page itself still says Gulf Coast
-     everywhere: this is how it gets found, not what it is called. -->
-<title>Home Maintenance Guides for the Gulf Coast, Texas to Florida</title>
-<meta name="description" content="Step by step for thirty-six Gulf Coast home maintenance jobs, Texas to Florida. What to have on hand, how to do it, and where people go wrong.">
+<!-- The page is the schedule, not the how-to. The step-by-step moved into the
+     kit, which is the paid product, so a title promising "how to" would be
+     advertising something this page no longer carries. The URL stays
+     /guides/ because thirty-six live calendar events point at it. -->
+<title>What Is on the Calendar, Gulf Coast Home Maintenance</title>
+<meta name="description" content="All thirty-six jobs on the Gulf Coast home maintenance calendar, Texas to Florida, and the month each one falls in. Free to subscribe to.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://gulfcoasthomemaintenance.com/guides/">
 
@@ -488,8 +496,8 @@ GUIDES_TEMPLATE = """<!doctype html>
      than the home page does, so a shared or pinned link to it needs to look
      like something. Absolute URLs: scrapers resolve these against their own
      host, not against this page. -->
-<meta property="og:title" content="How to do each of these, Gulf Coast Home Maintenance">
-<meta property="og:description" content="Step by step for all thirty-six tasks: what to have on hand, how to do it, and where people go wrong.">
+<meta property="og:title" content="What is on the calendar, Gulf Coast Home Maintenance">
+<meta property="og:description" content="All thirty-six jobs and the month each one falls in, timed for the Gulf Coast. Free to subscribe to.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://gulfcoasthomemaintenance.com/guides/">
 <meta property="og:site_name" content="Gulf Coast Home Maintenance">
@@ -578,27 +586,28 @@ GUIDES_TEMPLATE = """<!doctype html>
     display: block; font: 400 12px/1.4 ui-sans-serif, system-ui, sans-serif;
     color: var(--muted); margin-top: .15rem;
   }}
-  .need, .watch, .pro-note {{
-    font: 400 .9rem/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-    margin: .8rem 0 0 !important; padding: .55rem .75rem; border-radius: 3px;
-  }}
-  .need {{ background: var(--paper-2); color: var(--muted); }}
-  .need span, .watch span {{
-    font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
-    font-size: 10px; display: block; margin-bottom: .15rem;
-  }}
-  .need span {{ color: var(--ink); }}
-  .watch {{ background: var(--paper-2); border-left: 3px solid var(--must); color: var(--muted); }}
-  .watch span {{ color: var(--must); }}
+  /* The .need, .watch and .steps rules are gone along with the content they
+     styled. Those are the kit's pages and the kit is the paid product. */
   .pro-note {{
-    padding: 0; background: none; color: var(--accent); font-weight: 600; font-size: .85rem;
+    font: 600 .85rem/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    margin: .8rem 0 0 !important; color: var(--accent);
   }}
-  .steps {{ margin: .9rem 0 0; padding-left: 1.15rem; }}
-  .steps li {{
-    font: 400 .95rem/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-    color: var(--ink); margin-bottom: .45rem; padding-left: .15rem;
+
+  /* Sits once at the top of the list rather than repeating under all
+     thirty-six tasks, where it would read as thirty-six adverts. */
+  .kit-pointer {{
+    background: var(--paper); border: 1px solid var(--rule);
+    border-left: 3px solid var(--sand); border-radius: 3px;
+    padding: 1.15rem 1.35rem; margin: 0 0 2rem;
   }}
-  .steps li::marker {{ color: var(--tier-color); font-weight: 700; }}
+  .kit-pointer h2 {{
+    font: 700 1.05rem/1.3 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    margin: 0 0 .35rem; letter-spacing: 0;
+  }}
+  .kit-pointer p {{
+    font: 400 .93rem/1.6 ui-sans-serif, system-ui, sans-serif;
+    color: var(--muted); margin: 0;
+  }}
 
   /* --- tailpiece ------------------------------------------------------- */
   .sr-only {{
@@ -690,17 +699,26 @@ GUIDES_TEMPLATE = """<!doctype html>
 <header>
   <div class="wrap">
     <a class="back" href="../">&#8592; Gulf Coast Home Maintenance</a>
-    <h1>How to do each of these</h1>
+    <h1>What is on the calendar</h1>
     <p>
-      Step by step for all thirty-six, including what to have on hand and where
-      people go wrong. Your calendar links straight to the task you were just
-      reminded about.
+      All {total} jobs, in the month each one falls in, with why it matters
+      here rather than wherever the generic advice was written. Your calendar
+      links straight to the task you were just reminded about.
     </p>
-    <p class="count">{covered} of {total} tasks covered</p>
+    <p class="count">{total} jobs across twelve months</p>
   </div>
 </header>
 
 <main class="wrap">
+  <div class="kit-pointer">
+    <h2>Looking for how to actually do one?</h2>
+    <p>
+      The step-by-step for every job on this list, with the tools to have on
+      hand and the mistake that costs money, is in the
+      <a href="../#edition">printable kit</a>. This page is the schedule: what
+      needs doing, when, and why it is timed that way here.
+    </p>
+  </div>
 {body}
 </main>
 
@@ -719,8 +737,8 @@ GUIDES_TEMPLATE = """<!doctype html>
     <h2>Keep them coming</h2>
     <p class="tail-blurb">
       These same thirty-six jobs are three free calendars you subscribe to once.
-      They arrive in the month they matter, and every reminder links back to the
-      guide for it. No signup and no card.
+      They arrive in the month they matter, so you do not have to remember this
+      page exists. No signup and no card.
     </p>
     <p class="tail-actions"><a class="tail-btn" href="../#calendars">Get the free calendars</a></p>
     <p class="tail-kit">
@@ -836,24 +854,23 @@ def guide_section(task):
     for part in parts:
         out.append('        <p>{0}</p>'.format(html_escape(part)))
 
+    # STEPS is deliberately not rendered here. The tools, the numbered steps
+    # and the caution are the kit's content and the kit is the paid product, so
+    # they belong in the PDF and on the Etsy listing, not on a public page.
+    # build_printables.py still imports STEPS and prints all of it.
+    #
+    # What stays is what the .ics feeds already publish: the task, the
+    # instruction, and the why. Withholding those here would hide nothing,
+    # since Google fetches the feed and hands the same text to every
+    # subscriber, and it would leave the thirty-six event links landing on
+    # empty anchors.
+    #
+    # Curated videos stay too when they exist. They are other people's work,
+    # linked and not republished, so they were never the kit's to withhold.
     detail = STEPS.get(slug) or {}
-
-    if detail.get("need"):
-        out.append('        <p class="need"><span>You need</span> {0}</p>'.format(
-            html_escape(" · ".join(detail["need"]))))
-
-    if detail.get("steps"):
-        if detail.get("pro"):
-            out.append('        <p class="pro-note">This one is a job for a '
-                       'professional. What follows is what to ask for.</p>')
-        out.append('        <ol class="steps">')
-        for step in detail["steps"]:
-            out.append('          <li>{0}</li>'.format(html_escape(step)))
-        out.append('        </ol>')
-
-    if detail.get("watch"):
-        out.append('        <p class="watch"><span>Watch out</span> {0}</p>'.format(
-            html_escape(detail["watch"])))
+    if detail.get("pro"):
+        out.append('        <p class="pro-note">This one is a job for a '
+                   'professional rather than a Saturday.</p>')
 
     videos = GUIDES.get(slug) or []
     if videos:
@@ -870,54 +887,43 @@ def guide_section(task):
 
 
 def build_structured_data(tasks):
-    """JSON-LD for the guides page: one HowTo per task that has steps.
+    """JSON-LD for the calendar contents page.
 
-    Only tasks with a real sequence get a HowTo. A HowTo with no steps is not
-    a how-to, and claiming one is the sort of thing that gets structured data
-    ignored across a whole site rather than just on one page.
+    Deliberately not HowTo. A HowTo carries its steps in the markup, so
+    emitting one here would publish in structured data exactly what was just
+    taken out of the visible page, and hand it to every scraper in a tidier
+    form than the page ever had. Structured data is published content, not
+    metadata about it.
+
+    What is left describes the page and lists the tasks by name, which the
+    .ics feeds already publish anyway.
 
     Serialized with json.dumps rather than assembled as text, so a quote or a
-    backslash inside a step cannot break out of the script element. The one
-    sequence json.dumps will not escape for us is "</", which would close the
-    script early, so that is handled after.
+    backslash in a task title cannot break out of the script element. The one
+    sequence json.dumps will not escape is "</", which would close the script
+    early, so that is handled after.
     """
     graph = [{
         "@type": "WebPage",
         "@id": GUIDES_URL + "#page",
         "url": GUIDES_URL,
-        "name": "How to do each of these",
-        "description": "Step by step for all thirty-six Gulf Coast home "
-                       "maintenance tasks.",
+        "name": "What is on the calendar",
+        "description": "The thirty-six jobs on the Gulf Coast home maintenance "
+                       "calendar, and the month each one falls in.",
         "inLanguage": "en-US",
         "isPartOf": {"@type": "WebSite", "url": SITE_URL,
                      "name": "Gulf Coast Home Maintenance"},
-    }]
-
-    for month, _, tier, slug, title, body in tasks:
-        detail = STEPS.get(slug) or {}
-        if not detail.get("steps"):
-            continue
-
-        # The body is "instruction\n\nWhy: ...". The first part is the plain
-        # description of the job, which is what a HowTo wants.
-        summary = [p.strip() for p in body.split("\n\n") if p.strip()]
-
-        howto = {
-            "@type": "HowTo",
-            "@id": guide_url(slug),
-            "name": title,
-            "description": summary[0] if summary else title,
-            "url": guide_url(slug),
-            "step": [
-                {"@type": "HowToStep", "position": index, "text": step}
-                for index, step in enumerate(detail["steps"], start=1)
+        "mainEntity": {
+            "@type": "ItemList",
+            "numberOfItems": len(tasks),
+            "itemListElement": [
+                {"@type": "ListItem", "position": index,
+                 "name": title, "url": guide_url(slug)}
+                for index, (month, _, tier, slug, title, body)
+                in enumerate(tasks, start=1)
             ],
-        }
-        if detail.get("need"):
-            howto["supply"] = [
-                {"@type": "HowToSupply", "name": item} for item in detail["need"]
-            ]
-        graph.append(howto)
+        },
+    }]
 
     payload = json.dumps(
         {"@context": "https://schema.org", "@graph": graph},

@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.9.0**. Everything below is live unless marked otherwise.
+Current version **v1.10.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -12,7 +12,7 @@ Current version **v1.9.0**. Everything below is live unless marked otherwise.
 
 | | What | Where | Price |
 |---|---|---|---|
-| **The calendar** | Three subscribe-able `.ics` feeds, one per tier, plus the site and how-to guides that hand them out | <https://gulfcoasthomemaintenance.com> | Free, and stays free |
+| **The calendar** | Three subscribe-able `.ics` feeds, one per tier, plus the site and the calendar contents page that hand them out | <https://gulfcoasthomemaintenance.com> | Free, and stays free |
 | **The kit** | Every printable page, 27 of them, in two PDFs: print and fillable | Etsy only | $12.99 |
 | **The agent edition** | The same 27 pages branded for a realtor, plus a 4 page leave-behind. Four PDFs, print and fillable of each | Etsy only | $39 |
 
@@ -20,6 +20,14 @@ The words matter and were confused once already. **"Calendar" means the feeds.
 "Kit" means the printables.** A previous session built the printable as a free
 download, which is the opposite arrangement, and unwinding that touched the buy
 slot, the section labels, the README and the listing copy.
+
+**The step-by-step detail is kit only.** Settled by Chad on 2026-08-15 in
+1.10.0. `docs/guides/` used to print all of `STEPS`, the tools, the numbered
+steps and the caution, free to anyone, which gave away the thing the kit is
+sold on. It now lists the thirty-six jobs and the month each falls in, which is
+what the `.ics` feeds publish anyway, and points at the kit for the method.
+Read "What the site may publish" in [README.md](README.md) before adding
+anything to that page, including structured data.
 
 **Owner:** Chad. Bought his first house at forty-five, built the list for
 himself before it was a product. That origin is in the Etsy About section and is
@@ -43,7 +51,7 @@ the strongest thing in the listing. Do not embellish it.
 ## Build
 
 ```bash
-python build_calendars.py       # feeds + guides page, into docs/
+python build_calendars.py       # feeds + calendar contents page, into docs/
 python build_printables.py      # the kit PDF, into product/
 python build_fillable.py        # the fillable twin, needs the PDF above first
 python build_listing_images.py  # nine Etsy photos from the real pages
@@ -58,8 +66,9 @@ python optimize_images.py       # after replacing docs/img/hero.png
 ```
 
 Content lives in three files: `build_calendars.py` holds the 36 tasks and the
-`GUIDES` video table, `task_steps.py` holds the step-by-step detail, and
-`kit_sections.py` holds the seven kit-only conditional sections.
+`GUIDES` video table, which are the free half; `task_steps.py` holds the
+step-by-step detail and `kit_sections.py` the seven conditional sections, both
+of which are **kit only and must not reach the site**.
 
 **`docs/index.html` is hand-written. Everything in `docs/guides/` and
 `product/` is generated.** Edit the Python, not the output.
@@ -273,22 +282,6 @@ warm and the upsell follows immediately. It was flagged rather than changed:
 published permissions are hard to take back, and this one is Chad's call. Do
 not improvise a stance on gifting in a customer reply either. Answer the
 question actually asked, and if someone asks outright, ask Chad.
-
-**8. Open question: should the step-by-step detail stay free?** On 2026-08-15
-Chad declined to split the guides page into per-task pages on the grounds that
-the content is proprietary and people should pay for it. **It is already public
-and free**, and has been since the guides page shipped: all thirty-six jobs with
-tools, numbered steps and the caution, no signup, and every calendar event links
-straight to it. That was a deliberate earlier decision, recorded in
-[README.md](README.md) as "Free on the guides page, and printed in the kit".
-
-The question was raised and left open rather than settled. What the kit actually
-holds back is the Big Ticket Watch List (the site teases eight of seventeen
-lifespans), How To Find Out, Your First Month, the seven conditional sections,
-and the print and fillable formats. If the steps ever do move behind the
-paywall, note the cost: all thirty-six events deep link to `guides/#slug`, so
-those links break, the site loses its only real search asset, and changing event
-text needs a `SEQUENCE` bump. **Do not act on this either way without asking.**
 
 **Unverified:**
 
