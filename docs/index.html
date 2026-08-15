@@ -389,7 +389,7 @@
   }
   /* A buy button should look heavier than a nav link, and wide enough to hold
      its own against a 2.6rem price directly above it. */
-  #buy-slot .btn--lg {
+  #buy-slot .btn--lg, #agent-slot .btn--lg {
     /* inline-block, or min-width is ignored: it does not apply to inline
        elements, and an anchor is inline unless told otherwise. */
     display: inline-block;
@@ -397,9 +397,9 @@
     min-width: 17rem; letter-spacing: .01em;
     box-shadow: 0 2px 0 color-mix(in srgb, var(--accent) 62%, black);
   }
-  #buy-slot .btn--lg:hover { filter: brightness(1.06); }
+  #buy-slot .btn--lg:hover, #agent-slot .btn--lg:hover { filter: brightness(1.06); }
   @supports not (background: color-mix(in srgb, red 50%, transparent)) {
-    #buy-slot .btn--lg { box-shadow: 0 2px 0 #0a3f48; }
+    #buy-slot .btn--lg, #agent-slot .btn--lg { box-shadow: 0 2px 0 #0a3f48; }
   }
   .buy p { color: var(--muted); max-width: 30rem; margin-left: auto; margin-right: auto; font-size: .97rem; }
   .buy p:last-child { margin-bottom: 0; }
@@ -812,6 +812,52 @@
         <div id="buy-slot"></div>
         <p class="buy-note">Instant download &middot; Two PDFs &middot; Print at home on letter paper</p>
       </div>
+
+      <!-- An agent reading this card is the person who needs redirecting, and
+           the license here is for one household. -->
+      <p style="margin-top:1.4rem;font-size:.88rem">
+        Buying for clients rather than your own house? There's
+        <a href="#agents">an agent edition</a> licensed for exactly that.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== agents ===================== -->
+<!-- Directly under the kit, because the agent who needs this is most likely
+     reading that card and running into a license written for one household.
+     Left off the band on purpose: the kit's card sits on the deep ground and
+     stays the louder of the two, which is the right order for most visitors. -->
+<section id="agents">
+  <div class="wrap">
+    <span class="sec-no">05 / For agents</span>
+    <h2>The agent edition</h2>
+    <p class="deck">
+      If you hand a client something at closing, this is the version built for it.
+      The same twelve months, branded with your name and brokerage on every page,
+      and licensed to print for every client you close.
+    </p>
+
+    <div class="buy">
+      <h3>Branded for your brokerage</h3>
+      <p class="buy-blurb">
+        The full twenty-seven page kit with your details on every page, plus a
+        four-page leave-behind for the closing table, because handing over
+        twenty-seven pages twenty times is 540 sheets and nobody does that twice.
+        Type your name in once and save it, or send your logo and I'll build your
+        copies for you at no extra charge.
+      </p>
+
+      <div class="buy-action">
+        <p class="buy-price"><span class="amt">$39</span><span class="per">one time, print for every client</span></p>
+        <div id="agent-slot"></div>
+        <p class="buy-note">Instant download &middot; Four PDFs &middot; Client gifting license</p>
+      </div>
+
+      <p style="margin-top:1.4rem;font-size:.88rem">
+        The leave-behind points your client at the free phone calendars, so the
+        gift keeps arriving long after the paper gets filed.
+      </p>
     </div>
   </div>
 </section>
@@ -819,7 +865,7 @@
 <!-- ===================== calendars ===================== -->
 <section id="calendars">
   <div class="wrap">
-    <span class="sec-no">05 / Free</span>
+    <span class="sec-no">06 / Free</span>
     <h2>Put it on your phone <span class="free-tag">Free</span></h2>
     <p class="deck">
       <strong>All three of these are free.</strong> Not a sample of the kit above and
@@ -875,7 +921,7 @@
 <!-- ===================== how to ===================== -->
 <section class="band">
   <div class="wrap">
-    <span class="sec-no">06 / Getting them on your phone</span>
+    <span class="sec-no">07 / Getting them on your phone</span>
     <h2>However you keep your calendar</h2>
 
     <div class="howto">
@@ -932,7 +978,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.6.0</p>
+    <p class="version">v1.7.0</p>
   </div>
 </footer>
 
@@ -951,30 +997,47 @@
   // The price lives in one place, the .buy-price line in the markup above, so
   // changing it does not mean hunting through the script as well.
   var SHOP_URL = "https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast";
+
+  // The realtor edition, sold separately at $39. Same rules: the listing URL,
+  // not the shop URL, and emptying it puts that card back to "not listed yet"
+  // without touching the kit's card.
+  var AGENT_URL = "https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast";
   // ---------------------------------------------------------------------------
 
   (function () {
     var COPY_LABEL = 'Copy feed URL';
     var calendars = document.getElementById('calendars');
 
-    if (SHOP_URL) {
-      // Built as a node rather than an HTML string: SHOP_URL is pasted in by
-      // hand, and a stray quote in it would otherwise break out of the markup.
-      var buy = document.createElement('a');
-      buy.className = 'btn btn--primary btn--lg';
-      buy.href = SHOP_URL;
-      buy.target = '_blank';
-      buy.rel = 'noopener';
-      buy.textContent = 'Get the kit on Etsy';
-      document.getElementById('buy-slot').appendChild(buy);
-    } else {
-      // No listing, so hide the price and the download promise: both would be
-      // advertising something nobody can buy.
-      document.querySelectorAll('.buy-price, .buy-note').forEach(function (el) {
-        el.hidden = true;
-      });
-      document.getElementById('buy-slot').textContent = 'Not listed yet.';
+    // Scoped to one card, not the whole document. There are two products now,
+    // and the old version hid every .buy-price and .buy-note on the page, so an
+    // empty URL on either card would have blanked the price on the other one.
+    function wireBuy(slotId, url, label) {
+      var slot = document.getElementById(slotId);
+      if (!slot) return;
+
+      if (url) {
+        // Built as a node rather than an HTML string: the URL is pasted in by
+        // hand, and a stray quote in it would otherwise break out of the markup.
+        var buy = document.createElement('a');
+        buy.className = 'btn btn--primary btn--lg';
+        buy.href = url;
+        buy.target = '_blank';
+        buy.rel = 'noopener';
+        buy.textContent = label;
+        slot.appendChild(buy);
+        return;
+      }
+
+      // No listing, so hide this card's price and download promise: both would
+      // be advertising something nobody can buy.
+      (slot.closest('.buy') || document)
+        .querySelectorAll('.buy-price, .buy-note')
+        .forEach(function (el) { el.hidden = true; });
+      slot.textContent = 'Not listed yet.';
     }
+
+    wireBuy('buy-slot', SHOP_URL, 'Get the kit on Etsy');
+    wireBuy('agent-slot', AGENT_URL, 'Get the agent edition on Etsy');
 
     // The signup posts straight to MailerLite through a hidden frame,
     // so there is no library to load and the visitor never leaves the page. We

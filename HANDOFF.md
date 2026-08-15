@@ -4,16 +4,17 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.6.0**. Everything below is live unless marked otherwise.
+Current version **v1.7.0**. Everything below is live unless marked otherwise.
 
 ---
 
-## The two products
+## The three products
 
 | | What | Where | Price |
 |---|---|---|---|
 | **The calendar** | Three subscribe-able `.ics` feeds, one per tier, plus the site and how-to guides that hand them out | <https://gulfcoasthomemaintenance.com> | Free, and stays free |
 | **The kit** | Every printable page, 27 of them, in two PDFs: print and fillable | Etsy only | $12.99 |
+| **The agent edition** | The same 27 pages branded for a realtor, plus a 4 page leave-behind. Four PDFs, print and fillable of each | Etsy only | $39 |
 
 The words matter and were confused once already. **"Calendar" means the feeds.
 "Kit" means the printables.** A previous session built the printable as a free
@@ -31,7 +32,8 @@ the strongest thing in the listing. Do not embellish it.
   redirects, so anything already pointing there still works.
 - **Repo:** <https://github.com/Viqeaux/gulf-coast-home-maintenance>, **public**.
 - **Etsy shop:** GulfCoastHomeCare
-- **Etsy listing:** <https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast>
+- **Etsy listing, the kit:** <https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast>
+- **Etsy listing, the agent edition:** <https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast>
 - **Email:** MailerLite, group **"General Signups"**, double opt-in on. It began
   as a waitlist for the kit and the buy button retired that job, so in 1.6.0 it
   became a general "hear about the next one" list living at the end of the free
@@ -46,6 +48,9 @@ python build_printables.py      # the kit PDF, into product/
 python build_fillable.py        # the fillable twin, needs the PDF above first
 python build_listing_images.py  # nine Etsy photos from the real pages
 python build_video.py           # the 14 second Etsy listing video
+python build_agent_edition.py   # the realtor edition, four PDFs. --logo bakes one in
+python build_agent_listing.py   # nine photos for the realtor listing
+python build_video.py --agent   # the realtor cut of the video
 python build_brand.py           # shop icon and banner
 python check_links.py           # finds curated videos that have died
 python optimize_images.py       # after replacing docs/img/hero.png
@@ -153,11 +158,21 @@ for other climates are a later product line, not a rebrand.
 
 ## Outstanding
 
-**The listing is done.** Files, title, description, tags, category, price,
-photos, video, shop icon and banner are all live and current. The description
-matches [product/etsy-listing.md](product/etsy-listing.md), including the
-personal-use license that deliberately withholds bulk client printing and
-redirects agents to message about the coming edition.
+**Both listings are done.** Files, title, description, tags, materials,
+category, price, photos and video are live and current for each, and they match
+[product/etsy-listing.md](product/etsy-listing.md) and
+[product/etsy-listing-realtor.md](product/etsy-listing-realtor.md). The kit's
+personal-use license still withholds bulk client printing, which is what makes
+the agent edition worth buying, and it now points at that listing rather than
+promising a future one.
+
+**The agent edition takes work per order, but only sometimes.** Text branding is
+self-serve: the buyer types into AcroForm fields and saves. A logo cannot work
+that way, so a logo means running `build_agent_edition.py --logo` for that order
+and sending the four files back through Etsy Messages. Four minutes. The listing
+has **no custom option fields on purpose**, so nothing at checkout promises the
+buyer anything that depends on you being awake. Read the "Why no custom options"
+section before adding any.
 
 **The site has nothing open.** The future-releases signup was the last item and
 it shipped in 1.6.0, so the site can reach an interested visitor again. Nothing
@@ -175,20 +190,10 @@ on it is known to be broken or missing.
 
 **Next products, in order:**
 
-2. **The realtor edition.** The best opportunity in the data: 9,400 searches
-   against 31k listings, twenty times the ratio of anything else. Agents are
-   local by definition, so the regional angle helps rather than limits, and they
-   buy in bulk and repeatedly. The kit's license already points agents here, so
-   there may be messages waiting. **One decision is blocking the build:** manual
-   personalization via Etsy's personalization field, which justifies $39 to $59
-   but needs a rebuild per order, versus a blank "Compliments of ___" line that
-   scales with no work per sale. **Chad is deliberately leaving this for later,
-   as of 2026-08-14.** Do not keep re-raising it. Nothing else about the product
-   is blocked, so it can move the day he calls it.
-3. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
+1. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
    plumbing is done. Adding entries puts links on the guides page and into the
    calendar events. **Adding the first one requires a `SEQUENCE` bump**, since
    it changes what subscribers see. `check_links.py` finds dead ones.
-4. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
+2. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
    South regional rather than coastal-only, so a Texas or Florida edition is a
    retiming and a relabeling, not a rewrite.

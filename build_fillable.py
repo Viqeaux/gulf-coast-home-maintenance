@@ -136,16 +136,12 @@ def overlay(fields_by_page, page_count):
     return buffer
 
 
-def main():
-    chrome = find_chrome()
-    if not chrome:
-        print("No Chrome or Edge found.")
-        return 1
-    if not os.path.exists(BASE_PDF):
-        print("Run build_printables.py first, {0} is missing.".format(BASE_PDF))
-        return 1
+def stamp(chrome, html, base_pdf, out_pdf):
+    """Measure the blanks in `html` and lay real form fields over `base_pdf`.
 
-    html, page_count = build_html()
+    Kept separate from main() because the realtor edition needs the same
+    treatment on two documents, the branded kit and the short leave-behind.
+    """
     fields = measure(chrome, html)
 
     by_page = {}
@@ -157,7 +153,7 @@ def main():
     print("measured {0} fields across {1} pages: {2} text, {3} checkbox".format(
         len(fields), len(by_page), texts, checks))
 
-    base = PdfReader(BASE_PDF)
+    base = PdfReader(base_pdf)
 
     # Clone from the overlay, not the other way round. A form lives in the
     # document catalog as well as on the page: merging the overlay into the base
@@ -171,8 +167,22 @@ def main():
 
     # Without this, some readers show typed text only while a field has focus.
     writer.set_need_appearances_writer(True)
-    with open(OUT_PDF, "wb") as handle:
+    with open(out_pdf, "wb") as handle:
         writer.write(handle)
+    return out_pdf
+
+
+def main():
+    chrome = find_chrome()
+    if not chrome:
+        print("No Chrome or Edge found.")
+        return 1
+    if not os.path.exists(BASE_PDF):
+        print("Run build_printables.py first, {0} is missing.".format(BASE_PDF))
+        return 1
+
+    html, _ = build_html()
+    stamp(chrome, html, BASE_PDF, OUT_PDF)
 
     print("{0}  {1:,} bytes".format(OUT_PDF, os.path.getsize(OUT_PDF)))
     return 0

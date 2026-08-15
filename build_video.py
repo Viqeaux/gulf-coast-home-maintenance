@@ -10,10 +10,17 @@ letting the page speak for itself.
 Square, because Etsy shows the video inside the image carousel and a square
 survives every crop it might get.
 
-Run:  python build_video.py
-Out:  product/listing/video.mp4   (gitignored, rebuilt in seconds)
+Run:  python build_video.py            the kit cut
+      python build_video.py --agent    the realtor cut
+Out:  product/listing/video.mp4            (gitignored, rebuilt in seconds)
+      product/listing-realtor/video.mp4
+
+The two cuts share every frame, crossfade and encoding decision and differ only
+in which images they pull and what the captions say. The realtor cut argues a
+different case: its buyer is not the person who reads the thing.
 """
 
+import argparse
 import os
 import shutil
 import subprocess
@@ -42,7 +49,7 @@ SANS = os.path.join(FONT_DIR, "segoeuib.ttf")
 
 # Each shot is one page and one point. Order is the argument the listing makes:
 # who it is for, what is in it, what makes it worth money, what it costs you.
-SHOTS = [
+KIT_SHOTS = [
     ("01-cover.png", "Built for the Gulf Coast", "Texas to Florida"),
     ("03-may.png", "Twelve months, three levels", "Step by step, not a bare list"),
     ("02-watch-list.png", "Everything is on a clock", "Lifespans adjusted for this coast"),
@@ -51,11 +58,35 @@ SHOTS = [
     ("04-the-year.png", "Why May, not June", "A flood policy takes 30 days"),
 ]
 
-END_LINES = [
+KIT_END_LINES = [
     ("27 pages", SERIF, 96, INK),
     ("Undated, so it never expires", SERIF, 44, MUTED),
     ("INSTANT DOWNLOAD", SANS, 30, ACCENT),
 ]
+
+# The realtor cut argues something different: the buyer is not the reader. It
+# has to establish the branding first, because that is the whole reason an agent
+# is paying three times the price, and close on the license.
+# Portrait sources only. page_frame fixes the height and derives the width, so a
+# 4:3 composition comes back shrunk to fit a square frame, and the caption it
+# already carries ends up unreadable above the caption this adds.
+AGENT_SHOTS = [
+    ("01-cover.png", "Your name on the cover", "Branded in about a minute"),
+    ("07-full-kit.png", "And on all 27 pages", "Look along the footer"),
+    ("04-watch-list.png", "The page they keep", "Seventeen things already on a clock"),
+    ("05-the-year.png", "Built for this coast", "Why May, not June"),
+    ("06-first-month.png", "Four pages to hand over", "Not thirty, twenty times"),
+    ("08-license.png", "Print for every client", "A client gifting license"),
+]
+
+AGENT_END_LINES = [
+    ("27 pages, branded", SERIF, 80, INK),
+    ("Plus a four page leave-behind", SERIF, 42, MUTED),
+    ("INSTANT DOWNLOAD", SANS, 30, ACCENT),
+]
+
+SHOTS = KIT_SHOTS
+END_LINES = KIT_END_LINES
 
 
 def font(path, size):
@@ -109,7 +140,7 @@ def end_frame():
         tracking = 6 if path == SANS and text.isupper() else 0
         centered(draw, y, text, font(path, size), color, tracking)
         y += size + 58
-        if text == "27 pages":
+        if text == END_LINES[0][0]:
             draw.line([(SIZE // 2 - 60, y - 26), (SIZE // 2 + 60, y - 26)],
                       fill=SAND, width=5)
     centered(draw, 760, "GULF COAST HOME MAINTENANCE",
@@ -121,11 +152,29 @@ def blend(a, b, t):
     return Image.blend(a, b, t)
 
 
-def main():
+def main(argv=None):
+    global LISTING_DIR, FRAME_DIR, OUT, SHOTS, END_LINES
+
+    parser = argparse.ArgumentParser(
+        description="Build the Etsy listing video from the real pages.")
+    parser.add_argument("--agent", action="store_true",
+                        help="the realtor edition cut, from "
+                             "product/listing-realtor/")
+    args = parser.parse_args(argv)
+
+    source = "build_listing_images.py"
+    if args.agent:
+        LISTING_DIR = os.path.join("product", "listing-realtor")
+        FRAME_DIR = os.path.join(LISTING_DIR, "_frames")
+        OUT = os.path.join(LISTING_DIR, "video.mp4")
+        SHOTS = AGENT_SHOTS
+        END_LINES = AGENT_END_LINES
+        source = "build_agent_listing.py"
+
     missing = [s[0] for s in SHOTS
                if not os.path.exists(os.path.join(LISTING_DIR, s[0]))]
     if missing:
-        print("Run build_listing_images.py first, missing: " + ", ".join(missing))
+        print("Run {0} first, missing: {1}".format(source, ", ".join(missing)))
         return 1
 
     if os.path.isdir(FRAME_DIR):

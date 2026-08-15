@@ -103,7 +103,7 @@ This is a personal use license. Print as many copies as you need for your own ho
 
 Please do not resell the file, share it as a file, or list it anywhere as your own. If someone wants a copy, send them the listing.
 
-Real estate agents and inspectors: an agent edition made for client gifting is coming. Message me and you will hear about it first.
+Real estate agents: there is an agent edition made for client gifting, branded with your name and licensed to print for every client you close. Search my shop for "Realtor Closing Gift" or message me and I will send you the link.
 
 FREE CALENDARS FOR YOUR PHONE
 
@@ -261,8 +261,9 @@ gulfcoasthomemaintenance.com. They need no purchase.
 
 **Can I give this to my clients?**
 A printed copy as a closing or housewarming gift, gladly. For copies across
-many clients, message me: an agent edition with a client-gifting license is
-coming, and asking is how you hear about it first.
+many clients, there is an agent edition with a client-gifting license, branded
+with your name on every page. Search my shop for "Realtor Closing Gift", or
+message me and I will send you the link.
 
 ---
 

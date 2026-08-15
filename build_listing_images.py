@@ -101,13 +101,17 @@ def find_chrome():
     return None
 
 
-def shot(chrome, html_path, out_path, width, height, scale):
+def shot(chrome, html_path, out_path, width, height, scale, extra=None):
+    """`extra` takes additional Chrome flags. The realtor compositions set
+    --disable-lcd-text: they place small type at fractional scale, where
+    subpixel antialiasing leaves colored fringes on the letters."""
     subprocess.run([
         chrome, "--headless", "--disable-gpu", "--no-sandbox",
         "--hide-scrollbars",
         "--force-device-scale-factor={0}".format(scale),
         "--default-background-color=ffffff",
         "--window-size={0},{1}".format(width, height),
+    ] + list(extra or []) + [
         "--screenshot=" + os.path.abspath(out_path),
         "file:///" + os.path.abspath(html_path).replace("\\", "/"),
     ], check=True, capture_output=True, timeout=120)

@@ -27,6 +27,52 @@ Newest first.
 
 ---
 
+## [1.7.0], 2026-08-15
+
+### Added
+
+- **The realtor edition, and a section on the site that sells it.** A second
+  paid product at $39: the full 27 page kit branded with an agent's name,
+  brokerage, phone and license number on every page, plus a four page
+  leave-behind for the closing table. `realtor closing gift` draws 9,400
+  searches a month against 31.3k listings, a ratio of 1:3.3, where nothing else
+  in the market data beats 1:21. Minor rather than patch: the site gained a
+  section and a second buy path.
+- The section sits directly under the kit rather than at the end. The agent who
+  needs it is most likely reading the kit card and running into a license
+  written for one household, so that card now points at it.
+- **`build_agent_edition.py`**, producing four files, each document in a print
+  and a fillable version. Run with no arguments, every detail comes out as a
+  ruled blank that `build_fillable.py` turns into a form field, so an agent
+  types their details once and saves, with no work per order. Pass `--logo` and
+  it is baked in at build time, which is the only part that costs anything per
+  sale. AcroForm has no image field an ordinary reader will populate, so a logo
+  cannot be self-serve however much one would like it to be.
+- **Why a four page leave-behind exists at all.** Handing a client 27 pages
+  twenty times is 540 sheets, and nobody does that twice. The license was never
+  the thing worth paying for, because it cannot be enforced on a PDF. What the
+  $12.99 kit genuinely cannot do is fit the job.
+- **A `BRAND` block in `build_printables.py`**, disabled by default. With it off
+  the kit builds byte-identical to `HEAD`, verified by an A/B against a clean
+  checkout.
+- **`build_agent_listing.py`** and an `--agent` mode on `build_video.py`, for
+  nine listing photos and a 14 second video. Two photos exist only for this
+  listing: a footer close-up at twice actual size, the only way to prove the
+  branding runs past the cover, and a blank cover beside a filled one, which
+  answers the assumption that this is made to order and will be waited on.
+
+### Fixed
+
+- **The buy slot hid every price on the page, not only its own.** With one
+  product that was invisible. With two, an empty `AGENT_URL` would have blanked
+  the kit's price and download promise as well. Now scoped to the card that owns
+  the slot.
+
+### Changed
+
+- The kit's listing copy no longer says an agent edition is coming, in both the
+  license paragraph and the client-gifting question. It is here.
+
 ## [1.6.0], 2026-08-14
 
 ### Added

@@ -22,6 +22,7 @@ Out:  product/gulf-coast-home-maintenance-kit.html   (source, edit the generator
       product/gulf-coast-home-maintenance-kit.pdf    (the deliverable, sold on Etsy)
 """
 
+import base64
 import os
 import subprocess
 import sys
@@ -42,6 +43,26 @@ CHROME_CANDIDATES = [
     r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
     r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
 ]
+
+# Agent branding for the realtor edition. Disabled means the ordinary kit, and
+# the build comes out byte-identical to what it was before any of this existed.
+#
+# Everything except the logo can be filled in by the buyer: build_fillable.py
+# stamps AcroForm text fields over the blank lines, so an agent types their
+# details once, saves, and prints forever. A logo cannot work that way, because
+# AcroForm has no image field any ordinary reader will populate. So a logo, and
+# only a logo, means running this build for that one order.
+BRAND = {
+    "enabled": False,
+    "agent": "",
+    "brokerage": "",
+    "phone": "",
+    "license": "",
+    # PNG, JPG or SVG, on a transparent or white background. A logo sitting on
+    # a dark block prints an ink slab on all 27 pages, which is the one thing
+    # this kit is built not to do.
+    "logo": "",
+}
 
 MONTHS = ["January", "February", "March", "April", "May", "June", "July",
           "August", "September", "October", "November", "December"]
@@ -113,6 +134,123 @@ def esc(text):
     return (text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
 
 
+# --- agent branding --------------------------------------------------------
+
+# Order on the cover, and the caption under each blank line. Brokerage is not
+# decoration: agent-branded handouts count as advertising, and several states
+# require the broker's name on one.
+BRAND_LABELS = [
+    ("agent", "Name"),
+    ("brokerage", "Brokerage"),
+    ("phone", "Phone"),
+    ("license", "License #"),
+]
+
+
+def logo_data_uri():
+    """Read the logo once, hand back a data URI, so the HTML needs no files
+    sitting next to it."""
+    path = BRAND["logo"]
+    if not os.path.exists(path):
+        raise SystemExit("Logo not found: {0}".format(path))
+    mimes = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+             ".svg": "image/svg+xml"}
+    ext = os.path.splitext(path)[1].lower()
+    if ext not in mimes:
+        raise SystemExit(
+            "Logo has to be PNG, JPG or SVG. Got: {0}".format(ext or "no extension"))
+    with open(path, "rb") as handle:
+        blob = base64.b64encode(handle.read()).decode("ascii")
+    return "data:{0};base64,{1}".format(mimes[ext], blob)
+
+
+def brand_css():
+    """The styles only a branded build needs, appended to CSS.
+
+    The logo arrives as a background image rather than an <img>, so its base64
+    sits in the stylesheet once instead of being repeated on every page.
+    """
+    if not BRAND["enabled"]:
+        return ""
+    css = (
+        '\n  /* --- agent branding -------------------------------------------------- */\n'
+        '  .foot-brand { display: flex; align-items: center; gap: 5pt; }\n'
+        '  .brand-block { margin-top: 30pt; }\n'
+        '  .brand-label {\n'
+        '    font: 700 7pt/1 "Segoe UI", system-ui, sans-serif;\n'
+        '    letter-spacing: .2em; text-transform: uppercase; color: var(--sand);\n'
+        '    margin: 0 0 10pt;\n'
+        '  }\n'
+        '  .brand-line { font-size: 11pt; color: var(--ink); margin: 0 0 2pt; }\n'
+        '  .brand-line--blank {\n'
+        '    border-bottom: 0.5pt solid var(--muted); max-width: 3.1in; margin: 0;\n'
+        '  }\n'
+        '  .brand-hint {\n'
+        '    font: 5.5pt/1 "Segoe UI", system-ui, sans-serif; letter-spacing: .16em;\n'
+        '    text-transform: uppercase; color: var(--muted); margin: 3pt 0 9pt;\n'
+        '  }\n'
+        # Lives here rather than in CSS so the unbranded kit keeps building
+        # byte-identical. Only the leave-behind ever uses it.
+        '  .cover-feeds {\n'
+        '    margin: 34pt 0 0; padding-top: 10pt; border-top: 0.5pt solid var(--hair);\n'
+        '    font-size: 9.5pt; line-height: 1.45; color: var(--body); max-width: 3.9in;\n'
+        '  }\n'
+        '  .cover-feeds strong { color: var(--ink); }\n'
+    )
+    if BRAND["logo"]:
+        css += (
+            '  .foot-logo {{ flex: none; height: 13pt; width: 64pt; }}\n'
+            '  .brand-logo {{ height: 32pt; width: 2in; margin: 0 0 14pt; }}\n'
+            '  .foot-logo, .brand-logo {{\n'
+            '    background: url("{0}") left center / contain no-repeat;\n'
+            '  }}\n'.format(logo_data_uri())
+        )
+    return css
+
+
+def brand_foot():
+    """The left half of the running footer. Unbranded it is the product name,
+    exactly as it always was."""
+    if not BRAND["enabled"]:
+        return '<span>Gulf Coast Home Maintenance</span>'
+    if BRAND["logo"]:
+        # Most brokerage logos are a wide lockup of the brokerage name, so
+        # setting that beside the same words in 6.5pt caps crowds the rule and
+        # makes the mark illegible. The logo carries the brokerage here, and the
+        # cover carries it as text, which is the surface that has to be readable.
+        mark = '<span class="foot-logo"></span>'
+        label = BRAND["agent"] or BRAND["brokerage"]
+    else:
+        mark = ""
+        label = ", ".join(part for part in (BRAND["agent"], BRAND["brokerage"]) if part)
+    return '<span class="foot-brand">{0}<span>{1}</span></span>'.format(
+        mark, esc(label or "Gulf Coast Home Maintenance"))
+
+
+def brand_block():
+    """The Compliments Of panel on the cover.
+
+    A value that is set gets printed. A value left empty becomes a ruled blank,
+    which build_fillable.py finds by its data-fill and turns into a field the
+    agent types once and saves. That is why the text half of this costs nothing
+    per order.
+    """
+    if not BRAND["enabled"]:
+        return ""
+    rows = '        <div class="brand-logo"></div>\n' if BRAND["logo"] else ""
+    for key, hint in BRAND_LABELS:
+        if BRAND[key]:
+            rows += '        <p class="brand-line">{0}</p>\n'.format(esc(BRAND[key]))
+        else:
+            rows += ('        <p class="brand-line brand-line--blank" '
+                     'data-fill="text">&nbsp;</p>\n'
+                     '        <p class="brand-hint">{0}</p>\n'.format(esc(hint)))
+    return ('      <div class="brand-block">\n'
+            '        <p class="brand-label">Compliments of</p>\n'
+            '{0}'
+            '      </div>\n'.format(rows))
+
+
 # --- page helpers ----------------------------------------------------------
 
 def page(inner, foot="", classes=""):
@@ -120,13 +258,15 @@ def page(inner, foot="", classes=""):
     return (
         '<section class="{0}">\n'
         '  <div class="sheet">\n{1}\n  </div>\n'
-        '  <footer class="page-foot"><span>Gulf Coast Home Maintenance</span>'
+        '  <footer class="page-foot">{3}'
         '<span>{2}</span></footer>\n'
-        '</section>'.format(cls, inner, foot)
+        '</section>'.format(cls, inner, foot, brand_foot())
     )
 
 
-def cover_page():
+def cover_page(extra=""):
+    """`extra` is for the leave-behind, which closes the cover by pointing at
+    the free feeds. It stays out of the kit, whose cover is already settled."""
     return page(
         '    <div class="cover">\n'
         '      <p class="kicker">The</p>\n'
@@ -135,7 +275,8 @@ def cover_page():
         '      <p class="cover-sub">Twelve months, three tiers, and the list of everything '
         'in your house that is already on a clock.</p>\n'
         '      <p class="cover-note">Undated. It never expires, so start any month you like.</p>\n'
-        '    </div>',
+        '{0}{1}'
+        '    </div>'.format(brand_block(), extra),
         foot="")
 
 
@@ -690,7 +831,7 @@ def build_html():
     pages.append(conditional_intro_page())
     for section in SECTIONS:
         pages.append(conditional_page(section))
-    return DOCUMENT.format(css=CSS, body="\n".join(pages),
+    return DOCUMENT.format(css=CSS + brand_css(), body="\n".join(pages),
                            version=VERSION, disclaimer=DISCLAIMER), len(pages)
 
 
