@@ -27,6 +27,23 @@ Newest first.
 
 ---
 
+## [1.15.1], 2026-08-15
+
+### Changed
+
+- **Every button that ends at an Etsy checkout is gold.** All six of them, the
+  three in the shop grid and the three on the product cards, so "this one costs
+  money" is a color the reader learns once. New `.btn--buy`, reusing the exact
+  pair the hero's primary button already used rather than introducing a yellow:
+  `--sand` with `--deep` text, because white on sand lands near 3:1 and fails.
+  Measures 5.35 on the light scheme and 8.06 on the dark one.
+- The big buy buttons carry a 2px shadow that was mixed from `--accent`. It now
+  mixes from `--sand`, or a teal lip sat under a gold button. The no-`color-mix`
+  fallback moved with it.
+- **The agent edition reads $39.00 rather than $39**, on the shop card and on
+  its buy card, so all three prices carry cents. The structured data already
+  said 39.00 and is unchanged.
+
 ## [1.15.0], 2026-08-15
 
 ### Added

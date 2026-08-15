@@ -328,6 +328,16 @@
     color: var(--on-tier);
   }
   .btn--primary:hover { filter: brightness(1.09); }
+
+  /* Every button that ends at a checkout is gold, so "this one costs money" is
+     a color the reader learns once and then recognizes anywhere on the page.
+     The same pair the hero's primary button already uses: --sand needs dark
+     text on it, because white lands near 3:1 and fails. The hover keeps the
+     border gold too, or the shared .btn:hover rule repaints it teal. */
+  .btn--buy {
+    background: var(--sand); border-color: var(--sand); color: var(--deep);
+  }
+  .btn--buy:hover { filter: brightness(1.08); border-color: var(--sand); }
   .btn--lg { padding: .95rem 1.5rem; font-size: 15px; }
   .btn--copied { border-color: var(--tier-color, var(--accent)); color: var(--tier-color, var(--accent)); }
   .hero .btn { border-color: color-mix(in srgb, var(--on-deep) 32%, transparent); color: var(--on-deep); }
@@ -610,11 +620,11 @@
     display: inline-block;
     padding: 1.1rem 2.4rem; font-size: 16.5px; border-radius: 3px;
     min-width: 17rem; letter-spacing: .01em;
-    box-shadow: 0 2px 0 color-mix(in srgb, var(--accent) 62%, black);
+    box-shadow: 0 2px 0 color-mix(in srgb, var(--sand) 62%, black);
   }
   #buy-slot .btn--lg:hover, #binder-slot .btn--lg:hover, #agent-slot .btn--lg:hover { filter: brightness(1.06); }
   @supports not (background: color-mix(in srgb, red 50%, transparent)) {
-    #buy-slot .btn--lg, #binder-slot .btn--lg, #agent-slot .btn--lg { box-shadow: 0 2px 0 #0a3f48; }
+    #buy-slot .btn--lg, #binder-slot .btn--lg, #agent-slot .btn--lg { box-shadow: 0 2px 0 #7a5719; }
   }
   .buy p { color: var(--muted); max-width: 30rem; margin-left: auto; margin-right: auto; font-size: .97rem; }
   .buy p:last-child { margin-bottom: 0; }
@@ -1028,7 +1038,7 @@
           <h3>The maintenance kit</h3>
           <p class="pcard-line">Twelve months at three levels of effort, the Big Ticket Watch List, and seven sections for whatever your house happens to have. Twenty-seven pages, undated.</p>
           <p class="pcard-price">$12.99</p>
-          <a class="btn btn--primary" target="_blank" rel="noopener"
+          <a class="btn btn--buy" target="_blank" rel="noopener"
              href="https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast">Buy on Etsy</a>
           <a class="pcard-more" href="#edition">What's in it</a>
         </div>
@@ -1041,7 +1051,7 @@
           <h3>The storm season binder</h3>
           <p class="pcard-line">Policies, a room by room inventory, the countdown, and the damage and claim logs that decide what actually gets paid. Thirty-three pages, undated.</p>
           <p class="pcard-price">$16.99</p>
-          <a class="btn btn--primary" target="_blank" rel="noopener"
+          <a class="btn btn--buy" target="_blank" rel="noopener"
              href="https://www.etsy.com/listing/4556502794/hurricane-prep-binder-printable-home">Buy on Etsy</a>
           <a class="pcard-more" href="#binder">What's in it</a>
         </div>
@@ -1053,8 +1063,8 @@
         <div class="pcard-body">
           <h3>The agent edition</h3>
           <p class="pcard-line">The same kit with your name and brokerage on every page, plus a four-page leave-behind, licensed to print for every client you close.</p>
-          <p class="pcard-price">$39</p>
-          <a class="btn btn--primary" target="_blank" rel="noopener"
+          <p class="pcard-price">$39.00</p>
+          <a class="btn btn--buy" target="_blank" rel="noopener"
              href="https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast">Buy on Etsy</a>
           <a class="pcard-more" href="#agents">What's in it</a>
         </div>
@@ -1314,7 +1324,7 @@
       <div class="buy-action">
         <p class="buy-price"><span class="amt">$12.99</span><span class="per">one time, no subscription</span></p>
         <div id="buy-slot">
-          <a class="btn btn--primary btn--lg" target="_blank" rel="noopener"
+          <a class="btn btn--buy btn--lg" target="_blank" rel="noopener"
              href="https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast">Get the kit on Etsy</a>
         </div>
         <p class="buy-note">Instant download &middot; Two PDFs &middot; Print at home on letter paper</p>
@@ -1394,7 +1404,7 @@
       <div class="buy-action">
         <p class="buy-price"><span class="amt">$16.99</span><span class="per">one time, use it every season</span></p>
         <div id="binder-slot">
-          <a class="btn btn--primary btn--lg" target="_blank" rel="noopener"
+          <a class="btn btn--buy btn--lg" target="_blank" rel="noopener"
              href="https://www.etsy.com/listing/4556502794/hurricane-prep-binder-printable-home">Get the binder on Etsy</a>
         </div>
         <p class="buy-note">Instant download &middot; Two PDFs &middot; 1,876 fillable fields</p>
@@ -1469,9 +1479,9 @@
       </p>
 
       <div class="buy-action">
-        <p class="buy-price"><span class="amt">$39</span><span class="per">one time, print for every client</span></p>
+        <p class="buy-price"><span class="amt">$39.00</span><span class="per">one time, print for every client</span></p>
         <div id="agent-slot">
-          <a class="btn btn--primary btn--lg" target="_blank" rel="noopener"
+          <a class="btn btn--buy btn--lg" target="_blank" rel="noopener"
              href="https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast">Get the agent edition on Etsy</a>
         </div>
         <p class="buy-note">Instant download &middot; Four PDFs &middot; Client gifting license</p>
@@ -1662,7 +1672,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.15.0</p>
+    <p class="version">v1.15.1</p>
   </div>
 </footer>
 
