@@ -69,7 +69,7 @@ python build_video.py           # the 14 second Etsy listing video
 python build_agent_edition.py   # the realtor edition, four PDFs. --logo bakes one in
 python build_agent_listing.py   # nine photos for the realtor listing
 python build_video.py --agent   # the realtor cut of the video
-python build_pins.py            # six Pinterest pins, 1000x1500
+python build_pins.py            # eight Pinterest pins, 1000x1500
 python build_brand.py           # shop icon and banner
 python check_links.py           # finds curated videos that have died
 python optimize_images.py       # after replacing docs/img/hero.png
@@ -307,7 +307,7 @@ site is known to be broken.
 
 **Pinterest is launched.** Done 2026-08-15: the account, the boards, the pins
 uploaded, and the domain claim, whose `p:domain_verify` tag is live in the head
-of `docs/index.html`. `build_pins.py` makes the six pins and
+of `docs/index.html`. `build_pins.py` makes the eight pins and
 [product/pinterest.md](product/pinterest.md) holds the boards, the copy for
 every pin, and the setup steps. Re-run the script and re-upload if a pin's
 source page changes.

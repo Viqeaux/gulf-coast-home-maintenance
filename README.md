@@ -26,7 +26,7 @@ build_listing_images.py   renders Etsy photos from the real kit pages
 build_video.py            the 14 second silent Etsy listing video
 build_agent_edition.py    the realtor edition, four PDFs. --logo bakes one in
 build_agent_listing.py    nine photos for the realtor listing
-build_pins.py             six Pinterest pins from the real kit pages
+build_pins.py             eight Pinterest pins, from the kit and the binder
 build_brand.py            shop icon, banner, Pinterest covers, and the site icons
 check_links.py            finds curated videos that have gone dead
 optimize_images.py        resizes the hero photo for the web
@@ -312,8 +312,9 @@ is why each shot makes exactly one point.
 
 ## Pinterest
 
-`build_pins.py` renders six pins at 1000 x 1500, Pinterest's 2:3, from the same
-kit pages the listing images use. The setup steps, the board list and the copy
+`build_pins.py` renders eight pins at 1000 x 1500, Pinterest's 2:3, from the
+same pages the listing images use. Six sell the kit, two the storm season
+binder; a pin's `doc` key picks which document its page is cut from. The setup steps, the board list and the copy
 for every pin live in [product/pinterest.md](product/pinterest.md).
 
 Two things about the composition are deliberate. The headline block takes the

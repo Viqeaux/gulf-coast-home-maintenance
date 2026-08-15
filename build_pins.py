@@ -25,7 +25,15 @@ import shutil
 import sys
 
 from build_printables import build_html, OUT_DIR
+from build_storm_binder import build_html as build_binder_html
 from build_listing_images import find_chrome, shot, split_pages
+
+# Which document a pin's page is cut from. The kit and the binder are separate
+# products with separate listings, and a pin has to be able to come from either.
+DOCS = {
+    "kit": build_html,
+    "binder": build_binder_html,
+}
 
 PINS_DIR = os.path.join(OUT_DIR, "pins")
 
@@ -109,6 +117,37 @@ PINS = [
         "lift": 330,
         "crop": 470,
     },
+
+    # --- the storm season binder ------------------------------------------
+    # The binder is the only product with a clock on it. Peak Atlantic season
+    # is around September 10 and the search terms are close to dead in winter,
+    # so 07 is the seasonal pin and 08 is the hedge: home inventory and
+    # insurance claims are searched all year by people who have just bought a
+    # house or just been told by their agent to make a list.
+    {
+        "name": "07-storm-countdown",
+        "doc": "binder",
+        "page": "The countdown",
+        "eyebrow": "When a storm is named",
+        "head": "It is not what you buy. It is when you buy&nbsp;it.",
+        "sub": "Almost nobody fails because they did not know to get water. They "
+               "fail because they got it on the wrong day. The countdown starts "
+               "five to seven days out.",
+        "zoom": 1.05,
+        "crop": 810,
+    },
+    {
+        "name": "08-home-inventory",
+        "doc": "binder",
+        "page": "The home inventory",
+        "eyebrow": "The largest number in your policy",
+        "head": "Could you list everything you own, from&nbsp;memory?",
+        "sub": "Contents coverage runs 50 to 70 percent of what the house is "
+               "insured for. To collect it you have to say what you owned, and "
+               "the adjuster will not help you remember.",
+        "zoom": 1.05,
+        "crop": 800,
+    },
 ]
 
 # The pin ground is the site's own paper and deep tokens. A visitor who saves a
@@ -179,10 +218,17 @@ def main():
         shutil.rmtree(PINS_DIR)
     os.makedirs(PINS_DIR)
 
-    html, _ = build_html()
-    css, pages = split_pages(html)
+    # Each document is rendered once and reused. Both are slow to build and a
+    # pin only ever needs one page out of either.
+    built = {}
 
-    def find_page(needle):
+    def document(key):
+        if key not in built:
+            html, _ = DOCS[key]()
+            built[key] = split_pages(html)
+        return built[key]
+
+    def find_page(pages, needle):
         """First page whose heading contains this text. Exact for the cover,
         which has no heading of its own."""
         if needle == "cover":
@@ -193,7 +239,8 @@ def main():
     made = 0
 
     for spec in PINS:
-        match = find_page(spec["page"])
+        css, pages = document(spec.get("doc", "kit"))
+        match = find_page(pages, spec["page"])
         if match is None:
             print("  ! no page titled {0!r}, skipped".format(spec["page"]))
             continue

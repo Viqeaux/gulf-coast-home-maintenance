@@ -9,8 +9,9 @@ discovery has to come from somewhere that is not Etsy search. Pinterest is the
 one channel where a printable, a checklist and a seasonal home task are all
 native content rather than an ad wearing a costume.
 
-Pins are built by `python build_pins.py`, six of them, into `product/pins/`.
-Every pin shows a page that is genuinely in the kit.
+Pins are built by `python build_pins.py`, eight of them, into `product/pins/`.
+Every pin shows a page that is genuinely in the product it sells: six from the
+kit, two from the storm season binder.
 
 ---
 
@@ -64,7 +65,7 @@ file was written. After the claim goes through, run the site through
 
 ### 3. Make the boards
 
-Five, in this order. A board is a search target of its own, so the name matters
+Six, in this order. A board is a search target of its own, so the name matters
 more than it looks like it should. Give each one the description below, because
 Pinterest indexes board descriptions.
 
@@ -75,8 +76,9 @@ Pinterest indexes board descriptions.
 | **Home Maintenance by Month** | A month by month home maintenance schedule. Twelve months of tasks, sorted by what actually has to happen and what can wait. |
 | **New Homeowner Checklists** | First year in a new house. Shutoffs, breaker boxes, appliance lifespans, and the maintenance nobody hands you at closing. |
 | **Realtor Closing Gifts** | Closing gift ideas for real estate agents. Branded, useful, and the kind a client keeps rather than regifts. |
+| **Home Inventory and Insurance** | What to write down before you need it. Room by room home inventory, policy numbers and deductibles in dollars, and what an adjuster actually asks for. |
 
-### 4. Upload the six pins
+### 4. Upload the pins
 
 `python build_pins.py`, then upload each from `product/pins/`. Copy is below,
 one block per file. Fill in **Title**, **Description**, **Alt text**,
@@ -87,6 +89,13 @@ a day for six days, because Pinterest reads a burst from a brand new account as
 a spam signal. One a day, then repin the good ones to a second relevant board a
 week later.
 
+**The one exception is `07-storm-countdown`, which should go up first and
+immediately.** It is the only pin with a deadline. Peak Atlantic season is
+around September 10, the binder's whole listing strategy is built on being live
+before the demand rather than during it, and a pin needs weeks to gather saves
+before it can ride a spike. Every day it waits is a day off the front of that
+run-up.
+
 ---
 
 ## Product tags, and when to use one
@@ -96,13 +105,15 @@ tag hangs an Etsy listing off the pin while the pin itself still lands on the
 claimed domain, so the attribution and the email capture both survive and a
 ready-to-buy viewer gets a direct route.
 
-**Use one on the three product pins only:**
+**Use one on the five product pins only:**
 
 | Pin | Product tag |
 |---|---|
 | `04-first-month` | the kit listing |
 | `05-watch-list` | the kit listing |
 | `06-realtor` | the realtor listing |
+| `07-storm-countdown` | the binder listing |
+| `08-home-inventory` | the binder listing |
 
 **Not on `01-free-calendar`, `02-hurricane-season` or `03-summer-heat`.** Those
 three promise something free, and that promise is the entire reason they get
@@ -134,7 +145,7 @@ carries the shop name wherever it travels.
 ## Pin copy
 
 Titles run to 100 characters, of which Pinterest says the **first 40 are the
-ones most likely to be shown**. Descriptions run to 500. All six below are
+ones most likely to be shown**. Descriptions run to 500. All eight below are
 inside both, and every title still reads at 40.
 
 ### Topic tags: pick from the list below, do not go hunting
@@ -270,3 +281,34 @@ The cheapest expansion is one pin per month page. Twelve months, twelve pins,
 each targeting "what to do to your house in March" and its eleven siblings.
 `build_pins.py` already renders any page in the kit by heading, so a new pin is
 a new entry in `PINS` and nothing else.
+
+### 07-storm-countdown.png
+
+- **Board:** Hurricane Season Prep
+- **Link:** `https://gulfcoasthomemaintenance.com/#binder`
+- **Product tag:** the binder listing
+- **Title:** Hurricane prep checklist, in the order it happens
+- **Description:** Almost nobody fails because they did not know to buy water.
+  They fail because they bought it on the wrong day. Hurricane prep written as a
+  sequence: what to do five to seven days out while it is still a disturbance,
+  what changes at 72 hours, and what is already too late by 24. Refill
+  prescriptions early, get cash in small bills, fill every vehicle before the
+  queues. From a 33 page printable storm season binder for the Gulf Coast.
+- **Alt text:** A printable hurricane countdown checklist, tasks grouped under
+  five to seven days out and 72 hours, each with a checkbox.
+
+### 08-home-inventory.png
+
+- **Board:** Home Inventory and Insurance
+- **Link:** `https://gulfcoasthomemaintenance.com/#binder`
+- **Product tag:** the binder listing
+- **Title:** Home inventory for insurance, before you need it
+- **Description:** Contents coverage is usually 50 to 70 percent of what the
+  house itself is insured for, a six figure number on most policies. To collect
+  it you have to say what you owned, and the adjuster will not help you
+  remember. People settle for a fraction of their limit because listing four
+  hundred items from memory, three weeks after losing them, is impossible. Do
+  one room at a time and start with the expensive things. Nine room by room
+  sheets in a printable binder.
+- **Alt text:** A printable home inventory page showing item, make and model,
+  serial number, year and replacement cost, with a worked example.
