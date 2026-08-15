@@ -159,7 +159,48 @@
     transition: background .15s ease, color .15s ease;
   }
   .topbar a.cta:hover { background: var(--accent); color: var(--paper); }
-  @media (max-width: 30rem) { .topbar a.cta { display: none; } }
+  .topbar-ctas { display: flex; align-items: center; gap: .5rem; flex: none; }
+
+  /* The binder is the only product on the site with a deadline, so it gets the
+     loud button: filled rather than outlined, and in the brand's red rather
+     than the teal the rest of the furniture uses.
+
+     A pulse, not a blink. A hard on/off at a noticeable rate is a WCAG 2.2.2
+     problem, it is the one animation pattern people reliably read as an advert,
+     and this brand sells on not looking like that. The ring fades outward once
+     every 2.4s, which catches the eye in peripheral vision without ever hiding
+     the label. Under prefers-reduced-motion the global rule stops it and the
+     solid red still carries the emphasis on its own. */
+  .topbar a.cta--alert {
+    color: var(--on-tier); background: var(--must); border-color: var(--must);
+    animation: cta-pulse 2.4s ease-out infinite;
+  }
+  .topbar a.cta--alert:hover {
+    background: var(--must); color: var(--on-tier); filter: brightness(1.08);
+  }
+  @keyframes cta-pulse {
+    0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--must) 60%, transparent); }
+    70%  { box-shadow: 0 0 0 9px color-mix(in srgb, var(--must) 0%, transparent); }
+    100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--must) 0%, transparent); }
+  }
+  @supports not (background: color-mix(in srgb, red 50%, transparent)) {
+    @keyframes cta-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(163, 53, 32, .6); }
+      70%  { box-shadow: 0 0 0 9px rgba(163, 53, 32, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(163, 53, 32, 0); }
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .topbar a.cta { display: none; }
+    /* The seasonal one stays. It is the reason somebody is on this page on a
+       phone in August, and the small-screen rule existed when there was only
+       one button to drop. The wordmark gives up its text to make room: the
+       house glyph still identifies the brand, and the button is worth more
+       than the second reading of a name that is already in the tab title. */
+    .topbar a.cta--alert { display: inline-block; }
+    .mark .label { display: none; }
+  }
 
   /* --- hero ------------------------------------------------------------- */
   .hero {
@@ -771,7 +812,10 @@
       </svg>
       <span class="label">Gulf Coast Home Maintenance</span>
     </span>
-    <a class="cta" href="#calendars">Free calendars</a>
+    <span class="topbar-ctas">
+      <a class="cta" href="#calendars">Free calendars</a>
+      <a class="cta cta--alert" href="#binder">Hurricane prep</a>
+    </span>
   </div>
 </div>
 
@@ -1391,7 +1435,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.11.1</p>
+    <p class="version">v1.12.0</p>
   </div>
 </footer>
 

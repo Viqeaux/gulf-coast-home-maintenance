@@ -215,17 +215,43 @@ sheet, 1,876 uniquely named AcroForm fields with `/AcroForm` in the catalog and
 every widget on its page. Peak of season is September 10, so what is left is
 worth doing in the next three weeks rather than eventually:
 
-1. **Run the tag list through Etsy Marketplace Insights.** Still not done, and
-   still the highest value ten minutes available. The market data table below
-   covers gift and maintenance terms, not storm terms, so every keyword in that
-   listing is reasoned rather than measured. It was worth most before
-   publishing, but tags can be edited on a live listing and the ranking signal
-   builds from now, so doing it this week still beats doing it in September.
+1. **Mail the MailerLite list.** It has not been mailed since the kit launched,
+   and this is the first genuinely seasonal reason to send anything. The list
+   is warm, it costs nothing, and unlike the tag work below it is not blocked.
+   Do this one first.
 2. Add a cross-sell line to the kit's description, the way the kit already
-   points at the realtor edition. Mail the MailerLite list, which has not been
-   mailed since the kit launched and now has a genuinely seasonal reason to
-   hear from you.
-3. **The site placement is worth revisiting out of season.** The binder sits
+   points at the realtor edition.
+3. **Run the tag list through Etsy Marketplace Insights. Blocked until roughly
+   2026-08-22:** Chad is out of Insights searches until then. Do not send a
+   session at this before that date. Every keyword on the binder listing is
+   reasoned rather than measured, because the market data table below covers
+   gift and maintenance terms and not storm terms. Tags are editable on a live
+   listing, so this stays worth doing when the searches come back, and there is
+   still room before September 10.
+
+   **Spend the searches in this order**, since the quota is the scarce thing
+   rather than the time:
+
+   1. The four near-synonyms: `hurricane prep`, `hurricane checklist`,
+      `hurricane season`, `storm prep`. Four of thirteen slots on terms that
+      overlap heavily is the biggest thing the data could correct, and freeing
+      even one slot is a real gain.
+   2. The evergreen four: `home inventory`, `insurance claim`, `important
+      documents`, `disaster planning`. These are what earn between seasons, so
+      a dud here costs all year rather than for six weeks.
+   3. `printable binder` and `gulf coast`, the two most likely to be dead
+      generic weight.
+
+   **Do not spend one on `new homeowner gift`.** It is already in the table
+   below at 899 searches against 89k listings and flagged high converting.
+
+   **One trap when the searches return.** If Insights reports trailing 30 days,
+   storm terms measured in late August sit near seasonal peak and will look
+   far stronger than their annual average, while the evergreen terms are being
+   measured at their normal level. Do not let that flatter the storm terms into
+   displacing the evergreen ones. The 5 storm, 4 evergreen, 2 descriptive, 1
+   gift split is a deliberate hedge: replace within a category.
+4. **The site placement is worth revisiting out of season.** The binder sits
    above the agent edition because it sells to the same homeowner as the kit
    and because it has a deadline. In February it is the one product on the page
    nobody is shopping for, and the order that is right in August is not

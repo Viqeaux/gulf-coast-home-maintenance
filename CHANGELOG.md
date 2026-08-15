@@ -27,6 +27,35 @@ Newest first.
 
 ---
 
+## [1.12.0], 2026-08-15
+
+### Added
+
+- **A second button in the sticky bar, for the binder.** Filled in the brand's
+  red rather than outlined in the teal the rest of the furniture uses, so it
+  reads as the one urgent thing on the page. It scrolls to the binder section
+  rather than leaving the site, which puts the reader at the card with the price
+  and the button on it. The binder is the only product with a deadline, and the
+  sticky bar is the only element that follows the reader down the page.
+- A slow pulse on it, a ring fading outward every 2.4 seconds. **Deliberately a
+  pulse and not a blink.** A hard on and off at a noticeable rate is a WCAG
+  2.2.2 problem, it never hides the label this way, and blinking is the one
+  animation pattern people reliably read as an advert, which is the opposite of
+  what this brand sells on. The existing `prefers-reduced-motion` block stops it,
+  verified by applying the same declaration and confirming the animation count
+  drops to zero. The solid red carries the emphasis on its own when it does.
+
+### Changed
+
+- **The small-screen rule no longer hides both buttons.** `.topbar a.cta` was
+  set to `display: none` under 30rem, written when there was one button and
+  dropping it was free. The seasonal button now stays: a phone in August is
+  exactly the case it exists for.
+- To make room, the wordmark gives up its text below 30rem and keeps the house
+  glyph. The name is already in the tab title and the hero, and the button is
+  worth more than its second reading. Measured at 375px: the button is 120 by 32
+  and sits inside the bar with no horizontal overflow.
+
 ## [1.11.1], 2026-08-15
 
 ### Changed
