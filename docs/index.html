@@ -396,7 +396,65 @@
      the section's surface tokens. Custom properties inherit, so this makes
      rules like `.band h3 { color: var(--on-surface) }` resolve correctly for
      content inside a light card on a dark section. */
-  .tier, .month-card, .buy, .preview-warning, .android-note {
+  /* --- shop grid -------------------------------------------------------- */
+  /* Sits directly under the hero on the same deep ground, so it reads as part
+     of the header rather than as the page's first argument. Until this existed
+     the only way to learn there were three products was to scroll through three
+     long sections; the grid says what is for sale in one screen, and each card
+     links down to the section that makes the case for it.
+
+     A grid, not a carousel. A carousel shows one product and hides the other two
+     behind an interaction most people never make, and an auto-rotating one is a
+     WCAG 2.2.2 problem. The shops this is modelled on, Etsy included, are grids.
+
+     Full page thumbnails rather than a crop. The three covers put their titles
+     at different heights, so no single crop frames all three, and a whole sheet
+     also says "this is a printable page" in a way a cropped one does not. */
+  .shop { padding-top: 3.25rem; }
+  .shop .label { color: var(--sand); display: block; margin-bottom: 1.2rem; }
+  .pgrid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 46rem) { .pgrid { grid-template-columns: repeat(3, 1fr); } }
+  .pcard {
+    display: flex; flex-direction: column; overflow: hidden;
+    background: var(--paper); border: 1px solid var(--rule);
+    border-radius: 3px; box-shadow: var(--shadow);
+  }
+  .pcard img {
+    display: block; width: 100%; height: auto; aspect-ratio: 17 / 22;
+    object-fit: cover; background: #fff;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pcard-body {
+    padding: 1.1rem 1.15rem 1.25rem; display: flex; flex-direction: column; flex: 1;
+  }
+  .pcard h3 { margin-bottom: .3rem; }
+  /* Scoped through .pcard, not left as bare .pcard-line / .pcard-price. This
+     card sits inside a .band, and `.band p` is a class plus an element, so it
+     outranks a lone class and was repainting the price in the band's muted
+     tone. The price has to be the brand red here for the same reason it is on
+     the buy cards: it reads as a price rather than as more type. */
+  .pcard .pcard-line { color: var(--muted); font-size: .91rem; margin: 0 0 1rem; flex: 1; }
+  .pcard .pcard-price {
+    font: 700 1.3rem/1 ui-serif, Georgia, serif; color: var(--must);
+    margin: 0 0 .8rem; letter-spacing: -.01em;
+  }
+  .pcard .btn { text-align: center; display: block; }
+  .pcard-more {
+    display: inline-block; margin-top: .75rem; font-size: .85rem;
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+  .pcard-more:hover { border-bottom-color: var(--accent); }
+  .shop-free { margin: 1.4rem 0 0; font-size: .93rem; }
+  /* Nothing had styled a bare link on the deep ground before, so this one came
+     out as the browser's default blue. Sand is what every other link on a band
+     uses. */
+  .shop-free a { color: var(--sand); }
+  @supports not (background: color-mix(in srgb, red 50%, transparent)) {
+    .pcard-more { border-bottom-color: #7fa6ad; }
+  }
+
+  .pcard, .tier, .month-card, .buy, .preview-warning, .android-note {
     --surface: var(--paper);
     --on-surface: var(--ink);
     --on-surface-mute: var(--muted);
@@ -952,6 +1010,62 @@
     </div>
   </div>
 </header>
+
+<!-- ===================== shop grid ===================== -->
+<!-- Unnumbered on purpose. The 01 to 09 sequence is an argument that builds,
+     and a shelf of products is not a step in it. On the band, which keeps the
+     page alternating and makes this continuous with the hero above rather than
+     a separate slab. -->
+<section class="band shop" aria-labelledby="shop-h">
+  <div class="wrap">
+    <span class="label" id="shop-h">Three printables in the shop</span>
+
+    <div class="pgrid">
+      <div class="pcard">
+        <img src="img/cover-kit.jpg" width="560" height="725" loading="lazy" decoding="async"
+             alt="The cover of the Gulf Coast Home Maintenance Calendar kit.">
+        <div class="pcard-body">
+          <h3>The maintenance kit</h3>
+          <p class="pcard-line">Twelve months at three levels of effort, the Big Ticket Watch List, and seven sections for whatever your house happens to have. Twenty-seven pages, undated.</p>
+          <p class="pcard-price">$12.99</p>
+          <a class="btn btn--primary" target="_blank" rel="noopener"
+             href="https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast">Buy on Etsy</a>
+          <a class="pcard-more" href="#edition">What's in it</a>
+        </div>
+      </div>
+
+      <div class="pcard">
+        <img src="img/cover-binder.jpg" width="560" height="725" loading="lazy" decoding="async"
+             alt="The cover of the Gulf Coast Storm Season Binder.">
+        <div class="pcard-body">
+          <h3>The storm season binder</h3>
+          <p class="pcard-line">Policies, a room by room inventory, the countdown, and the damage and claim logs that decide what actually gets paid. Thirty-three pages, undated.</p>
+          <p class="pcard-price">$16.99</p>
+          <a class="btn btn--primary" target="_blank" rel="noopener"
+             href="https://www.etsy.com/listing/4556502794/hurricane-prep-binder-printable-home">Buy on Etsy</a>
+          <a class="pcard-more" href="#binder">What's in it</a>
+        </div>
+      </div>
+
+      <div class="pcard">
+        <img src="img/cover-agent.jpg" width="560" height="725" loading="lazy" decoding="async"
+             alt="The cover of the agent edition, showing where a realtor's logo and details are printed.">
+        <div class="pcard-body">
+          <h3>The agent edition</h3>
+          <p class="pcard-line">The same kit with your name and brokerage on every page, plus a four-page leave-behind, licensed to print for every client you close.</p>
+          <p class="pcard-price">$39</p>
+          <a class="btn btn--primary" target="_blank" rel="noopener"
+             href="https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast">Buy on Etsy</a>
+          <a class="pcard-more" href="#agents">What's in it</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="shop-free muted">
+      The twelve months are also <a href="#calendars">free as phone calendars</a>, with no signup and no card.
+    </p>
+  </div>
+</section>
 
 <!-- ===================== the year ===================== -->
 <section>
@@ -1548,7 +1662,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.14.0</p>
+    <p class="version">v1.15.0</p>
   </div>
 </footer>
 

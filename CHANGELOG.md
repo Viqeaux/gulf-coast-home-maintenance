@@ -27,6 +27,56 @@ Newest first.
 
 ---
 
+## [1.15.0], 2026-08-15
+
+### Added
+
+- **A shop grid under the hero.** Three product cards with a cover image, a
+  price, a Buy on Etsy button and a link down to the section that makes the
+  case. Until now the only way to learn the shop had three products was to
+  scroll through three long sections, and a reader who left early never knew
+  two of them existed.
+- `build_site_covers.py`, which makes `docs/img/cover-*.jpg` from the cover
+  render each listing builder already produces. Those covers are committed,
+  unusually for build output, because their sources live under gitignored
+  `product/` and a fresh clone would otherwise have a grid with no images.
+
+### Why a grid and not a carousel
+
+Asked for as a carousel, built as a grid deliberately. A carousel shows one
+product and puts the other two behind an interaction most people never make,
+which is the opposite of the problem being solved here. An auto-rotating one is
+also a WCAG 2.2.2 failure. The shops this is modelled on, Etsy included, are
+grids. The grid needs no JavaScript, stacks to one column on a phone, and shows
+all three products in a single screen.
+
+### Why only cover images
+
+The covers are title pages: the product name, its one-line promise, and nothing
+a buyer is paying for. The listing builders also render the Watch List, How To
+Find Out and Your First Month, and those are on the paid side of the line in
+`README.md` settled in 1.10.0. None of them may come to the site without
+reversing that decision on purpose.
+
+### Fixed while building it
+
+- **`.band p` was repainting the card prices.** It is a class plus an element,
+  so it outranks a lone class, and the prices came out in the band's muted tone
+  instead of the brand red. The card rules are scoped through `.pcard` now.
+- **The free-calendars link in the grid rendered as browser-default blue.**
+  Nothing had ever styled a bare link on the deep ground before. It takes
+  `--sand`, which every other link on a band already uses.
+
+### Kept
+
+The three product sections stay where they are. The grid is an index, not a
+replacement: the arguments those sections carry, the $8,000 deductible, the 540
+sheets, the Watch List chart, are the case Etsy's own listings cannot make, and
+a card cannot hold them. The grid is unnumbered because the 01 to 09 sequence is
+an argument that builds and a shelf of products is not a step in it. On the band,
+so the page still alternates strictly and the grid reads as continuous with the
+hero above it.
+
 ## [1.14.0], 2026-08-15
 
 Came out of an external design critique. Roughly half of it described a site
