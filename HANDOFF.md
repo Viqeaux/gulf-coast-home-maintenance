@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.15.2**. Everything below is live unless marked otherwise.
+Current version **v1.16.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -70,7 +70,7 @@ python build_agent_edition.py   # the realtor edition, four PDFs. --logo bakes o
 python build_agent_listing.py   # nine photos for the realtor listing
 python build_video.py --agent   # the realtor cut of the video
 python build_pins.py            # eight Pinterest pins, 1000x1500
-python build_site_covers.py     # the three shop-grid covers, into docs/img/
+python build_site_images.py     # shop covers + nine page previews, into docs/img/
 python build_brand.py           # shop icon and banner
 python check_links.py           # finds curated videos that have died
 python optimize_images.py       # after replacing docs/img/hero.png
@@ -106,14 +106,23 @@ content reaches instead.
 **`docs/index.html` is hand-written. Everything in `docs/guides/` and
 `product/` is generated.** Edit the Python, not the output.
 
-**`docs/img/cover-*.jpg` are committed build outputs, and that is deliberate.**
-`build_site_covers.py` makes them from the cover render each listing builder
-already produces, but those sources live under `product/`, which is gitignored,
-so a fresh clone cannot rebuild them. Committing them is the only way the shop
-grid has images after a clone. **Only covers may go in there.** A cover is a
-title page and gives nothing away; the Watch List, How To Find Out and Your
-First Month renders are on the paid side of the line in
-[README.md](README.md), and the listing builders emit those too.
+**`docs/img/cover-*.jpg` and `preview-*.jpg` are committed build outputs, and
+that is deliberate.** `build_site_images.py` makes them from renders the listing
+builders already produce, but those sources live under `product/`, which is
+gitignored, so a fresh clone cannot rebuild them. Committing them is the only
+way the site has images after a clone.
+
+**The previews are crops, and the crop is the protection.** Each keeps only the
+top slice of its page. On a month page the slice ends exactly where
+[README.md](README.md) already draws the line: the task, the one-line
+instruction and the "why" are above it and are free and already public in the
+feeds, and the numbered steps start below it and never reach the image file at
+all. Shrinking whole pages was tried first and does not work: at 420px wide the
+body text of a month page is still legible.
+
+**Adding an image, or raising a `keep_top` fraction, is a content decision.**
+Read the header of `build_site_images.py` before either. If a preview looks
+thin, change which page it shows rather than showing more of the same one.
 
 **The hero's hurricane season countdown hardcodes three dates**, in the script
 at the bottom of `docs/index.html`: June 1, September 10, November 30. The same

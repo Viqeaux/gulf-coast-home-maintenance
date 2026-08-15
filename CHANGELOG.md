@@ -27,6 +27,53 @@ Newest first.
 
 ---
 
+## [1.16.0], 2026-08-15
+
+### Added
+
+- **Page previews in all three product sections.** Three per product, with
+  captions, above each buy card. Until now nobody browsing the site had seen a
+  page of anything they were being asked to pay for, which is a lot of trust to
+  ask of someone buying a printable.
+- `build_site_images.py`, renamed from `build_site_covers.py` because it now
+  makes the nine previews as well as the three covers. Committed outputs, for
+  the same reason the covers already were: the sources live under gitignored
+  `product/` and a fresh clone could not rebuild them.
+
+### How this stays inside the 1.10.0 decision
+
+`README.md` puts the step-by-step, the Watch List, How To Find Out and Your
+First Month on the paid side, and the listing builders render exactly those
+pages. The previews get around that by **cropping rather than shrinking**, and
+the crop is the whole protection: what falls below the cut is not in the image
+file, at any zoom.
+
+- **Shrinking was tried first and abandoned.** At 420px wide the body text of a
+  month page is still perfectly legible. Picking a smaller number until it stops
+  being legible is guesswork dressed up as a rule, and it fails the moment
+  someone upscales it or a better model reads it.
+- **On the month pages the crop lands on a line that already exists.** The task,
+  its one-line instruction and the "why" sit above it, and all three are free
+  and already public inside the `.ics` feeds. The numbered steps start below it.
+  Nothing paid is in the file.
+- The Watch List preview shows three of seventeen rows. The home page already
+  charts eight of them, deliberately, so this is inside an existing teaser
+  rather than a new disclosure.
+- The binder previews are its blank forms, an inventory sheet and a claim log,
+  where the structure is the useful part and there is no prose to give away.
+- Each preview was opened and read back before shipping, rather than trusting
+  the arithmetic.
+
+### Fixed
+
+- **Two links had never been styled and rendered browser-default blue**, the
+  agent cross-sell inside the kit's buy card and the privacy link under the
+  signup. Both sit on paper and now take `--accent`, 7.29 against the card.
+  Pre-existing, unrelated to the previews, found while checking this work.
+- Preview captions bottom-align across each strip. The three crops are not the
+  same shape, because the pages are not, and forcing a common aspect ratio would
+  crop sideways into the page margins.
+
 ## [1.15.2], 2026-08-15
 
 ### Changed
