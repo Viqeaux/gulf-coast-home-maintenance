@@ -197,7 +197,7 @@ SECTIONS = [
         "always": [
             "Check bulkhead tiebacks and weep holes. A bulkhead fails from "
             "behind, through soil washing out, not from the face.",
-            "Replace corroded hardware with hot-dip galvanised or stainless.",
+            "Replace corroded hardware with hot-dip galvanized or stainless.",
             "Rinse lift motors and cables with fresh water.",
         ],
         "watch": "Look for soil settling or sinkholes on the land side of a "

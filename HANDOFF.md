@@ -8,13 +8,20 @@ Current version **v1.10.0**. Everything below is live unless marked otherwise.
 
 ---
 
-## The three products
+## The four products
 
 | | What | Where | Price |
 |---|---|---|---|
 | **The calendar** | Three subscribe-able `.ics` feeds, one per tier, plus the site and the calendar contents page that hand them out | <https://gulfcoasthomemaintenance.com> | Free, and stays free |
 | **The kit** | Every printable page, 27 of them, in two PDFs: print and fillable | Etsy only | $12.99 |
 | **The agent edition** | The same 27 pages branded for a realtor, plus a 4 page leave-behind. Four PDFs, print and fillable of each | Etsy only | $39 |
+| **The storm season binder** | 33 pages, mostly blanks: policies, room by room inventory, supply calculator, the countdown, shutdown, damage log, claim log, contractor vetting. Two PDFs, print and fillable | Etsy, **not listed yet** | $16.99 |
+
+**The binder is a different buying moment from the kit, and that is the point.**
+The kit is a calm January purchase by somebody being responsible. The binder is
+bought in August with a cone on the television. Chad's call, 2026-08-15: peak of
+season is September 10, so the listing is the thing standing between this and
+the revenue, not the build.
 
 The words matter and were confused once already. **"Calendar" means the feeds.
 "Kit" means the printables.** A previous session built the printable as a free
@@ -63,12 +70,32 @@ python build_pins.py            # six Pinterest pins, 1000x1500
 python build_brand.py           # shop icon and banner
 python check_links.py           # finds curated videos that have died
 python optimize_images.py       # after replacing docs/img/hero.png
+
+python build_storm_binder.py              # the binder, print PDF, into product/
+python build_storm_binder.py --fillable   # both PDFs, 1,876 form fields
+python build_storm_binder.py --fill-report  # lists pages with space going spare
 ```
 
-Content lives in three files: `build_calendars.py` holds the 36 tasks and the
+Content lives in four files: `build_calendars.py` holds the 36 tasks and the
 `GUIDES` video table, which are the free half; `task_steps.py` holds the
-step-by-step detail and `kit_sections.py` the seven conditional sections, both
-of which are **kit only and must not reach the site**.
+step-by-step detail, `kit_sections.py` the seven conditional sections, and
+`binder_pages.py` all of the binder's writing, all three of which are **paid
+product only and must not reach the site**.
+
+**The binder imports the kit's design system rather than copying it.**
+`build_storm_binder.py` pulls `CSS`, `page()` and `esc()` out of
+`build_printables.py`, and reuses `build_fillable.stamp()` for the fillable
+twin. So the two products look like one shop, and a fix to the kit's type or
+footer fixes the binder too. Only what the binder invents, the record blanks,
+the log tables, the calculator, lives in its own `BINDER_CSS`.
+
+**The binder build checks every page for overflow, and it is not optional.**
+The kit learned the hard way that a page can run past its sheet invisibly and
+come out truncated in the PDF. `--fill-report` also names pages using less than
+85 percent of the sheet, which on a product made of blanks is writing space the
+buyer paid for and did not get. Note that `.sheet` is `flex: 1`, so measuring
+its own `scrollHeight` can never report short: the check measures how far the
+content reaches instead.
 
 **`docs/index.html` is hand-written. Everything in `docs/guides/` and
 `product/` is generated.** Edit the Python, not the output.
@@ -175,6 +202,32 @@ for other climates are a later product line, not a rebrand.
 
 ## Outstanding
 
+**The binder is built and unlaunched, and the clock is the whole problem.**
+Both PDFs render and verify: 33 pages, every page measured against its sheet,
+1,876 uniquely named AcroForm fields with `/AcroForm` in the catalog and every
+widget on its page. What does not exist yet is the thing that earns money:
+**no Etsy listing, no photos, no video, and no copy.** Peak of season is
+September 10. In order:
+
+1. Listing copy, as `product/etsy-listing-binder.md`, matching how the other two
+   are written. The title has to carry the panic-buy search, not the calm one.
+2. Listing photos. `build_listing_images.py` is the pattern, pointed at binder
+   pages instead of kit pages, and the strongest sheets to show are the policy
+   page, a room inventory sheet, the countdown, and the claim call log.
+3. The listing itself, at $16.99.
+4. A decision on whether the kit's listing cross-sells the binder, and whether
+   the site mentions it at all. Nothing visitor-facing has changed yet, which is
+   why no version was cut: by the rule in [CHANGELOG.md](CHANGELOG.md) the
+   binder gets its version when it launches, not when it compiles.
+
+**Do not commit the binder before reading item 2 under "Waiting on Chad".**
+`binder_pages.py` is the entire content of the highest-value product in the shop
+and the repo is public. The build outputs are already covered by
+`product/*.pdf` and `product/*.html` in `.gitignore`, so nothing leaks by
+accident, but the source does not have that protection and neither does
+`task_steps.py` today. This is the same open decision as before, with more
+riding on it.
+
 **Both listings are done.** Files, title, description, tags, materials,
 category, price, photos and video are live and current for each, and they match
 [product/etsy-listing.md](product/etsy-listing.md) and
@@ -220,13 +273,20 @@ Stricter than the version originally recommended. There is deliberately no
 `rua=` reporting address, so enforcement works but no aggregate reports arrive.
 If mail ever gets sent *from* the domain, loosen SPF then.
 
-**2. The public repo still rebuilds both paid products.** `build_printables.py`
-holds `WATCH_LIST` and `FIRST_MONTH`, `kit_sections.py` the seven conditional
-sections, `task_steps.py` all thirty-six step-by-steps. A clone plus
+**2. The public repo still rebuilds every paid product, and the binder raises
+the stakes.** `build_printables.py` holds `WATCH_LIST` and `FIRST_MONTH`,
+`kit_sections.py` the seven conditional sections, `task_steps.py` all thirty-six
+step-by-steps, and now `binder_pages.py` holds the whole binder. A clone plus
 `python build_printables.py` is the $12.99 kit; `build_agent_edition.py` is the
-$39 one. `.gitignore` protects the built PDF, which was never the thing worth
-protecting. `product_content.py` also sits in history at commit `8a9f1f1` with
-the lifespans and the license in it.
+$39 one; `build_storm_binder.py` is the $16.99 one. `.gitignore` protects the
+built PDFs, which was never the thing worth protecting. `product_content.py`
+also sits in history at commit `8a9f1f1` with the lifespans and the license in
+it.
+
+**Decide this before the binder is committed, not after.** Git history is
+permanent, so a decision made after the push is not the same decision. The
+binder is the product Chad expects to outsell the kit in September, and its
+content is the only thing it sells.
 
 Nobody is doing this today: zero stars, zero forks, and the site does not link
 to the repo. It is also permanent and it grows with every bit of marketing that
@@ -244,11 +304,15 @@ British and was corrected to "on hand" in
 are right; the live listings still say the old thing until the description is
 pasted in again.
 
-**4. The kit PDFs need rebuilding and re-uploading.** `kit_sections.py` had
-"Check the skirting and any flood vents are intact", which wants a "that" in
-American usage. Rebuild with `build_printables.py` then `build_fillable.py`,
-and replace the files on the listing. Low urgency, worth folding into the next
-time the kit changes for another reason.
+**4. The kit PDFs need rebuilding and re-uploading.** Two wording fixes are
+waiting in `kit_sections.py`, both corrected in the source and neither one live
+on the listing yet. It had "Check the skirting and any flood vents are intact",
+which wants a "that" in American usage. It also had "hot-dip galvanised" in the
+on-the-water section, a Britishism found on 2026-08-15 while writing the binder
+and fixed the same day. Rebuild with `build_printables.py` then
+`build_fillable.py`, and replace the files on the listing. Low urgency
+individually, but that is now two, so fold them into the next kit upload rather
+than letting a third accumulate.
 
 **5. Decide how Pinterest gets measured, before it launches.** There is no
 analytics of any kind, so there is no way to tell whether the pins did anything.
@@ -286,29 +350,11 @@ question actually asked, and if someone asks outright, ask Chad.
 
 **Next products, in order:**
 
-1. **The storm season binder, $16.99. In progress, started 2026-08-15.** A third
-   paid product, not kit pages. It is bought in a different moment than the kit:
-   the kit is a calm purchase, this one is bought with a cone on the TV.
+**The storm season binder is built.** It came off this list on 2026-08-15 and
+now has its own entry under Outstanding above, where the remaining work is the
+Etsy listing rather than the product.
 
-   Contents as scoped: home inventory sheets by room, a policy and account
-   numbers page, a what-to-photograph-before checklist, a water and supply
-   calculator by household size, an evacuation and shutdown sequence, a
-   post-storm damage log, a claim call log with adjuster names and dates, and a
-   contractor vetting sheet.
-
-   **The code is nearly free and the content is the whole job.**
-   `build_printables.py` already renders HTML to PDF and `build_fillable.py`
-   already stamps AcroForm fields, which the inventory and claim log pages need
-   anyway. Writing the content at the depth of `task_steps.py` is the schedule
-   risk, not the engineering. Keep it out of the public repo the same way the
-   kit is: gitignored under `product/`.
-
-   **It has a clock the other products do not.** Peak of Atlantic hurricane
-   season is around September 10. That is why this outranks the reserve planner
-   below, which was originally ranked first on the grounds that its data already
-   existed. The planner sells the same in November; this does not.
-
-2. **The reserve planner, $9.99.** The calculator idea, and the cheapest build
+1. **The reserve planner, $9.99.** The calculator idea, and the cheapest build
    left. `WATCH_LIST` in `build_printables.py` already holds 17 components with
    Gulf-Coast-shortened lifespans. The buyer enters an install year per item and
    gets years remaining, a projected replacement year, a sorted what-breaks-next
@@ -320,24 +366,25 @@ question actually asked, and if someone asks outright, ask Chad.
    market, and a wrong number in a sold product is a support problem. Offer a
    plainly-marked typical range, and let the buyer's own figure drive the math.
 
-3. **A free calculator on the site.** Once the planner math exists, the same
+2. **A free calculator on the site.** Once the planner math exists, the same
    numbers render as a web page: enter four ages, see what is on borrowed time.
    The visitor gets a real answer and meets the buy button warm. Feeds the
    signup form already on `docs/index.html`.
 
-4. **A bundle at $29.99.** Kit plus planner plus binder. Lifts order value with
+3. **A bundle at $29.99.** Kit plus planner plus binder. Lifts order value with
    no new content. Worth doing once any two of the three exist.
 
-5. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
+4. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
    plumbing is done. Adding entries puts links on the guides page and into the
    calendar events. **Adding the first one requires a `SEQUENCE` bump**, since
    it changes what subscribers see. `check_links.py` finds dead ones.
 
-6. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
+5. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
    South regional rather than coastal-only, so a Texas or Florida edition is a
    retiming and a relabeling, not a rewrite.
 
-Items 1 through 4 came out of a product brainstorm on 2026-08-14 and lived only
+The planner, the free calculator and the bundle came out of a product
+brainstorm on 2026-08-14 and lived only
 in that session's transcript until 2026-08-15, which is how the binder went
 missing for a day of its own selling season. **Product ideas worth building go
 in this list, not in a chat.**
