@@ -296,6 +296,11 @@
     font: 700 1.45rem/1 ui-serif, Georgia, serif;
     color: var(--accent); letter-spacing: -.02em; margin: 0 0 .55rem;
   }
+  /* --accent is tuned for the paper ground: on the light scheme it is a dark
+     teal, which lands near 2:1 on a band and is unreadable. Sand is the token
+     already designated for deep grounds, and is what .sec-no uses there. The
+     points grid had never sat on a band before the agent section moved. */
+  .band .point .pn { color: var(--sand); }
   .point h3 { font-size: 1rem; color: var(--on-surface); margin-bottom: .4rem; }
   .point p { font-size: .93rem; color: var(--on-surface-mute); margin: 0; }
 
@@ -1149,12 +1154,15 @@
 </section>
 
 <!-- ===================== agents ===================== -->
-<!-- Left off the band on purpose: the kit's card sits on the deep ground and
-     stays the loudest of the three, which is the right order for most visitors.
+<!-- On the band rather than the paper ground. Adding the binder above put three
+     paper sections in a row, and this puts the page back to strict alternation:
+     paper, deep, paper, deep, paper, deep, paper, deep, paper. Same band as
+     every other one on the page, not a variant.
+
      The agent who needs this is most likely reading the kit's card and running
      into a license written for one household, and that card links here
      directly, so this does not depend on sitting next to it. -->
-<section id="agents">
+<section id="agents" class="band">
   <div class="wrap">
     <span class="sec-no">06 / For agents</span>
     <h2>The agent edition</h2>
@@ -1383,7 +1391,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.11.0</p>
+    <p class="version">v1.11.1</p>
   </div>
 </footer>
 

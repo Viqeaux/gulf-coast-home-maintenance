@@ -27,6 +27,30 @@ Newest first.
 
 ---
 
+## [1.11.1], 2026-08-15
+
+### Changed
+
+- **The agent section moves onto the band, restoring the page's alternation.**
+  Adding the binder in 1.11.0 put three paper sections in a row, since the
+  binder, the agents and the free calendars all sat on the paper ground. The
+  page alternates strictly again: paper, deep, paper, deep, paper, deep, paper,
+  deep, paper. It uses the same `--band-bg` as every other band, not a variant,
+  so there is still exactly one dark ground on the site.
+- Every hairline between sections is gone as a result, and correctly so. That
+  rule only fires between two sections sharing a ground, and no two paper
+  sections are adjacent any more, which is what its own comment asks for.
+
+### Fixed
+
+- **The points grid was unreadable on a band, which nothing had exposed until
+  now.** `.point .pn`, the large number on each card, takes `--accent`, and on
+  the light scheme that is a dark teal sitting near 2:1 against the deep ground.
+  The grid had only ever appeared on paper sections before the agent section
+  moved, so this was latent rather than new. It now takes `--sand` on a band,
+  the token already designated for deep grounds and already used there by
+  `.sec-no`. Measures 5.35 on the light scheme.
+
 ## [1.11.0], 2026-08-15
 
 ### Added
