@@ -74,6 +74,7 @@ python optimize_images.py       # after replacing docs/img/hero.png
 python build_storm_binder.py              # the binder, print PDF, into product/
 python build_storm_binder.py --fillable   # both PDFs, 1,876 form fields
 python build_storm_binder.py --fill-report  # lists pages with space going spare
+python build_binder_listing.py            # ten Etsy photos for the binder
 ```
 
 Content lives in four files: `build_calendars.py` holds the 36 tasks and the
@@ -205,20 +206,36 @@ for other climates are a later product line, not a rebrand.
 **The binder is built and unlaunched, and the clock is the whole problem.**
 Both PDFs render and verify: 33 pages, every page measured against its sheet,
 1,876 uniquely named AcroForm fields with `/AcroForm` in the catalog and every
-widget on its page. What does not exist yet is the thing that earns money:
-**no Etsy listing, no photos, no video, and no copy.** Peak of season is
+widget on its page. The copy and the photos are written too:
+[product/etsy-listing-binder.md](product/etsy-listing-binder.md) holds the
+title, description, tags, materials, price reasoning and FAQ, all validated
+against Etsy's field limits, and `build_binder_listing.py` emits the ten
+images. **What is left is browser work and two decisions.** Peak of season is
 September 10. In order:
 
-1. Listing copy, as `product/etsy-listing-binder.md`, matching how the other two
-   are written. The title has to carry the panic-buy search, not the calm one.
-2. Listing photos. `build_listing_images.py` is the pattern, pointed at binder
-   pages instead of kit pages, and the strongest sheets to show are the policy
-   page, a room inventory sheet, the countdown, and the claim call log.
-3. The listing itself, at $16.99.
-4. A decision on whether the kit's listing cross-sells the binder, and whether
-   the site mentions it at all. Nothing visitor-facing has changed yet, which is
-   why no version was cut: by the rule in [CHANGELOG.md](CHANGELOG.md) the
-   binder gets its version when it launches, not when it compiles.
+1. **Run the tag list through Etsy Marketplace Insights before publishing.**
+   The market data table below covers gift and maintenance terms, not storm
+   terms, so every keyword in that listing is reasoned rather than measured.
+   Ten minutes, and it is the highest value ten minutes left before launch.
+2. **Publish it, at $16.99, well before a storm is named.** A brand new listing
+   has no ranking signal and will not float to the top of a term that suddenly
+   has ten thousand searchers on it. The listing needs to have been live for
+   weeks, with a few sales behind it, to catch the spike. Publishing the day a
+   storm forms is the most expensive mistake available here.
+3. **Decide whether the site links to it.** `docs/index.html` carries one buy
+   slot, for the kit. A second product turns that button into a choice, which
+   is a design question rather than a paste, and the site plus the free feeds
+   are the only discovery this shop controls.
+4. Add a cross-sell line to the kit's description, the way the kit already
+   points at the realtor edition. Mail the MailerLite list, which has not been
+   mailed since the kit launched.
+5. Then cut a version. Nothing visitor-facing has changed yet, which is why
+   none has been: by the rule in [CHANGELOG.md](CHANGELOG.md) the binder earns
+   one when it has a live buy path, not when it compiles.
+
+**There is no video.** `build_video.py` has no binder cut, so the listing says
+to leave the slot empty rather than reuse the kit's, which shows the wrong
+product.
 
 **Do not commit the binder before reading item 2 under "Waiting on Chad".**
 `binder_pages.py` is the entire content of the highest-value product in the shop

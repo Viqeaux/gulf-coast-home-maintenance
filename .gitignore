@@ -19,6 +19,7 @@ product/*.pdf
 product/*.html
 product/listing/
 product/listing-realtor/
+product/listing-binder/
 product/pins/
 
 # Local Claude Code settings — machine-specific, not useful to anyone else.
