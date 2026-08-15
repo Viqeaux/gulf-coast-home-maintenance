@@ -70,6 +70,10 @@ Six, in this order. A board is a search target of its own, so the name matters
 more than it looks like it should. Give each one the description below, because
 Pinterest indexes board descriptions.
 
+**This table is the spec, not a record of the account.** Names have already
+drifted once: what is called "Hurricane Season Prep" here is live as "Hurricane
+Prep Checklist". Check the account rather than trusting this list.
+
 | Board | Description |
 |---|---|
 | **Gulf Coast Home Maintenance** | Seasonal home maintenance for the Gulf Coast, Texas to Florida. What to do and when, in a climate that runs on its own schedule. |

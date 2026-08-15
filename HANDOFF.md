@@ -313,13 +313,27 @@ connecting them to the Etsy listing. `build_pins.py` makes the pins and
 copy for every pin, and the setup steps. Re-run the script and re-upload if a
 pin's source page changes.
 
-Small things still open, none of them blocked by anything in the repo:
+The profile cover, the About text and the Website field were all done by Chad
+the same day. One thing is left, and it is not urgent:
 
-| | What | Why it matters |
-|---|---|---|
-| **1** | Upload a profile cover | `build_brand.py` makes two, `pinterest-cover-photo.png` is the one to use |
-| **2** | Check the profile **About** and **Website** fields | About still had another shop's copy on it when last seen, and the website was set to the `www` and `http` form. Flagged once, never confirmed fixed |
-| **3** | Confirm `08-home-inventory` sits on **Home Inventory and Insurance** | It is the binder's year-round hedge and needs its own board to be one. If it landed on a storm board instead it dies with the season |
+**`08-home-inventory` is on the Hurricane Prep Checklist board, and it was
+built to be the thing that is not seasonal.** Home inventory and insurance
+claims are searched in every month, and that pin is what keeps the binder
+earning from November to May, the same way half the listing's Etsy tags are
+deliberately not about hurricanes. A board name is a ranking signal, so on a
+hurricane board Pinterest reads that pin as hurricane content and it goes quiet
+with the season.
+
+The fix is a minute of work and does not involve moving anything: make the
+**Home Inventory and Insurance** board, description in
+[product/pinterest.md](product/pinterest.md), and save the existing pin to it
+as well. A pin can sit on several boards, and the second one gives it the
+year-round context without costing it the storm-season one.
+
+**Board names on the account do not all match the table in
+`product/pinterest.md`.** "Hurricane Prep Checklist" is the live name of what
+that table calls "Hurricane Season Prep". The table is the spec, not a record
+of what exists, so check the account before assuming a name.
 
 **No pin has been measured yet.** Nothing was built against Pinterest data
 because there is none. Give the first pins two weeks, then let saves and clicks
