@@ -75,6 +75,7 @@ python build_storm_binder.py              # the binder, print PDF, into product/
 python build_storm_binder.py --fillable   # both PDFs, 1,876 form fields
 python build_storm_binder.py --fill-report  # lists pages with space going spare
 python build_binder_listing.py            # ten Etsy photos for the binder
+python build_video.py --binder            # the 14 second binder video
 ```
 
 Content lives in four files: `build_calendars.py` holds the 36 tasks and the
@@ -233,9 +234,11 @@ September 10. In order:
    none has been: by the rule in [CHANGELOG.md](CHANGELOG.md) the binder earns
    one when it has a live buy path, not when it compiles.
 
-**There is no video.** `build_video.py` has no binder cut, so the listing says
-to leave the slot empty rather than reuse the kit's, which shows the wrong
-product.
+**The video is built.** `python build_video.py --binder` makes a fourteen
+second cut from the binder's own pages, into `product/listing-binder/`. It
+opens on the wind deductible, which is the one fact most homeowners have never
+looked up, and closes on the claim log, which is the only thing in the shop no
+free hurricane checklist carries.
 
 **Do not commit the binder before reading item 2 under "Waiting on Chad".**
 `binder_pages.py` is the entire content of the highest-value product in the shop

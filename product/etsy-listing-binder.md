@@ -260,9 +260,31 @@ understand within two images that this is a thing they fill in.
 
 ## Featured video
 
-`product/listing-binder/video.mp4` if `build_video.py` gets a binder cut. Until
-then, leave the video slot empty rather than reusing the kit's, which shows the
-wrong product.
+`product/listing-binder/video.mp4`. Run `python build_video.py --binder`, which
+needs the images above to exist first. Fourteen seconds, silent, square, and
+every shot is a page genuinely in the PDF.
+
+Etsy plays listing videos silently and caps them at 15 seconds, so each shot
+gets about two seconds and one point. The cut argues the binder's case rather
+than the kit's, because the buyer is different: frightened rather than
+responsible, and deciding in about a minute.
+
+| | Shot | Point |
+|---|---|---|
+| 1 | Cover | For the week you cannot think |
+| 2 | Policies | Know your wind deductible? On a $400,000 house, 2% is $8,000 |
+| 3 | Inventory intro | Nine room by room sheets, and contents cover is a six figure number |
+| 4 | The countdown | 72 hours, 48, 24. A sequence, not a list |
+| 5 | Shutdown | The last hour in the house, in the order that matters |
+| 6 | Claim call log | Most checklists end at the wind. The money is lost afterward |
+
+Shot 2 is the hook and is doing the most work: it is the one fact most
+homeowners have never looked up, and it reframes $16.99 against a number in
+the thousands. Shot 6 is the close, because covering what happens after the
+storm is the only thing here that no free hurricane checklist has.
+
+A blank inventory sheet is deliberately not in the cut. It reads as an empty
+page at two seconds, which is why the intro page carries the inventory instead.
 
 ## Category and attributes
 

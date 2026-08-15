@@ -12,12 +12,16 @@ survives every crop it might get.
 
 Run:  python build_video.py            the kit cut
       python build_video.py --agent    the realtor cut
+      python build_video.py --binder   the storm binder cut
 Out:  product/listing/video.mp4            (gitignored, rebuilt in seconds)
       product/listing-realtor/video.mp4
+      product/listing-binder/video.mp4
 
-The two cuts share every frame, crossfade and encoding decision and differ only
-in which images they pull and what the captions say. The realtor cut argues a
-different case: its buyer is not the person who reads the thing.
+The three cuts share every frame, crossfade and encoding decision and differ
+only in which images they pull and what the captions say. Each argues a
+different case, because each has a different buyer. The kit's buyer is being
+responsible, the realtor's buyer is not the person who reads the thing, and the
+binder's buyer is frightened and deciding in about a minute.
 """
 
 import argparse
@@ -82,6 +86,28 @@ AGENT_SHOTS = [
 AGENT_END_LINES = [
     ("27 pages, branded", SERIF, 80, INK),
     ("Plus a four page leave-behind", SERIF, 42, MUTED),
+    ("INSTANT DOWNLOAD", SANS, 30, ACCENT),
+]
+
+# The binder cut argues the third case: this buyer is frightened rather than
+# responsible, and is deciding in about a minute. So it opens on the one fact
+# most homeowners have never looked up, and closes on the thing no other
+# hurricane checklist carries, which is everything after the wind stops.
+#
+# Deliberately not shown: a blank inventory sheet. It reads as an empty page at
+# two seconds, so the intro page with its worked example carries the inventory.
+BINDER_SHOTS = [
+    ("01-cover.png", "For the week you cannot think", "Written down while it was calm"),
+    ("02-policies.png", "Know your wind deductible?", "On a $400,000 house, 2% is $8,000"),
+    ("03-inventory-how.png", "Nine room by room sheets", "Contents cover is a six figure number"),
+    ("05-countdown.png", "72 hours, 48, 24", "A sequence, not a list"),
+    ("06-shutdown.png", "The last hour in the house", "In the order that matters"),
+    ("07-claim-log.png", "Most checklists end at the wind", "The money is lost afterward"),
+]
+
+BINDER_END_LINES = [
+    ("33 pages", SERIF, 96, INK),
+    ("Fillable, and undated", SERIF, 44, MUTED),
     ("INSTANT DOWNLOAD", SANS, 30, ACCENT),
 ]
 
@@ -157,9 +183,12 @@ def main(argv=None):
 
     parser = argparse.ArgumentParser(
         description="Build the Etsy listing video from the real pages.")
-    parser.add_argument("--agent", action="store_true",
-                        help="the realtor edition cut, from "
-                             "product/listing-realtor/")
+    cut = parser.add_mutually_exclusive_group()
+    cut.add_argument("--agent", action="store_true",
+                     help="the realtor edition cut, from "
+                          "product/listing-realtor/")
+    cut.add_argument("--binder", action="store_true",
+                     help="the storm binder cut, from product/listing-binder/")
     args = parser.parse_args(argv)
 
     source = "build_listing_images.py"
@@ -170,6 +199,13 @@ def main(argv=None):
         SHOTS = AGENT_SHOTS
         END_LINES = AGENT_END_LINES
         source = "build_agent_listing.py"
+    elif args.binder:
+        LISTING_DIR = os.path.join("product", "listing-binder")
+        FRAME_DIR = os.path.join(LISTING_DIR, "_frames")
+        OUT = os.path.join(LISTING_DIR, "video.mp4")
+        SHOTS = BINDER_SHOTS
+        END_LINES = BINDER_END_LINES
+        source = "build_binder_listing.py"
 
     missing = [s[0] for s in SHOTS
                if not os.path.exists(os.path.join(LISTING_DIR, s[0]))]
