@@ -15,7 +15,7 @@ Current version **v1.10.0**. Everything below is live unless marked otherwise.
 | **The calendar** | Three subscribe-able `.ics` feeds, one per tier, plus the site and the calendar contents page that hand them out | <https://gulfcoasthomemaintenance.com> | Free, and stays free |
 | **The kit** | Every printable page, 27 of them, in two PDFs: print and fillable | Etsy only | $12.99 |
 | **The agent edition** | The same 27 pages branded for a realtor, plus a 4 page leave-behind. Four PDFs, print and fillable of each | Etsy only | $39 |
-| **The storm season binder** | 33 pages, mostly blanks: policies, room by room inventory, supply calculator, the countdown, shutdown, damage log, claim log, contractor vetting. Two PDFs, print and fillable | Etsy, **not listed yet** | $16.99 |
+| **The storm season binder** | 33 pages, mostly blanks: policies, room by room inventory, supply calculator, the countdown, shutdown, damage log, claim log, contractor vetting. Two PDFs, print and fillable | Etsy | $16.99 |
 
 **The binder is a different buying moment from the kit, and that is the point.**
 The kit is a calm January purchase by somebody being responsible. The binder is
@@ -49,6 +49,9 @@ the strongest thing in the listing. Do not embellish it.
 - **Etsy shop:** GulfCoastHomeCare
 - **Etsy listing, the kit:** <https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast>
 - **Etsy listing, the agent edition:** <https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast>
+- **Etsy listing, the storm binder:** <https://www.etsy.com/listing/4556502794/hurricane-prep-binder-printable-home>
+  Published by Chad 2026-08-15, and on the site the same day in 1.11.0 as
+  section 05.
 - **Email:** MailerLite, group **"General Signups"**, double opt-in on. It began
   as a waitlist for the kit and the buy button retired that job, so in 1.6.0 it
   became a general "hear about the next one" list living at the end of the free
@@ -204,35 +207,29 @@ for other climates are a later product line, not a rebrand.
 
 ## Outstanding
 
-**The binder is built and unlaunched, and the clock is the whole problem.**
-Both PDFs render and verify: 33 pages, every page measured against its sheet,
-1,876 uniquely named AcroForm fields with `/AcroForm` in the catalog and every
-widget on its page. The copy and the photos are written too:
-[product/etsy-listing-binder.md](product/etsy-listing-binder.md) holds the
-title, description, tags, materials, price reasoning and FAQ, all validated
-against Etsy's field limits, and `build_binder_listing.py` emits the ten
-images. **What is left is browser work and two decisions.** Peak of season is
-September 10. In order:
+**The binder is launched and on the site.** Chad published the listing on
+2026-08-15 and it went onto `docs/index.html` the same day, in 1.11.0, as
+section 05 with its own `BINDER_URL` and a `Product` entry in the structured
+data. Both PDFs render and verify: 33 pages, every page measured against its
+sheet, 1,876 uniquely named AcroForm fields with `/AcroForm` in the catalog and
+every widget on its page. Peak of season is September 10, so what is left is
+worth doing in the next three weeks rather than eventually:
 
-1. **Run the tag list through Etsy Marketplace Insights before publishing.**
-   The market data table below covers gift and maintenance terms, not storm
-   terms, so every keyword in that listing is reasoned rather than measured.
-   Ten minutes, and it is the highest value ten minutes left before launch.
-2. **Publish it, at $16.99, well before a storm is named.** A brand new listing
-   has no ranking signal and will not float to the top of a term that suddenly
-   has ten thousand searchers on it. The listing needs to have been live for
-   weeks, with a few sales behind it, to catch the spike. Publishing the day a
-   storm forms is the most expensive mistake available here.
-3. **Decide whether the site links to it.** `docs/index.html` carries one buy
-   slot, for the kit. A second product turns that button into a choice, which
-   is a design question rather than a paste, and the site plus the free feeds
-   are the only discovery this shop controls.
-4. Add a cross-sell line to the kit's description, the way the kit already
+1. **Run the tag list through Etsy Marketplace Insights.** Still not done, and
+   still the highest value ten minutes available. The market data table below
+   covers gift and maintenance terms, not storm terms, so every keyword in that
+   listing is reasoned rather than measured. It was worth most before
+   publishing, but tags can be edited on a live listing and the ranking signal
+   builds from now, so doing it this week still beats doing it in September.
+2. Add a cross-sell line to the kit's description, the way the kit already
    points at the realtor edition. Mail the MailerLite list, which has not been
-   mailed since the kit launched.
-5. Then cut a version. Nothing visitor-facing has changed yet, which is why
-   none has been: by the rule in [CHANGELOG.md](CHANGELOG.md) the binder earns
-   one when it has a live buy path, not when it compiles.
+   mailed since the kit launched and now has a genuinely seasonal reason to
+   hear from you.
+3. **The site placement is worth revisiting out of season.** The binder sits
+   above the agent edition because it sells to the same homeowner as the kit
+   and because it has a deadline. In February it is the one product on the page
+   nobody is shopping for, and the order that is right in August is not
+   obviously right in January.
 
 **The video is built.** `python build_video.py --binder` makes a fourteen
 second cut from the binder's own pages, into `product/listing-binder/`. It

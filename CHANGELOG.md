@@ -27,6 +27,40 @@ Newest first.
 
 ---
 
+## [1.11.0], 2026-08-15
+
+### Added
+
+- **The storm season binder is on the site**, as section 05 with its own buy
+  card at $16.99. Chad published the Etsy listing the same day, which answered
+  the open question from 1.10.0 about whether the site should link to a third
+  product. It earns a version by the rule in this file: the binder now has a
+  live buy path, which is what was being waited for, rather than merely
+  compiling.
+- A third `Product` block in the structured data, with the binder's price and
+  listing URL. The comment above that graph now names all three URL constants,
+  since the rule about deleting a block when its URL is emptied applies to each.
+- `BINDER_URL` and a third `wireBuy` call. No new machinery: `wireBuy` was made
+  per-card in 1.10.0 and takes a third slot without changes.
+
+### Changed
+
+- **The binder sits above the agent edition, not below it.** It sells to the
+  same person as the kit, a homeowner, and it is the only product on the page
+  with a deadline: search for every term it lives on collapses in winter and
+  peaks around September 10. An agent arriving at the kit's license wall has a
+  direct link out of that card, so adjacency was doing less work for that
+  section than it appeared. A homeowner had no such link and would have had to
+  scroll past a realtor-only pitch. Worth revisiting out of season, when the
+  binder is the one product nobody is shopping for.
+- Sections after it renumber: agents 05 to 06, free 06 to 07, how-to 07 to 08,
+  who 08 to 09.
+- Plain section rather than a band, so the kit keeps the deep ground and stays
+  the loudest paid thing on the page.
+- The card's copy was cut to the length the other two cards use. First draft ran
+  44 to 47 words per point against the agent card's 33 to 35, and 69 words of
+  blurb against 52 and 57. Now 35 to 38 and 54.
+
 ## [1.10.0], 2026-08-15
 
 **The step-by-step detail is kit only now.** Chad's call, and it corrects a

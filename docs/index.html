@@ -454,7 +454,7 @@
   }
   /* A buy button should look heavier than a nav link, and wide enough to hold
      its own against a 2.6rem price directly above it. */
-  #buy-slot .btn--lg, #agent-slot .btn--lg {
+  #buy-slot .btn--lg, #binder-slot .btn--lg, #agent-slot .btn--lg {
     /* inline-block, or min-width is ignored: it does not apply to inline
        elements, and an anchor is inline unless told otherwise. */
     display: inline-block;
@@ -462,9 +462,9 @@
     min-width: 17rem; letter-spacing: .01em;
     box-shadow: 0 2px 0 color-mix(in srgb, var(--accent) 62%, black);
   }
-  #buy-slot .btn--lg:hover, #agent-slot .btn--lg:hover { filter: brightness(1.06); }
+  #buy-slot .btn--lg:hover, #binder-slot .btn--lg:hover, #agent-slot .btn--lg:hover { filter: brightness(1.06); }
   @supports not (background: color-mix(in srgb, red 50%, transparent)) {
-    #buy-slot .btn--lg, #agent-slot .btn--lg { box-shadow: 0 2px 0 #0a3f48; }
+    #buy-slot .btn--lg, #binder-slot .btn--lg, #agent-slot .btn--lg { box-shadow: 0 2px 0 #0a3f48; }
   }
   .buy p { color: var(--muted); max-width: 30rem; margin-left: auto; margin-right: auto; font-size: .97rem; }
   .buy p:last-child { margin-bottom: 0; }
@@ -627,7 +627,8 @@
 
 <!-- Structured data. The prices here are duplicated from the .buy-price markup
      below and from the Etsy listings, so all three move together or none do.
-     If SHOP_URL or AGENT_URL is ever emptied, delete that product's block too:
+     If SHOP_URL, BINDER_URL or AGENT_URL is ever emptied, delete that
+     product's block too:
      the script hides the price and the button, but this would keep telling
      search engines the thing is for sale.
 
@@ -677,6 +678,22 @@
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
         "url": "https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "The Gulf Coast Storm Season Binder",
+      "description": "A 33 page printable hurricane preparedness binder for coastal homeowners. Policies and deductibles written in dollars, nine room by room home inventory sheets, a water and supply calculator, the countdown and shutdown sequence, and the damage and claim logs that decide what actually gets paid.",
+      "brand": { "@type": "Brand", "name": "Gulf Coast Home Maintenance" },
+      "category": "Calendars & Planners",
+      "url": "https://gulfcoasthomemaintenance.com/#binder",
+      "image": "https://gulfcoasthomemaintenance.com/img/hero-1600.jpg",
+      "offers": {
+        "@type": "Offer",
+        "price": "16.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.etsy.com/listing/4556502794/hurricane-prep-binder-printable-home"
       }
     },
     {
@@ -1055,14 +1072,91 @@
   </div>
 </section>
 
+<!-- ===================== binder ===================== -->
+<!-- Sits with the kit rather than after the agent section, because it sells to
+     the same person: a homeowner. An agent arriving at the kit's license wall
+     has a direct link out of that card, so adjacency is doing less work for
+     that section than it looks. A homeowner has no such link, and would have to
+     scroll past a realtor-only pitch to reach the one product on this page with
+     a deadline on it.
+
+     It has a clock the others do not. Search for every term this product lives
+     on is close to nothing in winter and peaks around September 10, so its
+     position is worth revisiting out of season.
+
+     Plain rather than band on purpose: the kit keeps the deep ground and stays
+     the loudest paid thing on the page. -->
+<section id="binder">
+  <div class="wrap">
+    <span class="sec-no">05 / Storm season</span>
+    <h2>The storm season binder</h2>
+    <p class="deck">
+      Thirty-three pages for the part of a hurricane nobody prepares for: proving
+      what you owned, and getting paid for it. Built to be filled in while it's
+      calm, because none of it can be done with a cone on the television.
+    </p>
+
+    <!-- Same three-point shape as the agent card, and for the same reason: the
+         objections are predictable. I already have a checklist, I'll do it when
+         something is named, and is this just the federal advice reprinted. -->
+    <div class="points">
+      <div class="point">
+        <p class="pn">$8,000</p>
+        <h3>Your deductible is a percentage</h3>
+        <p>Not a flat amount. On a $400,000 home a 2 percent wind deductible is
+        $8,000 before the policy pays anything. Most people learn that from an
+        adjuster, afterward. Page one is where yours gets written down.</p>
+      </div>
+      <div class="point">
+        <p class="pn">A third</p>
+        <h3>The money is lost after the wind stops</h3>
+        <p>Most hurricane lists end when the weather does. More than a third of
+        these pages sit after it: a damage log with a column for cause, because
+        wind and flood are different policies, and the claim call log.</p>
+      </div>
+      <div class="point">
+        <p class="pn">7 days</p>
+        <h3>Three days is the federal number</h3>
+        <p>Three days is for a house that was merely inconvenienced. After a Gulf
+        landfall near you it is seven, and fourteen at the end of a long feeder
+        line. The supply calculator does that math.</p>
+      </div>
+    </div>
+
+    <div class="buy">
+      <h3>Written down while it's calm</h3>
+      <p class="buy-blurb">
+        Policies and deductibles, every number you want in the first hour, nine
+        room by room inventory sheets, the water and supply calculator, the
+        countdown from seven days out to when the wind arrives, the shutdown
+        sequence, re-entry, and the damage and claim logs. Undated, so it works
+        this season and every season after it.
+      </p>
+
+      <div class="buy-action">
+        <p class="buy-price"><span class="amt">$16.99</span><span class="per">one time, use it every season</span></p>
+        <div id="binder-slot"></div>
+        <p class="buy-note">Instant download &middot; Two PDFs &middot; 1,876 fillable fields</p>
+      </div>
+
+      <p style="margin-top:1.4rem;font-size:.88rem">
+        Contents coverage is usually 50 to 70 percent of what the house itself is
+        insured for. To collect it you have to say what you owned, which is what
+        the nine inventory sheets are for.
+      </p>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== agents ===================== -->
-<!-- Directly under the kit, because the agent who needs this is most likely
-     reading that card and running into a license written for one household.
-     Left off the band on purpose: the kit's card sits on the deep ground and
-     stays the louder of the two, which is the right order for most visitors. -->
+<!-- Left off the band on purpose: the kit's card sits on the deep ground and
+     stays the loudest of the three, which is the right order for most visitors.
+     The agent who needs this is most likely reading the kit's card and running
+     into a license written for one household, and that card links here
+     directly, so this does not depend on sitting next to it. -->
 <section id="agents">
   <div class="wrap">
-    <span class="sec-no">05 / For agents</span>
+    <span class="sec-no">06 / For agents</span>
     <h2>The agent edition</h2>
     <p class="deck">
       If you hand a client something at closing, this is the version built for it.
@@ -1125,7 +1219,7 @@
 <!-- ===================== calendars ===================== -->
 <section id="calendars">
   <div class="wrap">
-    <span class="sec-no">06 / Free</span>
+    <span class="sec-no">07 / Free</span>
     <h2>Put it on your phone <span class="free-tag">Free</span></h2>
     <p class="deck">
       <strong>All three of these are free.</strong> Not a sample of the kit above and
@@ -1195,7 +1289,7 @@
 <!-- ===================== how to ===================== -->
 <section class="band">
   <div class="wrap">
-    <span class="sec-no">07 / Getting them on your phone</span>
+    <span class="sec-no">08 / Getting them on your phone</span>
     <h2>However you keep your calendar</h2>
 
     <div class="howto">
@@ -1245,7 +1339,7 @@
      reader this was taken seriously, so it stays. -->
 <section id="who">
   <div class="wrap">
-    <span class="sec-no">08 / Who made this</span>
+    <span class="sec-no">09 / Who made this</span>
     <h2>I built this for my own house first</h2>
     <div class="byline">
       <p>
@@ -1289,7 +1383,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.10.0</p>
+    <p class="version">v1.11.0</p>
   </div>
 </footer>
 
@@ -1313,6 +1407,11 @@
   // not the shop URL, and emptying it puts that card back to "not listed yet"
   // without touching the kit's card.
   var AGENT_URL = "https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast";
+
+  // The storm season binder, sold separately at $16.99. Same rules again. This
+  // is the seasonal one, so if it is ever pulled out of season, empty this
+  // rather than deleting the section, and delete its Product block above too.
+  var BINDER_URL = "https://www.etsy.com/listing/4556502794/hurricane-prep-binder-printable-home";
   // ---------------------------------------------------------------------------
 
   (function () {
@@ -1348,6 +1447,7 @@
     }
 
     wireBuy('buy-slot', SHOP_URL, 'Get the kit on Etsy');
+    wireBuy('binder-slot', BINDER_URL, 'Get the binder on Etsy');
     wireBuy('agent-slot', AGENT_URL, 'Get the agent edition on Etsy');
 
     // The signup posts straight to MailerLite through a hidden frame,
