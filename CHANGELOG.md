@@ -27,6 +27,15 @@ Newest first.
 
 ---
 
+## [1.12.1], 2026-08-15
+
+### Changed
+
+- The sticky bar's binder button reads "Hurricane checklist" rather than
+  "Hurricane prep". Chad's wording, and it matches the term the listing title
+  leads on. Sentence case to match "Free calendars" sitting next to it. It grows
+  from 120 to 145 px, still one line and still clear of the wordmark at 375 px.
+
 ## [1.12.0], 2026-08-15
 
 ### Added
