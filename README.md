@@ -19,6 +19,10 @@ build_printables.py       renders the kit to HTML then PDF, via headless Chrome
 build_fillable.py         stamps form fields onto a second, typeable copy
 build_listing_images.py   renders Etsy photos from the real kit pages
 build_video.py            the 14 second silent Etsy listing video
+build_agent_edition.py    the realtor edition, four PDFs. --logo bakes one in
+build_agent_listing.py    nine photos for the realtor listing
+build_pins.py             six Pinterest pins from the real kit pages
+build_brand.py            the shop icon and banner
 check_links.py            finds curated videos that have gone dead
 optimize_images.py        resizes the hero photo for the web
 
@@ -27,7 +31,9 @@ product/                  the paid kit. Gitignored except the listing copy
   gulf-coast-home-maintenance-kit-fillable.pdf  same pages, typeable
   gulf-coast-home-maintenance-kit.html          what the PDF renders from
   listing/                                      Etsy photos, 00-hero first
+  pins/                                         Pinterest pins, 1000 x 1500
   etsy-listing.md                               title, tags, copy to paste
+  pinterest.md                                  boards, pin copy, setup steps
 
 docs/                     published by GitHub Pages, exactly as-is
   gulf-coast-must-do.ics       12 events
@@ -291,6 +297,29 @@ show a page the file does not contain. Etsy plays these silently and caps them
 at 15 seconds, so it runs 14, square at 1080, with no audio track and a caption
 on every shot. Nothing can be narrated and nothing can be lingered over, which
 is why each shot makes exactly one point.
+
+## Pinterest
+
+`build_pins.py` renders six pins at 1000 x 1500, Pinterest's 2:3, from the same
+kit pages the listing images use. The setup steps, the board list and the copy
+for every pin live in [product/pinterest.md](product/pinterest.md).
+
+Two things about the composition are deliberate. The headline block takes the
+top third, because a pin is judged at thumbnail size and the page render is
+unreadable there. And the domain runs across the foot of every pin, because a
+pin is saved far more often than it is clicked, and a reshared pin can outlive
+its own link.
+
+Pages are not equally full. A month page runs to the bottom margin, while the
+cover and the year chart carry white space that reads as a printing fault once
+it lands in a pin. `crop` cuts the sheet where its content ends and lets the
+pin's own ground fill the rest, `lift` shifts the sheet up inside that cut, and
+`zoom` sizes the result. All in unscaled page pixels, where a Letter sheet is
+1056 tall.
+
+`docs/index.html` carries Open Graph tags so a link saved from the site is not a
+grey card. They are absolute URLs on purpose: every scraper resolves them
+against its own host rather than the page's.
 
 ## Selling it
 

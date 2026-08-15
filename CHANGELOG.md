@@ -27,6 +27,38 @@ Newest first.
 
 ---
 
+## [1.8.0], 2026-08-15
+
+### Added
+
+- **Pinterest, as a channel rather than an afterthought.** `build_pins.py`
+  renders six pins at 1000 x 1500 from the real kit pages, the same discipline
+  the Etsy photos follow, and [product/pinterest.md](product/pinterest.md)
+  carries the boards, the setup order and the copy for every pin. The market
+  data has said since the beginning that volume is the binding constraint and
+  that discovery cannot come from Etsy search, and this is the first thing built
+  against that. Each pin targets one search intent, because a person looking up
+  hurricane prep and an agent looking for a closing gift will never type the
+  other's words.
+- **Open Graph tags on the landing page.** The site had none, so every share of
+  it resolved to a grey card and Pinterest had to guess at an image. Absolute
+  URLs, since scrapers resolve them against their own host.
+- **The Pinterest domain claim.** A `p:domain_verify` tag in the head. Without
+  it, pins pointing at the site carry no shop attribution, including the ones
+  other people reshare.
+
+### Changed
+
+- The README's file map had drifted: `build_agent_edition.py`,
+  `build_agent_listing.py` and `build_brand.py` all shipped without being listed
+  in it.
+
+Minor rather than patch: a new capability, and a channel that did not exist
+before. No task content changed, so `SEQUENCE` stays at 1 and all three feeds
+are byte-identical to 1.7.0.
+
+---
+
 ## [1.7.0], 2026-08-15
 
 ### Added

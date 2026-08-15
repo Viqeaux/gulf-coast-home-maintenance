@@ -51,6 +51,7 @@ python build_video.py           # the 14 second Etsy listing video
 python build_agent_edition.py   # the realtor edition, four PDFs. --logo bakes one in
 python build_agent_listing.py   # nine photos for the realtor listing
 python build_video.py --agent   # the realtor cut of the video
+python build_pins.py            # six Pinterest pins, 1000x1500
 python build_brand.py           # shop icon and banner
 python check_links.py           # finds curated videos that have died
 python optimize_images.py       # after replacing docs/img/hero.png
@@ -184,6 +185,19 @@ section before adding any.
 **The site has nothing open.** The future-releases signup was the last item and
 it shipped in 1.6.0, so the site can reach an interested visitor again. Nothing
 on it is known to be broken or missing.
+
+**Pinterest is built but not launched.** `build_pins.py` makes the six pins and
+[product/pinterest.md](product/pinterest.md) holds the boards, the copy for
+every pin, and the setup steps in order. What is done: the pins, the copy, and
+the Open Graph tags on `docs/index.html`. What is not: the account itself, the
+domain claim, the boards, and the uploads, all of which are browser work in
+Chad's hands.
+
+**The domain claim needs a meta tag pasted back.** Pinterest hands out a
+`<meta name="p:domain_verify" ...>` line during the claim. It goes in the head
+of `docs/index.html` and has to be deployed before pressing Verify. Until the
+claim goes through, pins carry no shop attribution and site traffic does not
+show up in Pinterest analytics.
 
 **Unverified:**
 

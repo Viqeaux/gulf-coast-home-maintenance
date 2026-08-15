@@ -19,6 +19,7 @@ product/*.pdf
 product/*.html
 product/listing/
 product/listing-realtor/
+product/pins/
 
 # Local Claude Code settings — machine-specific, not useful to anyone else.
 # The .tmp.* pattern matters: Claude Code writes settings atomically via a temp
