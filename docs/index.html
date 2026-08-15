@@ -342,8 +342,17 @@
   .btn--copied { border-color: var(--tier-color, var(--accent)); color: var(--tier-color, var(--accent)); }
   .hero .btn { border-color: color-mix(in srgb, var(--on-deep) 32%, transparent); color: var(--on-deep); }
   .hero .btn:hover { border-color: var(--on-deep); }
+  /* The hero's free CTA, and deliberately not gold. Gold became the checkout
+     color in 1.15.1, across all six Etsy buttons, which left the loudest button
+     on the page wearing the "this costs money" color to offer something free.
+
+     Teal would be the obvious alternative, since that is what the FREE badges
+     use further down. It is not usable here: --accent against --deep measures
+     about 1.4:1, so a teal fill would sink into the hero's own ground. A light
+     fill is the strongest thing available on a dark hero, reads instantly as
+     the primary action, and cannot be confused with the buy color. */
   .hero .btn--primary {
-    background: var(--sand); border-color: var(--sand); color: var(--deep);
+    background: var(--on-deep); border-color: var(--on-deep); color: var(--deep);
   }
   .hero .btn--primary:hover { filter: brightness(1.08); }
 
@@ -1672,7 +1681,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.15.1</p>
+    <p class="version">v1.15.2</p>
   </div>
 </footer>
 

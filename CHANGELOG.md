@@ -27,6 +27,23 @@ Newest first.
 
 ---
 
+## [1.15.2], 2026-08-15
+
+### Changed
+
+- **The hero's free CTA is no longer gold.** 1.15.1 made gold the checkout
+  color across all six Etsy buttons, which left the loudest button on the page
+  wearing "this costs money" to offer something free. It takes a light fill,
+  `--on-deep` with `--deep` text, measuring 12.48 on the light scheme and 13.38
+  on the dark one against both its own label and the hero ground behind it.
+- Teal was the obvious alternative, since that is what the FREE badges use lower
+  down, and it does not work here: `--accent` against `--deep` is about 1.4:1,
+  so a teal fill sinks into the hero's own ground. Written down because it looks
+  like the right answer until it is measured.
+
+The two colors now each mean one thing: gold goes to a checkout, light is the
+free action. The outlined secondary button is untouched.
+
 ## [1.15.1], 2026-08-15
 
 ### Changed

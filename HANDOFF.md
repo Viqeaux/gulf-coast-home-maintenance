@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.15.1**. Everything below is live unless marked otherwise.
+Current version **v1.15.2**. Everything below is live unless marked otherwise.
 
 ---
 
