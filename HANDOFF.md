@@ -305,12 +305,27 @@ of what came out of it is fixed and shipped. What is left needs Chad's hands or
 Chad's decision, and is listed under "Waiting on Chad" below. Nothing on the
 site is known to be broken.
 
-**Pinterest is launched.** Done 2026-08-15: the account, the boards, the pins
-uploaded, and the domain claim, whose `p:domain_verify` tag is live in the head
-of `docs/index.html`. `build_pins.py` makes the eight pins and
-[product/pinterest.md](product/pinterest.md) holds the boards, the copy for
-every pin, and the setup steps. Re-run the script and re-upload if a pin's
-source page changes.
+**Pinterest is launched, and four things are built but not up yet.** Live as of
+2026-08-15: the account, five boards, the first six pins, and the domain claim,
+whose `p:domain_verify` tag is in the head of `docs/index.html`.
+`build_pins.py` makes the pins and [product/pinterest.md](product/pinterest.md)
+holds the boards, the copy for every pin, and the setup steps. Re-run the
+script and re-upload if a pin's source page changes.
+
+Still waiting on browser work, none of it blocked by anything in the repo:
+
+| | What | Why it matters |
+|---|---|---|
+| **1** | Upload `07-storm-countdown` | The only pin with a deadline. Peak season is around September 10 and a pin needs weeks of saves before it can ride a spike, so this one goes up ahead of the one-a-day rotation rather than in it |
+| **2** | Create the **Home Inventory and Insurance** board, then upload `08-home-inventory` | The binder's year-round hedge. Home inventory and insurance claims are searched in every month, which is what keeps the listing alive from November to May |
+| **3** | Upload a profile cover | `build_brand.py` makes two, `pinterest-cover-photo.png` is the one to use |
+| **4** | Check the profile **About** and **Website** fields | About still had another shop's copy on it when last seen, and the website was set to the `www` and `http` form. Never confirmed fixed |
+
+**No pin has been measured yet.** Nothing was built against Pinterest data
+because there is none. Give the first pins two weeks, then let saves and clicks
+pick the next batch rather than a guess. Resist adding pins in the meantime: a
+burst from a young account reads as spam and it also destroys the signal being
+waited on.
 
 ## Waiting on Chad, from the 1.9.0 review
 

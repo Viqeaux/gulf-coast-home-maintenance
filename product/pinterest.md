@@ -17,8 +17,9 @@ kit, two from the storm season binder.
 
 ## Setup, in order
 
-Steps 1 through 3 have to be done in a browser, on the Pinterest site. There is
-no way around that and no API shortcut worth the trouble.
+Every step here happens in a browser, on the Pinterest site. There is no way
+around that and no API shortcut worth the trouble. What the repo supplies is
+the images and the copy to paste.
 
 ### 1. Create a **business** account
 
@@ -95,6 +96,24 @@ around September 10, the binder's whole listing strategy is built on being live
 before the demand rather than during it, and a pin needs weeks to gather saves
 before it can ride a spike. Every day it waits is a day off the front of that
 run-up.
+
+### 5. The profile cover
+
+`python build_brand.py` makes two, beside the Etsy icon and banner:
+
+| File | |
+|---|---|
+| `pinterest-cover-photo.png` | **Use this one.** The site's hero photograph under the site's own scrim, so a visitor arriving from a pin recognizes the same place |
+| `pinterest-cover.png` | The flat version, deep ground and the house mark. Kept as the fallback if the photograph ever changes |
+
+Both are 1600 x 900. The spec is 16:9 at a minimum of 800 x 450, and 1600 is
+double that so it stays sharp on a retina screen. Anything quoting 1200 x 600
+is out of date, Pinterest crops a 2:1 image top and bottom now.
+
+Neither repeats the shop name. Pinterest already prints the profile name in
+large type beside the cover, so a second copy of it would spend the whole image
+saying what is said above it. Both keep their content centered and well inside
+the edges, because Pinterest narrows the crop on phones.
 
 ---
 
