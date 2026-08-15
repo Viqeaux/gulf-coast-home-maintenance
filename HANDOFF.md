@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.13.0**. Everything below is live unless marked otherwise.
+Current version **v1.14.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -340,6 +340,58 @@ because there is none. Give the first pins two weeks, then let saves and clicks
 pick the next batch rather than a guess. Resist adding pins in the meantime: a
 burst from a young account reads as spam and it also destroys the signal being
 waited on.
+
+## From the design critique, 2026-08-15
+
+An external critique was run against the site. What it got right shipped in
+1.14.0. It was working from a page three versions old, so several findings were
+already fixed, and the list below is what was **deliberately not done**. Do not
+re-open these without reading the reason.
+
+**1. Page previews of the kit. Chad's decision, and it is a real tradeoff.**
+The critique's strongest point: a printable with no images of itself asks for
+blind trust at the moment of payment. The problem is that
+[README.md](README.md) "What the site may publish" puts the Watch List, How To
+Find Out and Your First Month explicitly on the paid side, settled by Chad in
+1.10.0, and `build_listing_images.py` renders exactly those pages. Publishing
+them on the site would undo that decision by the back door.
+
+Three ways forward, in the order I would try them:
+
+- `01-cover.png` gives nothing away and can go up today.
+- Cropped or angled shots that show density and typography without being
+  readable, which is standard for printable listings.
+- Full page renders, which is genuinely reversing the 1.10.0 decision. It may
+  be the right call, since these images are already public on the Etsy listing,
+  but it is a reversal and should be made as one rather than drifted into.
+
+**2. Renaming the "Going Above" tier.** The critique is right that it breaks the
+verb pattern the other two share. It is not a copy tweak: the tier name is in
+`TIERS` in `build_calendars.py` and therefore in the `X-WR-CALNAME` of a feed
+people have already subscribed to. Renaming it changes what every existing
+subscriber sees in their sidebar, forces a `SEQUENCE` bump, and has to be done
+across the kit, the agent edition and the binder at the same time or the
+products disagree. Worth doing one day, as its own release, never folded into
+something else.
+
+**3. Removing the footer version.** It is one of the four version markers, and
+the comment above it says why it is visible: so a tester can say which version
+they were looking at. The critique called it developer-facing, which it is, on
+purpose.
+
+**4. Moving the agent section below the free calendars.** Would put two paper
+sections next to each other again and undo the alternation fixed in 1.11.1. The
+current order also already answers the underlying worry, since the binder sits
+between the kit and the agent pitch.
+
+**5. A dedicated `/agents` landing page.** Genuinely a good idea and the agent
+edition is the highest margin product. It is a new page rather than a fix, and
+it wants ad spend pointed at it to be worth anything, so it belongs on the
+product list rather than in a critique response.
+
+**6. Moving the signup below the About section.** Left where it is. Both spots
+are defensible and there is no data to choose between them, and with zero
+subscribers the binding constraint is traffic rather than placement.
 
 ## Waiting on Chad, from the 1.9.0 review
 

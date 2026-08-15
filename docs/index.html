@@ -191,6 +191,11 @@
     }
   }
 
+  /* Three buttons and the wordmark stop fitting on one line below this. The kit
+     is the one that goes, not because it matters least but because the other
+     two are the free entry point and the one with a deadline on it. */
+  @media (max-width: 46rem) { .topbar a.cta--kit { display: none; } }
+
   @media (max-width: 30rem) {
     .topbar a.cta { display: none; }
     /* The seasonal one stays. It is the reason somebody is on this page on a
@@ -672,6 +677,38 @@
   .howto ol { padding-left: 1.1rem; margin: .3rem 0 .55rem; }
   .howto li { margin-bottom: .2rem; }
 
+  /* Per-app setup steps, folded away. This is post-purchase support sitting in
+     a pre-purchase slot: three quarters of the section's text was instructions
+     for an app the reader has not chosen yet, and the Android failure note
+     apologized for a problem before anyone had clicked anything. Folded, it
+     reaches the person who has that problem and nobody else.
+
+     Native <details>, not a scripted accordion, so it still opens with
+     JavaScript blocked and browser find-in-page can still reach inside it. */
+  .setup { margin-top: 2.25rem; border-top: 1px solid var(--hairline); }
+  .setup details { border-bottom: 1px solid var(--hairline); }
+  .setup summary {
+    cursor: pointer; list-style: none; padding: .95rem 0;
+    font: 600 .98rem/1.35 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--on-surface); display: flex; align-items: center; gap: .6rem;
+  }
+  .setup summary::-webkit-details-marker { display: none; }
+  .setup summary::before {
+    content: "+"; flex: none; width: 1rem;
+    font: 400 1.1rem/1 ui-sans-serif, system-ui, sans-serif; color: var(--sand);
+  }
+  /* U+2212 minus, not a hyphen and not an en dash. It is the character that
+     pairs with "+", and the house rule keeps dashes off this site. */
+  .setup details[open] > summary::before { content: "\2212"; }
+  .setup summary:focus-visible { outline: 2px solid var(--sand); outline-offset: 2px; }
+  .setup .body { padding: 0 0 1.1rem 1.6rem; }
+  .setup .body p, .setup .body li {
+    color: var(--on-surface-mute); font-size: .93rem; margin: 0 0 .55rem;
+  }
+  .setup .body strong, .setup .body em { color: var(--on-surface); }
+  .setup .body ol { padding-left: 1.1rem; margin: .3rem 0 .55rem; }
+  .setup .body li { margin-bottom: .2rem; }
+
   /* --- who made this ---------------------------------------------------- */
   /* Narrower than the deck and set at reading size. This is the one place on
      the page written in the first person, so it is allowed to look like prose
@@ -714,10 +751,9 @@
 
 <!-- Structured data. The prices here are duplicated from the .buy-price markup
      below and from the Etsy listings, so all three move together or none do.
-     If SHOP_URL, BINDER_URL or AGENT_URL is ever emptied, delete that
-     product's block too:
-     the script hides the price and the button, but this would keep telling
-     search engines the thing is for sale.
+     Unlisting a product means deleting three things together: its buy anchor,
+     its .buy-price line, and its block here. Leaving this one behind would keep
+     telling search engines the thing is for sale after it stopped being.
 
      Deliberately no aggregateRating and no review. Inventing either is both
      against Google's guidelines and the fastest way to lose the one thing this
@@ -853,7 +889,14 @@
       </svg>
       <span class="label">Gulf Coast Home Maintenance</span>
     </span>
+    <!-- The bar is the only navigation that follows the reader, so it carries
+         one link per thing worth reaching: the kit, the free feeds, and the
+         seasonal binder. The kit's price is in the label on purpose, because
+         "The kit" alone does not tell a first-time reader whether clicking it
+         costs anything. It drops out below 46rem, where three buttons and a
+         wordmark stop fitting on one line. -->
     <span class="topbar-ctas">
+      <a class="cta cta--kit" href="#edition">The kit, $12.99</a>
       <a class="cta" href="#calendars">Free calendars</a>
       <a class="cta cta--alert" href="#binder">Hurricane checklist</a>
     </span>
@@ -1156,11 +1199,10 @@
            thing you click. -->
       <div class="buy-action">
         <p class="buy-price"><span class="amt">$12.99</span><span class="per">one time, no subscription</span></p>
-        <!-- The script at the bottom of this file writes the buy button in here
-             from SHOP_URL. Emptying SHOP_URL puts the slot back to "not listed
-             yet" and hides the price, so the card never shows a number with
-             nothing to click. -->
-        <div id="buy-slot"></div>
+        <div id="buy-slot">
+          <a class="btn btn--primary btn--lg" target="_blank" rel="noopener"
+             href="https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast">Get the kit on Etsy</a>
+        </div>
         <p class="buy-note">Instant download &middot; Two PDFs &middot; Print at home on letter paper</p>
       </div>
 
@@ -1237,7 +1279,10 @@
 
       <div class="buy-action">
         <p class="buy-price"><span class="amt">$16.99</span><span class="per">one time, use it every season</span></p>
-        <div id="binder-slot"></div>
+        <div id="binder-slot">
+          <a class="btn btn--primary btn--lg" target="_blank" rel="noopener"
+             href="https://www.etsy.com/listing/4556502794/hurricane-prep-binder-printable-home">Get the binder on Etsy</a>
+        </div>
         <p class="buy-note">Instant download &middot; Two PDFs &middot; 1,876 fillable fields</p>
       </div>
 
@@ -1299,17 +1344,22 @@
 
     <div class="buy">
       <h3>Branded for your brokerage</h3>
+      <!-- Says what is in the box, and nothing else. The three cards above
+           already make the whole argument, and this paragraph used to repeat
+           all of it, 540 sheets and the typing and the license, close enough to
+           verbatim that the two read as a stutter. -->
       <p class="buy-blurb">
-        The full twenty-seven page kit with your details on every page, plus a
-        four-page leave-behind for the closing table, because handing over
-        twenty-seven pages twenty times is 540 sheets and nobody does that twice.
-        Type your name in once and save it, or send your logo and I'll build your
-        copies for you at no extra charge.
+        Four PDFs: the twenty-seven page kit and the four-page leave-behind, each
+        as a print version and a fillable one. Your name, brokerage and contact
+        details sit on every page of both, and stay there once you save the file.
       </p>
 
       <div class="buy-action">
         <p class="buy-price"><span class="amt">$39</span><span class="per">one time, print for every client</span></p>
-        <div id="agent-slot"></div>
+        <div id="agent-slot">
+          <a class="btn btn--primary btn--lg" target="_blank" rel="noopener"
+             href="https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast">Get the agent edition on Etsy</a>
+        </div>
         <p class="buy-note">Instant download &middot; Four PDFs &middot; Client gifting license</p>
       </div>
 
@@ -1407,25 +1457,6 @@
         <p>A subscription keeps updating as the calendar improves. A downloaded file is a snapshot. It never changes, and it duplicates itself if you import it twice.</p>
       </div>
       <div>
-        <h3>Google Calendar, including Android</h3>
-        <p>Android uses Google Calendar, so this is the button for it too. The app itself can't add a subscription. Do it once from a browser and it appears on every device on that account.</p>
-        <ol>
-          <li>Tap <strong>Add to Google Calendar</strong>.</li>
-          <li>Confirm <strong>Add</strong> when Google asks.</li>
-          <li>In the app, open the menu and switch it on.</li>
-        </ol>
-        <p>Google refreshes slowly, sometimes up to a day. A new calendar may show its web address as the name until then, which is normal.</p>
-        <p><strong>If the Google Calendar app opens and nothing happens,</strong> most likely on Android, it intercepted the link and cannot subscribe. Use <strong>Copy feed URL</strong> instead, then add it from a browser with <em>Other calendars</em> → <em>+</em> → <em>From URL</em>. On a phone, turn on your browser's desktop-site setting first.</p>
-      </div>
-      <div>
-        <h3>Apple Calendar or Outlook</h3>
-        <p>Use <strong>Subscribe</strong>, which hands off to your default calendar app.</p>
-      </div>
-      <div>
-        <h3>Any other app</h3>
-        <p>Outlook on the web, Thunderbird and Proton want a pasted address. Use <strong>Copy feed URL</strong>, then find <em>Subscribe from web</em>, <em>Add from URL</em>, or <em>New calendar from internet</em>.</p>
-      </div>
-      <div>
         <h3>Reminders are yours to set</h3>
         <p>These arrive as all-day events with no alert, so they never wake you up. Add one notification on the calendar itself and it applies to all twelve months.</p>
       </div>
@@ -1433,6 +1464,35 @@
         <h3>Want to see the whole year first?</h3>
         <p><a href="guides/">What's on the calendar</a> lists all thirty-six jobs and the month each one falls in, and your calendar events link straight to the task they mention. The step-by-step for each job, with the tools and the mistake that costs money, is in the <a href="#edition">printable kit</a>.</p>
       </div>
+    </div>
+
+    <!-- Ordered by how many people need each one, not alphabetically. -->
+    <div class="setup">
+      <details>
+        <summary>Setting it up in Google Calendar, including Android</summary>
+        <div class="body">
+          <p>Android uses Google Calendar, so this is the button for it too. The app itself can't add a subscription. Do it once from a browser and it appears on every device on that account.</p>
+          <ol>
+            <li>Tap <strong>Add to Google Calendar</strong>.</li>
+            <li>Confirm <strong>Add</strong> when Google asks.</li>
+            <li>In the app, open the menu and switch it on.</li>
+          </ol>
+          <p>Google refreshes slowly, sometimes up to a day. A new calendar may show its web address as the name until then, which is normal.</p>
+          <p><strong>If the Google Calendar app opens and nothing happens,</strong> most likely on Android, it intercepted the link and cannot subscribe. Use <strong>Copy feed URL</strong> instead, then add it from a browser with <em>Other calendars</em> &rarr; <em>+</em> &rarr; <em>From URL</em>. On a phone, turn on your browser's desktop-site setting first.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Setting it up in Apple Calendar or Outlook</summary>
+        <div class="body">
+          <p>Use <strong>Subscribe</strong>, which hands off to your default calendar app.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Setting it up in any other app</summary>
+        <div class="body">
+          <p>Outlook on the web, Thunderbird and Proton want a pasted address. Use <strong>Copy feed URL</strong>, then find <em>Subscribe from web</em>, <em>Add from URL</em>, or <em>New calendar from internet</em>.</p>
+        </div>
+      </details>
     </div>
   </div>
 </section>
@@ -1488,72 +1548,30 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.13.0</p>
+    <p class="version">v1.14.0</p>
   </div>
 </footer>
 
 <script>
   // ---------------------------------------------------------------------------
-  // The Etsy listing for the printable kit, which is the paid product. The
-  // calendar feeds on this page stay free and are not sold anywhere.
+  // The three Etsy listings live in the markup above, on the anchors inside
+  // #buy-slot, #binder-slot and #agent-slot, and nowhere else.
   //
-  // This is the listing URL rather than the shop URL, so buyers land on the
-  // product instead of a shop front they have to search. Emptying it hides the
-  // price and puts the slot back to "not listed yet". It no longer has anything
-  // to do with the signup: that used to live in this slot and now sits with the
-  // free calendars, where it is a general list rather than a waitlist for one
-  // product.
+  // They used to be constants here that a script turned into buttons, which
+  // meant the only way to buy anything on this site depended on JavaScript
+  // running. Anyone with it blocked, or on the one request in a few hundred
+  // where the script does not arrive, saw a price with nothing to click. A
+  // storefront's buy button is the last thing that should need scripting.
   //
-  // The price lives in one place, the .buy-price line in the markup above, so
-  // changing it does not mean hunting through the script as well.
-  var SHOP_URL = "https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast";
-
-  // The realtor edition, sold separately at $39. Same rules: the listing URL,
-  // not the shop URL, and emptying it puts that card back to "not listed yet"
-  // without touching the kit's card.
-  var AGENT_URL = "https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast";
-
-  // The storm season binder, sold separately at $16.99. Same rules again. This
-  // is the seasonal one, so if it is ever pulled out of season, empty this
-  // rather than deleting the section, and delete its Product block above too.
-  var BINDER_URL = "https://www.etsy.com/listing/4556502794/hurricane-prep-binder-printable-home";
+  // To unlist a product now: delete its anchor, its .buy-price line and its
+  // Product block in the structured data above. That is one instruction for
+  // all three, rather than a second mechanism that had to be remembered
+  // separately, and the structured-data comment already said the same thing.
   // ---------------------------------------------------------------------------
 
   (function () {
     var COPY_LABEL = 'Copy feed URL';
     var calendars = document.getElementById('calendars');
-
-    // Scoped to one card, not the whole document. There are two products now,
-    // and the old version hid every .buy-price and .buy-note on the page, so an
-    // empty URL on either card would have blanked the price on the other one.
-    function wireBuy(slotId, url, label) {
-      var slot = document.getElementById(slotId);
-      if (!slot) return;
-
-      if (url) {
-        // Built as a node rather than an HTML string: the URL is pasted in by
-        // hand, and a stray quote in it would otherwise break out of the markup.
-        var buy = document.createElement('a');
-        buy.className = 'btn btn--primary btn--lg';
-        buy.href = url;
-        buy.target = '_blank';
-        buy.rel = 'noopener';
-        buy.textContent = label;
-        slot.appendChild(buy);
-        return;
-      }
-
-      // No listing, so hide this card's price and download promise: both would
-      // be advertising something nobody can buy.
-      (slot.closest('.buy') || document)
-        .querySelectorAll('.buy-price, .buy-note')
-        .forEach(function (el) { el.hidden = true; });
-      slot.textContent = 'Not listed yet.';
-    }
-
-    wireBuy('buy-slot', SHOP_URL, 'Get the kit on Etsy');
-    wireBuy('binder-slot', BINDER_URL, 'Get the binder on Etsy');
-    wireBuy('agent-slot', AGENT_URL, 'Get the agent edition on Etsy');
 
     // The signup posts straight to MailerLite through a hidden frame,
     // so there is no library to load and the visitor never leaves the page. We

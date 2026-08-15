@@ -27,6 +27,70 @@ Newest first.
 
 ---
 
+## [1.14.0], 2026-08-15
+
+Came out of an external design critique. Roughly half of it described a site
+three versions old, and two of its recommendations would have broken documented
+decisions, so what follows is the part that survived checking. What was declined
+and why is recorded in [HANDOFF.md](HANDOFF.md) so it is not re-litigated.
+
+### Fixed
+
+- **Buying anything required JavaScript, and now does not.** The three buy
+  buttons were built by a script from `SHOP_URL`, `BINDER_URL` and `AGENT_URL`
+  and appended into empty slots, so a visitor with scripting blocked, or one of
+  the small number whose script request simply fails, saw a price with nothing
+  to click. The anchors now ship in the markup. The critique reported this as
+  "no visible purchase button", which was wrong about the live page and right
+  about the underlying build.
+- `wireBuy` and the three URL constants are gone with it. Unlisting a product is
+  now one instruction rather than two mechanisms: delete its anchor, its
+  `.buy-price` line and its `Product` block in the structured data, which is
+  what the structured-data comment already told you to do.
+
+### Added
+
+- **A third link in the sticky bar, "The kit, $12.99".** The bar is the only
+  navigation that follows the reader, and it carried the free feeds and the
+  seasonal binder but no path to the flagship. The price is in the label because
+  "The kit" alone does not tell a first-time reader whether clicking it costs
+  anything. It hides below 46rem, measured as the width where three buttons and
+  the wordmark stop sharing a line.
+
+### Changed
+
+- **The per-app setup steps fold into `<details>`.** Three quarters of that
+  section was instructions for an app the reader has not chosen yet, sitting
+  between the products and the About section that closes the page. Visible text
+  drops from 1,834 characters to 973. Native `<details>`, not a scripted
+  accordion, so it still opens with JavaScript blocked and find-in-page still
+  reaches inside it.
+- The Android interception note goes inside the Google panel. It apologized for
+  a failure before anyone had clicked anything; folded, it reaches the person
+  who has that problem and nobody else.
+- **The agent card's blurb stops repeating the three cards above it.** It restated
+  540 sheets, the typing and the license close enough to verbatim that the two
+  read as a stutter. It now says what is in the box, which nothing else on the
+  page did: four PDFs, print and fillable of both documents, and that the
+  branding persists once saved.
+
+### Checked and found already correct
+
+Recorded because the critique reported each as a defect and a future reader will
+otherwise re-check them.
+
+- The season diagram already carries `role="img"` and a descriptive
+  `aria-label`, so a screen reader reads the summary rather than "JANFEBMAR".
+- The signup honeypot is already `aria-hidden` on the wrapper and `tabindex="-1"`
+  on the input.
+- The hero image already has an empty `alt` inside an `aria-hidden` container.
+- The stat strip has a 5px gap between number and label at every breakpoint, so
+  nothing collides.
+- The kit is 27 pages in the builder, in the built PDF, on the site and in the
+  Etsy listing copy. All four agree.
+- Bar and body contrast pass AA throughout. The kit link measures 6.46 on the
+  paper ground, identical to the link beside it.
+
 ## [1.13.0], 2026-08-15
 
 ### Added
