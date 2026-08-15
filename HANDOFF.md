@@ -98,11 +98,18 @@ subscribers. Hash them against the previous tag. It has caught real mistakes.
 
 ## Gotchas that cost time
 
-**GitHub Pages silently misses build triggers.** Twice now the commit landed but
-no deployment was created. The tell: `raw.githubusercontent.com` shows the new
-content while the site shows the old. Check
+**GitHub Pages silently misses build triggers.** Three times now the commit
+landed but no deployment was created. The tell: `raw.githubusercontent.com`
+shows the new content while the site shows the old. Check
 `api.github.com/repos/Viqeaux/gulf-coast-home-maintenance/deployments` for the
 latest sha rather than waiting longer. Fix is an empty commit.
+
+**Check the deployment's state, not just its sha.** A queued deployment already
+reports the new sha while still serving the old build, so a sha match alone says
+nothing. Follow `statuses_url` and wait for `success`. On top of that the CDN
+sends `Cache-Control: max-age=600`, so the site can lag a successful build by up
+to ten minutes. In 1.7.0 that combination read exactly like a second failure and
+sent a session chasing one that was not there.
 
 **Never commit a `CNAME` before DNS resolves.** Doing that took the site down:
 Pages starts redirecting immediately, and deleting the file does not undo it
