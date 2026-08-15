@@ -37,8 +37,12 @@ spend money before there is anything to measure.
 
 ### 2. Claim the domain
 
-Settings, then **Claimed accounts**, then **Claim** next to Websites. Choose the
-**Add HTML tag** option. Pinterest gives back one line that looks like this:
+Settings, then **Link to Pinterest**, then **Claim** next to Websites. The help
+articles and every guide written before about 2025 call that menu "Claimed
+accounts", which is what it used to be. Same place, renamed.
+
+Choose the **Add HTML tag** option. Pinterest gives back one line that looks
+like this:
 
 ```html
 <meta name="p:domain_verify" content="a1b2c3d4e5f6...">
@@ -85,6 +89,35 @@ week later.
 
 ---
 
+## Product tags, and when to use one
+
+Separate field from the destination link, and it does not replace it. A product
+tag hangs an Etsy listing off the pin while the pin itself still lands on the
+claimed domain, so the attribution and the email capture both survive and a
+ready-to-buy viewer gets a direct route.
+
+**Use one on the three product pins only:**
+
+| Pin | Product tag |
+|---|---|
+| `04-first-month` | the kit listing |
+| `05-watch-list` | the kit listing |
+| `06-realtor` | the realtor listing |
+
+**Not on `01-free-calendar`, `02-hurricane-season` or `03-summer-heat`.** Those
+three promise something free, and that promise is the entire reason they get
+saved. Hanging a price tag off them argues against the headline.
+
+Leave the **affiliate link or sponsored product** toggle off. It is for
+disclosing compensation from someone else's product. This is your own listing,
+so there is nothing to disclose, and switching it on puts a paid-promotion label
+on a pin that is not one.
+
+Nothing here conflicts with Etsy's fee-avoidance policy, which forbids using a
+listing to route buyers away from Etsy. This routes the other direction.
+
+---
+
 ## Why every pin links to the site and not to Etsy
 
 Etsy is one click further on, and the site is the only page that can do all
@@ -100,9 +133,48 @@ carries the shop name wherever it travels.
 
 ## Pin copy
 
-Titles run to 100 characters and descriptions to 800, but the description is
-cut off around 50 characters in the feed, so the first sentence carries it. The
-rest is there to be indexed.
+Titles run to 100 characters, of which Pinterest says the **first 40 are the
+ones most likely to be shown**. Descriptions run to 500. All six below are
+inside both, and every title still reads at 40.
+
+### Topic tags: pick from the list below, do not go hunting
+
+Up to ten per pin, from a fixed vocabulary. Free text does not stick, and
+neither does anything invented for this niche. **Home maintenance barely exists
+in Pinterest's taxonomy.** Searching `home`, `hurricane`, `weather`, `summer`,
+`cleaning` and `moving` across three pins produced the eleven tags below and
+almost nothing else, so treat that as the ceiling rather than a starting point.
+
+Pinterest says outright that viewers never see these, so they are an
+algorithmic hint and nothing else. Take what fits from the table, add anything
+new you happen to spot, and do not spend more than a few seconds per pin. One
+relevant tag is a fine result. Padding with the wrong ones argues for the wrong
+audience.
+
+The real keyword work is the title, the description, the board name and the
+board description. Those are the fields Pinterest's own guidance ranks, and
+they are already written.
+
+### Known to exist
+
+A pool, not an assignment. Any of these can go on any pin it actually fits.
+
+**Home and DIY:** Home Care, Home Organization Tips, Home Buying, Home
+Improvement Projects, Home Hacks, DIY Gifts
+
+**Real estate and gifting:** Real Estate Marketing, Real Estate Buying, Real
+Estate Selling, Housewarming Gifts
+
+The first group covers the four calendar and kit pins. The second is for
+`06-realtor`, where Housewarming Gifts and DIY Gifts are the two worth having:
+they reach past the real estate audience into browse categories this shop
+cannot win on Etsy.
+
+**Hashtags: no.** Pinterest's own guidance ranks the title, the description,
+the board title and the board description, and hashtags appear nowhere in it.
+The advice to stuff ten or fifteen of them comes almost entirely from sites
+selling hashtag generators. Keywords belong in the description as sentences,
+which is how the copy below is written.
 
 ### 01-free-calendar.png
 
