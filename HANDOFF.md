@@ -274,6 +274,22 @@ published permissions are hard to take back, and this one is Chad's call. Do
 not improvise a stance on gifting in a customer reply either. Answer the
 question actually asked, and if someone asks outright, ask Chad.
 
+**8. Open question: should the step-by-step detail stay free?** On 2026-08-15
+Chad declined to split the guides page into per-task pages on the grounds that
+the content is proprietary and people should pay for it. **It is already public
+and free**, and has been since the guides page shipped: all thirty-six jobs with
+tools, numbered steps and the caution, no signup, and every calendar event links
+straight to it. That was a deliberate earlier decision, recorded in
+[README.md](README.md) as "Free on the guides page, and printed in the kit".
+
+The question was raised and left open rather than settled. What the kit actually
+holds back is the Big Ticket Watch List (the site teases eight of seventeen
+lifespans), How To Find Out, Your First Month, the seven conditional sections,
+and the print and fillable formats. If the steps ever do move behind the
+paywall, note the cost: all thirty-six events deep link to `guides/#slug`, so
+those links break, the site loses its only real search asset, and changing event
+text needs a `SEQUENCE` bump. **Do not act on this either way without asking.**
+
 **Unverified:**
 
 1. **Android link interception.** A friend was going to test and never reported
