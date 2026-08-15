@@ -95,6 +95,18 @@ changes what a subscriber sees: all three feeds are byte-identical to 1.8.0 and
   main landmark; the home page had no way past the header for anyone using a
   keyboard or a screen reader. `main` opens at the hero, because a skip link
   that lands past the `h1` has skipped the content.
+- **Titles and descriptions target the search phrasing.** Nobody searches "Gulf
+  Coast home maintenance"; they search "Florida home maintenance checklist", and
+  every page that currently ranks for this subject is a Florida or state-named
+  one. Both pages now name the states. The guides page was titled "How-to
+  guides", which targeted nothing, on the page carrying all thirty-six jobs.
+  Titles are 54 and 60 characters and descriptions 147 and 142, so nothing
+  important falls past where Google truncates. The pages still say Gulf Coast
+  throughout: this is how they get found, not what they are called.
+- The home page description no longer opens on salt air. One task of thirty-six
+  is about salt, while fourteen are heat and humidity and five are hurricane
+  season, so leading on salt described a coastal strip rather than the Gulf
+  South. Less accurate, and a smaller audience.
 
 ### Fixed
 
