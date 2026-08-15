@@ -196,38 +196,29 @@ of what came out of it is fixed and shipped. What is left needs Chad's hands or
 Chad's decision, and is listed under "Waiting on Chad" below. Nothing on the
 site is known to be broken.
 
-**Pinterest is built but not launched.** `build_pins.py` makes the six pins and
+**Pinterest is launched.** Done 2026-08-15: the account, the boards, the pins
+uploaded, and the domain claim, whose `p:domain_verify` tag is live in the head
+of `docs/index.html`. `build_pins.py` makes the six pins and
 [product/pinterest.md](product/pinterest.md) holds the boards, the copy for
-every pin, and the setup steps in order. What is done: the pins, the copy, and
-the Open Graph tags on `docs/index.html`. What is not: the account itself, the
-domain claim, the boards, and the uploads, all of which are browser work in
-Chad's hands.
-
-**The domain claim needs a meta tag pasted back.** Pinterest hands out a
-`<meta name="p:domain_verify" ...>` line during the claim. It goes in the head
-of `docs/index.html` and has to be deployed before pressing Verify. Until the
-claim goes through, pins carry no shop attribution and site traffic does not
-show up in Pinterest analytics.
+every pin, and the setup steps. Re-run the script and re-upload if a pin's
+source page changes.
 
 ## Waiting on Chad, from the 1.9.0 review
 
-In priority order. The first two are the ones that matter.
+In priority order. Item 2 is the one that still matters.
 
-**1. The domain has no SPF, DMARC or MX record.** Verified against public DNS:
-no TXT records at all, no `_dmarc`, no MX. Anyone can send mail as
-`anything@gulfcoasthomemaintenance.com` and nothing says they may not. The
-scenario is a fake "your download link" to the MailerLite list or to Etsy
-buyers, carrying this domain as the return address. DNS is on Cloudflare, so
-this is three records and five minutes:
+**1. The domain email records. Done 2026-08-15.** Verified live against both
+Cloudflare and Google public resolvers:
 
 | Type | Name | Value |
 |---|---|---|
-| MX | `@` | `.` with priority `0`, the null MX, meaning this domain receives no mail |
+| MX | `@` | null MX, priority `0`, meaning this domain receives no mail |
 | TXT | `@` | `v=spf1 -all` |
-| TXT | `_dmarc` | `v=DMARC1; p=reject; rua=mailto:lege.chad@gmail.com` |
+| TXT | `_dmarc` | `v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s;` |
 
-If mail ever gets sent *from* the domain, loosen SPF then. Do not skip it now
-on the grounds that it might change later.
+Stricter than the version originally recommended. There is deliberately no
+`rua=` reporting address, so enforcement works but no aggregate reports arrive.
+If mail ever gets sent *from* the domain, loosen SPF then.
 
 **2. The public repo still rebuilds both paid products.** `build_printables.py`
 holds `WATCH_LIST` and `FIRST_MONTH`, `kit_sections.py` the seven conditional
@@ -295,10 +286,58 @@ question actually asked, and if someone asks outright, ask Chad.
 
 **Next products, in order:**
 
-1. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
+1. **The storm season binder, $16.99. In progress, started 2026-08-15.** A third
+   paid product, not kit pages. It is bought in a different moment than the kit:
+   the kit is a calm purchase, this one is bought with a cone on the TV.
+
+   Contents as scoped: home inventory sheets by room, a policy and account
+   numbers page, a what-to-photograph-before checklist, a water and supply
+   calculator by household size, an evacuation and shutdown sequence, a
+   post-storm damage log, a claim call log with adjuster names and dates, and a
+   contractor vetting sheet.
+
+   **The code is nearly free and the content is the whole job.**
+   `build_printables.py` already renders HTML to PDF and `build_fillable.py`
+   already stamps AcroForm fields, which the inventory and claim log pages need
+   anyway. Writing the content at the depth of `task_steps.py` is the schedule
+   risk, not the engineering. Keep it out of the public repo the same way the
+   kit is: gitignored under `product/`.
+
+   **It has a clock the other products do not.** Peak of Atlantic hurricane
+   season is around September 10. That is why this outranks the reserve planner
+   below, which was originally ranked first on the grounds that its data already
+   existed. The planner sells the same in November; this does not.
+
+2. **The reserve planner, $9.99.** The calculator idea, and the cheapest build
+   left. `WATCH_LIST` in `build_printables.py` already holds 17 components with
+   Gulf-Coast-shortened lifespans. The buyer enters an install year per item and
+   gets years remaining, a projected replacement year, a sorted what-breaks-next
+   list, and an annualized set-aside summed into one number. That last line is
+   the pitch. Ship as `.xlsx` plus a Sheets copy link plus a one-page quick
+   start, built by a `build_planner.py` reading the same constant.
+
+   **Do not hardcode replacement dollar amounts.** They go stale and vary by
+   market, and a wrong number in a sold product is a support problem. Offer a
+   plainly-marked typical range, and let the buyer's own figure drive the math.
+
+3. **A free calculator on the site.** Once the planner math exists, the same
+   numbers render as a web page: enter four ages, see what is on borrowed time.
+   The visitor gets a real answer and meets the buy button warm. Feeds the
+   signup form already on `docs/index.html`.
+
+4. **A bundle at $29.99.** Kit plus planner plus binder. Lifts order value with
+   no new content. Worth doing once any two of the three exist.
+
+5. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
    plumbing is done. Adding entries puts links on the guides page and into the
    calendar events. **Adding the first one requires a `SEQUENCE` bump**, since
    it changes what subscribers see. `check_links.py` finds dead ones.
-2. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
+
+6. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
    South regional rather than coastal-only, so a Texas or Florida edition is a
    retiming and a relabeling, not a rewrite.
+
+Items 1 through 4 came out of a product brainstorm on 2026-08-14 and lived only
+in that session's transcript until 2026-08-15, which is how the binder went
+missing for a day of its own selling season. **Product ideas worth building go
+in this list, not in a chat.**
