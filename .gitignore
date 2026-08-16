@@ -17,6 +17,11 @@ gulf-coast-maintenance-calendar-content.md
 # build_printables.py.
 product/*.pdf
 product/*.html
+# The reserve planner ships as a spreadsheet rather than a PDF, so it needs its
+# own line here. Without it `git add -A` would commit the paid workbook, which
+# is the same mistake as committing the kit, in a file extension the two rules
+# above do not cover.
+product/*.xlsx
 product/listing/
 product/listing-realtor/
 product/listing-binder/

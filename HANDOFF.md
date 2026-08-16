@@ -8,7 +8,7 @@ Current version **v1.16.0**. Everything below is live unless marked otherwise.
 
 ---
 
-## The four products
+## The products
 
 | | What | Where | Price |
 |---|---|---|---|
@@ -16,6 +16,7 @@ Current version **v1.16.0**. Everything below is live unless marked otherwise.
 | **The kit** | Every printable page, 27 of them, in two PDFs: print and fillable | Etsy only | $12.99 |
 | **The agent edition** | The same 27 pages branded for a realtor, plus a 4 page leave-behind. Four PDFs, print and fillable of each | Etsy only | $39 |
 | **The storm season binder** | 33 pages, mostly blanks: policies, room by room inventory, supply calculator, the countdown, shutdown, damage log, claim log, contractor vetting. Two PDFs, print and fillable | Etsy | $16.99 |
+| **The reserve planner** | One spreadsheet, eight tabs. 49 systems, the IDK engine, a 30 year forecast and a funding dashboard. Built 2026-08-16, **not listed yet** | Etsy, plus a Sheets copy link | Not set. See below |
 
 **The binder is a different buying moment from the kit, and that is the point.**
 The kit is a calm January purchase by somebody being responsible. The binder is
@@ -75,6 +76,10 @@ python build_brand.py           # shop icon and banner
 python check_links.py           # finds curated videos that have died
 python optimize_images.py       # after replacing docs/img/hero.png
 
+python build_planner.py                   # the reserve planner, one .xlsx, into product/
+python qa_planner.py                      # builds it, calculates it, runs the ten cases
+python qa_planner.py --checklist          # the five checks to do by hand in Sheets
+
 python build_storm_binder.py              # the binder, print PDF, into product/
 python build_storm_binder.py --fillable   # both PDFs, 1,876 form fields
 python build_storm_binder.py --fill-report  # lists pages with space going spare
@@ -82,11 +87,16 @@ python build_binder_listing.py            # ten Etsy photos for the binder
 python build_video.py --binder            # the 14 second binder video
 ```
 
-Content lives in four files: `build_calendars.py` holds the 36 tasks and the
+Content lives in five files: `build_calendars.py` holds the 36 tasks and the
 `GUIDES` video table, which are the free half; `task_steps.py` holds the
-step-by-step detail, `kit_sections.py` the seven conditional sections, and
-`binder_pages.py` all of the binder's writing, all three of which are **paid
-product only and must not reach the site**.
+step-by-step detail, `kit_sections.py` the seven conditional sections,
+`binder_pages.py` all of the binder's writing, and `planner_data.py` the
+planner's 49 systems with their lifespans and costs, all four of which are
+**paid product only and must not reach the site**.
+
+**The planner needs `openpyxl`, the first dependency the project has had.**
+`pip install openpyxl`. `qa_planner.py` also needs `formulas`, which is a test
+dependency rather than a build one: nothing a buyer receives depends on it.
 
 **The binder imports the kit's design system rather than copying it.**
 `build_storm_binder.py` pulls `CSS`, `page()` and `esc()` out of
@@ -148,6 +158,34 @@ for definitions. A blind swap to commas creates splices.
 "torch" for flashlight, "tap" for faucet, "autumn" for fall. The product claims
 local expertise, and this undercuts it. It is a recurring default, so watch for
 it.
+
+**Costs in the planner: defaults yes, quotes never.** The old note under next
+products said not to hardcode replacement dollar amounts at all, because they go
+stale, vary by market, and a wrong number in a sold product is a support
+problem. That still holds, and the planner ships 49 of them anyway, which is a
+deliberate change of position rather than an oversight. Chad's call,
+2026-08-16. What makes it safe is the three things that note assumed would not
+exist:
+
+1. **An override column beside every default.** Put a real quote in column N and
+   the entire workbook follows your number instead of ours. `START HERE` frames
+   that as the expected path, not a fallback.
+2. **A visible range next to every point figure**, on the reference tab and in
+   the tab's own header text. A number with a range printed beside it does not
+   read as a quote.
+3. **A sourcing note per row**, one of `kit`, `consensus` or `estimate`. Anything
+   marked `estimate` is ours and says so.
+
+The rule that replaces it: **a default may ship if it carries a range, a source
+note and an override.** A bare number may not. The same three apply to any
+regional edition, and the region factors themselves are `estimate`.
+
+**Lifespans are locked to the kit and the kit wins.** `check_against_kit()` in
+`planner_data.py` maps 19 planner systems onto `WATCH_LIST` in
+`build_printables.py` and fails the build if a default drifts outside the range
+the kit prints. A buyer can own both products and hold them side by side, and
+the kit is the one already published in a PDF, so the planner is the one that
+moves.
 
 **Four version markers, and they must agree:** `VERSION` in
 `build_calendars.py`, the footer of `docs/index.html`, an entry in
@@ -289,6 +327,43 @@ worth doing in the next three weeks rather than eventually:
    nobody is shopping for, and the order that is right in August is not
    obviously right in January.
 
+**The reserve planner is built and unlisted.** Chad asked for it on 2026-08-16
+against a written spec, and it landed the same day: `build_planner.py`,
+`planner_data.py` and `qa_planner.py`, one .xlsx of eight tabs, 49 systems, 100
+register rows and a 30 year forecast. All ten QA cases pass against a real
+formula engine, plus a file-structure pass for the parts a formula engine
+cannot see. Nothing about it is on the site or on Etsy. What is left, in order:
+
+1. **Verify the numbers before listing, and treat this as the gate.** The
+   lifespans are sound: 19 of the 49 are locked to the kit's Watch List by a
+   build-time check, and the rest are consensus trade figures. **The costs and
+   the seven region factors are ours and are marked `estimate` or `consensus`
+   in column I, and none of them has been checked against a published source.**
+   The spec Chad wrote says it plainly: a buyer who finds a wildly wrong number
+   leaves a two-star review that kills the listing. Worth a pass against
+   Remodeling Magazine's Cost vs Value report and the InterNACHI life
+   expectancy chart, correcting `planner_data.py` and updating the source note
+   per row as it goes. Do not reproduce either source's table wholesale, cite
+   it per row.
+2. **Decide the price.** The old note here said $9.99. What got built is
+   considerably more than that sketch, and Chad's spec suggests $20 to $35
+   standalone and $40 to $50 bundled with the kit. The binding constraint is
+   still traffic rather than price, which argues for the top of the range
+   rather than the bottom: at these volumes the extra ten dollars is the whole
+   difference and there is nobody to lose.
+3. **Import it into Google Sheets once and run `qa_planner.py --checklist`.**
+   Five checks, and the fourth one, whether the chart survived, is the one that
+   matters, because the forecast chart with the reserve line dipping negative
+   is the listing screenshot.
+4. **Then the listing**, and a `build_planner_listing.py` alongside the other
+   three listing builders. There are no page renders to reuse here, so the
+   photos have to come from screenshots of the real workbook.
+
+**One thing to weigh before any of that.** The shop's constraint is traffic,
+not products, and this is a fourth thing to sell to the same empty room. The
+free web calculator under next products is the item that changes that, and the
+planner's math is what it was waiting on.
+
 **The video is built.** `python build_video.py --binder` makes a fourteen
 second cut from the binder's own pages, into `product/listing-binder/`. It
 opens on the wind deductible, which is the one fact most homeowners have never
@@ -429,15 +504,22 @@ Stricter than the version originally recommended. There is deliberately no
 `rua=` reporting address, so enforcement works but no aggregate reports arrive.
 If mail ever gets sent *from* the domain, loosen SPF then.
 
-**2. The public repo still rebuilds every paid product, and the binder raises
+**2. The public repo still rebuilds every paid product, and each new one raises
 the stakes.** `build_printables.py` holds `WATCH_LIST` and `FIRST_MONTH`,
 `kit_sections.py` the seven conditional sections, `task_steps.py` all thirty-six
-step-by-steps, and now `binder_pages.py` holds the whole binder. A clone plus
+step-by-steps, `binder_pages.py` the whole binder, and now `planner_data.py` all
+49 systems with their lifespans and costs. A clone plus
 `python build_printables.py` is the $12.99 kit; `build_agent_edition.py` is the
-$39 one; `build_storm_binder.py` is the $16.99 one. `.gitignore` protects the
-built PDFs, which was never the thing worth protecting. `product_content.py`
-also sits in history at commit `8a9f1f1` with the lifespans and the license in
-it.
+$39 one; `build_storm_binder.py` is the $16.99 one; `build_planner.py` is the
+planner. `.gitignore` protects the built PDFs and now the built .xlsx, which was
+never the thing worth protecting. `product_content.py` also sits in history at
+commit `8a9f1f1` with the lifespans and the license in it.
+
+**The planner was committed locally and deliberately not pushed**, on
+2026-08-16, because pushing is what makes this permanent and it is Chad's call
+rather than a session's. Either push it and accept the position, or move the
+repo private first. Leaving it sitting locally is the one option that expires
+badly: an unpushed commit is a backup nobody has.
 
 **Decide this before the binder is committed, not after.** Git history is
 permanent, so a decision made after the push is not the same decision. The
@@ -510,34 +592,32 @@ question actually asked, and if someone asks outright, ask Chad.
 now has its own entry under Outstanding above, where the remaining work is the
 Etsy listing rather than the product.
 
-1. **The reserve planner, $9.99.** The calculator idea, and the cheapest build
-   left. `WATCH_LIST` in `build_printables.py` already holds 17 components with
-   Gulf-Coast-shortened lifespans. The buyer enters an install year per item and
-   gets years remaining, a projected replacement year, a sorted what-breaks-next
-   list, and an annualized set-aside summed into one number. That last line is
-   the pitch. Ship as `.xlsx` plus a Sheets copy link plus a one-page quick
-   start, built by a `build_planner.py` reading the same constant.
+**The reserve planner is built.** It came off this list on 2026-08-16 and has
+its own entry under Outstanding above. It landed considerably larger than the
+$9.99 sketch here, which is why the price is an open question rather than a
+settled one.
 
-   **Do not hardcode replacement dollar amounts.** They go stale and vary by
-   market, and a wrong number in a sold product is a support problem. Offer a
-   plainly-marked typical range, and let the buyer's own figure drive the math.
-
-2. **A free calculator on the site.** Once the planner math exists, the same
+1. **A free calculator on the site.** The planner math now exists, so the same
    numbers render as a web page: enter four ages, see what is on borrowed time.
    The visitor gets a real answer and meets the buy button warm. Feeds the
-   signup form already on `docs/index.html`.
+   signup form already on `docs/index.html`. **This is the one worth ranking
+   first now**, because the shop's constraint is traffic and this is the only
+   item on the list that makes any.
 
-3. **A bundle at $29.99.** Kit plus planner plus binder. Lifts order value with
-   no new content. Worth doing once any two of the three exist.
+2. **A bundle.** Kit plus planner plus binder. Lifts order value with no new
+   content, and three of the three now exist.
 
-4. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
+3. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
    plumbing is done. Adding entries puts links on the guides page and into the
    calendar events. **Adding the first one requires a `SEQUENCE` bump**, since
    it changes what subscribers see. `check_links.py` finds dead ones.
 
-5. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
+4. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
    South regional rather than coastal-only, so a Texas or Florida edition is a
-   retiming and a relabeling, not a rewrite.
+   retiming and a relabeling, not a rewrite. **The planner is already built for
+   this**: `REGIONS` in `planner_data.py` carries a cost factor and a lifespan
+   factor for seven regions, and the workbook applies them itself, so the
+   planner half of a regional edition is a dropdown rather than a build.
 
 The planner, the free calculator and the bundle came out of a product
 brainstorm on 2026-08-14 and lived only

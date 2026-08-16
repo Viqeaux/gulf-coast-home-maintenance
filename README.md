@@ -24,6 +24,9 @@ build_printables.py       renders the kit to HTML then PDF, via headless Chrome
 build_fillable.py         stamps form fields onto a second, typeable copy
 build_listing_images.py   renders Etsy photos from the real kit pages
 build_video.py            the 14 second silent Etsy listing video
+planner_data.py           the planner's 49 systems, and the region factors
+build_planner.py          the reserve planner workbook, one .xlsx, eight tabs
+qa_planner.py             calculates the planner and runs its ten QA cases
 build_agent_edition.py    the realtor edition, four PDFs. --logo bakes one in
 build_agent_listing.py    nine photos for the realtor listing
 build_pins.py             eight Pinterest pins, from the kit and the binder
@@ -289,6 +292,81 @@ Two things that are easy to get wrong here:
 
 Verify by round-tripping rather than by eye: write a value into a field, save,
 reopen, and read it back.
+
+## The reserve planner
+
+`build_planner.py` builds the fourth product and the first one that is not
+paper: a spreadsheet that takes a list of what is in the house and works out
+what breaks when, what it will cost in that year's dollars, and what to set
+aside every month. Eight tabs, no macros, and it runs from
+`planner_data.py`, which holds all 49 systems and the region factors.
+
+```bash
+python build_planner.py    # product/gulf-coast-reserve-planner.xlsx
+python qa_planner.py       # builds it, calculates it, runs the ten cases
+python qa_planner.py --checklist   # the five things to check by hand in Sheets
+```
+
+**The .xlsx is the master and the Google Sheet is the import.** Building it
+here rather than by hand in Sheets is what makes a regional edition a factor
+change in `planner_data.py` rather than an afternoon of retyping, and it is the
+only version of the product that can be diffed, tagged or rebuilt. It costs one
+dependency, `openpyxl`, which is the first the project has needed.
+
+**Every formula has to evaluate the same way in Excel and in Google Sheets**,
+which rules out more than it looks like it does: no `XLOOKUP`, `FILTER`, `SORT`,
+`UNIQUE`, `SEQUENCE`, `QUERY` or `ARRAYFORMULA`, none of which survive the round
+trip cleanly, and no `IFS`, `SWITCH`, `TEXTJOIN`, `MAXIFS` or `MINIFS`, which
+behave inconsistently on export. `formula()` refuses anything outside the
+allowed list, so that constraint is enforced at build time rather than
+remembered.
+
+Two pieces of the model are worth understanding before changing either.
+
+**The IDK engine, column H, is the differentiator.** Competing templates need an
+install date the buyer does not have, which is where they lose the sale. This
+one takes "I don't know" as an answer and estimates from the build year three
+ways: original, mid-life, or on schedule. Column I then labels the row
+`Estimated`, so an estimate never reads as a fact.
+
+**Overdue items have to fire in the current year.** The obvious forecast test,
+`MOD(year - install, lifespan) = 0`, is wrong in the case that matters most: a
+1990 water heater on a 20 year life was due in 2010, and that test does not come
+true again until 2030, so the most overdue thing in the house contributes
+nothing to the next ten years of spend. Column R clamps the next replacement to
+no earlier than the current year and the grid cycles from R.
+
+**Costs are defaults, and this product carries them on purpose.** The earlier
+note against hardcoding dollar amounts was written for a planner with no
+override column and no region table. This one has both, every row carries a
+range beside its point figure, and both tabs say plainly that the number is a
+starting point. What makes that safe is the override: put a real quote in
+column N and the entire workbook follows your number instead of ours.
+
+**Lifespans are Gulf South, and they are locked to the kit.** `KIT_ITEMS` maps
+19 systems onto `WATCH_LIST` in `build_printables.py`, and `check_against_kit()`
+fails the build if a default drifts outside the range the kit prints. The kit is
+published, so when the two disagree the planner is the one that moves.
+
+### Verifying it
+
+`qa_planner.py` compiles the workbook with the `formulas` package and reads the
+answers back, so nothing is checked by eye. It builds a six row copy to
+calculate, because a hundred rows times thirty years is 3,000 formulas and more
+than a pure-Python engine will chew through in a sitting; every formula and
+every reference is the one that ships.
+
+**What it cannot reach.** The engine is neither Excel nor Google Sheets. File
+structure, the dropdowns, the hidden tab, the protection and the chart, is read
+straight out of the .xlsx with openpyxl. What is left after that is five things
+a human looks at once after importing into Sheets, and `--checklist` prints
+them.
+
+It also caught a real difference: `COUNTIF(range,"<>")` and
+`COUNTIF(range,"?*")` both read as "count the filled ones" and both hand the
+answer to whatever the program decides an empty criterion or a wildcard means.
+The Dashboard counts with `SUMPRODUCT` instead, which has no criteria string in
+it to interpret.
 
 ## Listing images
 
