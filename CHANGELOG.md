@@ -27,6 +27,57 @@ Newest first.
 
 ---
 
+## [1.18.0], 2026-08-16
+
+### Added
+
+- **The storm season workbook**, built but not listed. The companion to the
+  storm binder and the fifth product: ten tabs of the things paper cannot do.
+  Wind and flood deductibles resolved to dollars against your savings, a 500 row
+  home inventory subtotaled by room and against the contents limit, the supply
+  calculator with a live "still need" column, a damage log subtotaled by which
+  policy pays, a claim call log, and four contractors scored against ten checks
+  and eight red flags. Built by `build_workbook.py` from `workbook_data.py` and
+  verified by `qa_workbook.py`, which compiles the workbook and reads the
+  answers back rather than checking them by eye. Fifteen cases, all passing.
+- **`Receipts & Loss of Use`, which is a gap in the binder rather than a
+  duplicate of it.** The binder's claim steps tell the buyer to keep every
+  receipt and correctly say loss of use is a separate limit, and there is
+  nowhere in the binder to log either. This tab keeps mitigation spending in its
+  own subtotal and says on the page why: mitigation is reimbursable under the
+  duty to prevent further damage and is not drawn from the loss of use limit.
+  Buyers conflate the two constantly. Worth adding to a v2 of the PDF as well.
+- The rooms and the supply rules are imported from `binder_pages.py` and
+  `check_against_binder()` fails the build if they drift, so the two products
+  cannot end up calling the same room different things.
+
+### Fixed
+
+- **Two corrupted strings in `binder_pages.py`**, and therefore in the live
+  $16.99 binder PDF. `insurer's` and `board's` had been mangled into control
+  characters by an apostrophe pass at some point before 1.11.0, on the damage
+  log page and the contractor vetting page. Reworded rather than re-apostrophed,
+  because the file carries no apostrophes anywhere else in 682 lines of prose.
+  **The binder PDFs need rebuilding and re-uploading to the listing.**
+
+### Notes
+
+- Nothing about the workbook is on the site or on Etsy. Deliberate: the shop's
+  constraint is traffic rather than products, and this is a fifth thing to sell
+  to the same room. It earns its place by making the binder worth more rather
+  than by competing with it.
+- Two things in the build spec were changed on purpose. `Unknown — described
+  below` lost its em dash, because those dropdown values are also `SUMIF`
+  criteria and a punctuation fix later would silently break a subtotal. And the
+  spec's count of un-entered sub-limits,
+  `COUNTIF(range,"Limit not entered")+COUNTIF(range,"LIMIT NOT ENTERED*")`,
+  double-counts: `COUNTIF` is case-insensitive, so the wildcard matches the
+  exact string too. It counts entered limits and subtracts instead.
+- The feeds are byte-identical to 1.17.0 and `SEQUENCE` stays at 1. No task
+  content changed, so subscribers have nothing to pick up.
+
+---
+
 ## [1.17.0], 2026-08-16
 
 ### Added

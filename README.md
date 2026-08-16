@@ -28,6 +28,9 @@ planner_data.py           the planner's 49 systems, and the region factors
 build_planner.py          the reserve planner workbook, one .xlsx, nine tabs
 qa_planner.py             calculates the planner and runs its eleven QA cases
 build_calculator.py       the free calculator page, the planner's teaser
+workbook_data.py          the storm workbook's lists, rooms and rule text
+build_workbook.py         the storm season workbook, one .xlsx, ten tabs
+qa_workbook.py            calculates the workbook and runs its fifteen QA cases
 build_agent_edition.py    the realtor edition, four PDFs. --logo bakes one in
 build_agent_listing.py    nine photos for the realtor listing
 build_pins.py             eight Pinterest pins, from the kit and the binder
@@ -379,6 +382,64 @@ It also caught a real difference: `COUNTIF(range,"<>")` and
 answer to whatever the program decides an empty criterion or a wildcard means.
 The Dashboard counts with `SUMPRODUCT` instead, which has no criteria string in
 it to interpret.
+
+## The storm season workbook
+
+`build_workbook.py` builds the fifth product, and it is the companion to the
+storm binder rather than a product on its own footing. The split is the whole
+design and the listing says it out loud: **the binder is what you carry, the
+workbook is what you calculate.**
+
+**Do not rebuild the binder in it.** The 72 hour countdown, the shutdown
+sequence, coming home, the go bag, what to photograph and the calm-week list are
+narrative and sequential. They work better on paper, they are readable by a wet
+person with no power, and duplicating them makes the bundle look like one
+product sold twice. What belongs in the workbook is arithmetic, aggregation,
+running totals against a coverage limit, and a flag that fires when a number
+crosses a line. Ten tabs, all of them one of those.
+
+It also fills a gap in the binder. "Making the claim" step 5 tells the buyer to
+keep every receipt and correctly says loss of use is a separate limit, and there
+is nowhere in the binder to log either. `Receipts & Loss of Use` is that page,
+and it is the highest-value thing the workbook adds. Worth adding to a v2 of the
+PDF as well.
+
+```bash
+python build_workbook.py    # product/gulf-coast-storm-workbook.xlsx
+python qa_workbook.py       # builds it, calculates it, runs the fifteen cases
+python qa_workbook.py --checklist   # the six to check by hand in Sheets
+```
+
+**The rooms and the supply rules are imported from `binder_pages.py`, not
+retyped.** `check_against_binder()` fails the build if they drift. A buyer who
+owns both works from the paper pages into the sheet, and a section called
+"Living and family room" on paper and "Living room" in the workbook makes them
+stop and translate. Same trick `planner_data.check_against_kit()` plays against
+the kit's Watch List, and the same compatible-function list as the planner,
+enforced the same way by `formula()`.
+
+**A blank policy limit is a third state, not a zero.** This is the thing the
+product turns on and the easiest thing to get wrong.
+`='Coverage & Deductibles'!$B$19` on an empty cell returns 0, not blank, so a
+buyer who has never looked up their jewelry sub-limit gets told they are inside
+it. Every cross-tab read of a policy figure is wrapped in
+`IF(source="","",source)` so the emptiness survives the hop, and the flag has
+three branches: over, within, and not entered. The wind deductible does the same
+thing: with no deductible type chosen, `D6` returns blank rather than falling
+through to the flat-amount branch and reporting $0.
+
+**Nothing policy-specific ships with a default.** Every coverage limit,
+deductible and sub-limit cell is empty on a fresh copy. A plausible-looking
+2,500 in a sub-limit would produce a confident "you're covered" on the one
+calculation a buyer most needs to be right, and they would never find out. The
+range goes in the helper text beside the cell, never in the cell, and the
+sub-limits carry a validation that refuses a zero, because zero and "I have not
+looked" are different answers.
+
+**Every tab prints.** Letter, fit to one page wide, header row repeating,
+landscape for the four log tabs. A buyer who owns both products wants the filled
+inventory on paper inside the binder, because after landfall there is no laptop
+and no power. `qa_workbook.py` checks the print setup rather than trusting it.
 
 ## The free calculator
 

@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.17.0**. Everything below is live unless marked otherwise.
+Current version **v1.18.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -17,6 +17,7 @@ Current version **v1.17.0**. Everything below is live unless marked otherwise.
 | **The agent edition** | The same 27 pages branded for a realtor, plus a 4 page leave-behind. Four PDFs, print and fillable of each | Etsy only | $39 |
 | **The storm season binder** | 33 pages, mostly blanks: policies, room by room inventory, supply calculator, the countdown, shutdown, damage log, claim log, contractor vetting. Two PDFs, print and fillable | Etsy | $16.99 |
 | **The reserve planner** | One spreadsheet, nine tabs. Quick Check, 49 systems, the IDK engine, a 30 year forecast and a funding dashboard. Built 2026-08-16, **not listed yet** | Etsy, plus a Sheets copy link | Not set. See below |
+| **The storm season workbook** | One spreadsheet, ten tabs. The companion to the binder: deductibles in dollars, a 500 row inventory against the contents limit, the supply calculator, the damage log subtotaled by policy side, receipts and loss of use, the claim log, four contractors scored. Built 2026-08-16, **not listed yet** | Etsy, plus a Sheets copy link | Not set. See below |
 | **The free calculator** | Four systems of the forty-nine, on the site. The teaser for the planner, and the only page that gives before it asks | <https://gulfcoasthomemaintenance.com/calculator/> | Free, and stays free |
 
 **The binder is a different buying moment from the kit, and that is the point.**
@@ -87,14 +88,19 @@ python build_storm_binder.py --fillable   # both PDFs, 1,876 form fields
 python build_storm_binder.py --fill-report  # lists pages with space going spare
 python build_binder_listing.py            # ten Etsy photos for the binder
 python build_video.py --binder            # the 14 second binder video
+
+python build_workbook.py                  # the storm workbook, one .xlsx, into product/
+python qa_workbook.py                     # builds it, calculates it, runs the fifteen cases
+python qa_workbook.py --checklist         # the six checks to do by hand in Sheets
 ```
 
-Content lives in five files: `build_calendars.py` holds the 36 tasks and the
+Content lives in six files: `build_calendars.py` holds the 36 tasks and the
 `GUIDES` video table, which are the free half; `task_steps.py` holds the
 step-by-step detail, `kit_sections.py` the seven conditional sections,
-`binder_pages.py` all of the binder's writing, and `planner_data.py` the
-planner's 49 systems with their lifespans and costs, all four of which are
-**paid product only and must not reach the site**.
+`binder_pages.py` all of the binder's writing, `planner_data.py` the planner's
+49 systems with their lifespans and costs, and `workbook_data.py` the storm
+workbook's lists and rule text, all five of which are **paid product only and
+must not reach the site**.
 
 **The planner needs `openpyxl`, the first dependency the project has had.**
 `pip install openpyxl`. `qa_planner.py` also needs `formulas`, which is a test
@@ -367,6 +373,55 @@ not products, and this is a fourth thing to sell to the same empty room. The
 free web calculator under next products is the item that changes that, and the
 planner's math is what it was waiting on.
 
+**The storm season workbook is built and unlisted.** Chad asked for it on
+2026-08-16 against a written spec and it landed the same day: `build_workbook.py`,
+`workbook_data.py` and `qa_workbook.py`, one .xlsx of ten tabs. All fifteen QA
+cases pass against a real formula engine, including the print setup and the
+protection, which a formula engine cannot see and openpyxl reads back out of the
+shipped file. Nothing about it is on the site or on Etsy.
+
+**It is the companion to the binder, not a fifth standalone.** The positioning
+line is the whole product and belongs in both listings: *the binder is what you
+carry, the workbook is what you calculate.* Do not rebuild the countdown, the
+shutdown sequence, coming home, the go bag, what to photograph or the calm-week
+list in it. Those are narrative and sequential, they are better on paper, and
+duplicating them makes the bundle look like one product sold twice.
+
+What is left, in order:
+
+1. **Decide the price.** The spec says $18 to $28 alone and $35 to $45 bundled
+   with the binder. The same argument as the planner applies and points at the
+   top of the range: the binding constraint is traffic rather than price, so at
+   these volumes the extra ten dollars is the whole difference and there is
+   nobody to lose.
+2. **Import it into Google Sheets once and run `qa_workbook.py --checklist`.**
+   Six checks. The one that matters is number 3, that B19 to B24 on
+   `Coverage & Deductibles` are empty, yellow, and refuse a typed zero, because
+   the entire safety argument for the product rests on a blank limit never
+   reading as a limit you are inside of.
+3. **The money screenshot is `Coverage & Deductibles`** with a $400,000 dwelling
+   limit and a 2 percent wind deductible resolving to $8,000, with the gap in
+   red below it. That one image is the pitch, and QA case 2 asserts the number.
+4. **Then the listing**, and a `build_workbook_listing.py` alongside the other
+   listing builders. There are no page renders to reuse, so the photos have to
+   come from screenshots of the real workbook, the same problem the planner has.
+
+**Two things in the spec were changed on purpose, and both were right.** Em
+dashes came out of the dropdown values, because those strings are also `SUMIF`
+criteria and a punctuation fix later would silently break a subtotal. And the
+spec's count of un-entered sub-limits,
+`COUNTIF(range,"Limit not entered")+COUNTIF(range,"LIMIT NOT ENTERED*")`,
+double-counts every gray row: `COUNTIF` is case-insensitive, so the wildcard
+matches the exact string as well. It counts entered limits and subtracts.
+
+**The thing most likely to be broken by a future edit** is the blank-limit
+handling. `='Coverage & Deductibles'!$B$19` on an empty cell returns 0, not
+blank, and every policy figure that crosses a tab boundary is wrapped in
+`IF(source="","",source)` to keep the emptiness. Take one of those wrappers off
+and the workbook starts telling buyers they are within a sub-limit they have
+never looked up, with no error anywhere. QA cases 6a and 6b exist for exactly
+that and will catch it.
+
 **What Breaks Next became the planner's Quick Check tab.** For a few hours on
 2026-08-16 it was a standalone `.html` download, all 49 systems in one
 self-contained file. Chad killed that the same day and he was right: a raw
@@ -565,19 +620,25 @@ If mail ever gets sent *from* the domain, loosen SPF then.
 **2. The public repo still rebuilds every paid product, and each new one raises
 the stakes.** `build_printables.py` holds `WATCH_LIST` and `FIRST_MONTH`,
 `kit_sections.py` the seven conditional sections, `task_steps.py` all thirty-six
-step-by-steps, `binder_pages.py` the whole binder, and now `planner_data.py` all
-49 systems with their lifespans and costs. A clone plus
-`python build_printables.py` is the $12.99 kit; `build_agent_edition.py` is the
-$39 one; `build_storm_binder.py` is the $16.99 one; `build_planner.py` is the
-planner. `.gitignore` protects the built PDFs and now the built .xlsx, which was
-never the thing worth protecting. `product_content.py` also sits in history at
-commit `8a9f1f1` with the lifespans and the license in it.
+step-by-steps, `binder_pages.py` the whole binder, `planner_data.py` all 49
+systems with their lifespans and costs, and now `workbook_data.py` the storm
+workbook's lists and rule text. A clone plus `python build_printables.py` is the
+$12.99 kit; `build_agent_edition.py` is the $39 one; `build_storm_binder.py` is
+the $16.99 one; `build_planner.py` is the planner; `build_workbook.py` is the
+storm workbook. `.gitignore` protects the built PDFs and the built .xlsx files,
+which was never the thing worth protecting. `product_content.py` also sits in
+history at commit `8a9f1f1` with the lifespans and the license in it.
 
-**The planner was committed locally and deliberately not pushed**, on
-2026-08-16, because pushing is what makes this permanent and it is Chad's call
-rather than a session's. Either push it and accept the position, or move the
-repo private first. Leaving it sitting locally is the one option that expires
-badly: an unpushed commit is a backup nobody has.
+**The planner and the storm workbook were committed locally and deliberately
+not pushed**, on 2026-08-16, because pushing is what makes this permanent and it
+is Chad's call rather than a session's. Either push and accept the position, or
+move the repo private first. Leaving them sitting locally is the one option that
+expires badly: an unpushed commit is a backup nobody has.
+
+Note that the workbook raises the stakes a third time in two days, and in a way
+worth naming: `workbook_data.py` is small, but `build_workbook.py` carries the
+whole model, and a spreadsheet's value is its formulas rather than its prose. A
+clone rebuilds it exactly.
 
 **Decide this before the binder is committed, not after.** Git history is
 permanent, so a decision made after the push is not the same decision. The
@@ -609,6 +670,17 @@ and fixed the same day. Rebuild with `build_printables.py` then
 `build_fillable.py`, and replace the files on the listing. Low urgency
 individually, but that is now two, so fold them into the next kit upload rather
 than letting a third accumulate.
+
+**4b. The binder PDFs need rebuilding and re-uploading, and this one is not
+cosmetic.** Two strings in `binder_pages.py` were corrupted into control
+characters by an apostrophe pass at some point before the binder shipped, and
+they are in the live $16.99 PDF on the listing: the damage log page read "use
+the insure[garbage] words" and the contractor vetting page "the state licensing
+boar[garbage] website". Both are fixed in the source as of 1.18.0 and reworded
+rather than re-apostrophed, because the file carries no apostrophes anywhere
+else in 682 lines. Rebuild with `python build_storm_binder.py --fillable` and
+replace both files on the listing. Found while wiring the workbook to the
+binder's own text, which is the argument for importing rather than retyping.
 
 **5. Decide how Pinterest gets measured, before it launches.** There is no
 analytics of any kind, so there is no way to tell whether the pins did anything.
@@ -659,8 +731,12 @@ settled one.
 its own entry under Outstanding above. What is left on it is placement, not
 build.
 
-1. **A bundle.** Kit plus planner plus binder. Lifts order value with no new
-   content, and three of the three now exist.
+1. **A bundle.** Lifts order value with no new content, and everything it needs
+   now exists. There are two of them and they are not the same offer.
+   **Binder plus workbook is the one to do first**: the spec names it *The Gulf
+   Coast Storm Season System*, the two products were designed against each other,
+   and it has a September 10 deadline. Kit plus planner is the calm January
+   pairing and can wait for the new year.
 
 2. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
    plumbing is done. Adding entries puts links on the guides page and into the

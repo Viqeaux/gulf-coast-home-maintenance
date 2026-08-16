@@ -558,8 +558,9 @@ DAMAGE_COLUMNS = [
 ]
 
 DAMAGE_NOTE = (
-    "Name a cause on every line, and use the insure’ words: wind, wind driven "
-    "rain, tree, flood, or surge. Wind and flood are separate policies and the "
+    "Name a cause on every line, and use the words the insurer uses: wind, "
+    "wind driven rain, tree, flood, or surge. Wind and flood are separate "
+    "policies and the "
     "two companies will each argue the other one owes it. Rain that entered "
     "through a hole the wind made is a wind loss. The same water arriving across "
     "the ground is a flood loss. Guessing wrong out loud to an adjuster is "
@@ -604,7 +605,7 @@ CLAIM_STEPS = [
 
 CONTRACTOR_CHECKS = [
     ("State license number",
-     "Look it up yourself on the state licensing boar’ website. Do not read it "
+     "Look it up yourself on the state licensing board website. Do not read it "
      "off the card they handed you."),
     ("General liability certificate",
      "Ask for it to come from their insurance agent directly to you. A photocopy "
