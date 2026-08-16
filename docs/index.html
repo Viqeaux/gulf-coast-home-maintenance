@@ -355,6 +355,16 @@
     background: var(--on-deep); border-color: var(--on-deep); color: var(--deep);
   }
   .hero .btn--primary:hover { filter: brightness(1.08); }
+  /* The calculator sits under the buttons as a line rather than beside them as
+     a third one. It is the only thing on the site that answers a question
+     before asking for anything, so it wants to be in the hero; but a third
+     button turns a clear choice into a menu, and this is the offer most likely
+     to be taken by somebody who is not yet sure they want a calendar. */
+  .hero .try {
+    margin: 1rem 0 0; font: 400 .95rem/1.55 ui-sans-serif, system-ui, sans-serif;
+    color: var(--on-deep-mute); max-width: 30rem;
+  }
+  .hero .try a { color: var(--sand); font-weight: 600; }
 
   /* --- year diagram ----------------------------------------------------- */
   .figure { margin: 2rem 0 0; }
@@ -1051,6 +1061,12 @@
       <a class="btn btn--primary btn--lg" href="#calendars">Get the free phone calendars</a>
       <a class="btn btn--lg" href="#edition">See the printable kit</a>
     </div>
+
+    <p class="try">
+      Or start with one number:
+      <a href="calculator/">find out what in your house is already on borrowed time</a>.
+      Takes about fifteen seconds and asks for nothing.
+    </p>
 
     <div class="stats">
       <div class="stat"><span class="n">9</span><span class="t">months a year your A/C is running</span></div>
@@ -1775,6 +1791,7 @@
     <p class="foot-links">
       <a href="privacy.html">Privacy</a>
       <a href="guides/">What's on the calendar</a>
+      <a href="calculator/">What's on borrowed time</a>
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->

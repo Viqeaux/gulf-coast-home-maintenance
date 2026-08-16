@@ -16,9 +16,8 @@ Current version **v1.16.0**. Everything below is live unless marked otherwise.
 | **The kit** | Every printable page, 27 of them, in two PDFs: print and fillable | Etsy only | $12.99 |
 | **The agent edition** | The same 27 pages branded for a realtor, plus a 4 page leave-behind. Four PDFs, print and fillable of each | Etsy only | $39 |
 | **The storm season binder** | 33 pages, mostly blanks: policies, room by room inventory, supply calculator, the countdown, shutdown, damage log, claim log, contractor vetting. Two PDFs, print and fillable | Etsy | $16.99 |
-| **The reserve planner** | One spreadsheet, eight tabs. 49 systems, the IDK engine, a 30 year forecast and a funding dashboard. Built 2026-08-16, **not listed yet** | Etsy, plus a Sheets copy link | Not set. See below |
-| **What Breaks Next** | One offline HTML file. The same 49 systems and the same IDK engine, no money math. Type the build year, get what is past due. Built 2026-08-16, **not listed yet** | Etsy, as a second file on the planner's listing | Sold with the planner |
-| **The free calculator** | Four systems of the forty-nine, on the site. The teaser for the two above, and the only page that gives before it asks | <https://gulfcoasthomemaintenance.com/calculator/>, once it is linked | Free, and stays free |
+| **The reserve planner** | One spreadsheet, nine tabs. Quick Check, 49 systems, the IDK engine, a 30 year forecast and a funding dashboard. Built 2026-08-16, **not listed yet** | Etsy, plus a Sheets copy link | Not set. See below |
+| **The free calculator** | Four systems of the forty-nine, on the site. The teaser for the planner, and the only page that gives before it asks | <https://gulfcoasthomemaintenance.com/calculator/> | Free, and stays free |
 
 **The binder is a different buying moment from the kit, and that is the point.**
 The kit is a calm January purchase by somebody being responsible. The binder is
@@ -79,9 +78,9 @@ python check_links.py           # finds curated videos that have died
 python optimize_images.py       # after replacing docs/img/hero.png
 
 python build_planner.py                   # the reserve planner, one .xlsx, into product/
-python qa_planner.py                      # builds it, calculates it, runs the ten cases
+python qa_planner.py                      # builds it, calculates it, runs the eleven cases
 python qa_planner.py --checklist          # the five checks to do by hand in Sheets
-python build_calculator.py                # What Breaks Next, one HTML file, into product/
+python build_calculator.py                # the free calculator, into docs/calculator/
 
 python build_storm_binder.py              # the binder, print PDF, into product/
 python build_storm_binder.py --fillable   # both PDFs, 1,876 form fields
@@ -116,8 +115,9 @@ buyer paid for and did not get. Note that `.sheet` is `flex: 1`, so measuring
 its own `scrollHeight` can never report short: the check measures how far the
 content reaches instead.
 
-**`docs/index.html` is hand-written. Everything in `docs/guides/` and
-`product/` is generated.** Edit the Python, not the output.
+**`docs/index.html` is hand-written. Everything in `docs/guides/`,
+`docs/calculator/` and `product/` is generated.** Edit the Python, not the
+output.
 
 **`docs/img/cover-*.jpg` and `preview-*.jpg` are committed build outputs, and
 that is deliberate.** `build_site_images.py` makes them from renders the listing
@@ -367,63 +367,44 @@ not products, and this is a fourth thing to sell to the same empty room. The
 free web calculator under next products is the item that changes that, and the
 planner's math is what it was waiting on.
 
-**What Breaks Next is built, and it is a download rather than a page.**
-`build_calculator.py` writes `product/gulf-coast-what-breaks-next.html`: one
-self-contained file, 49 systems in seven groups, the planner's IDK engine and
-its region factors, lifespans only and no dollar figures anywhere. Verified in a
-browser, light and dark, desktop and mobile, no console errors, no horizontal
-overflow, zero external or relative references and zero `<link>` tags. 73 KB.
+**What Breaks Next became the planner's Quick Check tab.** For a few hours on
+2026-08-16 it was a standalone `.html` download, all 49 systems in one
+self-contained file. Chad killed that the same day and he was right: a raw
+`.html` attachment cannot be relied on to open on a phone, Etsy buyers are
+heavily mobile, and a tool that will not open is worth nothing.
 
-**It started as a free page at `/calculator/` and Chad changed it on
-2026-08-16**, before anything was published. `docs/calculator/` is deleted and
-was never pushed, so nothing about that draft is public. The free version was
-cut to twelve systems so it would not give the planner away; as a paid file that
-reason is gone, which is why it carries all 49.
+**No static file format fixes that**, which is worth writing down so nobody
+re-opens it. PDFs and images cannot compute. PDF JavaScript only runs in
+Acrobat. A zipped `.html` is worse on a phone rather than better. The only
+thing that reliably calculates on a phone is a spreadsheet, and there already
+was one.
 
-**The line between this and the planner is money, and it should stay there.**
-This answers what and when, in five minutes, from one number. The planner
-answers what it costs and what to set aside, and it is the thing you keep. A
-browser file cannot reliably save anything between opens, so it must not
-pretend to be a record. Adding costs here would make the spreadsheet redundant
-rather than make this better.
+So it is tab three of the workbook now: two cells on Setup, the twelve systems
+almost every house has, and a headline count across the top. It answers before
+the buyer spends thirty minutes on the register, which is a better product than
+the download was. `product/gulf-coast-what-breaks-next.html` is deleted and was
+never committed.
 
-**It ships with the planner, not on its own.** Chad's call, 2026-08-16: a
-second file on the planner's listing rather than a fifth listing. No
-cannibalization, it makes that listing meaningfully richer, it avoids another
-SKU in a shop whose constraint is traffic rather than product count, and if the
-`.html` turns out awkward on phones the spreadsheet is still what the buyer
-opens.
+**The free calculator is on the site.** `docs/calculator/index.html`, four
+systems, built by `build_calculator.py` from the same numbers. Placed the same
+day: a line in the hero under the two buttons, both footers, the guides page
+tailpiece, and `sitemap.xml`.
 
-**The free teaser is built.** `docs/calculator/index.html`, four systems, no
-region picker, no print, same arithmetic. Chad's call the same day. Twelve
-systems on a free page was the worst of both, too much to be a teaser and too
-little to be a product, so it went to four on the site and forty-nine in the
-file. Both come out of `build_calculator.py` in one run and share `ENGINE_JS`,
-so they cannot disagree about the same roof.
+**It is a line rather than a third hero button on purpose.** Three buttons turn
+a clear choice into a menu, and this is the offer most likely to be taken by
+somebody not yet sure they want a calendar. Nothing else on the site answers a
+question before asking for something, which is what makes it the only page here
+worth linking or pinning, and the shop's constraint is traffic.
 
-What is left:
+What is left on the pair:
 
-1. **Test the download on a phone before listing.** Etsy buyers are heavily
-   mobile and a raw `.html` attachment is the weakest part of this product:
-   some mobile file managers will not hand one to a browser at all. That is the
-   single largest review risk here, larger than any number in it, and it is
-   also why bundling was the right call.
-2. **A quick start line in the listing copy**, saying plainly: download, then
-   open it with a browser. Most support email on this product will be that one
-   sentence, so it is worth writing before the first one arrives.
-3. **Place the free page.** It is built and linked from nowhere: no nav entry,
-   no card on `docs/index.html`, no line in `sitemap.xml`, which is
-   hand-maintained. **Where it goes is the decision.** Its whole value is that
-   it gives before it asks, so it wants to be near the top rather than filed
-   under the products, and the hero is the only spot that reaches somebody who
-   has not scrolled. The guides page footer is the other candidate: every
-   calendar event deep links there, so it is the warmest audience the site has.
-4. **`BUNDLE_URL` in `build_calculator.py`** when the listing exists. That turns
-   the free page's buy slot from the signup into a buy button.
-5. **Pinterest, once it is placed.** A calculator pins far better than a
-   printable does, and it is the first thing on the site somebody can be sent
-   to without being sold to. Worth waiting for the two week read on the first
-   eight pins before adding it.
+1. **`BUNDLE_URL` in `build_calculator.py`** when the planner is listed. That
+   turns the free page's buy slot from the signup anchor into a buy button.
+2. **A pin for it, after the two week read on the first eight.** A calculator
+   pins far better than a printable does. Resist adding it sooner: a burst from
+   a young account reads as spam and destroys the signal being waited on.
+3. **Nothing has been deployed.** The site changes are local and unpushed along
+   with everything else.
 
 **The video is built.** `python build_video.py --binder` makes a fourteen
 second cut from the binder's own pages, into `product/listing-binder/`. It

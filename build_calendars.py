@@ -744,7 +744,9 @@ GUIDES_TEMPLATE = """<!doctype html>
     <p class="tail-kit">
       If you would rather have it on paper, there is a
       <a href="../#edition">printable kit</a> as well, twenty-seven pages and
-      undated.
+      undated. And if you want to know what is already overdue rather than what
+      is due this month, that is
+      <a href="../calculator/">fifteen seconds and one number</a>.
     </p>
 
     <div class="tail-signup">
@@ -790,6 +792,7 @@ GUIDES_TEMPLATE = """<!doctype html>
     <p class="foot-links">
       <a href="../">Home</a>
       <a href="../#calendars">Free calendars</a>
+      <a href="../calculator/">What&#8217;s on borrowed time</a>
       <a href="../privacy.html">Privacy</a>
     </p>
     <p class="version">v{version}</p>

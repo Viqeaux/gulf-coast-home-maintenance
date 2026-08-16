@@ -25,9 +25,9 @@ build_fillable.py         stamps form fields onto a second, typeable copy
 build_listing_images.py   renders Etsy photos from the real kit pages
 build_video.py            the 14 second silent Etsy listing video
 planner_data.py           the planner's 49 systems, and the region factors
-build_planner.py          the reserve planner workbook, one .xlsx, eight tabs
-qa_planner.py             calculates the planner and runs its ten QA cases
-build_calculator.py       What Breaks Next, the download, and its free teaser
+build_planner.py          the reserve planner workbook, one .xlsx, nine tabs
+qa_planner.py             calculates the planner and runs its eleven QA cases
+build_calculator.py       the free calculator page, the planner's teaser
 build_agent_edition.py    the realtor edition, four PDFs. --logo bakes one in
 build_agent_listing.py    nine photos for the realtor listing
 build_pins.py             eight Pinterest pins, from the kit and the binder
@@ -58,7 +58,7 @@ docs/                     published by GitHub Pages, exactly as-is
   icon-180.png                 apple touch icon, same source
   icon-512.png                 Android and link unfurlers, same source
   robots.txt                   points at the sitemap
-  sitemap.xml                  three pages, hand-maintained
+  sitemap.xml                  four pages, hand-maintained
   img/hero-1600.jpg            hero, desktop
   img/hero-900.jpg             hero, mobile
   img/hero.png                 the master, local only, not published
@@ -66,7 +66,8 @@ docs/                     published by GitHub Pages, exactly as-is
   .nojekyll                    stops Pages running the site through Jekyll
 ```
 
-`docs/guides/index.html` and everything in `product/` are generated. Edit the
+`docs/guides/index.html`, `docs/calculator/index.html` and everything in
+`product/` are generated. Edit the
 Python, not the output. `docs/index.html` is hand-written.
 
 Rebuild the feeds and the calendar contents page, after editing tasks:
@@ -300,8 +301,17 @@ reopen, and read it back.
 `build_planner.py` builds the fourth product and the first one that is not
 paper: a spreadsheet that takes a list of what is in the house and works out
 what breaks when, what it will cost in that year's dollars, and what to set
-aside every month. Eight tabs, no macros, and it runs from
-`planner_data.py`, which holds all 49 systems and the region factors.
+aside every month. Nine tabs, no macros, and it runs from `planner_data.py`,
+which holds all 49 systems and the region factors.
+
+**`Quick Check` is the tab a new owner sees first**, and it exists because
+nobody buys a spreadsheet to spend thirty minutes on data entry before it tells
+them anything. Two cells on Setup, the build year and the region, and it reports
+on the twelve systems almost every house has: estimated install year, due year,
+years left, status, and a headline count across the top. Then it points at the
+register, which is where the money math is. It was a standalone HTML download
+for a few hours on 2026-08-16 and moved in here because an `.html` attachment
+cannot be relied on to open on a phone.
 
 ```bash
 python build_planner.py    # product/gulf-coast-reserve-planner.xlsx
@@ -370,61 +380,33 @@ answer to whatever the program decides an empty criterion or a wildcard means.
 The Dashboard counts with `SUMPRODUCT` instead, which has no criteria string in
 it to interpret.
 
-## What Breaks Next, and its teaser
+## The free calculator
 
-`build_calculator.py` writes two files from one set of numbers:
+`build_calculator.py` writes `docs/calculator/index.html`. The visitor types the
+year the house was built and gets back whether four of the most expensive things
+they own are already past due. The arithmetic runs in their browser, which is
+why nothing typed into it leaves their machine and why the page adds no origin
+to the site's policy.
 
 ```bash
 python build_calculator.py
 ```
 
-- **`product/gulf-coast-what-breaks-next.html`**, the paid download. The buyer
-  downloads one file, double-clicks it, and it runs in whatever browser they
-  already have. No install, no account, no server, no internet. All 49 systems
-  grouped by category, with the twelve almost every house has switched on and
-  the other 37 behind a button. The three I-don't-know estimates are the
-  planner's, and so is the region factor: pick a region and the weather-driven
-  lifespans move while the dishwasher does not. Plus a print stylesheet, since
-  printing is the only way anything leaves the file.
-- **`docs/calculator/index.html`**, the free teaser. Four systems, no region, no
-  print, and a pointer at the file above.
+**It is the only page on the site that gives before it asks.** Everything else
+wants a subscribe, a signup or a sale. That is what makes it the one worth
+linking and pinning, and the shop's constraint is traffic rather than
+conversion. It is in the hero as a line under the two buttons rather than as a
+third button, in both footers, and in the sitemap.
 
-**Twelve was the worst of both.** The first draft was a single free page of
-twelve systems: too much to be a teaser and too little to be a product. Chad
-split it on 2026-08-16, and twelve became four on the site and forty-nine in the
-file.
+**Four, and no more.** It went twelve, then four. Twelve was the worst of both:
+too much to be a teaser and too little to be a product. What it withholds is
+legible rather than arbitrary, no region picker and forty-five systems it does
+not carry, which is what a teaser is for.
 
-**The two share `ENGINE_JS` rather than each carrying a copy.** Someone who
-tries the free page and then buys must never find the two disagreeing about the
-same roof, and two copies of four functions drift on the first fix. `FREE_FOUR`
-is checked to be a subset of `COMMON`, which is checked against
-`planner_data.SYSTEMS`, so a lifespan cannot be free at one number and paid at
-another.
-
-**The free page is the only thing on the site that gives before it asks.**
-Everything else wants a subscribe, a signup or a sale. That is what makes it the
-one worth linking and pinning, and the shop's constraint is traffic.
-`BUNDLE_URL` at the top of the script is empty, so its buy slot holds the signup
-for now; paste the listing URL in and it becomes a buy button, the same trade as
-`SHOP_URL` at the bottom of `docs/index.html`.
-
-**The download is one file, and everything in it is inlined.** `docs/theme.css` is read at build time
-rather than copied, so the tool looks like the shop without being a second
-hand-synced palette. A relative `<link>` would be broken the moment the file
-left the folder it was built in, which for a download is always. The build
-prints a warning if any external or relative reference survives.
-
-**It sends nothing anywhere, and the policy in the file enforces that** rather
-than claiming it. `default-src 'none'` with no `connect-src` means a script in
-here cannot reach the network even if one were added. That is worth having for
-its own sake, and it is the honest version of the promise on the page.
-
-**No dollar amounts, and that is the line between this and the planner.** This
-answers what and when, in five minutes, from one number. The planner answers
-what it costs, what it will cost in the year it breaks, and what to set aside
-monthly, and it is the thing you keep and update. A browser file cannot reliably
-save anything between opens, so it should not pretend to be a record. Putting
-costs in here would make the spreadsheet redundant rather than make this better.
+**No dollar amounts.** Lifespans are the verified half and the costs are not,
+and a wrong figure on a public page has nobody to email about it. It is also
+the commercial line: this answers what and when, the workbook answers what it
+costs.
 
 **Every line defaults to "replaced on schedule"**, the kindest of the three
 estimates, because a tool that opens by declaring everything you own overdue
@@ -432,16 +414,28 @@ reads as a gimmick even when it is right. The catch is that on-schedule can
 never produce an overdue item: by definition it dates everything to its most
 recent cycle. So when the list comes back clean and uncorrected, the results
 panel names the assumption that produced it and points at the switch. Without
-that note the file quietly reassures people, which is the opposite of its job.
+that note the page quietly reassures people, which is the opposite of its job.
 
-The numbers come from `planner_data.py` rather than a copy of them. `COMMON`
-and the category list name things in that file and the build fails if either
-drifts, so the download and the workbook cannot tell the same person two
-different things about their roof.
+`FREE_FOUR` is checked to be a subset of `planner_data.COMMON`, the twelve the
+workbook's Quick Check tab is built from, so a lifespan cannot be free at one
+number and paid at another. `BUNDLE_URL` at the top of the script is empty, so
+the buy slot holds the signup; paste the planner's listing URL in and it becomes
+a buy button, the same trade as `SHOP_URL` at the bottom of `docs/index.html`.
 
-**The free page is built but not linked from anywhere**: no nav entry, no
-`sitemap.xml` line, no card on the home page. That is placement, and placement
-is a separate decision from whether the thing works.
+### It used to be a second product
+
+For a few hours on 2026-08-16 the paid half of this was a standalone
+`.html` download, all 49 systems in one self-contained file. It is now the
+workbook's `Quick Check` tab instead. A raw `.html` attachment cannot be relied
+on to open on a phone, Etsy buyers are heavily mobile, and a tool that will not
+open is worth nothing. No static format fixes that: PDFs and images cannot
+compute, and a zipped `.html` is worse on a phone rather than better. The only
+thing that reliably calculates on a phone is a spreadsheet, and there already
+was one.
+
+Nothing was lost in the move except a delivery problem, and something was
+gained: the workbook now answers before it asks for thirty minutes of data
+entry.
 
 ## Listing images
 

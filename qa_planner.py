@@ -25,7 +25,8 @@ formatting or the protection survived. Those are file structure, and
 What is left after that is five things a human has to look at once, in Sheets,
 after importing: `--checklist` prints them.
 
-Ten cases, from the build spec:
+Eleven cases. One to ten are the build spec's; eleven arrived with the Quick
+Check tab:
 
     1  an empty workbook shows no errors anywhere
     2  an overdue item reads Overdue and lands in the current year's forecast
@@ -37,8 +38,10 @@ Ten cases, from the build spec:
     8  a thin contribution turns the reserve balance red and raises SHORTFALL
     9  two of the same system in different places track independently
     10 dropdowns, the hidden tab and the protection survived the write
+    11 Quick Check answers from the build year alone, and its headline counts
 """
 
+import math
 import os
 import re
 import sys
@@ -59,6 +62,7 @@ REGISTER = "SYSTEMS REGISTER"
 SETUP = "SETUP"
 FORECAST = "30-YEAR FORECAST"
 DASHBOARD = "DASHBOARD"
+QUICK = "QUICK CHECK"
 
 CELL = re.compile(r"^'\[[^\]]+\](?P<sheet>[^']+)'!(?P<ref>\$?[A-Z]{1,3}\$?\d+)$")
 HIDDEN_FROM_BUYER = {"LISTS"}
@@ -404,6 +408,64 @@ def case_9_duplicates(case):
                      case.summary(bp.ROW_CUMULATIVE, 2055) < total_with)
 
 
+def case_11_quick_check(case):
+    """The sixty second tab: two cells on Setup and it answers."""
+    first, last = bp.QC_FIRST, bp.QC_LAST
+    roof, heater = first, first + bp.COMMON.index("Water heater - tank")
+
+    case.m.clear(SETUP, "B5")
+    case.is_blank("no install year without a build year", case.m.get(QUICK, "D{0}".format(roof)))
+    case.assert_true("and the headline says what to do",
+                     "build year" in str(case.m.get(QUICK, "A{0}".format(bp.QC_SUMMARY))))
+    case.no_errors("empty Quick Check is clean")
+
+    case.m.set(SETUP, "B5", 1975)
+    now = case.now()
+    life = case.m.get(QUICK, "B{0}".format(roof))
+    expected = 1975 + int((now - 1975) // life) * life
+    case.check("dates from the last cycle", case.m.get(QUICK, "D{0}".format(roof)), expected)
+    case.check("due follows", case.m.get(QUICK, "E{0}".format(roof)), expected + life)
+    case.check("years left follows", case.m.get(QUICK, "F{0}".format(roof)),
+               expected + life - now)
+
+    # On schedule can never be overdue, which is the whole reason the tab says so.
+    statuses = [case.m.get(QUICK, "G{0}".format(r)) for r in range(first, last + 1)]
+    case.check("all twelve report", len([s for s in statuses if s]), len(bp.COMMON))
+    case.assert_true("nothing is overdue on the generous default",
+                     "Overdue" not in statuses)
+
+    case.m.set(QUICK, "C{0}".format(roof), "Never replaced")
+    case.check("never replaced dates to the build year",
+               case.m.get(QUICK, "D{0}".format(roof)), 1975)
+    case.check("and reads overdue", case.m.get(QUICK, "G{0}".format(roof)), "Overdue")
+    headline = str(case.m.get(QUICK, "A{0}".format(bp.QC_SUMMARY)))
+    case.assert_true("the headline counts it: {0!r}".format(headline),
+                     "of 12" in headline and "Already overdue: 1" in headline)
+
+    case.m.set(QUICK, "C{0}".format(heater), "Roughly half way")
+    # Excel's ROUND goes half away from zero. Python's round() goes to even, so
+    # a 9 year life lands a year apart depending on which one you ask.
+    half = math.floor(case.m.get(QUICK, "B{0}".format(heater)) / 2.0 + 0.5)
+    case.check("half way is half a lifespan back", case.m.get(QUICK, "D{0}".format(heater)),
+               now - half)
+
+    case.m.set(QUICK, "C{0}".format(heater), "Not in my house")
+    case.is_blank("skipping empties the row", case.m.get(QUICK, "D{0}".format(heater)))
+    case.is_blank("and its status", case.m.get(QUICK, "G{0}".format(heater)))
+    case.assert_true("and drops out of the count",
+                     "of 11" in str(case.m.get(QUICK, "A{0}".format(bp.QC_SUMMARY))))
+
+    # Same region rule as the register: weather ages a roof and not a dishwasher.
+    dish = first + bp.COMMON.index("Dishwasher")
+    base_roof = case.m.get(QUICK, "B{0}".format(roof))
+    base_dish = case.m.get(QUICK, "B{0}".format(dish))
+    case.m.set(SETUP, "B6", "Pacific NW")
+    case.check("roof life moved", case.m.get(QUICK, "B{0}".format(roof)),
+               round(base_roof * 1.20))
+    case.check("dishwasher did not", case.m.get(QUICK, "B{0}".format(dish)), base_dish)
+    case.no_errors("and none of that raised an error")
+
+
 CASES = [
     ("1  empty workbook", case_1_empty),
     ("2  overdue item", case_2_overdue),
@@ -414,6 +476,7 @@ CASES = [
     ("7  inflation sanity", case_7_inflation),
     ("8  negative balance", case_8_shortfall),
     ("9  duplicate systems", case_9_duplicates),
+    ("11 quick check", case_11_quick_check),
 ]
 
 
@@ -429,8 +492,8 @@ def structure_checks(path):
 
     wb = load_workbook(path)
     want("tab order", wb.sheetnames, [
-        "START HERE", "Setup", "Systems Register", "Dashboard", "30-Year Forecast",
-        "Replacement Log", "Reference Data", "Lists"])
+        "START HERE", "Setup", "Quick Check", "Systems Register", "Dashboard",
+        "30-Year Forecast", "Replacement Log", "Reference Data", "Lists"])
     want("Lists is hidden", wb["Lists"].sheet_state, "hidden")
     for name in wb.sheetnames:
         if name != "Lists":
@@ -445,13 +508,25 @@ def structure_checks(path):
                           ("W", "=TierList"), ("X", "=YesNoList")):
         want("column {0} dropdown".format(col), ranges.get(col), listname)
 
+    quick = wb["Quick Check"]
+    quick_dv = [dv.formula1 for dv in quick.data_validations.dataValidation]
+    want("Quick Check dropdown", quick_dv, ["=QuickList"])
+    if quick["C{0}".format(bp.QC_FIRST)].protection.locked:
+        problems.append("Quick Check's answer column is locked")
+    for col in "ABDEFG":
+        if not quick["{0}{1}".format(col, bp.QC_FIRST)].protection.locked:
+            problems.append("Quick Check column {0} is unlocked".format(col))
+    filled = sum(1 for r in range(bp.QC_FIRST, bp.QC_LAST + 1) if quick["A{0}".format(r)].value)
+    want("Quick Check rows", filled, len(bp.COMMON))
+
     names = set(wb.defined_names)
-    for listname in ("SystemList", "StatusList", "TierList", "YesNoList", "RegionList"):
+    for listname in ("SystemList", "StatusList", "TierList", "YesNoList", "RegionList",
+                     "QuickList"):
         if listname not in names:
             problems.append("named range {0} is missing".format(listname))
 
     for name in ("Reference Data", "Lists", "Systems Register", "Setup", "Dashboard",
-                 "30-Year Forecast", "Replacement Log", "START HERE"):
+                 "30-Year Forecast", "Replacement Log", "START HERE", "Quick Check"):
         ws = wb[name]
         if not ws.protection.sheet:
             problems.append("{0} is not protected".format(name))

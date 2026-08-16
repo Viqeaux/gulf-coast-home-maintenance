@@ -136,6 +136,38 @@ REGIONS = [
     ("Pacific NW", 1.20, 1.20, "High labor cost, mild UV, and the longest exterior life on the list"),
 ]
 
+# The twelve almost every house has. The Quick Check tab is built from these and
+# nothing else, because its whole job is an answer in sixty seconds from one
+# number: a new owner should not have to scroll past well pumps and septic drain
+# fields to find out about their roof. The register carries all 49.
+#
+# `docs/calculator/index.html` shows four of these twelve, and
+# `build_calculator.py` checks its four are a subset of this list, so a lifespan
+# cannot be free at one number and paid at another.
+COMMON = [
+    "Roof - asphalt shingle, architectural",
+    "HVAC condenser - outdoor unit",
+    "HVAC air handler / furnace",
+    "Ductwork",
+    "Water heater - tank",
+    "Water heater anode rod",
+    "Windows - whole house",
+    "Exterior paint",
+    "Exterior caulk & sealants",
+    "Main electrical panel",
+    "Refrigerator",
+    "Dishwasher",
+]
+
+# What the Quick Check tab offers instead of a date. No "Known" option: if you
+# know the year, that is the register's job and this tab is the ramp onto it.
+QUICK_STATUSES = [
+    "Replaced on schedule",
+    "Never replaced",
+    "Roughly half way",
+    "Not in my house",
+]
+
 INSTALL_STATUSES = [
     "Known",
     "IDK - Assume Original",

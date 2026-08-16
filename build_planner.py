@@ -50,7 +50,8 @@ from openpyxl.workbook.defined_name import DefinedName
 from openpyxl.worksheet.datavalidation import DataValidation
 
 from planner_data import (
-    INSTALL_STATUSES, KIT_ITEMS, REGIONS, SYSTEMS, TIERS, YES_NO, check_against_kit)
+    COMMON, INSTALL_STATUSES, KIT_ITEMS, QUICK_STATUSES, REGIONS, SYSTEMS, TIERS, YES_NO,
+    check_against_kit)
 
 OUT = os.path.join("product", "gulf-coast-reserve-planner.xlsx")
 
@@ -60,6 +61,12 @@ HORIZON = 30        # forecast columns built, C through AF
 FC_FIRST = 6        # first item row on the forecast grid, maps to register row 5
 HORIZON_END = "AF"  # last forecast column, 2 + HORIZON
 LOG_FIRST, LOG_LAST = 5, 54
+
+# Quick Check: the sixty second answer, and the tab a new owner sees first.
+QC_SUMMARY = 7
+QC_HEAD = 12
+QC_FIRST = QC_HEAD + 1
+QC_LAST = QC_FIRST + len(COMMON) - 1
 
 # Reference Data occupies a known block, and every lookup in the workbook is
 # bounded to it. Whole-column references are tempting and cost real time in
@@ -275,7 +282,8 @@ def sheet_reference(wb):
 
 def sheet_lists(wb):
     ws = wb.create_sheet("Lists")
-    for i, text in enumerate(["Systems", "Install status", "Tier", "Yes/No", "Region"]):
+    headers = ["Systems", "Install status", "Tier", "Yes/No", "Region", "Quick Check"]
+    for i, text in enumerate(headers):
         style(ws.cell(row=1, column=i + 1, value=text), bold=True)
     columns = [
         (1, [system for system, *_rest in SYSTEMS]),
@@ -283,11 +291,12 @@ def sheet_lists(wb):
         (3, TIERS),
         (4, YES_NO),
         (5, [name for name, *_rest in REGIONS]),
+        (6, QUICK_STATUSES),
     ]
     for column, values in columns:
         for i, text in enumerate(values):
             style(ws.cell(row=2 + i, column=column, value=text))
-    widths(ws, {"A": 34, "B": 26, "C": 18, "D": 8, "E": 16})
+    widths(ws, {"A": 34, "B": 26, "C": 18, "D": 8, "E": 16, "F": 22})
     ws.sheet_state = "hidden"
     lock(ws)
 
@@ -300,6 +309,7 @@ def sheet_lists(wb):
         "TierList": "Lists!$C$2:$C${0}".format(1 + len(TIERS)),
         "YesNoList": "Lists!$D$2:$D${0}".format(1 + len(YES_NO)),
         "RegionList": "Lists!$E$2:$E${0}".format(1 + len(REGIONS)),
+        "QuickList": "Lists!$F$2:$F${0}".format(1 + len(QUICK_STATUSES)),
     }
     for name, ref in names.items():
         wb.defined_names[name] = DefinedName(name, attr_text=ref)
@@ -370,6 +380,115 @@ def sheet_setup(wb):
     ws.merge_cells("A15:F15")
 
     widths(ws, {"A": 32, "B": 16, "C": 18, "D": 18, "E": 18, "F": 18})
+    lock(ws)
+    return ws
+
+
+# ------------------------------------------------------------------ Quick Check
+
+def sheet_quick(wb):
+    """Twelve systems, two inputs, one answer.
+
+    This exists because the register is a thirty minute job and nobody buys a
+    spreadsheet to spend thirty minutes before it tells them anything. Fill in
+    two cells on Setup and this tab says what is already past due, which is the
+    whole product demonstrated before any work is done. Then it points at the
+    register, which is where the money math lives.
+
+    It was a separate HTML download until 2026-08-16. That could not be relied
+    on to open on a phone, and a tool that will not open is worth nothing, so it
+    moved in here where it opens anywhere the workbook does.
+    """
+    ws = wb.create_sheet("Quick Check")
+    heading(ws, "A1", "Quick Check")
+    note(ws, "A2",
+         "Two cells on the Setup tab and this answers. It covers the twelve things almost "
+         "every house has. When you want the other 37, and what any of it costs, that is the "
+         "Systems Register.")
+    ws.merge_cells("A2:G2")
+    ws.row_dimensions[2].height = 32
+
+    put(ws, "A4", "Home build year", bold=True)
+    put(ws, "B4", formula("=IF(Setup!$B$5=\"\",\"\",Setup!$B$5)"), color=PULLED_GREEN, fmt="0")
+    note(ws, "C4", "Set it on Setup. Nothing here works without it.")
+    put(ws, "A5", "Region", bold=True)
+    put(ws, "B5", formula("=Setup!$B$6"), color=PULLED_GREEN)
+    note(ws, "C5", "Also on Setup. It moves the weather-driven lifespans.")
+
+    counts = "$G${0}:$G${1}".format(QC_FIRST, QC_LAST)
+    headline = formula(
+        # Phrased to read correctly at any count. "1 of 12 need attention" and
+        # "1 are already overdue" are both wrong, and a formula that picks
+        # between is and are for two different numbers is not worth writing.
+        "=IF(Setup!$B$5=\"\",\"Put your home's build year on the Setup tab and this fills in.\","
+        "\"Needs attention now: \"&COUNTIF({0},\"Overdue\")+COUNTIF({0},\"Due Soon\")&"
+        "\" of \"&SUMPRODUCT(({0}<>\"\")*1)&\".   Already overdue: \"&"
+        "COUNTIF({0},\"Overdue\")&\".\")".format(counts))
+    cell = put(ws, "A{0}".format(QC_SUMMARY), headline, bold=True, size=13, color="9C0006")
+    cell.alignment = Alignment(vertical="center")
+    ws.merge_cells("A{0}:G{0}".format(QC_SUMMARY))
+    ws.row_dimensions[QC_SUMMARY].height = 30
+    note(ws, "A{0}".format(QC_SUMMARY + 1),
+         "Every line below starts at \"Replaced on schedule\", which assumes whoever owned "
+         "the house before you kept up with it. That is the most generous of the three "
+         "guesses, so this is the best case rather than the likely one. Switch anything you "
+         "know has never been touched to \"Never replaced\" and watch it move.")
+    ws.merge_cells("A{0}:G{1}".format(QC_SUMMARY + 1, QC_SUMMARY + 2))
+    ws.row_dimensions[QC_SUMMARY + 1].height = 28
+
+    band(ws, QC_HEAD, ["System", "Typical life (yrs)", "What you know",
+                       "Estimated install year", "Due", "Years left", "Status"], width=32)
+
+    for offset, system in enumerate(COMMON):
+        r = QC_FIRST + offset
+        lookup = "MATCH($A{0},{1},0)".format(r, ref_range("A"))
+        put(ws, "A{0}".format(r), system)
+        put(ws, "B{0}".format(r), formula(
+            "=IFERROR(ROUND(INDEX({life},{m})*"
+            "IF(INDEX({exp},{m})=\"Yes\",Setup!$B$8,1),0),\"\")".format(
+                life=ref_range("C"), exp=ref_range("H"), m=lookup)),
+            fmt="0", align="center", fill=GRAY)
+        put(ws, "C{0}".format(r), QUICK_STATUSES[0], color=INPUT_BLUE, locked=False)
+        put(ws, "D{0}".format(r), formula(
+            "=IF($C{r}=\"Not in my house\",\"\",IF(Setup!$B$5=\"\",\"\","
+            "IF($B{r}=\"\",\"\","
+            "IF($C{r}=\"Never replaced\",Setup!$B$5,"
+            "IF($C{r}=\"Roughly half way\",MAX(Setup!$B$5,Setup!$B$4-ROUND($B{r}/2,0)),"
+            "Setup!$B$5+FLOOR(MAX(Setup!$B$4-Setup!$B$5,0)/$B{r},1)*$B{r})))))".format(r=r)),
+            fmt="0", align="center")
+        put(ws, "E{0}".format(r), formula(
+            "=IF($D{r}=\"\",\"\",$D{r}+$B{r})".format(r=r)), fmt="0", align="center")
+        put(ws, "F{0}".format(r), formula(
+            "=IF($D{r}=\"\",\"\",$E{r}-Setup!$B$4)".format(r=r)), fmt="0", align="center")
+        put(ws, "G{0}".format(r), formula(
+            "=IF($D{r}=\"\",\"\",IF($F{r}<=0,\"Overdue\","
+            "IF($F{r}<=Setup!$B$12,\"Due Soon\","
+            "IF($F{r}<=5,\"Monitor\",\"OK\"))))".format(r=r)), bold=True, align="center")
+
+    dv = DataValidation(type="list", formula1="=QuickList", allow_blank=True)
+    dv.error = "Pick one from the list."
+    dv.errorTitle = "Not on the list"
+    ws.add_data_validation(dv)
+    dv.add("C{0}:C{1}".format(QC_FIRST, QC_LAST))
+
+    fills = [("Overdue", "FFC7CE", "9C0006"), ("Due Soon", "FFE0B2", "7F4F00"),
+             ("Monitor", "FFF2CC", "7F6000"), ("OK", "C6EFCE", "006100")]
+    for text, fill, font in fills:
+        ws.conditional_formatting.add(
+            "G{0}:G{1}".format(QC_FIRST, QC_LAST),
+            CellIsRule(operator="equal", formula=['"{0}"'.format(text)],
+                       fill=PatternFill("solid", bgColor=fill),
+                       font=Font(name="Arial", size=10, color=font, bold=True)))
+
+    put(ws, "A{0}".format(QC_LAST + 2),
+        "That is the fast answer, and it is a guess made from the age of the house. "
+        "The Systems Register takes all 49 systems, your own install dates, your own quotes "
+        "and your region, and turns them into what to set aside every month. That is the "
+        "part worth the half hour.", color=MUTED, italic=True, wrap=True)
+    ws.merge_cells("A{0}:G{1}".format(QC_LAST + 2, QC_LAST + 4))
+
+    widths(ws, {"A": 34, "B": 15, "C": 22, "D": 18, "E": 10, "F": 11, "G": 12})
+    ws.freeze_panes = "A{0}".format(QC_FIRST)
     lock(ws)
     return ws
 
@@ -819,9 +938,11 @@ START = [
     ("p", "Every expensive thing in your house is already on a clock. This works out what "
           "breaks when, what it will cost in the year it breaks, and what to set aside every "
           "month so the money is there when it does."),
-    ("h2", "Do these four things"),
+    ("h2", "Do these five things"),
     ("n", "Fill in Setup. The one that matters is the home build year, because it is what makes "
           "the I-don't-know options work."),
+    ("n", "Open Quick Check. It will already have an answer for you, from that one number. "
+          "That is the sixty second version, and everything below is the real one."),
     ("n", "On Systems Register, pick a system in column A, then say what you know about its age "
           "in column F. Repeat for everything you own. Two air conditioners get two rows."),
     ("n", "Read the Dashboard. Net recommended monthly is the number to act on."),
@@ -925,6 +1046,7 @@ def build(out=OUT):
 
     sheet_start(wb)
     sheet_setup(wb)
+    sheet_quick(wb)
     sheet_register(wb)
     sheet_dashboard(wb)
     sheet_forecast(wb)
@@ -932,8 +1054,11 @@ def build(out=OUT):
     sheet_reference(wb)
     sheet_lists(wb)
 
-    order = ["START HERE", "Setup", "Systems Register", "Dashboard", "30-Year Forecast",
-             "Replacement Log", "Reference Data", "Lists"]
+    # Setup before Quick Check because Quick Check reads two cells from it, and
+    # Quick Check before the register because it is the answer somebody gets in
+    # a minute rather than the one they get in half an hour.
+    order = ["START HERE", "Setup", "Quick Check", "Systems Register", "Dashboard",
+             "30-Year Forecast", "Replacement Log", "Reference Data", "Lists"]
     wb._sheets = [wb[name] for name in order]
     wb.active = 0
 
