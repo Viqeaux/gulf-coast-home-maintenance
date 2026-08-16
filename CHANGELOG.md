@@ -27,6 +27,45 @@ Newest first.
 
 ---
 
+## [1.17.0], 2026-08-16
+
+### Added
+
+- **The free calculator**, at `/calculator/`. Type the year the house was built
+  and it answers whether four of the most expensive things you own are already
+  past due. It is the only page on the site that gives something before it asks
+  for anything, which is what makes it the one worth linking or pinning, and the
+  shop's constraint is traffic rather than conversion. The arithmetic runs in
+  the visitor's browser, so nothing typed into it leaves their machine and the
+  page adds no origin to the policy.
+- Placed as a line in the hero under the two buttons rather than as a third
+  button, because three buttons turn a clear choice into a menu. Also in both
+  footers, the guides page tailpiece, and `sitemap.xml`.
+- **The reserve planner**, built but not listed. One spreadsheet, nine tabs, 49
+  systems, a 30 year forecast and a funding dashboard. Its `Quick Check` tab is
+  the paid version of the calculator: the same estimate from the same build
+  year, across twelve systems, with the region factor applied. Built by
+  `build_planner.py` from `planner_data.py` and verified by `qa_planner.py`,
+  which compiles the workbook and reads the answers back rather than checking
+  them by eye. Eleven cases, all passing.
+
+### Changed
+
+- Four became the number of systems on the free page. It was briefly twelve,
+  which was too much to be a teaser and too little to be a product.
+
+### Notes
+
+- `What Breaks Next` existed for a few hours as a standalone `.html` download
+  and is now the workbook's `Quick Check` tab. A raw `.html` attachment cannot
+  be relied on to open on a phone, and no static format fixes that: PDFs and
+  images cannot compute, and a zipped `.html` is worse rather than better. The
+  only thing that reliably calculates on a phone is a spreadsheet.
+- The feeds are byte-identical to 1.16.0. `SEQUENCE` stays at 1: no task
+  content changed, so subscribers have nothing to pick up.
+
+---
+
 ## [1.16.0], 2026-08-15
 
 ### Added
