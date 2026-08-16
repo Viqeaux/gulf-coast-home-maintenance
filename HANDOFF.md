@@ -406,6 +406,22 @@ What is left on the pair:
 3. **Nothing has been deployed.** The site changes are local and unpushed along
    with everything else.
 
+**Deferred, and do not re-propose it.** Outbound links from the calculator to
+county appraisal records, so a visitor who does not know their build year can go
+and find it, plus serial number date decoders. Both are real improvements to the
+one blocker the page has. Chad's call, 2026-08-16: after there are sales, not
+before. He is right that it does not touch the constraint, which is that almost
+nobody is arriving. Note the boundary if it ever comes back: "How to date what
+you own" is a kit page and sits on the paid side of "What the site may publish",
+so linking somebody else's decoder is adjacent enough to be Chad's decision.
+
+Worth keeping straight either way: **linking out is free, pulling live data in
+is not.** The calculator's policy is `connect-src 'self'` and the page tells the
+visitor that nothing they type leaves their machine. Fetching from a third-party
+origin would widen that policy and make the promise false. The zero-tracker
+posture is an asset the privacy page claims out loud; do not spend it on
+convenience.
+
 **The video is built.** `python build_video.py --binder` makes a fourteen
 second cut from the binder's own pages, into `product/listing-binder/`. It
 opens on the wind deductible, which is the one fact most homeowners have never
