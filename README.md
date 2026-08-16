@@ -27,7 +27,7 @@ build_video.py            the 14 second silent Etsy listing video
 planner_data.py           the planner's 49 systems, and the region factors
 build_planner.py          the reserve planner workbook, one .xlsx, eight tabs
 qa_planner.py             calculates the planner and runs its ten QA cases
-build_calculator.py       the free calculator page, twelve of those systems
+build_calculator.py       What Breaks Next, one offline HTML file, sold
 build_agent_edition.py    the realtor edition, four PDFs. --logo bakes one in
 build_agent_listing.py    nine photos for the realtor listing
 build_pins.py             eight Pinterest pins, from the kit and the binder
@@ -50,7 +50,6 @@ docs/                     published by GitHub Pages, exactly as-is
   gulf-coast-going-above.ics   12 events
   index.html                   the landing page the QR code points to
   guides/index.html            generated. The schedule, not the method
-  calculator/index.html        generated. The free calculator
   privacy.html                 hand-written, linked from both footers
   404.html                     Pages serves this for any missing address
   theme.css                    the palette, shared by every page
@@ -370,53 +369,57 @@ answer to whatever the program decides an empty criterion or a wildcard means.
 The Dashboard counts with `SUMPRODUCT` instead, which has no criteria string in
 it to interpret.
 
-## The free calculator
+## What Breaks Next
 
-`build_calculator.py` writes `docs/calculator/index.html`. The visitor types the
-year the house was built and gets a sorted list of what is already past its
-expected life. One page, no requests to anywhere, and the arithmetic runs in the
-browser, which is also why nothing typed into it leaves the machine.
+`build_calculator.py` writes `product/gulf-coast-what-breaks-next.html`. The
+buyer downloads one file, double-clicks it, and it runs in whatever browser they
+already have. No install, no account, no server, no internet.
 
 ```bash
 python build_calculator.py
 ```
 
-**It is the only page on the site that gives something before it asks for
-anything.** Everything else wants a subscribe, a signup or a sale. This is the
-one somebody would link to.
+Type the year the house was built and it returns a sorted list of what is
+already past its expected life. All 49 systems, grouped, with the twelve almost
+every house has switched on and the other 37 behind a button. The three
+I-don't-know estimates are the planner's, and so is the region factor: pick a
+region and the weather-driven lifespans move, while the dishwasher does not.
 
-Three rules it is built to, and all three are content decisions rather than
-code:
+**It is a paid download and not a page on the site.** Chad's call, 2026-08-16.
+An earlier draft was a free traffic play at `/calculator/`, cut to twelve
+systems so it would not give the planner away. As a product it has no reason to
+hold back, so it carries all 49 and the site page is gone.
 
-- **Lifespans only, no dollar amounts.** The lifespans are the verified half,
-  19 of them locked to the kit's printed Watch List. The costs are ours and are
-  not verified, and a wrong dollar figure on a public page is worse than one in
-  a paid file because there is nobody to email about it. It is also the
-  commercial line: this page answers what and when, the planner answers what it
-  costs.
-- **Twelve systems of the planner's forty-nine.** Same reasoning as the Watch
-  List chart on the home page showing eight of seventeen.
-- **The numbers come from `planner_data.py`, not a copy of them.**
-  `FREE_SYSTEMS` names rows in that file and the build fails if one goes
-  missing, so the free page and the paid workbook cannot tell the same person
-  two different things about their roof.
+**One file, and everything is inlined.** `docs/theme.css` is read at build time
+rather than copied, so the tool looks like the shop without being a second
+hand-synced palette. A relative `<link>` would be broken the moment the file
+left the folder it was built in, which for a download is always. The build
+prints a warning if any external or relative reference survives.
 
-**Every line defaults to "replaced on schedule", the kindest of the three
-estimates.** A free tool that opens by declaring everything you own overdue
-reads as a sales gimmick even when it is right. The catch is that on-schedule
-can never produce an overdue item, by definition: it dates everything to its
-most recent cycle. So when nothing is overdue and the visitor has not corrected
-a line yet, the results panel says which assumption produced that, and points at
-the switch. Without that note the page quietly reassures people, which is the
-opposite of its job.
+**It sends nothing anywhere, and the policy in the file enforces that** rather
+than claiming it. `default-src 'none'` with no `connect-src` means a script in
+here cannot reach the network even if one were added. That is worth having for
+its own sake, and it is the honest version of the promise on the page.
 
-`PLANNER_URL` at the top of the script is empty. Paste the planner's listing URL
-in when it exists and the results panel grows a buy button, the same trade as
-`SHOP_URL` at the bottom of `docs/index.html`.
+**No dollar amounts, and that is the line between this and the planner.** This
+answers what and when, in five minutes, from one number. The planner answers
+what it costs, what it will cost in the year it breaks, and what to set aside
+monthly, and it is the thing you keep and update. A browser file cannot reliably
+save anything between opens, so it should not pretend to be a record. Putting
+costs in here would make the spreadsheet redundant rather than make this better.
 
-The page is built but **not linked from anywhere**: no nav entry, no
-`sitemap.xml` line, no card on the home page. That is placement, and placement
-is a separate decision from whether the thing works.
+**Every line defaults to "replaced on schedule"**, the kindest of the three
+estimates, because a tool that opens by declaring everything you own overdue
+reads as a gimmick even when it is right. The catch is that on-schedule can
+never produce an overdue item: by definition it dates everything to its most
+recent cycle. So when the list comes back clean and uncorrected, the results
+panel names the assumption that produced it and points at the switch. Without
+that note the file quietly reassures people, which is the opposite of its job.
+
+The numbers come from `planner_data.py` rather than a copy of them. `COMMON`
+and the category list name things in that file and the build fails if either
+drifts, so the download and the workbook cannot tell the same person two
+different things about their roof.
 
 ## Listing images
 
