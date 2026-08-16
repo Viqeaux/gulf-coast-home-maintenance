@@ -458,8 +458,13 @@ What is left on the pair:
 2. **A pin for it, after the two week read on the first eight.** A calculator
    pins far better than a printable does. Resist adding it sooner: a burst from
    a young account reads as spam and destroys the signal being waited on.
-3. **Nothing has been deployed.** The site changes are local and unpushed along
-   with everything else.
+3. ~~Nothing has been deployed.~~ **Live as of 2026-08-16.** Pushed with
+   v1.18.0 and verified: the deployment reached `success` rather than sitting
+   queued, `/calculator/` returns 200, the footer serves v1.18.0, and the
+   homepage links the page. **This is the first thing the shop has ever put up
+   that answers a question before asking for anything**, so it is also the first
+   real test of whether the constraint is traffic. Nothing measures it yet, which
+   is item 5 under "Waiting on Chad" and is now overdue rather than early.
 
 **Deferred, and do not re-propose it.** Outbound links from the calculator to
 county appraisal records, so a visitor who does not know their build year can go
@@ -629,16 +634,27 @@ storm workbook. `.gitignore` protects the built PDFs and the built .xlsx files,
 which was never the thing worth protecting. `product_content.py` also sits in
 history at commit `8a9f1f1` with the lifespans and the license in it.
 
-**The planner and the storm workbook were committed locally and deliberately
-not pushed**, on 2026-08-16, because pushing is what makes this permanent and it
-is Chad's call rather than a session's. Either push and accept the position, or
-move the repo private first. Leaving them sitting locally is the one option that
-expires badly: an unpushed commit is a backup nobody has.
+**Decided, and it is settled: the repo stays public.** Chad's call, 2026-08-16,
+made with the position fully described. Everything through v1.18.0 was pushed
+the same day, including the planner, the free calculator and the storm workbook.
+Git history is permanent, so this is not a decision that gets unmade by going
+private later: the source of all five products is now in a public history.
 
-Note that the workbook raises the stakes a third time in two days, and in a way
-worth naming: `workbook_data.py` is small, but `build_workbook.py` carries the
-whole model, and a spreadsheet's value is its formulas rather than its prose. A
-clone rebuilds it exactly.
+**Do not re-open this.** A future session that notices the exposure and proposes
+Cloudflare Pages or a private repo is re-running an argument that has already
+been had and lost on purpose. What changes the answer is evidence, not
+reasoning: forks, stars, a scraped listing, or somebody selling the kit back.
+Until one of those exists, the position stands. The Cloudflare Pages notes under
+"Hosting" in [README.md](README.md) stay useful for the response headers Pages
+cannot set, which is a separate reason and still worth doing one day.
+
+Worth naming what was accepted, so nobody has to reconstruct it: a clone plus
+one command rebuilds the $12.99 kit, the $39 realtor edition, the $16.99 binder,
+the reserve planner and the storm workbook. `build_workbook.py` is the sharpest
+case, because a spreadsheet's value is its formulas rather than its prose and
+the file carries the whole model. The counterweight is that the shop's
+constraint is traffic: zero stars, zero forks, nobody arriving, and the site
+does not link to the repo.
 
 **Decide this before the binder is committed, not after.** Git history is
 permanent, so a decision made after the push is not the same decision. The
@@ -672,7 +688,10 @@ individually, but that is now two, so fold them into the next kit upload rather
 than letting a third accumulate.
 
 **4b. The binder PDFs need rebuilding and re-uploading, and this one is not
-cosmetic.** Two strings in `binder_pages.py` were corrupted into control
+cosmetic. Chad has seen this and is doing it later, as of 2026-08-16, so raise
+it once and do not nag.** It is the only known defect in a product people are
+currently paying for, so it should lead the next handful of Etsy admin rather
+than waiting for a reason of its own. Two strings in `binder_pages.py` were corrupted into control
 characters by an apostrophe pass at some point before the binder shipped, and
 they are in the live $16.99 PDF on the listing: the damage log page read "use
 the insure[garbage] words" and the contractor vetting page "the state licensing
