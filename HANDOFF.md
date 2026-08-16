@@ -17,7 +17,8 @@ Current version **v1.16.0**. Everything below is live unless marked otherwise.
 | **The agent edition** | The same 27 pages branded for a realtor, plus a 4 page leave-behind. Four PDFs, print and fillable of each | Etsy only | $39 |
 | **The storm season binder** | 33 pages, mostly blanks: policies, room by room inventory, supply calculator, the countdown, shutdown, damage log, claim log, contractor vetting. Two PDFs, print and fillable | Etsy | $16.99 |
 | **The reserve planner** | One spreadsheet, eight tabs. 49 systems, the IDK engine, a 30 year forecast and a funding dashboard. Built 2026-08-16, **not listed yet** | Etsy, plus a Sheets copy link | Not set. See below |
-| **What Breaks Next** | One offline HTML file. The same 49 systems and the same IDK engine, no money math. Type the build year, get what is past due. Built 2026-08-16, **not listed yet** | Etsy. Probably bundled with the planner | Not set. See below |
+| **What Breaks Next** | One offline HTML file. The same 49 systems and the same IDK engine, no money math. Type the build year, get what is past due. Built 2026-08-16, **not listed yet** | Etsy, as a second file on the planner's listing | Sold with the planner |
+| **The free calculator** | Four systems of the forty-nine, on the site. The teaser for the two above, and the only page that gives before it asks | <https://gulfcoasthomemaintenance.com/calculator/>, once it is linked | Free, and stays free |
 
 **The binder is a different buying moment from the kit, and that is the point.**
 The kit is a calm January purchase by somebody being responsible. The binder is
@@ -386,27 +387,43 @@ browser file cannot reliably save anything between opens, so it must not
 pretend to be a record. Adding costs here would make the spreadsheet redundant
 rather than make this better.
 
-What is left on it:
+**It ships with the planner, not on its own.** Chad's call, 2026-08-16: a
+second file on the planner's listing rather than a fifth listing. No
+cannibalization, it makes that listing meaningfully richer, it avoids another
+SKU in a shop whose constraint is traffic rather than product count, and if the
+`.html` turns out awkward on phones the spreadsheet is still what the buyer
+opens.
 
-1. **How it is sold is still open.** Bundling it as a second file on the
-   planner's listing is the recommendation: no cannibalization, it makes that
-   listing meaningfully richer, and it avoids a fifth SKU in a shop whose
-   constraint is traffic rather than product count. A separate cheap listing is
-   the alternative and would be the shop's first sub-$10 item.
-2. **Test it on a phone before listing.** Etsy buyers are heavily mobile and a
-   raw `.html` attachment is the weakest part of this product: some mobile file
-   managers will not open one in a browser at all. That is the single largest
-   review risk here, larger than any number in it. If it turns out badly on
-   iOS, bundling with the planner stops being a preference and becomes the
-   answer, because then the spreadsheet is what the buyer actually opens.
-3. **A quick start line in the listing copy**, saying plainly: download, then
+**The free teaser is built.** `docs/calculator/index.html`, four systems, no
+region picker, no print, same arithmetic. Chad's call the same day. Twelve
+systems on a free page was the worst of both, too much to be a teaser and too
+little to be a product, so it went to four on the site and forty-nine in the
+file. Both come out of `build_calculator.py` in one run and share `ENGINE_JS`,
+so they cannot disagree about the same roof.
+
+What is left:
+
+1. **Test the download on a phone before listing.** Etsy buyers are heavily
+   mobile and a raw `.html` attachment is the weakest part of this product:
+   some mobile file managers will not hand one to a browser at all. That is the
+   single largest review risk here, larger than any number in it, and it is
+   also why bundling was the right call.
+2. **A quick start line in the listing copy**, saying plainly: download, then
    open it with a browser. Most support email on this product will be that one
-   sentence.
-4. **The site still has no free calculator.** That was the traffic play and it
-   is now a paid product, so the traffic problem is untouched. Worth deciding
-   separately whether a deliberately thin free version goes back on the site,
-   three or four systems and no region picker, as the thing that sends people
-   to the paid one.
+   sentence, so it is worth writing before the first one arrives.
+3. **Place the free page.** It is built and linked from nowhere: no nav entry,
+   no card on `docs/index.html`, no line in `sitemap.xml`, which is
+   hand-maintained. **Where it goes is the decision.** Its whole value is that
+   it gives before it asks, so it wants to be near the top rather than filed
+   under the products, and the hero is the only spot that reaches somebody who
+   has not scrolled. The guides page footer is the other candidate: every
+   calendar event deep links there, so it is the warmest audience the site has.
+4. **`BUNDLE_URL` in `build_calculator.py`** when the listing exists. That turns
+   the free page's buy slot from the signup into a buy button.
+5. **Pinterest, once it is placed.** A calculator pins far better than a
+   printable does, and it is the first thing on the site somebody can be sent
+   to without being sold to. Worth waiting for the two week read on the first
+   eight pins before adding it.
 
 **The video is built.** `python build_video.py --binder` makes a fourteen
 second cut from the binder's own pages, into `product/listing-binder/`. It

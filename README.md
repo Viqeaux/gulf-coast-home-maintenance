@@ -27,7 +27,7 @@ build_video.py            the 14 second silent Etsy listing video
 planner_data.py           the planner's 49 systems, and the region factors
 build_planner.py          the reserve planner workbook, one .xlsx, eight tabs
 qa_planner.py             calculates the planner and runs its ten QA cases
-build_calculator.py       What Breaks Next, one offline HTML file, sold
+build_calculator.py       What Breaks Next, the download, and its free teaser
 build_agent_edition.py    the realtor edition, four PDFs. --logo bakes one in
 build_agent_listing.py    nine photos for the realtor listing
 build_pins.py             eight Pinterest pins, from the kit and the binder
@@ -50,6 +50,7 @@ docs/                     published by GitHub Pages, exactly as-is
   gulf-coast-going-above.ics   12 events
   index.html                   the landing page the QR code points to
   guides/index.html            generated. The schedule, not the method
+  calculator/index.html        generated. The free four-system teaser
   privacy.html                 hand-written, linked from both footers
   404.html                     Pages serves this for any missing address
   theme.css                    the palette, shared by every page
@@ -369,28 +370,45 @@ answer to whatever the program decides an empty criterion or a wildcard means.
 The Dashboard counts with `SUMPRODUCT` instead, which has no criteria string in
 it to interpret.
 
-## What Breaks Next
+## What Breaks Next, and its teaser
 
-`build_calculator.py` writes `product/gulf-coast-what-breaks-next.html`. The
-buyer downloads one file, double-clicks it, and it runs in whatever browser they
-already have. No install, no account, no server, no internet.
+`build_calculator.py` writes two files from one set of numbers:
 
 ```bash
 python build_calculator.py
 ```
 
-Type the year the house was built and it returns a sorted list of what is
-already past its expected life. All 49 systems, grouped, with the twelve almost
-every house has switched on and the other 37 behind a button. The three
-I-don't-know estimates are the planner's, and so is the region factor: pick a
-region and the weather-driven lifespans move, while the dishwasher does not.
+- **`product/gulf-coast-what-breaks-next.html`**, the paid download. The buyer
+  downloads one file, double-clicks it, and it runs in whatever browser they
+  already have. No install, no account, no server, no internet. All 49 systems
+  grouped by category, with the twelve almost every house has switched on and
+  the other 37 behind a button. The three I-don't-know estimates are the
+  planner's, and so is the region factor: pick a region and the weather-driven
+  lifespans move while the dishwasher does not. Plus a print stylesheet, since
+  printing is the only way anything leaves the file.
+- **`docs/calculator/index.html`**, the free teaser. Four systems, no region, no
+  print, and a pointer at the file above.
 
-**It is a paid download and not a page on the site.** Chad's call, 2026-08-16.
-An earlier draft was a free traffic play at `/calculator/`, cut to twelve
-systems so it would not give the planner away. As a product it has no reason to
-hold back, so it carries all 49 and the site page is gone.
+**Twelve was the worst of both.** The first draft was a single free page of
+twelve systems: too much to be a teaser and too little to be a product. Chad
+split it on 2026-08-16, and twelve became four on the site and forty-nine in the
+file.
 
-**One file, and everything is inlined.** `docs/theme.css` is read at build time
+**The two share `ENGINE_JS` rather than each carrying a copy.** Someone who
+tries the free page and then buys must never find the two disagreeing about the
+same roof, and two copies of four functions drift on the first fix. `FREE_FOUR`
+is checked to be a subset of `COMMON`, which is checked against
+`planner_data.SYSTEMS`, so a lifespan cannot be free at one number and paid at
+another.
+
+**The free page is the only thing on the site that gives before it asks.**
+Everything else wants a subscribe, a signup or a sale. That is what makes it the
+one worth linking and pinning, and the shop's constraint is traffic.
+`BUNDLE_URL` at the top of the script is empty, so its buy slot holds the signup
+for now; paste the listing URL in and it becomes a buy button, the same trade as
+`SHOP_URL` at the bottom of `docs/index.html`.
+
+**The download is one file, and everything in it is inlined.** `docs/theme.css` is read at build time
 rather than copied, so the tool looks like the shop without being a second
 hand-synced palette. A relative `<link>` would be broken the moment the file
 left the folder it was built in, which for a download is always. The build
@@ -420,6 +438,10 @@ The numbers come from `planner_data.py` rather than a copy of them. `COMMON`
 and the category list name things in that file and the build fails if either
 drifts, so the download and the workbook cannot tell the same person two
 different things about their roof.
+
+**The free page is built but not linked from anywhere**: no nav entry, no
+`sitemap.xml` line, no card on the home page. That is placement, and placement
+is a separate decision from whether the thing works.
 
 ## Listing images
 
