@@ -27,6 +27,7 @@ build_video.py            the 14 second silent Etsy listing video
 planner_data.py           the planner's 49 systems, and the region factors
 build_planner.py          the reserve planner workbook, one .xlsx, eight tabs
 qa_planner.py             calculates the planner and runs its ten QA cases
+build_calculator.py       the free calculator page, twelve of those systems
 build_agent_edition.py    the realtor edition, four PDFs. --logo bakes one in
 build_agent_listing.py    nine photos for the realtor listing
 build_pins.py             eight Pinterest pins, from the kit and the binder
@@ -49,6 +50,7 @@ docs/                     published by GitHub Pages, exactly as-is
   gulf-coast-going-above.ics   12 events
   index.html                   the landing page the QR code points to
   guides/index.html            generated. The schedule, not the method
+  calculator/index.html        generated. The free calculator
   privacy.html                 hand-written, linked from both footers
   404.html                     Pages serves this for any missing address
   theme.css                    the palette, shared by every page
@@ -367,6 +369,54 @@ It also caught a real difference: `COUNTIF(range,"<>")` and
 answer to whatever the program decides an empty criterion or a wildcard means.
 The Dashboard counts with `SUMPRODUCT` instead, which has no criteria string in
 it to interpret.
+
+## The free calculator
+
+`build_calculator.py` writes `docs/calculator/index.html`. The visitor types the
+year the house was built and gets a sorted list of what is already past its
+expected life. One page, no requests to anywhere, and the arithmetic runs in the
+browser, which is also why nothing typed into it leaves the machine.
+
+```bash
+python build_calculator.py
+```
+
+**It is the only page on the site that gives something before it asks for
+anything.** Everything else wants a subscribe, a signup or a sale. This is the
+one somebody would link to.
+
+Three rules it is built to, and all three are content decisions rather than
+code:
+
+- **Lifespans only, no dollar amounts.** The lifespans are the verified half,
+  19 of them locked to the kit's printed Watch List. The costs are ours and are
+  not verified, and a wrong dollar figure on a public page is worse than one in
+  a paid file because there is nobody to email about it. It is also the
+  commercial line: this page answers what and when, the planner answers what it
+  costs.
+- **Twelve systems of the planner's forty-nine.** Same reasoning as the Watch
+  List chart on the home page showing eight of seventeen.
+- **The numbers come from `planner_data.py`, not a copy of them.**
+  `FREE_SYSTEMS` names rows in that file and the build fails if one goes
+  missing, so the free page and the paid workbook cannot tell the same person
+  two different things about their roof.
+
+**Every line defaults to "replaced on schedule", the kindest of the three
+estimates.** A free tool that opens by declaring everything you own overdue
+reads as a sales gimmick even when it is right. The catch is that on-schedule
+can never produce an overdue item, by definition: it dates everything to its
+most recent cycle. So when nothing is overdue and the visitor has not corrected
+a line yet, the results panel says which assumption produced that, and points at
+the switch. Without that note the page quietly reassures people, which is the
+opposite of its job.
+
+`PLANNER_URL` at the top of the script is empty. Paste the planner's listing URL
+in when it exists and the results panel grows a buy button, the same trade as
+`SHOP_URL` at the bottom of `docs/index.html`.
+
+The page is built but **not linked from anywhere**: no nav entry, no
+`sitemap.xml` line, no card on the home page. That is placement, and placement
+is a separate decision from whether the thing works.
 
 ## Listing images
 

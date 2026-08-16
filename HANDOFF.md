@@ -79,6 +79,7 @@ python optimize_images.py       # after replacing docs/img/hero.png
 python build_planner.py                   # the reserve planner, one .xlsx, into product/
 python qa_planner.py                      # builds it, calculates it, runs the ten cases
 python qa_planner.py --checklist          # the five checks to do by hand in Sheets
+python build_calculator.py                # the free calculator, into docs/calculator/
 
 python build_storm_binder.py              # the binder, print PDF, into product/
 python build_storm_binder.py --fillable   # both PDFs, 1,876 form fields
@@ -364,6 +365,32 @@ not products, and this is a fourth thing to sell to the same empty room. The
 free web calculator under next products is the item that changes that, and the
 planner's math is what it was waiting on.
 
+**The free calculator is built and unlinked.** `build_calculator.py` writes
+`docs/calculator/index.html`: twelve of the planner's forty-nine systems, the
+same IDK engine, lifespans only and no dollar figures anywhere. Verified in the
+browser, light and dark, desktop and mobile, no console errors, no horizontal
+overflow, and no request to any origin the other pages do not already use.
+
+**It is deliberately not linked from anywhere yet.** No nav entry, no card on
+`docs/index.html`, no line in `sitemap.xml`. Chad's call, 2026-08-16: build
+first, place later. Nothing is broken by that, the page simply cannot be found.
+Placing it is four small edits and one real decision:
+
+1. `sitemap.xml` gains a fourth entry. It is hand-maintained.
+2. `docs/index.html` needs a link, and **where it goes is the decision.** The
+   page's whole value is that it gives before it asks, so it wants to be near
+   the top rather than filed under the products, and the hero is the only spot
+   that reaches somebody who has not scrolled.
+3. The guides page footer could carry it. Every calendar event deep links into
+   that page, so it is the warmest audience the site has.
+4. `PLANNER_URL` in `build_calculator.py` when the planner is listed, which
+   turns the results panel into a buy button.
+
+**Pinterest is where this pays off.** A calculator pins far better than a
+printable does, and it is the first thing on the site somebody can be sent to
+without being sold to. Worth its own pin once it is linked, and worth waiting
+for the two week read on the first eight before adding it.
+
 **The video is built.** `python build_video.py --binder` makes a fourteen
 second cut from the binder's own pages, into `product/listing-binder/`. It
 opens on the wind deductible, which is the one fact most homeowners have never
@@ -597,22 +624,19 @@ its own entry under Outstanding above. It landed considerably larger than the
 $9.99 sketch here, which is why the price is an open question rather than a
 settled one.
 
-1. **A free calculator on the site.** The planner math now exists, so the same
-   numbers render as a web page: enter four ages, see what is on borrowed time.
-   The visitor gets a real answer and meets the buy button warm. Feeds the
-   signup form already on `docs/index.html`. **This is the one worth ranking
-   first now**, because the shop's constraint is traffic and this is the only
-   item on the list that makes any.
+**The free calculator is built.** It came off this list on 2026-08-16 and has
+its own entry under Outstanding above. What is left on it is placement, not
+build.
 
-2. **A bundle.** Kit plus planner plus binder. Lifts order value with no new
+1. **A bundle.** Kit plus planner plus binder. Lifts order value with no new
    content, and three of the three now exist.
 
-3. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
+2. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
    plumbing is done. Adding entries puts links on the guides page and into the
    calendar events. **Adding the first one requires a `SEQUENCE` bump**, since
    it changes what subscribers see. `check_links.py` finds dead ones.
 
-4. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
+3. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
    South regional rather than coastal-only, so a Texas or Florida edition is a
    retiming and a relabeling, not a rewrite. **The planner is already built for
    this**: `REGIONS` in `planner_data.py` carries a cost factor and a lifespan
