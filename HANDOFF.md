@@ -490,10 +490,10 @@ worth doing in the next three weeks rather than eventually:
 
 **The reserve planner is built and unlisted.** Chad asked for it on 2026-08-16
 against a written spec, and it landed the same day: `build_planner.py`,
-`planner_data.py` and `qa_planner.py`, one .xlsx of eight tabs, 49 systems, 100
-register rows and a 30 year forecast. All ten QA cases pass against a real
+`planner_data.py` and `qa_planner.py`, one .xlsx of nine tabs, 49 systems, 100
+register rows and a 30 year forecast. All eleven QA cases pass against a real
 formula engine, plus a file-structure pass for the parts a formula engine
-cannot see. Nothing about it is on the site or on Etsy. What is left, in order:
+cannot see, re-confirmed green on 2026-08-21. Nothing about it is on the site or on Etsy. What is left, in order:
 
 1. **Verify the numbers before listing, and treat this as the gate.** The
    lifespans are sound: 19 of the 49 are locked to the kit's Watch List by a
