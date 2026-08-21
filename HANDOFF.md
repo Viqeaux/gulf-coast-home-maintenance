@@ -351,6 +351,64 @@ tasks), hurricane season (~5), termites (2), freeze (2). So the content is
 **Gulf South regional, not coastal-only and not national**. Regional editions
 for other climates are a later product line, not a rebrand.
 
+## What to do next, as of 2026-08-21 evening
+
+Ranked. The site is in good shape after 1.19.1 through 1.23.2 and **site work
+has hit diminishing returns**: everything there improves conversion for people
+who already arrive, and almost nobody does. Analytics went live this morning,
+so the first real traffic numbers exist within a week.
+
+**Peak of hurricane season is September 10.**
+
+1. **Run the Insights tag check. The quota returns around 2026-08-22.** The
+   marketing plan's own first priority is Etsy SEO, all thirteen tags on the
+   binder are reasoned rather than measured, and the spend order is written
+   below so no search is wasted. Ten minutes, and the window closes with the
+   season.
+2. **Price and list the reserve planner and the storm workbook.** Two finished
+   products earning nothing, with no price set and, as of this date, **no
+   listing copy written at all**: the kit, binder and agent edition each have an
+   `etsy-listing-*.md` and these two have nothing. Writing both is the largest
+   piece of work a session can do here without Chad.
+
+   **An Etsy listing is itself a traffic source**, which is the counter to
+   "traffic is the constraint, so do not build more." That reasoning is right
+   about the site and wrong about Etsy: the site converts arrivals, a listing
+   creates them. Two more listings are two more surfaces in Etsy's own search.
+3. **Pinterest pins for the binder.** The plan calls Pinterest the best free
+   channel for printables and pins stay discoverable for months. `build_pins.py`
+   exists. New pins must link to `/shop/#binder` rather than the old home page
+   anchors: see the redirect note above.
+4. **The kit's cross-sell line**, parked twice now. Five minutes, no cost.
+
+**Do not spend another session on the site's layout** without a reason from the
+analytics. It went from 23.7 phone screens to 9 on the home page and 9.8 on the
+shop in one evening, and the next change to make is not obvious from the inside.
+
+## Permission prompts, and why the allowlist is small
+
+`.claude/settings.json` holds twelve entries, all read-only: the browser tools
+that read a page and GETs to this site and this repo's API. That is genuinely
+all that is safely allowlistable, and it is worth writing down why so nobody
+adds more.
+
+The prompts come overwhelmingly from three places that **must not** be
+blanket-allowed: `python` heredocs and `javascript_tool`, which are arbitrary
+code execution, and `git add`/`commit`/`push`/`tag`, which mutate and one of
+which publishes to a public repo. `grep`, `sed`, `head`, `tail`, `ls`, `wc` and
+the read-only `git` subcommands never prompt at all, so entries for them do
+nothing.
+
+`.claude/settings.local.json` is gitignored, personal, and had grown to 140
+entries, most of them exact one-off command strings carrying version numbers or
+temp paths that can never match again. It is worth pruning and it is Chad's.
+
+**The real lever is a permission mode, not an allowlist.** `acceptEdits` clears
+the file-edit prompts, which are the largest single share, and everything here
+is in git and recoverable. `bypassPermissions` clears everything including
+`git push` to a public repo, which is the one worth thinking about. Neither is
+set; Chad has not chosen.
+
 ## Outstanding
 
 **The free calendar's real problem is that nobody can tell it is working.**
