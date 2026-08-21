@@ -1727,12 +1727,14 @@
       <details>
         <summary>Setting it up in Google Calendar, including Android</summary>
         <div class="body">
-          <p>Android uses Google Calendar, so this is the button for it too. The app itself can't add a subscription. Do it once from a browser and it appears on every device on that account.</p>
+          <p>Android uses Google Calendar, so this is the button for it too. The app itself can't add a subscription, so start from a browser. Adding it puts it on your account, not yet on your phone.</p>
           <ol>
             <li>Tap <strong>Add to Google Calendar</strong>.</li>
             <li>Confirm <strong>Add</strong> when Google asks.</li>
-            <li>In the app, open the menu and switch it on.</li>
+            <li>On a phone, switch it on: the app menu, then <em>Settings</em>, then the calendar's name.</li>
           </ol>
+          <p><strong>On your computer but not your phone?</strong> That is Google's default rather than a fault. The app keeps its own list of calendars to sync, and anything newly subscribed starts switched off, so step three is not optional.</p>
+          <p><strong>If the calendar is not in that Settings list at all,</strong> the app is not syncing it yet and nothing inside the app will fix that. Open <code>calendar.google.com/calendar/syncselect</code> in a browser signed into the same account, tick the calendar, and save. That page is the only place this can be changed and there is no link to it from the app.</p>
           <p>Google refreshes slowly, sometimes up to a day. A new calendar may show its web address as the name until then, which is normal.</p>
           <p><strong>If the Google Calendar app opens and nothing happens,</strong> most likely on Android, it intercepted the link and cannot subscribe. Use <strong>Copy feed URL</strong> instead, then add it from a browser with <em>Other calendars</em> &rarr; <em>+</em> &rarr; <em>From URL</em>. On a phone, turn on your browser's desktop-site setting first.</p>
         </div>
@@ -1805,7 +1807,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.19.0</p>
+    <p class="version">v1.19.1</p>
   </div>
 </footer>
 

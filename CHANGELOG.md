@@ -27,6 +27,37 @@ Newest first.
 
 ---
 
+## [1.19.1], 2026-08-21
+
+### Fixed
+
+- **The setup instructions told a lie about phones, and it cost the owner an
+  evening.** The Google panel said adding the feed from a browser makes it
+  "appear on every device on that account". It does not. Google keeps a
+  per-device sync list for the mobile app, and a newly subscribed calendar
+  starts switched off, so it lands on desktop and never reaches the phone. Chad
+  followed his own instructions on 2026-08-21 and concluded the feed was broken.
+  It was not: the feed returns 200 as `text/calendar`, parses clean, CRLF
+  throughout, twelve events, and the certificate is good until November.
+- The panel now says adding it puts the calendar on the account rather than on
+  the phone, makes switching it on in the app a real step rather than an aside,
+  and names the case nothing in the app can fix: when the calendar is missing
+  from the app's own Settings list, the only control is
+  `calendar.google.com/calendar/syncselect`, which the app does not link to.
+
+### Noted, not changed
+
+- **Thirteen days a year carry an event.** Every task sits on the 1st, plus
+  November 30, so a subscriber opening a week view on any of the other three
+  hundred and fifty-two days sees an empty calendar and cannot tell that from a
+  broken one. That is the same false conclusion the owner reached, and it is the
+  free product's real weakness rather than a display detail. Spreading each
+  month's three tasks through the month would fix it, and it rewrites dates
+  subscribers already hold, so it needs a `SEQUENCE` bump and belongs in its own
+  release. Recorded in [HANDOFF.md](HANDOFF.md).
+
+Feeds are byte-identical to 1.19.0 and `SEQUENCE` stays at 1.
+
 ## [1.19.0], 2026-08-21
 
 Google Analytics, and the reversal of the zero-tracking position.

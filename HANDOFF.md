@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.19.0**. Everything below is live unless marked otherwise.
+Current version **v1.19.1**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -280,6 +280,33 @@ tasks), hurricane season (~5), termites (2), freeze (2). So the content is
 for other climates are a later product line, not a rebrand.
 
 ## Outstanding
+
+**The free calendar's real problem is that nobody can tell it is working.**
+Found on 2026-08-21, when Chad concluded his own feed had broken. It had not.
+Two separate causes, one fixed and one open.
+
+**Fixed in 1.19.1.** The site claimed that adding the feed from a browser makes
+it "appear on every device on that account". It does not. Google keeps a
+per-device sync list for the mobile app, and a newly subscribed calendar starts
+switched off, so it shows on desktop and never reaches the phone. Worse, if the
+calendar is missing from the app's own Settings list, nothing inside the app can
+fix it: the only control is `calendar.google.com/calendar/syncselect`, which the
+app does not link to. Both facts are now in the Google panel on the site.
+
+**Open, and it is Chad's call because it moves subscriber data.** Every event
+sits on the 1st of the month. Twelve events per feed, plus November 30, so
+**thirteen days a year carry anything at all**. Any subscriber opening a week
+view on the other three hundred and fifty-two days sees an empty calendar and
+has no way to distinguish that from a broken feed. That is exactly the
+conclusion the owner reached.
+
+The fix is to spread each month's three tasks across the month rather than
+stacking all three on the 1st, which would put an event in most weeks. It is not
+a small change: the dates are what existing subscribers already hold, so it
+rewrites all three feeds and **requires a `SEQUENCE` bump**. Worth doing as its
+own release, and worth pairing with the "How to:" label wording already waiting
+on the next `SEQUENCE` bump. Do not fold it into an unrelated one.
+
 
 **The binder is launched and on the site.** Chad published the listing on
 2026-08-15 and it went onto `docs/index.html` the same day, in 1.11.0, as
