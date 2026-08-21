@@ -656,19 +656,24 @@ the file carries the whole model. The counterweight is that the shop's
 constraint is traffic: zero stars, zero forks, nobody arriving, and the site
 does not link to the repo.
 
-**Decide this before the binder is committed, not after.** Git history is
-permanent, so a decision made after the push is not the same decision. The
-binder is the product Chad expects to outsell the kit in September, and its
-content is the only thing it sells.
+**The trigger to revisit is traffic. Chad's call, 2026-08-21.** If the site
+starts getting real visitors, the move is off GitHub Pages to hosting that
+supports a private repository, which means Cloudflare Pages. See "Hosting" in
+[README.md](README.md), and note that Pages can also set real response headers,
+which GitHub cannot, so the move is worth something on its own terms.
 
-Nobody is doing this today: zero stars, zero forks, and the site does not link
-to the repo. It is also permanent and it grows with every bit of marketing that
-works. **The recommended fix is to move the site to Cloudflare Pages**, which
-is free, supports private repositories, and can set real response headers,
-which GitHub Pages cannot. DNS is already on Cloudflare. See
-"Hosting" in [README.md](README.md). GitHub Pro at about $4 a month and a
-private repo is the smaller-change alternative. Doing nothing is defensible;
-doing nothing without deciding is not.
+That is a better trigger than the one it replaces. The old wording waited for
+forks, stars, a scraped listing or somebody reselling the kit, all of which are
+evidence that the damage has already happened. Traffic is the leading indicator:
+nobody goes looking for the repository behind a site nobody has heard of, so
+exposure and audience arrive together.
+
+**Also public, and it is a different category: `Marketing Plan.md`**, committed
+2026-08-21. Product source is one thing; that file is competitive strategy. It
+names competitors and their prices, the pricing rationale, the channel plan, the
+seasonal timing, and the realtor association to approach. Chad was told before
+choosing to leave it, and left it on the same reasoning: nobody is arriving yet.
+It moves with everything else when the traffic trigger fires.
 
 **3. Both Etsy descriptions need one line re-pasted.** "What to have to hand" is
 British and was corrected to "on hand" in
