@@ -443,8 +443,19 @@
      surface tokens rather than naming a color. */
   .previews { margin-top: 2.4rem; }
   .previews > .label { color: var(--on-surface-mute); display: block; margin-bottom: .9rem; }
-  .prow { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-  @media (min-width: 40rem) { .prow { grid-template-columns: repeat(3, 1fr); } }
+  /* One row at every width. Stacked, three page previews cost a whole screen
+     each on a phone and pushed the buy button three screens down the section.
+     They are crops of a page top rather than something to read, so a strip you
+     swipe shows the same thing in a third of the height. The container scrolls,
+     never the page. */
+  .prow {
+    display: grid; grid-auto-flow: column; grid-auto-columns: 72%;
+    gap: 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    padding-bottom: .4rem;
+  }
+  @media (min-width: 40rem) {
+    .prow { grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); overflow-x: visible; }
+  }
   /* The three crops are not the same shape, because the pages are not. Rather
      than force a common aspect ratio, which would crop sideways into the page
      margins, the figures stretch to the row and the captions drop to the
@@ -510,6 +521,19 @@
     border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
   }
   .pcard-more:hover { border-bottom-color: var(--accent); }
+  /* On a phone three upright cards were 2.9 screens of contents list sitting
+     directly on top of the sections it lists. Turned on its side the same card
+     is a shelf row: the cover still identifies the product, the price and the
+     button still work, and the grid costs about a screen instead of three. */
+  @media (max-width: 46rem) {
+    .pcard { flex-direction: row; align-items: stretch; }
+    .pcard img {
+      width: 34%; max-width: 132px; flex: none; align-self: flex-start;
+      border-bottom: 0; border-right: 1px solid var(--rule);
+    }
+    .pcard-body { padding: .95rem 1.05rem 1.05rem; }
+  }
+
   .shop-free { margin: 1.4rem 0 0; font-size: .93rem; }
   /* Nothing had styled a bare link on the deep ground before, so this one came
      out as the browser's default blue. Sand is what every other link on a band

@@ -27,6 +27,53 @@ Newest first.
 
 ---
 
+## [1.23.2], 2026-08-21
+
+**The shop page, 13.3 phone screens to 9.8.** Asked whether each product should
+get its own page. The answer was no, and the reason was that length was not the
+disease: each product was described three times on one page, so splitting would
+have hidden the repetition rather than removed it.
+
+### Changed
+
+- **The buy card's blurb is gone from all three products.** Every product had a
+  grid card line, a section deck and a buy blurb, three passes at the same
+  contents. The grid card already describes the product and the deck already
+  positions it, so the buy card is a buy box now: name, price, button, terms.
+- **The page previews are one swipeable row on a phone** instead of three
+  stacked images. They are crops of a page top rather than something to read, so
+  a strip shows the same thing in a third of the height. The container scrolls,
+  never the page. Unchanged at 40rem and up, where three across already fit.
+- **The shop cards lie on their side below 46rem**, cover left and text right.
+  Upright, three of them were 2.9 screens of contents list sitting directly on
+  top of the sections they list. Now 1.33.
+
+### Deliberately not done
+
+- **A page per product.** Etsy already is the product page, with photos, a
+  description, an FAQ and eventually reviews, and a copy of that on this site is
+  a second thing to keep in step that will go stale. The SEO case is the
+  strongest one for it and it is weaker than it looks, because those pages would
+  compete against this shop's own Etsy listings, which carry marketplace
+  authority a new domain will not beat. It also means rebuilding the Pinterest
+  redirect a second time.
+
+  **When it becomes right:** pointing an ad at one product. A dedicated landing
+  page is genuinely better for paid traffic and would finally show which product
+  people care about. There is no paid traffic yet, so it is not today's problem.
+
+  **The better version of the idea**, when there is appetite for it, is a
+  content page that happens to sell one product: something people actually
+  search for, which Etsy cannot host, with the product as the answer at the
+  bottom. That earns traffic. A product page only reorganizes traffic that
+  already exists.
+
+### Notes
+
+- Feeds byte-identical to 1.23.1, `SEQUENCE` stays at 2.
+- Desktop is unchanged: 7 screens, cards still upright, previews still three
+  across.
+
 ## [1.23.1], 2026-08-21
 
 ### Changed
