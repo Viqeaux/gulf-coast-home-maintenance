@@ -36,7 +36,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.21.0"
+VERSION = "1.22.0"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -892,7 +892,7 @@ GUIDES_TEMPLATE = """<!doctype html>
     <p>
       The step-by-step for every job on this list, with the tools to have on
       hand and the mistake that costs money, is in the
-      <a href="../#edition">printable kit</a>. This page is the schedule: what
+      <a href="../shop/">printable kit</a>. This page is the schedule: what
       needs doing, when, and why it is timed that way here.
     </p>
   </div>
@@ -920,7 +920,7 @@ GUIDES_TEMPLATE = """<!doctype html>
     <p class="tail-actions"><a class="tail-btn" href="../#calendars">Get the free calendars</a></p>
     <p class="tail-kit">
       If you would rather have it on paper, there is a
-      <a href="../#edition">printable kit</a> as well, twenty-seven pages and
+      <a href="../shop/">printable kit</a> as well, twenty-seven pages and
       undated. And if you want to know what is already overdue rather than what
       is due this month, that is
       <a href="../calculator/">fifteen seconds and one number</a>.

@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The shop is its own page as of 1.22.0. On one page the products sat between
+     the argument and the free calendars, which put the thing the site is named
+     after at 77 percent scroll depth on a phone. Split, each page does one job:
+     the home page hands over the free calendar, and this one sells. -->
+<title>The Shop, Gulf Coast Home Maintenance</title>
+<meta name="description" content="Printable home maintenance for the Gulf Coast, Texas to Florida. The 27 page kit, the storm season binder, and the agent edition branded for a realtor.">
+<meta property="og:title" content="The Gulf Coast Home Maintenance shop">
+<meta property="og:description" content="Three printables built for Gulf Coast homes: the maintenance kit, the storm season binder, and the agent edition.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gulfcoasthomemaintenance.com/shop/">
+<meta property="og:site_name" content="Gulf Coast Home Maintenance">
+<meta property="og:image" content="https://gulfcoasthomemaintenance.com/img/hero-1600.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="A live oak hung with Spanish moss over the roof of a Gulf Coast house at sunset.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0e2429">
+<link rel="canonical" href="https://gulfcoasthomemaintenance.com/shop/">
+
+<!-- Same policy as the home page. It travels in the document because GitHub
+     Pages cannot set response headers. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- This is the page where money changes hands, so it is measured like the
+     others. The Measurement ID lives in analytics.js and nowhere else. -->
+<script src="../analytics.js"></script>
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../icon-180.png">
+<link rel="stylesheet" href="../theme.css">
+<link rel="stylesheet" href="../site.css">
+
+<!-- The three Product blocks live with the products. Their url fields point at
+     this page's anchors, not the home page's, or search engines send buyers
+     somewhere the product is no longer described. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "name": "The Gulf Coast Home Maintenance Kit",
+      "description": "A 27 page undated printable home maintenance kit built for Gulf Coast homes, Texas to Florida. Twelve months of tasks at three levels of effort, the Big Ticket Watch List, and seven sections for whatever the house happens to have.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Gulf Coast Home Maintenance"
+      },
+      "category": "Calendars & Planners",
+      "url": "https://gulfcoasthomemaintenance.com/shop/#edition",
+      "image": "https://gulfcoasthomemaintenance.com/img/hero-1600.jpg",
+      "offers": {
+        "@type": "Offer",
+        "price": "12.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "The Gulf Coast Home Maintenance Kit, Agent Edition",
+      "description": "The full 27 page kit branded with a realtor's name and brokerage on every page, plus a four page leave-behind for the closing table. Licensed to print for every client you close.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Gulf Coast Home Maintenance"
+      },
+      "category": "Calendars & Planners",
+      "url": "https://gulfcoasthomemaintenance.com/shop/#agents",
+      "image": "https://gulfcoasthomemaintenance.com/img/hero-1600.jpg",
+      "offers": {
+        "@type": "Offer",
+        "price": "39.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "The Gulf Coast Storm Season Binder",
+      "description": "A 33 page printable hurricane preparedness binder for coastal homeowners. Policies and deductibles written in dollars, nine room by room home inventory sheets, a water and supply calculator, the countdown and shutdown sequence, and the damage and claim logs that decide what actually gets paid.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Gulf Coast Home Maintenance"
+      },
+      "category": "Calendars & Planners",
+      "url": "https://gulfcoasthomemaintenance.com/shop/#binder",
+      "image": "https://gulfcoasthomemaintenance.com/img/hero-1600.jpg",
+      "offers": {
+        "@type": "Offer",
+        "price": "16.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.etsy.com/listing/4556502794/hurricane-prep-binder-printable-home"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip" href="#start">Skip to content</a>
+
+<div class="topbar">
+  <div class="inner">
+    <a class="mark" href="../">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--accent)">
+        <path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5V14h4v5.5"/>
+      </svg>
+      <span class="label">Gulf Coast Home Maintenance</span>
+    </a>
+    <!-- The bar is the only navigation that follows the reader, so it carries
+         one link per thing worth reaching: the kit, the free feeds, and the
+         seasonal binder. The kit's price is in the label on purpose, because
+         "The kit" alone does not tell a first-time reader whether clicking it
+         costs anything. It drops out below 46rem, where three buttons and a
+         wordmark stop fitting on one line. -->
+    <span class="topbar-ctas">
+      <a class="cta cta--kit" href="#edition">The kit, $12.99</a>
+      <a class="cta" href="../#calendars">Free calendars</a>
+      <a class="cta cta--alert" href="#binder">Hurricane checklist</a>
+    </span>
+  </div>
+</div>
+
+<main id="start">
+
+<!-- A band header rather than the home page's photographic hero: this page is
+     a shelf, and the hero's job is to make an argument that has already been
+     made by the time somebody clicks through. Band, so the grid below it can
+     sit on paper and the alternation runs unbroken down the page. -->
+<section class="band">
+  <div class="wrap">
+    <span class="label">The shop</span>
+    <h2>Three printables, built for this coast</h2>
+    <p class="deck">
+      Undated, so none of them expire. Print at home on letter paper, or fill
+      them in on screen. The twelve months are also
+      <a href="../#calendars">free as phone calendars</a> if the printables are
+      not what you came for.
+    </p>
+  </div>
+</section>
+
+<section class="shop" aria-labelledby="shop-h">
+  <div class="wrap">
+    <span class="label" id="shop-h">Three printables in the shop</span>
+
+    <div class="pgrid">
+      <div class="pcard">
+        <img src="../img/cover-kit.jpg" width="560" height="725" loading="lazy" decoding="async"
+             alt="The cover of the Gulf Coast Home Maintenance Calendar kit.">
+        <div class="pcard-body">
+          <h3>The maintenance kit</h3>
+          <p class="pcard-line">Twelve months at three levels of effort, the Big Ticket Watch List, and seven sections for whatever your house happens to have. Twenty-seven pages, undated.</p>
+          <p class="pcard-price">$12.99</p>
+          <a class="btn btn--buy" target="_blank" rel="noopener"
+             href="https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast">Buy on Etsy</a>
+          <a class="pcard-more" href="#edition">What's in it</a>
+        </div>
+      </div>
+
+      <div class="pcard">
+        <img src="../img/cover-binder.jpg" width="560" height="725" loading="lazy" decoding="async"
+             alt="The cover of the Gulf Coast Storm Season Binder.">
+        <div class="pcard-body">
+          <h3>The storm season binder</h3>
+          <p class="pcard-line">Policies, a room by room inventory, the countdown, and the damage and claim logs that decide what actually gets paid. Thirty-three pages, undated.</p>
+          <p class="pcard-price">$16.99</p>
+          <a class="btn btn--buy" target="_blank" rel="noopener"
+             href="https://www.etsy.com/listing/4556502794/hurricane-prep-binder-printable-home">Buy on Etsy</a>
+          <a class="pcard-more" href="#binder">What's in it</a>
+        </div>
+      </div>
+
+      <div class="pcard">
+        <img src="../img/cover-agent.jpg" width="560" height="725" loading="lazy" decoding="async"
+             alt="The cover of the agent edition, showing where a realtor's logo and details are printed.">
+        <div class="pcard-body">
+          <h3>The agent edition</h3>
+          <p class="pcard-line">The same kit with your name and brokerage on every page, plus a four-page leave-behind, licensed to print for every client you close.</p>
+          <p class="pcard-price">$39.00</p>
+          <a class="btn btn--buy" target="_blank" rel="noopener"
+             href="https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast">Buy on Etsy</a>
+          <a class="pcard-more" href="#agents">What's in it</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="shop-free muted">
+      The twelve months are also <a href="../#calendars">free as phone calendars</a>, with no signup and no card.
+    </p>
+  </div>
+</section>
+
+<section id="edition" class="band">
+  <div class="wrap">
+    <span class="sec-no">01 / The kit</span>
+    <h2>The Big Ticket Watch List</h2>
+    <p class="deck">
+      Every expensive thing in your house is already on a clock. You write in the year it
+      was installed; the list tells you when to start saving instead of when to start panicking.
+    </p>
+
+    <div class="lifespans">
+      <div class="ls ls--short">
+        <span class="name">Exterior caulk</span>
+        <span class="track"><span class="fill" style="left:5%;width:5%"></span></span>
+        <span class="yrs">2–4 yr</span>
+      </div>
+      <div class="ls ls--short">
+        <span class="name">Exterior paint</span>
+        <span class="track"><span class="fill" style="left:12.5%;width:5%"></span></span>
+        <span class="yrs">5–7 yr</span>
+      </div>
+      <div class="ls">
+        <span class="name">Water heater, tank</span>
+        <span class="track"><span class="fill" style="left:20%;width:5%"></span></span>
+        <span class="yrs">8–10 yr</span>
+      </div>
+      <div class="ls">
+        <span class="name">A/C condenser</span>
+        <span class="track"><span class="fill" style="left:25%;width:5%"></span></span>
+        <span class="yrs">10–12 yr</span>
+      </div>
+      <div class="ls">
+        <span class="name">Roof, asphalt shingle</span>
+        <span class="track"><span class="fill" style="left:30%;width:7.5%"></span></span>
+        <span class="yrs">12–15 yr</span>
+      </div>
+      <div class="ls">
+        <span class="name">Furnace / air handler</span>
+        <span class="track"><span class="fill" style="left:37.5%;width:7.5%"></span></span>
+        <span class="yrs">15–18 yr</span>
+      </div>
+      <div class="ls">
+        <span class="name">Windows</span>
+        <span class="track"><span class="fill" style="left:37.5%;width:25%"></span></span>
+        <span class="yrs">15–25 yr</span>
+      </div>
+      <div class="ls">
+        <span class="name">Roof, metal</span>
+        <span class="track"><span class="fill" style="left:75%;width:25%"></span></span>
+        <span class="yrs">30–40 yr</span>
+      </div>
+      <div class="scale">
+        <div class="ticks"><span>0</span><span>10</span><span>20</span><span>30</span><span>40 YEARS</span></div>
+      </div>
+    </div>
+
+    <p class="muted" style="margin-top:1.6rem;font-size:.93rem">
+      Your caulk fails seven times before your roof does, which is exactly why it's the
+      thing nobody budgets for. These numbers run shorter than the national ones on purpose:
+      salt, humidity, and UV wear coastal homes faster than those averages assume. The full
+      kit carries the whole list, plus a page on how to date everything in your house
+      when the previous owner left you nothing.
+    </p>
+
+    <div class="previews">
+      <p class="label">What the pages look like</p>
+      <div class="prow">
+        <figure>
+          <img src="../img/preview-kit-1.jpg" width="520" height="202" loading="lazy" decoding="async"
+               alt="The top of the May page: the month, the first task, and the reason it matters.">
+          <figcaption>A month</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/preview-kit-2.jpg" width="520" height="202" loading="lazy" decoding="async"
+               alt="The top of the Watch List, showing the columns and the first few components with their Gulf Coast lifespans.">
+          <figcaption>The Big Ticket Watch List</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/preview-kit-3.jpg" width="520" height="202" loading="lazy" decoding="async"
+               alt="The top of the page explaining the three levels of effort.">
+          <figcaption>How the levels work</figcaption>
+        </figure>
+      </div>
+      <p class="previews-note">Tops of real pages. The rest of each page, including the step-by-step, is in the kit.</p>
+    </div>
+
+    <div class="buy">
+      <h3>The printable kit</h3>
+      <p class="buy-blurb">
+        Twenty-seven pages, undated, so it never expires and never goes on sale in
+        January. Twelve months with step-by-step detail, the full seventeen-item Watch
+        List, seven sections for whatever your house happens to have, the page on how
+        to date everything you own, and a first-month checklist for what you only do
+        once.
+      </p>
+
+      <!-- Price sits with the button rather than above the heading. Up there it was
+           styled like a section label and read as one, and it was five lines from the
+           thing you click. -->
+      <div class="buy-action">
+        <p class="buy-price"><span class="amt">$12.99</span><span class="per">one time, no subscription</span></p>
+        <div id="buy-slot">
+          <a class="btn btn--buy btn--lg" target="_blank" rel="noopener"
+             href="https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast">Get the kit on Etsy</a>
+        </div>
+        <p class="buy-note">Instant download &middot; Two PDFs &middot; Print at home on letter paper</p>
+      </div>
+
+      <!-- An agent reading this card is the person who needs redirecting, and
+           the license here is for one household. -->
+      <p style="margin-top:1.4rem;font-size:.88rem">
+        Buying for clients rather than your own house? There's
+        <a href="#agents">an agent edition</a> licensed for exactly that.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="binder">
+  <div class="wrap">
+    <span class="sec-no">02 / Storm season</span>
+    <h2>The storm season binder</h2>
+    <p class="deck">
+      Thirty-three pages for the part of a hurricane nobody prepares for: proving
+      what you owned, and getting paid for it. Built to be filled in while it's
+      calm, because none of it can be done with a cone on the television.
+    </p>
+
+    <!-- Same three-point shape as the agent card, and for the same reason: the
+         objections are predictable. I already have a checklist, I'll do it when
+         something is named, and is this just the federal advice reprinted. -->
+    <div class="points">
+      <div class="point">
+        <p class="pn">$8,000</p>
+        <h3>Your deductible is a percentage</h3>
+        <p>Not a flat amount. On a $400,000 home a 2 percent wind deductible is
+        $8,000 before the policy pays anything. Most people learn that from an
+        adjuster, afterward. Page one is where yours gets written down.</p>
+      </div>
+      <div class="point">
+        <p class="pn">A third</p>
+        <h3>The money is lost after the wind stops</h3>
+        <p>Most hurricane lists end when the weather does. More than a third of
+        these pages sit after it: a damage log with a column for cause, because
+        wind and flood are different policies, and the claim call log.</p>
+      </div>
+      <div class="point">
+        <p class="pn">7 days</p>
+        <h3>Three days is the federal number</h3>
+        <p>Three days is for a house that was merely inconvenienced. After a Gulf
+        landfall near you it is seven, and fourteen at the end of a long feeder
+        line. The supply calculator does that math.</p>
+      </div>
+    </div>
+
+    <div class="previews">
+      <p class="label">What the pages look like</p>
+      <div class="prow">
+        <figure>
+          <img src="../img/preview-binder-1.jpg" width="520" height="282" loading="lazy" decoding="async"
+               alt="A blank kitchen inventory sheet with columns for item, make and model, serial number, year and replacement cost.">
+          <figcaption>Room by room inventory</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/preview-binder-2.jpg" width="520" height="282" loading="lazy" decoding="async"
+               alt="A blank claim call log with columns for the date, who you spoke to and what they promised.">
+          <figcaption>The claim call log</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/preview-binder-3.jpg" width="520" height="229" loading="lazy" decoding="async"
+               alt="The top of the water and supply calculator, which works from household size, pets and days.">
+          <figcaption>The supply calculator</figcaption>
+        </figure>
+      </div>
+      <p class="previews-note">Mostly blanks, which is the point: you fill them in while it is calm.</p>
+    </div>
+
+    <div class="buy">
+      <h3>Written down while it's calm</h3>
+      <p class="buy-blurb">
+        Policies and deductibles, every number you want in the first hour, nine
+        room by room inventory sheets, the water and supply calculator, the
+        countdown from seven days out to when the wind arrives, the shutdown
+        sequence, re-entry, and the damage and claim logs. Undated, so it works
+        this season and every season after it.
+      </p>
+
+      <div class="buy-action">
+        <p class="buy-price"><span class="amt">$16.99</span><span class="per">one time, use it every season</span></p>
+        <div id="binder-slot">
+          <a class="btn btn--buy btn--lg" target="_blank" rel="noopener"
+             href="https://www.etsy.com/listing/4556502794/hurricane-prep-binder-printable-home">Get the binder on Etsy</a>
+        </div>
+        <p class="buy-note">Instant download &middot; Two PDFs &middot; 1,876 fillable fields</p>
+      </div>
+
+      <p style="margin-top:1.4rem;font-size:.88rem">
+        Contents coverage is usually 50 to 70 percent of what the house itself is
+        insured for. To collect it you have to say what you owned, which is what
+        the nine inventory sheets are for.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="agents" class="band">
+  <div class="wrap">
+    <span class="sec-no">03 / For agents</span>
+    <h2>The agent edition</h2>
+    <p class="deck">
+      If you hand a client something at closing, this is the version built for it.
+      The same twelve months, branded with your name and brokerage on every page,
+      and licensed to print for every client you close.
+    </p>
+
+    <!-- The kit's card has a diagram, a sample month and a lifespan chart
+         standing behind it. This one had a paragraph. Three points, because
+         the objections are always the same three: what do I actually hand
+         over, how much work is it for me, and am I allowed to. -->
+    <div class="points">
+      <div class="point">
+        <p class="pn">4 pages</p>
+        <h3>Not twenty-seven, twenty times</h3>
+        <p>Twenty closings at twenty-seven pages is 540 sheets, and nobody does
+        that twice. The leave-behind is four pages for the closing table. The
+        full kit is there for the client who asks for it.</p>
+      </div>
+      <div class="point">
+        <p class="pn">Once</p>
+        <h3>Type your details in and save</h3>
+        <p>Your name and brokerage are form fields, so you fill them once and
+        keep the file. Or send a logo and I'll build your copies and send them
+        back, at no extra charge.</p>
+      </div>
+      <div class="point">
+        <p class="pn">Every client</p>
+        <h3>Licensed for exactly this</h3>
+        <p>The $12.99 kit is licensed for one household, which is why it does
+        not cover a stack for your clients. This one does, for every client you
+        close, for as long as you're closing them.</p>
+      </div>
+    </div>
+
+    <div class="previews">
+      <p class="label">What the pages look like</p>
+      <div class="prow">
+        <figure>
+          <img src="../img/preview-agent-1.jpg" width="520" height="390" loading="lazy" decoding="async"
+               alt="A detail of the page footer carrying a realtor's logo and name.">
+          <figcaption>Your name on every page</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/preview-agent-2.jpg" width="520" height="390" loading="lazy" decoding="async"
+               alt="A detail showing the form fields where an agent types their own details.">
+          <figcaption>Type it in once</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/preview-agent-3.jpg" width="520" height="202" loading="lazy" decoding="async"
+               alt="The top of a page from the full twenty-seven page kit included with the agent edition.">
+          <figcaption>The full kit as well</figcaption>
+        </figure>
+      </div>
+      <p class="previews-note">The leave-behind is four pages. The full kit comes with it.</p>
+    </div>
+
+    <div class="buy">
+      <h3>Branded for your brokerage</h3>
+      <!-- Says what is in the box, and nothing else. The three cards above
+           already make the whole argument, and this paragraph used to repeat
+           all of it, 540 sheets and the typing and the license, close enough to
+           verbatim that the two read as a stutter. -->
+      <p class="buy-blurb">
+        Four PDFs: the twenty-seven page kit and the four-page leave-behind, each
+        as a print version and a fillable one. Your name, brokerage and contact
+        details sit on every page of both, and stay there once you save the file.
+      </p>
+
+      <div class="buy-action">
+        <p class="buy-price"><span class="amt">$39.00</span><span class="per">one time, print for every client</span></p>
+        <div id="agent-slot">
+          <a class="btn btn--buy btn--lg" target="_blank" rel="noopener"
+             href="https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast">Get the agent edition on Etsy</a>
+        </div>
+        <p class="buy-note">Instant download &middot; Four PDFs &middot; Client gifting license</p>
+      </div>
+
+      <p style="margin-top:1.4rem;font-size:.88rem">
+        The leave-behind points your client at the free phone calendars, so the
+        gift keeps arriving long after the paper gets filed.
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="mark" style="margin-bottom:1.25rem">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--sand)">
+        <path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5V14h4v5.5"/>
+      </svg>
+      <span class="label">Gulf Coast Home Maintenance</span>
+    </span>
+    <p class="disclaimer">
+      General maintenance guidance, not a substitute for a licensed inspector, contractor,
+      or your insurance policy terms.
+    </p>
+    <p class="foot-links">
+      <a href="../privacy.html">Privacy</a>
+      <a href="../guides/">What's on the calendar</a>
+      <a href="../calculator/">What's on borrowed time</a>
+    </p>
+    <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
+         a tester can say which version they were looking at. -->
+    <p class="version">v1.22.0</p>
+  </div>
+</footer>
+
+</body>
+</html>

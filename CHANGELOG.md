@@ -27,6 +27,69 @@ Newest first.
 
 ---
 
+## [1.22.0], 2026-08-21
+
+**The shop is its own page.** Asked for as "the site is getting messy", which it
+measurably was.
+
+### What the measurements said
+
+On a phone the single page ran to **23.7 screens** and 2,123 words with 46
+clickable things on it. The first buy button was at screen 2.3. The free
+calendars, which the site is named after and which every Pinterest pin and
+search result arrives for, were at **screen 18.2 of 23.7**, behind three
+product pitches. Each product was pitched twice, once in the shop grid and
+again in its own section, and the three product sections were 9.4 screens, 40
+percent of the page.
+
+### Changed
+
+- **`/shop/` is a new page** carrying the grid and the three product sections.
+  The home page keeps the argument, the free calendars, the setup help and the
+  About section.
+- **Home page: 23.7 screens to 11.1**, 2,123 words to 1,129, 46 clickable
+  things to 23. The free calendars moved from screen 18.2 to **6.2**.
+- The sticky bar's first button is "The shop" rather than "The kit, $12.99",
+  since it now leads somewhere rather than jumping down the page.
+- **`docs/site.css`**, lifted out of an 839 line `<style>` block in
+  `index.html`. Two pages sharing a look cannot each keep a copy of it, which
+  is the reasoning `theme.css` and `analytics.js` already exist under.
+- The three `Product` blocks moved to the shop page's structured data, with
+  their `url` fields repointed at `/shop/#...`, so search engines send buyers
+  where the product is actually described.
+- Section numbering: the home page runs 01 to 06, the shop 01 to 03.
+
+### The redirect, which is not optional
+
+Five live Pinterest pins link to `/#edition`, `/#agents` and `/#binder`. Those
+were home page sections until this release. GitHub Pages cannot issue a
+redirect, so a short script at the top of `index.html` rewrites those three
+hashes to `/shop/` and replaces the history entry so the back button still
+works. Those pins are published, cannot be edited in bulk, and Pinterest is one
+of the few traffic sources this shop has. All three were tested and land on the
+right section. `#calendars` correctly stays on the home page.
+
+`build_calendars.py` and `build_calculator.py` emitted `../#edition` into the
+generated pages, so both were repointed at the source rather than in the output.
+
+### Fixed
+
+- Two more browser-default links: the wordmark, which became a link home on the
+  shop page and inherited link styling, and a link inside a deck, which had
+  never happened before. Deck links are now set for both grounds in `site.css`
+  rather than patched per section, which is the third time this class of bug
+  has appeared.
+- The CSP comment claimed the stylesheet was inline in the file. It is not any
+  more, and dropping `'unsafe-inline'` is now one step away rather than two.
+
+### Notes
+
+- All four `.ics` feeds are byte-identical to 1.21.0 and `SEQUENCE` stays at 2.
+  This release does not touch a single subscriber.
+- The shop page is 13.3 screens on a phone, which is long, but everyone on it
+  arrived to look at products. That is the difference from before, when the
+  same length sat in front of people who came for a free calendar.
+
 ## [1.21.0], 2026-08-21
 
 **Cut as one self-contained release so it can be reverted whole.** Chad asked

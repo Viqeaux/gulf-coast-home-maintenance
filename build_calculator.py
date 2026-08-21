@@ -467,7 +467,7 @@ FREE_TEMPLATE = """<!doctype html>
     </p>
     <p class="actions">
 {buy}
-      <a class="btn btn--quiet" href="../#edition">See the printable kit</a>
+      <a class="btn btn--quiet" href="../shop/">See the printable kit</a>
     </p>
     <p class="fine">
       There are also three free calendars of the small jobs that keep this list

@@ -165,6 +165,12 @@ carries the shop name wherever it travels.
 
 ---
 
+> **The addresses below are pre-1.22.0.** The products moved to `/shop/`, and
+> the home page now redirects `#edition`, `#agents` and `#binder` there, so the
+> live pins still land correctly. **New pins should link to
+> `https://gulfcoasthomemaintenance.com/shop/#edition` and so on directly**,
+> rather than leaning on a redirect a future session might tidy away.
+
 ## Pin copy
 
 Titles run to 100 characters, of which Pinterest says the **first 40 are the

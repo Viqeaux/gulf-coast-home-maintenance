@@ -1,0 +1,861 @@
+/* =============================================================================
+   Shared page styles for gulfcoasthomemaintenance.com.
+
+   Lifted out of an 839 line <style> block inside index.html when the products
+   moved to their own page, because two pages sharing a look cannot each keep
+   their own copy of it. That is the same reasoning theme.css was split out
+   under, and the same reasoning analytics.js exists for: a value pasted into
+   two files is a value that drifts.
+
+   Palette lives in theme.css and is loaded before this.
+   ============================================================================= */
+
+  /* Palette lives in theme.css, shared with the guides page. */
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.65 ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+  }
+
+  .wrap { max-width: 50rem; margin: 0 auto; padding: 0 1.35rem; }
+
+  /* --- type ------------------------------------------------------------- */
+  .label {
+    font: 600 11px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    letter-spacing: .18em; text-transform: uppercase;
+  }
+  h1 {
+    font-size: clamp(2.1rem, 6.4vw, 3.6rem); line-height: 1.05;
+    margin: 0 0 1.15rem; letter-spacing: -.022em; font-weight: 700;
+  }
+  h2 {
+    font: 700 clamp(1.5rem, 4vw, 2.15rem)/1.15 ui-serif, Georgia, serif;
+    margin: 0 0 .7rem; letter-spacing: -.018em;
+  }
+  h3 {
+    font: 700 1.08rem/1.35 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    margin: 0 0 .35rem; letter-spacing: -.005em;
+  }
+  p { margin: 0 0 1.05rem; }
+  .muted { color: var(--muted); }
+  .deck { font-size: 1.06rem; color: var(--muted); max-width: 36rem; }
+  .deck strong { color: var(--ink); font-weight: 600; }
+  /* A link inside a deck had never occurred until the shop page put one there,
+     so it came out browser-default blue on the deep ground. Third time this
+     class of bug has shown up, so it is set for both grounds here rather than
+     patched per section: sand reads on the deep one, accent on paper. */
+  .deck a { color: var(--accent); }
+  .band .deck a, .hero .deck a { color: var(--sand); }
+
+  /* section numbering, the field-guide device */
+  .sec-no {
+    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .16em; color: var(--accent);
+    display: block; margin-bottom: .7rem;
+  }
+
+  /* Sections alternate between the paper ground and the deep one. Anything that
+     paints itself reads these four tokens rather than naming a color, so a
+     component works on either ground without a variant. */
+  section {
+    padding: 4.25rem 0;
+    --surface: var(--bg);
+    --on-surface: var(--ink);
+    --on-surface-mute: var(--muted);
+    --hairline: var(--rule-soft);
+    --marker: var(--must);
+    background: var(--surface);
+    color: var(--on-surface);
+  }
+  section.band {
+    --surface: var(--band-bg);
+    --on-surface: var(--on-deep);
+    --on-surface-mute: var(--on-deep-mute);
+    --hairline: color-mix(in srgb, var(--on-deep) 17%, transparent);
+    --marker: var(--sand);
+  }
+  @supports not (background: color-mix(in srgb, red 50%, transparent)) {
+    section.band { --hairline: #33454a; }
+  }
+  .band h2, .band h3 { color: var(--on-surface); }
+  .band p, .band .muted { color: var(--on-surface-mute); }
+  .band .sec-no { color: var(--sand); }
+  /* A rule only earns its place between two sections of the same ground; where
+     the ground changes, the change is the divider. */
+  section:not(.band) + section:not(.band) { border-top: 1px solid var(--rule-soft); }
+
+  /* --- sticky bar ------------------------------------------------------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(150%) blur(10px);
+    -webkit-backdrop-filter: saturate(150%) blur(10px);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  @supports not (backdrop-filter: blur(1px)) { .topbar { background: var(--bg); } }
+  .topbar .inner {
+    max-width: 50rem; margin: 0 auto; padding: .7rem 1.35rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .mark { display: flex; align-items: center; gap: .55rem; min-width: 0; }
+  /* On subpages the wordmark is a link home rather than a span, so it needs
+     saying that it is not a body link. Underline only on hover, because a
+     permanently underlined logo reads as a mistake. */
+  a.mark { color: inherit; text-decoration: none; }
+  a.mark:hover .label { text-decoration: underline; }
+  .mark .label { color: var(--ink); letter-spacing: .13em; font-size: 11px; }
+  .mark svg { flex: none; }
+  .topbar a.cta {
+    font: 600 12.5px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .04em; text-decoration: none; white-space: nowrap;
+    color: var(--accent); border: 1px solid var(--accent);
+    padding: .55rem .8rem; border-radius: 2px;
+    transition: background .15s ease, color .15s ease;
+  }
+  .topbar a.cta:hover { background: var(--accent); color: var(--paper); }
+  .topbar-ctas { display: flex; align-items: center; gap: .5rem; flex: none; }
+
+  /* The binder is the only product on the site with a deadline, so it gets the
+     loud button: filled rather than outlined, and in the brand's red rather
+     than the teal the rest of the furniture uses.
+
+     A pulse, not a blink. A hard on/off at a noticeable rate is a WCAG 2.2.2
+     problem, it is the one animation pattern people reliably read as an advert,
+     and this brand sells on not looking like that. The ring fades outward once
+     every 2.4s, which catches the eye in peripheral vision without ever hiding
+     the label. Under prefers-reduced-motion the global rule stops it and the
+     solid red still carries the emphasis on its own. */
+  .topbar a.cta--alert {
+    color: var(--on-tier); background: var(--must); border-color: var(--must);
+    animation: cta-pulse 2.4s ease-out infinite;
+  }
+  .topbar a.cta--alert:hover {
+    background: var(--must); color: var(--on-tier); filter: brightness(1.08);
+  }
+  @keyframes cta-pulse {
+    0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--must) 60%, transparent); }
+    70%  { box-shadow: 0 0 0 9px color-mix(in srgb, var(--must) 0%, transparent); }
+    100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--must) 0%, transparent); }
+  }
+  @supports not (background: color-mix(in srgb, red 50%, transparent)) {
+    @keyframes cta-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(163, 53, 32, .6); }
+      70%  { box-shadow: 0 0 0 9px rgba(163, 53, 32, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(163, 53, 32, 0); }
+    }
+  }
+
+  /* Three buttons and the wordmark stop fitting on one line below this. The kit
+     is the one that goes, not because it matters least but because the other
+     two are the free entry point and the one with a deadline on it. */
+  @media (max-width: 46rem) { .topbar a.cta--kit { display: none; } }
+
+  @media (max-width: 30rem) {
+    .topbar a.cta { display: none; }
+    /* The seasonal one stays. It is the reason somebody is on this page on a
+       phone in August, and the small-screen rule existed when there was only
+       one button to drop. The wordmark gives up its text to make room: the
+       house glyph still identifies the brand, and the button is worth more
+       than the second reading of a name that is already in the tab title. */
+    .topbar a.cta--alert { display: inline-block; }
+    .mark .label { display: none; }
+  }
+
+  /* --- hero ------------------------------------------------------------- */
+  .hero {
+    position: relative; overflow: hidden;
+    background: var(--deep); color: var(--on-deep);
+    padding: 4.5rem 0 4rem;
+  }
+  /* The photograph sits well back behind a scrim. Its job is to say "you live
+     here", which live oak and Spanish moss do instantly. It is not there to be
+     looked at, so the gradient is heaviest on the left where the headline sits. */
+  .hero-media { position: absolute; inset: 0; overflow: hidden; }
+  .hero-media img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 62% 42%;
+    display: block;
+  }
+  .hero-media::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(100deg,
+        color-mix(in srgb, var(--deep) 94%, transparent) 0%,
+        color-mix(in srgb, var(--deep) 82%, transparent) 34%,
+        color-mix(in srgb, var(--deep) 34%, transparent) 72%,
+        color-mix(in srgb, var(--deep) 18%, transparent) 100%),
+      linear-gradient(to bottom,
+        color-mix(in srgb, var(--deep) 45%, transparent) 0%,
+        color-mix(in srgb, var(--deep) 10%, transparent) 38%,
+        color-mix(in srgb, var(--deep) 78%, transparent) 88%,
+        var(--deep) 100%);
+  }
+  /* Older engines without color-mix would show an unreadable hero, so fall back
+     to a flat scrim rather than a transparent one. */
+  @supports not (background: color-mix(in srgb, red 50%, transparent)) {
+    .hero-media::after { background: rgba(14,36,41,.86); }
+  }
+  .hero .wrap { position: relative; z-index: 2; }
+  .hero .label { color: var(--sand); }
+  /* Hero copy sits over a photograph, so it runs brighter than the muted tone
+     used on flat dark sections, and carries a soft shadow as insurance where
+     the canopy behind it lightens. */
+  .hero h1 { color: #fff; text-shadow: 0 2px 24px rgba(8,24,28,.55); }
+  .hero .deck {
+    color: #d8d3c7; font-size: clamp(1.02rem, 2.3vw, 1.18rem); max-width: 33rem;
+    text-shadow: 0 1px 14px rgba(8,24,28,.7);
+  }
+  .hero .deck strong { color: #fff; font-weight: 600; }
+  .rule-sm {
+    width: 3rem; height: 2px; background: var(--sand);
+    margin: 0 0 1.4rem; border: 0;
+  }
+
+  /* Hurricane season countdown. Days, not a ticking clock: seconds counting
+     down to a six month season is theatre, and the number a reader can act on
+     is the one measured in days, which is also the unit the whole product is
+     organized around. It states a fact and links to the thing that answers it
+     rather than manufacturing alarm, which is the same reason there is no
+     invented rating in the structured data. */
+  .season {
+    display: inline-flex; align-items: center; gap: .55rem; flex-wrap: wrap;
+    margin: 1.6rem 0 0; padding: .55rem .85rem;
+    background: color-mix(in srgb, var(--deep) 62%, transparent);
+    border: 1px solid color-mix(in srgb, var(--on-deep) 24%, transparent);
+    border-radius: 3px;
+    font: 500 13.5px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: #ded8cb; text-shadow: 0 1px 10px rgba(8,24,28,.7);
+  }
+  .season-num { color: #fff; font-weight: 700; }
+  .season-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex: none;
+    background: var(--must-lift);
+    animation: season-pulse 2.4s ease-out infinite;
+  }
+  .season-link {
+    color: var(--sand); text-decoration: none; white-space: nowrap;
+    border-bottom: 1px solid color-mix(in srgb, var(--sand) 45%, transparent);
+  }
+  .season-link:hover { border-bottom-color: var(--sand); }
+  @keyframes season-pulse {
+    0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--must-lift) 65%, transparent); }
+    70%  { box-shadow: 0 0 0 7px color-mix(in srgb, var(--must-lift) 0%, transparent); }
+    100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--must-lift) 0%, transparent); }
+  }
+  @supports not (background: color-mix(in srgb, red 50%, transparent)) {
+    .season { background: rgba(14,36,41,.62); border-color: #3d4f52; }
+    .season-link { border-bottom-color: #7a5c22; }
+    @keyframes season-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(224,138,114,.65); }
+      70%  { box-shadow: 0 0 0 7px rgba(224,138,114,0); }
+      100% { box-shadow: 0 0 0 0 rgba(224,138,114,0); }
+    }
+  }
+
+  /* stat strip under hero */
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 1px; margin-top: 2.75rem;
+    background: color-mix(in srgb, var(--on-deep) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--on-deep) 14%, transparent);
+  }
+  .stat { background: var(--deep); padding: 1.05rem 1.1rem; }
+  .stat .n {
+    font: 700 1.6rem/1 ui-serif, Georgia, serif; color: #fff;
+    display: block; margin-bottom: .3rem; letter-spacing: -.02em;
+  }
+  .stat .t { font-size: .82rem; color: var(--on-deep-mute); line-height: 1.4; display: block; }
+
+  /* --- buttons ---------------------------------------------------------- */
+  .actions { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .btn {
+    font: 600 14px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    text-decoration: none; padding: .8rem 1.1rem; border-radius: 2px;
+    border: 1px solid var(--rule); color: var(--ink); background: transparent;
+    cursor: pointer; -webkit-appearance: none; appearance: none;
+    transition: border-color .15s ease, filter .15s ease, background .15s ease, color .15s ease;
+  }
+  .btn:hover { border-color: var(--tier-color, var(--accent)); }
+  .btn:focus-visible { outline: 2px solid var(--tier-color, var(--accent)); outline-offset: 2px; }
+  .btn--primary {
+    background: var(--tier-color, var(--accent));
+    border-color: var(--tier-color, var(--accent));
+    color: var(--on-tier);
+  }
+  .btn--primary:hover { filter: brightness(1.09); }
+
+  /* Every button that ends at a checkout is gold, so "this one costs money" is
+     a color the reader learns once and then recognizes anywhere on the page.
+     The same pair the hero's primary button already uses: --sand needs dark
+     text on it, because white lands near 3:1 and fails. The hover keeps the
+     border gold too, or the shared .btn:hover rule repaints it teal. */
+  .btn--buy {
+    background: var(--sand); border-color: var(--sand); color: var(--deep);
+  }
+  .btn--buy:hover { filter: brightness(1.08); border-color: var(--sand); }
+  .btn--lg { padding: .95rem 1.5rem; font-size: 15px; }
+  .btn--copied { border-color: var(--tier-color, var(--accent)); color: var(--tier-color, var(--accent)); }
+  .hero .btn { border-color: color-mix(in srgb, var(--on-deep) 32%, transparent); color: var(--on-deep); }
+  .hero .btn:hover { border-color: var(--on-deep); }
+  /* The hero's free CTA, and deliberately not gold. Gold became the checkout
+     color in 1.15.1, across all six Etsy buttons, which left the loudest button
+     on the page wearing the "this costs money" color to offer something free.
+
+     Teal would be the obvious alternative, since that is what the FREE badges
+     use further down. It is not usable here: --accent against --deep measures
+     about 1.4:1, so a teal fill would sink into the hero's own ground. A light
+     fill is the strongest thing available on a dark hero, reads instantly as
+     the primary action, and cannot be confused with the buy color. */
+  .hero .btn--primary {
+    background: var(--on-deep); border-color: var(--on-deep); color: var(--deep);
+  }
+  .hero .btn--primary:hover { filter: brightness(1.08); }
+  /* The calculator sits under the buttons as a line rather than beside them as
+     a third one. It is the only thing on the site that answers a question
+     before asking for anything, so it wants to be in the hero; but a third
+     button turns a clear choice into a menu, and this is the offer most likely
+     to be taken by somebody who is not yet sure they want a calendar. */
+  .hero .try {
+    margin: 1rem 0 0; font: 400 .95rem/1.55 ui-sans-serif, system-ui, sans-serif;
+    color: var(--on-deep-mute); max-width: 30rem;
+  }
+  .hero .try a { color: var(--sand); font-weight: 600; }
+
+  /* --- year diagram ----------------------------------------------------- */
+  .figure { margin: 2rem 0 0; }
+  .figure .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .figure svg { display: block; min-width: 34rem; width: 100%; height: auto; }
+  .figcaption {
+    font-size: .87rem; color: var(--on-surface-mute); margin: .9rem 0 0;
+    padding-top: .9rem; border-top: 1px solid var(--hairline);
+  }
+  .diag-month { font: 600 11px ui-sans-serif, system-ui, sans-serif; letter-spacing: .1em; fill: var(--on-surface-mute); }
+  .diag-band-label { font: 600 11px ui-sans-serif, system-ui, sans-serif; letter-spacing: .12em; fill: var(--on-surface); }
+  .diag-note { font: 600 10px ui-sans-serif, system-ui, sans-serif; letter-spacing: .1em; fill: var(--marker); }
+  .diag-grid { stroke: var(--hairline); stroke-width: 1; }
+  .diag-marker { stroke: var(--marker); stroke-width: 1.5; stroke-dasharray: 3 3; }
+
+  /* --- factor cards ----------------------------------------------------- */
+  /* Four cells, so the track count has to divide into four exactly, auto-fit
+     lands on three at some widths and leaves an empty cell showing the grid's
+     own background as a block. */
+  .factors {
+    display: grid; grid-template-columns: 1fr;
+    gap: 1px; margin-top: 2rem;
+    background: var(--hairline); border: 1px solid var(--hairline);
+  }
+  @media (min-width: 34rem) { .factors { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 60rem) { .factors { grid-template-columns: repeat(4, 1fr); } }
+  .factor { background: var(--surface); padding: 1.5rem 1.4rem; }
+  .factor svg { color: var(--accent); margin-bottom: .85rem; display: block; }
+  .band .factor svg { color: var(--sand); }
+  .factor h3 { font-size: 1rem; color: var(--on-surface); }
+  .factor p { font-size: .93rem; color: var(--on-surface-mute); margin: 0; }
+
+  /* --- agent points ----------------------------------------------------- */
+  /* Three cells, so the track count divides exactly at both widths. Same
+     hairline grid as .factors rather than a new card style: this section sits
+     on the paper ground and does not need to shout over the kit above it. */
+  .points {
+    display: grid; grid-template-columns: 1fr;
+    gap: 1px; margin-top: 2rem;
+    background: var(--hairline); border: 1px solid var(--hairline);
+  }
+  @media (min-width: 46rem) { .points { grid-template-columns: repeat(3, 1fr); } }
+  .point { background: var(--surface); padding: 1.5rem 1.4rem; }
+  .point .pn {
+    font: 700 1.45rem/1 ui-serif, Georgia, serif;
+    color: var(--accent); letter-spacing: -.02em; margin: 0 0 .55rem;
+  }
+  /* --accent is tuned for the paper ground: on the light scheme it is a dark
+     teal, which lands near 2:1 on a band and is unreadable. Sand is the token
+     already designated for deep grounds, and is what .sec-no uses there. The
+     points grid had never sat on a band before the agent section moved. */
+  .band .point .pn { color: var(--sand); }
+  .point h3 { font-size: 1rem; color: var(--on-surface); margin-bottom: .4rem; }
+  .point p { font-size: .93rem; color: var(--on-surface-mute); margin: 0; }
+
+  /* --- tiers ------------------------------------------------------------ */
+  /* Cards keep their own paper ground wherever they sit, so they have to reset
+     the section's surface tokens. Custom properties inherit, so this makes
+     rules like `.band h3 { color: var(--on-surface) }` resolve correctly for
+     content inside a light card on a dark section. */
+  /* Two links had never been styled and were rendering browser-default blue on
+     a cream card: the agent cross-sell inside the kit's buy card, and the
+     privacy link under the signup. Both sit on paper, so --accent is the one
+     the rest of the page already uses there. */
+  .buy a:not(.btn), .signup-note a { color: var(--accent); }
+
+  /* --- feed picker ------------------------------------------------------ */
+  /* Four feeds means somebody who wants three of them ends up with three
+     entries in their sidebar. A subscription is a URL fetched by Google from
+     its own servers, so there is no per-person state on a static site: every
+     selection is a file built in advance, and this only hands out the address
+     that matches the boxes. */
+  .picker {
+    margin-top: 1.75rem; background: var(--paper-2);
+    border: 1px solid var(--rule); border-radius: 3px; padding: 1.5rem 1.6rem;
+  }
+  .picker h3 { margin-bottom: .3rem; }
+  .picker > p { color: var(--muted); font-size: .95rem; margin: 0 0 1.1rem; }
+  .picker-boxes { display: flex; flex-wrap: wrap; gap: .5rem .9rem; margin-bottom: 1.1rem; }
+  .picker-boxes label {
+    display: inline-flex; align-items: center; gap: .45rem; cursor: pointer;
+    font: 600 .93rem/1.2 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink); border: 1px solid var(--rule); background: var(--paper);
+    padding: .55rem .75rem; border-radius: 2px;
+  }
+  .picker-boxes input { accent-color: var(--accent); width: 15px; height: 15px; margin: 0; }
+  .picker-boxes label:focus-within { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .picker-summary {
+    font-size: .9rem; color: var(--muted); margin: 0 0 1rem;
+    padding-top: .9rem; border-top: 1px solid var(--rule);
+  }
+  .picker-summary strong { color: var(--ink); }
+
+  /* --- page previews ---------------------------------------------------- */
+  /* Tops of real pages, inside each product section. Cropped rather than shrunk:
+     see build_site_images.py for why the crop is the protection and where each
+     boundary sits. Works on either ground because everything here reads the
+     surface tokens rather than naming a color. */
+  .previews { margin-top: 2.4rem; }
+  .previews > .label { color: var(--on-surface-mute); display: block; margin-bottom: .9rem; }
+  .prow { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 40rem) { .prow { grid-template-columns: repeat(3, 1fr); } }
+  /* The three crops are not the same shape, because the pages are not. Rather
+     than force a common aspect ratio, which would crop sideways into the page
+     margins, the figures stretch to the row and the captions drop to the
+     bottom so they line up across the strip. */
+  .prow figure { margin: 0; display: flex; flex-direction: column; height: 100%; }
+  .prow img {
+    display: block; width: 100%; height: auto; background: #fff;
+    border: 1px solid var(--hairline); border-radius: 2px;
+  }
+  .prow figcaption {
+    font: 600 10.5px/1.4 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--on-surface-mute); margin-top: auto; padding-top: .5rem;
+  }
+  .previews-note { color: var(--on-surface-mute); font-size: .85rem; margin: 1rem 0 0; }
+
+  /* --- shop grid -------------------------------------------------------- */
+  /* Sits directly under the hero on the same deep ground, so it reads as part
+     of the header rather than as the page's first argument. Until this existed
+     the only way to learn there were three products was to scroll through three
+     long sections; the grid says what is for sale in one screen, and each card
+     links down to the section that makes the case for it.
+
+     A grid, not a carousel. A carousel shows one product and hides the other two
+     behind an interaction most people never make, and an auto-rotating one is a
+     WCAG 2.2.2 problem. The shops this is modelled on, Etsy included, are grids.
+
+     Full page thumbnails rather than a crop. The three covers put their titles
+     at different heights, so no single crop frames all three, and a whole sheet
+     also says "this is a printable page" in a way a cropped one does not. */
+  .shop { padding-top: 3.25rem; }
+  .shop .label { color: var(--sand); display: block; margin-bottom: 1.2rem; }
+  .pgrid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 46rem) { .pgrid { grid-template-columns: repeat(3, 1fr); } }
+  .pcard {
+    display: flex; flex-direction: column; overflow: hidden;
+    background: var(--paper); border: 1px solid var(--rule);
+    border-radius: 3px; box-shadow: var(--shadow);
+  }
+  .pcard img {
+    display: block; width: 100%; height: auto; aspect-ratio: 17 / 22;
+    object-fit: cover; background: #fff;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pcard-body {
+    padding: 1.1rem 1.15rem 1.25rem; display: flex; flex-direction: column; flex: 1;
+  }
+  .pcard h3 { margin-bottom: .3rem; }
+  /* Scoped through .pcard, not left as bare .pcard-line / .pcard-price. This
+     card sits inside a .band, and `.band p` is a class plus an element, so it
+     outranks a lone class and was repainting the price in the band's muted
+     tone. The price has to be the brand red here for the same reason it is on
+     the buy cards: it reads as a price rather than as more type. */
+  .pcard .pcard-line { color: var(--muted); font-size: .91rem; margin: 0 0 1rem; flex: 1; }
+  .pcard .pcard-price {
+    font: 700 1.3rem/1 ui-serif, Georgia, serif; color: var(--must);
+    margin: 0 0 .8rem; letter-spacing: -.01em;
+  }
+  .pcard .btn { text-align: center; display: block; }
+  .pcard-more {
+    display: inline-block; margin-top: .75rem; font-size: .85rem;
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+  .pcard-more:hover { border-bottom-color: var(--accent); }
+  .shop-free { margin: 1.4rem 0 0; font-size: .93rem; }
+  /* Nothing had styled a bare link on the deep ground before, so this one came
+     out as the browser's default blue. Sand is what every other link on a band
+     uses. */
+  .shop-free a { color: var(--sand); }
+  @supports not (background: color-mix(in srgb, red 50%, transparent)) {
+    .pcard-more { border-bottom-color: #7fa6ad; }
+  }
+
+  .pcard, .tier, .month-card, .buy, .preview-warning, .android-note {
+    --surface: var(--paper);
+    --on-surface: var(--ink);
+    --on-surface-mute: var(--muted);
+    --hairline: var(--rule-soft);
+  }
+
+  .tier {
+    background: var(--paper); border: 1px solid var(--rule);
+    border-left: 3px solid var(--tier-color); border-radius: 3px;
+    box-shadow: var(--shadow); padding: 1.5rem 1.6rem;
+    margin-bottom: 1rem; position: relative;
+  }
+  .tier--must   { --tier-color: var(--must); }
+  .tier--should { --tier-color: var(--should); }
+  .tier--above  { --tier-color: var(--above); }
+  /* The monthly feed is not a fourth level of effort, so it takes the sand
+     accent rather than extending the red/teal/olive ladder the three tiers
+     use. Different kind of thing, different color family. */
+  .tier--monthly { --tier-color: var(--sand); }
+  .tier h3 {
+    color: var(--tier-color); font-size: 1.16rem;
+    display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
+  }
+  .tier .badge {
+    font: 600 10px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+    border: 1px solid var(--rule); padding: .32rem .45rem; border-radius: 2px;
+  }
+  /* The free feeds sit immediately below the $12.99 kit, which is exactly where
+     a scanner assumes the price carries down. "Free" is repeated at the heading
+     and again on every card so no one has to read a sentence to learn it. Both
+     take their color from --accent against --paper, so the pair inverts with
+     the palette and stays legible in dark mode. */
+  .free-tag {
+    font: 700 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase;
+    background: var(--accent); color: var(--paper);
+    padding: .42rem .58rem; border-radius: 2px;
+    display: inline-block; vertical-align: .28em; white-space: nowrap;
+  }
+  .tier .badge--free { color: var(--accent); border-color: var(--accent); }
+  .tier p { margin: .45rem 0 0; color: var(--muted); font-size: .97rem; }
+  .tier .actions { margin-top: 1.15rem; }
+
+  /* --- sample month ----------------------------------------------------- */
+  .month-card {
+    background: var(--paper); border: 1px solid var(--rule);
+    border-radius: 3px; box-shadow: var(--shadow-lg); overflow: hidden; margin-top: 2rem;
+  }
+  .month-card .head {
+    background: var(--paper-2); border-bottom: 1px solid var(--rule);
+    padding: 1.2rem 1.6rem;
+  }
+  .month-card .head .m {
+    font: 700 clamp(1.6rem,4vw,2rem)/1 ui-serif, Georgia, serif;
+    letter-spacing: -.02em; margin: 0 0 .35rem;
+  }
+  .month-card .head .sub { font: 600 .88rem/1.4 ui-sans-serif, system-ui, sans-serif; color: var(--must); margin: 0; }
+  .month-card .body { padding: .35rem 1.6rem 1.5rem; }
+  .row { display: flex; gap: 1rem; padding: 1.15rem 0; border-bottom: 1px solid var(--rule-soft); }
+  .row:last-child { border-bottom: 0; padding-bottom: .35rem; }
+  .row .k {
+    flex: none; width: 4.4rem; padding-top: .15rem;
+    font: 700 10px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .13em; text-transform: uppercase;
+  }
+  .k--must { color: var(--must); } .k--should { color: var(--should); } .k--above { color: var(--above); }
+  .row .v { font-size: .97rem; color: var(--muted); }
+  .row .v em { color: var(--ink); font-style: italic; }
+  @media (max-width: 30rem) {
+    .row { flex-direction: column; gap: .35rem; }
+    .row .k { width: auto; }
+  }
+
+  /* --- lifespan chart --------------------------------------------------- */
+  .lifespans { margin-top: 2rem; }
+  .ls {
+    display: grid; grid-template-columns: 11.5rem 1fr 4.6rem;
+    align-items: center; gap: .9rem; padding: .5rem 0;
+  }
+  .ls + .ls { border-top: 1px solid var(--hairline); }
+  .ls .name { font-size: .93rem; color: var(--on-surface); }
+  .ls .track { position: relative; height: 9px; background: var(--hairline); border-radius: 9px; }
+  .ls .fill {
+    position: absolute; top: 0; bottom: 0; border-radius: 9px;
+    background: linear-gradient(90deg,
+      color-mix(in srgb, var(--accent) 55%, transparent), var(--accent));
+  }
+  .ls .yrs {
+    font: 600 12px ui-sans-serif, system-ui, sans-serif;
+    color: var(--on-surface-mute); text-align: right; white-space: nowrap;
+  }
+  .band .ls .fill { background: linear-gradient(90deg,
+      color-mix(in srgb, var(--accent) 45%, transparent), var(--accent)); }
+  /* Keep the short-lifespan items reading as a warning on the deep ground too. That contrast is the whole point of the chart. */
+  .band .ls--short .fill { background: linear-gradient(90deg,
+      color-mix(in srgb, var(--must-lift) 45%, transparent), var(--must-lift)); }
+  .band .ls--short .yrs { color: var(--must-lift); }
+  .ls--short .fill { background: linear-gradient(90deg,
+      color-mix(in srgb, var(--must) 55%, transparent), var(--must)); }
+  .ls--short .yrs { color: var(--must); }
+  .scale {
+    display: grid; grid-template-columns: 11.5rem 1fr 4.6rem; gap: .9rem;
+    margin-top: .6rem;
+  }
+  .scale .ticks {
+    grid-column: 2; display: flex; justify-content: space-between;
+    font: 600 10px ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .1em; color: var(--on-surface-mute);
+  }
+  @media (max-width: 34rem) {
+    .ls { grid-template-columns: 1fr 3.9rem; row-gap: .3rem; }
+    .ls .name { grid-column: 1 / -1; }
+    .scale { grid-template-columns: 1fr 3.9rem; }
+    .scale .ticks { grid-column: 1; }
+  }
+
+  /* --- buy -------------------------------------------------------------- */
+  .buy {
+    background: var(--paper); border: 1px solid var(--rule); border-radius: 3px;
+    box-shadow: var(--shadow-lg); padding: 2rem 1.8rem; margin-top: 2.25rem; text-align: center;
+  }
+  .buy h3 { font-size: 1.35rem; margin-bottom: .55rem; }
+  .buy-blurb { max-width: 32rem; margin-left: auto; margin-right: auto; }
+
+  /* The price belongs next to the button. Set as a small uppercase label above
+     the heading it read as a section eyebrow, because that is exactly how the
+     eyebrows are styled, and it sat five lines from the thing you click. */
+  .buy-action {
+    margin-top: 1.6rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  /* The auto side margins matter: .buy p caps these at 30rem, so a shorthand
+     margin that zeroes left and right drops them against the left edge of a
+     wider card instead of centering them. */
+  .buy-price { margin: 0 auto 1.35rem !important; }
+  .buy-price .amt {
+    display: block;
+    font: 700 2.7rem/1 ui-serif, Georgia, serif;
+    color: var(--must); letter-spacing: -.02em;
+  }
+  .buy-price .per {
+    display: block; margin-top: .35rem;
+    font: 400 .85rem/1.4 ui-sans-serif, system-ui, sans-serif;
+    color: var(--muted);
+  }
+  .buy-note {
+    margin: .9rem auto 0 !important;
+    font: 400 .82rem/1.5 ui-sans-serif, system-ui, sans-serif;
+    color: var(--muted) !important;
+  }
+  /* A buy button should look heavier than a nav link, and wide enough to hold
+     its own against a 2.6rem price directly above it. */
+  #buy-slot .btn--lg, #binder-slot .btn--lg, #agent-slot .btn--lg {
+    /* inline-block, or min-width is ignored: it does not apply to inline
+       elements, and an anchor is inline unless told otherwise. */
+    display: inline-block;
+    padding: 1.1rem 2.4rem; font-size: 16.5px; border-radius: 3px;
+    min-width: 17rem; letter-spacing: .01em;
+    box-shadow: 0 2px 0 color-mix(in srgb, var(--sand) 62%, black);
+  }
+  #buy-slot .btn--lg:hover, #binder-slot .btn--lg:hover, #agent-slot .btn--lg:hover { filter: brightness(1.06); }
+  @supports not (background: color-mix(in srgb, red 50%, transparent)) {
+    #buy-slot .btn--lg, #binder-slot .btn--lg, #agent-slot .btn--lg { box-shadow: 0 2px 0 #7a5719; }
+  }
+  .buy p { color: var(--muted); max-width: 30rem; margin-left: auto; margin-right: auto; font-size: .97rem; }
+  .buy p:last-child { margin-bottom: 0; }
+  /* --- signup ----------------------------------------------------------- */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  /* Off screen until focused, rather than hidden: a skip link that display:none
+     hides is a skip link no keyboard reaches. z-index clears the sticky bar,
+     which is 50. */
+  .skip {
+    position: absolute; left: .6rem; top: -4rem; z-index: 60;
+    background: var(--accent); color: var(--paper);
+    font: 600 13px/1 ui-sans-serif, system-ui, sans-serif;
+    padding: .75rem 1rem; border-radius: 2px; text-decoration: none;
+    transition: top .12s ease;
+  }
+  .skip:focus { top: .6rem; }
+  .signup { margin: 0; }
+  .signup-row {
+    display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center;
+    max-width: 27rem; margin: 0 auto;
+  }
+  /* The border is --muted, not --rule. A --rule hairline against --paper is
+     1.5:1 and the field's own fill is 1.1:1 against it, so the input was a
+     rectangle you could only find by clicking where you guessed it was. WCAG
+     1.4.11 asks 3:1 for the boundary of a control; --muted is 5.6:1 on paper
+     and 6.6:1 in dark, and it is the token already used for text at this
+     weight, so nothing new enters the palette. --rule stays correct for rules
+     between things, which is what it is named for. */
+  .signup-row input {
+    flex: 1 1 12rem; min-width: 0;
+    font: 400 15px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: .8rem .9rem; border-radius: 2px;
+    border: 1px solid var(--muted); background: var(--bg); color: var(--ink);
+  }
+  .signup-row input:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
+  }
+  .signup-row .btn { flex: 0 0 auto; }
+  .signup-note {
+    font: 400 12.5px/1.5 ui-sans-serif, system-ui, sans-serif;
+    color: var(--muted) !important; margin: .75rem 0 0 !important;
+  }
+  .signup-done {
+    font: 400 .95rem/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--muted) !important; margin: 0 !important;
+  }
+  .signup-done strong { display: block; color: var(--accent); margin-bottom: .2rem; }
+  @media (max-width: 26rem) {
+    .signup-row input, .signup-row .btn { flex: 1 1 100%; }
+  }
+
+  /* The signup sits at the end of the free calendars rather than in the buy
+     card it started in. It began as a waitlist for the kit, the buy button
+     retired that job, and what is left is a general "tell me about the next
+     one" list. The moment to ask is right after someone has been handed three
+     free things, not while they are deciding whether to spend $12.99.
+
+     Deliberately not a fourth tier card, but distinguished without changing the
+     ground: no colored left bar, an uncolored heading, and no shadow, so it
+     sits flatter than the three cards above it. The ground stays --paper so the
+     --bg field keeps reading as inset. On --paper-2 both the field's fill and
+     its --rule border land within 1.2 of the block behind them, which leaves
+     the input invisible until it takes focus. */
+  .followup {
+    background: var(--paper); border: 1px solid var(--rule);
+    border-radius: 3px; padding: 1.75rem 1.6rem; margin-top: 2.25rem;
+    text-align: center;
+  }
+  .followup-blurb {
+    color: var(--muted); font-size: .97rem;
+    max-width: 30rem; margin: 0 auto 1.25rem;
+  }
+
+  /* --- misc ------------------------------------------------------------- */
+  .preview-warning {
+    background: var(--paper); border: 1px solid var(--must); border-left: 3px solid var(--must);
+    border-radius: 3px; padding: 1rem 1.2rem; margin-bottom: 1.6rem;
+    font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--muted);
+  }
+  .preview-warning strong { color: var(--must); display: block; margin-bottom: .25rem; }
+
+  /* Shown only to Android visitors. The Google Calendar app can claim links to
+     calendar.google.com and then cannot act on them, so these users may tap the
+     main button and land nowhere. This gives them the working route without
+     making everyone else read about it. */
+  /* A details element, so it costs one line until someone needs it. The
+     summary keeps a comfortable tap target and its own focus ring, since on
+     this section it is the only thing between a visitor and the buttons. */
+  .android-note {
+    background: var(--paper); border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent); border-radius: 3px;
+    padding: .35rem .4rem; margin-bottom: 1.6rem;
+    font: 15px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--muted);
+  }
+  .android-note summary {
+    cursor: pointer; padding: .65rem .85rem; border-radius: 2px;
+    font-weight: 600; color: var(--ink); list-style-position: outside;
+  }
+  .android-note summary::marker { color: var(--accent); }
+  .android-note summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .android-note[open] summary { margin-bottom: .1rem; }
+  .android-note p, .android-note ol { margin: 0 .85rem .6rem; }
+  .android-note strong { color: var(--ink); }
+  .android-note ol { padding-left: 1.15rem; margin-top: .5rem; }
+  .android-note li { margin-bottom: .3rem; }
+  .android-note a { color: var(--accent); }
+
+  .howto { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.75rem 2.25rem; margin-top: 2rem; }
+  .howto h3 { font-size: .98rem; color: var(--on-surface); }
+  .howto p, .howto li { color: var(--on-surface-mute); font-size: .93rem; margin: 0 0 .55rem; }
+  .howto strong, .howto em { color: var(--on-surface); }
+  .howto a { color: var(--sand); }
+  .howto ol { padding-left: 1.1rem; margin: .3rem 0 .55rem; }
+  .howto li { margin-bottom: .2rem; }
+
+  /* Per-app setup steps, folded away. This is post-purchase support sitting in
+     a pre-purchase slot: three quarters of the section's text was instructions
+     for an app the reader has not chosen yet, and the Android failure note
+     apologized for a problem before anyone had clicked anything. Folded, it
+     reaches the person who has that problem and nobody else.
+
+     Native <details>, not a scripted accordion, so it still opens with
+     JavaScript blocked and browser find-in-page can still reach inside it. */
+  .setup { margin-top: 2.25rem; border-top: 1px solid var(--hairline); }
+  .setup details { border-bottom: 1px solid var(--hairline); }
+  .setup summary {
+    cursor: pointer; list-style: none; padding: .95rem 0;
+    font: 600 .98rem/1.35 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--on-surface); display: flex; align-items: center; gap: .6rem;
+  }
+  .setup summary::-webkit-details-marker { display: none; }
+  .setup summary::before {
+    content: "+"; flex: none; width: 1rem;
+    font: 400 1.1rem/1 ui-sans-serif, system-ui, sans-serif; color: var(--sand);
+  }
+  /* U+2212 minus, not a hyphen and not an en dash. It is the character that
+     pairs with "+", and the house rule keeps dashes off this site. */
+  .setup details[open] > summary::before { content: "\2212"; }
+  .setup summary:focus-visible { outline: 2px solid var(--sand); outline-offset: 2px; }
+  .setup .body { padding: 0 0 1.1rem 1.6rem; }
+  .setup .body p, .setup .body li {
+    color: var(--on-surface-mute); font-size: .93rem; margin: 0 0 .55rem;
+  }
+  .setup .body strong, .setup .body em { color: var(--on-surface); }
+  .setup .body ol { padding-left: 1.1rem; margin: .3rem 0 .55rem; }
+  .setup .body li { margin-bottom: .2rem; }
+
+  /* --- who made this ---------------------------------------------------- */
+  /* Narrower than the deck and set at reading size. This is the one place on
+     the page written in the first person, so it is allowed to look like prose
+     rather than like a product section. */
+  .byline { max-width: 34rem; margin-top: 1.6rem; }
+  .byline p { color: var(--muted); }
+  .byline .sig {
+    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin-top: 1.5rem;
+  }
+
+  /* The section above the footer used to be dark, which is why this hairline
+     exists. It now sits under a paper section, where the ground change is
+     already the divider and the rule is simply invisible. Kept because the
+     order of sections is not guaranteed to stay this way. */
+  footer {
+    background: var(--deep); color: var(--on-deep-mute);
+    padding: 3rem 0 3.5rem; font-size: .87rem;
+    border-top: 1px solid color-mix(in srgb, var(--on-deep) 17%, transparent);
+  }
+  footer .disclaimer { font-style: italic; margin-bottom: 1rem; max-width: 34rem; }
+  footer .foot-links {
+    display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.1rem;
+    font: 400 .87rem/1 ui-sans-serif, system-ui, sans-serif;
+  }
+  footer .foot-links a { color: var(--sand); text-decoration: none; }
+  footer .foot-links a:hover { text-decoration: underline; }
+  footer .version {
+    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: .12em; opacity: .55; margin: 0;
+  }
+  footer .mark .label { color: var(--on-deep); }
+  code {
+    font: 13px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
+    background: var(--paper-2); border: 1px solid var(--rule);
+    padding: .1rem .35rem; border-radius: 2px; word-break: break-all;
+  }
