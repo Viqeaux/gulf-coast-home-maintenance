@@ -365,19 +365,14 @@ calendar is missing from the app's own Settings list, nothing inside the app can
 fix it: the only control is `calendar.google.com/calendar/syncselect`, which the
 app does not link to. Both facts are now in the Google panel on the site.
 
-**Open, and it is Chad's call because it moves subscriber data.** Every event
-sits on the 1st of the month. Twelve events per feed, plus November 30, so
-**thirteen days a year carry anything at all**. Any subscriber opening a week
-view on the other three hundred and fifty-two days sees an empty calendar and
-has no way to distinguish that from a broken feed. That is exactly the
-conclusion the owner reached.
-
-The fix is to spread each month's three tasks across the month rather than
-stacking all three on the 1st, which would put an event in most weeks. It is not
-a small change: the dates are what existing subscribers already hold, so it
-rewrites all three feeds and **requires a `SEQUENCE` bump**. Worth doing as its
-own release, and worth pairing with the "How to:" label wording already waiting
-on the next `SEQUENCE` bump. Do not fold it into an unrelated one.
+**Fixed the same day, in 1.20.0.** Every event used to sit on the 1st, so
+thirteen days a year carried anything at all and a subscriber opening a week
+view on any of the other three hundred and fifty-two saw an empty calendar with
+no way to tell that from a broken feed. Dates are spread now: Must Do on the
+1st, Should Do on the 10th, Going Above on the 20th, November 30 left alone.
+`SEQUENCE` went to 2 and the "How to:" label was relabelled in the same bump,
+which is what it had been waiting for. **Do not move task dates again without
+another `SEQUENCE` bump.**
 
 
 **The binder is launched and on the site.** Chad published the listing on
