@@ -29,12 +29,14 @@ ANCHOR_YEAR = 2026
 
 # Bump on every content change you publish, so subscribers pick up the edit.
 # 1. Every event gained a link to its guide.
-SEQUENCE = 1
+# 2. Task dates spread across the month, the guide link relabelled, and the
+#    Monthly Rounds feed added.
+SEQUENCE = 2
 DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.19.1"
+VERSION = "1.20.0"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -84,6 +86,24 @@ TIERS = {
             + DISCLAIMER
         ),
     },
+    # The fourth feed, and deliberately not a fourth tier. The three tiers are
+    # levels of effort on the same seasonal list; this is a different kind of
+    # thing, the short routine that repeats every month regardless of season.
+    # It is its own feed so that subscribing is a separate decision: seven
+    # events a month is welcome to somebody who wants a routine and noise to
+    # somebody who wanted twelve seasonal reminders, and neither should have to
+    # take the other to get what they came for.
+    "monthly": {
+        "file": "gulf-coast-monthly-rounds.ics",
+        "name": "Monthly Rounds, Gulf Coast Home Maintenance",
+        "color": ("goldenrod", "#C08B2E"),
+        "desc": (
+            "The short monthly pass, seven rounds spread through the month. "
+            "Separate from the seasonal calendars on purpose, so you can take "
+            "the routine without the season or the season without the "
+            "routine. " + DISCLAIMER
+        ),
+    },
     "above": {
         "file": "gulf-coast-going-above.ics",
         "name": "Going Above, Gulf Coast Home Maintenance",
@@ -97,8 +117,20 @@ TIERS = {
 
 # --- Content ---------------------------------------------------------------
 # (month, day, tier, uid slug, title, body)
-# Day is 1 unless the date is deliberate: May 1 gives the 30-day flood
-# insurance window room before June 1, and November 30 is the season close.
+#
+# The day is the tier: Must Do on the 1st, Should Do on the 10th, Going Above
+# on the 20th. Everything used to sit on the 1st, which meant thirteen days a
+# year carried anything at all, and a subscriber opening a week view on any
+# other day saw an empty calendar with no way to tell that from a broken feed.
+# The owner reached exactly that conclusion about his own product on
+# 2026-08-21. Spread, something lands in three weeks out of four.
+#
+# November 30 is the exception and stays put: it is the close of hurricane
+# season and the date is the whole point. May's Must Do sits on the 1st like
+# every other, which still clears the 30-day flood policy window before June 1.
+#
+# Moving these rewrote dates subscribers already held, which is what SEQUENCE 2
+# is for. Do not move them again without another bump.
 
 TASKS = [
     # JANUARY
@@ -109,14 +141,14 @@ TASKS = [
      "Why: sensors degrade with age whether or not the unit still chirps, and "
      "a detector past its rated life can pass a button test and still fail in "
      "a real fire."),
-    (1, 1, "should", "jan-freeze-prep",
+    (1, 10, "should", "jan-freeze-prep",
      "Freeze prep, find your water shutoff",
      "Locate your main water shutoff and make sure you can actually turn it. "
      "Cover outdoor spigots.\n\n"
      "Why: coastal plumbing is often run through uninsulated exterior walls "
      "because it rarely needs to survive a freeze. When one comes, knowing "
      "where the shutoff is turns a flooded house into a wet floor."),
-    (1, 1, "above", "jan-attic-check",
+    (1, 20, "above", "jan-attic-check",
      "Check the attic after winter rain",
      "Look for daylight through the roof deck, damp or matted insulation, and "
      "water stains on the framing.\n\n"
@@ -130,12 +162,12 @@ TASKS = [
      "Why: Formosan and native subterranean termites are endemic across the "
      "Gulf Coast, and damage is almost never covered by homeowners insurance. "
      "An annual inspection is the cheapest insurance you can buy."),
-    (2, 1, "should", "feb-hvac-filter",
+    (2, 10, "should", "feb-hvac-filter",
      "Replace the HVAC filter, test the A/C",
      "Swap the filter and run the air conditioning briefly.\n\n"
      "Why: finding a cooling problem in February means an appointment. Finding "
      "it in July means a wait list, a premium, and a hot house."),
-    (2, 1, "above", "feb-caulk",
+    (2, 20, "above", "feb-caulk",
      "Walk the exterior and re-caulk",
      "Re-caulk gaps around windows, doors, and any penetration through the "
      "wall.\n\n"
@@ -149,14 +181,14 @@ TASKS = [
      "Why: down here the system runs eight or nine months a year, roughly "
      "double the load it was rated against. Service is what buys back the "
      "years that heat takes off."),
-    (3, 1, "should", "mar-gutters",
+    (3, 10, "should", "mar-gutters",
      "Clear the gutters, check the downspouts",
      "Clear the gutters and confirm every downspout discharges away from the "
      "foundation, not against it.\n\n"
      "Why: water dumped at the foundation is the start of settling, slab "
      "cracks, and a wet crawlspace. All of them expensive, all of them "
      "avoidable with a splash block."),
-    (3, 1, "above", "mar-grading",
+    (3, 20, "above", "mar-grading",
      "Check the grading around the house",
      "Walk the perimeter after a hard rain. Look for settling, cracks, and "
      "standing water.\n\n"
@@ -170,14 +202,14 @@ TASKS = [
      "along the slab, piers, and foundation walls.\n\n"
      "Why: a swarm is the one time termites are visible to you. Mud tubes mean "
      "an active colony is already feeding on the house."),
-    (4, 1, "should", "apr-wash-exterior",
+    (4, 10, "should", "apr-wash-exterior",
      "Wash the exterior, inspect the siding",
      "Wash the house down and inspect siding, brick, and soffits for damage or "
      "gaps.\n\n"
      "Why: salt air and humidity feed mildew and rot, and washing is how you "
      "find the soft spot behind it. Open soffits are also how squirrels and "
      "wasps get into the attic."),
-    (4, 1, "above", "apr-spigots-irrigation",
+    (4, 20, "above", "apr-spigots-irrigation",
      "Check spigots and service irrigation",
      "Check hose bibs and outdoor spigots for leaks. Service the irrigation "
      "system if you have one.\n\n"
@@ -193,7 +225,7 @@ TASKS = [
      "Why: flood policies generally take 30 days to take effect, so June 1 is "
      "already too late to start. Photos taken before a storm are what get a "
      "claim paid after one."),
-    (5, 1, "should", "may-generator-supplies",
+    (5, 10, "should", "may-generator-supplies",
      "Test the generator, restock supplies",
      "Start and load-test the generator. Restock water, batteries, and fuel. "
      "Confirm shutters or plywood are on hand and actually fit your "
@@ -201,7 +233,7 @@ TASKS = [
      "Why: a generator that has sat with old fuel since last season will not "
      "start when you need it, and plywood cut to the wrong window is plywood "
      "you cannot use."),
-    (5, 1, "above", "may-secure-exterior",
+    (5, 20, "above", "may-secure-exterior",
      "Inspect roof edges, secure loose items",
      "Inspect soffit vents and roof edges. Secure sheds, fencing, and anything "
      "that becomes a projectile.\n\n"
@@ -216,14 +248,14 @@ TASKS = [
      "Why: a clogged condensate line is one of the most common causes of "
      "ceiling damage on the coast. The unit keeps running and quietly drains "
      "into your drywall."),
-    (6, 1, "should", "jun-condenser-coils",
+    (6, 10, "should", "jun-condenser-coils",
      "Clean the condenser, clear vegetation",
      "Clean the outdoor condenser coils and cut vegetation back two feet on "
      "all sides of the unit.\n\n"
      "Why: a coil that cannot breathe makes the compressor work harder in the "
      "hottest months, which is exactly how a 12-year unit becomes an 8-year "
      "unit."),
-    (6, 1, "above", "jun-attic-ventilation",
+    (6, 20, "above", "jun-attic-ventilation",
      "Check attic ventilation and insulation",
      "Check that soffit and ridge vents are clear, and measure insulation "
      "depth.\n\n"
@@ -237,13 +269,13 @@ TASKS = [
      "water heater.\n\n"
      "Why: slow leaks are found by looking, not by waiting. In this humidity a "
      "cabinet leak becomes mold long before it becomes a stain you notice."),
-    (7, 1, "should", "jul-crawlspace",
+    (7, 10, "should", "jul-crawlspace",
      "Inspect the crawlspace",
      "Inspect the crawlspace or under-house area for moisture, pests, and "
      "vapor barrier damage.\n\n"
      "Why: it is the part of the house nobody looks at and the part humidity "
      "attacks hardest. Rot and pests both start down there."),
-    (7, 1, "above", "jul-humidity",
+    (7, 20, "above", "jul-humidity",
      "Check indoor humidity",
      "Measure indoor relative humidity. Aim for 45–55%. Run a "
      "dehumidifier if you are above that.\n\n"
@@ -258,12 +290,12 @@ TASKS = [
      "Why: this is the peak of the season. A lapsed policy or an expired "
      "document is something you want to find now, not while you are "
      "packing."),
-    (8, 1, "should", "aug-gutters-again",
+    (8, 10, "should", "aug-gutters-again",
      "Clear the gutters again",
      "Clear the gutters a second time.\n\n"
      "Why: summer storms fill them fast, and a full gutter in a tropical "
      "downpour sends the whole roof's water straight down your wall."),
-    (8, 1, "above", "aug-photograph-valuables",
+    (8, 20, "above", "aug-photograph-valuables",
      "Photograph big-ticket items",
      "Photograph big-ticket items and store the photos somewhere off-site or "
      "in the cloud.\n\n"
@@ -276,13 +308,13 @@ TASKS = [
      "Clean the full dryer vent run, not just the lint trap.\n\n"
      "Why: dryer lint is a leading cause of house fires, and coastal humidity "
      "makes it pack into the duct harder and faster."),
-    (9, 1, "should", "sep-roof-inspection",
+    (9, 10, "should", "sep-roof-inspection",
      "Inspect the roof from the ground",
      "Inspect the roof from the ground with binoculars after the summer storm "
      "run. Look for lifted, curled, or missing shingles.\n\n"
      "Why: you can see almost everything that matters from the driveway, and "
      "nobody has ever fallen off a driveway."),
-    (9, 1, "above", "sep-sump-drainage",
+    (9, 20, "above", "sep-sump-drainage",
      "Test the sump pump, clear drainage",
      "Test the sump pump if you have one. Clear drainage swales and "
      "ditches.\n\n"
@@ -296,12 +328,12 @@ TASKS = [
      "Why: sediment insulates the burner from the water and cooks the tank "
      "from the inside. Gulf Coast water heaters are already short-lived; this "
      "is most of the difference between 8 years and 12."),
-    (10, 1, "should", "oct-weatherstripping",
+    (10, 10, "should", "oct-weatherstripping",
      "Check weatherstripping and seals",
      "Check weatherstripping, door sweeps, and the attic hatch seal.\n\n"
      "Why: those gaps are your largest uncontrolled air exchange, which on the "
      "coast means you are paying to dehumidify the outdoors."),
-    (10, 1, "above", "oct-chimney",
+    (10, 20, "above", "oct-chimney",
      "Service the fireplace or chimney",
      "Service the fireplace or chimney before first use.\n\n"
      "Why: an unused flue collects nests, debris, and moisture damage over a "
@@ -315,13 +347,13 @@ TASKS = [
      "Why: hurricane season closes November 30. Insurers get much harder to "
      "convince about damage the longer you wait, and most policies require "
      "prompt notice."),
-    (11, 1, "should", "nov-filter-heat-test",
+    (11, 10, "should", "nov-filter-heat-test",
      "Replace the filter, test the heat",
      "Replace the HVAC filter and run the heat once.\n\n"
      "Why: the burner or heat strips have sat unused since spring. Better to "
      "smell the dust burn off in November than to find a dead system during a "
      "cold snap."),
-    (11, 1, "above", "nov-gutters-fascia",
+    (11, 20, "above", "nov-gutters-fascia",
      "Clear gutters, check fascia and trim",
      "Clear the gutters after leaf drop. Check the fascia and trim for "
      "rot.\n\n"
@@ -336,19 +368,63 @@ TASKS = [
      "main shutoff is.\n\n"
      "Why: coastal homes are built for heat, not cold. A hard freeze here "
      "bursts pipes that would be fine anywhere north of us."),
-    (12, 1, "should", "dec-gfci-breakers",
+    (12, 10, "should", "dec-gfci-breakers",
      "Test GFCI outlets, label the panel",
      "Press test and reset on every GFCI outlet. Label the breaker panel if it "
      "is not already labeled.\n\n"
      "Why: a GFCI that will not trip is not protecting anyone, and a labeled "
      "panel is what lets you kill the right circuit in a hurry."),
-    (12, 1, "above", "dec-watch-list",
+    (12, 20, "above", "dec-watch-list",
      "Update the Big Ticket Watch List",
      "Update your Big Ticket Watch List with anything you replaced or "
      "serviced this year.\n\n"
      "Why: the list is what turns a surprise roof into a planned roof. One "
      "update a year keeps it honest."),
 ]
+
+# --- Monthly rounds --------------------------------------------------------
+# (day, uid slug, title, body)
+#
+# Seven rounds, one per area, rather than one event per item. The raw list ran
+# to twenty-four jobs, and as separate reminders that is 288 events a year
+# against the seasonal calendar's 36, which is the volume at which people mute
+# a calendar rather than read it. Grouped by area it is 84, it lands in most
+# weeks, and every item still travels in the description.
+#
+# Days avoid the 1st, 10th, 20th and 30th so these interleave with the seasonal
+# tasks instead of stacking on them. Nothing falls later than the 26th, so no
+# round goes missing in February.
+#
+# Several overlap tasks already in the seasonal calendars: detectors, GFCIs,
+# the condensate line, gutters, the roof, the generator. That is deliberate and
+# it is why the wording differs. The monthly version is the quick pass and the
+# seasonal one is the thorough version, and the descriptions say so where the
+# difference matters.
+
+MONTHLY_ROUNDS = [
+    (3, "monthly-hvac", "Monthly: HVAC and air",
+     "Check or replace the air filter. A 1 inch filter is a monthly job; thicker media filters go quarterly.\nPour a cup of vinegar down the A/C condensate drain line.\nClear leaves and debris from around the outdoor condenser.\nCheck the dehumidifier bucket or drain, if you run one.\n\nWhy: the system runs most of the year here and the air it handles is wet, so the condensate line is the part most likely to block and put water somewhere expensive."),
+
+    (6, "monthly-plumbing", "Monthly: plumbing",
+     "Run water in the guest bath and any sink or shower nobody uses, so the P-traps stay full.\nClean sink and tub drains with baking soda and hot water, or an enzyme treatment.\nCheck under the sinks and around the water heater for damp.\nClean the garbage disposal and the dishwasher filter.\n\nWhy: a P-trap that dries out lets sewer gas straight into the room, and in a bathroom nobody uses that takes weeks rather than months."),
+
+    (8, "monthly-safety", "Monthly: safety check",
+     "Press and hold the test button on every smoke and carbon monoxide detector.\nCheck the fire extinguisher gauge is in the green.\nTest the GFCI outlets: kitchen, baths, garage, exterior.\n\nWhy: this is the quick pass. January's Must Do is the thorough one, with fresh batteries and any detector over ten years old replaced."),
+
+    (13, "monthly-appliances", "Monthly: appliances",
+     "Wipe the refrigerator door gaskets and check the drip pan.\nClean the range hood filter, with degreaser or in the dishwasher.\nRun a cleaning cycle on the washing machine and wipe the door gasket dry.\nClean out the dryer lint trap housing, past the screen you empty every load.\n\nWhy: a washer gasket left damp grows mold faster in Gulf humidity than anywhere else in the house, and the lint past the screen is the lint that starts dryer fires."),
+
+    (16, "monthly-exterior", "Monthly: walk the exterior",
+     "Walk the perimeter looking for wasp nests, mud tubes, standing water, and mulch piled against the siding.\nRinse salt spray off exterior fixtures, hardware and the grill if you are near the water.\nCheck the gutters and downspouts, especially once the season is open.\nLook over the roof from the ground for lifted or missing shingles.\n\nWhy: mud tubes and standing water are the two cheapest things to find and the two most expensive to miss."),
+
+    (23, "monthly-interior", "Monthly: interior upkeep",
+     "Vacuum the refrigerator coils, or every other month.\nDust the ceiling fan blades and check for wobble.\nVacuum the bathroom exhaust fan cover.\nRotate or flip the mattress, if it is the kind that flips.\n\nWhy: a bathroom fan that cannot move air is how a Gulf Coast bathroom ends up with mold on the ceiling."),
+
+    (26, "monthly-admin", "Monthly: generator and kit",
+     "Run the generator under load for fifteen to twenty minutes, if you have one.\nCheck the storm kit for expired batteries, water and medicine.\n\nWhy: a generator that has not run since last season is one you find out about in the dark, with the shops shut."),
+
+]
+
 
 # --- Curated guides --------------------------------------------------------
 # Videos other people made, chosen because they are good, keyed by task slug.
@@ -420,7 +496,7 @@ def has_guide(slug):
     return bool(STEPS.get(slug) or GUIDES.get(slug))
 
 
-def build_event(month, day, slug, title, body):
+def build_event(month, day, slug, title, body, freq="YEARLY"):
     # An all-day event's DTEND is exclusive, so it is the following day. Letting
     # the date module carry the month and year rollovers keeps leap years right
     # without a table of month lengths to maintain.
@@ -430,7 +506,7 @@ def build_event(month, day, slug, title, body):
     # one to an empty section. Steps count, not just videos.
     description = body + "\n\n" + DISCLAIMER
     if has_guide(slug):
-        description = body + "\n\nHow to: " + guide_url(slug) + "\n\n" + DISCLAIMER
+        description = body + "\n\nDetails: " + guide_url(slug) + "\n\n" + DISCLAIMER
 
     return [
         "BEGIN:VEVENT",
@@ -438,7 +514,7 @@ def build_event(month, day, slug, title, body):
         "DTSTAMP:" + DTSTAMP,
         "DTSTART;VALUE=DATE:" + stamp(start),
         "DTEND;VALUE=DATE:" + stamp(start + timedelta(days=1)),
-        "RRULE:FREQ=YEARLY",
+        "RRULE:FREQ=" + freq,
         "SEQUENCE:{0}".format(SEQUENCE),
         "SUMMARY:" + escape(title),
         "DESCRIPTION:" + escape(description),
@@ -465,9 +541,17 @@ def build_calendar(tier_key):
         "COLOR:" + tier["color"][0],
         "X-APPLE-CALENDAR-COLOR:" + tier["color"][1],
     ]
-    events = [t for t in TASKS if t[2] == tier_key]
-    for month, day, _, slug, title, body in events:
-        lines.extend(build_event(month, day, slug, title, body))
+    if tier_key == "monthly":
+        # Anchored in January and repeating every month. The month in DTSTART
+        # only says where the series begins, never which months it covers, so
+        # there is no month field on a round to keep in step with anything.
+        events = MONTHLY_ROUNDS
+        for day, slug, title, body in events:
+            lines.extend(build_event(1, day, slug, title, body, freq="MONTHLY"))
+    else:
+        events = [t for t in TASKS if t[2] == tier_key]
+        for month, day, _, slug, title, body in events:
+            lines.extend(build_event(month, day, slug, title, body))
     lines.append("END:VCALENDAR")
 
     # Fold once, here, rather than at each place a line is built, every line in
@@ -974,7 +1058,7 @@ def build_guides():
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
-    for tier_key in ("must", "should", "above"):
+    for tier_key in ("must", "should", "above", "monthly"):
         text, count = build_calendar(tier_key)
         path = os.path.join(OUT_DIR, TIERS[tier_key]["file"])
         with open(path, "wb") as handle:

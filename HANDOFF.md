@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.19.1**. Everything below is live unless marked otherwise.
+Current version **v1.20.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -203,8 +203,22 @@ the guides page keeps reporting the old one.
 
 **`SEQUENCE` is not the version.** It lives in `build_calendars.py` and is what
 tells a calendar client an event actually changed. Bump it only when task
-content changes. It is at **1** because every event gained a guide link. A
-design or infrastructure release does not need it.
+content changes. It is at **2**: 1 was every event gaining a guide link, and 2
+was 1.20.0 spreading the task dates across the month, relabelling that link, and
+adding the Monthly Rounds feed. A design or infrastructure release does not need
+it.
+
+**Task dates are now the tier.** Must Do on the 1st, Should Do on the 10th,
+Going Above on the 20th, and November 30 left alone because it is the close of
+the season. Moving them again means another `SEQUENCE` bump and another round of
+every subscriber's events shifting under them, so it is not a thing to tidy.
+
+**There are four feeds, not three.** The fourth is Monthly Rounds, seven events
+a month grouped by area, and it is deliberately not a fourth tier: the tiers are
+levels of effort on the seasonal list, this is the routine that repeats whatever
+the season. It lives in `MONTHLY_ROUNDS` rather than `TASKS`, which is what
+keeps it out of the printed kit. Anything added to `TASKS` reaches the kit;
+anything added to `MONTHLY_ROUNDS` does not.
 
 **Cut versions without being asked**, when a coherent piece of work lands and is
 verified. Not every commit, and not a half-finished feature.

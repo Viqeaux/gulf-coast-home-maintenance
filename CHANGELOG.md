@@ -27,6 +27,67 @@ Newest first.
 
 ---
 
+## [1.20.0], 2026-08-21
+
+**`SEQUENCE` goes to 2.** Every subscriber's existing events move, which is the
+first time that has happened since the feeds launched. Read the note at the
+bottom before touching task dates again.
+
+### Changed
+
+- **Task dates spread across the month.** Must Do on the 1st, Should Do on the
+  10th, Going Above on the 20th. Everything used to sit on the 1st, so thirteen
+  days a year carried anything at all and a subscriber opening a week view on
+  any of the other three hundred and fifty-two saw an empty calendar with no way
+  to tell that from a broken feed. Chad reached exactly that conclusion about
+  his own product on 2026-08-21. Spread, something lands in three weeks of four.
+- November 30 stays put. It is the close of hurricane season and the date is the
+  whole point. May's Must Do sits on the 1st with the rest, which still clears
+  the 30-day flood policy window ahead of June 1.
+- **The guide link is labelled "Details:" rather than "How to:".** Parked in
+  1.10.0 for the next `SEQUENCE` bump, because the page stopped carrying steps
+  when they moved into the kit and a label promising them was overselling what
+  it leads to. This is that bump, so it travels here rather than earning its own.
+
+### Added
+
+- **A fourth feed, Monthly Rounds**, at `gulf-coast-monthly-rounds.ics`. Seven
+  rounds a month, one per area: HVAC and air, plumbing, safety, appliances, the
+  exterior walk, interior upkeep, and the generator and storm kit. Every item
+  travels in the event description.
+- **Deliberately a fourth feed rather than a fourth tier.** The three tiers are
+  levels of effort on one seasonal list. This is a different kind of thing, the
+  short routine that repeats regardless of season, and subscribing to it is a
+  separate decision: seven events a month is welcome to somebody who wants a
+  routine and noise to somebody who came for twelve seasonal reminders.
+- **Seven events a month, not twenty-four.** The list ran to twenty-four jobs,
+  which as separate reminders is 288 events a year against the seasonal
+  calendar's 36. That is the volume at which people mute a calendar rather than
+  read it. Grouped by area it is 84, it lands in most weeks, and nothing is lost
+  because each event carries its whole list.
+- Rounds fall on the 3rd, 6th, 8th, 13th, 16th, 23rd and 26th, which interleaves
+  them with the seasonal tasks rather than stacking on them, and keeps every
+  round inside a February.
+
+### Notes
+
+- **Overlaps with the seasonal calendars are deliberate.** Detectors, GFCIs, the
+  condensate line, gutters, the roof and the generator appear in both. The
+  monthly version is the quick pass and the seasonal one is the thorough
+  version, and the wording differs to say so: the monthly safety round is press
+  and hold the test button, while January is fresh batteries and replacing any
+  detector over ten years old.
+- **UIDs are unchanged**, verified against 1.19.1. With the same UID and a
+  raised `SEQUENCE`, a client moves the event it already holds instead of adding
+  a second copy, which is the whole reason this is safe to do at all.
+- The printed kit is untouched. `build_printables.py` filters `TASKS` by month
+  and never reads the day, so spreading the dates changed nothing about the 27
+  pages, and the rounds live in their own constant rather than in `TASKS`.
+- All four feeds verified: CRLF throughout with no bare LF, no line over the
+  75 octet limit, `SEQUENCE:2` everywhere, seven `FREQ=MONTHLY` events in the
+  new feed and none of them carrying a guide link, since the contents page has
+  no anchors for them.
+
 ## [1.19.1], 2026-08-21
 
 ### Fixed

@@ -540,6 +540,10 @@
   .tier--must   { --tier-color: var(--must); }
   .tier--should { --tier-color: var(--should); }
   .tier--above  { --tier-color: var(--above); }
+  /* The monthly feed is not a fourth level of effort, so it takes the sand
+     accent rather than extending the red/teal/olive ladder the three tiers
+     use. Different kind of thing, different color family. */
+  .tier--monthly { --tier-color: var(--sand); }
   .tier h3 {
     color: var(--tier-color); font-size: 1.16rem;
     display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
@@ -955,7 +959,7 @@
           "name": "Are the phone calendars really free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, and they stay free. All three tiers are subscribe-able calendars with no signup, no card, and no trial. They are not a sample of the printable kit."
+            "text": "Yes, and they stay free. The three seasonal tiers and the monthly rounds are all subscribe-able calendars with no signup, no card, and no trial. They are not a sample of the printable kit."
           }
         },
         {
@@ -1633,7 +1637,7 @@
     <span class="sec-no">07 / Free</span>
     <h2>Put it on your phone <span class="free-tag">Free</span></h2>
     <p class="deck">
-      <strong>All three of these are free.</strong> Not a sample of the kit above and
+      <strong>All four of these are free.</strong> Not a sample of the kit above and
       not a trial. The same twelve months, as calendars you subscribe to once: no
       signup, no card, and they repeat every year forever.
     </p>
@@ -1650,6 +1654,16 @@
       <div class="tier tier--above">
         <h3>Going Above <span class="badge badge--free">Free</span> <span class="badge">12 reminders a year</span></h3>
         <div class="actions" data-file="gulf-coast-going-above.ics"></div>
+      </div>
+      <!-- Separated from the three tiers by a rule and its own line of copy,
+           because it is a different kind of subscription rather than a fourth
+           level of effort. Seven events a month is welcome to somebody who
+           wants a routine and noise to somebody who came for the season, so it
+           is worth making the difference obvious before they click. -->
+      <div class="tier tier--monthly" style="margin-top:1.75rem">
+        <h3>Monthly Rounds <span class="badge badge--free">Free</span> <span class="badge">7 reminders a month</span></h3>
+        <p>The short routine, not the seasons: filters, drains, detectors, the walk round the outside. Seven rounds spread through the month, every month. Take this one as well if you want the calendar to keep you honest between the big jobs.</p>
+        <div class="actions" data-file="gulf-coast-monthly-rounds.ics"></div>
       </div>
     </div>
 
@@ -1807,7 +1821,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.19.1</p>
+    <p class="version">v1.20.0</p>
   </div>
 </footer>
 
