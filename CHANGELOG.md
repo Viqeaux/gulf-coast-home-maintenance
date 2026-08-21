@@ -27,6 +27,40 @@ Newest first.
 
 ---
 
+## [1.23.1], 2026-08-21
+
+### Changed
+
+- **The free calendar section moves to the band, and the picker becomes the
+  loudest card on the page.** It was the quietest: `--paper-2` on the paper
+  ground measured **1.06** against it, which is not a card so much as a faint
+  rectangle around the one thing that section exists to get clicked. It now
+  takes the tier cards' treatment, a lifted paper card with a shadow, plus the
+  accent bar that means free everywhere else on the site. Against the deep
+  ground it measures **15.84**.
+- The same change fixes an alternation regression from 1.23.0. Removing the
+  setup section left three paper sections in a row, and the page had stopped
+  alternating. It runs paper, deep, paper, deep, paper again.
+
+### Fixed
+
+- **"Free, and it stays free." was invisible.** `.deck strong` is `--ink`, an
+  absolute near-black, so the bolded opening of that deck vanished the moment
+  its section moved to the deep ground. It reads the surface token now and
+  follows the section wherever it goes. Measures 12.48.
+- **This is the third absolute token caught on a ground it was not written
+  for**, after the deck links in 1.22.0 and the wordmark in the same release.
+  The pattern is worth naming: a value that names a color directly is a value
+  that breaks the next time a section changes ground, and the fix is always to
+  read `--on-surface` instead. The rest of that section was swept and everything
+  else sits inside a paper card, where the absolute tokens are correct.
+
+### Notes
+
+- Feeds byte-identical to 1.23.0, `SEQUENCE` stays at 2.
+- Checked at both widths: the picker holds one row of checkboxes on desktop and
+  three on a phone, its buttons stay inside the card, and nothing overflows.
+
 ## [1.23.0], 2026-08-21
 
 **The free calendars page.** Chad, looking at the calendar section: "we don't

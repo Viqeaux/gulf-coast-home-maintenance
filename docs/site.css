@@ -49,6 +49,12 @@
   .muted { color: var(--muted); }
   .deck { font-size: 1.06rem; color: var(--muted); max-width: 36rem; }
   .deck strong { color: var(--ink); font-weight: 600; }
+  /* --ink is an absolute near-black, so a bolded phrase in a deck disappeared
+     the moment a section carrying one moved to the deep ground. Third time an
+     absolute token has been caught on a ground it was not written for, after
+     the deck links and the wordmark, so this reads the surface token instead
+     and follows the section wherever it goes. */
+  .band .deck strong { color: var(--on-surface); }
   /* A link inside a deck had never occurred until the shop page put one there,
      so it came out browser-default blue on the deep ground. Third time this
      class of bug has shown up, so it is set for both grounds here rather than
@@ -400,9 +406,16 @@
      its own servers, so there is no per-person state on a static site: every
      selection is a file built in advance, and this only hands out the address
      that matches the boxes. */
+  /* The loudest card on the page, deliberately. It was the quietest: paper-2
+     on the paper ground measured 1.06 against it, which is not a card so much
+     as a faint rectangle. This is the one thing the free section exists to get
+     clicked, so it takes the treatment the tier cards use, a lifted paper card
+     with a shadow, and the accent bar that means "free" everywhere else on the
+     site. On the deep ground it now reads as the object in the room. */
   .picker {
-    margin-top: 1.75rem; background: var(--paper-2);
-    border: 1px solid var(--rule); border-radius: 3px; padding: 1.5rem 1.6rem;
+    margin-top: 1.75rem; background: var(--paper);
+    border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+    border-radius: 3px; box-shadow: var(--shadow-lg); padding: 1.6rem 1.7rem;
   }
   .picker h3 { margin-bottom: .3rem; }
   .picker > p { color: var(--muted); font-size: .95rem; margin: 0 0 1.1rem; }
@@ -506,7 +519,8 @@
     .pcard-more { border-bottom-color: #7fa6ad; }
   }
 
-  .pcard, .tier, .month-card, .buy, .preview-warning, .android-note {
+  .pcard, .tier, .month-card, .buy, .preview-warning, .android-note,
+  .picker, .followup {
     --surface: var(--paper);
     --on-surface: var(--ink);
     --on-surface-mute: var(--muted);
