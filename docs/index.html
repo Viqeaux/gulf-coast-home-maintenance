@@ -441,6 +441,33 @@
      the rest of the page already uses there. */
   .buy a:not(.btn), .signup-note a { color: var(--accent); }
 
+  /* --- feed picker ------------------------------------------------------ */
+  /* Four feeds means somebody who wants three of them ends up with three
+     entries in their sidebar. A subscription is a URL fetched by Google from
+     its own servers, so there is no per-person state on a static site: every
+     selection is a file built in advance, and this only hands out the address
+     that matches the boxes. */
+  .picker {
+    margin-top: 1.75rem; background: var(--paper-2);
+    border: 1px solid var(--rule); border-radius: 3px; padding: 1.5rem 1.6rem;
+  }
+  .picker h3 { margin-bottom: .3rem; }
+  .picker > p { color: var(--muted); font-size: .95rem; margin: 0 0 1.1rem; }
+  .picker-boxes { display: flex; flex-wrap: wrap; gap: .5rem .9rem; margin-bottom: 1.1rem; }
+  .picker-boxes label {
+    display: inline-flex; align-items: center; gap: .45rem; cursor: pointer;
+    font: 600 .93rem/1.2 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink); border: 1px solid var(--rule); background: var(--paper);
+    padding: .55rem .75rem; border-radius: 2px;
+  }
+  .picker-boxes input { accent-color: var(--accent); width: 15px; height: 15px; margin: 0; }
+  .picker-boxes label:focus-within { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .picker-summary {
+    font-size: .9rem; color: var(--muted); margin: 0 0 1rem;
+    padding-top: .9rem; border-top: 1px solid var(--rule);
+  }
+  .picker-summary strong { color: var(--ink); }
+
   /* --- page previews ---------------------------------------------------- */
   /* Tops of real pages, inside each product section. Cropped rather than shrunk:
      see build_site_images.py for why the crop is the protection and where each
@@ -1665,6 +1692,22 @@
         <p>The short routine, not the seasons: filters, drains, detectors, the walk round the outside. Seven rounds spread through the month, every month. Take this one as well if you want the calendar to keep you honest between the big jobs.</p>
         <div class="actions" data-file="gulf-coast-monthly-rounds.ics"></div>
       </div>
+
+      <!-- Every combination is a real file built at build time, so this picker
+           only chooses an address. It starts on Must Do alone, which is what
+           the section above tells people to start with. -->
+      <div class="picker">
+        <h3>Or take them as one calendar</h3>
+        <p>Tick what you want and subscribe once, instead of adding each of these separately and ending up with four calendars in your sidebar.</p>
+        <div class="picker-boxes">
+          <label><input type="checkbox" value="must" checked> Must Do</label>
+          <label><input type="checkbox" value="should"> Should Do</label>
+          <label><input type="checkbox" value="above"> Going Above</label>
+          <label><input type="checkbox" value="monthly"> Monthly Rounds</label>
+        </div>
+        <p class="picker-summary"></p>
+        <div class="actions" id="picker-actions" data-file="gulf-coast-must-do.ics"></div>
+      </div>
     </div>
 
     <div class="followup">
@@ -1821,7 +1864,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.20.0</p>
+    <p class="version">v1.21.0</p>
   </div>
 </footer>
 
@@ -1951,7 +1994,9 @@
       return a;
     }
 
-    document.querySelectorAll('.actions[data-file]').forEach(function (box) {
+    // Named rather than inline, because the picker below re-renders one of
+    // these boxes every time a checkbox moves.
+    function renderActions(box) {
       var file = box.getAttribute('data-file');
       var feed = base + file;
       var webcal = 'webcal://' + bare + file;
@@ -1976,7 +2021,70 @@
       copy.setAttribute('data-url', feed);
       copy.textContent = COPY_LABEL;
       box.appendChild(copy);
-    });
+    }
+
+    document.querySelectorAll('.actions[data-file]').forEach(renderActions);
+
+    // --- the picker -------------------------------------------------------
+    // Mirrors combo_file() in build_calendars.py: the order is fixed, and one
+    // ticked box resolves to that feed's own file rather than to a combination
+    // of one. If those two ever disagree the picker hands out a 404, so they
+    // are written to look alike on purpose.
+    var PICKER_ORDER = ['must', 'should', 'above', 'monthly'];
+    var PICKER_SINGLE = {
+      must: 'gulf-coast-must-do.ics',
+      should: 'gulf-coast-should-do.ics',
+      above: 'gulf-coast-going-above.ics',
+      monthly: 'gulf-coast-monthly-rounds.ics'
+    };
+    var PICKER_LABEL = {
+      must: 'Must Do',
+      should: 'Should Do',
+      above: 'Going Above',
+      monthly: 'Monthly Rounds'
+    };
+    var PICKER_COUNT = { must: 12, should: 12, above: 12, monthly: 84 };
+
+    var picker = document.querySelector('.picker');
+    if (picker) {
+      var pickerBox = picker.querySelector('.actions');
+      var pickerSummary = picker.querySelector('.picker-summary');
+
+      function pickerUpdate() {
+        var chosen = PICKER_ORDER.filter(function (key) {
+          var input = picker.querySelector('input[value="' + key + '"]');
+          return input && input.checked;
+        });
+
+        if (!chosen.length) {
+          pickerBox.textContent = '';
+          pickerSummary.textContent = 'Tick at least one to get a calendar.';
+          return;
+        }
+
+        var file = chosen.length === 1
+          ? PICKER_SINGLE[chosen[0]]
+          : 'gulf-coast-' + chosen.join('-') + '.ics';
+
+        var total = 0;
+        chosen.forEach(function (key) { total += PICKER_COUNT[key]; });
+        var names = chosen.map(function (key) { return PICKER_LABEL[key]; });
+
+        pickerSummary.textContent = '';
+        pickerSummary.appendChild(document.createTextNode('One calendar: '));
+        var strong = document.createElement('strong');
+        strong.textContent = names.join(', ');
+        pickerSummary.appendChild(strong);
+        pickerSummary.appendChild(document.createTextNode(
+          '. About ' + total + ' reminders a year.'));
+
+        pickerBox.setAttribute('data-file', file);
+        renderActions(pickerBox);
+      }
+
+      picker.addEventListener('change', pickerUpdate);
+      pickerUpdate();
+    }
 
     // The two subscribe buttons only cover Google and apps that register the
     // webcal:// handler. Everything else (Outlook on the web, Thunderbird,

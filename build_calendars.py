@@ -36,7 +36,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.20.0"
+VERSION = "1.21.0"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -524,39 +524,129 @@ def build_event(month, day, slug, title, body, freq="YEARLY"):
     ]
 
 
-def build_calendar(tier_key):
-    """Return the .ics text for one tier, and how many events it holds."""
-    tier = TIERS[tier_key]
+def events_for(tier_key):
+    """Every event in one feed, as (month, day, slug, title, body, freq).
+
+    The monthly rounds are anchored in January and repeat every month: the
+    month in DTSTART only says where the series begins, never which months it
+    covers, so a round carries no month of its own to keep in step with
+    anything.
+    """
+    if tier_key == "monthly":
+        return [(1, day, slug, title, body, "MONTHLY")
+                for day, slug, title, body in MONTHLY_ROUNDS]
+    return [(month, day, slug, title, body, "YEARLY")
+            for month, day, tier, slug, title, body in TASKS if tier == tier_key]
+
+
+def render_calendar(name, desc, color, events):
+    """Wrap a list of events in a VCALENDAR and fold it."""
     lines = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
         "PRODID:-//Gulf Coast Home Maintenance//Perpetual Edition//EN",
         "CALSCALE:GREGORIAN",
         "METHOD:PUBLISH",
-        "X-WR-CALNAME:" + escape(tier["name"]),
-        "X-WR-CALDESC:" + escape(tier["desc"]),
+        "X-WR-CALNAME:" + escape(name),
+        "X-WR-CALDESC:" + escape(desc),
         "X-WR-TIMEZONE:America/Chicago",
         "REFRESH-INTERVAL;VALUE=DURATION:P1D",
         "X-PUBLISHED-TTL:P1D",
-        "COLOR:" + tier["color"][0],
-        "X-APPLE-CALENDAR-COLOR:" + tier["color"][1],
+        "COLOR:" + color[0],
+        "X-APPLE-CALENDAR-COLOR:" + color[1],
     ]
-    if tier_key == "monthly":
-        # Anchored in January and repeating every month. The month in DTSTART
-        # only says where the series begins, never which months it covers, so
-        # there is no month field on a round to keep in step with anything.
-        events = MONTHLY_ROUNDS
-        for day, slug, title, body in events:
-            lines.extend(build_event(1, day, slug, title, body, freq="MONTHLY"))
-    else:
-        events = [t for t in TASKS if t[2] == tier_key]
-        for month, day, _, slug, title, body in events:
-            lines.extend(build_event(month, day, slug, title, body))
+    for month, day, slug, title, body, freq in events:
+        lines.extend(build_event(month, day, slug, title, body, freq=freq))
     lines.append("END:VCALENDAR")
 
-    # Fold once, here, rather than at each place a line is built, every line in
+    # Fold once, here, rather than at each place a line is built: every line in
     # the file has to obey the 75-octet limit, so nowhere else has to remember.
     return "\r\n".join(fold(line) for line in lines) + "\r\n", len(events)
+
+
+def build_calendar(tier_key):
+    """Return the .ics text for one feed, and how many events it holds."""
+    tier = TIERS[tier_key]
+    return render_calendar(tier["name"], tier["desc"], tier["color"],
+                           events_for(tier_key))
+
+
+# --- Combined feeds --------------------------------------------------------
+# Somebody who wants three of the four should end up with one calendar, not
+# three entries cluttering their sidebar. A subscription is a URL that Google
+# fetches from its own servers, so there is no per-person state to work with:
+# on a static site the only way to offer a choice is to build every choice in
+# advance and hand out the matching address.
+#
+# Four feeds make fifteen useful selections. The four singles already exist, so
+# this builds the eleven combinations of two or more, and the picker on the
+# site maps a set of ticked boxes onto one of those addresses.
+#
+# UIDs match the single feeds on purpose. Subscribing to both a single and a
+# combination containing it shows every shared event twice, because they are
+# two calendars and a client has no reason to merge them. That is why the
+# picker hands out one address rather than several.
+
+COMBO_ORDER = ("must", "should", "above", "monthly")
+
+COMBO_LABELS = {
+    "must": "Must Do",
+    "should": "Should Do",
+    "above": "Going Above",
+    "monthly": "Monthly Rounds",
+}
+
+
+def combo_file(keys):
+    """Stable filename for a selection. The order is fixed so it cannot drift."""
+    return "gulf-coast-" + "-".join(keys) + ".ics"
+
+
+def combo_name(keys):
+    labels = [COMBO_LABELS[k] for k in keys]
+    if len(labels) == len(COMBO_ORDER):
+        return "Gulf Coast Home Maintenance, everything"
+    return "Gulf Coast Home Maintenance: " + " + ".join(labels)
+
+
+def combinations(items, size):
+    """Subsets of a given size, in the order the items were given."""
+    if size == 0:
+        return [()]
+    out = []
+    for i, item in enumerate(items):
+        for rest in combinations(items[i + 1:], size - 1):
+            out.append((item,) + rest)
+    return out
+
+
+def all_combos():
+    """Every selection of two or more feeds."""
+    out = []
+    for size in range(2, len(COMBO_ORDER) + 1):
+        out.extend(combinations(COMBO_ORDER, size))
+    return out
+
+
+def build_combo(keys):
+    """One calendar carrying several feeds' events."""
+    events = []
+    for key in keys:
+        events.extend(events_for(key))
+    # Sorted so the file reads in calendar order rather than feed order. Purely
+    # cosmetic: a client sorts by date regardless.
+    events.sort(key=lambda e: (e[0], e[1]))
+
+    labels = [COMBO_LABELS[k] for k in keys]
+    desc = ("One calendar carrying " + ", ".join(labels[:-1]) + " and " +
+            labels[-1] + ". Subscribe to this instead of to each of them "
+            "separately, not as well, or every shared event arrives twice. "
+            + DISCLAIMER)
+
+    # The most demanding feed present gives the calendar its color, so a
+    # selection containing Must Do still reads as the urgent one.
+    color = TIERS[keys[0]]["color"]
+    return render_calendar(combo_name(keys), desc, color, events)
 
 
 # --- Guides page -----------------------------------------------------------
@@ -1064,6 +1154,17 @@ def main():
         with open(path, "wb") as handle:
             handle.write(text.encode("utf-8"))
         print("{0}  {1} events".format(path, count))
+
+    combos = all_combos()
+    sizes = []
+    for keys in combos:
+        text, count = build_combo(keys)
+        path = os.path.join(OUT_DIR, combo_file(keys))
+        with open(path, "wb") as handle:
+            handle.write(text.encode("utf-8"))
+        sizes.append(count)
+    print("{0} combined feeds  {1} to {2} events each".format(
+        len(combos), min(sizes), max(sizes)))
 
     guides_dir = os.path.join(OUT_DIR, "guides")
     os.makedirs(guides_dir, exist_ok=True)

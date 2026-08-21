@@ -1,0 +1,562 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Gulf Coast Home Maintenance//Perpetual Edition//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Gulf Coast Home Maintenance: Should Do + Going Above + Monthly
+  Rounds
+X-WR-CALDESC:One calendar carrying Should Do\, Going Above and Monthly Roun
+ ds. Subscribe to this instead of to each of them separately\, not as well\
+ , or every shared event arrives twice. General maintenance guidance\, not 
+ a substitute for a licensed inspector\, contractor\, or your insurance pol
+ icy terms.
+X-WR-TIMEZONE:America/Chicago
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+COLOR:teal
+X-APPLE-CALENDAR-COLOR:#1F5F6B
+BEGIN:VEVENT
+UID:2026-monthly-hvac@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260103
+DTEND;VALUE=DATE:20260104
+RRULE:FREQ=MONTHLY
+SEQUENCE:2
+SUMMARY:Monthly: HVAC and air
+DESCRIPTION:Check or replace the air filter. A 1 inch filter is a monthly j
+ ob\; thicker media filters go quarterly.\nPour a cup of vinegar down the A
+ /C condensate drain line.\nClear leaves and debris from around the outdoor
+  condenser.\nCheck the dehumidifier bucket or drain\, if you run one.\n\nW
+ hy: the system runs most of the year here and the air it handles is wet\, 
+ so the condensate line is the part most likely to block and put water some
+ where expensive.\n\nGeneral maintenance guidance\, not a substitute for a 
+ licensed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-monthly-plumbing@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260106
+DTEND;VALUE=DATE:20260107
+RRULE:FREQ=MONTHLY
+SEQUENCE:2
+SUMMARY:Monthly: plumbing
+DESCRIPTION:Run water in the guest bath and any sink or shower nobody uses\
+ , so the P-traps stay full.\nClean sink and tub drains with baking soda an
+ d hot water\, or an enzyme treatment.\nCheck under the sinks and around th
+ e water heater for damp.\nClean the garbage disposal and the dishwasher fi
+ lter.\n\nWhy: a P-trap that dries out lets sewer gas straight into the roo
+ m\, and in a bathroom nobody uses that takes weeks rather than months.\n\n
+ General maintenance guidance\, not a substitute for a licensed inspector\,
+  contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-monthly-safety@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260108
+DTEND;VALUE=DATE:20260109
+RRULE:FREQ=MONTHLY
+SEQUENCE:2
+SUMMARY:Monthly: safety check
+DESCRIPTION:Press and hold the test button on every smoke and carbon monoxi
+ de detector.\nCheck the fire extinguisher gauge is in the green.\nTest the
+  GFCI outlets: kitchen\, baths\, garage\, exterior.\n\nWhy: this is the qu
+ ick pass. January's Must Do is the thorough one\, with fresh batteries and
+  any detector over ten years old replaced.\n\nGeneral maintenance guidance
+ \, not a substitute for a licensed inspector\, contractor\, or your insura
+ nce policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-jan-freeze-prep@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260110
+DTEND;VALUE=DATE:20260111
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Freeze prep\, find your water shutoff
+DESCRIPTION:Locate your main water shutoff and make sure you can actually t
+ urn it. Cover outdoor spigots.\n\nWhy: coastal plumbing is often run throu
+ gh uninsulated exterior walls because it rarely needs to survive a freeze.
+  When one comes\, knowing where the shutoff is turns a flooded house into 
+ a wet floor.\n\nDetails: https://gulfcoasthomemaintenance.com/guides/#jan-
+ freeze-prep\n\nGeneral maintenance guidance\, not a substitute for a licen
+ sed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-monthly-appliances@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260113
+DTEND;VALUE=DATE:20260114
+RRULE:FREQ=MONTHLY
+SEQUENCE:2
+SUMMARY:Monthly: appliances
+DESCRIPTION:Wipe the refrigerator door gaskets and check the drip pan.\nCle
+ an the range hood filter\, with degreaser or in the dishwasher.\nRun a cle
+ aning cycle on the washing machine and wipe the door gasket dry.\nClean ou
+ t the dryer lint trap housing\, past the screen you empty every load.\n\nW
+ hy: a washer gasket left damp grows mold faster in Gulf humidity than anyw
+ here else in the house\, and the lint past the screen is the lint that sta
+ rts dryer fires.\n\nGeneral maintenance guidance\, not a substitute for a 
+ licensed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-monthly-exterior@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260116
+DTEND;VALUE=DATE:20260117
+RRULE:FREQ=MONTHLY
+SEQUENCE:2
+SUMMARY:Monthly: walk the exterior
+DESCRIPTION:Walk the perimeter looking for wasp nests\, mud tubes\, standin
+ g water\, and mulch piled against the siding.\nRinse salt spray off exteri
+ or fixtures\, hardware and the grill if you are near the water.\nCheck the
+  gutters and downspouts\, especially once the season is open.\nLook over t
+ he roof from the ground for lifted or missing shingles.\n\nWhy: mud tubes 
+ and standing water are the two cheapest things to find and the two most ex
+ pensive to miss.\n\nGeneral maintenance guidance\, not a substitute for a 
+ licensed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-jan-attic-check@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260120
+DTEND;VALUE=DATE:20260121
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Check the attic after winter rain
+DESCRIPTION:Look for daylight through the roof deck\, damp or matted insula
+ tion\, and water stains on the framing.\n\nWhy: a small roof leak shows up
+  in the attic long before it shows up on your ceiling. Winter rain is the 
+ easiest time to catch one.\n\nDetails: https://gulfcoasthomemaintenance.co
+ m/guides/#jan-attic-check\n\nGeneral maintenance guidance\, not a substitu
+ te for a licensed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-monthly-interior@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260123
+DTEND;VALUE=DATE:20260124
+RRULE:FREQ=MONTHLY
+SEQUENCE:2
+SUMMARY:Monthly: interior upkeep
+DESCRIPTION:Vacuum the refrigerator coils\, or every other month.\nDust the
+  ceiling fan blades and check for wobble.\nVacuum the bathroom exhaust fan
+  cover.\nRotate or flip the mattress\, if it is the kind that flips.\n\nWh
+ y: a bathroom fan that cannot move air is how a Gulf Coast bathroom ends u
+ p with mold on the ceiling.\n\nGeneral maintenance guidance\, not a substi
+ tute for a licensed inspector\, contractor\, or your insurance policy term
+ s.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-monthly-admin@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260126
+DTEND;VALUE=DATE:20260127
+RRULE:FREQ=MONTHLY
+SEQUENCE:2
+SUMMARY:Monthly: generator and kit
+DESCRIPTION:Run the generator under load for fifteen to twenty minutes\, if
+  you have one.\nCheck the storm kit for expired batteries\, water and medi
+ cine.\n\nWhy: a generator that has not run since last season is one you fi
+ nd out about in the dark\, with the shops shut.\n\nGeneral maintenance gui
+ dance\, not a substitute for a licensed inspector\, contractor\, or your i
+ nsurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-feb-hvac-filter@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260210
+DTEND;VALUE=DATE:20260211
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Replace the HVAC filter\, test the A/C
+DESCRIPTION:Swap the filter and run the air conditioning briefly.\n\nWhy: f
+ inding a cooling problem in February means an appointment. Finding it in J
+ uly means a wait list\, a premium\, and a hot house.\n\nDetails: https://g
+ ulfcoasthomemaintenance.com/guides/#feb-hvac-filter\n\nGeneral maintenance
+  guidance\, not a substitute for a licensed inspector\, contractor\, or yo
+ ur insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-feb-caulk@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260220
+DTEND;VALUE=DATE:20260221
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Walk the exterior and re-caulk
+DESCRIPTION:Re-caulk gaps around windows\, doors\, and any penetration thro
+ ugh the wall.\n\nWhy: caulk is the cheapest material on the house and the 
+ first line against wind-driven rain. On the coast it fails in 2–4 years.
+ \n\nDetails: https://gulfcoasthomemaintenance.com/guides/#feb-caulk\n\nGen
+ eral maintenance guidance\, not a substitute for a licensed inspector\, co
+ ntractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-mar-gutters@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260310
+DTEND;VALUE=DATE:20260311
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Clear the gutters\, check the downspouts
+DESCRIPTION:Clear the gutters and confirm every downspout discharges away f
+ rom the foundation\, not against it.\n\nWhy: water dumped at the foundatio
+ n is the start of settling\, slab cracks\, and a wet crawlspace. All of th
+ em expensive\, all of them avoidable with a splash block.\n\nDetails: http
+ s://gulfcoasthomemaintenance.com/guides/#mar-gutters\n\nGeneral maintenanc
+ e guidance\, not a substitute for a licensed inspector\, contractor\, or y
+ our insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-mar-grading@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260320
+DTEND;VALUE=DATE:20260321
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Check the grading around the house
+DESCRIPTION:Walk the perimeter after a hard rain. Look for settling\, crack
+ s\, and standing water.\n\nWhy: the ground should fall away from the house
+ . Gulf Coast soils shift\, and grading that worked at closing may not work
+  three years later.\n\nDetails: https://gulfcoasthomemaintenance.com/guide
+ s/#mar-grading\n\nGeneral maintenance guidance\, not a substitute for a li
+ censed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-apr-wash-exterior@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260410
+DTEND;VALUE=DATE:20260411
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Wash the exterior\, inspect the siding
+DESCRIPTION:Wash the house down and inspect siding\, brick\, and soffits fo
+ r damage or gaps.\n\nWhy: salt air and humidity feed mildew and rot\, and 
+ washing is how you find the soft spot behind it. Open soffits are also how
+  squirrels and wasps get into the attic.\n\nDetails: https://gulfcoasthome
+ maintenance.com/guides/#apr-wash-exterior\n\nGeneral maintenance guidance\
+ , not a substitute for a licensed inspector\, contractor\, or your insuran
+ ce policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-apr-spigots-irrigation@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260420
+DTEND;VALUE=DATE:20260421
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Check spigots and service irrigation
+DESCRIPTION:Check hose bibs and outdoor spigots for leaks. Service the irri
+ gation system if you have one.\n\nWhy: a spigot that weeps against the fou
+ ndation all summer does quiet\, steady damage\, and shows up on the water 
+ bill.\n\nDetails: https://gulfcoasthomemaintenance.com/guides/#apr-spigots
+ -irrigation\n\nGeneral maintenance guidance\, not a substitute for a licen
+ sed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-may-generator-supplies@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260510
+DTEND;VALUE=DATE:20260511
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Test the generator\, restock supplies
+DESCRIPTION:Start and load-test the generator. Restock water\, batteries\, 
+ and fuel. Confirm shutters or plywood are on hand and actually fit your op
+ enings.\n\nWhy: a generator that has sat with old fuel since last season w
+ ill not start when you need it\, and plywood cut to the wrong window is pl
+ ywood you cannot use.\n\nDetails: https://gulfcoasthomemaintenance.com/gui
+ des/#may-generator-supplies\n\nGeneral maintenance guidance\, not a substi
+ tute for a licensed inspector\, contractor\, or your insurance policy term
+ s.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-may-secure-exterior@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260520
+DTEND;VALUE=DATE:20260521
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Inspect roof edges\, secure loose items
+DESCRIPTION:Inspect soffit vents and roof edges. Secure sheds\, fencing\, a
+ nd anything that becomes a projectile.\n\nWhy: most wind damage starts at 
+ an edge. Once wind gets under the roof edge or through an open soffit\, it
+  works on the whole roof.\n\nDetails: https://gulfcoasthomemaintenance.com
+ /guides/#may-secure-exterior\n\nGeneral maintenance guidance\, not a subst
+ itute for a licensed inspector\, contractor\, or your insurance policy ter
+ ms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-jun-condenser-coils@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260610
+DTEND;VALUE=DATE:20260611
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Clean the condenser\, clear vegetation
+DESCRIPTION:Clean the outdoor condenser coils and cut vegetation back two f
+ eet on all sides of the unit.\n\nWhy: a coil that cannot breathe makes the
+  compressor work harder in the hottest months\, which is exactly how a 12-
+ year unit becomes an 8-year unit.\n\nDetails: https://gulfcoasthomemainten
+ ance.com/guides/#jun-condenser-coils\n\nGeneral maintenance guidance\, not
+  a substitute for a licensed inspector\, contractor\, or your insurance po
+ licy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-jun-attic-ventilation@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260620
+DTEND;VALUE=DATE:20260621
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Check attic ventilation and insulation
+DESCRIPTION:Check that soffit and ridge vents are clear\, and measure insul
+ ation depth.\n\nWhy: a poorly vented attic bakes the roof deck from undern
+ eath and shortens shingle life\, on top of what it costs you in cooling.\n
+ \nDetails: https://gulfcoasthomemaintenance.com/guides/#jun-attic-ventilat
+ ion\n\nGeneral maintenance guidance\, not a substitute for a licensed insp
+ ector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-jul-crawlspace@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260710
+DTEND;VALUE=DATE:20260711
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Inspect the crawlspace
+DESCRIPTION:Inspect the crawlspace or under-house area for moisture\, pests
+ \, and vapor barrier damage.\n\nWhy: it is the part of the house nobody lo
+ oks at and the part humidity attacks hardest. Rot and pests both start dow
+ n there.\n\nDetails: https://gulfcoasthomemaintenance.com/guides/#jul-craw
+ lspace\n\nGeneral maintenance guidance\, not a substitute for a licensed i
+ nspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-jul-humidity@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260720
+DTEND;VALUE=DATE:20260721
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Check indoor humidity
+DESCRIPTION:Measure indoor relative humidity. Aim for 45–55%. Run a dehum
+ idifier if you are above that.\n\nWhy: above 60% indoors you are growing m
+ old and inviting dust mites\, whatever the thermostat says.\n\nDetails: ht
+ tps://gulfcoasthomemaintenance.com/guides/#jul-humidity\n\nGeneral mainten
+ ance guidance\, not a substitute for a licensed inspector\, contractor\, o
+ r your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-aug-gutters-again@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260810
+DTEND;VALUE=DATE:20260811
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Clear the gutters again
+DESCRIPTION:Clear the gutters a second time.\n\nWhy: summer storms fill the
+ m fast\, and a full gutter in a tropical downpour sends the whole roof's w
+ ater straight down your wall.\n\nDetails: https://gulfcoasthomemaintenance
+ .com/guides/#aug-gutters-again\n\nGeneral maintenance guidance\, not a sub
+ stitute for a licensed inspector\, contractor\, or your insurance policy t
+ erms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-aug-photograph-valuables@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260820
+DTEND;VALUE=DATE:20260821
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Photograph big-ticket items
+DESCRIPTION:Photograph big-ticket items and store the photos somewhere off-
+ site or in the cloud.\n\nWhy: proof of ownership is what turns a claim int
+ o a payment\, and it is worthless if it only exists on a phone that went w
+ ith the house.\n\nDetails: https://gulfcoasthomemaintenance.com/guides/#au
+ g-photograph-valuables\n\nGeneral maintenance guidance\, not a substitute 
+ for a licensed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-sep-roof-inspection@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260910
+DTEND;VALUE=DATE:20260911
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Inspect the roof from the ground
+DESCRIPTION:Inspect the roof from the ground with binoculars after the summ
+ er storm run. Look for lifted\, curled\, or missing shingles.\n\nWhy: you 
+ can see almost everything that matters from the driveway\, and nobody has 
+ ever fallen off a driveway.\n\nDetails: https://gulfcoasthomemaintenance.c
+ om/guides/#sep-roof-inspection\n\nGeneral maintenance guidance\, not a sub
+ stitute for a licensed inspector\, contractor\, or your insurance policy t
+ erms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-sep-sump-drainage@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20260920
+DTEND;VALUE=DATE:20260921
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Test the sump pump\, clear drainage
+DESCRIPTION:Test the sump pump if you have one. Clear drainage swales and d
+ itches.\n\nWhy: a sump pump that has not run in months is a sump pump you 
+ should not assume works. Blocked ditches move the water to your yard.\n\nD
+ etails: https://gulfcoasthomemaintenance.com/guides/#sep-sump-drainage\n\n
+ General maintenance guidance\, not a substitute for a licensed inspector\,
+  contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-oct-weatherstripping@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261011
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Check weatherstripping and seals
+DESCRIPTION:Check weatherstripping\, door sweeps\, and the attic hatch seal
+ .\n\nWhy: those gaps are your largest uncontrolled air exchange\, which on
+  the coast means you are paying to dehumidify the outdoors.\n\nDetails: ht
+ tps://gulfcoasthomemaintenance.com/guides/#oct-weatherstripping\n\nGeneral
+  maintenance guidance\, not a substitute for a licensed inspector\, contra
+ ctor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-oct-chimney@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20261020
+DTEND;VALUE=DATE:20261021
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Service the fireplace or chimney
+DESCRIPTION:Service the fireplace or chimney before first use.\n\nWhy: an u
+ nused flue collects nests\, debris\, and moisture damage over a long warm 
+ season.\n\nDetails: https://gulfcoasthomemaintenance.com/guides/#oct-chimn
+ ey\n\nGeneral maintenance guidance\, not a substitute for a licensed inspe
+ ctor\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-nov-filter-heat-test@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20261110
+DTEND;VALUE=DATE:20261111
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Replace the filter\, test the heat
+DESCRIPTION:Replace the HVAC filter and run the heat once.\n\nWhy: the burn
+ er or heat strips have sat unused since spring. Better to smell the dust b
+ urn off in November than to find a dead system during a cold snap.\n\nDeta
+ ils: https://gulfcoasthomemaintenance.com/guides/#nov-filter-heat-test\n\n
+ General maintenance guidance\, not a substitute for a licensed inspector\,
+  contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-nov-gutters-fascia@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20261120
+DTEND;VALUE=DATE:20261121
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Clear gutters\, check fascia and trim
+DESCRIPTION:Clear the gutters after leaf drop. Check the fascia and trim fo
+ r rot.\n\nWhy: fascia is where a gutter that overflowed all year finally s
+ hows the damage\, and rotten fascia is how the gutter comes off in the nex
+ t storm.\n\nDetails: https://gulfcoasthomemaintenance.com/guides/#nov-gutt
+ ers-fascia\n\nGeneral maintenance guidance\, not a substitute for a licens
+ ed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-dec-gfci-breakers@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20261210
+DTEND;VALUE=DATE:20261211
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Test GFCI outlets\, label the panel
+DESCRIPTION:Press test and reset on every GFCI outlet. Label the breaker pa
+ nel if it is not already labeled.\n\nWhy: a GFCI that will not trip is not
+  protecting anyone\, and a labeled panel is what lets you kill the right c
+ ircuit in a hurry.\n\nDetails: https://gulfcoasthomemaintenance.com/guides
+ /#dec-gfci-breakers\n\nGeneral maintenance guidance\, not a substitute for
+  a licensed inspector\, contractor\, or your insurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-dec-watch-list@gulfcoast-home-maintenance
+DTSTAMP:20260813T000000Z
+DTSTART;VALUE=DATE:20261220
+DTEND;VALUE=DATE:20261221
+RRULE:FREQ=YEARLY
+SEQUENCE:2
+SUMMARY:Update the Big Ticket Watch List
+DESCRIPTION:Update your Big Ticket Watch List with anything you replaced or
+  serviced this year.\n\nWhy: the list is what turns a surprise roof into a
+  planned roof. One update a year keeps it honest.\n\nDetails: https://gulf
+ coasthomemaintenance.com/guides/#dec-watch-list\n\nGeneral maintenance gui
+ dance\, not a substitute for a licensed inspector\, contractor\, or your i
+ nsurance policy terms.
+TRANSP:TRANSPARENT
+CATEGORIES:Home Maintenance
+END:VEVENT
+END:VCALENDAR

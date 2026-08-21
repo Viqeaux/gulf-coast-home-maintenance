@@ -27,6 +27,54 @@ Newest first.
 
 ---
 
+## [1.21.0], 2026-08-21
+
+**Cut as one self-contained release so it can be reverted whole.** Chad asked
+for a rollback point before it was built. Nothing here touches the four existing
+feeds, which are byte-identical to 1.20.0, and `SEQUENCE` stays at 2.
+
+### Added
+
+- **A picker on the calendar section: tick what you want, subscribe once.**
+  Four feeds meant somebody who wanted three of them ended up with three
+  entries in their sidebar. The picker hands out a single address carrying
+  exactly the selection.
+- **Eleven combined feeds**, every selection of two or more, built at build
+  time. The four singles already existed and one ticked box resolves to its own
+  feed rather than to a combination of one. 229 KB of static files in total.
+
+### How it works, and why it works this way
+
+A subscription is a URL that Google fetches from its own servers, so there is
+no per-person state to hold on a static site. The only way to offer a choice is
+to build every choice in advance and hand out the matching address. Four feeds
+make fifteen useful selections, which is small enough to enumerate. Per-task
+picking, "everything except the septic reminder", is 2^36 and would need a
+server; that is noted in [HANDOFF.md](HANDOFF.md) against the Cloudflare move
+already recorded there.
+
+### Notes
+
+- **`combo_file()` in the build and the picker's filename logic have to agree.**
+  If they ever diverge the picker hands out a 404, so they are written to look
+  alike and there is a comment on each pointing at the other. All fifteen
+  selections were exercised in a browser and every one returned 200.
+- UIDs match the single feeds, so subscribing to both a single and a
+  combination containing it shows shared events twice. The picker offers one
+  address rather than several, and each combined feed's description says so.
+- A combination takes its color from the most demanding feed in it, so anything
+  containing Must Do still reads as the urgent one.
+- `renderActions()` was extracted from the load-time loop so the picker can
+  re-render its own button row as boxes move. The copy-to-clipboard handler was
+  already delegated on the section, so it picked up the new buttons unchanged.
+
+### The one thing that decays
+
+Reverting this is clean **today**, because nothing points at the combined feeds
+yet. It stops being clean the moment somebody subscribes to one: their calendar
+is pointed at an address that would 404, and there is no way to tell them. If
+this is going to be undone, undo it before it has users.
+
 ## [1.20.0], 2026-08-21
 
 **`SEQUENCE` goes to 2.** Every subscriber's existing events move, which is the

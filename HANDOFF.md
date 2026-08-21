@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.20.0**. Everything below is live unless marked otherwise.
+Current version **v1.21.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -212,6 +212,23 @@ it.
 Going Above on the 20th, and November 30 left alone because it is the close of
 the season. Moving them again means another `SEQUENCE` bump and another round of
 every subscriber's events shifting under them, so it is not a thing to tidy.
+
+**There are fifteen feed addresses, not four.** The four singles are the ones
+the cards hand out. The other eleven are every combination of two or more,
+built by `all_combos()` and chosen by the picker in the calendar section, so
+somebody who wants three of the four gets one calendar instead of three
+sidebar entries. **`combo_file()` in `build_calendars.py` and the picker's
+filename logic in `docs/index.html` must agree**, or the picker hands out a
+404; each has a comment pointing at the other. All fifteen were exercised in a
+browser at 1.21.0.
+
+**Per-task customization needs a server and is not possible here.** Picking
+individual tasks is 2^36 combinations, so it cannot be pre-built. It wants a
+small Worker assembling feeds from query parameters, which is worth folding
+into the Cloudflare Pages move recorded below rather than justifying alone.
+House-specific tasks are a separate problem again: the conditional sections
+live in `kit_sections.py` and are paid-only, so "customize for my house" is a
+pricing decision before it is a technical one.
 
 **There are four feeds, not three.** The fourth is Monthly Rounds, seven events
 a month grouped by area, and it is deliberately not a fourth tier: the tiers are
