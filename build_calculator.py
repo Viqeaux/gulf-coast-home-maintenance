@@ -194,12 +194,19 @@ FREE_TEMPLATE = """<!doctype html>
 <meta name="theme-color" content="#0e2429">
 
 <!-- Pages cannot set headers, so the policy travels in the document. See the
-     longer note in docs/index.html for why 'unsafe-inline' is here and why
-     frame-ancestors is not. This page adds no origin: it does its arithmetic in
-     the browser and sends nothing anywhere except the signup, which is the same
-     endpoint the other two pages already post to. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
+     longer note in docs/index.html for why 'unsafe-inline' is here, why
+     frame-ancestors is not, and why Google is the only third party named.
+
+     This page tells the visitor, in the body text below, that nothing they type
+     leaves their machine. That is still true and it has to stay true: analytics
+     here counts the visit, not the answer. Sending a build year, a system name
+     or a computed figure to Google as an event parameter would make the page
+     lie, however useful the data looked. The arithmetic stays local. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- One Measurement ID for the whole site, in docs/analytics.js. -->
+<script src="../analytics.js"></script>
 
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../icon-180.png">

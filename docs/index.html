@@ -46,13 +46,23 @@
      'unsafe-inline' is required because the stylesheet and the script are both
      inline in this file. That is a deliberate trade: one request instead of
      three. The directive still does the job that matters here, which is that
-     no third-party origin can load code, and any future analytics snippet or
-     pasted widget fails loudly instead of silently exfiltrating the signup.
+     a pasted widget fails loudly instead of silently exfiltrating the signup.
+
+     Google is named, and nothing else is. googletagmanager.com in script-src
+     is the only third party allowed to run code on this page, and the
+     google-analytics hosts in connect-src and img-src are the only places a
+     measurement can be sent. Adding a second tool means adding its origins
+     here on purpose, which is the point: a tracker that arrives by paste
+     rather than by decision does not work at all.
 
      form-action names MailerLite explicitly. If the signup ever moves, this
      line moves with it or the form silently stops submitting. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- The Measurement ID lives in this file and nowhere else. Empty means nothing
+     loads and nothing is set. See the header of docs/analytics.js. -->
+<script src="analytics.js"></script>
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -1795,7 +1805,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.18.0</p>
+    <p class="version">v1.19.0</p>
   </div>
 </footer>
 

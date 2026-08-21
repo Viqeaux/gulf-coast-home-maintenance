@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.18.0**. Everything below is live unless marked otherwise.
+Current version **v1.19.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -701,13 +701,39 @@ else in 682 lines. Rebuild with `python build_storm_binder.py --fillable` and
 replace both files on the listing. Found while wiring the workbook to the
 binder's own text, which is the argument for importing rather than retyping.
 
-**5. Decide how Pinterest gets measured, before it launches.** There is no
-analytics of any kind, so there is no way to tell whether the pins did anything.
-The zero-tracker profile is a real asset and the privacy page now says so out
-loud, so anything added should be cookieless and consent-free, and should
-instrument three events only: Etsy click, feed subscribe, signup submit. If the
-answer is "add nothing", the fallback is Etsy's own traffic-source report plus
-MailerLite signup counts. Either is fine. Deciding after the launch is not.
+**5. How the site gets measured. Decided 2026-08-21, and it is Google
+Analytics.** Property `G-KB3D46WDYK`, on the home page, the calendar contents
+page and the free calculator, shipped in 1.19.0.
+
+**The old rule here said any analytics must be cookieless and consent-free,
+because the zero-tracker profile was an asset worth protecting. That rule is
+gone, and it was Chad's call to spend it.** He is right about the trade: the
+asset was only ever worth something to visitors who noticed it, and the shop
+could not tell whether it had any visitors at all. A future session that
+proposes replacing this with Plausible, Fathom or a cookieless setup on privacy
+grounds is re-running an argument that has already been had. What changes the
+answer is a complaint, a legal requirement, or the data turning out to be
+useless, not a preference.
+
+Two boundaries that came with the decision and are not preferences:
+
+- **The calculator sends the visit, never the answer.** The page tells visitors
+  nothing they type leaves their machine. No build year, system name or
+  computed figure may be attached to an event. The note is in the head of
+  `build_calculator.py`.
+- **The CSP names Google and nothing else.** A second tool means adding its
+  origins deliberately. That is the feature: a tracker pasted in without a
+  decision does not run.
+
+`docs/privacy.html` describes what is collected and is part of the same
+release as any change to what is collected, because the page promises it says
+so before anything watches visitors.
+
+Still worth doing, in order: confirm data is arriving, then instrument the two
+events enhanced measurement does not already cover. Outbound clicks are
+automatic, so the Etsy click is handled; feed subscribe and signup submit are
+not. Etsy's own traffic-source report and MailerLite's signup count remain the
+cross-check, and are the only source for anything that happens off the site.
 
 **6. Small repository hygiene.** Issues and the Wiki are enabled on a public
 repo that is not an open source project, so anyone can publish text under the

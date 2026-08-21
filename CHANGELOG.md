@@ -27,6 +27,65 @@ Newest first.
 
 ---
 
+## [1.19.0], 2026-08-21
+
+Google Analytics, and the reversal of the zero-tracking position.
+
+### Added
+
+- **Google Analytics 4 on the three pages that matter**: the home page, the
+  calendar contents page and the free calculator. Property `G-KB3D46WDYK`.
+  Chad's call, 2026-08-21, made deliberately rather than drifted into. The shop
+  has been running on nothing but Etsy's own stats since it opened, which meant
+  there was no way to tell whether anybody was arriving at the site at all,
+  which is the one number the whole business currently turns on.
+- **`docs/analytics.js`**, which exists so the Measurement ID lives in exactly
+  one place. Three pages load it. A constant pasted into three files is a
+  constant that drifts, and this project has already paid for that lesson once
+  with the four version markers. An empty `GA_ID` disables the whole thing:
+  nothing is requested and no cookie is set.
+
+### Changed
+
+- **The Content Security Policy names Google and nothing else.**
+  `googletagmanager.com` in `script-src` is now the only third party permitted
+  to run code, and the `google-analytics` hosts in `connect-src` and `img-src`
+  are the only destinations a measurement may be sent to. The property that
+  made the old policy worth having is intact: a tracker that arrives by paste
+  rather than by decision still fails loudly instead of silently working.
+- **`docs/privacy.html` says what is now true**, in the lede, the opening line,
+  the meta description and the date. The page had promised that if anything
+  ever watched visitors it would say so before that went live, so the wording
+  and the tag ship in the same release rather than the wording following after.
+- The zero-tracking rule in [HANDOFF.md](HANDOFF.md) is replaced by the
+  decision that superseded it, so a future session does not read the old rule
+  and quietly argue the position back.
+
+### Deliberately not done
+
+- **`404.html` and `privacy.html` are not measured.** Both run no script on
+  purpose, `404.html` at `script-src 'none'`, and neither sees enough traffic to
+  justify widening its policy.
+- **The calculator sends the visit, never the answer.** The page tells visitors
+  that nothing they type leaves their machine, and that remains true: no build
+  year, system name or computed figure is attached to an event, however useful
+  it would look in a report. The constraint is written into the header of
+  `build_calculator.py` so it is hit before it is broken.
+- **No custom events yet.** Enhanced measurement covers outbound clicks, which
+  is the Etsy click. Feed subscribes and signup submits are worth instrumenting
+  once data is confirmed arriving, on the principle that you verify a pipe
+  before sending structured data down it.
+
+### Notes
+
+- The three `.ics` files are byte-identical to 1.18.0, so no subscriber sees
+  anything and `SEQUENCE` stays at 1.
+- Verified in a browser before release: with the ID empty, no `gtag`, no
+  `dataLayer`, no cookie and no request; with an ID set, the tag loads, the
+  `_ga` cookies appear and there are zero CSP violations. Both subdirectory
+  pages resolve `../analytics.js` correctly, the two unmeasured pages load no
+  analytics at all, and the calculator still computes.
+
 ## [1.18.0], 2026-08-16
 
 ### Added
