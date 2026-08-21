@@ -420,6 +420,8 @@
     padding-top: .9rem; border-top: 1px solid var(--rule);
   }
   .picker-summary strong { color: var(--ink); }
+  .picker-more { font-size: .88rem; color: var(--muted); margin: 1rem 0 0; }
+  .picker-more a { color: var(--accent); }
 
   /* --- page previews ---------------------------------------------------- */
   /* Tops of real pages, inside each product section. Cropped rather than shrunk:

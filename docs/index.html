@@ -65,6 +65,22 @@
 
 <!-- The Measurement ID lives in this file and nowhere else. Empty means nothing
      loads and nothing is set. See the header of docs/analytics.js. -->
+<script>
+  // Live Pinterest pins point at /#edition, /#agents and /#binder, which were
+  // sections on this page until 1.22.0 and are now on /shop/. GitHub Pages
+  // cannot issue a redirect, so this does it. Those pins are published and
+  // cannot be edited in bulk, and a pin that lands on a page with no matching
+  // anchor just dumps the reader at the top with no idea what they were
+  // promised. Runs before anything else and replaces the history entry, so the
+  // back button still goes where the reader came from.
+  (function () {
+    var moved = { '#edition': 1, '#binder': 1, '#agents': 1 };
+    if (moved[window.location.hash]) {
+      window.location.replace('shop/' + window.location.hash);
+    }
+  })();
+</script>
+
 <script src="analytics.js"></script>
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -418,41 +434,21 @@
     <span class="sec-no">04 / Free</span>
     <h2>Put it on your phone <span class="free-tag">Free</span></h2>
     <p class="deck">
-      <strong>All four of these are free.</strong> Not a sample of the kit above and
-      not a trial. The same twelve months, as calendars you subscribe to once: no
-      signup, no card, and they repeat every year forever.
+      <strong>Free, and it stays free.</strong> Not a sample of the printables and
+      not a trial. Tick what you want below and subscribe once: no signup, no card,
+      and it repeats every year forever.
     </p>
 
-    <div style="margin-top:2rem">
-      <div class="tier tier--must">
-        <h3>Must Do <span class="badge badge--free">Free</span> <span class="badge">12 reminders a year</span></h3>
-        <div class="actions" data-file="gulf-coast-must-do.ics"></div>
-      </div>
-      <div class="tier tier--should">
-        <h3>Should Do <span class="badge badge--free">Free</span> <span class="badge">12 reminders a year</span></h3>
-        <div class="actions" data-file="gulf-coast-should-do.ics"></div>
-      </div>
-      <div class="tier tier--above">
-        <h3>Going Above <span class="badge badge--free">Free</span> <span class="badge">12 reminders a year</span></h3>
-        <div class="actions" data-file="gulf-coast-going-above.ics"></div>
-      </div>
-      <!-- Separated from the three tiers by a rule and its own line of copy,
-           because it is a different kind of subscription rather than a fourth
-           level of effort. Seven events a month is welcome to somebody who
-           wants a routine and noise to somebody who came for the season, so it
-           is worth making the difference obvious before they click. -->
-      <div class="tier tier--monthly" style="margin-top:1.75rem">
-        <h3>Monthly Rounds <span class="badge badge--free">Free</span> <span class="badge">7 reminders a month</span></h3>
-        <p>The short routine, not the seasons: filters, drains, detectors, the walk round the outside. Seven rounds spread through the month, every month. Take this one as well if you want the calendar to keep you honest between the big jobs.</p>
-        <div class="actions" data-file="gulf-coast-monthly-rounds.ics"></div>
-      </div>
-
+        <!-- The four feeds one at a time live on /calendars/ now. Showing the
+         cards and the picker together made the reader choose between two ways
+         of choosing, and the picker is the one that answers the question most
+         people actually have, which is "just give me a calendar". -->
       <!-- Every combination is a real file built at build time, so this picker
-           only chooses an address. It starts on Must Do alone, which is what
-           the section above tells people to start with. -->
+           only chooses an address. It starts on Must Do alone, which is the
+           tier /calendars/ tells people to start with. -->
       <div class="picker">
-        <h3>Or take them as one calendar</h3>
-        <p>Tick what you want and subscribe once, instead of adding each of these separately and ending up with four calendars in your sidebar.</p>
+        <h3>Build your calendar</h3>
+        <p>Four calendars are on offer and most people want some of them, not all. Tick the ones you want and you get a single calendar carrying exactly those, rather than four separate entries in your sidebar.</p>
         <div class="picker-boxes">
           <label><input type="checkbox" value="must" checked> Must Do</label>
           <label><input type="checkbox" value="should"> Should Do</label>
@@ -461,6 +457,10 @@
         </div>
         <p class="picker-summary"></p>
         <div class="actions" id="picker-actions" data-file="gulf-coast-must-do.ics"></div>
+        <p class="picker-more">
+          Would rather take them <a href="calendars/">one at a time</a>? That page
+          also has the setup help for Google, Apple and everything else.
+        </p>
       </div>
     </div>
 
@@ -508,63 +508,7 @@
   </div>
 </section>
 
-<!-- ===================== how to ===================== -->
-<section class="band">
-  <div class="wrap">
-    <span class="sec-no">05 / Getting them on your phone</span>
-    <h2>However you keep your calendar</h2>
 
-    <div class="howto">
-      <div>
-        <h3>Start with Must Do</h3>
-        <p>Add the others when you're ready. The whole point of the tiers is that you don't have to do everything at once.</p>
-      </div>
-      <div>
-        <h3>Subscribe rather than download</h3>
-        <p>A subscription keeps updating as the calendar improves. A downloaded file is a snapshot. It never changes, and it duplicates itself if you import it twice.</p>
-      </div>
-      <div>
-        <h3>Reminders are yours to set</h3>
-        <p>These arrive as all-day events with no alert, so they never wake you up. Add one notification on the calendar itself and it applies to all twelve months.</p>
-      </div>
-      <div>
-        <h3>Want to see the whole year first?</h3>
-        <p><a href="guides/">What's on the calendar</a> lists all thirty-six jobs and the month each one falls in, and your calendar events link straight to the task they mention. The step-by-step for each job, with the tools and the mistake that costs money, is in the <a href="shop/">printable kit</a>.</p>
-      </div>
-    </div>
-
-    <!-- Ordered by how many people need each one, not alphabetically. -->
-    <div class="setup">
-      <details>
-        <summary>Setting it up in Google Calendar, including Android</summary>
-        <div class="body">
-          <p>Android uses Google Calendar, so this is the button for it too. The app itself can't add a subscription, so start from a browser. Adding it puts it on your account, not yet on your phone.</p>
-          <ol>
-            <li>Tap <strong>Add to Google Calendar</strong>.</li>
-            <li>Confirm <strong>Add</strong> when Google asks.</li>
-            <li>On a phone, switch it on: the app menu, then <em>Settings</em>, then the calendar's name.</li>
-          </ol>
-          <p><strong>On your computer but not your phone?</strong> That is Google's default rather than a fault. The app keeps its own list of calendars to sync, and anything newly subscribed starts switched off, so step three is not optional.</p>
-          <p><strong>If the calendar is not in that Settings list at all,</strong> the app is not syncing it yet and nothing inside the app will fix that. Open <code>calendar.google.com/calendar/syncselect</code> in a browser signed into the same account, tick the calendar, and save. That page is the only place this can be changed and there is no link to it from the app.</p>
-          <p>Google refreshes slowly, sometimes up to a day. A new calendar may show its web address as the name until then, which is normal.</p>
-          <p><strong>If the Google Calendar app opens and nothing happens,</strong> most likely on Android, it intercepted the link and cannot subscribe. Use <strong>Copy feed URL</strong> instead, then add it from a browser with <em>Other calendars</em> &rarr; <em>+</em> &rarr; <em>From URL</em>. On a phone, turn on your browser's desktop-site setting first.</p>
-        </div>
-      </details>
-      <details>
-        <summary>Setting it up in Apple Calendar or Outlook</summary>
-        <div class="body">
-          <p>Use <strong>Subscribe</strong>, which hands off to your default calendar app.</p>
-        </div>
-      </details>
-      <details>
-        <summary>Setting it up in any other app</summary>
-        <div class="body">
-          <p>Outlook on the web, Thunderbird and Proton want a pasted address. Use <strong>Copy feed URL</strong>, then find <em>Subscribe from web</em>, <em>Add from URL</em>, or <em>New calendar from internet</em>.</p>
-        </div>
-      </details>
-    </div>
-  </div>
-</section>
 
 <!-- ===================== who ===================== -->
 <!-- The origin lived only in the Etsy About section, which meant the site asked
@@ -573,7 +517,7 @@
      reader this was taken seriously, so it stays. -->
 <section id="who">
   <div class="wrap">
-    <span class="sec-no">06 / Who made this</span>
+    <span class="sec-no">05 / Who made this</span>
     <h2>I built this for my own house first</h2>
     <div class="byline">
       <p>
@@ -613,30 +557,17 @@
     </p>
     <p class="foot-links">
       <a href="privacy.html">Privacy</a>
+      <a href="calendars/">The calendars</a>
       <a href="guides/">What's on the calendar</a>
       <a href="calculator/">What's on borrowed time</a>
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.22.0</p>
+    <p class="version">v1.23.0</p>
   </div>
 </footer>
 
-<script>
-  // Live Pinterest pins point at /#edition, /#agents and /#binder, which were
-  // sections on this page until 1.22.0 and are now on /shop/. GitHub Pages
-  // cannot issue a redirect, so this does it. Those pins are published and
-  // cannot be edited in bulk, and a pin that lands on a page with no matching
-  // anchor just dumps the reader at the top with no idea what they were
-  // promised. Runs before anything else and replaces the history entry, so the
-  // back button still goes where the reader came from.
-  (function () {
-    var moved = { '#edition': 1, '#binder': 1, '#agents': 1 };
-    if (moved[window.location.hash]) {
-      window.location.replace('shop/' + window.location.hash);
-    }
-  })();
-</script>
+<script src="calendar-buttons.js"></script>
 
 <script>
   // ---------------------------------------------------------------------------
@@ -655,254 +586,7 @@
   // separately, and the structured-data comment already said the same thing.
   // ---------------------------------------------------------------------------
 
-  (function () {
-    var COPY_LABEL = 'Copy feed URL';
-    var calendars = document.getElementById('calendars');
-
-    // The signup posts straight to MailerLite through a hidden frame,
-    // so there is no library to load and the visitor never leaves the page. We
-    // cannot read the response across origins, but the frame firing `load`
-    // confirms the request completed, and double opt-in means the real
-    // confirmation is the email they are about to get either way.
-    var signup = document.querySelector('.signup');
-    if (signup) {
-      signup.addEventListener('submit', function (event) {
-        // Anything in the honeypot means this is not a person. Say nothing
-        // about why: a bot that gets told it failed is a bot that gets fixed.
-        var hp = signup.querySelector('input[name="website"]');
-        if (hp && hp.value) {
-          event.preventDefault();
-          signup.hidden = true;
-          document.querySelector('.signup-done').hidden = false;
-          return;
-        }
-        // Disabled controls are not submitted, so MailerLite never sees a
-        // parameter it has no field for.
-        if (hp) { hp.disabled = true; }
-
-        var sink = document.querySelector('iframe[name="ml-sink"]');
-        var swap = function () {
-          signup.hidden = true;
-          document.querySelector('.signup-done').hidden = false;
-        };
-        sink.addEventListener('load', swap, { once: true });
-        // If the frame never reports back, show it anyway rather than leaving
-        // them staring at a form that looks like it did nothing.
-        setTimeout(swap, 2500);
-      });
-    }
-
-    // Both notices go in the same place, above the tier cards. The tag varies
-    // because one of them is a disclosure: the preview warning is always worth
-    // reading, the Android note only matters to the people it happens to.
-    function notice(tag, className, html) {
-      var el = document.createElement(tag);
-      el.className = className;
-      el.innerHTML = html;
-      calendars.querySelector('.deck').insertAdjacentElement('afterend', el);
-    }
-
-    // Subscribe links are built from wherever this page is hosted, so the files
-    // work on any domain without editing.
-    //
-    // Subscribing only works from a public HTTPS origin: Google fetches the .ics
-    // from its own servers, so file://, localhost, and http:// are unreachable to
-    // it. Rather than render a button that silently does nothing, say so.
-    var local = /^(localhost|127\.0\.0\.1|\[::1\]|.*\.local)$/i.test(location.hostname);
-    var publicHost = location.protocol === 'https:' && !local;
-
-    if (!publicHost) {
-      notice('div', 'preview-warning',
-        '<strong>Preview only, subscribing won\'t work yet.</strong> ' +
-        (/^https?:$/.test(location.protocol)
-          ? 'This page is being served from ' + location.host + '.'
-          : 'This page is open as a local file.') +
-        ' Google fetches the calendar file from its own servers, so it has to be on a ' +
-        'public <code>https://</code> address first. Download still works, and importing ' +
-        'a downloaded file is a good way to check the events read correctly.');
-    }
-
-    // Android can route calendar.google.com links into the Google Calendar app,
-    // which has no way to subscribe to a URL. The app just opens and sits
-    // there. It depends on a per-device "open supported links" setting, so it
-    // hits some Android users and not others, and neither we nor they can tell
-    // in advance.
-    //
-    // A closed disclosure rather than an open card. How often interception
-    // actually happens is still unmeasured, so this was a paragraph of
-    // troubleshooting sitting on top of the buttons for every Android visitor,
-    // most of whom never needed it. Collapsed, it costs one line and is still
-    // right there at the moment someone taps a button and nothing happens.
-    // If it turns out to be common, promote it back.
-    if (publicHost && /android/i.test(navigator.userAgent)) {
-      notice('details', 'android-note',
-        '<summary>On Android and nothing happened? Tap here.</summary>' +
-        '<p>Google Calendar can claim the link, and the app itself cannot ' +
-        'subscribe to a calendar. This route always works:</p>' +
-        '<ol>' +
-          '<li>Tap <strong>' + COPY_LABEL + '</strong> on the tier you want.</li>' +
-          '<li>Open <a href="https://calendar.google.com/calendar/u/0/r/settings/addbyurl" ' +
-            'target="_blank" rel="noopener">Google Calendar’s add-by-URL page</a>.</li>' +
-          '<li>Paste it in and tap <strong>Add calendar</strong>.</li>' +
-        '</ol>');
-    }
-
-    var base = location.href.replace(/[#?].*$/, '').replace(/[^\/]*$/, '');
-    var bare = base.replace(/^https?:\/\//, '');
-
-    // Built as nodes rather than as an HTML string. Every address here is
-    // derived from location.href, so string concatenation would be putting a
-    // value nobody controls inside a quoted attribute. It is not reachable on
-    // GitHub Pages, which 404s any path that is not a real file, but the whole
-    // point of building it this way is that it stops depending on the host.
-    function tierLink(className, href, text, newTab) {
-      var a = document.createElement('a');
-      a.className = className;
-      a.href = href;
-      a.textContent = text;
-      if (newTab) { a.target = '_blank'; a.rel = 'noopener'; }
-      return a;
-    }
-
-    // Named rather than inline, because the picker below re-renders one of
-    // these boxes every time a checkbox moves.
-    function renderActions(box) {
-      var file = box.getAttribute('data-file');
-      var feed = base + file;
-      var webcal = 'webcal://' + bare + file;
-
-      box.textContent = '';
-
-      if (publicHost) {
-        box.appendChild(tierLink('btn btn--primary',
-          'https://calendar.google.com/calendar/u/0/r?cid=' + encodeURIComponent(webcal),
-          'Add to Google Calendar', true));
-        box.appendChild(tierLink('btn', webcal, 'Subscribe (Apple / Outlook)'));
-      }
-
-      var download = tierLink('btn' + (publicHost ? '' : ' btn--primary'),
-                              feed, 'Download .ics');
-      download.setAttribute('download', '');
-      box.appendChild(download);
-
-      var copy = document.createElement('button');
-      copy.className = 'btn';
-      copy.type = 'button';
-      copy.setAttribute('data-url', feed);
-      copy.textContent = COPY_LABEL;
-      box.appendChild(copy);
-    }
-
-    document.querySelectorAll('.actions[data-file]').forEach(renderActions);
-
-    // --- the picker -------------------------------------------------------
-    // Mirrors combo_file() in build_calendars.py: the order is fixed, and one
-    // ticked box resolves to that feed's own file rather than to a combination
-    // of one. If those two ever disagree the picker hands out a 404, so they
-    // are written to look alike on purpose.
-    var PICKER_ORDER = ['must', 'should', 'above', 'monthly'];
-    var PICKER_SINGLE = {
-      must: 'gulf-coast-must-do.ics',
-      should: 'gulf-coast-should-do.ics',
-      above: 'gulf-coast-going-above.ics',
-      monthly: 'gulf-coast-monthly-rounds.ics'
-    };
-    var PICKER_LABEL = {
-      must: 'Must Do',
-      should: 'Should Do',
-      above: 'Going Above',
-      monthly: 'Monthly Rounds'
-    };
-    var PICKER_COUNT = { must: 12, should: 12, above: 12, monthly: 84 };
-
-    var picker = document.querySelector('.picker');
-    if (picker) {
-      var pickerBox = picker.querySelector('.actions');
-      var pickerSummary = picker.querySelector('.picker-summary');
-
-      function pickerUpdate() {
-        var chosen = PICKER_ORDER.filter(function (key) {
-          var input = picker.querySelector('input[value="' + key + '"]');
-          return input && input.checked;
-        });
-
-        if (!chosen.length) {
-          pickerBox.textContent = '';
-          pickerSummary.textContent = 'Tick at least one to get a calendar.';
-          return;
-        }
-
-        var file = chosen.length === 1
-          ? PICKER_SINGLE[chosen[0]]
-          : 'gulf-coast-' + chosen.join('-') + '.ics';
-
-        var total = 0;
-        chosen.forEach(function (key) { total += PICKER_COUNT[key]; });
-        var names = chosen.map(function (key) { return PICKER_LABEL[key]; });
-
-        pickerSummary.textContent = '';
-        pickerSummary.appendChild(document.createTextNode('One calendar: '));
-        var strong = document.createElement('strong');
-        strong.textContent = names.join(', ');
-        pickerSummary.appendChild(strong);
-        pickerSummary.appendChild(document.createTextNode(
-          '. About ' + total + ' reminders a year.'));
-
-        pickerBox.setAttribute('data-file', file);
-        renderActions(pickerBox);
-      }
-
-      picker.addEventListener('change', pickerUpdate);
-      pickerUpdate();
-    }
-
-    // The two subscribe buttons only cover Google and apps that register the
-    // webcal:// handler. Everything else (Outlook on the web, Thunderbird,
-    // Proton) wants an https:// feed address pasted into a box, so hand it over
-    // directly rather than making people dig it out of the download link.
-    //
-    // One delegated listener rather than one per button, so it keeps working no
-    // matter how many tiers the page grows.
-    calendars.addEventListener('click', function (event) {
-      var btn = event.target.closest('button[data-url]');
-      if (!btn) { return; }
-      var url = btn.getAttribute('data-url');
-
-      function done(ok) {
-        btn.textContent = ok ? 'Copied' : 'Press Ctrl+C';
-        btn.classList.add('btn--copied');
-        // Clear any pending reset first: without this, a second click inherits
-        // the first timer and the label snaps back early.
-        clearTimeout(btn._resetTimer);
-        btn._resetTimer = setTimeout(function () {
-          btn.textContent = COPY_LABEL;
-          btn.classList.remove('btn--copied');
-        }, 2000);
-      }
-
-      function fallback() {
-        var ta = document.createElement('textarea');
-        ta.value = url;
-        ta.setAttribute('readonly', '');
-        ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
-        document.body.appendChild(ta);
-        ta.select();
-        var ok = false;
-        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
-        document.body.removeChild(ta);
-        if (ok) { done(true); } else { window.prompt('Copy this feed address:', url); done(false); }
-      }
-
-      // navigator.clipboard needs a secure context and can still be refused by
-      // permissions policy, so fall back to a selected textarea, and finally to
-      // a prompt the user can copy out of by hand.
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(url).then(function () { done(true); }, fallback);
-      } else {
-        fallback();
-      }
-    });
-  })();
+  
 
   // ---------------------------------------------------------------------------
   // Hurricane season countdown in the hero.

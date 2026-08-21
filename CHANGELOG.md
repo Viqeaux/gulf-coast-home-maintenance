@@ -27,6 +27,47 @@ Newest first.
 
 ---
 
+## [1.23.0], 2026-08-21
+
+**The free calendars page.** Chad, looking at the calendar section: "we don't
+need both of these visible."
+
+### Changed
+
+- **The home page carries the picker and nothing else.** The four individual
+  feed cards and the picker were both on it, which made the reader choose
+  between two ways of choosing before choosing anything. The picker answers the
+  question most people arrive with, so it is the one that stays.
+- **`/calendars/` is a new page** with the four feeds one at a time and all the
+  setup help, linked from under the picker and from the footer. Somebody who
+  wants a single tier, or who cannot get one onto a phone, goes there.
+- **Home page: 11.1 phone screens to 9**, and 23.7 before the split in 1.22.0.
+  The new page is 4.5.
+- **`docs/calendar-buttons.js`**, lifted out of the inline script, because two
+  pages now need the feed buttons, the preview warning, the Android note and
+  the clipboard handler. Everything in it is guarded by an existence check and
+  it returns immediately on a page with no feed section.
+- The Pinterest redirect moved into the head. It was at the foot of the body,
+  which meant a pin visitor watched the home page render before being sent to
+  `/shop/`. It needs no DOM and now fires before the page paints.
+
+### Fixed
+
+- **Two pieces of copy went stale in the restructure and would have read as
+  nonsense.** The deck said "All four of these are free" with nothing visible to
+  point at, and "not a sample of the kit above" when the kit moved to `/shop/` in
+  1.22.0. It now reads "Free, and it stays free. Not a sample of the printables."
+- The picker's heading was "Or take them as one calendar", where the "Or" was an
+  alternative to the cards that are no longer there. It is "Build your calendar".
+- A code comment pointed at "the section above" for the same reason. It names
+  `/calendars/` now.
+
+### Notes
+
+- All four feeds byte-identical to 1.22.0, `SEQUENCE` stays at 2.
+- The four cards on `/calendars/` are the same markup, moved rather than
+  rewritten, so the copy and the badges are unchanged.
+
 ## [1.22.0], 2026-08-21
 
 **The shop is its own page.** Asked for as "the site is getting messy", which it
