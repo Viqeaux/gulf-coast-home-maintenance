@@ -27,6 +27,69 @@ Newest first.
 
 ---
 
+## [1.33.0], 2026-08-22
+
+**The site is about owning a home here, not only about the calendar.** Chad's
+direction: make this the place Gulf Coast homeowners come to find the hard
+parts of owning a home, with the grant programs the easiest thing on it to
+find. Etsy stays what it always was, a checkout, rather than the reason the
+site exists.
+
+**Grants only. No loans.** Chad's call, and it is a scope line rather than a
+preference: a grant program has a published eligibility rule that can be
+checked against a primary source and dated, which is what the pointer rule in
+[HANDOFF.md](HANDOFF.md) was built for. Lending is a different kind of claim
+and edges toward advice. Do not add loan pages without Chad reopening this.
+
+**The calendar is not buried, and that was the other instruction.** On a
+phone the free calendar button is still the first thing on the page at screen
+0.8 of 12.7, the calendar door is still first of four at 2.1, and This Month
+still sits at 4.8, above the new grants section at 6.0. The shop moved from
+6.3 to 7.9, which is the only thing that went down.
+
+**No feed changed.** The four singles and the eleven combinations are
+byte-identical to v1.32.3, hashed before and after the rebuild, so `SEQUENCE`
+stays at 2 and nobody's subscription moves.
+
+### Changed
+
+- **The tagline widened**, which is the whole reframe in one line. "Home
+  maintenance for the Gulf Coast" became "Owning a home on the Gulf Coast,
+  Texas to Florida", and the deck under it now names the roof grants
+  alongside the climate before handing over the calendar. The `h1` is
+  untouched: it came from a mockup Chad approved and it still says the right
+  thing.
+- **The title, description, og tags and the `WebSite` description in the
+  structured data** all widened with it. The title is now "Gulf Coast Home
+  Maintenance and Grants, Texas to Florida", 56 characters, so the states
+  still survive Google's truncation.
+- **A fourth door, Grants and programs**, in the Start here row. `.doors`
+  goes 1 / 2 / 4 across the breakpoints rather than 1 / 3, and four across
+  only above 72rem: a quarter of a 71rem wrap is too narrow for what a door
+  card carries.
+- **The home page has a grants shelf again**, as section 03. It went missing
+  in the 1.29.0 halving, which left the programs that are now the site's
+  reason for existing with no presence on the home page at all: nav and
+  footer only. Four state cards, and Texas below them in a line of its own.
+- **Texas is deliberately not in that row.** There is no statewide Texas
+  FORTIFIED grant to put there, and the honest page says so. Do not complete
+  the set by promoting it.
+- **Resources moved from fourth to second in the navigation**, on all
+  eighteen pages and in both builders that emit a bar. Calendar keeps first
+  place.
+- **`/resources/` is categorized**: "Roof grant programs, by state" and
+  "Insurance rules and discounts". A flat list was right at seven entries and
+  breaks somewhere before thirty. Its title, deck and meta widened too, and
+  the deck now says out loud that we do not run these programs and do not
+  decide who qualifies.
+- **A second hero line for the grants**, beside the calculator's. Neither
+  becomes a button: three buttons turn a clear choice into a menu, which is
+  the reason recorded for the calculator's line in the first place.
+- **The footer's Resources column is "Grants and programs"**, and Privacy
+  moved out of it into About, where it belongs.
+
+---
+
 ## [1.32.3], 2026-08-22
 
 **The last two pages join the bar.** Every page on the site now carries the

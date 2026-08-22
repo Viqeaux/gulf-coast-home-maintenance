@@ -495,14 +495,6 @@ FREE_TEMPLATE = """<!doctype html>
     </a>
     <nav class="nav-links" aria-label="Site">
       <a href="../calendars/">Calendar</a>
-      <a href="../storm/">Storm prep</a>
-      <span class="nav-drop">
-        <a href="./" aria-current="page">Tools</a>
-        <span class="nav-menu"><span class="menu-card">
-          <a href="./">Borrowed Time Calculator</a>
-          <a href="../guides/">What's on the calendar</a>
-        </span></span>
-      </span>
       <span class="nav-drop">
         <a href="../resources/">Resources</a>
         <span class="nav-menu"><span class="menu-card">
@@ -514,6 +506,14 @@ FREE_TEMPLATE = """<!doctype html>
           <a href="../resources/texas-windstorm-coverage/">Texas windstorm coverage</a>
           <a href="../resources/flood-insurance-30-day-rule/">Flood insurance 30-day rule</a>
           <a href="../resources/wind-mitigation-discounts/">Wind mitigation discounts</a>
+        </span></span>
+      </span>
+      <a href="../storm/">Storm prep</a>
+      <span class="nav-drop">
+        <a href="./" aria-current="page">Tools</a>
+        <span class="nav-menu"><span class="menu-card">
+          <a href="./">Borrowed Time Calculator</a>
+          <a href="../guides/">What's on the calendar</a>
         </span></span>
       </span>
       <a href="../guides/">Guide</a>

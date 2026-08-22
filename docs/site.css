@@ -914,7 +914,8 @@
   /* The decision system: keep up, get ready, see what's aging. Each door names
      the reader's situation first and the thing behind it second. */
   .doors { display: grid; gap: 1rem; margin-top: 2rem; }
-  @media (min-width: 46rem) { .doors { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 46rem) { .doors { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 72rem) { .doors { grid-template-columns: repeat(4, 1fr); } }
   .door {
     display: flex; flex-direction: column; text-decoration: none;
     background: var(--paper); border: 1px solid var(--rule);
@@ -926,6 +927,7 @@
   .door--calendar { --door-color: var(--accent); }
   .door--storm    { --door-color: var(--must); }
   .door--aging    { --door-color: var(--sand); }
+  .door--grants   { --door-color: var(--above); }
   .door .label { color: var(--door-color); display: block; margin-bottom: .55rem; }
   .door h3 { font: 600 1.3rem/1.2 var(--font-serif); color: var(--ink); margin-bottom: .45rem; }
   .door .door-icon { color: var(--ink); opacity: .75; margin: .35rem 0 .7rem; }
@@ -1250,7 +1252,16 @@
   .btn--outline:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
   /* --- the resources index ------------------------------------------------- */
-  .res-list { margin-top: 2rem; }
+  .res-cat {
+    font: 600 1.05rem/1.3 var(--font-sans); letter-spacing: .02em;
+    color: var(--ink); margin: 3rem 0 .4rem; max-width: 54rem;
+  }
+  .res-cat:first-of-type { margin-top: 2.5rem; }
+  .res-cat-sub {
+    font: 400 .95rem/1.55 var(--font-sans); color: var(--muted);
+    margin: 0; max-width: 54rem;
+  }
+  .res-list { margin-top: 1.25rem; }
   .res-row {
     display: block; text-decoration: none; color: var(--ink);
     padding: 1.5rem 0; border-top: 1px solid var(--rule-soft);

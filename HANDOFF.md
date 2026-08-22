@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.32.3**. Everything below is live unless marked otherwise.
+Current version **v1.33.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -121,7 +121,8 @@ buyer paid for and did not get. Note that `.sheet` is `flex: 1`, so measuring
 its own `scrollHeight` can never report short: the check measures how far the
 content reaches instead.
 
-**The site is six pages now, and three of them are hand-written.**
+**The site is six pages now, and three of them are hand-written.** (The count
+predates the resource pages; there are eighteen HTML pages in `docs/` today.)
 
 | Page | What it is for | Written how |
 |---|---|---|
@@ -482,6 +483,56 @@ second kind: Chad commissioned an external design review and told a session to
 implement all of it, which supersedes the older phone-screen numbers in these
 notes. With that done, the rule is back in force, and the next layout change
 should come from the analytics that went live 2026-08-21.
+
+## What the site is for, widened by Chad on 2026-08-22
+
+**The site is where Gulf Coast homeowners find the hard parts of owning a home
+here, and the grant programs are the easiest thing on it to find.** Chad's
+words: Etsy is just an easy commerce option, and the site should make finding
+grants and the rest of it easier. This supersedes the framing below it, which
+said the same thing about maintenance only. Shipped in 1.33.0.
+
+**Grants only. No loans. Chad's call, 2026-08-22, and it is a scope line rather
+than a preference.** A grant program publishes an eligibility rule that can be
+checked against a primary source and dated, which is exactly what the pointer
+rule was built for. Lending is a different kind of claim and edges toward
+advice, which this site does not give. A future session that proposes FHA
+203(k), Title I, USDA 504 or down payment assistance pages is re-running a
+decision already made. What changes it is Chad, not reasoning.
+
+**Do not bury the calendar.** Chad's other instruction in the same breath, and
+it has a number attached so a future layout change can be checked against it.
+On a phone at 1.33.0 the free calendar button sits at screen 0.8 of 12.7, the
+calendar door is first of four at 2.1, This Month is at 4.8, the grants shelf
+is at 6.0 and the shop is at 7.9. The calendar is the only thing on the site
+with recurring engagement, so it is what brings anyone back; grants are what
+make a stranger arrive. Both go above anything paid.
+
+**What 1.33.0 actually changed**, so nobody redoes it: the tagline and every
+title, description and og tag widened from the calendar to ownership; a fourth
+door for grants; the grants shelf restored to the home page as section 03,
+having gone missing in the 1.29.0 halving; Resources promoted to second in the
+nav on all eighteen pages and both builders; `/resources/` split into "Roof
+grant programs, by state" and "Insurance rules and discounts"; the footer
+column renamed with Privacy moved to About. **The `h1` was left alone** because
+it came from a mockup Chad approved and still says the right thing, and **no
+feed changed**, verified byte-identical, so `SEQUENCE` stays at 2.
+
+**The five-state grant shelf is the finished part, not the whole plan.** The
+reframe is copy and layout; what makes the site the destination is more pages,
+and that is one session per page at the verification standard below. The two
+candidates already named are still the right next ones: a wind-deductible
+mini-tool and a find-your-flood-zone walkthrough. Beyond those, let Search
+Console query data pick, not guessing.
+
+**The thing that will break this, and it is not built yet: staleness.** Seven
+dated pages fit in one head. Twenty-five pages of grant programs, with rounds
+opening and closing and funding changing, is a maintenance job with no
+mechanism behind it. There is no registry of page to checked date to source
+and nothing that flags a page going stale. That is worth half a session
+before the shelf gets much bigger, because a wrong grant rule on this site
+costs a reader money and the whole argument for the site is being the one
+that is correct.
 
 ## The direction, set by Chad on 2026-08-21
 

@@ -36,7 +36,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.32.3"
+VERSION = "1.33.0"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -887,14 +887,6 @@ GUIDES_TEMPLATE = """<!doctype html>
     </a>
     <nav class="nav-links" aria-label="Site">
       <a href="../calendars/">Calendar</a>
-      <a href="../storm/">Storm prep</a>
-      <span class="nav-drop">
-        <a href="../calculator/">Tools</a>
-        <span class="nav-menu"><span class="menu-card">
-          <a href="../calculator/">Borrowed Time Calculator</a>
-          <a href="./" aria-current="page">What's on the calendar</a>
-        </span></span>
-      </span>
       <span class="nav-drop">
         <a href="../resources/">Resources</a>
         <span class="nav-menu"><span class="menu-card">
@@ -906,6 +898,14 @@ GUIDES_TEMPLATE = """<!doctype html>
           <a href="../resources/texas-windstorm-coverage/">Texas windstorm coverage</a>
           <a href="../resources/flood-insurance-30-day-rule/">Flood insurance 30-day rule</a>
           <a href="../resources/wind-mitigation-discounts/">Wind mitigation discounts</a>
+        </span></span>
+      </span>
+      <a href="../storm/">Storm prep</a>
+      <span class="nav-drop">
+        <a href="../calculator/">Tools</a>
+        <span class="nav-menu"><span class="menu-card">
+          <a href="../calculator/">Borrowed Time Calculator</a>
+          <a href="./" aria-current="page">What's on the calendar</a>
         </span></span>
       </span>
       <a href="./" aria-current="page">Guide</a>
