@@ -172,6 +172,10 @@
   }
   .nav-drop:hover .nav-menu, .nav-drop:focus-within .nav-menu { display: block; }
   .nav-menu .menu-card {
+    /* Block, not the span default: an inline box wrapping block-level links
+       measures 0x0, so the dark ground painted nothing and the links sat
+       unreadable on whatever the page had behind them. */
+    display: block;
     background: var(--deep);
     border: 1px solid color-mix(in srgb, var(--on-deep) 16%, transparent);
     border-radius: 3px; box-shadow: var(--shadow-lg);

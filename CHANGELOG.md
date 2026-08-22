@@ -27,6 +27,19 @@ Newest first.
 
 ---
 
+## [1.32.1], 2026-08-22
+
+### Fixed
+
+- **The nav dropdowns had no background.** Chad caught it: the menu links
+  were unreadable over whatever the page had behind them. The card wrapping
+  them is a `span`, so it defaulted to `display: inline`, which measures 0x0
+  around block-level children and paints its dark ground nowhere. One
+  `display: block` fixes both menus, and the comment in `site.css` names the
+  trap so it does not come back.
+
+---
+
 ## [1.32.0], 2026-08-22
 
 **Texas completes the five-state set, honestly.** tdi.texas.gov became
