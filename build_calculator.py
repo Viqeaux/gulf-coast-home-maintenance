@@ -238,6 +238,10 @@ FREE_TEMPLATE = """<!doctype html>
 <link rel="stylesheet" href="../nav.css">
 <style>
   * {{ box-sizing: border-box; }}
+  /* The top bar is sticky and 3.5rem tall, so a #fragment landing at the very
+     top of the viewport puts its first line underneath it. Measured before
+     this existed: /calculator/#adjust hid 56px, the whole section heading. */
+  html {{ scroll-padding-top: 4.5rem; }}
   body {{
     margin: 0; background: var(--bg); color: var(--ink);
     font: 17px/1.65 var(--font-serif);
@@ -611,7 +615,7 @@ FREE_TEMPLATE = """<!doctype html>
     <p class="fine">
       There are also three free calendars of the small jobs that keep this list
       from getting shorter faster than it has to.
-      <a href="../#calendars">Those are here.</a>
+      <a href="../calendars/">Those are here.</a>
     </p>
 
     <div class="tail-signup" id="keep-posted">

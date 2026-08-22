@@ -42,7 +42,12 @@
 
 <!-- The three Product blocks live with the products. Their url fields point at
      this page's anchors, not the home page's, or search engines send buyers
-     somewhere the product is no longer described. -->
+     somewhere the product is no longer described.
+
+     Each image is that product's own cover. All three pointed at the live oak
+     hero until 1.33.1, which meant every surface Google renders a product
+     image on showed a tree instead of the thing for sale. The covers are the
+     same files the cards below use. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,7 +62,7 @@
       },
       "category": "Calendars & Planners",
       "url": "https://gulfcoasthomemaintenance.com/shop/#edition",
-      "image": "https://gulfcoasthomemaintenance.com/img/hero-1600.jpg",
+      "image": "https://gulfcoasthomemaintenance.com/img/cover-kit.jpg",
       "offers": {
         "@type": "Offer",
         "price": "12.99",
@@ -76,7 +81,7 @@
       },
       "category": "Calendars & Planners",
       "url": "https://gulfcoasthomemaintenance.com/shop/#agents",
-      "image": "https://gulfcoasthomemaintenance.com/img/hero-1600.jpg",
+      "image": "https://gulfcoasthomemaintenance.com/img/cover-agent.jpg",
       "offers": {
         "@type": "Offer",
         "price": "39.00",
@@ -95,7 +100,7 @@
       },
       "category": "Calendars & Planners",
       "url": "https://gulfcoasthomemaintenance.com/shop/#binder",
-      "image": "https://gulfcoasthomemaintenance.com/img/hero-1600.jpg",
+      "image": "https://gulfcoasthomemaintenance.com/img/cover-binder.jpg",
       "offers": {
         "@type": "Offer",
         "price": "16.99",
@@ -168,7 +173,7 @@
       Digital tools and guides built for the Gulf Coast. Undated, so none of
       them expire: print at home on letter paper, or fill them in on screen.
       The twelve months are also
-      <a href="../#calendars">free as phone calendars</a> if the printables are
+      <a href="../calendars/">free as phone calendars</a> if the printables are
       not what you came for.
     </p>
   </div>
@@ -220,7 +225,7 @@
     </div>
 
     <p class="shop-free muted">
-      The twelve months are also <a href="../#calendars">free as phone calendars</a>, with no signup and no card.
+      The twelve months are also <a href="../calendars/">free as phone calendars</a>, with no signup and no card.
     </p>
   </div>
 </section>
@@ -509,7 +514,7 @@
       <div>
         <h3>Free</h3>
         <ul>
-          <li><a href="../#calendars">The phone calendars</a></li>
+          <li><a href="../calendars/">The phone calendars</a></li>
           <li><a href="../guides/">What's on the calendar</a></li>
           <li><a href="../calculator/">Borrowed Time Calculator</a></li>
           <li><a href="../calendars/">Calendar setup help</a></li>
@@ -554,7 +559,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.33.0</p>
+    <p class="version">v1.33.1</p>
   </div>
 </footer>
 

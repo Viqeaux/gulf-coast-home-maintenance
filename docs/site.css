@@ -12,7 +12,19 @@
 
   /* Palette lives in theme.css, shared with the guides page. */
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  /* Deliberately no scroll-behavior: smooth on the root. On the root it also
+     animates the browser's own jump to a #fragment on load, and that animation
+     did not survive these pages: /shop/#edition, /shop/#binder, /#who and
+     /calendars/#calendars all finished loading at scrollY 0 with the hash still
+     in the address bar. That silently broke every "View details" button, every
+     footer shop link, the "Who made this" link, and the published Pinterest
+     pins that the redirect at the top of index.html exists specifically to
+     rescue. Measured on the live site and fixed in 1.33.1. If smooth scrolling
+     is ever wanted back, scope it to a container, never to html.
+
+     scroll-padding-top keeps whatever a fragment does land on clear of the
+     sticky bar, which measures 3.5rem. */
+  html { scroll-padding-top: 4.5rem; }
   body {
     margin: 0;
     background: var(--bg);
@@ -22,7 +34,6 @@
     overflow-x: hidden;
   }
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
     * { transition: none !important; animation: none !important; }
   }
 
@@ -487,6 +498,10 @@
     --hairline: var(--rule-soft);
   }
 
+  /* The four feed cards as a group. Was an inline style on a div that was
+     never closed, so the </div> written for .wrap closed this instead and
+     .wrap was left to the parser. */
+  .tier-list { margin-top: 2rem; }
   .tier {
     background: var(--paper); border: 1px solid var(--rule);
     border-left: 3px solid var(--tier-color); border-radius: 3px;

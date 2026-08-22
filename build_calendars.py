@@ -36,7 +36,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.33.0"
+VERSION = "1.33.1"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -700,6 +700,12 @@ GUIDES_TEMPLATE = """<!doctype html>
 <link rel="stylesheet" href="../nav.css">
 <style>
   * {{ box-sizing: border-box; }}
+  /* The top bar is sticky and 3.5rem tall, so a #fragment landing at the very
+     top of the viewport puts its first line underneath it. Every one of the
+     thirty-six calendar reminders deep links into a task anchor on this page,
+     twelve times a year, and the 31px being hidden was the tier tag: the one
+     word that says whether this is a Must or a Should. */
+  html {{ scroll-padding-top: 4.5rem; }}
   body {{
     margin: 0; background: var(--bg); color: var(--ink);
     font: 17px/1.65 var(--font-serif);
@@ -961,7 +967,7 @@ GUIDES_TEMPLATE = """<!doctype html>
       They arrive in the month they matter, so you do not have to remember this
       page exists. No signup and no card.
     </p>
-    <p class="tail-actions"><a class="tail-btn" href="../#calendars">Get the free calendars</a></p>
+    <p class="tail-actions"><a class="tail-btn" href="../calendars/">Get the free calendars</a></p>
     <p class="tail-kit">
       If you would rather have it on paper, there is a
       <a href="../shop/">printable kit</a> as well, twenty-seven pages and
@@ -1012,7 +1018,7 @@ GUIDES_TEMPLATE = """<!doctype html>
 {video_note}
     <p class="foot-links">
       <a href="../">Home</a>
-      <a href="../#calendars">Free calendars</a>
+      <a href="../calendars/">Free calendars</a>
       <a href="../calculator/">What&#8217;s on borrowed time</a>
       <a href="../privacy.html">Privacy</a>
     </p>

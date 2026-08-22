@@ -447,6 +447,114 @@ tasks), hurricane season (~5), termites (2), freeze (2). So the content is
 **Gulf South regional, not coastal-only and not national**. Regional editions
 for other climates are a later product line, not a rebrand.
 
+## The full-site audit, 2026-08-22, and what came out of it
+
+`audit.md` at the repo root is the whole thing: three passes over all 16 pages,
+grouped Critical / High / Medium / Nitpick, every finding with a file, a line, a
+measurement and a fix. Read it before planning site work. It is a snapshot
+rather than a living document, so check anything in it against the code before
+acting on it.
+
+**Screenshots were impossible in that session** and the design pass was measured
+from the live DOM instead: computed colours, contrast ratios, element geometry
+and scroll positions at 390x844 and 1440x900. That turned out to be the more
+useful method and is worth repeating. The numbers in the audit are real
+measurements and can be re-run.
+
+**Shipped in 1.33.1, the eight mechanical fixes.** All verified against a local
+server rather than only read:
+
+1. **`scroll-behavior: smooth` is gone from `site.css`.** On the root it also
+   animated the browser's own jump to a `#fragment` on load, and that animation
+   never completed on these pages: `/shop/#edition`, `/shop/#binder`, `/#who`
+   and `/calendars/#calendars` all finished at `scrollY` 0 with the hash still
+   in the address bar. Every "View details" button, every footer shop link and
+   every published Pinterest pin was landing at the top of a nine-screen page.
+   The redirect at the top of `index.html` exists to prevent exactly that
+   outcome and had been quietly defeated by a CSS property. The controlled
+   comparison is in the audit: the only two pages where fragments worked were
+   the only two that do not load `site.css`.
+2. **`scroll-padding-top: 4.5rem`** in `site.css` and in both generators. The
+   bar is sticky and 3.5rem tall, so fragments that did work put their target
+   underneath it: 31px on a guides task, which is the tier tag, and 56px on the
+   calculator, which is the whole section heading.
+3. **The `FAQPage` node is gone from `index.html`.** Six questions and answers,
+   not one of which appeared anywhere on the rendered page, which is against
+   Google's rules and is the `aggregateRating` mistake wearing a different hat.
+   **Chad's call, 2026-08-22: delete now, write a real one later.** See below.
+4. **The three `Product` nodes point at their own covers**, not at the live oak
+   hero, which every shopping surface had been showing instead of the product.
+5. **`floir.com` is now `floir.gov`.** Florida's insurance regulator moved and
+   the old address 301s. On a page whose credibility rests on "we send you to
+   the institution in charge", that is the one link a sceptic would check.
+   `www.aldoi.gov` and `www.msplans.com` normalised in the same pass.
+6. **The unclosed `<div>` on `/calendars/`** is closed, and its inline style is
+   now `.tier-list` in `site.css`. The `</div>` written for `.wrap` had been
+   closing the tier group instead, leaving `.wrap` to the parser.
+7. **`aria-current` on the seven resource pages.** The "Resources" trigger said
+   `page` while pointing at the shelf, so a screen reader announced the shelf as
+   the current page from inside a state page. It is `true` now, and each page
+   marks its own entry in the dropdown with `page`.
+8. **Twelve internal links stopped routing through the Pinterest shim.** They
+   pointed at `/#calendars`, which costs a homepage load, a `location.replace`
+   and a second load, breaks with scripting off, and inflates the homepage
+   pageview count in the analytics `privacy.html` promises are only counting
+   visits. The shim stays for the pins, which cannot be edited in bulk.
+
+The `.ics` feeds, `month-tasks.js` and `calc-widget.js` all regenerated
+byte-identical, so **no `SEQUENCE` bump** and no subscriber sees anything.
+
+**Next, ranked. The reasoning for each is in the audit.**
+
+1. **The light-theme contrast tokens.** `--accent` is 4.27:1 on `--bg` and
+   `--sand` is 3.53:1 on `--deep`; both fail AA. That is every in-body link,
+   every resource page footer, both hero secondary links and every back link.
+   The dark palette has no failures at all, because those values were lifted and
+   the light ones never were. `theme.css` is 77 lines and the audit carries
+   measured replacement values. Do this before the shell below, so the shell
+   lands with correct colours instead of propagating bad ones to 16 pages.
+2. **One footer and one mobile menu, on all 16 pages, as a build step.** Below
+   832px the nav links are hidden and nothing replaces them, so the whole top
+   bar on a phone is a wordmark and one gold button. The seven resource pages,
+   which are where the search traffic lands, carry a four-link footer instead of
+   the 21-link grid. A cold visitor's entire site map is nine links. **Do this
+   as page assembly in Python rather than 16 hand edits**: two pages are already
+   generated, the other fourteen duplicate the bar, the footer and the head, and
+   the resource pages duplicate a 71-line stylesheet that has already drifted
+   twice. The audit's M5 is that drift trap firing for the fourth time, and the
+   file headers of `site.css`, `theme.css`, `nav.css` and `analytics.js` each
+   say in their own words that this is the thing they exist to prevent.
+3. **`/calculator/` needs a link to `/resources/`.** The page tells someone
+   their roof is finished and never mentions that four states will pay for a new
+   one. One paragraph, and it is the highest-value missing link on the site.
+4. **`/storm/` is 274 words and a $16.99 button.** Its own title promises four
+   phases of storm content. It is the strongest argument on the site that this
+   is a storefront, and the flood insurance page already proves the house style
+   can give the substance away and still sell.
+5. **A dated line under the homepage grant cards.** They assert `$10,000`,
+   "three coastal counties" and "no statewide roof grant in Texas" with no date,
+   while every detail page dates the same facts correctly. The trust panel four
+   sections below promises the opposite in so many words.
+6. **A month jump strip and contextual links on `/guides/`.** 16.3 phone screens
+   with no way to reach December, and exactly one link in `<main>`, pointing at
+   the shop. Both changes live in `build_calendars.py`.
+7. **The FAQ, properly this time.** Chad's call was delete now and write later,
+   so this is the later. A real section on the homepage answering what people
+   actually type: which Gulf states pay for a roof, is the calendar really free,
+   do you run any of these programs, when was this last checked. Then the
+   `FAQPage` markup comes back **alongside it and never on its own**. The
+   comment left behind in `index.html` says the same thing at the point of
+   temptation.
+8. **An `/about/` page and a real contact address.** The only way to reach this
+   site is an Etsy storefront, including from `privacy.html`, which asks people
+   to route privacy questions through a marketplace listing. On grants,
+   insurance and government money that is a straightforward E-E-A-T weakness as
+   well as a trust one.
+
+Then the content gaps, of which the wind and hurricane deductible page is first:
+highest intent on this coast, and the site has already written half of it as an
+aside on the Mississippi page.
+
 ## What to do next, as of 2026-08-21 evening
 
 Ranked. The site is in good shape after 1.19.1 through 1.23.2 and **site work
@@ -499,6 +607,20 @@ rule was built for. Lending is a different kind of claim and edges toward
 advice, which this site does not give. A future session that proposes FHA
 203(k), Title I, USDA 504 or down payment assistance pages is re-running a
 decision already made. What changes it is Chad, not reasoning.
+
+**Reaffirmed by Chad on 2026-08-22**, in stronger words: nothing dealing with
+loans, anywhere on the site. Checked the same day and the site was already
+clean, so nothing had to be removed. Two things are worth knowing before a
+future session tries to enforce this with grep. The word `mortgage` appears
+twice on the flood insurance page, at lines 206 and 225, and both are FEMA's
+own rule text rather than lending content: the 30-day wait is waived when a
+policy is bought in connection with a mortgage, and a high-risk zone plus a
+federally backed mortgage is what makes coverage mandatory. Delete those and
+the page states the federal rule wrongly. Separately, `binder_pages.py` line 96
+carries a **"Loan number"** field on a storm binder record page. That is a
+blank for the owner's own servicer number, which is what an adjuster asks for
+after a hurricane, and it sits in a printed product rather than on the site.
+Left alone pending Chad, because removing it makes the binder worse.
 
 **Do not bury the calendar.** Chad's other instruction in the same breath, and
 it has a number attached so a future layout change can be checked against it.

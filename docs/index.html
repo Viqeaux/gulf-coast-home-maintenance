@@ -106,7 +106,18 @@
 <!-- Structured data. Deliberately no aggregateRating and no review: inventing
      either is against Google's guidelines and the fastest way to lose the one
      thing this brand is actually selling, which is being straight with people.
-     The three Product blocks live on /shop/ with the products. -->
+     The three Product blocks live on /shop/ with the products.
+
+     A FAQPage node lived here until 1.33.1 and had to go for the same reason.
+     It described six questions and answers, and not one of them appeared
+     anywhere on the rendered page: Google's rules require FAQ markup to match
+     content the visitor can actually see, so it was the aggregateRating
+     mistake wearing a different hat, on the page the whole site's traffic
+     depends on. Its answers had also gone stale, describing three seasonal
+     tiers when there are four calendars.
+
+     A real FAQ section is worth writing, and then this node comes back
+     alongside it. Do not re-add the markup on its own. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -118,59 +129,6 @@
       "name": "Gulf Coast Home Maintenance",
       "description": "Where Gulf Coast homeowners find the roof grant programs, the insurance rules and a free maintenance calendar, Texas to Florida.",
       "inLanguage": "en-US"
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Are the phone calendars really free?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, and they stay free. The three seasonal tiers and the monthly rounds are all subscribe-able calendars with no signup, no card, and no trial. They are not a sample of the printable kit."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is the kit dated?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No, deliberately. There is no year and no weekday grid, so the same printout works every year and it never goes stale in January. Each task has a box to tick."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Will this work outside the Gulf Coast?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Some of it. The structure works anywhere, but the timing, the lifespans and about half the tasks are specific to long humid summers, termite pressure and hurricane season. Inland Gulf South, most of it still applies. Further north, the Big Ticket Watch List is where the value is."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do I need a color printer for the kit?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. Plain US Letter paper, and black and white loses only the level colors, which are labeled anyway. Interior pages are white on purpose so printing does not cost you a cartridge."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why is hurricane prep in May rather than June?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A flood policy generally takes 30 days to take effect. Buy one in June and you are uninsured for the opening weeks of the season, so May 1 is the real deadline."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I give the kit to my clients?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The kit carries a personal use license for one household. For copies across many clients there is an agent edition, branded with your name and brokerage and licensed to print for every client you close."
-          }
-        }
-      ]
     }
   ]
 }
@@ -820,7 +778,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.33.0</p>
+    <p class="version">v1.33.1</p>
   </div>
 </footer>
 
