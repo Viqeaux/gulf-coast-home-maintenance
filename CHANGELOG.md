@@ -27,6 +27,15 @@ Newest first.
 
 ---
 
+## [1.29.1], 2026-08-22
+
+### Changed
+
+- **The hero crop slid down the photograph**, object-position 42% to 72%, so
+  the porch and dormers carry the frame instead of mostly canopy. Chad's ask.
+
+---
+
 ## [1.29.0], 2026-08-22
 
 **The final mockup convergence, and a real bug it flushed out.** Chad asked
