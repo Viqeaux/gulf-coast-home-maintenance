@@ -27,6 +27,39 @@ Newest first.
 
 ---
 
+## [1.24.0], 2026-08-21
+
+**The first resource page, and the rule it establishes.** Chad refined the
+authority direction the same evening it was set: the site never presents
+itself as the authority, it points at the institutions that are and makes
+their pages easier to get through. Facts stay attributed and linked, the
+site's own contribution is the walkthrough, and every resource page carries a
+visible "checked on" date that moves when a fact is re-verified.
+
+### Added
+
+- **`/resources/strengthen-mississippi-homes/`**, the first resource page:
+  Mississippi's $10,000 FORTIFIED roof grant, run by the Mississippi Insurance
+  Department. Every specific was checked against MID's own page, the wind
+  pool's site and the reporting on Senate Bill 2409 on 2026-08-21. The
+  "statewide by early 2027" date circulating in contractor blogs has no
+  primary source and is deliberately absent: the page says the statute is
+  statewide by design and points at MID's page for phase announcements. Prose
+  layout in the mold of `privacy.html`, measured by analytics, binder as the
+  quiet one-paragraph next step, not-affiliated disclaimer at the bottom.
+- **A footer link to the page** from the three hand-written pages, labelled
+  "The $10,000 roof grant".
+
+### Fixed
+
+- **`sitemap.xml` was missing `/shop/` and `/calendars/`**, live since 1.22.0.
+  Both added, along with the new resource page, and the sitemap's comment now
+  names the rule: a new page goes into the sitemap in the same commit.
+- **`analytics.js` claimed three pages load it**, a count that was already
+  stale. The comment now says what is true regardless of count.
+
+---
+
 ## [1.23.2], 2026-08-21
 
 **The shop page, 13.3 phone screens to 9.8.** Asked whether each product should

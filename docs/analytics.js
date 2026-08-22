@@ -1,8 +1,8 @@
 /* Google Analytics 4.
  *
- * The Measurement ID lives here and nowhere else. Three pages load this file,
- * and a constant pasted into three pages is a constant that drifts: the project
- * has already paid for that lesson with the four version markers.
+ * The Measurement ID lives here and nowhere else. Every measured page loads
+ * this file, and a constant pasted into pages is a constant that drifts: the
+ * project has already paid for that lesson with the four version markers.
  *
  * An empty GA_ID means no tracking at all. Nothing is requested, no cookie is
  * set, and every page behaves exactly as it did before this file existed. That
