@@ -236,7 +236,7 @@ FREE_TEMPLATE = """<!doctype html>
     border-bottom: 1px solid rgba(234,228,212,.12);
   }}
   .topbar .inner {{
-    max-width: 56rem; margin: 0 auto; padding: .75rem 1.35rem;
+    max-width: 71rem; margin: 0 auto; padding: .75rem 1.35rem;
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   }}
   a.mark {{ display: flex; align-items: center; gap: .6rem; min-width: 0; color: var(--sand); text-decoration: none; }}

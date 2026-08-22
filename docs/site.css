@@ -26,7 +26,10 @@
     * { transition: none !important; animation: none !important; }
   }
 
-  .wrap { max-width: 50rem; margin: 0 auto; padding: 0 1.35rem; }
+  /* Widened in 1.27.0 to the approved full-width layout. Grids scale with
+     it; anything that reads as a column of text carries its own cap below,
+     because a 71rem line of body copy is unreadable. */
+  .wrap { max-width: 71rem; margin: 0 auto; padding: 0 1.35rem; }
 
   /* --- type ------------------------------------------------------------- */
   .label {
@@ -110,7 +113,7 @@
     border-bottom: 1px solid color-mix(in srgb, var(--on-deep) 12%, transparent);
   }
   .topbar .inner {
-    max-width: 56rem; margin: 0 auto; padding: .75rem 1.35rem;
+    max-width: 71rem; margin: 0 auto; padding: .75rem 1.35rem;
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   }
   .mark { display: flex; align-items: center; gap: .6rem; min-width: 0; }
@@ -147,15 +150,14 @@
     color: var(--on-deep); white-space: nowrap;
   }
   .nav-links a:hover { color: var(--sand); }
-  .topbar-ctas { display: none; }
+  /* Back on the bar at every width, per the approved full-width screenshot:
+     gold outline, uppercase, filling on hover. */
   .topbar a.cta--free {
-    color: var(--deep); background: var(--sand); border-color: var(--sand);
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--sand); background: transparent; border: 1px solid var(--sand);
   }
-  .topbar a.cta--free:hover { filter: brightness(1.08); background: var(--sand); color: var(--deep); }
-  @media (max-width: 52rem) {
-    .nav-links { display: none; }
-    .topbar-ctas { display: flex; }
-  }
+  .topbar a.cta--free:hover { background: var(--sand); color: var(--deep); }
+  @media (max-width: 52rem) { .nav-links { display: none; } }
 
   /* The binder is the only product on the site with a deadline, so it gets the
      loud button: filled rather than outlined, and in the brand's red rather
@@ -1101,6 +1103,20 @@
   @media (min-width: 34rem) { .points--four { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 60rem) { .points--four { grid-template-columns: repeat(4, 1fr); } }
 
+  /* --- width caps for the 71rem wrap --------------------------------------- */
+  /* The grids scale with the wide layout; these are columns of text and
+     controls, which do not. Each keeps roughly the width it was designed at
+     and centers in the wider page. */
+  .picker { max-width: 52rem; margin-left: auto; margin-right: auto; }
+  .month-card { max-width: 54rem; margin-left: auto; margin-right: auto; }
+  .mini-calc { max-width: 46rem; margin-left: auto; margin-right: auto; }
+  .followup { max-width: 44rem; margin-left: auto; margin-right: auto; }
+  .buy { max-width: 48rem; margin-left: auto; margin-right: auto; }
+  .res-card { max-width: 54rem; }
+  .res-list { max-width: 54rem; }
+  .tier { max-width: 54rem; }
+  .preview-warning, .android-note { max-width: 54rem; }
+
   /* --- structured footer --------------------------------------------------- */
   .foot-grid {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 1.5rem;
@@ -1126,36 +1142,54 @@
      ========================================================================= */
 
   /* --- split hero --------------------------------------------------------- */
-  /* Light ground, photograph contained on the right as an object rather than
-     stretched behind everything, and the month card overlapping its edge the
-     way a bookmark overlaps a book. */
+  /* The approved full-width layout: light ground, copy on the left inside the
+     wrap, and the photograph bleeding clean to the viewport's right edge with
+     no box around it. The month card floats on the photo. */
   .hero--split {
     background: var(--bg); color: var(--ink);
-    padding: 3.5rem 0 4rem; position: relative; overflow: visible;
+    padding: 0; position: relative; overflow: hidden;
   }
-  .hero--split .wrap { max-width: 56rem; }
   .hero--split .label { color: var(--sand); }
   .hero--split h1 { color: var(--ink); text-shadow: none; }
   .hero--split .deck { color: var(--muted); text-shadow: none; }
   .hero--split .deck strong { color: var(--ink); }
-  .hero--split .hero-grid { grid-template-columns: 1fr; align-items: start; }
-  @media (min-width: 56rem) { .hero--split .hero-grid { grid-template-columns: 6fr 5fr; } }
-  .hero-photo { position: relative; }
-  .hero-photo img {
-    display: block; width: 100%; height: 100%; min-height: 22rem;
-    object-fit: cover; object-position: 60% 40%;
-    border-radius: 4px; box-shadow: var(--shadow-lg);
+  .hero--split .hero-grid {
+    grid-template-columns: 1fr; align-items: stretch; gap: 0;
   }
-  /* The photograph has to be taller than the month card that overlaps it, or
-     the card reads as pinned to its top edge instead of floating over it. */
-  @media (min-width: 56rem) { .hero-photo img { min-height: 30rem; } }
   @media (min-width: 56rem) {
-    .hero-photo .hero-month {
-      position: absolute; left: -3.5rem; bottom: 2rem; max-width: 15.5rem;
+    .hero--split .hero-grid { grid-template-columns: 11fr 10fr; gap: 0 3.5rem; }
+  }
+  .hero-copy { padding: 4rem 0 4rem; }
+  /* The bleed: the photo column throws its outer margin past the wrap's edge
+     to the viewport's. The distance is the wrap's outer gutter plus its
+     padding; a percentage would resolve against the grid column and
+     overshoot, which is exactly the bug this formula replaced. */
+  .hero-photo {
+    position: relative;
+    margin: 0 calc(-1 * ((100vw - min(100vw, 71rem)) / 2 + 1.35rem));
+  }
+  @media (min-width: 56rem) {
+    .hero-photo {
+      margin: 0 calc(-1 * ((100vw - min(100vw, 71rem)) / 2 + 1.35rem)) 0 0;
     }
   }
-  .hero-photo .hero-month { margin-top: 1rem; }
-  @media (min-width: 56rem) { .hero-photo .hero-month { margin-top: 0; } }
+  .hero-photo img {
+    display: block; width: 100%; height: 100%; min-height: 24rem;
+    object-fit: cover; object-position: 60% 30%;
+    border-radius: 0; box-shadow: none;
+  }
+  @media (min-width: 56rem) {
+    .hero-photo .hero-month {
+      position: absolute; right: 3rem; bottom: 3rem; max-width: 16rem;
+    }
+  }
+  @media (max-width: 55.98rem) {
+    /* On a phone the card slides up over the photo's bottom edge rather than
+       floating on it, so neither has to shrink. */
+    .hero-photo .hero-month {
+      position: relative; margin: -4.5rem 1.35rem 1.5rem auto; max-width: 17rem;
+    }
+  }
   .hero--split .hero-month { background: var(--paper); }
   /* The season pill, restyled for the light ground it now sits on. */
   .hero--split .season {

@@ -27,6 +27,30 @@ Newest first.
 
 ---
 
+## [1.27.0], 2026-08-22
+
+**The full-width layout, from the screenshot Chad approved.** His words: how
+the page is full width, and how the image looks.
+
+### Changed
+
+- **The wrap went from 50rem to 71rem** on every page that loads `site.css`,
+  and the top bar with it. Grids scale with the width; the components that
+  read as columns of text and controls, the picker, the month card, the mini
+  calculator, the buy cards, the signup, carry their own caps and center in
+  the wider page, because a 71rem line of body copy is unreadable.
+- **The hero photograph bleeds to the viewport's edge**: no rounded box, no
+  shadow, flush against the bar above and the stat band below, with the month
+  card floating on the photo. On a phone the card slides up over the photo's
+  bottom edge instead. The first bleed formula resolved its percentage
+  against the grid column and pushed the card off screen; the shipped one
+  measures from the wrap, and the comment in `site.css` names the bug so it
+  does not come back.
+- **The free-calendar button is back on the bar at every width**, gold
+  outline, per the screenshot.
+
+---
+
 ## [1.26.1], 2026-08-22
 
 **The hero photograph Chad picked.** A closer golden-hour porch under the
