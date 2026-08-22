@@ -27,6 +27,50 @@ Newest first.
 
 ---
 
+## [1.26.0], 2026-08-21
+
+**The approved mockup, implemented.** Chad liked a set of visual mockups of
+the redesign, so this release closes the gap between 1.25.0 and them. Two
+things in the mockups were deliberately not reproduced: the two resource
+articles that do not exist yet, whose invented "checked" dates will never be
+printed for checks that did not happen, and the 3D product cover renders,
+because the real covers are the real product.
+
+### Added
+
+- **`/resources/`**, the resources index page from the mockup: one row per
+  page with its checked date, currently holding the one page that exists. The
+  nav's Resources link points here on every page, and it is in the sitemap.
+- **The calculator is the mockup's tool now**: centered title, a year stepper
+  with minus and plus, a Check My House button, and one card per system with
+  an icon, the age at display size, the typical Gulf Coast life with the due
+  year, a wear bar, and a colored status chip: Already on borrowed time, Due
+  soon, Start planning, On schedule.
+- **The benefits row** under the fanned pages: Practical, Organized,
+  Print-friendly, Yours forever.
+
+### Changed
+
+- **The top bar is the brand's dark green everywhere**, with the wordmark set
+  as a two-line gold serif and the nav as white uppercase links. No button at
+  desktop widths, exactly as mocked; the free-calendar button appears only on
+  screens where the links have gone.
+- **The hero is the mockup's split**: light ground, copy left, the photograph
+  contained on the right as an object, and the This Month card floating over
+  its edge. The deck is the mockup's shorter one.
+- **The Gulf Coast year chart carries five rows** now: A/C season (the
+  9-month stat drawn as a bar, March through November), termite swarm,
+  hurricane prep, hurricane season, and peak heat and humidity. The four
+  pressures sit under it as a quiet icon row instead of boxed cards.
+- **The tier cards are the mockup's**: colored chip, uppercase name, two
+  short lines, and a See tasks link. Heading: Three levels. One goal.
+- **Product cards** show a pages line and an uppercase View Details outline
+  button, on the shop and the home page.
+- **The stat band is centered with hairline dividers**, and the year chart,
+  month, levels, and pages sections take centered headings, as mocked.
+
+---
+
 ## [1.25.0], 2026-08-21
 
 **The redesign, from the external design review Chad commissioned.** The

@@ -151,8 +151,22 @@ accident.** Readable interior pages would reverse the 1.10.0 paid-content
 line by the back door, so the "pages on a kitchen table" section uses the
 existing protective crops, arranged rather than enlarged. The founder photo
 waits on Chad supplying one. The nav's Tools and Resources entries list only
-the tool and the resource that exist; when a second resource page ships, the
-Resources link should point at a resources index page instead.
+what exists.
+
+**1.26.0 finished the job against visual mockups Chad approved** ("I like
+this design"): dark topbar with the gold serif wordmark, the light split
+hero with the photo as an object and the month card floating on it, the
+five-row climate chart with the pressures as an icon row, chip tier cards,
+View Details product cards, the benefits row under the fanned pages, the
+calculator rebuilt as the mockup's tool (stepper, Check My House, per-system
+cards with wear bars and status chips), and `/resources/` as a real index
+page that the nav's Resources link now points at. Two mockup items were
+refused on honesty grounds and stay refused: resource articles that do not
+exist yet were shown with invented "checked" dates, and the product covers
+were 3D renders of covers that are not the real ones. **The mockups name the
+next two resource pages worth writing**, a flood insurance 30-day rule
+explainer and a wind mitigation insurance discounts page, both of which fit
+the pointer rule; verify against primary sources before writing either.
 
 **Resource pages follow the pointer rule and carry a checked date.** See "The
 direction" below before writing one. The sitemap is hand-maintained and a new

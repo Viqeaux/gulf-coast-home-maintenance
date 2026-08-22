@@ -100,26 +100,32 @@
   section:not(.band) + section:not(.band) { border-top: 1px solid var(--rule-soft); }
 
   /* --- sticky bar ------------------------------------------------------- */
+  /* Dark green, per the approved mockup: the bar is the brand's ground, the
+     wordmark is gold serif over two lines, and the links are quiet white
+     uppercase. No button on wide screens, exactly as mocked; the free-calendar
+     button appears only where the links have gone. */
   .topbar {
     position: sticky; top: 0; z-index: 50;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: saturate(150%) blur(10px);
-    -webkit-backdrop-filter: saturate(150%) blur(10px);
-    border-bottom: 1px solid var(--rule-soft);
+    background: var(--deep);
+    border-bottom: 1px solid color-mix(in srgb, var(--on-deep) 12%, transparent);
   }
-  @supports not (backdrop-filter: blur(1px)) { .topbar { background: var(--bg); } }
   .topbar .inner {
-    max-width: 50rem; margin: 0 auto; padding: .7rem 1.35rem;
+    max-width: 56rem; margin: 0 auto; padding: .75rem 1.35rem;
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   }
-  .mark { display: flex; align-items: center; gap: .55rem; min-width: 0; }
+  .mark { display: flex; align-items: center; gap: .6rem; min-width: 0; }
   /* On subpages the wordmark is a link home rather than a span, so it needs
      saying that it is not a body link. Underline only on hover, because a
      permanently underlined logo reads as a mistake. */
   a.mark { color: inherit; text-decoration: none; }
   a.mark:hover .label { text-decoration: underline; }
-  .mark .label { color: var(--ink); letter-spacing: .13em; font-size: 11px; }
-  .mark svg { flex: none; }
+  .mark .label {
+    color: var(--sand);
+    font: 700 .82rem/1.2 var(--font-serif);
+    letter-spacing: .1em; text-transform: uppercase;
+    max-width: 10.5rem;
+  }
+  .mark svg { flex: none; color: var(--sand) !important; }
   .topbar a.cta {
     font: 600 12.5px/1 var(--font-sans);
     letter-spacing: .04em; text-decoration: none; white-space: nowrap;
@@ -130,22 +136,26 @@
   .topbar a.cta:hover { background: var(--accent); color: var(--paper); }
   .topbar-ctas { display: flex; align-items: center; gap: .5rem; flex: none; }
 
-  /* The 1.25.0 nav: quiet section links plus one filled button. The links are
-     the map, the button is the offer, and only one thing on the bar is allowed
-     to be loud. */
-  .nav-links { display: flex; align-items: center; gap: 1.05rem; }
+  /* The nav, per the approved mockup: white uppercase links on the dark bar,
+     gold on hover, no button at desktop widths. Below 52rem the links stop
+     fitting and the free-calendar button takes their place, because a bar
+     with nothing actionable on a phone would be a dead strip. */
+  .nav-links { display: flex; align-items: center; gap: 1.3rem; }
   .nav-links a {
-    font: 600 12.5px/1 var(--font-sans); letter-spacing: .05em;
-    text-decoration: none; color: var(--ink); white-space: nowrap;
+    font: 600 11px/1 var(--font-sans); letter-spacing: .12em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--on-deep); white-space: nowrap;
   }
-  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover { color: var(--sand); }
+  .topbar-ctas { display: none; }
   .topbar a.cta--free {
-    color: var(--on-tier); background: var(--accent); border-color: var(--accent);
+    color: var(--deep); background: var(--sand); border-color: var(--sand);
   }
-  .topbar a.cta--free:hover { filter: brightness(1.08); background: var(--accent); color: var(--on-tier); }
-  /* The links go before the button does. Below 52rem the five of them and a
-     wordmark stop fitting; the button is the one thing that must survive. */
-  @media (max-width: 52rem) { .nav-links { display: none; } }
+  .topbar a.cta--free:hover { filter: brightness(1.08); background: var(--sand); color: var(--deep); }
+  @media (max-width: 52rem) {
+    .nav-links { display: none; }
+    .topbar-ctas { display: flex; }
+  }
 
   /* The binder is the only product on the site with a deadline, so it gets the
      loud button: filled rather than outlined, and in the brand's red rather
@@ -1084,6 +1094,12 @@
     border: 1px solid var(--rule); border-radius: 2px;
     padding: .35rem .5rem; display: inline-block;
   }
+  /* Four cells, so the track count has to divide into four exactly, same
+     reason .factors carries its own counts: three tracks under four cells
+     leaves the grid's own ground showing as empty boxes. */
+  .points--four { grid-template-columns: 1fr; }
+  @media (min-width: 34rem) { .points--four { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 60rem) { .points--four { grid-template-columns: repeat(4, 1fr); } }
 
   /* --- structured footer --------------------------------------------------- */
   .foot-grid {
@@ -1102,3 +1118,181 @@
     font: 400 .88rem/1.5 var(--font-sans);
   }
   .foot-grid a:hover { color: var(--on-deep); text-decoration: underline; }
+
+  /* =========================================================================
+     1.26.0: the approved mockup. Light split hero, centered section heads,
+     the five-row climate chart, chip tier cards, the fanned page spread with
+     benefit bullets, and outline "view details" buttons.
+     ========================================================================= */
+
+  /* --- split hero --------------------------------------------------------- */
+  /* Light ground, photograph contained on the right as an object rather than
+     stretched behind everything, and the month card overlapping its edge the
+     way a bookmark overlaps a book. */
+  .hero--split {
+    background: var(--bg); color: var(--ink);
+    padding: 3.5rem 0 4rem; position: relative; overflow: visible;
+  }
+  .hero--split .wrap { max-width: 56rem; }
+  .hero--split .label { color: var(--sand); }
+  .hero--split h1 { color: var(--ink); text-shadow: none; }
+  .hero--split .deck { color: var(--muted); text-shadow: none; }
+  .hero--split .deck strong { color: var(--ink); }
+  .hero--split .hero-grid { grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 56rem) { .hero--split .hero-grid { grid-template-columns: 6fr 5fr; } }
+  .hero-photo { position: relative; }
+  .hero-photo img {
+    display: block; width: 100%; height: 100%; min-height: 22rem;
+    object-fit: cover; object-position: 60% 40%;
+    border-radius: 4px; box-shadow: var(--shadow-lg);
+  }
+  /* The photograph has to be taller than the month card that overlaps it, or
+     the card reads as pinned to its top edge instead of floating over it. */
+  @media (min-width: 56rem) { .hero-photo img { min-height: 30rem; } }
+  @media (min-width: 56rem) {
+    .hero-photo .hero-month {
+      position: absolute; left: -3.5rem; bottom: 2rem; max-width: 15.5rem;
+    }
+  }
+  .hero-photo .hero-month { margin-top: 1rem; }
+  @media (min-width: 56rem) { .hero-photo .hero-month { margin-top: 0; } }
+  .hero--split .hero-month { background: var(--paper); }
+  /* The season pill, restyled for the light ground it now sits on. */
+  .hero--split .season {
+    background: var(--paper); border-color: var(--rule);
+    color: var(--muted); text-shadow: none;
+  }
+  .hero--split .season-num { color: var(--ink); }
+  .hero--split .season-link { color: var(--accent); border-bottom-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+  .hero--split .btn--hero {
+    background: var(--deep); border-color: var(--deep); color: var(--on-deep);
+    text-transform: uppercase; letter-spacing: .09em; font-size: 12px;
+    padding: 1rem 1.4rem;
+  }
+  .hero--split .btn--hero:hover { filter: brightness(1.18); }
+  .hero--split .hero-alt { color: var(--muted); margin: 0; max-width: 13rem; }
+  .hero--split .hero-alt a { color: var(--ink); font-weight: 600; }
+  .hero--split .free-line { color: var(--muted); text-transform: none; letter-spacing: .02em; font-weight: 400; font-size: 13px; }
+  .hero--split .free-line { margin-top: 1.1rem; }
+
+  /* --- centered section heads --------------------------------------------- */
+  .center { text-align: center; }
+  .center .deck { margin-left: auto; margin-right: auto; }
+  .center .sub {
+    font: 400 .95rem/1.6 var(--font-sans); color: var(--on-surface-mute);
+    max-width: 30rem; margin: 0 auto 1rem;
+  }
+
+  /* --- stat band, centered with dividers ---------------------------------- */
+  .bigstats .grid > div { text-align: center; padding: 0 .5rem; }
+  @media (min-width: 46rem) {
+    .bigstats .grid { gap: 0; }
+    .bigstats .grid > div + div { border-left: 1px solid color-mix(in srgb, var(--on-deep) 18%, transparent); }
+  }
+
+  /* --- factors, borderless icon row ---------------------------------------- */
+  .factors--plain { background: none; border: 0; gap: 1.5rem 0; margin-top: 2.5rem; }
+  .factors--plain .factor { background: none; padding: 0 1.4rem; }
+  @media (min-width: 60rem) {
+    .factors--plain .factor + .factor { border-left: 1px solid var(--hairline); }
+  }
+  .factors--plain .factor h3 {
+    font: 700 11px/1.4 var(--font-sans); letter-spacing: .12em;
+    text-transform: uppercase; margin-bottom: .3rem;
+  }
+  .factors--plain .factor p { font-size: .87rem; }
+  .factors--plain .factor svg { margin-bottom: .6rem; }
+
+  /* --- the three levels ---------------------------------------------------- */
+  .levels { display: grid; gap: 1rem; margin-top: 2.25rem; text-align: left; }
+  @media (min-width: 46rem) { .levels { grid-template-columns: repeat(3, 1fr); } }
+  .level {
+    background: var(--paper); border: 1px solid var(--rule); border-radius: 4px;
+    box-shadow: var(--shadow); padding: 1.5rem 1.5rem 1.35rem;
+    --surface: var(--paper); --on-surface: var(--ink); --on-surface-mute: var(--muted);
+  }
+  .level .chip {
+    width: 30px; height: 30px; border-radius: 3px; margin-bottom: .8rem;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--level-color); color: var(--on-tier);
+  }
+  .level--must   { --level-color: var(--must); }
+  .level--should { --level-color: var(--sand); }
+  .level--above  { --level-color: var(--should); }
+  .level h3 {
+    font: 700 11.5px/1.3 var(--font-sans); letter-spacing: .13em;
+    text-transform: uppercase; color: var(--level-color); margin-bottom: .55rem;
+  }
+  .level p { font: 400 .93rem/1.55 var(--font-sans); color: var(--muted); margin: 0 0 .35rem; }
+  .level .go {
+    display: inline-block; margin-top: .6rem;
+    font: 600 .88rem/1.3 var(--font-sans); color: var(--ink); text-decoration: none;
+  }
+  .level .go:hover { color: var(--level-color); }
+
+  /* --- the fanned spread and the benefits ---------------------------------- */
+  .fan {
+    display: flex; justify-content: center; align-items: flex-start;
+    margin: 2.5rem 0 1rem; padding: 0 1rem;
+  }
+  .fan figure { margin: 0; width: 27%; min-width: 9.5rem; }
+  .fan figure + figure { margin-left: -2.5%; }
+  .fan img {
+    display: block; width: 100%; height: auto; background: #fff;
+    border: 1px solid var(--rule); border-radius: 2px; box-shadow: var(--shadow-lg);
+  }
+  .fan figure:nth-child(1) { transform: rotate(-3deg) translateY(.6rem); }
+  .fan figure:nth-child(2) { transform: rotate(-.8deg); }
+  .fan figure:nth-child(3) { transform: rotate(1deg) translateY(.3rem); }
+  .fan figure:nth-child(4) { transform: rotate(3.2deg) translateY(.9rem); }
+  @media (max-width: 40rem) {
+    .fan { flex-wrap: wrap; gap: 1rem; }
+    .fan figure { width: 46%; }
+    .fan figure + figure { margin-left: 0; }
+  }
+  .benefits {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem;
+    margin: 2.75rem 0 0; text-align: center;
+  }
+  @media (min-width: 46rem) {
+    .benefits { grid-template-columns: repeat(4, 1fr); }
+    .benefits > div + div { border-left: 1px solid var(--hairline); }
+  }
+  .benefits svg { color: var(--sand); margin-bottom: .5rem; }
+  .benefits h3 {
+    font: 700 11px/1.4 var(--font-sans); letter-spacing: .12em;
+    text-transform: uppercase; color: var(--on-surface); margin-bottom: .25rem;
+  }
+  .benefits p { font: 400 .85rem/1.5 var(--font-sans); color: var(--on-surface-mute); margin: 0; }
+  .btn--dark {
+    background: var(--deep); border-color: var(--deep); color: var(--on-deep);
+    text-transform: uppercase; letter-spacing: .09em; font-size: 12px;
+  }
+  .btn--dark:hover { filter: brightness(1.18); border-color: var(--deep); }
+  .band .btn--dark { background: var(--sand); border-color: var(--sand); color: var(--deep); }
+
+  /* --- product cards, mockup form ------------------------------------------ */
+  .pcard .pcard-pages {
+    font: 400 .82rem/1.4 var(--font-sans); color: var(--muted); margin: 0 0 .5rem;
+  }
+  .btn--outline {
+    text-transform: uppercase; letter-spacing: .1em; font-size: 11.5px;
+    border-color: var(--ink); color: var(--ink); text-align: center;
+  }
+  .btn--outline:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  /* --- the resources index ------------------------------------------------- */
+  .res-list { margin-top: 2rem; }
+  .res-row {
+    display: block; text-decoration: none; color: var(--ink);
+    padding: 1.5rem 0; border-top: 1px solid var(--rule-soft);
+  }
+  .res-row:last-child { border-bottom: 1px solid var(--rule-soft); }
+  .res-row h3 { font: 600 1.3rem/1.3 var(--font-serif); color: var(--ink); margin-bottom: .35rem; }
+  .res-row:hover h3 { color: var(--accent); }
+  .res-row p { font: 400 .95rem/1.55 var(--font-sans); color: var(--muted); margin: 0 0 .55rem; }
+  .res-row .meta {
+    font: 600 11px/1.4 var(--font-sans); letter-spacing: .08em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .res-row .meta .read { color: var(--accent); }

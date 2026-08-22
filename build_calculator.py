@@ -228,18 +228,105 @@ FREE_TEMPLATE = """<!doctype html>
     overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
   }}
 
-  header {{ background: var(--deep); color: var(--on-deep); padding: 3rem 0 2.5rem; }}
-  header a.back {{
-    font: 600 11px/1 var(--font-sans);
-    letter-spacing: .14em; text-transform: uppercase;
-    color: var(--sand); text-decoration: none;
+  /* The site's dark bar, self-contained because this page keeps its own
+     styles. Same look as site.css: gold serif wordmark, white uppercase
+     links. */
+  .topbar {{
+    position: sticky; top: 0; z-index: 50; background: var(--deep);
+    border-bottom: 1px solid rgba(234,228,212,.12);
   }}
-  header a.back:hover {{ text-decoration: underline; }}
-  header h1 {{
-    font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.1;
-    margin: 1rem 0 .9rem; letter-spacing: -.02em; color: #fff;
+  .topbar .inner {{
+    max-width: 56rem; margin: 0 auto; padding: .75rem 1.35rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   }}
-  header p {{ color: var(--on-deep-mute); margin: 0; max-width: 34rem; }}
+  a.mark {{ display: flex; align-items: center; gap: .6rem; min-width: 0; color: var(--sand); text-decoration: none; }}
+  a.mark:hover .mark-label {{ text-decoration: underline; }}
+  .mark-label {{
+    font: 700 .82rem/1.2 var(--font-serif);
+    letter-spacing: .1em; text-transform: uppercase; max-width: 10.5rem;
+  }}
+  .nav-links {{ display: flex; align-items: center; gap: 1.3rem; }}
+  .nav-links a {{
+    font: 600 11px/1 var(--font-sans); letter-spacing: .12em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--on-deep); white-space: nowrap;
+  }}
+  .nav-links a:hover {{ color: var(--sand); }}
+  @media (max-width: 52rem) {{ .nav-links {{ display: none; }} }}
+
+  /* The tool's front, centered like the mockup: a question, a year, a button. */
+  .intro {{ text-align: center; padding: 3rem 0 1rem; }}
+  .intro h1 {{
+    font: 600 clamp(2rem, 5vw, 2.7rem)/1.1 var(--font-serif);
+    margin: 0 0 .6rem; letter-spacing: -.02em; color: var(--ink);
+  }}
+  .intro-sub {{ color: var(--muted); margin: 0 auto 2rem; max-width: 30rem; }}
+  .ask {{
+    font: 600 .98rem/1.4 var(--font-sans); color: var(--ink); margin: 0 0 .7rem;
+  }}
+  .stepper {{ display: flex; justify-content: center; align-items: stretch; gap: .45rem; }}
+  .stepper input {{
+    width: 8.5rem; font: 600 1.7rem/1.2 var(--font-serif);
+    text-align: center; letter-spacing: .01em;
+  }}
+  .step-btn {{
+    width: 3rem; font: 400 1.3rem/1 var(--font-sans); cursor: pointer;
+    border: 1px solid var(--muted); background: var(--paper); color: var(--ink);
+    border-radius: 3px;
+  }}
+  .step-btn:hover {{ border-color: var(--accent); color: var(--accent); }}
+  .step-btn:focus-visible {{ outline: 2px solid var(--accent); outline-offset: 1px; }}
+  .check-btn {{
+    font: 600 12px/1 var(--font-sans); letter-spacing: .1em; text-transform: uppercase;
+    background: var(--deep); border: 1px solid var(--deep); color: var(--on-deep);
+    padding: 1rem 2rem; border-radius: 3px; cursor: pointer;
+    -webkit-appearance: none; appearance: none; transition: filter .15s ease;
+  }}
+  .check-btn:hover {{ filter: brightness(1.2); }}
+  .check-btn:focus-visible {{ outline: 2px solid var(--accent); outline-offset: 2px; }}
+  .hint {{
+    font: 400 .84rem/1.55 var(--font-sans); color: var(--muted);
+    max-width: 26rem; margin: 1.1rem auto 0;
+  }}
+
+  /* One card per system, per the mockup: icon, name, age at display size,
+     the typical life, a wear bar, and the status chip on the right. */
+  .syscard {{
+    display: flex; align-items: center; gap: 1.1rem;
+    background: var(--paper); border: 1px solid var(--rule); border-radius: 4px;
+    box-shadow: var(--shadow); padding: 1.15rem 1.25rem; margin: 0 0 .8rem;
+  }}
+  .sysicon {{ flex: none; color: var(--ink); display: flex; }}
+  .sysmain {{ flex: 1; min-width: 0; }}
+  .sysname {{
+    display: block; font: 700 10.5px/1.4 var(--font-sans);
+    letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+  }}
+  .sysage {{
+    display: block; font: 600 1.35rem/1.25 var(--font-serif);
+    color: var(--ink); letter-spacing: -.01em; margin: .1rem 0 .15rem;
+  }}
+  .syslife {{ display: block; font: 400 .82rem/1.5 var(--font-sans); color: var(--muted); margin-bottom: .55rem; }}
+  .bar {{
+    display: block; height: 6px; border-radius: 6px;
+    background: var(--rule-soft); overflow: hidden; max-width: 22rem;
+  }}
+  .bar span {{ display: block; height: 100%; border-radius: 6px; }}
+  .chip {{
+    flex: none; font: 700 9.5px/1.35 var(--font-sans);
+    letter-spacing: .09em; text-transform: uppercase;
+    padding: .5rem .6rem; border-radius: 2px; text-align: center; max-width: 8rem;
+  }}
+  .chip--overdue {{ background: var(--must); color: var(--on-tier); }}
+  .chip--soon    {{ background: var(--must); color: var(--on-tier); }}
+  /* Darkened brass rather than raw --sand: white text on the raw token sits
+     near 3:1, which fails for type this small. */
+  .chip--watch   {{ background: color-mix(in srgb, var(--sand) 78%, black); color: #fdfbf4; }}
+  .chip--ok      {{ background: var(--should); color: var(--on-tier); }}
+  @media (max-width: 30rem) {{
+    .syscard {{ flex-wrap: wrap; }}
+    .sysicon {{ display: none; }}
+  }}
 
   main {{ padding: 2.5rem 0 0; }}
   h2 {{
@@ -398,14 +485,44 @@ FREE_TEMPLATE = """<!doctype html>
 </head>
 <body>
 
-<header>
+<div class="topbar">
+  <div class="inner">
+    <a class="mark" href="../">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5V14h4v5.5"/>
+      </svg>
+      <span class="mark-label">Gulf Coast Home Maintenance</span>
+    </a>
+    <nav class="nav-links" aria-label="Site">
+      <a href="../calendars/">Calendar</a>
+      <a href="../shop/#binder">Storm prep</a>
+      <a href="./" aria-current="page">Tools</a>
+      <a href="../resources/">Resources</a>
+      <a href="../shop/">Shop</a>
+    </nav>
+  </div>
+</div>
+
+<header class="intro">
   <div class="wrap">
-    <a class="back" href="../">&#8592; Gulf Coast Home Maintenance</a>
-    <h1>What in your house is on borrowed time</h1>
-    <p>
-      Four of the most expensive things you own, and whether they are already
-      past due. Type the year it was built. That is the only thing you have to
-      know.
+    <h1>Borrowed Time Calculator</h1>
+    <p class="intro-sub">Find out how much useful life your major systems
+    likely have left.</p>
+
+    <p class="ask">When was your house built?</p>
+    <div class="stepper">
+      <button type="button" class="step-btn" id="year-down" aria-label="One year earlier">&#8722;</button>
+      <label class="sr-only" for="built">The year your house was built</label>
+      <input id="built" type="number" inputmode="numeric" placeholder="1998"
+             min="1850" max="2100">
+      <button type="button" class="step-btn" id="year-up" aria-label="One year later">+</button>
+    </div>
+    <p style="margin:1.1rem 0 0">
+      <button type="button" class="check-btn" id="check">Check my house</button>
+    </p>
+    <p class="hint">
+      On your county appraisal record if you do not have it to hand. Nothing
+      you type leaves your browser.
     </p>
   </div>
 </header>
@@ -422,20 +539,6 @@ FREE_TEMPLATE = """<!doctype html>
       </p>
     </div>
   </noscript>
-
-  <div class="card">
-    <div class="built">
-      <div>
-        <label for="built">What year was it built?</label>
-        <input id="built" type="number" inputmode="numeric" placeholder="1998"
-               min="1850" max="2100">
-      </div>
-      <p class="hint">
-        On your county appraisal record if you do not have it to hand. Nothing
-        you type leaves your browser.
-      </p>
-    </div>
-  </div>
 
   <section class="results" id="results" aria-live="polite">
     <p class="empty">Put a build year in above and the answer appears here.</p>
@@ -568,6 +671,8 @@ FREE_TEMPLATE = """<!doctype html>
       if (installed === null) {{ continue; }}
       found.push({{
         name: SYSTEMS[i].name,
+        life: SYSTEMS[i].life,
+        age: Math.max(NOW - installed, 0),
         due: installed + SYSTEMS[i].life,
         remaining: installed + SYSTEMS[i].life - NOW,
         estimated: mode !== 'known'
@@ -603,16 +708,47 @@ FREE_TEMPLATE = """<!doctype html>
         'was built, set those to <strong>never replaced</strong> below.</p>';
     }}
 
-    results.innerHTML = verdict + '<ul class="rows">' + found.map(function (item) {{
-      var state = status(item.remaining);
-      return '<li class="row">' +
-        '<span class="tag tag--' + state[0] + '">' + state[1] + '</span>' +
-        '<span class="what">' + escapeHtml(item.name) + '</span>' +
-        '<span class="when">' + whenText(item.remaining, item.due) +
-        (item.estimated ? ' <span class="estimated">estimated</span>' : '') +
-        '</span></li>';
-    }}).join('') + '</ul>';
+    // One card per system, the mockup's shape: age at display size, the
+    // typical life with the due year, a wear bar, and the chip.
+    results.innerHTML = verdict + found.map(function (item) {{
+      var chip = chipFor(item.remaining);
+      var pct = Math.round(Math.min(item.age / item.life, 1) * 100);
+      return '<div class="syscard">' +
+        '<span class="sysicon" aria-hidden="true">' + (ICONS[item.name] || '') + '</span>' +
+        '<div class="sysmain">' +
+          '<span class="sysname">' + escapeHtml(item.name) + '</span>' +
+          '<span class="sysage">' + (item.estimated ? 'About ' : '') +
+            item.age + (item.age === 1 ? ' year' : ' years') + ' old</span>' +
+          '<span class="syslife">Typical Gulf Coast life: ' + item.life +
+            ' years &middot; ' + whenText(item.remaining, item.due) +
+            (item.estimated ? ' <span class="estimated">estimated</span>' : '') + '</span>' +
+          '<span class="bar"><span style="width:' + pct + '%;background:' + chip[2] + '"></span></span>' +
+        '</div>' +
+        '<span class="chip chip--' + chip[0] + '">' + chip[1] + '</span>' +
+      '</div>';
+    }}).join('');
   }}
+
+  // The chip is the mockup's language for status(): same thresholds, longer
+  // labels, and the bar borrows the chip's color so the card agrees with
+  // itself.
+  function chipFor(remaining) {{
+    if (remaining <= 0) {{ return ['overdue', 'Already on borrowed time', 'var(--must)']; }}
+    if (remaining <= 2) {{ return ['soon', 'Due soon', 'var(--must)']; }}
+    if (remaining <= 5) {{ return ['watch', 'Start planning', 'var(--sand)']; }}
+    return ['ok', 'On schedule', 'var(--should)'];
+  }}
+
+  var ICONS = {{
+    'Roof, architectural shingle':
+      '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12 12 3l10 9"/><path d="M5.5 9.5V20h13V9.5"/><path d="M9.5 20v-6h5v6"/></svg>',
+    'A/C condenser, the outdoor unit':
+      '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="1.4"/><path d="M12 6.5a3.5 3.5 0 0 1 3 5.3M12 17.5a3.5 3.5 0 0 1-3-5.3M6.7 9.5a3.5 3.5 0 0 1 5.1-1.2M17.3 14.5a3.5 3.5 0 0 1-5.1 1.2"/></svg>',
+    'Water heater, tank':
+      '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="17" rx="3"/><path d="M9 19.5V22M15 19.5V22"/><path d="M12 7s2 2.1 2 3.4a2 2 0 0 1-4 0C10 9.1 12 7 12 7z"/></svg>',
+    'Air handler or furnace':
+      '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 9h16"/><path d="M8 13h8M8 16h8"/><circle cx="7" cy="6" r=".8"/></svg>'
+  }};
 
   // The home page's mini calculator hands the year over as ?year=, so the
   // card there can stay a plain GET form that works with scripting off. A
@@ -624,6 +760,26 @@ FREE_TEMPLATE = """<!doctype html>
   }}
 
   built.addEventListener('input', render);
+
+  // The stepper and the button. The input already answers live; these give
+  // the tool its handles, and the button also carries anyone whose eye went
+  // straight to it.
+  function bump(delta) {{
+    var value = parseInt(built.value, 10);
+    if (!value) {{ value = NOW - 25; }}
+    built.value = Math.min(2100, Math.max(1850, value + delta));
+    render();
+  }}
+  document.getElementById('year-down').addEventListener('click', function () {{ bump(-1); }});
+  document.getElementById('year-up').addEventListener('click', function () {{ bump(1); }});
+  document.getElementById('check').addEventListener('click', function () {{
+    render();
+    var target = document.getElementById('results');
+    if (target && target.scrollIntoView) {{
+      target.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+    }}
+  }});
+
   modes.forEach(function (select, index) {{
     select.addEventListener('change', function () {{
       years[index].hidden = select.value !== 'known';
