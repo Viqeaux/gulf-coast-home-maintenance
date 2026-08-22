@@ -27,6 +27,31 @@ Newest first.
 
 ---
 
+## [1.31.0], 2026-08-22
+
+**Florida joins the grants shelf.** Four of five Gulf states covered.
+
+### Added
+
+- **`/resources/my-safe-florida-home/`**: the free wind mitigation
+  inspection and the two grant types, matching (two-thirds reimbursement up
+  to $10,000) and low-income (no match required), with the homestead,
+  $700,000 insured value, and pre-2008 permit rules and the four priority
+  groups. Checked against mysafeflhome.com and the program's own 2025-26
+  Program Terms document, downloaded and read directly, 2026-08-22. The
+  page's angle is the honest one the program itself argues: the inspection
+  is worth having even with no grant, because Florida law makes the
+  discounts it documents mandatory.
+
+### Changed
+
+- Resources dropdown, footers, index, sitemap and the wind page's Florida
+  section carry it. Texas remains: no statewide equivalent exists, so its
+  page is "what Texas has instead", and tdi.texas.gov still has to become
+  reachable for verification.
+
+---
+
 ## [1.30.0], 2026-08-22
 
 **The grants shelf goes multi-state.** Chad's observation: the site claimed
