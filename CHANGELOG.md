@@ -27,6 +27,80 @@ Newest first.
 
 ---
 
+## [1.34.0], 2026-08-22
+
+**There is a menu on phones now, and every page has the same footer.** Below
+832px the bar's links have always been `display: none`, and until this release
+nothing replaced them: the whole of the navigation on a phone was a wordmark
+and one gold button pointing at the calendar, whatever the reader had come for.
+Most of this site's visitors arrive from a search engine onto a deep resource
+page, on a phone, so that was most of the audience seeing none of the site.
+
+**The bar and the footer moved out of the pages.** They were pasted into
+sixteen HTML files. They now live in `site_chrome.py` and are written in by
+`build_chrome.py`, and the two already-generated pages import the same
+functions instead of keeping their own copies. A full site build is three
+commands and they are listed in [HANDOFF.md](HANDOFF.md).
+
+**No feed changed**, and `SEQUENCE` stays at 2.
+
+### Added
+
+- **A phone menu**, as a `<details>` rather than a script. It is keyboard
+  operable and screen-reader announced for free, it works with scripting off,
+  and there is no open/closed state for anything to get out of step with. It
+  carries all fifteen destinations rather than a shortlist, grouped as Pages,
+  Grants and programs, and Free tools, because on a phone it is the only way
+  through the site. Every row is a 44px target and the summary is 44x44.
+- **`site_chrome.py`**, which is now the one place that knows what pages this
+  site has. Adding a page means an entry there, a row on `/resources/` if it is
+  a resource, a sitemap entry, and an entry in `build_chrome.py`.
+- **`build_chrome.py`**, which rewrites two regions in each hand-written page
+  and touches nothing else. It is idempotent: running it twice changes nothing
+  the second time.
+
+### Changed
+
+- **Every page carries the full footer.** Nineteen to twenty links, four
+  columns. The seven resource pages used to carry four links, `/guides/` and
+  `/calculator/` three, and those nine are exactly the pages the search traffic
+  lands on. `/404.html` keeps its austere card, because a page that exists to
+  get you unstuck already carries three ways out and now has the bar as well.
+- **The footer CSS moved from `site.css` to `nav.css`**, for the same reason
+  the bar moved there in 1.32.2: nine pages do not load `site.css`, and that is
+  precisely why they could not have the footer. `.foot-links`, the one-line
+  footer those pages used to carry, is deleted.
+- **The footer uses `.foot-wrap`, not `.wrap`.** `.wrap` is 42rem on a resource
+  page and 71rem everywhere else, and four columns inside 42rem is not four
+  columns.
+- **The wordmark is a 44x44 target below 480px**, where the label is hidden and
+  the link had been the 18px glyph alone. Padding plus a matching negative
+  margin, so nothing on the bar moved.
+- **The bar has focus rings.** Every other interactive surface on the site
+  named its own and the bar never did, so it fell back to the browser default
+  on a dark ground.
+- **One disclaimer sentence, one definition.** It was written out three times,
+  in `site_chrome.py`, `build_calendars.py` and `build_calculator.py`. The
+  feeds put it in every event description and the footer puts it on every page;
+  they are the same promise and should not be able to drift.
+
+### Fixed
+
+- **The phone menu's panel rendered while the menu was closed**, with its links
+  still focusable. Chrome hides a closed `<details>`'s contents with
+  `content-visibility`, which implies `contain: paint`, which makes the details
+  the containing block for an absolutely positioned child, so the panel escaped
+  the hiding. Said explicitly now.
+- **`/privacy.html` said "Back to the calendars" and linked to the site root**,
+  which is not the calendars. The audit caught it as M18. Its "Last updated"
+  date survives the move, because the page's own body says that date changes if
+  anything about tracking does, which makes it part of the promise rather than
+  decoration.
+- **The footer's "Calendar setup help" and "The phone calendars" pointed at the
+  same page.** One link now, called "The free calendars".
+
+---
+
 ## [1.33.2], 2026-08-22
 
 **Every piece of text on the site now meets WCAG AA for contrast, measured

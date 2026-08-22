@@ -835,27 +835,10 @@
     color: var(--accent); margin-top: 1.5rem;
   }
 
-  /* The section above the footer used to be dark, which is why this hairline
-     exists. It now sits under a paper section, where the ground change is
-     already the divider and the rule is simply invisible. Kept because the
-     order of sections is not guaranteed to stay this way. */
-  footer {
-    background: var(--deep); color: var(--on-deep-mute);
-    padding: 3rem 0 3.5rem; font-size: .87rem;
-    border-top: 1px solid color-mix(in srgb, var(--on-deep) 17%, transparent);
-  }
-  footer .disclaimer { font-style: italic; margin-bottom: 1rem; max-width: 34rem; }
-  footer .foot-links {
-    display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.1rem;
-    font: 400 .87rem/1 var(--font-sans);
-  }
-  footer .foot-links a { color: var(--sand-lift); text-decoration: none; }
-  footer .foot-links a:hover { text-decoration: underline; }
-  footer .version {
-    font: 600 11px/1 var(--font-sans);
-    letter-spacing: .12em; opacity: .55; margin: 0;
-  }
-  footer .mark .label { color: var(--on-deep); }
+  /* The footer moved to nav.css in 1.34.0, so the nine pages that do not load
+     this file can have it too. .foot-links went with the move rather than into
+     it: it was the one-line footer that /guides/ and /calculator/ used to
+     carry, and nothing uses it now that every page carries the grid. */
   /* code paints itself a paper ground, so it cannot inherit its colour from
      whatever section it lands in. Inside the band on /calendars/ it was
      inheriting --on-deep-mute and rendering at 1.85:1, which is not readable
@@ -1059,23 +1042,7 @@
   .tier { max-width: 54rem; }
   .preview-warning, .android-note { max-width: 54rem; }
 
-  /* --- structured footer --------------------------------------------------- */
-  .foot-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 1.5rem;
-    margin: 1.9rem 0 2.2rem;
-  }
-  @media (min-width: 46rem) { .foot-grid { grid-template-columns: repeat(4, 1fr); } }
-  .foot-grid h3 {
-    font: 600 10.5px/1 var(--font-sans); letter-spacing: .15em;
-    text-transform: uppercase; color: var(--sand-lift); margin: 0 0 .8rem;
-  }
-  .foot-grid ul { list-style: none; margin: 0; padding: 0; }
-  .foot-grid li { margin: 0 0 .5rem; }
-  .foot-grid a {
-    color: var(--on-deep-mute); text-decoration: none;
-    font: 400 .88rem/1.5 var(--font-sans);
-  }
-  .foot-grid a:hover { color: var(--on-deep); text-decoration: underline; }
+  /* .foot-grid moved to nav.css in 1.34.0, with the rest of the footer. */
 
   /* =========================================================================
      1.26.0: the approved mockup. Light split hero, centered section heads,

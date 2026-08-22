@@ -34,6 +34,12 @@ and the fix was verified against a local server rather than only written:
 `M1` scroll-padding · `M4` aria-current · `M8` shim routing ·
 `M9` floir.gov · `M11` unclosed div
 
+**C2, C3, M13, M15, M18 and N5 shipped in v1.34.0**: the phone menu, the shared
+footer on every page, focus rings on the bar, the wordmark's tap target, and
+the privacy page's mislabelled link. The bar and the footer now come from
+`site_chrome.py` rather than from sixteen pasted copies, which is also the
+answer to M5. What is left of the audit is content work, not structure.
+
 **H1, the contrast tokens, shipped in v1.33.2 the same day.** The measured
 sweep was re-run as the verification: all sixteen pages, 1440px and 390px, both
 colour schemes, 64 combinations. **78 failing colour pairs before, 0 after.**
@@ -101,7 +107,7 @@ currently costing conversions on live traffic.
 
 ---
 
-### C2. There is no navigation on a phone
+### C2. There is no navigation on a phone  ·  FIXED 1.34.0
 
 **Where:** [nav.css:55](docs/nav.css:55) — `@media (max-width: 52rem) { .nav-links { display: none; } }`
 
@@ -140,7 +146,7 @@ each — or better, fixed as part of C3 below.
 
 ---
 
-### C3. The seven deep resource pages — the primary landing pages — are the only pages with no real footer
+### C3. The seven deep resource pages — the primary landing pages — are the only pages with no real footer  ·  FIXED 1.34.0
 
 **Where:** [resources/louisiana-fortify-homes/index.html:276-289](docs/resources/louisiana-fortify-homes/index.html:276) and the equivalent block in all six siblings.
 
@@ -917,7 +923,7 @@ aria-label="Pages from the kit"`) on each `.prow` and on `.scroll`, and a
 
 ---
 
-### M13. No focus styles anywhere in the top bar
+### M13. No focus styles anywhere in the top bar  ·  FIXED 1.34.0
 
 **Where:** [nav.css](docs/nav.css) defines `:hover` for `.nav-links a`,
 `.nav-menu a`, `a.mark` and `.topbar a.cta--free`, and `:focus-within` for the
@@ -970,7 +976,7 @@ insurance, government programmes.
 
 ---
 
-### M15. Footer link sets differ from page to page for no reason
+### M15. Footer link sets differ from page to page for no reason  ·  FIXED 1.34.0
 
 - `/calendars/` ([:237-240](docs/calendars/index.html:237)) omits "Storm season" from the Free column, which every other full footer includes.
 - `/calendars/` puts the disclaimer above the `foot-grid`; every other page puts it below.
@@ -1016,7 +1022,7 @@ accounts for 166 KB — so this is repo hygiene rather than a page-weight proble
 
 ---
 
-### M18. `/privacy.html` footer link is mislabelled
+### M18. `/privacy.html` footer link is mislabelled  ·  FIXED 1.34.0
 
 **Where:** [privacy.html:230](docs/privacy.html:230) —
 `Back to <a href="./">the calendars</a>.`

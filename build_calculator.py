@@ -37,6 +37,7 @@ commercial line: this answers what and when, the workbook answers what it costs.
 import json
 import os
 
+import site_chrome
 from build_calendars import VERSION
 from planner_data import COMMON, SYSTEMS
 
@@ -49,8 +50,9 @@ BUNDLE_URL = ""
 
 DOMAIN = "gulfcoasthomemaintenance.com"
 
-DISCLAIMER = ("General maintenance guidance, not a substitute for a licensed "
-              "inspector, contractor, or your insurance policy terms.")
+# The footer sentence lives in site_chrome now; this page no longer prints it
+# itself. Kept as an alias because the workbook copy below still refers to it.
+DISCLAIMER = site_chrome.DISCLAIMER
 
 # Shortened for the page. The workbook's names have to disambiguate 49 rows in a
 # dropdown; these four only have to be readable on a phone.
@@ -469,65 +471,13 @@ FREE_TEMPLATE = """<!doctype html>
     color: var(--muted); max-width: 34rem;
   }}
 
-  footer {{
-    background: var(--deep); color: var(--on-deep-mute);
-    padding: 2.5rem 0 3rem; font-size: .87rem;
-  }}
-  footer p {{ margin: 0 0 .8rem; max-width: 34rem; }}
-  footer .disclaimer {{ font-style: italic; }}
-  footer .foot-links {{
-    display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.1rem;
-    font: 400 .87rem/1 var(--font-sans);
-  }}
-  footer .foot-links a {{ color: var(--sand-lift); text-decoration: none; }}
-  footer .foot-links a:hover {{ text-decoration: underline; }}
-  footer .version {{
-    font: 600 11px/1 var(--font-sans);
-    letter-spacing: .12em; opacity: .55; margin: 0;
-  }}
+  /* No footer rules here. nav.css carries the footer for the whole site since
+     1.34.0, and this page loads it. A second copy is how the two drift. */
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="inner">
-    <a class="mark" href="../">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5V14h4v5.5"/>
-      </svg>
-      <span class="label">Gulf Coast Home Maintenance</span>
-    </a>
-    <nav class="nav-links" aria-label="Site">
-      <a href="../calendars/">Calendar</a>
-      <span class="nav-drop">
-        <a href="../resources/">Resources</a>
-        <span class="nav-menu"><span class="menu-card">
-          <a href="../resources/">All resources</a>
-          <a href="../resources/strengthen-mississippi-homes/">Mississippi roof grant</a>
-          <a href="../resources/strengthen-alabama-homes/">Alabama roof grant</a>
-          <a href="../resources/louisiana-fortify-homes/">Louisiana roof grant</a>
-          <a href="../resources/my-safe-florida-home/">Florida inspections and grants</a>
-          <a href="../resources/texas-windstorm-coverage/">Texas windstorm coverage</a>
-          <a href="../resources/flood-insurance-30-day-rule/">Flood insurance 30-day rule</a>
-          <a href="../resources/wind-mitigation-discounts/">Wind mitigation discounts</a>
-        </span></span>
-      </span>
-      <a href="../storm/">Storm prep</a>
-      <span class="nav-drop">
-        <a href="./" aria-current="page">Tools</a>
-        <span class="nav-menu"><span class="menu-card">
-          <a href="./">Borrowed Time Calculator</a>
-          <a href="../guides/">What's on the calendar</a>
-        </span></span>
-      </span>
-      <a href="../guides/">Guide</a>
-      <a href="../shop/">Shop</a>
-    </nav>
-    <span class="topbar-ctas">
-      <a class="cta cta--free" href="../calendars/">Get the free calendar</a>
-    </span>
-  </div>
-</div>
+{topbar}
 
 <header class="intro">
   <div class="wrap">
@@ -655,17 +605,7 @@ FREE_TEMPLATE = """<!doctype html>
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <p class="disclaimer">{disclaimer}</p>
-    <p class="foot-links">
-      <a href="../">Home</a>
-      <a href="../guides/">What is on the calendar</a>
-      <a href="../privacy.html">Privacy</a>
-    </p>
-    <p class="version">v{version}</p>
-  </div>
-</footer>
+{footer}
 
 <script>
 (function () {{
@@ -871,8 +811,8 @@ def build_free():
                            ensure_ascii=False).replace("</", "<\\/"),
         engine=ENGINE_JS,
         buy=buy,
-        disclaimer=escape(DISCLAIMER),
-        version=VERSION,
+        topbar=site_chrome.topbar(prefix="../", current="calculator/"),
+        footer=site_chrome.footer(prefix="../", version=VERSION),
     )
 
     folder = os.path.dirname(FREE_OUT)

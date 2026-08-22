@@ -63,7 +63,13 @@ the strongest thing in the listing. Do not embellish it.
 
 ## Build
 
+**A full site build is three commands, in this order.** `build_chrome.py` reads
+`site_chrome.py` and writes the bar and the footer into the fourteen
+hand-written pages; the other two generate `/guides/` and `/calculator/` and
+import the same functions, so the chrome cannot differ between them.
+
 ```bash
+python build_chrome.py          # the shared bar and footer, into the 14 hand-written pages
 python build_calendars.py       # feeds + calendar contents page, into docs/
 python build_printables.py      # the kit PDF, into product/
 python build_fillable.py        # the fillable twin, needs the PDF above first
@@ -336,7 +342,16 @@ moves.
 **Four version markers, and they must agree:** `VERSION` in
 `build_calendars.py`, the footer of `docs/index.html`, an entry in
 `CHANGELOG.md`, and an annotated git tag. Rebuild after changing `VERSION`, or
-the guides page keeps reporting the old one.
+the guides page keeps reporting the old one. Since 1.34.0 the footer marker is
+written by `build_chrome.py` on all sixteen pages, so the rebuild is what makes
+them agree rather than fifteen hand edits.
+
+**The bar and the footer are not in the pages any more.** They live in
+`site_chrome.py` and are written in by `build_chrome.py`. Editing the markup
+inside a `<div class="topbar">` or a `<footer>` in `docs/` is editing something
+that gets overwritten on the next build. Change `site_chrome.py` and rebuild.
+Everything between those two blocks is still the page's own hand-written words
+and is never touched.
 
 **`SEQUENCE` is not the version.** It lives in `build_calendars.py` and is what
 tells a calendar client an event actually changed. Bump it only when task
@@ -525,18 +540,27 @@ Three links were still rendering as the browser's default `#0000ee` because
 
 **Next, ranked. The reasoning for each is in the audit.**
 
-1. **One footer and one mobile menu, on all 16 pages, as a build step.** Below
-   832px the nav links are hidden and nothing replaces them, so the whole top
-   bar on a phone is a wordmark and one gold button. The seven resource pages,
-   which are where the search traffic lands, carry a four-link footer instead of
-   the 21-link grid. A cold visitor's entire site map is nine links. **Do this
-   as page assembly in Python rather than 16 hand edits**: two pages are already
-   generated, the other fourteen duplicate the bar, the footer and the head, and
-   the resource pages duplicate a 71-line stylesheet that has already drifted
-   twice. The audit's M5 is that drift trap firing for the fourth time, and the
-   file headers of `site.css`, `theme.css`, `nav.css` and `analytics.js` each
-   say in their own words that this is the thing they exist to prevent.
-2. **`/calculator/` needs a link to `/resources/`.** The page tells someone
+**Also shipped, in 1.34.0: the shared chrome and the phone menu.** The bar and
+the footer now come from `site_chrome.py`, written into the pages by
+`build_chrome.py`, and the two generated pages import the same functions. Every
+page carries the same nineteen to twenty link footer, where the seven resource
+pages used to carry four and `/guides/` and `/calculator/` carried three. Below
+832px there is a `<details>` menu holding all fifteen destinations, where there
+used to be nothing at all.
+
+**Two things learned doing it, worth keeping.** First, the footer uses
+`.foot-wrap` rather than `.wrap`, because `.wrap` is 42rem on a resource page
+and 71rem elsewhere, and a four column grid inside 42rem is not a four column
+grid. Second, Chrome hides a closed `<details>`'s contents with
+`content-visibility`, which implies `contain: paint`, which makes the details
+itself the containing block for an absolutely positioned child. The panel
+therefore escaped the hiding and rendered with its links still focusable.
+`.nav-mobile:not([open]) .nm-panel { display: none }` says it explicitly. Do
+not remove it on the grounds that the browser should already be doing it.
+
+**Next, ranked. The reasoning for each is in the audit.**
+
+1. **`/calculator/` needs a link to `/resources/`.** The page tells someone
    their roof is finished and never mentions that four states will pay for a new
    one. One paragraph, and it is the highest-value missing link on the site.
 3. **`/storm/` is 274 words and a $16.99 button.** Its own title promises four
