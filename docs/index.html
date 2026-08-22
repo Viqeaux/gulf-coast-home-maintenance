@@ -484,7 +484,10 @@
 </section>
 
 <!-- ===================== 6 / the pages + the products ===================== -->
-<section>
+<!-- On the dark band, deliberately: the pages and the covers are white paper,
+     and on a light ground they vanished. Chad flagged exactly that. Full-width
+     fan on top, full-size cards below. -->
+<section class="band">
   <div class="wrap">
     <div class="center">
       <span class="sec-no">04 / What's in the shop</span>
@@ -492,67 +495,64 @@
       <p class="sub">Real pages from the kit and binder.</p>
     </div>
 
-    <div class="get-grid">
-      <div>
-        <!-- The fanned spread. Same protective crops as always: the drama is
-             the arrangement, not showing more of any page. Read the header of
-             build_site_images.py before changing an image. -->
-        <div class="fan">
-          <figure>
-            <img src="img/preview-kit-1.jpg" width="520" height="202" loading="lazy" decoding="async"
-                 alt="The top of the May page: the month, the first task, and the reason it matters.">
-          </figure>
-          <figure>
-            <img src="img/preview-kit-2.jpg" width="520" height="202" loading="lazy" decoding="async"
-                 alt="The top of the Watch List, showing the columns and the first few components with their Gulf Coast lifespans.">
-          </figure>
-          <figure>
-            <img src="img/preview-binder-1.jpg" width="520" height="282" loading="lazy" decoding="async"
-                 alt="A blank kitchen inventory sheet with columns for item, make and model, serial number, year and replacement cost.">
-          </figure>
-          <figure>
-            <img src="img/preview-binder-2.jpg" width="520" height="282" loading="lazy" decoding="async"
-                 alt="A blank claim call log with columns for the date, who you spoke to and what they promised.">
-          </figure>
-        </div>
-        <p class="center">
-          <a class="btn btn--dark" href="shop/">See all products</a>
-        </p>
-      </div>
+    <!-- The fanned spread. Same protective crops as always: the drama is
+         the arrangement, not showing more of any page. Read the header of
+         build_site_images.py before changing an image. -->
+    <div class="fan fan--wide">
+      <figure>
+        <img src="img/preview-kit-1.jpg" width="520" height="202" loading="lazy" decoding="async"
+             alt="The top of the May page: the month, the first task, and the reason it matters.">
+      </figure>
+      <figure>
+        <img src="img/preview-kit-2.jpg" width="520" height="202" loading="lazy" decoding="async"
+             alt="The top of the Watch List, showing the columns and the first few components with their Gulf Coast lifespans.">
+      </figure>
+      <figure>
+        <img src="img/preview-binder-1.jpg" width="520" height="282" loading="lazy" decoding="async"
+             alt="A blank kitchen inventory sheet with columns for item, make and model, serial number, year and replacement cost.">
+      </figure>
+      <figure>
+        <img src="img/preview-binder-2.jpg" width="520" height="282" loading="lazy" decoding="async"
+             alt="A blank claim call log with columns for the date, who you spoke to and what they promised.">
+      </figure>
+    </div>
 
-      <div class="pgrid pgrid--sm">
-        <div class="pcard">
-          <img src="img/cover-kit.jpg" width="560" height="725" loading="lazy" decoding="async"
-               alt="The cover of the Gulf Coast Home Maintenance Calendar kit.">
-          <div class="pcard-body">
-            <h3>The maintenance kit</h3>
-            <p class="pcard-pages">27 pages</p>
-            <p class="pcard-price">$12.99</p>
-            <a class="btn btn--outline" href="shop/#edition">View details</a>
-          </div>
+    <div class="pgrid" style="margin-top:2.75rem">
+      <div class="pcard">
+        <img src="img/cover-kit.jpg" width="560" height="725" loading="lazy" decoding="async"
+             alt="The cover of the Gulf Coast Home Maintenance Calendar kit.">
+        <div class="pcard-body">
+          <h3>The maintenance kit</h3>
+          <p class="pcard-pages">27 pages</p>
+          <p class="pcard-price">$12.99</p>
+          <a class="btn btn--outline" href="shop/#edition">View details</a>
         </div>
-        <div class="pcard">
-          <img src="img/cover-binder.jpg" width="560" height="725" loading="lazy" decoding="async"
-               alt="The cover of the Gulf Coast Storm Season Binder.">
-          <div class="pcard-body">
-            <h3>The storm season binder</h3>
-            <p class="pcard-pages">33 pages</p>
-            <p class="pcard-price">$16.99</p>
-            <a class="btn btn--outline" href="shop/#binder">View details</a>
-          </div>
+      </div>
+      <div class="pcard">
+        <img src="img/cover-binder.jpg" width="560" height="725" loading="lazy" decoding="async"
+             alt="The cover of the Gulf Coast Storm Season Binder.">
+        <div class="pcard-body">
+          <h3>The storm season binder</h3>
+          <p class="pcard-pages">33 pages</p>
+          <p class="pcard-price">$16.99</p>
+          <a class="btn btn--outline" href="shop/#binder">View details</a>
         </div>
-        <div class="pcard">
-          <img src="img/cover-agent.jpg" width="560" height="725" loading="lazy" decoding="async"
-               alt="The cover of the agent edition, showing where a realtor's logo and details are printed.">
-          <div class="pcard-body">
-            <h3>The agent edition</h3>
-            <p class="pcard-pages">For real estate professionals</p>
-            <p class="pcard-price">$39.00</p>
-            <a class="btn btn--outline" href="shop/#agents">View details</a>
-          </div>
+      </div>
+      <div class="pcard">
+        <img src="img/cover-agent.jpg" width="560" height="725" loading="lazy" decoding="async"
+             alt="The cover of the agent edition, showing where a realtor's logo and details are printed.">
+        <div class="pcard-body">
+          <h3>The agent edition</h3>
+          <p class="pcard-pages">For real estate professionals</p>
+          <p class="pcard-price">$39.00</p>
+          <a class="btn btn--outline" href="shop/#agents">View details</a>
         </div>
       </div>
     </div>
+
+    <p class="center" style="margin-top:2.25rem">
+      <a class="btn btn--dark btn--lg" href="shop/">See all products</a>
+    </p>
   </div>
 </section>
 
@@ -723,7 +723,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.29.1</p>
+    <p class="version">v1.29.2</p>
   </div>
 </footer>
 

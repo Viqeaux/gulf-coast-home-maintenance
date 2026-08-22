@@ -27,6 +27,18 @@ Newest first.
 
 ---
 
+## [1.29.2], 2026-08-22
+
+### Changed
+
+- **The "see what you're actually getting" section rearranged**, Chad's ask:
+  the two-column squeeze made the pages and covers tiny, and white paper on a
+  light ground vanished. The fan now runs full width at twice the sheet size,
+  the three product cards are back at full size below it, and the section sits
+  on the dark band again, where white paper reads as paper.
+
+---
+
 ## [1.29.1], 2026-08-22
 
 ### Changed

@@ -1346,6 +1346,11 @@
     .benefits { grid-template-columns: repeat(4, 1fr); }
     .benefits > div + div { border-left: 1px solid var(--hairline); }
   }
+  /* The full-width fan: bigger sheets, per Chad. On the band the white pages
+     carry their own light, so the shadows can be deeper. */
+  .fan--wide { margin-top: 2.5rem; }
+  .fan--wide figure { width: 24%; min-width: 12rem; }
+  .fan--wide img { box-shadow: 0 3px 6px rgba(0,0,0,.25), 0 24px 60px -18px rgba(0,0,0,.5); }
   .benefits svg { color: var(--sand); margin-bottom: .5rem; }
   .benefits h3 {
     font: 700 11px/1.4 var(--font-sans); letter-spacing: .12em;
