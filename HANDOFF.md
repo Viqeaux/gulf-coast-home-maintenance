@@ -160,8 +160,13 @@ five-row climate chart with the pressures as an icon row, chip tier cards,
 View Details product cards, the benefits row under the fanned pages, the
 calculator rebuilt as the mockup's tool (stepper, Check My House, per-system
 cards with wear bars and status chips), and `/resources/` as a real index
-page that the nav's Resources link now points at. Two mockup items were
-refused on honesty grounds and stay refused: resource articles that do not
+page that the nav's Resources link now points at. **1.27.0 took the layout
+full width on Chad's screenshot approval**: the wrap is 71rem everywhere, the
+hero photo bleeds to the viewport edge with the month card floating on it,
+and the text-column components (picker, month card, mini calculator, buy
+cards, signup) carry their own width caps so they stay readable. Two mockup
+items were refused on honesty grounds and stay refused: resource articles
+that do not
 exist yet were shown with invented "checked" dates, and the product covers
 were 3D renders of covers that are not the real ones. **The mockups name the
 next two resource pages worth writing**, a flood insurance 30-day rule
