@@ -69,6 +69,7 @@
           <a href="../resources/wind-mitigation-discounts/">Wind mitigation discounts</a>
         </span></span>
       </span>
+      <a href="../guides/">Guide</a>
       <a href="../shop/">Shop</a>
     </nav>
     <span class="topbar-ctas">
@@ -84,10 +85,9 @@
     <span class="label">The calendars</span>
     <h2>One at a time <span class="free-tag">Free</span></h2>
     <p class="deck">
-      Four calendars you can subscribe to separately. If you would rather have
-      one calendar carrying whichever of them you want, the
-      <a href="../#calendars">picker on the home page</a> builds it for you.
-      Nothing here needs a signup or a card.
+      Four calendars, free, no signup and no card. Build one calendar carrying
+      exactly the ones you want, or take them one at a time below, and the
+      setup help for every app is at the bottom.
     </p>
   </div>
 </section>
@@ -101,6 +101,29 @@
       the same way. Subscribing keeps updating as the calendar improves, which a
       downloaded file does not.
     </p>
+
+    <!-- The picker lived on the home page until 1.29.0, when the final mockup
+         shortened the home page and this became the free calendar's page in
+         full. Every combination is a real file built in advance, so this only
+         chooses an address. combo_file() in build_calendars.py and the
+         filename logic in calendar-buttons.js must agree, or this hands out a
+         404. -->
+    <div class="picker">
+      <h3>Build your calendar</h3>
+      <p>Four calendars are on offer and most people want some of them, not all. Tick the ones you want and you get a single calendar carrying exactly those, rather than four separate entries in your sidebar.</p>
+      <div class="picker-boxes">
+        <label><input type="checkbox" value="must" checked> Must Do</label>
+        <label><input type="checkbox" value="should"> Should Do</label>
+        <label><input type="checkbox" value="above"> Going Above</label>
+        <label><input type="checkbox" value="monthly"> Monthly Rounds</label>
+      </div>
+      <p class="picker-summary"></p>
+      <div class="actions" id="picker-actions" data-file="gulf-coast-must-do.ics"></div>
+      <p class="picker-more">
+        Would rather take them one at a time? The four cards below are exactly
+        that, and the setup help for every app is further down.
+      </p>
+    </div>
 
 <div style="margin-top:2rem">
       <div class="tier tier--must">
@@ -241,7 +264,7 @@
     </div>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.28.0</p>
+    <p class="version">v1.29.0</p>
   </div>
 </footer>
 

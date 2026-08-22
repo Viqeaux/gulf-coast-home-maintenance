@@ -19,15 +19,15 @@
 (function () {
     var COPY_LABEL = 'Copy feed URL';
     var calendars = document.getElementById('calendars');
-    // Guarded, because this file now loads on pages that may not carry a feed
-    // section at all. Everything below that touches it is inside this check.
-    if (!calendars) { return; }
 
     // The signup posts straight to MailerLite through a hidden frame,
     // so there is no library to load and the visitor never leaves the page. We
     // cannot read the response across origins, but the frame firing `load`
     // confirms the request completed, and double opt-in means the real
     // confirmation is the email they are about to get either way.
+    //
+    // Bound BEFORE the #calendars guard below, because since 1.29.0 the form
+    // lives in the footer of pages that may carry no feed section at all.
     var signup = document.querySelector('.signup');
     if (signup) {
       signup.addEventListener('submit', function (event) {
@@ -55,6 +55,9 @@
         setTimeout(swap, 2500);
       });
     }
+
+    // Everything below touches the feed section; a page without one is done.
+    if (!calendars) { return; }
 
     // Both notices go in the same place, above the tier cards. The tag varies
     // because one of them is a disclosure: the preview warning is always worth
@@ -111,7 +114,12 @@
         '</ol>');
     }
 
-    var base = location.href.replace(/[#?].*$/, '').replace(/[^\/]*$/, '');
+    // The feeds live at the site root, so the base is the origin, never the
+    // current page's directory. Deriving it from location.href broke every
+    // button on /calendars/ from 1.22.0 until 1.29.0: on that page the
+    // "relative" base resolved to /calendars/gulf-coast-*.ics, which 404s.
+    // Nobody reported it, which says more about the traffic than the bug.
+    var base = location.origin + '/';
     var bare = base.replace(/^https?:\/\//, '');
 
     // Built as nodes rather than as an HTML string. Every address here is

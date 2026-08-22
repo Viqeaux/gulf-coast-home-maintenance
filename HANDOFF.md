@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.28.0**. Everything below is live unless marked otherwise.
+Current version **v1.29.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -180,6 +180,18 @@ the Monthly Rounds titles), and the calculator shows the kit's ranges beside
 its verdicts with a build-time check that the planner figure sits inside the
 kit range. The one mockup item still refused: 3D product cover renders,
 because the real covers are the real product.
+
+**1.29.0 is the final convergence, and it caught a real bug.** The hero is
+photographic again, the home page halved (picker to /calendars/, signup to
+the footer, This Month and an inline borrowed-time panel sharing one
+two-panel section fed by `calc-widget.js`), and the nav gained a Guide item.
+Moving the picker exposed that **every feed button on /calendars/ had handed
+out 404 addresses since 1.22.0**: `calendar-buttons.js` built URLs from the
+page's own directory. It now uses the site origin. Nobody had reported it in
+the intervening versions, which is the traffic constraint stated as a bug
+report. The mockup set's invented content (garden tasks, rewritten story,
+fake products and stats) was not reproduced: the layout is theirs, the facts
+are ours.
 
 **Resource pages follow the pointer rule and carry a checked date.** See "The
 direction" below before writing one. The sitemap is hand-maintained and a new
