@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.31.0**. Everything below is live unless marked otherwise.
+Current version **v1.32.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -197,9 +197,12 @@ are ours.
 (strengthenalabamahomes.com verified directly) and Louisiana
 (ldi.la.gov/fortifyhomes verified directly, including the parish list and the
 rounds-closed status) joined Mississippi. **Florida shipped in 1.31.0** (mysafeflhome.com and its 2025-26 Program
-Terms PDF verified directly). **Next: the honest Texas page**, which is "what Texas has
-instead" because no statewide FORTIFIED grant exists there; Texas also waits
-on tdi.texas.gov being reachable, which it was not on 2026-08-22. The
+Terms PDF verified directly) and **Texas completed the set in 1.32.0** (TDI
+and TWIA verified directly once tdi.texas.gov came back reachable): the
+honest page, since no statewide Texas FORTIFIED grant exists, mapping the
+WPI-8 system instead. **The five-state grants shelf is complete.** The next
+resource pages should come from Search Console query data once it
+accumulates, not from guessing. The
 Search Console verification file `docs/googlef6be8e2fccfd7d3c.html` must stay
 in the repo forever: Google re-checks it, and removing it un-verifies the
 property. The sitemap was submitted 2026-08-22; a first "Couldn't fetch"

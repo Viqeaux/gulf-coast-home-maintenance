@@ -27,6 +27,34 @@ Newest first.
 
 ---
 
+## [1.32.0], 2026-08-22
+
+**Texas completes the five-state set, honestly.** tdi.texas.gov became
+reachable and was verified directly, along with twia.org.
+
+### Added
+
+- **`/resources/texas-windstorm-coverage/`**: the page whose value is
+  saying plainly that no statewide Texas FORTIFIED grant exists, and mapping
+  what Texas has instead: TDI's windstorm inspection program and coastal
+  building standards, the WPI-8 certificate, TWIA as the insurer of last
+  resort, and the insurer discounts IBHS's directory does list. Includes the
+  re-roofing sequence that keeps coastal Texans from ending up with a
+  compliant roof their insurer cannot see. Checked against TDI, TWIA and
+  IBHS, 2026-08-22.
+
+### Changed
+
+- The wind mitigation page's Texas section carries the TDI link it was
+  waiting on and cross-links the new page; its could-not-verify caveat is
+  retired. Resources dropdown, footers, index and sitemap carry Texas.
+
+The grants shelf now covers all five Gulf states plus the flood rule and
+the discounts map: eight resource pages, every one checked against primary
+sources and dated.
+
+---
+
 ## [1.31.0], 2026-08-22
 
 **Florida joins the grants shelf.** Four of five Gulf states covered.
