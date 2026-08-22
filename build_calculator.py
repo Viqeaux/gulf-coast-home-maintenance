@@ -395,7 +395,7 @@ FREE_TEMPLATE = """<!doctype html>
   .nudge {{
     font: 400 .93rem/1.6 var(--font-sans);
     color: var(--muted); margin: -.4rem 0 1.1rem; max-width: 33rem;
-    border-left: 3px solid var(--sand); padding-left: .85rem;
+    border-left: 3px solid var(--sand-ink); padding-left: .85rem;
   }}
   .rows {{ list-style: none; margin: 0; padding: 0; }}
   .row {{
@@ -415,7 +415,7 @@ FREE_TEMPLATE = """<!doctype html>
     white-space: nowrap;
   }}
   .tag--overdue {{ color: var(--must); }}
-  .tag--soon {{ color: var(--sand); }}
+  .tag--soon {{ color: var(--sand-ink); }}
   .tag--watch {{ color: var(--should); }}
   .tag--ok {{ color: var(--above); }}
   .estimated {{
@@ -479,7 +479,7 @@ FREE_TEMPLATE = """<!doctype html>
     display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.1rem;
     font: 400 .87rem/1 var(--font-sans);
   }}
-  footer .foot-links a {{ color: var(--sand); text-decoration: none; }}
+  footer .foot-links a {{ color: var(--sand-lift); text-decoration: none; }}
   footer .foot-links a:hover {{ text-decoration: underline; }}
   footer .version {{
     font: 600 11px/1 var(--font-sans);

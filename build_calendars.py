@@ -36,7 +36,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.33.1"
+VERSION = "1.33.2"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -718,7 +718,7 @@ GUIDES_TEMPLATE = """<!doctype html>
   header a.back {{
     font: 600 11px/1 var(--font-sans);
     letter-spacing: .14em; text-transform: uppercase;
-    color: var(--sand); text-decoration: none;
+    color: var(--sand-lift); text-decoration: none;
   }}
   header a.back:hover {{ text-decoration: underline; }}
   header h1 {{
@@ -729,7 +729,7 @@ GUIDES_TEMPLATE = """<!doctype html>
   .count {{
     font: 600 11px/1 var(--font-sans);
     letter-spacing: .12em; text-transform: uppercase;
-    color: var(--sand); margin-top: 1.25rem !important;
+    color: var(--sand-lift); margin-top: 1.25rem !important;
   }}
 
   .month {{ padding: 2.75rem 0 .5rem; border-top: 1px solid var(--rule-soft); }}
@@ -784,7 +784,7 @@ GUIDES_TEMPLATE = """<!doctype html>
      thirty-six tasks, where it would read as thirty-six adverts. */
   .kit-pointer {{
     background: var(--paper); border: 1px solid var(--rule);
-    border-left: 3px solid var(--sand); border-radius: 3px;
+    border-left: 3px solid var(--sand-ink); border-radius: 3px;
     padding: 1.15rem 1.35rem; margin: 0 0 2rem;
   }}
   .kit-pointer h2 {{
@@ -873,7 +873,7 @@ GUIDES_TEMPLATE = """<!doctype html>
     display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.1rem;
     font: 400 .87rem/1 var(--font-sans);
   }}
-  footer .foot-links a {{ color: var(--sand); text-decoration: none; }}
+  footer .foot-links a {{ color: var(--sand-lift); text-decoration: none; }}
   footer .foot-links a:hover {{ text-decoration: underline; }}
   footer .version {{
     font: 600 11px/1 var(--font-sans);

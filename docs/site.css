@@ -37,6 +37,16 @@
     * { transition: none !important; animation: none !important; }
   }
 
+  /* A floor under every link, so none can fall through to the browser default.
+     This file had no bare a rule at all, and the gap kept being found one link
+     at a time: the comments above .shop-free a and .deck a each record a
+     separate occasion when a new link came out #0000ee. Measured in 1.33.2,
+     three more were still doing it, and in the dark scheme that blue lands at
+     1.76 on --paper, which is not readable. This is the least specific rule in
+     the file, so every component that sets its own colour still wins. The
+     hand-written and generated pages already carry the same line locally.  */
+  a { color: var(--accent); }
+
   /* Widened in 1.27.0 to the approved full-width layout. Grids scale with
      it; anything that reads as a column of text carries its own cap below,
      because a 71rem line of body copy is unreadable. */
@@ -74,7 +84,7 @@
      class of bug has shown up, so it is set for both grounds here rather than
      patched per section: sand reads on the deep one, accent on paper. */
   .deck a { color: var(--accent); }
-  .band .deck a, .hero .deck a { color: var(--sand); }
+  .band .deck a, .hero .deck a { color: var(--sand-lift); }
 
   /* section numbering, the field-guide device */
   .sec-no {
@@ -101,14 +111,14 @@
     --on-surface: var(--on-deep);
     --on-surface-mute: var(--on-deep-mute);
     --hairline: color-mix(in srgb, var(--on-deep) 17%, transparent);
-    --marker: var(--sand);
+    --marker: var(--sand-lift);
   }
   @supports not (background: color-mix(in srgb, red 50%, transparent)) {
     section.band { --hairline: #33454a; }
   }
   .band h2, .band h3 { color: var(--on-surface); }
   .band p, .band .muted { color: var(--on-surface-mute); }
-  .band .sec-no { color: var(--sand); }
+  .band .sec-no { color: var(--sand-lift); }
   /* A rule only earns its place between two sections of the same ground; where
      the ground changes, the change is the divider. */
   section:not(.band) + section:not(.band) { border-top: 1px solid var(--rule-soft); }
@@ -157,7 +167,7 @@
     .hero-media::after { background: rgba(14,36,41,.86); }
   }
   .hero .wrap { position: relative; z-index: 2; }
-  .hero .label { color: var(--sand); }
+  .hero .label { color: var(--sand-lift); }
   /* Hero copy sits over a photograph, so it runs brighter than the muted tone
      used on flat dark sections, and carries a soft shadow as insurance where
      the canopy behind it lightens. */
@@ -168,7 +178,7 @@
   }
   .hero .deck strong { color: #fff; font-weight: 600; }
   .rule-sm {
-    width: 3rem; height: 2px; background: var(--sand);
+    width: 3rem; height: 2px; background: var(--sand-lift);
     margin: 0 0 1.4rem; border: 0;
   }
 
@@ -194,10 +204,10 @@
     animation: season-pulse 2.4s ease-out infinite;
   }
   .season-link {
-    color: var(--sand); text-decoration: none; white-space: nowrap;
-    border-bottom: 1px solid color-mix(in srgb, var(--sand) 45%, transparent);
+    color: var(--sand-lift); text-decoration: none; white-space: nowrap;
+    border-bottom: 1px solid color-mix(in srgb, var(--sand-lift) 45%, transparent);
   }
-  .season-link:hover { border-bottom-color: var(--sand); }
+  .season-link:hover { border-bottom-color: var(--sand-lift); }
   @keyframes season-pulse {
     0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--must-lift) 65%, transparent); }
     70%  { box-shadow: 0 0 0 7px color-mix(in srgb, var(--must-lift) 0%, transparent); }
@@ -251,9 +261,9 @@
      text on it, because white lands near 3:1 and fails. The hover keeps the
      border gold too, or the shared .btn:hover rule repaints it teal. */
   .btn--buy {
-    background: var(--sand); border-color: var(--sand); color: var(--deep);
+    background: var(--sand-lift); border-color: var(--sand-lift); color: var(--deep);
   }
-  .btn--buy:hover { filter: brightness(1.08); border-color: var(--sand); }
+  .btn--buy:hover { filter: brightness(1.08); border-color: var(--sand-lift); }
   .btn--lg { padding: .95rem 1.5rem; font-size: 15px; }
   .btn--copied { border-color: var(--tier-color, var(--accent)); color: var(--tier-color, var(--accent)); }
   .hero .btn { border-color: color-mix(in srgb, var(--on-deep) 32%, transparent); color: var(--on-deep); }
@@ -280,7 +290,7 @@
     margin: 1rem 0 0; font: 400 .95rem/1.55 var(--font-sans);
     color: var(--on-deep-mute); max-width: 30rem;
   }
-  .hero .try a { color: var(--sand); font-weight: 600; }
+  .hero .try a { color: var(--sand-lift); font-weight: 600; }
 
   /* --- year diagram ----------------------------------------------------- */
   .figure { margin: 2rem 0 0; }
@@ -309,7 +319,7 @@
   @media (min-width: 60rem) { .factors { grid-template-columns: repeat(4, 1fr); } }
   .factor { background: var(--surface); padding: 1.5rem 1.4rem; }
   .factor svg { color: var(--accent); margin-bottom: .85rem; display: block; }
-  .band .factor svg { color: var(--sand); }
+  .band .factor svg { color: var(--sand-lift); }
   .factor h3 { font-size: 1rem; color: var(--on-surface); }
   .factor p { font-size: .93rem; color: var(--on-surface-mute); margin: 0; }
 
@@ -332,7 +342,7 @@
      teal, which lands near 2:1 on a band and is unreadable. Sand is the token
      already designated for deep grounds, and is what .sec-no uses there. The
      points grid had never sat on a band before the agent section moved. */
-  .band .point .pn { color: var(--sand); }
+  .band .point .pn { color: var(--sand-lift); }
   .point h3 { font-size: 1rem; color: var(--on-surface); margin-bottom: .4rem; }
   .point p { font-size: .93rem; color: var(--on-surface-mute); margin: 0; }
 
@@ -434,7 +444,7 @@
      at different heights, so no single crop frames all three, and a whole sheet
      also says "this is a printable page" in a way a cropped one does not. */
   .shop { padding-top: 3.25rem; }
-  .shop .label { color: var(--sand); display: block; margin-bottom: 1.2rem; }
+  .shop .label { color: var(--sand-ink); display: block; margin-bottom: 1.2rem; }
   .pgrid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
   @media (min-width: 46rem) { .pgrid { grid-template-columns: repeat(3, 1fr); } }
   .pcard {
@@ -482,10 +492,11 @@
   }
 
   .shop-free { margin: 1.4rem 0 0; font-size: .93rem; }
-  /* Nothing had styled a bare link on the deep ground before, so this one came
-     out as the browser's default blue. Sand is what every other link on a band
-     uses. */
-  .shop-free a { color: var(--sand); }
+  /* Nothing had styled a bare link here before, so this one came out as the
+     browser's default blue. Note the ground: section.shop carries no .band, so
+     this sits on paper and wants the ink gold, not the lifted one. The comment
+     here used to say "the deep ground", which measurement disproved. */
+  .shop-free a { color: var(--sand-ink); }
   @supports not (background: color-mix(in srgb, red 50%, transparent)) {
     .pcard-more { border-bottom-color: #7fa6ad; }
   }
@@ -514,7 +525,7 @@
   /* The monthly feed is not a fourth level of effort, so it takes the sand
      accent rather than extending the red/teal/olive ladder the three tiers
      use. Different kind of thing, different color family. */
-  .tier--monthly { --tier-color: var(--sand); }
+  .tier--monthly { --tier-color: var(--sand-ink); }
   .tier h3 {
     color: var(--tier-color); font-size: 1.16rem;
     display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
@@ -655,7 +666,7 @@
     display: inline-block;
     padding: 1.1rem 2.4rem; font-size: 16.5px; border-radius: 3px;
     min-width: 17rem; letter-spacing: .01em;
-    box-shadow: 0 2px 0 color-mix(in srgb, var(--sand) 62%, black);
+    box-shadow: 0 2px 0 color-mix(in srgb, var(--sand-lift) 62%, black);
   }
   #buy-slot .btn--lg:hover, #binder-slot .btn--lg:hover, #agent-slot .btn--lg:hover { filter: brightness(1.06); }
   @supports not (background: color-mix(in srgb, red 50%, transparent)) {
@@ -776,7 +787,7 @@
   .howto h3 { font-size: .98rem; color: var(--on-surface); }
   .howto p, .howto li { color: var(--on-surface-mute); font-size: .93rem; margin: 0 0 .55rem; }
   .howto strong, .howto em { color: var(--on-surface); }
-  .howto a { color: var(--sand); }
+  .howto a { color: var(--sand-lift); }
   .howto ol { padding-left: 1.1rem; margin: .3rem 0 .55rem; }
   .howto li { margin-bottom: .2rem; }
 
@@ -798,12 +809,12 @@
   .setup summary::-webkit-details-marker { display: none; }
   .setup summary::before {
     content: "+"; flex: none; width: 1rem;
-    font: 400 1.1rem/1 var(--font-sans); color: var(--sand);
+    font: 400 1.1rem/1 var(--font-sans); color: var(--sand-lift);
   }
   /* U+2212 minus, not a hyphen and not an en dash. It is the character that
      pairs with "+", and the house rule keeps dashes off this site. */
   .setup details[open] > summary::before { content: "\2212"; }
-  .setup summary:focus-visible { outline: 2px solid var(--sand); outline-offset: 2px; }
+  .setup summary:focus-visible { outline: 2px solid var(--sand-lift); outline-offset: 2px; }
   .setup .body { padding: 0 0 1.1rem 1.6rem; }
   .setup .body p, .setup .body li {
     color: var(--on-surface-mute); font-size: .93rem; margin: 0 0 .55rem;
@@ -838,15 +849,21 @@
     display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.1rem;
     font: 400 .87rem/1 var(--font-sans);
   }
-  footer .foot-links a { color: var(--sand); text-decoration: none; }
+  footer .foot-links a { color: var(--sand-lift); text-decoration: none; }
   footer .foot-links a:hover { text-decoration: underline; }
   footer .version {
     font: 600 11px/1 var(--font-sans);
     letter-spacing: .12em; opacity: .55; margin: 0;
   }
   footer .mark .label { color: var(--on-deep); }
+  /* code paints itself a paper ground, so it cannot inherit its colour from
+     whatever section it lands in. Inside the band on /calendars/ it was
+     inheriting --on-deep-mute and rendering at 1.85:1, which is not readable
+     at all. The addbyurl address is the one string on that page a reader has
+     to be able to copy by eye. */
   code {
     font: 13px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
+    color: var(--ink);
     background: var(--paper-2); border: 1px solid var(--rule);
     padding: .1rem .35rem; border-radius: 2px; word-break: break-all;
   }
@@ -873,7 +890,7 @@
   @supports not (background: color-mix(in srgb, red 50%, transparent)) {
     .hero-month { background: var(--paper); }
   }
-  .hero-month .label { color: var(--sand); display: block; margin-bottom: .2rem; }
+  .hero-month .label { color: var(--sand-ink); display: block; margin-bottom: .2rem; }
   .hero-month .hm-month {
     font: 600 1.55rem/1 var(--font-serif); letter-spacing: -.015em;
     margin: 0 0 .85rem; color: var(--ink);
@@ -903,7 +920,7 @@
     margin: 1rem 0 0; font: 400 .95rem/1.55 var(--font-sans);
     color: var(--on-deep-mute);
   }
-  .hero-alt a { color: var(--sand); font-weight: 600; }
+  .hero-alt a { color: var(--sand-lift); font-weight: 600; }
 
   /* --- the oversized stat band ------------------------------------------- */
   /* Four numbers big enough to sell the concept before anyone reads a word.
@@ -917,7 +934,7 @@
     display: block; font: 600 clamp(3rem, 7vw, 4.6rem)/1 var(--font-serif);
     letter-spacing: -.03em; color: var(--on-deep);
   }
-  .bigstats .n .unit { font-size: .38em; letter-spacing: 0; color: var(--sand); }
+  .bigstats .n .unit { font-size: .38em; letter-spacing: 0; color: var(--sand-lift); }
   .bigstats .t {
     display: block; margin-top: .55rem;
     font: 600 10.5px/1.5 var(--font-sans);
@@ -941,7 +958,7 @@
   .door:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
   .door--calendar { --door-color: var(--accent); }
   .door--storm    { --door-color: var(--must); }
-  .door--aging    { --door-color: var(--sand); }
+  .door--aging    { --door-color: var(--sand-ink); }
   .door--grants   { --door-color: var(--above); }
   .door .label { color: var(--door-color); display: block; margin-bottom: .55rem; }
   .door h3 { font: 600 1.3rem/1.2 var(--font-serif); color: var(--ink); margin-bottom: .45rem; }
@@ -1000,7 +1017,7 @@
     margin-top: .6rem;
   }
   .desk-note { color: var(--on-surface-mute); font-size: .88rem; margin: 1.6rem 0 0; }
-  .desk-note a { color: var(--sand); }
+  .desk-note a { color: var(--sand-lift); }
   section:not(.band) .desk-note a { color: var(--accent); }
 
   /* --- useful right now --------------------------------------------------- */
@@ -1050,7 +1067,7 @@
   @media (min-width: 46rem) { .foot-grid { grid-template-columns: repeat(4, 1fr); } }
   .foot-grid h3 {
     font: 600 10.5px/1 var(--font-sans); letter-spacing: .15em;
-    text-transform: uppercase; color: var(--sand); margin: 0 0 .8rem;
+    text-transform: uppercase; color: var(--sand-lift); margin: 0 0 .8rem;
   }
   .foot-grid ul { list-style: none; margin: 0; padding: 0; }
   .foot-grid li { margin: 0 0 .5rem; }
@@ -1254,7 +1271,7 @@
     text-transform: uppercase; letter-spacing: .09em; font-size: 12px;
   }
   .btn--dark:hover { filter: brightness(1.18); border-color: var(--deep); }
-  .band .btn--dark { background: var(--sand); border-color: var(--sand); color: var(--deep); }
+  .band .btn--dark { background: var(--sand-lift); border-color: var(--sand-lift); color: var(--deep); }
 
   /* --- product cards, mockup form ------------------------------------------ */
   .pcard .pcard-pages {
@@ -1306,7 +1323,7 @@
     --surface: var(--paper); --on-surface: var(--ink); --on-surface-mute: var(--muted);
     --hairline: var(--rule-soft);
   }
-  .panel > .label { color: var(--sand); display: block; margin-bottom: .35rem; }
+  .panel > .label { color: var(--sand-ink); display: block; margin-bottom: .35rem; }
   .panel h3 { font: 600 1.35rem/1.25 var(--font-serif); color: var(--ink); margin-bottom: .35rem; }
   .panel .panel-sub { font: 400 .92rem/1.5 var(--font-sans); color: var(--muted); margin: 0 0 1.2rem; }
 
@@ -1319,7 +1336,7 @@
   }
   .now-tier { --level-color: var(--tier-color); }
   .now-tier--must   { --tier-color: var(--must); }
-  .now-tier--should { --tier-color: var(--sand); }
+  .now-tier--should { --tier-color: var(--sand-ink); }
   .now-tier--above  { --tier-color: var(--should); }
   .now-tier .go {
     display: inline-block; margin-top: .4rem;
@@ -1380,7 +1397,7 @@
   /* Story left, the trust list right. */
   .trust-list { display: flex; flex-direction: column; gap: 1.1rem; }
   .trust-item { display: flex; gap: .85rem; align-items: flex-start; }
-  .trust-item svg { flex: none; color: var(--sand); margin-top: .1rem; }
+  .trust-item svg { flex: none; color: var(--sand-ink); margin-top: .1rem; }
   .trust-item h3 {
     font: 700 .95rem/1.35 var(--font-sans); color: var(--on-surface); margin: 0 0 .15rem;
   }
@@ -1394,10 +1411,10 @@
   @media (min-width: 52rem) { .foot-signup { grid-template-columns: 1fr auto; align-items: center; } }
   .foot-signup .fs-title {
     font: 600 11px/1.5 var(--font-sans); letter-spacing: .14em;
-    text-transform: uppercase; color: var(--sand); margin: 0 0 .3rem;
+    text-transform: uppercase; color: var(--sand-lift); margin: 0 0 .3rem;
   }
   .foot-signup .fs-sub { font: 400 .9rem/1.5 var(--font-sans); color: var(--on-deep-mute); margin: 0; max-width: 26rem; }
   .foot-signup .signup-row { justify-content: flex-start; max-width: none; }
   footer .signup-note { color: var(--on-deep-mute) !important; }
   footer .signup-done { color: var(--on-deep-mute) !important; }
-  footer .signup-done strong { color: var(--sand); }
+  footer .signup-done strong { color: var(--sand-lift); }

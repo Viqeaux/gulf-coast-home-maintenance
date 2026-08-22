@@ -34,6 +34,16 @@ and the fix was verified against a local server rather than only written:
 `M1` scroll-padding · `M4` aria-current · `M8` shim routing ·
 `M9` floir.gov · `M11` unclosed div
 
+**H1, the contrast tokens, shipped in v1.33.2 the same day.** The measured
+sweep was re-run as the verification: all sixteen pages, 1440px and 390px, both
+colour schemes, 64 combinations. **78 failing colour pairs before, 0 after.**
+The fix went further than this document proposed, because the sweep found three
+things reading the source had not: the gold needed three tokens rather than two
+(it is also a button ground, and that direction conflicts with the other two),
+the `code` element on `/calendars/` was rendering at 1.85:1, and three links
+were still falling through to the browser's default blue. All are in the
+1.33.2 changelog entry.
+
 Everything else stands. The ranked order for what comes next is in
 `HANDOFF.md` under "The full-site audit, 2026-08-22"; the short version is
 contrast tokens first, then one footer and one mobile menu built as page
@@ -256,7 +266,7 @@ version of this" rather than "the content is behind this button."
 
 ## High
 
-### H1. Two palette tokens fail WCAG AA in the light theme, across every page
+### H1. Two palette tokens fail WCAG AA in the light theme, across every page  ·  FIXED 1.33.2
 
 **Where:** [theme.css:36-37](docs/theme.css:36) — `--accent: #327d82` and `--sand: #a97822`.
 

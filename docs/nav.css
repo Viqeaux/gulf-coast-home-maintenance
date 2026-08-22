@@ -35,12 +35,12 @@ a.mark:hover .label { text-decoration: underline; }
 /* Scoped through .mark so this file stands on its own: site.css also has a
    general .label utility, and the calculator page has none at all. */
 .mark .label {
-  color: var(--sand);
+  color: var(--sand-lift);
   font: 700 .82rem/1.2 var(--font-serif);
   letter-spacing: .1em; text-transform: uppercase;
   max-width: 10.5rem;
 }
-.mark svg { flex: none; color: var(--sand) !important; }
+.mark svg { flex: none; color: var(--sand-lift) !important; }
 
 /* White uppercase links on the dark bar, gold on hover. Below 52rem they stop
    fitting and drop out, leaving the one gold button, because a bar with
@@ -51,7 +51,7 @@ a.mark:hover .label { text-decoration: underline; }
   text-transform: uppercase; text-decoration: none;
   color: var(--on-deep); white-space: nowrap;
 }
-.nav-links a:hover { color: var(--sand); }
+.nav-links a:hover { color: var(--sand-lift); }
 @media (max-width: 52rem) { .nav-links { display: none; } }
 
 .topbar-ctas { display: flex; align-items: center; gap: .5rem; flex: none; }
@@ -64,9 +64,9 @@ a.mark:hover .label { text-decoration: underline; }
 /* Solid gold, per the approved mockups. The only button on the bar. */
 .topbar a.cta--free {
   font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--deep); background: var(--sand); border: 1px solid var(--sand);
+  color: var(--deep); background: var(--sand-lift); border: 1px solid var(--sand-lift);
 }
-.topbar a.cta--free:hover { filter: brightness(1.08); background: var(--sand); color: var(--deep); }
+.topbar a.cta--free:hover { filter: brightness(1.08); background: var(--sand-lift); color: var(--deep); }
 
 /* Dropdowns under Tools and Resources. The top link still goes somewhere real
    on its own, so the menu is a shortcut rather than a gate, and focus-within
@@ -98,7 +98,7 @@ a.mark:hover .label { text-decoration: underline; }
   color: var(--on-deep); text-decoration: none; white-space: nowrap;
 }
 .nav-menu a:hover {
-  color: var(--sand);
+  color: var(--sand-lift);
   background: color-mix(in srgb, var(--on-deep) 7%, transparent);
 }
 

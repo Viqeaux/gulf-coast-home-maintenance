@@ -504,16 +504,28 @@ server rather than only read:
 The `.ics` feeds, `month-tasks.js` and `calc-widget.js` all regenerated
 byte-identical, so **no `SEQUENCE` bump** and no subscriber sees anything.
 
+**Also shipped, in 1.33.2: the contrast tokens.** Sixty-four combinations
+measured, all sixteen pages at 1440px and 390px in both colour schemes: 78
+failing pairs before, 0 after. The gold is three tokens now, because one value
+could not be read on the deep green, read on paper, and serve as a button ground
+at the same time. **`--sand` is the decorative gold only** — rules, icon strokes,
+borders, anything with no text on it. **`--sand-lift` `#c99230`** is for the deep
+ground, in both directions, since contrast is symmetric. **`--sand-ink`
+`#856012`** is for paper. `--accent` and `--should` both moved to `#2a6b70`.
+
+**The rule to keep**: pick the gold by the ground the element actually sits on,
+not by the section it is nested in. A `.tier` card paints itself paper even when
+it sits inside a `.band`, and that is exactly where the Monthly Rounds heading
+was wrong. When in doubt, measure — the sweep that found all of this walks the
+DOM compositing every background layer, and re-running it is the cheapest way to
+check any future palette change.
+
+Three links were still rendering as the browser's default `#0000ee` because
+`site.css` had no bare `a` rule; there is one now. Do not remove it.
+
 **Next, ranked. The reasoning for each is in the audit.**
 
-1. **The light-theme contrast tokens.** `--accent` is 4.27:1 on `--bg` and
-   `--sand` is 3.53:1 on `--deep`; both fail AA. That is every in-body link,
-   every resource page footer, both hero secondary links and every back link.
-   The dark palette has no failures at all, because those values were lifted and
-   the light ones never were. `theme.css` is 77 lines and the audit carries
-   measured replacement values. Do this before the shell below, so the shell
-   lands with correct colours instead of propagating bad ones to 16 pages.
-2. **One footer and one mobile menu, on all 16 pages, as a build step.** Below
+1. **One footer and one mobile menu, on all 16 pages, as a build step.** Below
    832px the nav links are hidden and nothing replaces them, so the whole top
    bar on a phone is a wordmark and one gold button. The seven resource pages,
    which are where the search traffic lands, carry a four-link footer instead of
@@ -524,28 +536,28 @@ byte-identical, so **no `SEQUENCE` bump** and no subscriber sees anything.
    twice. The audit's M5 is that drift trap firing for the fourth time, and the
    file headers of `site.css`, `theme.css`, `nav.css` and `analytics.js` each
    say in their own words that this is the thing they exist to prevent.
-3. **`/calculator/` needs a link to `/resources/`.** The page tells someone
+2. **`/calculator/` needs a link to `/resources/`.** The page tells someone
    their roof is finished and never mentions that four states will pay for a new
    one. One paragraph, and it is the highest-value missing link on the site.
-4. **`/storm/` is 274 words and a $16.99 button.** Its own title promises four
+3. **`/storm/` is 274 words and a $16.99 button.** Its own title promises four
    phases of storm content. It is the strongest argument on the site that this
    is a storefront, and the flood insurance page already proves the house style
    can give the substance away and still sell.
-5. **A dated line under the homepage grant cards.** They assert `$10,000`,
+4. **A dated line under the homepage grant cards.** They assert `$10,000`,
    "three coastal counties" and "no statewide roof grant in Texas" with no date,
    while every detail page dates the same facts correctly. The trust panel four
    sections below promises the opposite in so many words.
-6. **A month jump strip and contextual links on `/guides/`.** 16.3 phone screens
+5. **A month jump strip and contextual links on `/guides/`.** 16.3 phone screens
    with no way to reach December, and exactly one link in `<main>`, pointing at
    the shop. Both changes live in `build_calendars.py`.
-7. **The FAQ, properly this time.** Chad's call was delete now and write later,
+6. **The FAQ, properly this time.** Chad's call was delete now and write later,
    so this is the later. A real section on the homepage answering what people
    actually type: which Gulf states pay for a roof, is the calendar really free,
    do you run any of these programs, when was this last checked. Then the
    `FAQPage` markup comes back **alongside it and never on its own**. The
    comment left behind in `index.html` says the same thing at the point of
    temptation.
-8. **An `/about/` page and a real contact address.** The only way to reach this
+7. **An `/about/` page and a real contact address.** The only way to reach this
    site is an Etsy storefront, including from `privacy.html`, which asks people
    to route privacy questions through a marketplace listing. On grants,
    insurance and government money that is a straightforward E-E-A-T weakness as

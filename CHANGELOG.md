@@ -27,6 +27,69 @@ Newest first.
 
 ---
 
+## [1.33.2], 2026-08-22
+
+**Every piece of text on the site now meets WCAG AA for contrast, measured
+rather than eyeballed.** Two palette tokens were failing and between them they
+coloured most of the small type on the site: `--accent` at 4.27:1 on `--bg`,
+which is every in-body link, and `--sand` at 3.53:1 on the deep green, which is
+the wordmark, the gold button, every section label, every back link and every
+footer link on the resource pages. The dark scheme had no failures at all,
+because its values were lifted when it was written and the light ones never
+were.
+
+**Sixty-four combinations checked**: all sixteen pages, at 1440px and 390px, in
+both colour schemes, compositing every background layer including alpha and
+applying the large-text exemption. Before: 78 failing colour pairs. After: 0.
+
+### Changed
+
+- **`--accent` is `#2a6b70`**, from `#327d82`. Clears AA on all four light
+  grounds: 5.46 on `--bg`, 5.90 on `--paper`, 4.95 on `--paper-2`. `--should`
+  moves with it, which is what the note at the top of `theme.css` always
+  intended by "Gulf teal for Should Do and links" — they had been the same
+  value by hand rather than by rule.
+- **The gold is now three tokens, because one value cannot do three jobs.**
+  It has to be read against the deep green, read against paper, and act as a
+  button ground, and `#a97822` failed all three at 3.53, 3.48 and 3.53.
+  `--sand` stays as the decorative gold for rules, icon strokes and borders,
+  which carry no text-contrast duty. `--sand-lift` `#c99230` is gold on the
+  deep ground, and gold as a ground under `--deep` text: one value serves both
+  because contrast is symmetric, at 5.00 either way. `--sand-ink` `#856012` is
+  gold as text on paper, at 5.10 on `--bg` and 5.51 under white. In the dark
+  scheme all three collapse to the existing `#cb9a45`, because every ground
+  there is dark.
+- **Fifty-one rules repointed** at whichever of the three matches the ground
+  they actually sit on, across `site.css`, `nav.css`, both generators, the two
+  austere pages and the seven resource pages.
+
+### Fixed
+
+- **The Google add-by-URL address on `/calendars/` was unreadable at 1.85:1.**
+  `code` paints itself a paper ground but had no colour of its own, so inside
+  the band section it inherited `--on-deep-mute`, a token meant for the dark
+  ground. It is the one string on that page a reader has to be able to copy by
+  eye. Now `--ink`, at 12.92.
+- **Three links were still coming out as the browser's default `#0000ee`**,
+  which in the dark scheme lands at 1.76 on `--paper`: the "how these numbers
+  are calculated" line on the home page, the Texas line under the grant row,
+  and the "say so through the Etsy shop" line on `/resources/`. `site.css` had
+  no bare `a` rule at all, and the gap kept being found one link at a time —
+  the comments above `.shop-free a` and `.deck a` each record a previous
+  occasion. There is now a floor under every link, as the least specific rule
+  in the file, so every component that sets its own colour still wins.
+- **The Monthly Rounds card had white text on gold at 3.76.** `--tier-color`
+  fed both the heading and the "Add to Google Calendar" button, and the comment
+  above `.btn--buy` had already worked out that `--sand` needs dark text on it.
+  The tier now uses `--sand-ink`, so the white reads at 5.51.
+- **The comment above `.shop-free a` said the link sat "on the deep ground".**
+  Measurement disproved it: `section.shop` carries no `.band`. Corrected, since
+  a wrong note about a ground is what produces the next wrong colour.
+
+**No feed changed**, and `SEQUENCE` stays at 2.
+
+---
+
 ## [1.33.1], 2026-08-22
 
 **A full audit of all sixteen pages, and the eight mechanical fixes that came
