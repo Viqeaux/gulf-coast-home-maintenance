@@ -129,6 +129,20 @@ FREE_FOUR = [
 ]
 
 
+# Display ranges, from the kit's Watch List, which already prints them in
+# public on the shop page's lifespan chart. The single planner figure stays
+# the number the arithmetic runs on; the range is what the reader sees beside
+# it, same policy as the reserve planner: a number with a range printed next
+# to it does not read as a quote. The build checks each point figure sits
+# inside its range, so the two sources cannot drift apart silently.
+RANGES = {
+    "Roof - asphalt shingle, architectural": (12, 15),
+    "HVAC condenser - outdoor unit": (10, 12),
+    "Water heater - tank": (8, 10),
+    "HVAC air handler / furnace": (15, 18),
+}
+
+
 def free_rows():
     table = dict((row[0], row) for row in SYSTEMS)
     stray = [name for name in FREE_FOUR if name not in COMMON]
@@ -139,7 +153,14 @@ def free_rows():
     for name in FREE_FOUR:
         if name not in table:
             raise SystemExit("FREE_FOUR names a row that is not in planner_data: " + name)
-        out.append({"name": SHORTER.get(name, name), "life": table[name][2]})
+        life = table[name][2]
+        lo, hi = RANGES[name]
+        if not lo <= life <= hi:
+            raise SystemExit(
+                "planner life for {0} is {1}, outside the kit range {2} to {3}"
+                .format(name, life, lo, hi))
+        out.append({"name": SHORTER.get(name, name), "life": life,
+                    "range": "{0}–{1}".format(lo, hi)})
     return out
 
 
@@ -296,7 +317,11 @@ FREE_TEMPLATE = """<!doctype html>
     background: var(--paper); border: 1px solid var(--rule); border-radius: 4px;
     box-shadow: var(--shadow); padding: 1.15rem 1.25rem; margin: 0 0 .8rem;
   }}
-  .sysicon {{ flex: none; color: var(--ink); display: flex; }}
+  .sysicon {{
+    flex: none; color: var(--ink); display: flex;
+    border: 1px solid var(--rule); border-radius: 4px; padding: .6rem;
+    background: var(--bg);
+  }}
   .sysmain {{ flex: 1; min-width: 0; }}
   .sysname {{
     display: block; font: 700 10.5px/1.4 var(--font-sans);
@@ -495,7 +520,7 @@ FREE_TEMPLATE = """<!doctype html>
     </a>
     <nav class="nav-links" aria-label="Site">
       <a href="../calendars/">Calendar</a>
-      <a href="../shop/#binder">Storm prep</a>
+      <a href="../storm/">Storm prep</a>
       <a href="./" aria-current="page">Tools</a>
       <a href="../resources/">Resources</a>
       <a href="../shop/">Shop</a>
@@ -544,7 +569,12 @@ FREE_TEMPLATE = """<!doctype html>
     <p class="empty">Put a build year in above and the answer appears here.</p>
   </section>
 
-  <div class="card">
+  <p class="fine" style="text-align:center">
+    This is a guide, not a guarantee: regular maintenance extends life.
+    <a href="#adjust">Learn how these numbers are calculated &#8594;</a>
+  </p>
+
+  <div class="card" id="adjust">
     <h2>Correct anything you actually know</h2>
     <p class="lede">
       All four start at <strong>replaced on schedule</strong>, which assumes
@@ -672,6 +702,7 @@ FREE_TEMPLATE = """<!doctype html>
       found.push({{
         name: SYSTEMS[i].name,
         life: SYSTEMS[i].life,
+        range: SYSTEMS[i].range,
         age: Math.max(NOW - installed, 0),
         due: installed + SYSTEMS[i].life,
         remaining: installed + SYSTEMS[i].life - NOW,
@@ -719,7 +750,7 @@ FREE_TEMPLATE = """<!doctype html>
           '<span class="sysname">' + escapeHtml(item.name) + '</span>' +
           '<span class="sysage">' + (item.estimated ? 'About ' : '') +
             item.age + (item.age === 1 ? ' year' : ' years') + ' old</span>' +
-          '<span class="syslife">Typical Gulf Coast life: ' + item.life +
+          '<span class="syslife">Typical Gulf Coast life: ' + item.range +
             ' years &middot; ' + whenText(item.remaining, item.due) +
             (item.estimated ? ' <span class="estimated">estimated</span>' : '') + '</span>' +
           '<span class="bar"><span style="width:' + pct + '%;background:' + chip[2] + '"></span></span>' +
@@ -834,7 +865,8 @@ def build_free():
     html = FREE_TEMPLATE.format(
         domain=DOMAIN,
         items=free_items_html(items),
-        systems=json.dumps([{"name": r["name"], "life": r["life"]} for r in items],
+        systems=json.dumps([{"name": r["name"], "life": r["life"],
+                             "range": r["range"]} for r in items],
                            ensure_ascii=False).replace("</", "<\\/"),
         engine=ENGINE_JS,
         buy=buy,

@@ -123,7 +123,11 @@
     background: var(--paper); border: 1px solid var(--rule); border-radius: 4px;
     box-shadow: var(--shadow); padding: 1.15rem 1.25rem; margin: 0 0 .8rem;
   }
-  .sysicon { flex: none; color: var(--ink); display: flex; }
+  .sysicon {
+    flex: none; color: var(--ink); display: flex;
+    border: 1px solid var(--rule); border-radius: 4px; padding: .6rem;
+    background: var(--bg);
+  }
   .sysmain { flex: 1; min-width: 0; }
   .sysname {
     display: block; font: 700 10.5px/1.4 var(--font-sans);
@@ -322,7 +326,7 @@
     </a>
     <nav class="nav-links" aria-label="Site">
       <a href="../calendars/">Calendar</a>
-      <a href="../shop/#binder">Storm prep</a>
+      <a href="../storm/">Storm prep</a>
       <a href="./" aria-current="page">Tools</a>
       <a href="../resources/">Resources</a>
       <a href="../shop/">Shop</a>
@@ -371,7 +375,12 @@
     <p class="empty">Put a build year in above and the answer appears here.</p>
   </section>
 
-  <div class="card">
+  <p class="fine" style="text-align:center">
+    This is a guide, not a guarantee: regular maintenance extends life.
+    <a href="#adjust">Learn how these numbers are calculated &#8594;</a>
+  </p>
+
+  <div class="card" id="adjust">
     <h2>Correct anything you actually know</h2>
     <p class="lede">
       All four start at <strong>replaced on schedule</strong>, which assumes
@@ -534,7 +543,7 @@
       <a href="../guides/">What is on the calendar</a>
       <a href="../privacy.html">Privacy</a>
     </p>
-    <p class="version">v1.27.0</p>
+    <p class="version">v1.28.0</p>
   </div>
 </footer>
 
@@ -545,7 +554,7 @@
   // The four, and their lifespans, written out of planner_data.py at build
   // time. The download runs this same arithmetic on the same numbers, so
   // somebody who tries this and then buys never finds the two disagreeing.
-  var SYSTEMS = [{"name": "Roof, architectural shingle", "life": 15}, {"name": "A/C condenser, the outdoor unit", "life": 11}, {"name": "Water heater, tank", "life": 9}, {"name": "Air handler or furnace", "life": 16}];
+  var SYSTEMS = [{"name": "Roof, architectural shingle", "life": 15, "range": "12–15"}, {"name": "A/C condenser, the outdoor unit", "life": 11, "range": "10–12"}, {"name": "Water heater, tank", "life": 9, "range": "8–10"}, {"name": "Air handler or furnace", "life": 16, "range": "15–18"}];
   var NOW = new Date().getFullYear();
 
   var built = document.getElementById('built');
@@ -610,6 +619,7 @@
       found.push({
         name: SYSTEMS[i].name,
         life: SYSTEMS[i].life,
+        range: SYSTEMS[i].range,
         age: Math.max(NOW - installed, 0),
         due: installed + SYSTEMS[i].life,
         remaining: installed + SYSTEMS[i].life - NOW,
@@ -657,7 +667,7 @@
           '<span class="sysname">' + escapeHtml(item.name) + '</span>' +
           '<span class="sysage">' + (item.estimated ? 'About ' : '') +
             item.age + (item.age === 1 ? ' year' : ' years') + ' old</span>' +
-          '<span class="syslife">Typical Gulf Coast life: ' + item.life +
+          '<span class="syslife">Typical Gulf Coast life: ' + item.range +
             ' years &middot; ' + whenText(item.remaining, item.due) +
             (item.estimated ? ' <span class="estimated">estimated</span>' : '') + '</span>' +
           '<span class="bar"><span style="width:' + pct + '%;background:' + chip[2] + '"></span></span>' +

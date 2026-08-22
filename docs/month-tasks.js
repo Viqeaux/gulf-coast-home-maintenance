@@ -133,3 +133,4 @@ window.MONTH_TASKS = {
     ]
   }
 };
+window.MONTHLY_ROUNDS = ["HVAC and air", "plumbing", "safety check", "appliances", "walk the exterior", "interior upkeep", "generator and kit"];

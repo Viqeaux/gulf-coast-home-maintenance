@@ -27,6 +27,52 @@ Newest first.
 
 ---
 
+## [1.28.0], 2026-08-22
+
+**The rest of the approved mockup set, including the two resource pages that
+used to be refused.** The mockups showed a flood insurance article and a wind
+mitigation article with invented "checked" dates. Rather than fake them, this
+release researched and wrote them for real, checked against primary sources
+on today's date, which is what makes the Resources page finally match the
+picture honestly.
+
+### Added
+
+- **`/resources/flood-insurance-30-day-rule/`**: the 30-day waiting period
+  and its four exceptions, quoted from and attributed to FloodSmart's own
+  buy-a-policy page, the flood zone lookup at FEMA's Map Service Center, and
+  why May 1 is the real deadline. Checked 2026-08-22.
+- **`/resources/wind-mitigation-discounts/`**: premium credits for wind
+  mitigation across the five Gulf states, every state figure attributed to
+  IBHS's incentives directory, with the LDI homepage verified directly.
+  tdi.texas.gov refused connections at check time, so Texas deliberately
+  carries no regulator link until one has actually been verified. Checked
+  2026-08-22.
+- **`/storm/`**, the Storm Season landing page: the four phases (before,
+  during, after, insurance and claims) at the high level the free side is
+  allowed, with the binder as the complete system. The nav's Storm prep entry
+  lands here now instead of jumping straight to a buy section.
+- **Dropdown menus** under Tools and Resources in the nav, per the mockups:
+  hover or keyboard focus, with the top-level links still going somewhere
+  real on their own.
+- **The This Month section is four checklist columns**: the month's task in
+  each tier plus the seven Monthly Rounds, which repeat whatever the month.
+  `month-tasks.js` now carries the rounds titles too.
+- **Door icons** on the three doors, and the free-calendar button went solid
+  gold.
+
+### Changed
+
+- **The calculator shows the kit's lifespan ranges** ("12–15 years") beside
+  each verdict instead of the bare point figure, with a build-time check that
+  the planner's number sits inside the kit's range so the two cannot drift.
+  The system icons sit in outlined boxes and the results carry a "learn how
+  these numbers are calculated" link to the correction card.
+- The resources index, home resource shelf, footers and sitemap all carry the
+  two new pages and the storm page.
+
+---
+
 ## [1.27.0], 2026-08-22
 
 **The full-width layout, from the screenshot Chad approved.** His words: how

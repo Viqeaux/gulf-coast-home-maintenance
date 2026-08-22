@@ -188,9 +188,23 @@
     </span>
     <nav class="nav-links" aria-label="Site">
       <a href="calendars/">Calendar</a>
-      <a href="shop/#binder">Storm prep</a>
-      <a href="calculator/">Tools</a>
-      <a href="resources/">Resources</a>
+      <a href="storm/">Storm prep</a>
+      <span class="nav-drop">
+        <a href="calculator/">Tools</a>
+        <span class="nav-menu"><span class="menu-card">
+          <a href="calculator/">Borrowed Time Calculator</a>
+          <a href="guides/">What's on the calendar</a>
+        </span></span>
+      </span>
+      <span class="nav-drop">
+        <a href="resources/">Resources</a>
+        <span class="nav-menu"><span class="menu-card">
+          <a href="resources/">All resources</a>
+          <a href="resources/strengthen-mississippi-homes/">The $10,000 roof grant</a>
+          <a href="resources/flood-insurance-30-day-rule/">Flood insurance 30-day rule</a>
+          <a href="resources/wind-mitigation-discounts/">Wind mitigation discounts</a>
+        </span></span>
+      </span>
       <a href="shop/">Shop</a>
     </nav>
     <span class="topbar-ctas">
@@ -286,13 +300,15 @@
       <a class="door door--calendar" href="#calendars">
         <span class="label">Keep up with my house</span>
         <h3>The free maintenance calendar</h3>
+        <svg class="door-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16.5" rx="2"/><path d="M8 2.5v4M16 2.5v4M3.5 9.5h17"/><path d="M7.5 13h2M11 13h2M14.5 13h2M7.5 16.5h2M11 16.5h2"/></svg>
         <p>36 Gulf Coast tasks, organized through the year, delivered to the
         calendar already on your phone.</p>
         <span class="go">Add it to my phone &#8594;</span>
       </a>
-      <a class="door door--storm" href="shop/#binder">
+      <a class="door door--storm" href="storm/">
         <span class="label">Get ready for storms</span>
         <h3>Storm season</h3>
+        <svg class="door-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 9.5A4.5 4.5 0 0 0 11.6 7 3.5 3.5 0 0 0 5 8.6 3.7 3.7 0 0 0 5.5 16h13a3.5 3.5 0 0 0 1.5-6.5z"/><path d="M12.5 17.5 10 21h3l-2 3"/></svg>
         <p>Insurance in dollars, a room by room inventory, supplies, the
         countdown, and the damage and claim logs.</p>
         <span class="go">Prepare my house &#8594;</span>
@@ -300,6 +316,7 @@
       <a class="door door--aging" href="calculator/">
         <span class="label">See what's getting old</span>
         <h3>The Borrowed Time Calculator</h3>
+        <svg class="door-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 2.5h11M6.5 21.5h11"/><path d="M7.5 2.5c0 7 9 7 9 9.5s-9 2.5-9 9.5M16.5 2.5c0 7-9 7-9 9.5s9 2.5 9 9.5"/></svg>
         <p>Roof. A/C. Water heater. Air handler. What is due next, and roughly
         when, from one number.</p>
         <span class="go">Check my house &#8594;</span>
@@ -456,37 +473,50 @@
 <section id="this-month" class="band">
   <div class="wrap">
     <span class="sec-no">04 / This month</span>
-    <div class="now-head">
-      <h2>What should I be doing in <span id="now-month">&hellip;</span>?</h2>
+    <h2>This month: <span id="now-month">&hellip;</span></h2>
+    <p class="deck" id="now-sub">The real tasks from the real calendar, for
+    the month you are in right now.</p>
+
+    <div class="todo-cols" id="now-cols" hidden>
+      <div class="level level--must">
+        <span class="chip" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4"/><path d="M4 4h14l-3 5 3 5H4"/></svg>
+        </span>
+        <h3>Must Do</h3>
+        <ul class="check-list" id="now-must"></ul>
+        <a class="go" href="guides/">See all Must Do tasks &#8594;</a>
+      </div>
+      <div class="level level--should">
+        <span class="chip" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg>
+        </span>
+        <h3>Should Do</h3>
+        <ul class="check-list" id="now-should"></ul>
+        <a class="go" href="guides/">See all Should Do tasks &#8594;</a>
+      </div>
+      <div class="level level--above">
+        <span class="chip" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l5 5L20 6"/></svg>
+        </span>
+        <h3>Going Above</h3>
+        <ul class="check-list" id="now-above"></ul>
+        <a class="go" href="guides/">See all Going Above tasks &#8594;</a>
+      </div>
+      <div class="level level--rounds">
+        <span class="chip" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg>
+        </span>
+        <h3>Monthly Rounds</h3>
+        <ul class="check-list" id="now-rounds"></ul>
+        <a class="go" href="calendars/">A feed of its own &#8594;</a>
+      </div>
     </div>
-    <p class="deck">
-      The real tasks from the real calendar, for the month you are in right now.
+
+    <p style="margin-top:2.25rem">
+      <a class="btn btn--dark btn--lg" href="guides/">View the full calendar</a>
     </p>
-
-    <div class="month-card" id="now-card" hidden>
-      <div class="head">
-        <p class="m" id="now-card-month"></p>
-        <p class="sub" id="now-card-sub"></p>
-      </div>
-      <div class="body">
-        <div class="row">
-          <div class="k k--must">Must</div>
-          <div class="v" id="now-must"></div>
-        </div>
-        <div class="row">
-          <div class="k k--should">Should</div>
-          <div class="v" id="now-should"></div>
-        </div>
-        <div class="row">
-          <div class="k k--above">Above</div>
-          <div class="v" id="now-above"></div>
-        </div>
-      </div>
-    </div>
-
-    <p class="desk-note">
-      Every month works like this.
-      <a href="guides/">See all 36 tasks and the month each falls in &#8594;</a>
+    <p class="desk-note" style="margin-top:1rem">
+      All 36 tasks across twelve months, and the month each one falls in.
     </p>
   </div>
 </section>
@@ -685,6 +715,24 @@
       <span class="checked-chip">Checked August 21, 2026</span>
     </a>
 
+    <a class="res-card" href="resources/flood-insurance-30-day-rule/">
+      <span class="label">Insurance &middot; Flood</span>
+      <h3>The flood insurance 30-day rule, and why May 1 is the real deadline</h3>
+      <p>A new flood policy generally takes 30 days to go into effect. The
+      rule, its four exceptions, and where to look up your flood zone by
+      address, verified against FEMA's own pages.</p>
+      <span class="checked-chip">Checked August 22, 2026</span>
+    </a>
+
+    <a class="res-card" href="resources/wind-mitigation-discounts/">
+      <span class="label">Insurance &middot; Wind</span>
+      <h3>Wind mitigation discounts: the credits most homeowners never ask about</h3>
+      <p>Insurers across the Gulf states give premium credits for construction
+      that resists wind. The state-by-state map, and the one phone call that
+      finds out what yours offers.</p>
+      <span class="checked-chip">Checked August 22, 2026</span>
+    </a>
+
     <p class="center" style="margin-top:1.6rem">
       <a class="btn btn--dark" href="resources/">View all resources</a>
     </p>
@@ -807,6 +855,7 @@
           <li><a href="guides/">What's on the calendar</a></li>
           <li><a href="calculator/">Borrowed Time Calculator</a></li>
           <li><a href="calendars/">Calendar setup help</a></li>
+          <li><a href="storm/">Storm season</a></li>
         </ul>
       </div>
       <div>
@@ -823,6 +872,8 @@
         <ul>
           <li><a href="resources/">All resources</a></li>
           <li><a href="resources/strengthen-mississippi-homes/">The $10,000 roof grant</a></li>
+          <li><a href="resources/flood-insurance-30-day-rule/">Flood insurance 30-day rule</a></li>
+          <li><a href="resources/wind-mitigation-discounts/">Wind mitigation discounts</a></li>
           <li><a href="privacy.html">Privacy</a></li>
         </ul>
       </div>
@@ -841,7 +892,7 @@
     </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.27.0</p>
+    <p class="version">v1.28.0</p>
   </div>
 </footer>
 
@@ -959,25 +1010,34 @@
       if (list.children.length) hero.hidden = false;
     }
 
-    // The full card in section 04: every title for the month, per tier.
-    var card = document.getElementById('now-card');
-    if (card) {
+    // The checklist columns in section 04: every title for the month, per
+    // tier, plus the seven rounds that repeat whatever the month is.
+    var cols = document.getElementById('now-cols');
+    if (cols) {
       document.getElementById('now-month').textContent = name;
-      document.getElementById('now-card-month').textContent = name;
       var subs = {
-        5: 'Hurricane prep month · season opens June 1',
-        6: 'Hurricane season opens June 1',
-        8: 'Peak of hurricane season is September 10',
-        9: 'Peak of hurricane season is September 10',
-        11: 'Hurricane season closes November 30'
+        5: 'Hurricane prep month. The season opens June 1.',
+        6: 'Hurricane season opens June 1.',
+        8: 'Peak storm season.',
+        9: 'Peak of hurricane season is September 10.',
+        11: 'Hurricane season closes November 30.'
       };
-      document.getElementById('now-card-sub').textContent =
-        subs[m] || 'From the free calendar';
-      ['must', 'should', 'above'].forEach(function (tier) {
-        var el = document.getElementById('now-' + tier);
-        if (el && data[tier]) el.textContent = data[tier].join('. ') + '.';
-      });
-      card.hidden = false;
+      document.getElementById('now-sub').textContent =
+        subs[m] || 'The real tasks from the real calendar, for the month you are in right now.';
+      function fill(id, items) {
+        var el = document.getElementById(id);
+        if (!el || !items) return;
+        items.forEach(function (title) {
+          var li = document.createElement('li');
+          li.textContent = title;
+          el.appendChild(li);
+        });
+      }
+      fill('now-must', data.must);
+      fill('now-should', data.should);
+      fill('now-above', data.above);
+      fill('now-rounds', window.MONTHLY_ROUNDS);
+      cols.hidden = false;
     }
   })();
 </script>

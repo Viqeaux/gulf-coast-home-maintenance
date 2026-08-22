@@ -164,14 +164,22 @@ page that the nav's Resources link now points at. **1.27.0 took the layout
 full width on Chad's screenshot approval**: the wrap is 71rem everywhere, the
 hero photo bleeds to the viewport edge with the month card floating on it,
 and the text-column components (picker, month card, mini calculator, buy
-cards, signup) carry their own width caps so they stay readable. Two mockup
-items were refused on honesty grounds and stay refused: resource articles
-that do not
-exist yet were shown with invented "checked" dates, and the product covers
-were 3D renders of covers that are not the real ones. **The mockups name the
-next two resource pages worth writing**, a flood insurance 30-day rule
-explainer and a wind mitigation insurance discounts page, both of which fit
-the pointer rule; verify against primary sources before writing either.
+cards, signup) carry their own width caps so they stay readable.
+
+**1.28.0 finished the mockup set.** The two resource articles the mockups
+kept showing with invented dates now exist for real: the flood insurance
+30-day rule (attributed to FloodSmart, checked 2026-08-22) and wind
+mitigation discounts (state facts attributed to IBHS's incentives directory,
+LDI verified directly, checked 2026-08-22; tdi.texas.gov refused connections
+at check time, so Texas carries no regulator link until one is verified).
+`/storm/` is the Storm Season landing page the nav's Storm prep entry now
+points at, four phases kept at the free-side level with the binder as the
+system. The nav has real dropdowns under Tools and Resources, the This Month
+section is four checklist columns fed by `month-tasks.js` (which now carries
+the Monthly Rounds titles), and the calculator shows the kit's ranges beside
+its verdicts with a build-time check that the planner figure sits inside the
+kit range. The one mockup item still refused: 3D product cover renders,
+because the real covers are the real product.
 
 **Resource pages follow the pointer rule and carry a checked date.** See "The
 direction" below before writing one. The sitemap is hand-maintained and a new
