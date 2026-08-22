@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.32.0**. Everything below is live unless marked otherwise.
+Current version **v1.32.2**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -236,7 +236,14 @@ the file is safe on any page, and it returns immediately where there is no
 `#calendars` section. Same reasoning as `site.css`: a thing two pages share
 cannot live inside one of them.
 
-**`docs/site.css` is shared by all three hand-written pages.** It was an 839 line
+**`docs/nav.css` is the top bar, and every page with a bar loads it.** Split
+out of `site.css` in 1.32.2 so the generated calculator and guides pages,
+which carry their own self-contained styles, could have the same navigation
+without a second copy of the rules. Adding a page means linking theme.css,
+nav.css, then the page's own styles, and pasting the bar markup with the
+right relative depth. Do not reintroduce nav rules into `site.css`.
+
+**`docs/site.css` is shared by all the hand-written pages.** It was an 839 line
 `<style>` block inside `index.html` until the shop needed the same look. Two
 pages cannot each keep a copy, for the same reason `theme.css` and
 `analytics.js` exist. Anything styling both pages belongs there.

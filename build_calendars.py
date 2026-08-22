@@ -36,7 +36,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.32.1"
+VERSION = "1.32.2"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -697,6 +697,7 @@ GUIDES_TEMPLATE = """<!doctype html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&display=swap">
 <link rel="stylesheet" href="../theme.css">
+<link rel="stylesheet" href="../nav.css">
 <style>
   * {{ box-sizing: border-box; }}
   body {{
@@ -875,6 +876,46 @@ GUIDES_TEMPLATE = """<!doctype html>
 </style>
 </head>
 <body>
+
+<div class="topbar">
+  <div class="inner">
+    <a class="mark" href="../">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5V14h4v5.5"/>
+      </svg>
+      <span class="label">Gulf Coast Home Maintenance</span>
+    </a>
+    <nav class="nav-links" aria-label="Site">
+      <a href="../calendars/">Calendar</a>
+      <a href="../storm/">Storm prep</a>
+      <span class="nav-drop">
+        <a href="../calculator/">Tools</a>
+        <span class="nav-menu"><span class="menu-card">
+          <a href="../calculator/">Borrowed Time Calculator</a>
+          <a href="./" aria-current="page">What's on the calendar</a>
+        </span></span>
+      </span>
+      <span class="nav-drop">
+        <a href="../resources/">Resources</a>
+        <span class="nav-menu"><span class="menu-card">
+          <a href="../resources/">All resources</a>
+          <a href="../resources/strengthen-mississippi-homes/">Mississippi roof grant</a>
+          <a href="../resources/strengthen-alabama-homes/">Alabama roof grant</a>
+          <a href="../resources/louisiana-fortify-homes/">Louisiana roof grant</a>
+          <a href="../resources/my-safe-florida-home/">Florida inspections and grants</a>
+          <a href="../resources/texas-windstorm-coverage/">Texas windstorm coverage</a>
+          <a href="../resources/flood-insurance-30-day-rule/">Flood insurance 30-day rule</a>
+          <a href="../resources/wind-mitigation-discounts/">Wind mitigation discounts</a>
+        </span></span>
+      </span>
+      <a href="./" aria-current="page">Guide</a>
+      <a href="../shop/">Shop</a>
+    </nav>
+    <span class="topbar-ctas">
+      <a class="cta cta--free" href="../calendars/">Get the free calendar</a>
+    </span>
+  </div>
+</div>
 
 <header>
   <div class="wrap">

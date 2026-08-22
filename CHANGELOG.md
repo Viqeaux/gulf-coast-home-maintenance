@@ -27,6 +27,37 @@ Newest first.
 
 ---
 
+## [1.32.2], 2026-08-22
+
+**One navigation bar, on every page.** Chad's call after the dropdown fix.
+
+### Added
+
+- **`docs/nav.css`**, the top bar extracted out of `site.css` so the pages
+  that do not load `site.css` can carry the same bar without a second copy of
+  the rules. That is the same reasoning behind `site.css`, `theme.css` and
+  `analytics.js`: a thing several pages share cannot live inside one of them.
+  Load order is theme, nav, then the page's own styles.
+
+### Changed
+
+- **The calculator page has the real navigation now**: the gold serif
+  wordmark, the Tools and Resources dropdowns, and the free-calendar button,
+  instead of a private copy of the bar styles and a row of plain links. Its
+  `.mark-label` class went away in favor of the shared one.
+- **The guides page and all seven resource articles gained the bar.** They
+  had none at all, which had become a real dead end: "Guide" sits in the nav
+  on every page, and the resource articles are the pages most likely to be a
+  search visitor's first landing. Their quiet article design is unchanged
+  below the bar, breadcrumb included.
+
+### Fixed
+
+- Dead `.cta--alert`, `.cta--kit` and `cta-pulse` rules dropped rather than
+  carried across: no markup had used them since the 1.25.0 nav redesign.
+
+---
+
 ## [1.32.1], 2026-08-22
 
 ### Fixed
