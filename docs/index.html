@@ -33,7 +33,7 @@
 <meta property="og:image:height" content="900">
 <meta property="og:image:alt" content="A live oak hung with Spanish moss over the roof of a Gulf Coast house at sunset.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0e2429">
+<meta name="theme-color" content="#17322c">
 <link rel="canonical" href="https://gulfcoasthomemaintenance.com/">
 
 <!-- GitHub Pages cannot set response headers, so the policy has to travel in
@@ -54,13 +54,16 @@
      Google is named, and nothing else is. googletagmanager.com in script-src
      is the only third party allowed to run code on this page, and the
      google-analytics hosts in connect-src and img-src are the only places a
-     measurement can be sent. Adding a second tool means adding its origins
-     here on purpose, which is the point: a tracker that arrives by paste
-     rather than by decision does not work at all.
+     measurement can be sent. The fonts origins arrived with the 1.25.0
+     redesign and carry type, not code: googleapis serves the stylesheet,
+     gstatic the font files, and neither can run a script. Adding a second
+     tool of any kind means adding its origins here on purpose, which is the
+     point: a tracker that arrives by paste rather than by decision does not
+     work at all.
 
      form-action names MailerLite explicitly. If the signup ever moves, this
      line moves with it or the form silently stops submitting. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- The Measurement ID lives in this file and nowhere else. Empty means nothing
@@ -85,19 +88,19 @@
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-180.png">
+<!-- The typefaces from the 1.25.0 redesign: Newsreader for headlines, Inter
+     for interface text. Every stack in theme.css falls back to the system
+     faces the site shipped with, so a blocked font host costs nothing. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&display=swap">
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="site.css">
 
-<!-- Structured data. The prices here are duplicated from the .buy-price markup
-     below and from the Etsy listings, so all three move together or none do.
-     Unlisting a product means deleting three things together: its buy anchor,
-     its .buy-price line, and its block here. Leaving this one behind would keep
-     telling search engines the thing is for sale after it stopped being.
-
-     Deliberately no aggregateRating and no review. Inventing either is both
-     against Google's guidelines and the fastest way to lose the one thing this
-     brand is actually selling, which is being straight with people. Add real
-     ones once Etsy has them. -->
+<!-- Structured data. Deliberately no aggregateRating and no review: inventing
+     either is against Google's guidelines and the fastest way to lose the one
+     thing this brand is actually selling, which is being straight with people.
+     The three Product blocks live on /shop/ with the products. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -172,6 +175,9 @@
 <a class="skip" href="#start">Skip to content</a>
 
 <!-- ===================== sticky bar ===================== -->
+<!-- The 1.25.0 nav: the map on the left, one loud offer on the right. Five
+     quiet links name the site's surfaces; the filled button is the free
+     calendar, because that is the thing a first visit should leave with. -->
 <div class="topbar">
   <div class="inner">
     <span class="mark">
@@ -180,16 +186,15 @@
       </svg>
       <span class="label">Gulf Coast Home Maintenance</span>
     </span>
-    <!-- The bar is the only navigation that follows the reader, so it carries
-         one link per thing worth reaching: the kit, the free feeds, and the
-         seasonal binder. The kit's price is in the label on purpose, because
-         "The kit" alone does not tell a first-time reader whether clicking it
-         costs anything. It drops out below 46rem, where three buttons and a
-         wordmark stop fitting on one line. -->
+    <nav class="nav-links" aria-label="Site">
+      <a href="calendars/">Calendar</a>
+      <a href="shop/#binder">Storm prep</a>
+      <a href="calculator/">Tools</a>
+      <a href="resources/strengthen-mississippi-homes/">Resources</a>
+      <a href="shop/">Shop</a>
+    </nav>
     <span class="topbar-ctas">
-      <a class="cta cta--kit" href="shop/">The shop</a>
-      <a class="cta" href="#calendars">Free calendars</a>
-      <a class="cta cta--alert" href="shop/#binder">Hurricane checklist</a>
+      <a class="cta cta--free" href="#calendars">Get the free calendar</a>
     </span>
   </div>
 </div>
@@ -199,7 +204,7 @@
      element nested inside main is a section header, not a second banner. -->
 <main id="start">
 
-<!-- ===================== hero ===================== -->
+<!-- ===================== 1 / hero ===================== -->
 <header class="hero">
   <div class="hero-media" aria-hidden="true">
     <img src="img/hero-1600.jpg"
@@ -208,65 +213,140 @@
   </div>
 
   <div class="wrap">
-    <p class="label">The Gulf Coast Home Maintenance Calendar</p>
-    <hr class="rule-sm">
-    <h1>Your house is on a different schedule than the internet thinks.</h1>
-    <p class="deck">
-      Most maintenance advice is written for a climate you don't live in. Down here the
-      A/C runs nine months a year, termites swarm every spring, and hurricane season has a
-      deadline your insurance actually enforces.
-      <strong>This calendar is built for that.</strong>
-    </p>
+    <div class="hero-grid">
+      <div>
+        <p class="label">Home maintenance for the Gulf Coast</p>
+        <hr class="rule-sm">
+        <h1>Your house is on a different schedule than the internet thinks.</h1>
+        <p class="deck">
+          Most maintenance advice is written for a climate you don't live in. Down here the
+          A/C runs nine months a year, termites swarm every spring, and hurricane season has a
+          deadline your insurance actually enforces.
+          <strong>This calendar is built for that.</strong>
+        </p>
 
-    <!-- Filled in by the script at the bottom of this file. The number depends
-         on the day the page is read, so there is nothing honest to ship in the
-         markup, and it stays hidden until the script has a real one: a
-         countdown showing a blank or a stale figure is worse than no countdown
-         at all. Anyone without scripting still gets the season dates from the
-         stat strip below. -->
-    <p class="season" hidden>
-      <span class="season-dot" aria-hidden="true"></span>
-      <span class="season-text"></span>
-      <a class="season-link" href="shop/#binder">Get the checklist</a>
-    </p>
+        <!-- Filled in by the script at the bottom of this file. The number depends
+             on the day the page is read, so there is nothing honest to ship in the
+             markup, and it stays hidden until the script has a real one: a
+             countdown showing a blank or a stale figure is worse than no countdown
+             at all. Anyone without scripting still gets the season dates from the
+             stat band below. -->
+        <p class="season" hidden>
+          <span class="season-dot" aria-hidden="true"></span>
+          <span class="season-text"></span>
+          <a class="season-link" href="shop/#binder">Get the checklist</a>
+        </p>
 
-    <div class="actions" style="margin-top:1.9rem">
-      <a class="btn btn--primary btn--lg" href="#calendars">Get the free phone calendars</a>
-      <a class="btn btn--lg" href="shop/">See the printables</a>
-    </div>
+        <div class="actions" style="margin-top:1.9rem">
+          <a class="btn btn--primary btn--lg" href="#calendars">Get the free maintenance calendar</a>
+        </div>
+        <p class="free-line">Free &middot; No account &middot; No card &middot; Repeats every year</p>
+        <p class="hero-alt">
+          Or start with one number:
+          <a href="calculator/">see what's already on borrowed time &#8594;</a>
+        </p>
+      </div>
 
-    <p class="try">
-      Or start with one number:
-      <a href="calculator/">find out what in your house is already on borrowed time</a>.
-      Takes about fifteen seconds and asks for nothing.
-    </p>
-
-    <!-- The resource pages get one hero line each, the same slot the
-         calculator earned: the footer alone is a route for crawlers, not
-         people. If these ever number more than two, that is the moment a
-         resources page exists and this becomes one line pointing at it. -->
-    <p class="try">
-      Mississippi is paying up to $10,000 toward hurricane-rated roofs for some
-      coastal homeowners.
-      <a href="resources/strengthen-mississippi-homes/">Where to check if you qualify</a>.
-    </p>
-
-    <div class="stats">
-      <div class="stat"><span class="n">9</span><span class="t">months a year your A/C is running</span></div>
-      <div class="stat"><span class="n">183</span><span class="t">days of hurricane season, June 1 to Nov 30</span></div>
-      <div class="stat"><span class="n">30</span><span class="t">day wait before a flood policy takes effect</span></div>
-      <div class="stat"><span class="n">36</span><span class="t">tasks across twelve months, in three tiers</span></div>
+      <!-- The product demonstrating itself: the real tasks for the real month,
+           filled by the script at the bottom from month-tasks.js. -->
+      <aside class="hero-month" hidden aria-labelledby="hm-title">
+        <span class="label" id="hm-title">This month</span>
+        <p class="hm-month"></p>
+        <ul></ul>
+        <a class="hm-more" href="#this-month">What your house needs this month &#8594;</a>
+      </aside>
     </div>
   </div>
 </header>
 
-<!-- ===================== shop grid ===================== -->
+<!-- ===================== 2 / the numbers ===================== -->
+<section class="band bigstats" aria-label="The Gulf Coast numbers">
+  <div class="wrap">
+    <div class="grid">
+      <div><span class="n">9</span><span class="t">Months of A/C</span></div>
+      <div><span class="n">183</span><span class="t">Days of hurricane season</span></div>
+      <div><span class="n">30</span><span class="t">Day flood insurance wait</span></div>
+      <div><span class="n">36</span><span class="t">Tasks a year, three tiers</span></div>
+    </div>
+  </div>
+</section>
 
-
-<!-- ===================== the year ===================== -->
+<!-- ===================== 3 / the doors ===================== -->
 <section>
   <div class="wrap">
-    <span class="sec-no">01 / The pressures</span>
+    <span class="sec-no">01 / Start here</span>
+    <h2>Choose what you need</h2>
+    <p class="deck">
+      Three doors, and everything on this site is behind one of them.
+    </p>
+
+    <div class="doors">
+      <a class="door door--calendar" href="#calendars">
+        <span class="label">Keep up with my house</span>
+        <h3>The free maintenance calendar</h3>
+        <p>36 Gulf Coast tasks, organized through the year, delivered to the
+        calendar already on your phone.</p>
+        <span class="go">Add it to my phone &#8594;</span>
+      </a>
+      <a class="door door--storm" href="shop/#binder">
+        <span class="label">Get ready for storms</span>
+        <h3>Storm season</h3>
+        <p>Insurance in dollars, a room by room inventory, supplies, the
+        countdown, and the damage and claim logs.</p>
+        <span class="go">Prepare my house &#8594;</span>
+      </a>
+      <a class="door door--aging" href="calculator/">
+        <span class="label">See what's getting old</span>
+        <h3>The Borrowed Time Calculator</h3>
+        <p>Roof. A/C. Water heater. Air handler. What is due next, and roughly
+        when, from one number.</p>
+        <span class="go">Check my house &#8594;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 4 / free calendars ===================== -->
+<section id="calendars" class="band">
+  <div class="wrap">
+    <span class="sec-no">02 / Free</span>
+    <h2>Put it on your phone <span class="free-tag">Free</span></h2>
+    <p class="deck">
+      <strong>Free, and it stays free.</strong> Not a sample of the printables and
+      not a trial. Tick what you want below and subscribe once: no signup, no card,
+      and it repeats every year forever.
+    </p>
+
+    <!-- The four feeds one at a time live on /calendars/ now. Showing the
+         cards and the picker together made the reader choose between two ways
+         of choosing, and the picker is the one that answers the question most
+         people actually have, which is "just give me a calendar". -->
+    <!-- Every combination is a real file built at build time, so this picker
+         only chooses an address. It starts on Must Do alone, which is the
+         tier /calendars/ tells people to start with. -->
+    <div class="picker">
+      <h3>Build your calendar</h3>
+      <p>Four calendars are on offer and most people want some of them, not all. Tick the ones you want and you get a single calendar carrying exactly those, rather than four separate entries in your sidebar.</p>
+      <div class="picker-boxes">
+        <label><input type="checkbox" value="must" checked> Must Do</label>
+        <label><input type="checkbox" value="should"> Should Do</label>
+        <label><input type="checkbox" value="above"> Going Above</label>
+        <label><input type="checkbox" value="monthly"> Monthly Rounds</label>
+      </div>
+      <p class="picker-summary"></p>
+      <div class="actions" id="picker-actions" data-file="gulf-coast-must-do.ics"></div>
+      <p class="picker-more">
+        Would rather take them <a href="calendars/">one at a time</a>? That page
+        also has the setup help for Google, Apple and everything else.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 5 / the year ===================== -->
+<section>
+  <div class="wrap">
+    <span class="sec-no">03 / What your house is fighting</span>
     <h2>The Gulf Coast year</h2>
     <p class="deck">
       Four overlapping seasons your house has to survive, and they don't line up with the
@@ -313,12 +393,13 @@
 
           <!-- June 1 to Nov 30 is six columns, not seven. 900 would run the
                band through December and contradict both the caption and the
-               183-day figure above. -->
-          <rect x="468.3" y="44" width="370" height="30" rx="2" fill="#a33520" opacity=".85"/>
-          <rect x="406.7" y="90" width="308.3" height="30" rx="2" fill="#c08b2e" opacity=".85"/>
+               183-day figure above. Fills match theme.css: must, sand, above,
+               should. -->
+          <rect x="468.3" y="44" width="370" height="30" rx="2" fill="#a94f3d" opacity=".9"/>
+          <rect x="406.7" y="90" width="308.3" height="30" rx="2" fill="#a97822" opacity=".9"/>
           <rect x="283.3" y="136" width="185" height="30" rx="2" fill="#5b6f34" opacity=".9"/>
-          <rect x="160"   y="182" width="123.3" height="30" rx="2" fill="#14606e" opacity=".85"/>
-          <rect x="838.3" y="182" width="61.7"  height="30" rx="2" fill="#14606e" opacity=".85"/>
+          <rect x="160"   y="182" width="123.3" height="30" rx="2" fill="#327d82" opacity=".9"/>
+          <rect x="838.3" y="182" width="61.7"  height="30" rx="2" fill="#327d82" opacity=".9"/>
 
           <!-- the May 1 deadline -->
           <line class="diag-marker" x1="406.7" y1="30" x2="406.7" y2="258"/>
@@ -332,18 +413,6 @@
         deadline. Miss it and you are uninsured for the opening weeks of the season.
       </figcaption>
     </figure>
-  </div>
-</section>
-
-<!-- ===================== why ===================== -->
-<section class="band">
-  <div class="wrap">
-    <span class="sec-no">02 / Why it's different here</span>
-    <h2>Four things that break the national averages</h2>
-    <p class="deck">
-      Those averages assume mild summers, dry air, and a roof that isn't being sandblasted
-      with salt.
-    </p>
 
     <div class="factors">
       <div class="factor">
@@ -358,30 +427,72 @@
           <path d="M12 3s6 6.4 6 10.2A6 6 0 0 1 6 13.2C6 9.4 12 3 12 3z"/>
         </svg>
         <h3>Humidity</h3>
-        <p>Drives mold, rot, and pests into crawlspaces and wall cavities you never look at.</p>
+        <p>Feeds mold and rot in crawlspaces and wall cavities you never look at.</p>
       </div>
       <div class="factor">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
           <ellipse cx="12" cy="13" rx="4" ry="6"/><path d="M12 7V4M9 4.5 12 4l3 .5M4 10h4M16 10h4M4.5 15H8M16 15h3.5M6 20l2.6-2M18 20l-2.6-2"/>
         </svg>
         <h3>Termites</h3>
-        <p>Formosan and native subterranean colonies are endemic, and the damage is almost never covered by insurance.</p>
+        <p>Attack where you can't see, and the damage is almost never covered by insurance.</p>
       </div>
       <div class="factor">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M20 9.5A4.5 4.5 0 0 0 11.6 7 3.5 3.5 0 0 0 5 8.6 3.7 3.7 0 0 0 5.5 16h13a3.5 3.5 0 0 0 1.5-6.5z"/><path d="M12 19l-1.5 3M16 19l-1.5 3M8 19l-1.5 3"/>
         </svg>
-        <h3>Hurricane season</h3>
-        <p>June 1 to November 30, with an insurance waiting period that makes May the real deadline.</p>
+        <h3>Storms</h3>
+        <p>Turn neglected maintenance into expensive damage, on an insurance clock.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== tiers + sample ===================== -->
+<!-- ===================== 6 / this month ===================== -->
+<!-- Useful even if nobody ever buys anything, a reason to come back, and the
+     reason the calendar exists, all in one section. Filled by the script at
+     the bottom from month-tasks.js, and hidden until it has real content. -->
+<section id="this-month" class="band">
+  <div class="wrap">
+    <span class="sec-no">04 / This month</span>
+    <div class="now-head">
+      <h2>What should I be doing in <span id="now-month">&hellip;</span>?</h2>
+    </div>
+    <p class="deck">
+      The real tasks from the real calendar, for the month you are in right now.
+    </p>
+
+    <div class="month-card" id="now-card" hidden>
+      <div class="head">
+        <p class="m" id="now-card-month"></p>
+        <p class="sub" id="now-card-sub"></p>
+      </div>
+      <div class="body">
+        <div class="row">
+          <div class="k k--must">Must</div>
+          <div class="v" id="now-must"></div>
+        </div>
+        <div class="row">
+          <div class="k k--should">Should</div>
+          <div class="v" id="now-should"></div>
+        </div>
+        <div class="row">
+          <div class="k k--above">Above</div>
+          <div class="v" id="now-above"></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="desk-note">
+      Every month works like this.
+      <a href="guides/">See all 36 tasks and the month each falls in &#8594;</a>
+    </p>
+  </div>
+</section>
+
+<!-- ===================== 7 / tiers + mini calculator ===================== -->
 <section>
   <div class="wrap">
-    <span class="sec-no">03 / How it works</span>
+    <span class="sec-no">05 / How it works</span>
     <h2>Twelve months, three tiers</h2>
     <p class="deck">
       The tiers exist so you can start without drowning. Nobody does all of this the first year.
@@ -402,83 +513,203 @@
       </div>
     </div>
 
-    <h2 style="margin-top:3rem">What a month looks like</h2>
-    <div class="month-card">
-      <div class="head">
-        <p class="m">May</p>
-        <p class="sub">Hurricane prep month · season opens June 1</p>
+    <!-- The calculator's front door, on the page most people land on. One
+         number in, and the full page takes it from there: the year rides a GET
+         parameter that build_calculator.py reads on arrival. Works with
+         scripting off, because it is only a form. -->
+    <div class="mini-calc" id="mini-calc">
+      <h3>When was your house built?</h3>
+      <p>Four of the most expensive systems in your house age on known Gulf
+      Coast clocks. One number tells you which is next.</p>
+      <form class="mini-calc-row" action="calculator/" method="get">
+        <label class="sr-only" for="mini-year">The year your house was built</label>
+        <input id="mini-year" name="year" type="number" inputmode="numeric"
+               min="1900" max="2026" placeholder="1998">
+        <button class="btn btn--primary btn--lg" type="submit">Check my house</button>
+      </form>
+      <p class="mini-calc-note muted">Free, in your browser. Nothing you type leaves your machine.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 8 / the shop ===================== -->
+<section class="band shop">
+  <div class="wrap">
+    <span class="sec-no">06 / On paper</span>
+    <h2>Three printables, built for this coast</h2>
+    <p class="deck">
+      Undated, so none of them expire. Print at home on letter paper, or fill
+      them in on screen.
+    </p>
+
+    <div class="pgrid">
+      <div class="pcard">
+        <img src="img/cover-kit.jpg" width="560" height="725" loading="lazy" decoding="async"
+             alt="The cover of the Gulf Coast Home Maintenance Calendar kit.">
+        <div class="pcard-body">
+          <h3>The maintenance kit</h3>
+          <p class="pcard-line">Twelve months at three levels of effort, the Big Ticket Watch List, and seven sections for whatever your house happens to have.</p>
+          <p class="pcard-price">$12.99</p>
+          <a class="btn" href="shop/#edition">See what's inside</a>
+        </div>
       </div>
-      <div class="body">
-        <div class="row">
-          <div class="k k--must">Must</div>
-          <div class="v">
-            Verify your insurance <em>before</em> the season starts: wind, and flood if you
-            carry it. Flood policies generally take 30 days to take effect. Photograph every
-            room and the exterior for your claim file. Trim limbs back from the roof.
-          </div>
+
+      <div class="pcard">
+        <img src="img/cover-binder.jpg" width="560" height="725" loading="lazy" decoding="async"
+             alt="The cover of the Gulf Coast Storm Season Binder.">
+        <div class="pcard-body">
+          <h3>The storm season binder</h3>
+          <p class="pcard-line">Policies, a room by room inventory, the countdown, and the damage and claim logs that decide what actually gets paid.</p>
+          <p class="pcard-price">$16.99</p>
+          <a class="btn" href="shop/#binder">See what's inside</a>
         </div>
-        <div class="row">
-          <div class="k k--should">Should</div>
-          <div class="v">Test the generator. Restock supplies. Check that shutters or plywood are on hand and fit.</div>
+      </div>
+
+      <div class="pcard">
+        <img src="img/cover-agent.jpg" width="560" height="725" loading="lazy" decoding="async"
+             alt="The cover of the agent edition, showing where a realtor's logo and details are printed.">
+        <div class="pcard-body">
+          <h3>The agent edition</h3>
+          <p class="pcard-line">The same kit branded with your name and brokerage, plus a four-page leave-behind, licensed for every client you close.</p>
+          <p class="pcard-price">$39.00</p>
+          <a class="btn" href="shop/#agents">See what's inside</a>
         </div>
-        <div class="row">
-          <div class="k k--above">Above</div>
-          <div class="v">Inspect soffit vents and roof edges. Secure sheds, fencing, and anything that becomes a projectile.</div>
-        </div>
+      </div>
+    </div>
+
+    <p class="shop-free muted">
+      The twelve months are also <a href="#calendars">free as phone calendars</a>, with no signup and no card.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== 9 / the desk ===================== -->
+<!-- The interior pages sell better than the covers. These are the same
+     protective crops the shop already shows, arranged like sheets on a
+     kitchen table rather than filed as thumbnails. Showing more of any page
+     than the crop allows is a content decision: read the header of
+     build_site_images.py first. -->
+<section>
+  <div class="wrap">
+    <span class="sec-no">07 / The pages themselves</span>
+    <h2>See what you're actually getting</h2>
+    <p class="deck">
+      Tops of real pages, from the kit and the binder.
+    </p>
+
+    <div class="desk">
+      <figure>
+        <img src="img/preview-kit-1.jpg" width="520" height="202" loading="lazy" decoding="async"
+             alt="The top of the May page: the month, the first task, and the reason it matters.">
+        <figcaption>A month from the kit</figcaption>
+      </figure>
+      <figure>
+        <img src="img/preview-binder-1.jpg" width="520" height="282" loading="lazy" decoding="async"
+             alt="A blank kitchen inventory sheet with columns for item, make and model, serial number, year and replacement cost.">
+        <figcaption>Room by room inventory</figcaption>
+      </figure>
+      <figure>
+        <img src="img/preview-kit-2.jpg" width="520" height="202" loading="lazy" decoding="async"
+             alt="The top of the Watch List, showing the columns and the first few components with their Gulf Coast lifespans.">
+        <figcaption>The Big Ticket Watch List</figcaption>
+      </figure>
+      <figure>
+        <img src="img/preview-binder-2.jpg" width="520" height="282" loading="lazy" decoding="async"
+             alt="A blank claim call log with columns for the date, who you spoke to and what they promised.">
+        <figcaption>The claim call log</figcaption>
+      </figure>
+      <figure>
+        <img src="img/preview-kit-3.jpg" width="520" height="202" loading="lazy" decoding="async"
+             alt="The top of the page explaining the three levels of effort.">
+        <figcaption>How the levels work</figcaption>
+      </figure>
+      <figure>
+        <img src="img/preview-binder-3.jpg" width="520" height="229" loading="lazy" decoding="async"
+             alt="The top of the water and supply calculator, which works from household size, pets and days.">
+        <figcaption>The supply calculator</figcaption>
+      </figure>
+    </div>
+
+    <p class="desk-note">
+      The rest of each page, including the step-by-step, is in
+      <a href="shop/">the shop</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== 10 / useful right now ===================== -->
+<section class="band">
+  <div class="wrap">
+    <span class="sec-no">08 / Useful right now</span>
+    <h2>From the resource shelf</h2>
+    <p class="deck">
+      Pages that answer a question and point you at the people in charge of the
+      answer. Time-sensitive ones show the date they were last checked.
+    </p>
+
+    <a class="res-card" href="resources/strengthen-mississippi-homes/">
+      <span class="label">Mississippi &middot; Roof grants</span>
+      <h3>Mississippi's $10,000 FORTIFIED roof grant, and where to check if you qualify</h3>
+      <p>Strengthen Mississippi Homes, run by the Mississippi Insurance
+      Department. Who the current phase covers, how to find out if that is you,
+      and the pages where the rules actually live.</p>
+      <span class="checked-chip">Checked August 21, 2026</span>
+    </a>
+
+    <!-- The trust section, in the doc's phrase: we show our work. Specificity
+         and transparency are the trust signal; no invented testimonials, no
+         invented counts, same reason the structured data carries no rating. -->
+    <div class="points" style="margin-top:2rem">
+      <div class="point">
+        <h3>Built for Gulf Coast conditions</h3>
+        <p>Texas through Florida, not a national checklist with hurricanes added afterward.</p>
+      </div>
+      <div class="point">
+        <h3>Dates matter</h3>
+        <p>Time-sensitive resources show when they were last verified against the source.</p>
+      </div>
+      <div class="point">
+        <h3>Primary sources first</h3>
+        <p>Insurance programs and government information link to the agencies responsible, not a rewording of them.</p>
+      </div>
+      <div class="point">
+        <h3>No lead selling</h3>
+        <p>The free tools do not ask for a phone number, an email, or an account.</p>
       </div>
     </div>
   </div>
 </section>
 
-
-
-<!-- ===================== binder ===================== -->
-
-
-<!-- ===================== agents ===================== -->
-
-
-<!-- ===================== calendars ===================== -->
-<!-- On the band. Two reasons, and they are the same reason: removing the setup
-     section in 1.23.0 left three paper sections in a row and broke the
-     alternation, and the free calendar had become the quietest thing on a page
-     it is supposed to be the point of. The deep ground fixes the rhythm and
-     makes the one offer here impossible to scroll past. -->
-<section id="calendars" class="band">
+<!-- ===================== 11 / who ===================== -->
+<!-- The origin lived only in the Etsy About section, which meant the site asked
+     for $12.99 and $39 from an anonymous voice. These are the same words as the
+     shop's About, trimmed, not embellished. The age is the detail that tells a
+     reader this was taken seriously, so it stays. -->
+<section id="who">
   <div class="wrap">
-    <span class="sec-no">04 / Free</span>
-    <h2>Put it on your phone <span class="free-tag">Free</span></h2>
-    <p class="deck">
-      <strong>Free, and it stays free.</strong> Not a sample of the printables and
-      not a trial. Tick what you want below and subscribe once: no signup, no card,
-      and it repeats every year forever.
-    </p>
-
-        <!-- The four feeds one at a time live on /calendars/ now. Showing the
-         cards and the picker together made the reader choose between two ways
-         of choosing, and the picker is the one that answers the question most
-         people actually have, which is "just give me a calendar". -->
-      <!-- Every combination is a real file built at build time, so this picker
-           only chooses an address. It starts on Must Do alone, which is the
-           tier /calendars/ tells people to start with. -->
-      <div class="picker">
-        <h3>Build your calendar</h3>
-        <p>Four calendars are on offer and most people want some of them, not all. Tick the ones you want and you get a single calendar carrying exactly those, rather than four separate entries in your sidebar.</p>
-        <div class="picker-boxes">
-          <label><input type="checkbox" value="must" checked> Must Do</label>
-          <label><input type="checkbox" value="should"> Should Do</label>
-          <label><input type="checkbox" value="above"> Going Above</label>
-          <label><input type="checkbox" value="monthly"> Monthly Rounds</label>
-        </div>
-        <p class="picker-summary"></p>
-        <div class="actions" id="picker-actions" data-file="gulf-coast-must-do.ics"></div>
-        <p class="picker-more">
-          Would rather take them <a href="calendars/">one at a time</a>? That page
-          also has the setup help for Google, Apple and everything else.
-        </p>
-      </div>
+    <span class="sec-no">09 / Who made this</span>
+    <h2>I needed this, so I made it</h2>
+    <div class="byline">
+      <p>
+        I bought my first house at forty-five. Nobody hands you a manual with the
+        keys, so I started keeping a list of what needed doing and when, and I
+        added to it every time I found something out the hard way.
+      </p>
+      <p>
+        Every checklist I could find had been written for somewhere else. So my
+        list turned into a calendar built for this coast, at three levels of
+        effort, because the first year should not be overwhelming. If anything
+        in it is wrong or unclear, tell me. I would rather fix it than have you
+        work around it.
+      </p>
+      <p class="sig">Chad &middot; Gulf Coast Home Maintenance</p>
     </div>
+  </div>
+</section>
 
+<!-- ===================== 12 / signup ===================== -->
+<section class="band">
+  <div class="wrap">
     <div class="followup">
       <h3>Hear about the next one</h3>
       <p class="followup-blurb">
@@ -523,41 +754,9 @@
   </div>
 </section>
 
-
-
-<!-- ===================== who ===================== -->
-<!-- The origin lived only in the Etsy About section, which meant the site asked
-     for $12.99 and $39 from an anonymous voice. These are the same words as the
-     shop's About, trimmed, not embellished. The age is the detail that tells a
-     reader this was taken seriously, so it stays. -->
-<section id="who">
-  <div class="wrap">
-    <span class="sec-no">05 / Who made this</span>
-    <h2>I built this for my own house first</h2>
-    <div class="byline">
-      <p>
-        I bought my first house at forty-five. Nobody hands you a manual with the
-        keys, so I started keeping a list of what needed doing and when, and I
-        added to it every time I found something out the hard way.
-      </p>
-      <p>
-        The trouble was that every maintenance checklist I could find had been
-        written for somewhere else. So my list turned into a calendar built for
-        this coast, at three levels of effort, because the first year should not
-        be overwhelming.
-      </p>
-      <p>
-        It was only after living with it for a while that I realized how much I
-        would have wanted this the week I moved in. If anything in it is wrong or
-        unclear, tell me. I would rather fix it than have you work around it.
-      </p>
-      <p class="sig">Chad &middot; Gulf Coast Home Maintenance</p>
-    </div>
-  </div>
-</section>
-
 </main>
 
+<!-- ===================== 13 / footer ===================== -->
 <footer>
   <div class="wrap">
     <span class="mark" style="margin-bottom:1.25rem">
@@ -566,44 +765,56 @@
       </svg>
       <span class="label">Gulf Coast Home Maintenance</span>
     </span>
+
+    <div class="foot-grid">
+      <div>
+        <h3>Free</h3>
+        <ul>
+          <li><a href="#calendars">The phone calendars</a></li>
+          <li><a href="guides/">What's on the calendar</a></li>
+          <li><a href="calculator/">Borrowed Time Calculator</a></li>
+          <li><a href="calendars/">Calendar setup help</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>The shop</h3>
+        <ul>
+          <li><a href="shop/#edition">The maintenance kit</a></li>
+          <li><a href="shop/#binder">The storm season binder</a></li>
+          <li><a href="shop/#agents">The agent edition</a></li>
+          <li><a href="https://www.etsy.com/shop/GulfCoastHomeCare" target="_blank" rel="noopener">The shop on Etsy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="resources/strengthen-mississippi-homes/">The $10,000 roof grant</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>About</h3>
+        <ul>
+          <li><a href="#who">Who made this</a></li>
+          <li><a href="https://www.etsy.com/shop/GulfCoastHomeCare" target="_blank" rel="noopener">Message the shop</a></li>
+        </ul>
+      </div>
+    </div>
+
     <p class="disclaimer">
       General maintenance guidance, not a substitute for a licensed inspector, contractor,
       or your insurance policy terms.
     </p>
-    <p class="foot-links">
-      <a href="privacy.html">Privacy</a>
-      <a href="calendars/">The calendars</a>
-      <a href="guides/">What's on the calendar</a>
-      <a href="calculator/">What's on borrowed time</a>
-      <a href="resources/strengthen-mississippi-homes/">The $10,000 roof grant</a>
-    </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.24.1</p>
+    <p class="version">v1.25.0</p>
   </div>
 </footer>
 
 <script src="calendar-buttons.js"></script>
+<script src="month-tasks.js"></script>
 
 <script>
-  // ---------------------------------------------------------------------------
-  // The three Etsy listings live in the markup above, on the anchors inside
-  // #buy-slot, #binder-slot and #agent-slot, and nowhere else.
-  //
-  // They used to be constants here that a script turned into buttons, which
-  // meant the only way to buy anything on this site depended on JavaScript
-  // running. Anyone with it blocked, or on the one request in a few hundred
-  // where the script does not arrive, saw a price with nothing to click. A
-  // storefront's buy button is the last thing that should need scripting.
-  //
-  // To unlist a product now: delete its anchor, its .buy-price line and its
-  // Product block in the structured data above. That is one instruction for
-  // all three, rather than a second mechanism that had to be remembered
-  // separately, and the structured-data comment already said the same thing.
-  // ---------------------------------------------------------------------------
-
-  
-
   // ---------------------------------------------------------------------------
   // Hurricane season countdown in the hero.
   //
@@ -619,7 +830,7 @@
   // Pensacola ten minutes later. Normalizing both ends to UTC midnight of their
   // local calendar date removes both problems.
   //
-  // Dates from binder_pages.py and the hero stat strip: June 1 to November 30,
+  // Dates from binder_pages.py and the stat band: June 1 to November 30,
   // peaking around September 10. If those ever move, they move together.
   // ---------------------------------------------------------------------------
   (function () {
@@ -675,6 +886,60 @@
     }
 
     el.hidden = false;
+  })();
+
+  // ---------------------------------------------------------------------------
+  // The month cards: the floating one in the hero and the full one in section
+  // 04. Both read window.MONTH_TASKS from month-tasks.js, which is generated
+  // by build_calendars.py from the same TASKS the feeds publish, so nothing
+  // here can drift from the calendar. Titles only, which is the free half.
+  // Everything is built as nodes and both cards stay hidden if the data does
+  // not arrive: an empty card is worse than no card.
+  // ---------------------------------------------------------------------------
+  (function () {
+    if (!window.MONTH_TASKS) return;
+    var MONTHS = ['January','February','March','April','May','June','July',
+                  'August','September','October','November','December'];
+    var m = new Date().getMonth() + 1;
+    var data = window.MONTH_TASKS[String(m)] || window.MONTH_TASKS[m];
+    if (!data) return;
+    var name = MONTHS[m - 1];
+
+    // The hero card: one task from each tier, ticked off like a list.
+    var hero = document.querySelector('.hero-month');
+    if (hero) {
+      hero.querySelector('.hm-month').textContent = name;
+      var list = hero.querySelector('ul');
+      ['must', 'should', 'above'].forEach(function (tier) {
+        if (data[tier] && data[tier][0]) {
+          var li = document.createElement('li');
+          li.textContent = data[tier][0];
+          list.appendChild(li);
+        }
+      });
+      if (list.children.length) hero.hidden = false;
+    }
+
+    // The full card in section 04: every title for the month, per tier.
+    var card = document.getElementById('now-card');
+    if (card) {
+      document.getElementById('now-month').textContent = name;
+      document.getElementById('now-card-month').textContent = name;
+      var subs = {
+        5: 'Hurricane prep month · season opens June 1',
+        6: 'Hurricane season opens June 1',
+        8: 'Peak of hurricane season is September 10',
+        9: 'Peak of hurricane season is September 10',
+        11: 'Hurricane season closes November 30'
+      };
+      document.getElementById('now-card-sub').textContent =
+        subs[m] || 'From the free calendar';
+      ['must', 'should', 'above'].forEach(function (tier) {
+        var el = document.getElementById('now-' + tier);
+        if (el && data[tier]) el.textContent = data[tier].join('. ') + '.';
+      });
+      card.hidden = false;
+    }
   })();
 </script>
 </body>

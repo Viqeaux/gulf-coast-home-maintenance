@@ -191,7 +191,7 @@ FREE_TEMPLATE = """<!doctype html>
 <meta property="og:image:height" content="900">
 <meta property="og:image:alt" content="A live oak hung with Spanish moss over the roof of a Gulf Coast house at sunset.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0e2429">
+<meta name="theme-color" content="#17322c">
 
 <!-- Pages cannot set headers, so the policy travels in the document. See the
      longer note in docs/index.html for why 'unsafe-inline' is here, why
@@ -202,7 +202,7 @@ FREE_TEMPLATE = """<!doctype html>
      here counts the visit, not the answer. Sending a build year, a system name
      or a computed figure to Google as an event parameter would make the page
      lie, however useful the data looked. The arithmetic stays local. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- One Measurement ID for the whole site, in docs/analytics.js. -->
@@ -210,12 +210,15 @@ FREE_TEMPLATE = """<!doctype html>
 
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&display=swap">
 <link rel="stylesheet" href="../theme.css">
 <style>
   * {{ box-sizing: border-box; }}
   body {{
     margin: 0; background: var(--bg); color: var(--ink);
-    font: 17px/1.65 ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font: 17px/1.65 var(--font-serif);
     -webkit-font-smoothing: antialiased;
   }}
   .wrap {{ max-width: 46rem; margin: 0 auto; padding: 0 1.35rem; }}
@@ -227,7 +230,7 @@ FREE_TEMPLATE = """<!doctype html>
 
   header {{ background: var(--deep); color: var(--on-deep); padding: 3rem 0 2.5rem; }}
   header a.back {{
-    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    font: 600 11px/1 var(--font-sans);
     letter-spacing: .14em; text-transform: uppercase;
     color: var(--sand); text-decoration: none;
   }}
@@ -240,7 +243,7 @@ FREE_TEMPLATE = """<!doctype html>
 
   main {{ padding: 2.5rem 0 0; }}
   h2 {{
-    font: 700 clamp(1.3rem, 3.5vw, 1.7rem)/1.2 ui-serif, Georgia, serif;
+    font: 700 clamp(1.3rem, 3.5vw, 1.7rem)/1.2 var(--font-serif);
     margin: 0 0 .6rem; letter-spacing: -.015em;
   }}
   .lede {{ color: var(--muted); font-size: .96rem; margin: 0 0 1.5rem; max-width: 34rem; }}
@@ -252,13 +255,13 @@ FREE_TEMPLATE = """<!doctype html>
 
   .built {{ display: flex; align-items: flex-end; gap: .9rem; flex-wrap: wrap; }}
   .built label {{
-    font: 600 .95rem/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 600 .95rem/1.4 var(--font-sans);
     display: block; margin-bottom: .35rem;
   }}
   /* --muted rather than --rule for the boundary: a --rule hairline on --paper is
      under 3:1 and the control vanishes until it takes focus. WCAG 1.4.11. */
   input, select {{
-    font: 400 15px/1.2 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 400 15px/1.2 var(--font-sans);
     padding: .7rem .8rem; border-radius: 2px;
     border: 1px solid var(--muted); background: var(--bg); color: var(--ink);
     max-width: 100%;
@@ -266,9 +269,15 @@ FREE_TEMPLATE = """<!doctype html>
   input:focus-visible, select:focus-visible {{
     outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
   }}
-  .built input {{ width: 8rem; }}
+  /* The one input the page runs on, sized like the answer to a question
+     rather than a form field. The 1.25.0 review's phrase: a tool, not a
+     form. */
+  .built input {{
+    width: 9.5rem; font: 600 1.6rem/1.2 var(--font-serif);
+    text-align: center; letter-spacing: .01em;
+  }}
   .built .hint {{
-    font: 400 .86rem/1.5 ui-sans-serif, system-ui, sans-serif;
+    font: 400 .86rem/1.5 var(--font-sans);
     color: var(--muted); margin: 0; flex: 1 1 14rem; min-width: 0;
   }}
 
@@ -277,10 +286,10 @@ FREE_TEMPLATE = """<!doctype html>
   .item:first-child {{ border-top: 0; padding-top: 0; }}
   .item-head {{ display: flex; justify-content: space-between; gap: .75rem; align-items: baseline; }}
   .item-name {{
-    font: 600 .98rem/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 600 .98rem/1.4 var(--font-sans);
   }}
   .item-life {{
-    font: 400 12px/1.4 ui-sans-serif, system-ui, sans-serif;
+    font: 400 12px/1.4 var(--font-sans);
     color: var(--muted); white-space: nowrap;
   }}
   .item-controls {{ display: flex; gap: .5rem; margin-top: .5rem; flex-wrap: wrap; }}
@@ -289,11 +298,11 @@ FREE_TEMPLATE = """<!doctype html>
 
   .results {{ margin: 0 0 2rem; }}
   .verdict {{
-    font: 700 clamp(1.15rem, 3vw, 1.4rem)/1.35 ui-serif, Georgia, serif; margin: 0 0 1rem;
+    font: 600 clamp(1.3rem, 3.6vw, 1.75rem)/1.3 var(--font-serif); margin: 0 0 1rem;
   }}
   .verdict .big {{ color: var(--must); }}
   .nudge {{
-    font: 400 .93rem/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 400 .93rem/1.6 var(--font-sans);
     color: var(--muted); margin: -.4rem 0 1.1rem; max-width: 33rem;
     border-left: 3px solid var(--sand); padding-left: .85rem;
   }}
@@ -305,11 +314,11 @@ FREE_TEMPLATE = """<!doctype html>
   .row:first-child {{ border-top: 0; }}
   .row .what {{
     flex: 1 1 12rem;
-    font: 600 .98rem/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 600 .98rem/1.4 var(--font-sans);
   }}
-  .row .when {{ font: 400 .9rem/1.4 ui-sans-serif, system-ui, sans-serif; color: var(--muted); }}
+  .row .when {{ font: 400 .9rem/1.4 var(--font-sans); color: var(--muted); }}
   .tag {{
-    font: 700 10px/1 ui-sans-serif, system-ui, sans-serif;
+    font: 700 10px/1 var(--font-sans);
     letter-spacing: .12em; text-transform: uppercase;
     border: 1px solid currentColor; border-radius: 2px; padding: .32rem .45rem;
     white-space: nowrap;
@@ -319,7 +328,7 @@ FREE_TEMPLATE = """<!doctype html>
   .tag--watch {{ color: var(--should); }}
   .tag--ok {{ color: var(--above); }}
   .estimated {{
-    font: 400 11px/1 ui-sans-serif, system-ui, sans-serif;
+    font: 400 11px/1 var(--font-sans);
     color: var(--muted); letter-spacing: .06em; text-transform: uppercase;
   }}
   .empty {{ color: var(--muted); font-size: .95rem; margin: 0; }}
@@ -332,7 +341,7 @@ FREE_TEMPLATE = """<!doctype html>
   .next p {{ color: var(--muted); font-size: .96rem; max-width: 33rem; margin: 0 0 1.2rem; }}
   .btn {{
     display: inline-block;
-    font: 600 14px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 600 14px/1 var(--font-sans);
     text-decoration: none; padding: .85rem 1.3rem; border-radius: 2px;
     background: var(--accent); border: 1px solid var(--accent); color: var(--paper);
     cursor: pointer; -webkit-appearance: none; appearance: none;
@@ -347,17 +356,17 @@ FREE_TEMPLATE = """<!doctype html>
   .signup-row {{ display: flex; gap: .5rem; flex-wrap: wrap; max-width: 27rem; }}
   .signup-row input {{ flex: 1 1 12rem; min-width: 0; }}
   .signup-note {{
-    font: 400 12.5px/1.5 ui-sans-serif, system-ui, sans-serif;
+    font: 400 12.5px/1.5 var(--font-sans);
     color: var(--muted); margin: .75rem 0 0; max-width: 32rem;
   }}
   .signup-done {{
-    font: 400 .95rem/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 400 .95rem/1.6 var(--font-sans);
     color: var(--muted); margin: 0;
   }}
   .signup-done strong {{ display: block; color: var(--accent); margin-bottom: .2rem; }}
   .tail-signup {{ margin-top: 2.25rem; padding-top: 1.9rem; border-top: 1px solid var(--rule); }}
   .tail-signup h3 {{
-    font: 700 1.05rem/1.3 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 700 1.05rem/1.3 var(--font-sans);
     margin: 0 0 .4rem;
   }}
   @media (max-width: 26rem) {{
@@ -365,7 +374,7 @@ FREE_TEMPLATE = """<!doctype html>
   }}
 
   .fine {{
-    font: 400 .87rem/1.6 ui-sans-serif, system-ui, sans-serif;
+    font: 400 .87rem/1.6 var(--font-sans);
     color: var(--muted); max-width: 34rem;
   }}
 
@@ -377,12 +386,12 @@ FREE_TEMPLATE = """<!doctype html>
   footer .disclaimer {{ font-style: italic; }}
   footer .foot-links {{
     display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.1rem;
-    font: 400 .87rem/1 ui-sans-serif, system-ui, sans-serif;
+    font: 400 .87rem/1 var(--font-sans);
   }}
   footer .foot-links a {{ color: var(--sand); text-decoration: none; }}
   footer .foot-links a:hover {{ text-decoration: underline; }}
   footer .version {{
-    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    font: 600 11px/1 var(--font-sans);
     letter-spacing: .12em; opacity: .55; margin: 0;
   }}
 </style>
@@ -603,6 +612,15 @@ FREE_TEMPLATE = """<!doctype html>
         (item.estimated ? ' <span class="estimated">estimated</span>' : '') +
         '</span></li>';
     }}).join('') + '</ul>';
+  }}
+
+  // The home page's mini calculator hands the year over as ?year=, so the
+  // card there can stay a plain GET form that works with scripting off. A
+  // valid year prefills the field and answers immediately.
+  var fromQuery = parseInt(new URLSearchParams(window.location.search).get('year'), 10);
+  if (fromQuery && fromQuery >= 1850 && fromQuery <= NOW + 1) {{
+    built.value = fromQuery;
+    render();
   }}
 
   built.addEventListener('input', render);

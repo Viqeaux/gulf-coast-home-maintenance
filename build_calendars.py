@@ -36,7 +36,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.24.1"
+VERSION = "1.25.0"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -680,12 +680,12 @@ GUIDES_TEMPLATE = """<!doctype html>
 <meta property="og:image:height" content="900">
 <meta property="og:image:alt" content="A live oak hung with Spanish moss over the roof of a Gulf Coast house at sunset.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0e2429">
+<meta name="theme-color" content="#17322c">
 
 <!-- Pages cannot set headers, so the policy travels in the document. See the
      longer note in docs/index.html for why 'unsafe-inline' is here, why
      frame-ancestors is not, and why Google is the only third party named. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- One Measurement ID for the whole site, in docs/analytics.js. -->
@@ -693,12 +693,15 @@ GUIDES_TEMPLATE = """<!doctype html>
 
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&display=swap">
 <link rel="stylesheet" href="../theme.css">
 <style>
   * {{ box-sizing: border-box; }}
   body {{
     margin: 0; background: var(--bg); color: var(--ink);
-    font: 17px/1.65 ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font: 17px/1.65 var(--font-serif);
     -webkit-font-smoothing: antialiased;
   }}
   .wrap {{ max-width: 46rem; margin: 0 auto; padding: 0 1.35rem; }}
@@ -706,7 +709,7 @@ GUIDES_TEMPLATE = """<!doctype html>
 
   header {{ background: var(--deep); color: var(--on-deep); padding: 3rem 0 2.5rem; }}
   header a.back {{
-    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    font: 600 11px/1 var(--font-sans);
     letter-spacing: .14em; text-transform: uppercase;
     color: var(--sand); text-decoration: none;
   }}
@@ -717,7 +720,7 @@ GUIDES_TEMPLATE = """<!doctype html>
   }}
   header p {{ color: var(--on-deep-mute); margin: 0; max-width: 34rem; }}
   .count {{
-    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    font: 600 11px/1 var(--font-sans);
     letter-spacing: .12em; text-transform: uppercase;
     color: var(--sand); margin-top: 1.25rem !important;
   }}
@@ -725,7 +728,7 @@ GUIDES_TEMPLATE = """<!doctype html>
   .month {{ padding: 2.75rem 0 .5rem; border-top: 1px solid var(--rule-soft); }}
   .month:first-of-type {{ border-top: 0; }}
   .month h2 {{
-    font: 700 clamp(1.4rem, 3.5vw, 1.8rem)/1.2 ui-serif, Georgia, serif;
+    font: 700 clamp(1.4rem, 3.5vw, 1.8rem)/1.2 var(--font-serif);
     margin: 0 0 1.25rem; letter-spacing: -.015em;
   }}
 
@@ -740,12 +743,12 @@ GUIDES_TEMPLATE = """<!doctype html>
   .task--above {{ --tier-color: var(--above); }}
   .task:target {{ box-shadow: 0 0 0 2px var(--tier-color), var(--shadow); }}
   .tier-tag {{
-    font: 700 10px/1 ui-sans-serif, system-ui, sans-serif;
+    font: 700 10px/1 var(--font-sans);
     letter-spacing: .14em; text-transform: uppercase;
     color: var(--tier-color); margin: 0 0 .45rem;
   }}
   .task h3 {{
-    font: 700 1.1rem/1.35 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 700 1.1rem/1.35 var(--font-sans);
     margin: 0 0 .55rem; letter-spacing: -.005em;
   }}
   .task p {{ margin: 0 0 .65rem; font-size: .96rem; color: var(--muted); }}
@@ -755,18 +758,18 @@ GUIDES_TEMPLATE = """<!doctype html>
   .videos li {{ border-top: 1px solid var(--rule-soft); padding: .65rem 0 0; margin-top: .65rem; }}
   .videos li:first-child {{ border-top: 0; margin-top: 0; }}
   .videos a {{
-    font: 600 .95rem/1.4 ui-sans-serif, system-ui, sans-serif;
+    font: 600 .95rem/1.4 var(--font-sans);
     text-decoration: none;
   }}
   .videos a:hover {{ text-decoration: underline; }}
   .source {{
-    display: block; font: 400 12px/1.4 ui-sans-serif, system-ui, sans-serif;
+    display: block; font: 400 12px/1.4 var(--font-sans);
     color: var(--muted); margin-top: .15rem;
   }}
   /* The .need, .watch and .steps rules are gone along with the content they
      styled. Those are the kit's pages and the kit is the paid product. */
   .pro-note {{
-    font: 600 .85rem/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 600 .85rem/1.55 var(--font-sans);
     margin: .8rem 0 0 !important; color: var(--accent);
   }}
 
@@ -778,11 +781,11 @@ GUIDES_TEMPLATE = """<!doctype html>
     padding: 1.15rem 1.35rem; margin: 0 0 2rem;
   }}
   .kit-pointer h2 {{
-    font: 700 1.05rem/1.3 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 700 1.05rem/1.3 var(--font-sans);
     margin: 0 0 .35rem; letter-spacing: 0;
   }}
   .kit-pointer p {{
-    font: 400 .93rem/1.6 ui-sans-serif, system-ui, sans-serif;
+    font: 400 .93rem/1.6 var(--font-sans);
     color: var(--muted); margin: 0;
   }}
 
@@ -796,11 +799,11 @@ GUIDES_TEMPLATE = """<!doctype html>
     margin-top: 3rem; padding: 3rem 0;
   }}
   .tailpiece h2 {{
-    font: 700 clamp(1.4rem, 3.5vw, 1.8rem)/1.2 ui-serif, Georgia, serif;
+    font: 700 clamp(1.4rem, 3.5vw, 1.8rem)/1.2 var(--font-serif);
     margin: 0 0 .7rem; letter-spacing: -.015em;
   }}
   .tailpiece h3 {{
-    font: 700 1.05rem/1.3 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 700 1.05rem/1.3 var(--font-sans);
     margin: 0 0 .4rem;
   }}
   .tail-blurb {{
@@ -809,7 +812,7 @@ GUIDES_TEMPLATE = """<!doctype html>
   .tail-actions {{ margin: 0 0 1rem; }}
   .tail-btn {{
     display: inline-block;
-    font: 600 14px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 600 14px/1 var(--font-sans);
     text-decoration: none; padding: .85rem 1.3rem; border-radius: 2px;
     background: var(--accent); border: 1px solid var(--accent); color: var(--paper);
     cursor: pointer; -webkit-appearance: none; appearance: none;
@@ -833,7 +836,7 @@ GUIDES_TEMPLATE = """<!doctype html>
      in docs/index.html, for the same reason. */
   .signup-row input {{
     flex: 1 1 12rem; min-width: 0;
-    font: 400 15px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 400 15px/1 var(--font-sans);
     padding: .8rem .9rem; border-radius: 2px;
     border: 1px solid var(--muted); background: var(--bg); color: var(--ink);
   }}
@@ -841,11 +844,11 @@ GUIDES_TEMPLATE = """<!doctype html>
     outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
   }}
   .signup-note {{
-    font: 400 12.5px/1.5 ui-sans-serif, system-ui, sans-serif;
+    font: 400 12.5px/1.5 var(--font-sans);
     color: var(--muted); margin: .75rem 0 0; max-width: 32rem;
   }}
   .signup-done {{
-    font: 400 .95rem/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 400 .95rem/1.6 var(--font-sans);
     color: var(--muted); margin: 0;
   }}
   .signup-done strong {{ display: block; color: var(--accent); margin-bottom: .2rem; }}
@@ -861,12 +864,12 @@ GUIDES_TEMPLATE = """<!doctype html>
   footer .disclaimer {{ font-style: italic; }}
   footer .foot-links {{
     display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.1rem;
-    font: 400 .87rem/1 ui-sans-serif, system-ui, sans-serif;
+    font: 400 .87rem/1 var(--font-sans);
   }}
   footer .foot-links a {{ color: var(--sand); text-decoration: none; }}
   footer .foot-links a:hover {{ text-decoration: underline; }}
   footer .version {{
-    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    font: 600 11px/1 var(--font-sans);
     letter-spacing: .12em; opacity: .55; margin: 0;
   }}
 </style>
@@ -1146,6 +1149,25 @@ def build_guides():
     ), covered
 
 
+def build_month_tasks():
+    """Return docs/month-tasks.js, the data behind the home page's month cards.
+
+    Titles only, which is the free half: the feeds already publish every title
+    to anyone who subscribes. The step-by-step stays in task_steps.py and never
+    reaches this file. The home page reads window.MONTH_TASKS to fill the hero
+    card and the "this month" section for whatever month the visitor is in.
+    """
+    months = {}
+    for month, _day, tier, _slug, title, _body in TASKS:
+        months.setdefault(month, {"must": [], "should": [], "above": []})
+        months[month][tier].append(title)
+    lines = [
+        "/* Generated by build_calendars.py. Do not edit: edit TASKS there. */",
+        "window.MONTH_TASKS = " + json.dumps(months, indent=2) + ";",
+    ]
+    return "\n".join(lines) + "\n"
+
+
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     for tier_key in ("must", "should", "above", "monthly"):
@@ -1165,6 +1187,11 @@ def main():
         sizes.append(count)
     print("{0} combined feeds  {1} to {2} events each".format(
         len(combos), min(sizes), max(sizes)))
+
+    month_path = os.path.join(OUT_DIR, "month-tasks.js")
+    with open(month_path, "w", encoding="utf-8", newline="\n") as handle:
+        handle.write(build_month_tasks())
+    print("{0}  titles for the home page month cards".format(month_path))
 
     guides_dir = os.path.join(OUT_DIR, "guides")
     os.makedirs(guides_dir, exist_ok=True)

@@ -16,13 +16,13 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://gulfcoasthomemaintenance.com/resources/strengthen-mississippi-homes/">
 <meta property="og:site_name" content="Gulf Coast Home Maintenance">
-<meta name="theme-color" content="#0e2429">
+<meta name="theme-color" content="#17322c">
 <link rel="canonical" href="https://gulfcoasthomemaintenance.com/resources/strengthen-mississippi-homes/">
 
 <!-- Same policy as the other measured pages, minus the MailerLite form-action
      because there is no form here. It travels in the document because GitHub
      Pages cannot set response headers. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action 'none'; frame-src 'none'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action 'none'; frame-src 'none'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- This page exists to find out whether content earns traffic, so it is
@@ -31,12 +31,15 @@
 
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../../icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&display=swap">
 <link rel="stylesheet" href="../../theme.css">
 <style>
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
-    font: 17px/1.65 ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font: 17px/1.65 var(--font-serif);
     -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 42rem; margin: 0 auto; padding: 0 1.35rem; }
@@ -44,7 +47,7 @@
 
   header { background: var(--deep); color: var(--on-deep); padding: 3rem 0 2.5rem; }
   header a.back {
-    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    font: 600 11px/1 var(--font-sans);
     letter-spacing: .14em; text-transform: uppercase;
     color: var(--sand); text-decoration: none;
   }
@@ -57,7 +60,7 @@
 
   main { padding: 2.75rem 0 1rem; }
   h2 {
-    font: 700 1.25rem/1.25 ui-serif, Georgia, serif;
+    font: 700 1.25rem/1.25 var(--font-serif);
     margin: 2.4rem 0 .6rem; letter-spacing: -.012em;
   }
   p { margin: 0 0 1.05rem; color: var(--muted); }
@@ -71,7 +74,7 @@
   /* The checked line is the page's whole warranty, so it reads as a stamp
      rather than a sentence that scrolls past. */
   .checked {
-    font: 600 12px/1.5 ui-sans-serif, system-ui, sans-serif;
+    font: 600 12px/1.5 var(--font-sans);
     letter-spacing: .06em; text-transform: uppercase;
     color: var(--ink); background: var(--paper-2);
     border-left: 3px solid var(--accent);
@@ -82,7 +85,19 @@
     border: 1px solid var(--rule); background: var(--paper);
     padding: 1.15rem 1.25rem; margin: 2.2rem 0 0;
   }
-  .next p { margin: 0; font-size: .95rem; }
+  .next p { margin: 0 0 .6rem; font-size: .95rem; }
+  .next .label {
+    font: 600 10.5px/1 var(--font-sans); letter-spacing: .15em;
+    text-transform: uppercase; color: var(--sand);
+    display: block; margin-bottom: .7rem;
+  }
+  .next ul { list-style: none; margin: 0; padding: 0; }
+  .next li {
+    margin: 0; padding: .45rem 0; border-top: 1px solid var(--rule-soft);
+    font: 400 .93rem/1.5 var(--font-sans);
+  }
+  .next li:first-child { border-top: 0; padding-top: 0; }
+  .next li .what { color: var(--muted); }
 
   footer {
     background: var(--deep); color: var(--on-deep-mute);
@@ -91,7 +106,7 @@
   footer p { color: var(--on-deep-mute); }
   footer a { color: var(--sand); }
   footer .updated {
-    font: 600 11px/1 ui-sans-serif, system-ui, sans-serif;
+    font: 600 11px/1 var(--font-sans);
     letter-spacing: .12em; opacity: .55; margin: 0;
   }
 </style>
@@ -243,13 +258,18 @@
     </p>
 
     <div class="next">
-      <p>
-        The paper half of storm season is what this shop makes:
-        <a href="../../shop/#binder">the storm season binder</a> is 33 printable
-        pages for deductibles in dollars, a room by room inventory, and the
-        damage and claim logs. The twelve months of ordinary upkeep are
-        <a href="../../#calendars">free as phone calendars</a>, no signup.
-      </p>
+      <span class="label">Related tools</span>
+      <ul>
+        <li><a href="../../shop/#binder">The storm season binder</a>
+          <span class="what">&middot; deductibles in dollars, a room by room
+          inventory, and the damage and claim logs. $16.99.</span></li>
+        <li><a href="../../#calendars">The free maintenance calendar</a>
+          <span class="what">&middot; the twelve months of ordinary upkeep, on
+          your phone, no signup.</span></li>
+        <li><a href="../../calculator/">The Borrowed Time Calculator</a>
+          <span class="what">&middot; whether your roof is already past its
+          Gulf Coast lifespan, from one number, free.</span></li>
+      </ul>
     </div>
 
     <h2>What this page is not</h2>

@@ -24,7 +24,7 @@
 
 <!-- Same policy as the home page. It travels in the document because GitHub
      Pages cannot set response headers. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- This is the page where money changes hands, so it is measured like the
@@ -33,6 +33,9 @@
 
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&display=swap">
 <link rel="stylesheet" href="../theme.css">
 <link rel="stylesheet" href="../site.css">
 
@@ -116,16 +119,17 @@
       </svg>
       <span class="label">Gulf Coast Home Maintenance</span>
     </a>
-    <!-- The bar is the only navigation that follows the reader, so it carries
-         one link per thing worth reaching: the kit, the free feeds, and the
-         seasonal binder. The kit's price is in the label on purpose, because
-         "The kit" alone does not tell a first-time reader whether clicking it
-         costs anything. It drops out below 46rem, where three buttons and a
-         wordmark stop fitting on one line. -->
+    <!-- The 1.25.0 nav, same shape on every page: the map on the left, one
+         loud offer on the right. -->
+    <nav class="nav-links" aria-label="Site">
+      <a href="../calendars/">Calendar</a>
+      <a href="#binder">Storm prep</a>
+      <a href="../calculator/">Tools</a>
+      <a href="../resources/strengthen-mississippi-homes/">Resources</a>
+      <a href="./" aria-current="page">Shop</a>
+    </nav>
     <span class="topbar-ctas">
-      <a class="cta cta--kit" href="#edition">The kit, $12.99</a>
-      <a class="cta" href="../#calendars">Free calendars</a>
-      <a class="cta cta--alert" href="#binder">Hurricane checklist</a>
+      <a class="cta cta--free" href="../#calendars">Get the free calendar</a>
     </span>
   </div>
 </div>
@@ -161,9 +165,10 @@
           <h3>The maintenance kit</h3>
           <p class="pcard-line">Twelve months at three levels of effort, the Big Ticket Watch List, and seven sections for whatever your house happens to have. Twenty-seven pages, undated.</p>
           <p class="pcard-price">$12.99</p>
-          <a class="btn btn--buy" target="_blank" rel="noopener"
-             href="https://www.etsy.com/listing/4555777332/new-homeowner-gift-undated-gulf-coast">Buy on Etsy</a>
-          <a class="pcard-more" href="#edition">What's in it</a>
+          <!-- Single CTA per card, per the 1.25.0 design review: quick decision
+               first, deep reading second. The buy button lives in the detail
+               section the card opens onto. -->
+          <a class="btn" href="#edition">See what's inside</a>
         </div>
       </div>
 
@@ -174,9 +179,7 @@
           <h3>The storm season binder</h3>
           <p class="pcard-line">Policies, a room by room inventory, the countdown, and the damage and claim logs that decide what actually gets paid. Thirty-three pages, undated.</p>
           <p class="pcard-price">$16.99</p>
-          <a class="btn btn--buy" target="_blank" rel="noopener"
-             href="https://www.etsy.com/listing/4556502794/hurricane-prep-binder-printable-home">Buy on Etsy</a>
-          <a class="pcard-more" href="#binder">What's in it</a>
+          <a class="btn" href="#binder">See what's inside</a>
         </div>
       </div>
 
@@ -187,9 +190,7 @@
           <h3>The agent edition</h3>
           <p class="pcard-line">The same kit with your name and brokerage on every page, plus a four-page leave-behind, licensed to print for every client you close.</p>
           <p class="pcard-price">$39.00</p>
-          <a class="btn btn--buy" target="_blank" rel="noopener"
-             href="https://www.etsy.com/listing/4556335504/realtor-closing-gift-branded-gulf-coast">Buy on Etsy</a>
-          <a class="pcard-more" href="#agents">What's in it</a>
+          <a class="btn" href="#agents">See what's inside</a>
         </div>
       </div>
     </div>
@@ -480,20 +481,48 @@
       </svg>
       <span class="label">Gulf Coast Home Maintenance</span>
     </span>
+    <div class="foot-grid">
+      <div>
+        <h3>Free</h3>
+        <ul>
+          <li><a href="../#calendars">The phone calendars</a></li>
+          <li><a href="../guides/">What's on the calendar</a></li>
+          <li><a href="../calculator/">Borrowed Time Calculator</a></li>
+          <li><a href="../calendars/">Calendar setup help</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>The shop</h3>
+        <ul>
+          <li><a href="#edition">The maintenance kit</a></li>
+          <li><a href="#binder">The storm season binder</a></li>
+          <li><a href="#agents">The agent edition</a></li>
+          <li><a href="https://www.etsy.com/shop/GulfCoastHomeCare" target="_blank" rel="noopener">The shop on Etsy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="../resources/strengthen-mississippi-homes/">The $10,000 roof grant</a></li>
+          <li><a href="../privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>About</h3>
+        <ul>
+          <li><a href="../#who">Who made this</a></li>
+          <li><a href="https://www.etsy.com/shop/GulfCoastHomeCare" target="_blank" rel="noopener">Message the shop</a></li>
+        </ul>
+      </div>
+    </div>
+
     <p class="disclaimer">
       General maintenance guidance, not a substitute for a licensed inspector, contractor,
       or your insurance policy terms.
     </p>
-    <p class="foot-links">
-      <a href="../privacy.html">Privacy</a>
-      <a href="../calendars/">The calendars</a>
-      <a href="../guides/">What's on the calendar</a>
-      <a href="../calculator/">What's on borrowed time</a>
-      <a href="../resources/strengthen-mississippi-homes/">The $10,000 roof grant</a>
-    </p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag. Shown so
          a tester can say which version they were looking at. -->
-    <p class="version">v1.24.1</p>
+    <p class="version">v1.25.0</p>
   </div>
 </footer>
 

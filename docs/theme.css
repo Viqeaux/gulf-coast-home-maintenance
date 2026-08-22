@@ -10,53 +10,67 @@
 
    There is deliberately no [data-theme] override: the site has no theme toggle,
    so such a block could never match.
+
+   The 1.25.0 redesign set these to the values from the design review, which
+   took them from the product PDFs themselves: dark Gulf green that almost
+   reads as charcoal, warm paper rather than white, brass for small accents,
+   brick for Must Do and warnings, Gulf teal for Should Do and links. The
+   website and the printed kit now share one palette on purpose; if a value
+   moves here, check it still agrees with the covers.
    ============================================================================= */
 :root {
-  --bg:        #f4efe4;
-  --paper:     #fffdf7;
-  --paper-2:   #efe8d9;
-  --deep:      #0e2429;   /* hero and footer ground */
+  --bg:        #f5f2e9;
+  --paper:     #fdfbf4;
+  --paper-2:   #ede7d8;
+  --deep:      #17322c;   /* hero and footer ground */
   /* The alternating band is its own token because in dark mode it cannot just
      borrow --deep: the page ground is already near-black there, so the two
      would be indistinguishable and the alternation would disappear. */
-  --band-bg:   #0e2429;
-  --on-deep:   #e8e2d4;
-  --on-deep-mute: #93a5a6;
-  --ink:       #15201f;
-  --muted:     #5b6a68;
+  --band-bg:   #17322c;
+  --on-deep:   #eae4d4;
+  --on-deep-mute: #9db0a7;
+  --ink:       #1a2420;
+  --muted:     #5b6a64;
   --rule:      #d9cfba;
   --rule-soft: #e7dfcd;
-  --accent:    #0f5e6b;
-  --sand:      #c08b2e;
-  --must:      #a33520;
-  --should:    #14606e;
+  --accent:    #327d82;
+  --sand:      #a97822;
+  --must:      #a94f3d;
+  --should:    #327d82;
   --above:     #5b6f34;
-  --on-tier:   #fffdf7;
+  --on-tier:   #fdfbf4;
   /* --must is tuned for the paper ground and goes muddy on the deep one, so the
      dark sections use a lifted version of the same hue. */
-  --must-lift: #e08a72;
-  --shadow:    0 1px 2px rgba(21,32,31,.05), 0 10px 30px -12px rgba(21,32,31,.22);
-  --shadow-lg: 0 2px 4px rgba(21,32,31,.06), 0 24px 60px -20px rgba(21,32,31,.32);
+  --must-lift: #de9078;
+  --shadow:    0 1px 2px rgba(23,50,44,.05), 0 10px 30px -12px rgba(23,50,44,.22);
+  --shadow-lg: 0 2px 4px rgba(23,50,44,.06), 0 24px 60px -20px rgba(23,50,44,.32);
+
+  /* Typefaces, set here so the hand-written pages and the generated ones stay
+     in step. Newsreader is literary without being old-fashioned; Inter is the
+     interface voice. Both load from Google Fonts on the pages that use them,
+     and every stack falls back to the system faces the site shipped with. */
+  --font-serif: "Newsreader", ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --font-sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:        #0d1618;
-    --paper:     #162226;
-    --paper-2:   #1c2b30;
-    --deep:      #08181c;
-    --band-bg:   #050e10;
+    --bg:        #0e1614;
+    --paper:     #16211e;
+    --paper-2:   #1c2a26;
+    --deep:      #0a1512;
+    --band-bg:   #060f0c;
     --on-deep:   #e2ddd0;
-    --on-deep-mute: #8fa2a3;
+    --on-deep-mute: #92a59c;
     --ink:       #e8e3d6;
-    --muted:     #9aa8a6;
-    --rule:      #2a393d;
-    --rule-soft: #223034;
-    --accent:    #63b4c0;
-    --sand:      #d9a441;
-    --must:      #e08a72;
-    --should:    #63b4c0;
+    --muted:     #9aa8a2;
+    --rule:      #2a3934;
+    --rule-soft: #22302b;
+    --accent:    #6fb5b9;
+    --sand:      #cb9a45;
+    --must:      #de9078;
+    --should:    #6fb5b9;
     --above:     #a4bb70;
-    --on-tier:   #0d1618;
+    --on-tier:   #0e1614;
     --shadow:    0 1px 2px rgba(0,0,0,.5), 0 10px 30px -12px rgba(0,0,0,.6);
     --shadow-lg: 0 2px 4px rgba(0,0,0,.5), 0 24px 60px -20px rgba(0,0,0,.7);
   }

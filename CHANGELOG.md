@@ -27,6 +27,69 @@ Newest first.
 
 ---
 
+## [1.25.0], 2026-08-21
+
+**The redesign, from the external design review Chad commissioned.** The
+review's frame: this is a Gulf Coast homeowner field guide, not a
+home-services company, and the site should look the way the PDFs already do.
+Chad's instruction was to follow the guide, and everything in it is in except
+three things adapted on purpose: the "show pages big enough to read" idea
+ships as the existing protective crops arranged as overlapping sheets, because
+readable interiors would reverse the 1.10.0 paid-content line by the back
+door; the founder-photo idea waits on a photo only Chad can supply; and the
+nav's Tools and Resources entries carry only the tool and the resource that
+exist.
+
+### Added
+
+- **Web typography.** Newsreader for headlines, Inter for interface text,
+  loaded from Google Fonts with full system fallbacks. The stacks live in
+  `theme.css` as `--font-serif` and `--font-sans`; every page, hand-written
+  and generated, reads those tokens. The CSP on each page gains the two fonts
+  origins, which serve type and cannot run code, and `privacy.html` explains
+  the request.
+- **The month cards.** A floating "This month" card in the hero and a full
+  "What should I be doing in <month>?" section, both filled for the visitor's
+  actual month from `docs/month-tasks.js`, which `build_calendars.py` now
+  generates from the same `TASKS` the feeds publish. Titles only: the free
+  half, by construction.
+- **The three doors**, the decision system from the review: keep up with my
+  house, get ready for storms, see what's getting old.
+- **The oversized stat band**: the four numbers at poster size on the dark
+  green ground, directly under the hero.
+- **The mini calculator** on the home page: a build-year field that hands the
+  year to `/calculator/?year=`, which the calculator now reads and answers
+  immediately. A plain GET form, so it works with scripting off.
+- **The desk section**: the six page crops overlapping like sheets on a
+  kitchen table, on the home page.
+- **The resource shelf and the trust section**: the grant page as a dated
+  card, plus the review's "we show our work" points, which were already true
+  and are now said.
+- **Site navigation**: Calendar, Storm prep, Tools, Resources, Shop, plus one
+  filled "Get the free calendar" button, the same bar on every hand-written
+  page. The structured footer replaces the single row of links.
+
+### Changed
+
+- **The palette** moved to the review's values, which are the products' own:
+  deep Gulf green `#17322c`, warm paper `#f5f2e9`, brass `#a97822`, brick
+  `#a94f3d`, Gulf teal `#327d82`, in `theme.css` for every page at once. The
+  year diagram's band fills moved with it.
+- **The home page is rebuilt in the review's section order**: hero with the
+  month card, numbers, doors, free calendars, the year, this month, tiers and
+  the mini calculator, products, the desk, resources, story, signup.
+- **The shop's top cards carry one CTA each**, "See what's inside", opening
+  the detail section where the buy button lives. Quick decision first, deep
+  reading second, and the long-form copy stays.
+- **The story section is shorter** and titled in the review's phrase: I
+  needed this, so I made it.
+- **The calculator reads like a tool**: the build-year input and the verdict
+  set at display size.
+- The grant page's tailpiece is now a **Related tools** list: binder,
+  calendar, calculator.
+
+---
+
 ## [1.24.1], 2026-08-21
 
 **The grant page had no route a person would find.** 1.24.0 linked it from the
