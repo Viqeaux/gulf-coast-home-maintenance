@@ -385,6 +385,124 @@ so the first real traffic numbers exist within a week.
 analytics. It went from 23.7 phone screens to 9 on the home page and 9.8 on the
 shop in one evening, and the next change to make is not obvious from the inside.
 
+## The direction, set by Chad on 2026-08-21
+
+**Make the site the place people go for Gulf Coast home maintenance**, not only
+a shop with three printables behind it. This is the same conclusion the
+marketing plan reaches from the other end and the same one the 1.23.2 decision
+reached about product pages: **content that earns traffic beats pages that
+reorganize the traffic you already have.** Nobody is arriving, so the work worth
+doing is the work that makes strangers arrive.
+
+It does not displace the Insights tag check above. That is deadline-driven and
+takes ten minutes. It does reframe everything after it.
+
+### The rule that comes first
+
+**Nothing regulatory goes live until it has been checked against the primary
+source, and the page carries the date it was checked.** Chad's own framing, and
+it is the right one: being the site that is correct is worth more than the
+traffic. Competing sites still promise a 30 percent federal credit that no
+longer exists.
+
+This matters more here than on most sites. A reader who believes they qualify
+for a grant, and does not, has spent money on the strength of this page. Treat
+eligibility rules, dollar figures and dates as claims to verify rather than
+copy to paste, and put a "checked on" line on any page describing a program,
+because a program with an expansion date will go stale.
+
+### The lead opportunity, and it is unverified
+
+**Strengthen Mississippi Homes**, administered by the Mississippi Insurance
+Department:
+<https://www.mid.ms.gov/mississippi-insurance-department/preparedness/mitigation/smh/>
+
+Chad's research, **none of it yet checked against the source**, says: grants up
+to $10,000 for FORTIFIED Roof upgrades, currently limited to Wind Pool (MWUA)
+policyholders in Hancock, Harrison and Jackson counties who have held coverage
+three consecutive years, with a statewide expansion expected in early 2027.
+MWUA is at <https://www.msplans.com>.
+
+Why it is the one to lead with: named, searchable, high intent, a dollar figure
+attached, almost no evergreen coverage from small sites, and the statewide phase
+gives the same page a second life. It also lands exactly on this shop's
+audience, and somebody reading about a wind mitigation grant is somebody who has
+just learned their deductible is a percentage, which is the binder's whole
+opening.
+
+**Verify every specific above before publishing any of it.**
+
+### Do not build a page on the federal energy credits
+
+The 25C Energy Efficient Home Improvement Credit and 25D were terminated by the
+One Big Beautiful Bill Act for property placed in service after 2025-12-31.
+**Also unverified and worth checking**, but if it holds, a page promising 30
+percent back is exactly the mistake this site should be the one not making.
+There is an honest page in saying the credits ended and what replaced them, if
+anything.
+
+### The reference list Chad assembled
+
+Storm and flood:
+
+- Ready.gov hurricanes, <https://www.ready.gov/hurricanes>
+- FEMA Flood Map Service Center, flood zone by address, <https://msc.fema.gov/portal/home>
+- FloodSmart / NFIP, <https://www.floodsmart.gov>
+- National Hurricane Center, <https://www.nhc.noaa.gov>
+- NWS New Orleans and Baton Rouge, which covers the Mississippi coast, <https://www.weather.gov/lix>
+- MEMA, <https://www.msema.org>, hurricanes page <https://www.msema.org/prepare/types-disasters/hurricanes>
+- disasterassistance.gov, <https://www.disasterassistance.gov>
+
+Home safety and systems:
+
+- CPSC recalls, a natural annual "check your appliances" task, <https://www.cpsc.gov/Recalls> and <https://www.saferproducts.gov>
+- EPA mold, <https://www.epa.gov/mold>
+- EPA radon, <https://www.epa.gov/radon>
+- EPA lead and the RRP rule, <https://www.epa.gov/lead>
+- DOE Energy Saver, <https://www.energy.gov/energysaver/energy-saver>
+- ENERGY STAR maintenance checklist, <https://www.energystar.gov/saveathome/heating-cooling/maintenance-checklist>
+- HUD Healthy Homes, <https://www.hud.gov/hudprograms/healthy-homes>
+- Mississippi State Department of Health, private well testing, <https://msdh.ms.gov>
+
+**A page that is only this list is worth very little.** Link lists do not rank
+and nobody links to them. The list is raw material for pages that answer a
+question, not a page of its own.
+
+### Federal works are public domain, with four caveats
+
+United States federal government works are not under copyright, 17 U.S.C. 105,
+so Ready.gov and FEMA checklist material can be **adapted into the binder and
+the calendar** rather than merely linked. That is a real content supply and it
+is the largest thing on this page.
+
+1. **Agency logos and seals are protected separately** from the text. Do not use
+   them.
+2. **FORTIFIED is an IBHS trademark**, not a government one, so it does not get
+   the same treatment.
+3. **State and county material is not automatically public domain.** MEMA and
+   county items have to be checked individually.
+4. **Public domain does not permit implying endorsement.** Adapting Ready.gov
+   text is fine; laying a page out so a buyer infers FEMA endorses a product for
+   sale is a different problem from copyright, and it applies to the paid PDFs
+   more than to the site.
+
+### Open question Chad has not answered
+
+He asked that the products be "compliant with all regulations". That could mean
+building code accuracy, insurance claim guidance being defensible, FTC rules
+about how the products are described, or accessibility. They need different
+work, and the products already carry a disclaimer that they are not a substitute
+for an inspector, contractor or policy terms. **Ask which one he means before
+starting compliance work.**
+
+### The recommended first move
+
+Verify the Strengthen Mississippi Homes specifics and the 25C and 25D status
+against primary sources, then build **one** page on Strengthen Mississippi
+Homes: researched, dated, honest about who does not qualify, with the binder as
+the natural next step. If it ranks, that is the template and it repeats. If it
+does not, a day is lost rather than a strategy.
+
 ## Permission prompts, and why the allowlist is small
 
 `.claude/settings.json` holds twelve entries, all read-only: the browser tools
