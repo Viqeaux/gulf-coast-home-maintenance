@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.29.0**. Everything below is live unless marked otherwise.
+Current version **v1.30.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -192,6 +192,19 @@ the intervening versions, which is the traffic constraint stated as a bug
 report. The mockup set's invented content (garden tasks, rewritten story,
 fake products and stats) was not reproduced: the layout is theirs, the facts
 are ours.
+
+**The grants shelf went multi-state in 1.30.0**, on Chad's direction: Alabama
+(strengthenalabamahomes.com verified directly) and Louisiana
+(ldi.la.gov/fortifyhomes verified directly, including the parish list and the
+rounds-closed status) joined Mississippi. **Next in the set: Florida's My
+Safe Florida Home, then the honest Texas page**, which is "what Texas has
+instead" because no statewide FORTIFIED grant exists there; Texas also waits
+on tdi.texas.gov being reachable, which it was not on 2026-08-22. The
+Search Console verification file `docs/googlef6be8e2fccfd7d3c.html` must stay
+in the repo forever: Google re-checks it, and removing it un-verifies the
+property. The sitemap was submitted 2026-08-22; a first "Couldn't fetch"
+status is a known Search Console lag quirk, confirmed not to be a real fetch
+problem.
 
 **Resource pages follow the pointer rule and carry a checked date.** See "The
 direction" below before writing one. The sitemap is hand-maintained and a new

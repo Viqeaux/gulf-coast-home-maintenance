@@ -27,6 +27,37 @@ Newest first.
 
 ---
 
+## [1.30.0], 2026-08-22
+
+**The grants shelf goes multi-state.** Chad's observation: the site claimed
+Texas to Florida but the only state grant page was Mississippi's. Two more
+now exist, both verified against their primary sources today.
+
+### Added
+
+- **`/resources/strengthen-alabama-homes/`**: the original FORTIFIED grant
+  program, run by the Alabama Department of Insurance since the 2011 act, 100
+  percent of mitigation cost up to $10,000, county-by-county rounds. Checked
+  against strengthenalabamahomes.com, the program's own site, 2026-08-22.
+- **`/resources/louisiana-fortify-homes/`**: up to $10,000 by lottery in 25
+  eligible parishes, run by the Louisiana Department of Insurance. Checked
+  against ldi.la.gov/fortifyhomes directly, including the current
+  rounds-closed status line and the parish list, 2026-08-22.
+
+### Changed
+
+- The Resources dropdown, footers, index rows, and sitemap carry both new
+  pages, and "The $10,000 roof grant" labels became "Mississippi roof grant"
+  everywhere, because there are three $10,000 roof grants on the shelf now.
+- The wind mitigation page's Alabama and Louisiana sections cross-link the
+  new grant pages.
+
+Still to come in the set: Florida (My Safe Florida Home) and the honest Texas
+page (no statewide equivalent exists; what Texas has instead). Texas also
+waits on tdi.texas.gov being reachable for verification.
+
+---
+
 ## [1.29.2], 2026-08-22
 
 ### Changed
