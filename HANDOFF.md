@@ -711,11 +711,68 @@ nothing.
 entries, most of them exact one-off command strings carrying version numbers or
 temp paths that can never match again. It is worth pruning and it is Chad's.
 
-**The real lever is a permission mode, not an allowlist.** `acceptEdits` clears
-the file-edit prompts, which are the largest single share, and everything here
-is in git and recoverable. `bypassPermissions` clears everything including
-`git push` to a public repo, which is the one worth thinking about. Neither is
-set; Chad has not chosen.
+**The real lever is a permission mode, not an allowlist.** Checked against the
+Claude Code docs on 2026-08-22, because the older note here guessed at some of
+this and got part of it wrong.
+
+**`acceptEdits` is the wrong tool for this project**, which the old note did
+not notice. It auto-approves file edits, and almost nothing here goes through
+the edit tool: the work is Python heredocs, the build scripts and git, all of
+which are Bash. It would clear very few of Chad's prompts.
+
+**What the modes actually are**, from the docs rather than from memory:
+
+| Mode | Runs without asking |
+|---|---|
+| `default`, shown as Manual | Reads only |
+| `acceptEdits` | Reads, file edits, common filesystem commands |
+| `plan` | Reads, plus classifier-approved commands |
+| `auto` | Everything, with background safety checks |
+| `dontAsk` | Only pre-approved tools, denies the rest without asking |
+| `bypassPermissions` | Everything, no checks |
+
+**Three rules about how modes and permission rules interact, and they are the
+whole answer to "let it run while I step away":**
+
+1. **An `ask` rule is never auto-approved in any mode, `bypassPermissions`
+   included.** So a single `ask` entry for `Bash(git push:*)` survives every
+   mode and is enforced by the harness rather than by a session remembering a
+   convention.
+2. **Deny rules block in every mode**, `bypassPermissions` included.
+3. **Allow rules have no effect in `bypassPermissions`**, so the twelve-entry
+   allowlist above stops meaning anything if that mode is ever set.
+
+**The recommended shape, and the reason:** stay in `auto`, which is what
+sessions here already start in and which keeps a classifier reviewing actions
+in the background, and add the `ask` rule on `git push`. That gets the long
+unattended run with one deliberate checkpoint on the only act that cannot be
+undone, publishing to a public repo. The docs say plainly that
+`bypassPermissions` "offers no protection against prompt injection or
+unintended actions" and is for isolated containers and VMs, and they point at
+`auto` for the same goal with fewer prompts.
+
+```json
+{
+  "permissions": {
+    "ask": ["Bash(git push:*)"]
+  }
+}
+```
+
+**This belongs in `.claude/settings.local.json`, never in
+`.claude/settings.json`.** The latter is committed to a public repo, and a
+permission mode is personal configuration rather than project configuration.
+
+**A session must not set this for itself.** An attempt to do it on 2026-08-22
+was correctly blocked by the auto-mode classifier: an agent widening its own
+permissions is exactly what that check exists for. Hand Chad the snippet and
+let him paste it. `bypassPermissions` in particular cannot be entered
+mid-session at all; it has to be set at launch, with
+`claude --permission-mode bypassPermissions` or in settings.
+
+**Until a rule enforces it, asking before `git push` is a convention this file
+carries and nothing more.** Build, verify, commit, tag, then stop and ask.
+That is how v1.33.0 was done.
 
 ## Outstanding
 
