@@ -188,7 +188,7 @@ FREE_TEMPLATE = """<!doctype html>
 <meta property="og:site_name" content="Gulf Coast Home Maintenance">
 <meta property="og:image" content="https://{domain}/img/hero-1600.jpg">
 <meta property="og:image:width" content="1600">
-<meta property="og:image:height" content="900">
+<meta property="og:image:height" content="1200">
 <meta property="og:image:alt" content="A live oak hung with Spanish moss over the roof of a Gulf Coast house at sunset.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#17322c">

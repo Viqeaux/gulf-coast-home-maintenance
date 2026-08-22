@@ -27,6 +27,21 @@ Newest first.
 
 ---
 
+## [1.26.1], 2026-08-22
+
+**The hero photograph Chad picked.** A closer golden-hour porch under the
+live oak, in through the usual pipeline: new master at `docs/img/hero.png`,
+`optimize_images.py` rebuilt `hero-1600.jpg` and `hero-900.jpg`.
+
+### Changed
+
+- The new master is 4:3 where the old one was 16:9, so `hero-1600.jpg` is
+  now 1600x1200 and every page's `og:image:height` moved from 900 to 1200
+  with it, including the two generated pages' templates. The taller shape
+  also fits the split hero's photo column better than the old wide one did.
+
+---
+
 ## [1.26.0], 2026-08-21
 
 **The approved mockup, implemented.** Chad liked a set of visual mockups of
