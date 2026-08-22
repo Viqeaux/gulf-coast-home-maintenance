@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.32.2**. Everything below is live unless marked otherwise.
+Current version **v1.32.3**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -242,6 +242,11 @@ which carry their own self-contained styles, could have the same navigation
 without a second copy of the rules. Adding a page means linking theme.css,
 nav.css, then the page's own styles, and pasting the bar markup with the
 right relative depth. Do not reintroduce nav rules into `site.css`.
+**`404.html` is the exception that must use absolute paths throughout**,
+because Pages serves it for a missing address at any depth and a relative
+href would resolve against the wrong directory. **`privacy.html` deliberately
+loads no scripts and no fonts**, which its own text promises, so its copy of
+the bar renders in fallback type; do not "fix" that by adding the font link.
 
 **`docs/site.css` is shared by all the hand-written pages.** It was an 839 line
 `<style>` block inside `index.html` until the shop needed the same look. Two

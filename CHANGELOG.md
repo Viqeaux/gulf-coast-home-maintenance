@@ -27,6 +27,34 @@ Newest first.
 
 ---
 
+## [1.32.3], 2026-08-22
+
+**The last two pages join the bar.** Every page on the site now carries the
+same navigation.
+
+### Changed
+
+- **`404.html`** gets the bar with absolute paths, which matters more here
+  than anywhere: Pages serves this file for a missing address at any depth,
+  so a relative href would resolve against the wrong directory for exactly
+  the visitors who are already lost. The page's own centering flex could not
+  hold a sticky bar, so the body is a column now and the card centers in a
+  box below it. Its duplicate wordmark came out, its "Free phone calendars"
+  button points at `/calendars/` rather than the retired home page anchor,
+  and its hardcoded font stacks became the shared tokens.
+- **`privacy.html`** gets the bar without gaining a single external request:
+  `nav.css` is same-origin, so `style-src 'self'` already allowed it and the
+  policy did not move. The page still loads no scripts and no fonts, which is
+  a promise its own text makes, so the bar draws in whatever type the device
+  already had. That paragraph now says so.
+
+### Fixed
+
+- **Both pages carried `#0e2429` as their `theme-color`**, the pre-1.25.0
+  palette, so a phone browser tinted its chrome the old green on them.
+
+---
+
 ## [1.32.2], 2026-08-22
 
 **One navigation bar, on every page.** Chad's call after the dropdown fix.
