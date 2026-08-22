@@ -427,7 +427,11 @@ easier to go through. The agreed shape, which Chad approved as a hybrid:
 
 **The first page under this rule shipped in 1.24.0:**
 `docs/resources/strengthen-mississippi-homes/`, hand-written, measured by
-analytics, linked from the three hand-written footers and the sitemap. The
+analytics, linked from the three hand-written footers, the sitemap, and, as
+of 1.24.1, a hero line on the home page in the calculator's slot, because a
+footer link alone is a route for crawlers and Chad caught that within the
+hour. One hero line per resource page holds up to two of them; a third means
+building a resources index page and pointing one hero line at it. The
 next two candidates in the same mold: a wind-deductible mini-tool (type your
 dwelling limit and percentage, see the dollar figure; arithmetic, not advice)
 and a find-your-flood-zone walkthrough around FEMA's map tool.

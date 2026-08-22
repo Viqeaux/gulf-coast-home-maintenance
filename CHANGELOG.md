@@ -27,6 +27,22 @@ Newest first.
 
 ---
 
+## [1.24.1], 2026-08-21
+
+**The grant page had no route a person would find.** 1.24.0 linked it from the
+footers and the sitemap, which is a route for crawlers. Chad caught it within
+the hour.
+
+### Fixed
+
+- **A hero line for the roof grant page**, in the same slot the calculator
+  earned: one sentence under the two buttons, sitting just below the season
+  countdown it belongs next to. If resource pages ever number more than two,
+  that is the moment a resources index page exists and the hero carries one
+  line pointing at it instead of one per page.
+
+---
+
 ## [1.24.0], 2026-08-21
 
 **The first resource page, and the rule it establishes.** Chad refined the
