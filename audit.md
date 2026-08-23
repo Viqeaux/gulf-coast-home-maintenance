@@ -34,6 +34,9 @@ and the fix was verified against a local server rather than only written:
 `M1` scroll-padding · `M4` aria-current · `M8` shim routing ·
 `M9` floir.gov · `M11` unclosed div
 
+**The first item of H7, the calculator's missing link to the grants shelf,
+shipped in v1.35.0.**
+
 **C2, C3, M13, M15, M18 and N5 shipped in v1.34.0**: the phone menu, the shared
 footer on every page, focus rings on the bar, the wordmark's tap target, and
 the privacy page's mislabelled link. The bar and the footer now come from
@@ -519,7 +522,7 @@ and `/` links to `/calendars/` in body copy.
 
 The specific gaps worth fixing, in order of value to a reader:
 
-1. **`/calculator/` → `/resources/`.** The calculator's whole output is "your roof is on borrowed time." Four Gulf states will pay up to $10,000 toward replacing it, and the page never says so. Its "next" section ([calculator/index.html:479-495](docs/calculator/index.html:479)) instead pitches an unreleased spreadsheet and the printable kit. This is the single highest-value missing link on the site.
+1. **`/calculator/` → `/resources/`.**  ·  **FIXED 1.35.0** — a note between the results and the correction card. The calculator's whole output is "your roof is on borrowed time." Four Gulf states will pay up to $10,000 toward replacing it, and the page never said so. Its "next" section ([calculator/index.html:479-495](docs/calculator/index.html:479)) instead pitches an unreleased spreadsheet and the printable kit. This is the single highest-value missing link on the site.
 2. **`/resources/flood-insurance-30-day-rule/` → `/storm/`.** Its own "Worth knowing while you are here" section ([:239-245](docs/resources/flood-insurance-30-day-rule/index.html:239)) is entirely about post-storm damage documentation, and links to the paid binder rather than the free storm page.
 3. **`/resources/flood-insurance-30-day-rule/` → `/resources/`.** Its third "related tool" is *"Mississippi's $10,000 roof grant · the other insurance-adjacent program worth knowing on this coast"* ([:256-258](docs/resources/flood-insurance-30-day-rule/index.html:256)). This is the most universally relevant page on the site — every Gulf homeowner in every state — and it hands a Floridian a Mississippi program. It should point at the shelf, or at the state pages as a set.
 4. **`/resources/strengthen-mississippi-homes/` → `/resources/wind-mitigation-discounts/`.** Mississippi is the most linked-*to* resource page and the least linked-*from*: it reaches only the shop and the calculator. Every other state page links to wind-mitigation; this one does not, despite its own closing section being about wind deductibles.

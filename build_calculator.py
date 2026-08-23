@@ -471,6 +471,34 @@ FREE_TEMPLATE = """<!doctype html>
     color: var(--muted); max-width: 34rem;
   }}
 
+  /* This page's whole answer is "one of these is nearly finished", and when the
+     answer is the roof, that is the exact moment the grant programs matter.
+     Nothing here linked to them until 1.35.0. The audit called it the highest
+     value missing link on the site, and it was right: the page told somebody
+     their roof was done and never mentioned that four states will pay toward
+     the next one.
+
+     Marked out from the .card above it with the accent edge, because it is a
+     different kind of thing. The cards are this page's own arithmetic. This is
+     somebody else's money, and the page is pointing at the door. */
+  .grants-note {{
+    background: var(--paper); border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent); border-radius: 3px;
+    padding: 1.35rem 1.5rem 1.4rem; margin: 0 0 2rem;
+  }}
+  .grants-note h2 {{ font-size: 1.16rem; margin: 0 0 .55rem; }}
+  .grants-note p {{
+    color: var(--muted); font: 400 .95rem/1.6 var(--font-sans);
+    margin: 0 0 .9rem; max-width: 36rem;
+  }}
+  .grants-note p:last-child {{ margin-bottom: 0; }}
+  .grants-note strong {{ color: var(--ink); }}
+  .grants-note .go {{
+    font: 600 .95rem/1.3 var(--font-sans);
+    color: var(--accent); text-decoration: none;
+  }}
+  .grants-note .go:hover {{ text-decoration: underline; }}
+
   /* No footer rules here. nav.css carries the footer for the whole site since
      1.34.0, and this page loads it. A second copy is how the two drift. */
 </style>
@@ -524,6 +552,26 @@ FREE_TEMPLATE = """<!doctype html>
     This is a guide, not a guarantee: regular maintenance extends life.
     <a href="#adjust">Learn how these numbers are calculated &#8594;</a>
   </p>
+
+  <div class="grants-note">
+    <h2>The roof is the one somebody else may help pay for</h2>
+    <p>
+      Of the four systems above, the roof is the only one with a public
+      program behind it. <strong>Four of the five Gulf states put up to
+      $10,000</strong> toward replacing a roof to a stronger standard, and
+      Texas runs a coverage system worth understanding instead. We do not run
+      any of them and we do not decide who qualifies: each page maps one
+      program and sends you to the agency that does, and carries the date its
+      facts were last checked against that agency's own pages.
+    </p>
+    <p>
+      A stronger roof is also what earns a
+      <a href="../resources/wind-mitigation-discounts/">wind mitigation
+      discount</a> on the insurance afterwards, which is the part most
+      homeowners never think to ask about.
+    </p>
+    <p><a class="go" href="../resources/">Find the program in your state &#8594;</a></p>
+  </div>
 
   <div class="card" id="adjust">
     <h2>Correct anything you actually know</h2>

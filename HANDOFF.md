@@ -538,7 +538,6 @@ check any future palette change.
 Three links were still rendering as the browser's default `#0000ee` because
 `site.css` had no bare `a` rule; there is one now. Do not remove it.
 
-**Next, ranked. The reasoning for each is in the audit.**
 
 **Also shipped, in 1.34.0: the shared chrome and the phone menu.** The bar and
 the footer now come from `site_chrome.py`, written into the pages by
@@ -558,30 +557,34 @@ therefore escaped the hiding and rendered with its links still focusable.
 `.nav-mobile:not([open]) .nm-panel { display: none }` says it explicitly. Do
 not remove it on the grounds that the browser should already be doing it.
 
+**Also shipped, in 1.35.0: the calculator points at the grants.** A note
+between the results and the correction card, which is the moment of maximum
+intent: straight after the answer, before the reader starts adjusting inputs.
+It names the figure, says plainly that we run none of these programs and decide
+nobody's eligibility, and links `/resources/` and the wind mitigation discounts
+page. That was the audit's highest value missing link and it is closed.
+
 **Next, ranked. The reasoning for each is in the audit.**
 
-1. **`/calculator/` needs a link to `/resources/`.** The page tells someone
-   their roof is finished and never mentions that four states will pay for a new
-   one. One paragraph, and it is the highest-value missing link on the site.
-3. **`/storm/` is 274 words and a $16.99 button.** Its own title promises four
+1. **`/storm/` is 274 words and a $16.99 button.** Its own title promises four
    phases of storm content. It is the strongest argument on the site that this
    is a storefront, and the flood insurance page already proves the house style
    can give the substance away and still sell.
-4. **A dated line under the homepage grant cards.** They assert `$10,000`,
+2. **A dated line under the homepage grant cards.** They assert `$10,000`,
    "three coastal counties" and "no statewide roof grant in Texas" with no date,
    while every detail page dates the same facts correctly. The trust panel four
    sections below promises the opposite in so many words.
-5. **A month jump strip and contextual links on `/guides/`.** 16.3 phone screens
+3. **A month jump strip and contextual links on `/guides/`.** 16.3 phone screens
    with no way to reach December, and exactly one link in `<main>`, pointing at
    the shop. Both changes live in `build_calendars.py`.
-6. **The FAQ, properly this time.** Chad's call was delete now and write later,
+4. **The FAQ, properly this time.** Chad's call was delete now and write later,
    so this is the later. A real section on the homepage answering what people
    actually type: which Gulf states pay for a roof, is the calendar really free,
    do you run any of these programs, when was this last checked. Then the
    `FAQPage` markup comes back **alongside it and never on its own**. The
    comment left behind in `index.html` says the same thing at the point of
    temptation.
-7. **An `/about/` page and a real contact address.** The only way to reach this
+5. **An `/about/` page and a real contact address.** The only way to reach this
    site is an Etsy storefront, including from `privacy.html`, which asks people
    to route privacy questions through a marketplace listing. On grants,
    insurance and government money that is a straightforward E-E-A-T weakness as

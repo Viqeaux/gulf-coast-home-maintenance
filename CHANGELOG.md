@@ -27,6 +27,38 @@ Newest first.
 
 ---
 
+## [1.35.0], 2026-08-22
+
+**The calculator now says who will help pay for the roof it just told you is
+finished.** The page's whole answer is "one of these four is nearly done", and
+for a roof that is the exact moment the grant programs matter. It had never
+linked to them. The audit called this the highest value missing link on the
+site and it was right: four of the five Gulf states put up to $10,000 toward a
+stronger roof, and the one page most likely to be read by somebody who needs
+that money never mentioned it.
+
+### Added
+
+- **A note between the results and the correction card on `/calculator/`.**
+  Placed there deliberately: that is the moment of maximum intent, straight
+  after the answer and before the reader starts adjusting inputs. It says the
+  roof is the only one of the four with a public program behind it, names the
+  figure, says plainly that we do not run any of them and do not decide who
+  qualifies, and points at the shelf. It also links the wind mitigation
+  discounts page, because a stronger roof earns a premium credit afterwards and
+  that is the part most homeowners never think to ask about.
+
+  It carries the site's own promise about dates rather than repeating an undated
+  figure: the detail pages hold the checked date, and the note says so.
+
+  Marked out from the cards around it with the accent edge, because it is a
+  different kind of thing. The cards are this page's arithmetic; this is
+  somebody else's money and the page is pointing at the door.
+
+**No feed changed**, and `SEQUENCE` stays at 2.
+
+---
+
 ## [1.34.0], 2026-08-22
 
 **There is a menu on phones now, and every page has the same footer.** Below
