@@ -36,6 +36,8 @@ build_agent_listing.py    nine photos for the realtor listing
 build_pins.py             eight Pinterest pins, from the kit and the binder
 build_brand.py            shop icon, banner, Pinterest covers, and the site icons
 check_links.py            finds curated videos that have gone dead
+check_resources.py        watches the agencies behind the resource pages
+resource_sources.json     what those agencies last said, the drift baseline
 optimize_images.py        resizes the hero photo for the web
 
 product/                  the paid kit. Gitignored except the listing copy

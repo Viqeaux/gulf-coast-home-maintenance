@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.33.0**. Everything below is live unless marked otherwise.
+Current version **v1.38.0**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -523,7 +523,7 @@ byte-identical, so **no `SEQUENCE` bump** and no subscriber sees anything.
 measured, all sixteen pages at 1440px and 390px in both colour schemes: 78
 failing pairs before, 0 after. The gold is three tokens now, because one value
 could not be read on the deep green, read on paper, and serve as a button ground
-at the same time. **`--sand` is the decorative gold only** — rules, icon strokes,
+at the same time. **`--sand` is the decorative gold only**: rules, icon strokes,
 borders, anything with no text on it. **`--sand-lift` `#c99230`** is for the deep
 ground, in both directions, since contrast is symmetric. **`--sand-ink`
 `#856012`** is for paper. `--accent` and `--should` both moved to `#2a6b70`.
@@ -531,7 +531,7 @@ ground, in both directions, since contrast is symmetric. **`--sand-ink`
 **The rule to keep**: pick the gold by the ground the element actually sits on,
 not by the section it is nested in. A `.tier` card paints itself paper even when
 it sits inside a `.band`, and that is exactly where the Monthly Rounds heading
-was wrong. When in doubt, measure — the sweep that found all of this walks the
+was wrong. When in doubt, measure. The sweep that found all of this walks the
 DOM compositing every background layer, and re-running it is the cheapest way to
 check any future palette change.
 
@@ -882,6 +882,95 @@ as the quiet next step, not-affiliated disclaimer at the bottom. If it ranks,
 that is the template and it repeats. If it does not, a day is lost rather than
 a strategy. The 25C and 25D status remains unverified because no page is being
 built on it; verify before ever writing one.
+
+## The resource watcher, built 2026-08-23
+
+**`python check_resources.py` is what stops the shelf rotting.** The staleness
+gap named under "What the site is for" is closed. It does three jobs and only
+the third is new:
+
+1. **Staleness.** Every `RESOURCE_CHECKED` entry in `build_chrome.py`, flagged
+   past `STALE_DAYS`, which is 90.
+2. **Reachability.** Every outbound source link on every generated resource
+   page, the way `check_links.py` does the guide videos.
+3. **Drift.** A fingerprint of each source page's visible text, kept in
+   `resource_sources.json` and compared on the next run. When it moves the
+   script reports which dollar figures, dates and program-status words moved
+   with it.
+
+```bash
+python check_resources.py               # the full pass
+python check_resources.py --stale-only  # dates only, no network
+python check_resources.py --update      # accept current state as the baseline
+```
+
+**A MOVED line is a prompt to go and read that page, never a finding.** The
+script cannot tell you a grant changed, only that the page did. Read the
+source, fix the page if it is wrong, move the date in `RESOURCE_CHECKED`,
+rebuild, then `--update`. The site promises a person checked, not a script.
+
+**`resource_sources.json` is committed on purpose.** It is the record of what
+each agency said when we last looked, so a git diff on it is the history of who
+changed what. Gitignoring it would lose that on every clone.
+
+**Three design decisions worth not undoing:**
+
+- **Drift is measured on visible text, not on HTML.** Agencies rewrite markup,
+  rotate nonces and stamp build dates on every response. Hashing the source
+  reports a change every run and gets ignored inside a week.
+- **A change is confirmed by a second fetch before it is reported.**
+  `citizensfla.com` served two different bodies inside one run, which is a load
+  balancer rather than news about the wind pool. One re-fetch removes that
+  whole class of false alarm.
+- **`ldi.la.gov` is in `MANUAL_HOSTS` and is not a bug.** It returns 403 to any
+  non-browser client and a browser User-Agent does not change that. Spoofing
+  harder to get around a state agency's bot protection is not something this
+  project does, so Louisiana is reported under "By hand" and gets opened in a
+  browser at re-check time. Do not "fix" this by faking a client.
+
+## Other grant programs, researched 2026-08-23
+
+Grants only, per the scope line above. Each was read on its own site on this
+date, and **none of these has a page yet**: this is the candidate list, not
+published content.
+
+**The strongest candidate by some distance: USDA Section 504 grants.**
+Verified on rd.usda.gov. The loan half is out of scope; the **grant** half is
+not, and it is aimed at exactly the person this site is for.
+
+- Grants go to **very-low-income homeowners aged 62 or older**, to remove
+  health and safety hazards
+- **$10,000 lifetime maximum**, and **$15,000 in a presidentially declared
+  disaster area**
+- Must own and occupy, be unable to get affordable credit elsewhere, and be
+  under the county very-low income limit
+- The home must be in a **USDA-eligible rural area**, which covers far more of
+  the Gulf South than the word "rural" suggests
+- **Repayable if the property is sold inside three years**, which is the trap
+  worth leading with
+- Applications are accepted year round through a local RD office
+
+**The disaster-area bump is the Gulf Coast angle.** A named-storm declaration
+raises the ceiling to $15,000, and declarations here are routine. That is a
+genuine question-shaped page nobody local is answering well.
+
+**Weatherization Assistance Program, DOE.** Verified on energy.gov: active,
+free to the household, about 32,000 homes a year nationally. Eligibility and
+dollars are set per state, so a page is a pointer to the five state
+administrators rather than a figure. Lower drama than the roof grants, and it
+is not seasonal, which is worth something.
+
+**25C is dead, and this is now verified rather than assumed.** IRS.gov states
+the Energy Efficient Home Improvement Credit is claimable "for improvements
+made through December 31, 2025" and for property placed in service before that
+date. So the honest page proposed earlier is a real page: competing sites still
+promise 30 percent back. This resolves the open item that said the status was
+unverified. **It is a tax credit rather than a grant**, so if it ships it ships
+as a correction, not as money on the table.
+
+**Not yet checked, and do not write from this list:** HUD lead hazard control
+grants, FEMA ICC coverage under an NFIP policy, and state and parish
+weatherization top-ups. Named so the next session has somewhere to start.
 
 ## Permission prompts, and why the allowlist is small
 
