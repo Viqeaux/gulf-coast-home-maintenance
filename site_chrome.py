@@ -43,6 +43,10 @@ RESOURCES = [
     ("resources/texas-windstorm-coverage/",     "Texas windstorm coverage"),
     ("resources/flood-insurance-30-day-rule/",  "Flood insurance 30-day rule"),
     ("resources/wind-mitigation-discounts/",    "Wind mitigation discounts"),
+    ("resources/hurricane-deductibles/",        "Hurricane deductibles"),
+    ("resources/gulf-wind-pools/",              "Wind pools by state"),
+    ("resources/roof-age-and-insurance/",       "Roof age and insurance"),
+    ("resources/storm-contractors/",            "Checking a contractor"),
 ]
 
 TOOLS = [

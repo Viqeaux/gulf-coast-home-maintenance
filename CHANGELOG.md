@@ -27,6 +27,63 @@ Newest first.
 
 ---
 
+## [1.38.0], 2026-08-22
+
+**Four new pages on the shelf, and the last of the audit's structural
+findings.** The shelf answered "who will pay for my roof" thoroughly and
+stopped there. These are the questions a Gulf Coast homeowner asks next.
+
+**No feed changed**, and `SEQUENCE` stays at 2.
+
+### Added
+
+- **Your hurricane deductible, in dollars.** The highest intent gap the audit
+  found. Most homeowners can tell you their deductible and most are quoting
+  the wrong one: on this coast there is usually a second, set as a percentage
+  of the dwelling limit rather than as an amount of money. The page does not
+  print a percentage, because it varies by carrier, state and distance from
+  the water. It tells you that a percentage is what you are looking for, shows
+  the arithmetic, and says where on the declarations page to find it.
+- **Wind pools and insurers of last resort.** TWIA, Louisiana Citizens, MWUA,
+  AIUA and Florida Citizens, each with its own site. Completes the state grid
+  the shelf already implied, and explains why it matters here: wind pool
+  membership is sometimes the gate to a grant.
+- **Checking a contractor after a storm.** The licence lookup for each Gulf
+  state, and the paperwork worth refusing: anything that hands over the
+  insurance claim, a large deposit before materials, an offer to cover the
+  deductible, pressure to sign today. Texas is flagged as the one to read
+  rather than assume, because it does not license general residential
+  contractors the way its neighbours do.
+- **Roof age, and what your insurer is looking at.** Deliberately prints no
+  age threshold, because underwriting rules are set carrier by carrier and
+  filed state by state and a number that is right for one company is wrong for
+  another. What is general enough to be useful is what gets looked at and what
+  a homeowner can change before the renewal notice.
+- **`build_resource_pages.py` and `resource_content.py`.** The shell of a
+  resource page is the same shape every time, and the first seven were pasted.
+  New ones are generated; the prose lives in its own file so it is editable
+  without reading past a template.
+
+  Every outbound link on the four pages was checked before shipping. Two were
+  corrected in the process: Louisiana's licensing board redirects to `lslbc.gov`
+  and Mississippi's contractors board only serves a valid certificate on
+  `www.msboc.us`, so the apex would have thrown a security warning.
+
+### Fixed
+
+- **Three pages had no `<h1>`.** `/calendars/`, `/shop/` and `/resources/`
+  opened at `<h2>`, which the audit filed as H3. `/resources/` is the hub for
+  the site's highest value content and had no document heading at all.
+- **The shelf's outline said nothing about which heading was a category.**
+  Both the two group headings and the seven page rows were `<h3>`, so a screen
+  reader browsing by heading got a flat list of equal siblings and could not
+  tell that Texas belongs under roof grants and flood insurance does not.
+  Categories are `<h2>` now, rows stay `<h3>`. Audit H4.
+- **`/shop/` jumped `<h1>` straight to `<h3>`.** Its section label was a
+  `<span>`; it is the `<h2>` it was already acting as, and keeps its size.
+
+---
+
 ## [1.37.0], 2026-08-22
 
 **The audit's medium and nitpick tier, cleared.** None of it changes what the

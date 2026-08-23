@@ -37,6 +37,10 @@ RESOURCE_CHECKED = {
     "strengthen-mississippi-homes": ("the department's page", "21 August 2026"),
     "texas-windstorm-coverage":     ("the sources",           "22 August 2026"),
     "wind-mitigation-discounts":    ("the sources",           "22 August 2026"),
+    "hurricane-deductibles":        ("the sources",           "22 August 2026"),
+    "gulf-wind-pools":              ("the associations' own sites", "22 August 2026"),
+    "storm-contractors":            ("the licensing boards",  "22 August 2026"),
+    "roof-age-and-insurance":       ("the sources",           "22 August 2026"),
 }
 
 SIGNUP = """    <div class="foot-signup">

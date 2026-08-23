@@ -34,6 +34,14 @@ and the fix was verified against a local server rather than only written:
 `M1` scroll-padding · `M4` aria-current · `M8` shim routing ·
 `M9` floir.gov · `M11` unclosed div
 
+**Four of the ten content gaps in H11 were written in v1.38.0**: hurricane
+deductibles, wind pools by state, checking a contractor after a storm, and roof
+age and insurance. H3 and H4 went with them, so every page now has an `h1` and
+the shelf's outline distinguishes a category from a row. The six remaining gaps
+are content commissions, listed in H11 and in `HANDOFF.md`; each needs a session
+with the primary sources open, which is the only way this shelf is allowed to
+grow.
+
 **The medium and nitpick tier cleared in v1.37.0**: `resources.css` extracted
 from seven pasted copies (two already drifted), social cards and breadcrumbs on
 the resource pages, four titles and seven descriptions rewritten for what gets
@@ -374,7 +382,7 @@ JavaScript but Download does not.
 
 ---
 
-### H3. Four pages have no `<h1>`
+### H3. Four pages have no `<h1>`  ·  FIXED 1.36.0 and 1.38.0
 
 **Where:**
 
@@ -403,7 +411,7 @@ heading.
 
 ---
 
-### H4. `/resources/` uses `<h3>` for both the categories and the items inside them
+### H4. `/resources/` uses `<h3>` for both the categories and the items inside them  ·  FIXED 1.38.0
 
 **Where:** [resources/index.html:98](docs/resources/index.html:98) (`<h3 class="res-cat">Roof grant programs, by state</h3>`) and [:105, 113, 122, 130, 138](docs/resources/index.html:105) (`<h3>` inside each `.res-row`), then [:147](docs/resources/index.html:147) (`<h3 class="res-cat">Insurance rules and discounts</h3>`) and [:153, 161](docs/resources/index.html:153).
 
@@ -616,7 +624,7 @@ quality signal.
 
 ---
 
-### H11. Obvious Gulf Coast homeowner questions with no page at all
+### H11. Obvious Gulf Coast homeowner questions with no page at all  ·  4 of 10 WRITTEN 1.38.0
 
 The shelf answers "who will pay for my roof" thoroughly. These are the questions
 a Gulf Coast homeowner asks next, ranked by how often they are searched against
