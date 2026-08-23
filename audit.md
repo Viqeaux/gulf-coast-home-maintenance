@@ -34,7 +34,7 @@ and the fix was verified against a local server rather than only written:
 `M1` scroll-padding · `M4` aria-current · `M8` shim routing ·
 `M9` floir.gov · `M11` unclosed div
 
-**The medium and nitpick tier cleared in v1.37.0**:  extracted
+**The medium and nitpick tier cleared in v1.37.0**: `resources.css` extracted
 from seven pasted copies (two already drifted), social cards and breadcrumbs on
 the resource pages, four titles and seven descriptions rewritten for what gets
 typed and what Google renders, 245 lines of dead CSS gone, three copies of the
@@ -580,7 +580,7 @@ generated at [build_calendars.py:934](build_calendars.py:934)), above January.
 
 ---
 
-### H9. The seven resource pages have no `og:image` and no `twitter:card`
+### H9. The seven resource pages have no `og:image` and no `twitter:card`  ·  FIXED 1.37.0
 
 **Where:** heads of all seven, e.g. [resources/louisiana-fortify-homes/index.html:13-19](docs/resources/louisiana-fortify-homes/index.html:13) — `og:title`, `og:description`, `og:type`, `og:url`, `og:site_name` are present; `og:image`, `og:image:width/height/alt` and `twitter:card` are not. Every other page on the site has all of them.
 
@@ -669,7 +669,7 @@ stylesheet from M5).
 
 ---
 
-### M2. Six meta descriptions and two titles will be truncated in search results
+### M2. Six meta descriptions and two titles will be truncated in search results  ·  FIXED 1.37.0
 
 | Page | Title | Description |
 |---|---|---|
@@ -694,7 +694,7 @@ shorter.
 
 ---
 
-### M3. Four titles do not match what a Gulf Coast homeowner types into a search box
+### M3. Four titles do not match what a Gulf Coast homeowner types into a search box  ·  FIXED 1.37.0
 
 | Page | Current | Problem |
 |---|---|---|
@@ -734,7 +734,7 @@ more useful.
 
 ---
 
-### M5. Seven copies of a 71-line stylesheet, two of which have already drifted
+### M5. Seven copies of a 71-line stylesheet, two of which have already drifted  ·  FIXED 1.37.0
 
 **Where:** the `<style>` block in each resource page,
 e.g. [resources/louisiana-fortify-homes/index.html:33-104](docs/resources/louisiana-fortify-homes/index.html:33).
@@ -772,7 +772,7 @@ lines of duplicated bytes from the pages that get the most search traffic.
 
 ---
 
-### M6. Three copies of the mailing-list submit handler
+### M6. Three copies of the mailing-list submit handler  ·  FIXED 1.37.0
 
 **Where:**
 
@@ -792,7 +792,7 @@ to allow.
 
 ---
 
-### M7. Roughly 350 lines of dead CSS, and a comment that misdescribes it
+### M7. Roughly 350 lines of dead CSS, and a comment that misdescribes it  ·  FIXED 1.37.0
 
 **Where:** [site.css](docs/site.css). Class selectors defined in `site.css` that
 appear in no HTML file and in no JS file:
@@ -918,7 +918,7 @@ class while you are there.
 
 ---
 
-### M12. Three horizontally scrolling regions cannot be scrolled by keyboard
+### M12. Three horizontally scrolling regions cannot be scrolled by keyboard  ·  FIXED 1.37.0
 
 **Where:** the three `.prow` containers on [shop/index.html:293, 396, 477](docs/shop/index.html:293).
 
@@ -1004,7 +1004,7 @@ insurance, government programmes.
 
 ---
 
-### M16. No breadcrumbs, and no structured data on four pages
+### M16. No breadcrumbs, and no structured data on four pages  ·  FIXED 1.37.0 (breadcrumbs on the resource pages)
 
 `BreadcrumbList` appears nowhere. `/storm/`, `/calendars/`, `/resources/` and
 `/privacy.html` carry no structured data at all.
@@ -1022,7 +1022,7 @@ already has at [guides/index.html:648](docs/guides/index.html:648).
 
 ---
 
-### M17. `docs/img/hero.png` is a 2.9 MB file that is not deployed and not referenced
+### M17. `docs/img/hero.png` is a 2.9 MB file that is not deployed and not referenced  ·  FIXED 1.37.0
 
 **Where:** `docs/img/hero.png`, 2,892,840 bytes.
 
