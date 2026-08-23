@@ -564,31 +564,30 @@ It names the figure, says plainly that we run none of these programs and decide
 nobody's eligibility, and links `/resources/` and the wind mitigation discounts
 page. That was the audit's highest value missing link and it is closed.
 
-**Next, ranked. The reasoning for each is in the audit.**
+**Also shipped, in 1.36.0: the last five ranked items.** `/storm/` went from
+274 words to 1,215 and now carries what its title promised; the home page has a
+real FAQ at `#questions` with the `FAQPage` node describing the same seven
+questions; `/guides/` has a sticky month strip and seven contextual links out of
+its tasks; the grant cards carry a date written from the resource pages' own
+table; and there is an `/about/` page.
 
-1. **`/storm/` is 274 words and a $16.99 button.** Its own title promises four
-   phases of storm content. It is the strongest argument on the site that this
-   is a storefront, and the flood insurance page already proves the house style
-   can give the substance away and still sell.
-2. **A dated line under the homepage grant cards.** They assert `$10,000`,
-   "three coastal counties" and "no statewide roof grant in Texas" with no date,
-   while every detail page dates the same facts correctly. The trust panel four
-   sections below promises the opposite in so many words.
-3. **A month jump strip and contextual links on `/guides/`.** 16.3 phone screens
-   with no way to reach December, and exactly one link in `<main>`, pointing at
-   the shop. Both changes live in `build_calendars.py`.
-4. **The FAQ, properly this time.** Chad's call was delete now and write later,
-   so this is the later. A real section on the homepage answering what people
-   actually type: which Gulf states pay for a roof, is the calendar really free,
-   do you run any of these programs, when was this last checked. Then the
-   `FAQPage` markup comes back **alongside it and never on its own**. The
-   comment left behind in `index.html` says the same thing at the point of
-   temptation.
-5. **An `/about/` page and a real contact address.** The only way to reach this
-   site is an Etsy storefront, including from `privacy.html`, which asks people
-   to route privacy questions through a marketplace listing. On grants,
-   insurance and government money that is a straightforward E-E-A-T weakness as
-   well as a trust one.
+**One thing is waiting on Chad.** `CONTACT_EMAIL` in `site_chrome.py` is empty.
+While it is, every "get in touch" route on the site says Etsy, which works but
+routes a correction about a state agency through a retail storefront. Put a
+mailbox somebody reads between those quotes, run `build_chrome.py`, and the
+About page and the resource footers all start offering it. Nothing else is
+needed.
+
+**The rule that keeps being relearned**, now four times: a link written for the
+paper ground and then placed on the deep one comes out unreadable. It is a
+general rule in `site.css` now, with a reversal for the cards that paint
+themselves paper inside a band. When adding a section, check which ground its
+text is actually on, and re-run the contrast sweep rather than reasoning about
+it.
+
+**What is left is content, not structure.** The audit's remaining items are the
+gaps in what the site covers, listed below, plus the medium and nitpick tidying
+in `audit.md`. The structural work is done.
 
 Then the content gaps, of which the wind and hurricane deductible page is first:
 highest intent on this coast, and the site has already written half of it as an

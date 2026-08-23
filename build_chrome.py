@@ -115,12 +115,41 @@ def pages():
         ("shop/index.html",      "../",  "shop/",       "",     False, True),
         ("storm/index.html",     "../",  "storm/",      "",     False, True),
         ("resources/index.html", "../",  "resources/",  "",     False, True),
+        ("about/index.html",     "../",  "about/",      "",     False, True),
     ]
     for slug in sorted(RESOURCE_CHECKED):
         path = "resources/%s/index.html" % slug
         cur = "resources/%s/" % slug
         out.append((path, "../../", cur, resource_prelude(slug, "../../"), False, True))
     return out
+
+
+def newest_checked():
+    """The most recent date in RESOURCE_CHECKED, written as it is on the pages.
+
+    The home page's grant row asserts dollar figures and eligibility with no
+    date of its own. Rather than a second date to keep in step, it reports the
+    newest of the ones the detail pages already carry, so re-checking a program
+    and moving its date here is what updates the front door too.
+    """
+    months = ["January", "February", "March", "April", "May", "June", "July",
+              "August", "September", "October", "November", "December"]
+
+    def key(text):
+        day, month, year = text.split()
+        return (int(year), months.index(month), int(day))
+
+    return max((d for _, d in RESOURCE_CHECKED.values()), key=key)
+
+
+def replace_span(text, span_id, inner):
+    """Rewrite the contents of one <span id="...">, leaving the tag alone."""
+    open_tag = '<span id="%s">' % span_id
+    i = text.find(open_tag)
+    if i < 0:
+        return text
+    j = text.index("</span>", i)
+    return text[:i + len(open_tag)] + inner + text[j:]
 
 
 def replace_block(text, open_tag, path):
@@ -169,6 +198,10 @@ def main():
             foot = site_chrome.footer(prefix=prefix, version=VERSION,
                                       prelude=prelude, absolute=absolute)
             text = text[:span[0]] + foot + text[span[1]:]
+
+        if rel == "index.html":
+            text = replace_span(text, "grants-checked",
+                                "Most recently checked %s." % newest_checked())
 
         if text != original:
             io.open(path, "w", encoding="utf-8", newline="\n").write(text)

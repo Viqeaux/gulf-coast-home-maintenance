@@ -27,6 +27,83 @@ Newest first.
 
 ---
 
+## [1.36.0], 2026-08-22
+
+**The last five things the audit was waiting on.** `/storm/` has content, the
+home page has a real FAQ and a date on its grant claims, `/guides/` has a way
+to reach December, and there is an About page.
+
+**No feed changed**, and `SEQUENCE` stays at 2.
+
+### Added
+
+- **`/about/`.** Who writes this, the sourcing rule every grant page follows,
+  how corrections work, how the site makes money, and what it is not. The
+  audit's M14: the only route to a human was an Etsy storefront, including
+  from the privacy page, which is a straightforward E-E-A-T weakness on
+  grants, insurance and government money as well as a trust one.
+
+  The contact address follows the same contract as `GA_ID` in `analytics.js`:
+  `CONTACT_EMAIL` in `site_chrome.py` is empty, and while it is empty every
+  page offers the Etsy route as before. **Put a mailbox somebody reads between
+  those quotes and the whole site starts offering it instead.** That is the one
+  thing on the page that could not be written without Chad.
+
+- **A real FAQ on the home page**, at `#questions`. Seven questions written for
+  what people type: which states pay for a roof, do you run these programs, are
+  the calendars really free, why May rather than June, does this work outside
+  the Gulf, how does this make money, and what to do when a page has gone
+  stale. **The `FAQPage` node came back with it and describes the same seven**,
+  which is the rule the deleted one broke.
+
+- **A month jump strip on `/guides/`.** Sixteen phone screens with no way to
+  reach December but the thumb. Sticky under the bar, scrolls sideways rather
+  than wrapping. `scroll-padding-top` went to 7.5rem so a task anchor still
+  clears both the bar and the strip; the tier tag is still visible when a
+  calendar reminder lands on it.
+
+- **Seven contextual links out of `/guides/` tasks.** The page ran to 1,763
+  words about termites, hurricane prep, insurance verification and roof
+  inspection and contained one link, to the shop. May's insurance task now
+  points at the flood rule, September's roof inspection at the grant shelf,
+  December's watch list at the calculator, and so on. Seven, not thirty-six: a
+  link on every task is noise.
+
+- **A dated line under the home page's grant cards.** It asserted four dollar
+  figures and a county list with no date while every detail page dated the same
+  facts correctly, and the trust panel four sections below promised in so many
+  words that it would. The date is written by `build_chrome.py` from the same
+  table the resource pages take theirs from, so re-checking a program updates
+  the front door too and there is no second date to keep in step.
+
+### Changed
+
+- **`/storm/` is 1,215 words instead of 274.** It was four one-sentence cards
+  and a $16.99 button, under a title promising before, during, after and the
+  claim: the audit's C5 and the strongest argument on the site that this was a
+  storefront. It now carries the three numbers to find while the map is empty
+  (your wind deductible in dollars, whether you have flood coverage and when it
+  starts, your evacuation zone), what the National Hurricane Center decides
+  versus what your county decides, photograph-before-you-clean-up and why cause
+  matters more than damage, and how a wind claim differs from a flood claim.
+  Twelve outbound links, every one checked, to NHC, Ready.gov, FloodSmart,
+  disasterassistance.gov and the five state emergency management agencies. The
+  binder is still there, once, at the end.
+
+  Its title and description changed with it, because the old ones promised what
+  the page had not delivered.
+
+### Fixed
+
+- **A prose link on a dark band came out at 2.25:1** on the new About page.
+  Fourth time this exact bug has appeared, after a deck link, the wordmark and
+  `.shop-free`; the comments above two of those record the previous three. It
+  is a general rule now rather than a fourth patch, with a reversal for the
+  cards that paint themselves paper while sitting on a band, which is the trap
+  that immediately caught it on `/shop/` at 2.66:1.
+
+---
+
 ## [1.35.0], 2026-08-22
 
 **The calculator now says who will help pay for the roof it just told you is

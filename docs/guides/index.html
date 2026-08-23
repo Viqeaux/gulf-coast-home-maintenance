@@ -51,7 +51,7 @@
      thirty-six calendar reminders deep links into a task anchor on this page,
      twelve times a year, and the 31px being hidden was the tier tag: the one
      word that says whether this is a Must or a Should. */
-  html { scroll-padding-top: 4.5rem; }
+  html { scroll-padding-top: 7.5rem; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
     font: 17px/1.65 var(--font-serif);
@@ -141,6 +141,37 @@
     font: 400 .93rem/1.6 var(--font-sans);
     color: var(--muted); margin: 0;
   }
+
+  /* The jump strip. Sticky under the bar so it is reachable from anywhere in
+     sixteen screens of page, and it scrolls sideways rather than wrapping to
+     three lines on a phone. */
+  .month-jump {
+    position: sticky; top: 3.6rem; z-index: 20;
+    display: flex; gap: .25rem; overflow-x: auto;
+    margin: 0 -1.35rem 2rem; padding: .55rem 1.35rem;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule-soft);
+    scrollbar-width: none;
+  }
+  .month-jump::-webkit-scrollbar { display: none; }
+  .month-jump a {
+    flex: none; display: inline-flex; align-items: center;
+    min-height: 34px; padding: 0 .6rem; border-radius: 2px;
+    font: 600 11px/1 var(--font-sans);
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    border: 1px solid var(--rule);
+  }
+  .month-jump a:hover { color: var(--accent); border-color: var(--accent); }
+  .month-jump a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* One link out of a task, where the task has somewhere real to go. */
+  .task-more {
+    margin: .7rem 0 0 !important;
+    font: 600 .88rem/1.5 var(--font-sans) !important;
+  }
+  .task-more a { color: var(--accent); text-decoration: none; }
+  .task-more a:hover { text-decoration: underline; }
 
   /* --- tailpiece ------------------------------------------------------- */
   .sr-only {
@@ -270,6 +301,9 @@
           <p class="nm-group">Free tools</p>
           <a href="../calculator/">Borrowed Time Calculator</a>
           <a href="../guides/" aria-current="page">What's on the calendar</a>
+          <p class="nm-group">About</p>
+          <a href="../about/">About this site</a>
+          <a href="../privacy.html">Privacy</a>
         </nav>
       </details>
     </span>
@@ -299,7 +333,21 @@
       needs doing, when, and why it is timed that way here.
     </p>
   </div>
-    <section class="month">
+    <nav class="month-jump" aria-label="Jump to a month">
+      <a href="#jan">Jan</a>
+      <a href="#feb">Feb</a>
+      <a href="#mar">Mar</a>
+      <a href="#apr">Apr</a>
+      <a href="#may">May</a>
+      <a href="#jun">Jun</a>
+      <a href="#jul">Jul</a>
+      <a href="#aug">Aug</a>
+      <a href="#sep">Sep</a>
+      <a href="#oct">Oct</a>
+      <a href="#nov">Nov</a>
+      <a href="#dec">Dec</a>
+    </nav>
+    <section class="month" id="jan">
       <h2>January</h2>
       <article class="task task--must" id="jan-detectors">
         <p class="tier-tag">Must</p>
@@ -320,7 +368,7 @@
         <p>Why: a small roof leak shows up in the attic long before it shows up on your ceiling. Winter rain is the easiest time to catch one.</p>
       </article>
     </section>
-    <section class="month">
+    <section class="month" id="feb">
       <h2>February</h2>
       <article class="task task--must" id="feb-termite-inspection">
         <p class="tier-tag">Must</p>
@@ -342,7 +390,7 @@
         <p>Why: caulk is the cheapest material on the house and the first line against wind-driven rain. On the coast it fails in 2–4 years.</p>
       </article>
     </section>
-    <section class="month">
+    <section class="month" id="mar">
       <h2>March</h2>
       <article class="task task--must" id="mar-hvac-service">
         <p class="tier-tag">Must</p>
@@ -364,7 +412,7 @@
         <p>Why: the ground should fall away from the house. Gulf Coast soils shift, and grading that worked at closing may not work three years later.</p>
       </article>
     </section>
-    <section class="month">
+    <section class="month" id="apr">
       <h2>April</h2>
       <article class="task task--must" id="apr-swarm-season">
         <p class="tier-tag">Must</p>
@@ -385,28 +433,31 @@
         <p>Why: a spigot that weeps against the foundation all summer does quiet, steady damage, and shows up on the water bill.</p>
       </article>
     </section>
-    <section class="month">
+    <section class="month" id="may">
       <h2>May</h2>
       <article class="task task--must" id="may-insurance-hurricane-prep">
         <p class="tier-tag">Must</p>
         <h3>Verify insurance, season opens June 1</h3>
         <p>Verify your coverage BEFORE the season starts: wind, and flood if you carry it. Photograph every room and the full exterior for your claim file. Trim limbs back from the roof.</p>
         <p>Why: flood policies generally take 30 days to take effect, so June 1 is already too late to start. Photos taken before a storm are what get a claim paid after one.</p>
+        <p class="task-more"><a href="../resources/flood-insurance-30-day-rule/">Why May 1 is the real deadline, and the four exceptions &#8594;</a></p>
       </article>
       <article class="task task--should" id="may-generator-supplies">
         <p class="tier-tag">Should</p>
         <h3>Test the generator, restock supplies</h3>
         <p>Start and load-test the generator. Restock water, batteries, and fuel. Confirm shutters or plywood are on hand and actually fit your openings.</p>
         <p>Why: a generator that has sat with old fuel since last season will not start when you need it, and plywood cut to the wrong window is plywood you cannot use.</p>
+        <p class="task-more"><a href="../storm/">The three numbers to find before a storm is named &#8594;</a></p>
       </article>
       <article class="task task--above" id="may-secure-exterior">
         <p class="tier-tag">Above</p>
         <h3>Inspect roof edges, secure loose items</h3>
         <p>Inspect soffit vents and roof edges. Secure sheds, fencing, and anything that becomes a projectile.</p>
         <p>Why: most wind damage starts at an edge. Once wind gets under the roof edge or through an open soffit, it works on the whole roof.</p>
+        <p class="task-more"><a href="../storm/">What to photograph, and why cause matters more than damage &#8594;</a></p>
       </article>
     </section>
-    <section class="month">
+    <section class="month" id="jun">
       <h2>June</h2>
       <article class="task task--must" id="jun-condensate-line">
         <p class="tier-tag">Must</p>
@@ -427,7 +478,7 @@
         <p>Why: a poorly vented attic bakes the roof deck from underneath and shortens shingle life, on top of what it costs you in cooling.</p>
       </article>
     </section>
-    <section class="month">
+    <section class="month" id="jul">
       <h2>July</h2>
       <article class="task task--must" id="jul-leak-hunt">
         <p class="tier-tag">Must</p>
@@ -448,7 +499,7 @@
         <p>Why: above 60% indoors you are growing mold and inviting dust mites, whatever the thermostat says.</p>
       </article>
     </section>
-    <section class="month">
+    <section class="month" id="aug">
       <h2>August</h2>
       <article class="task task--must" id="aug-peak-season-check">
         <p class="tier-tag">Must</p>
@@ -467,9 +518,10 @@
         <h3>Photograph big-ticket items</h3>
         <p>Photograph big-ticket items and store the photos somewhere off-site or in the cloud.</p>
         <p>Why: proof of ownership is what turns a claim into a payment, and it is worthless if it only exists on a phone that went with the house.</p>
+        <p class="task-more"><a href="../storm/">Documenting what you own, before you need to prove it &#8594;</a></p>
       </article>
     </section>
-    <section class="month">
+    <section class="month" id="sep">
       <h2>September</h2>
       <article class="task task--must" id="sep-dryer-vent">
         <p class="tier-tag">Must</p>
@@ -482,6 +534,7 @@
         <h3>Inspect the roof from the ground</h3>
         <p>Inspect the roof from the ground with binoculars after the summer storm run. Look for lifted, curled, or missing shingles.</p>
         <p>Why: you can see almost everything that matters from the driveway, and nobody has ever fallen off a driveway.</p>
+        <p class="task-more"><a href="../resources/">Four Gulf states pay toward a stronger roof &#8594;</a></p>
       </article>
       <article class="task task--above" id="sep-sump-drainage">
         <p class="tier-tag">Above</p>
@@ -490,7 +543,7 @@
         <p>Why: a sump pump that has not run in months is a sump pump you should not assume works. Blocked ditches move the water to your yard.</p>
       </article>
     </section>
-    <section class="month">
+    <section class="month" id="oct">
       <h2>October</h2>
       <article class="task task--must" id="oct-flush-water-heater">
         <p class="tier-tag">Must</p>
@@ -512,13 +565,14 @@
         <p class="pro-note">This one is a job for a professional rather than a Saturday.</p>
       </article>
     </section>
-    <section class="month">
+    <section class="month" id="nov">
       <h2>November</h2>
       <article class="task task--must" id="nov-post-season-inspection">
         <p class="tier-tag">Must</p>
         <h3>Post-season inspection, season closed</h3>
         <p>Walk the roof line and the whole property for storm damage. File any claims now, not in spring.</p>
         <p>Why: hurricane season closes November 30. Insurers get much harder to convince about damage the longer you wait, and most policies require prompt notice.</p>
+        <p class="task-more"><a href="../resources/wind-mitigation-discounts/">The premium credit most homeowners never ask for &#8594;</a></p>
       </article>
       <article class="task task--should" id="nov-filter-heat-test">
         <p class="tier-tag">Should</p>
@@ -533,7 +587,7 @@
         <p>Why: fascia is where a gutter that overflowed all year finally shows the damage, and rotten fascia is how the gutter comes off in the next storm.</p>
       </article>
     </section>
-    <section class="month">
+    <section class="month" id="dec">
       <h2>December</h2>
       <article class="task task--must" id="dec-freeze-prep">
         <p class="tier-tag">Must</p>
@@ -552,6 +606,7 @@
         <h3>Update the Big Ticket Watch List</h3>
         <p>Update your Big Ticket Watch List with anything you replaced or serviced this year.</p>
         <p>Why: the list is what turns a surprise roof into a planned roof. One update a year keeps it honest.</p>
+        <p class="task-more"><a href="../calculator/">What is already on borrowed time, from one number &#8594;</a></p>
       </article>
     </section>
 </main>
@@ -663,6 +718,7 @@
       <div>
         <h3>About</h3>
         <ul>
+          <li><a href="../about/">About this site</a></li>
           <li><a href="../#who">Who made this</a></li>
           <li><a href="https://www.etsy.com/shop/GulfCoastHomeCare" target="_blank" rel="noopener">Message the shop</a></li>
           <li><a href="../privacy.html">Privacy</a></li>
@@ -673,7 +729,7 @@
     <p class="disclaimer">General maintenance guidance, not a substitute for a licensed inspector, contractor, or your insurance policy terms.</p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag.
          Shown so a tester can say which version they were looking at. -->
-    <p class="version">v1.35.0</p>
+    <p class="version">v1.36.0</p>
   </div>
 </footer>
 

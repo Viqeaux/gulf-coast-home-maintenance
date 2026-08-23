@@ -116,8 +116,10 @@
      depends on. Its answers had also gone stale, describing three seasonal
      tiers when there are four calendars.
 
-     A real FAQ section is worth writing, and then this node comes back
-     alongside it. Do not re-add the markup on its own. -->
+     A real FAQ section was written in 1.36.0 and this node came back with
+     it. The two describe the same seven questions and must move together:
+     the section is at #questions, and markup describing anything a reader
+     cannot see on the page is the mistake that got the last one deleted. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -129,6 +131,67 @@
       "name": "Gulf Coast Home Maintenance",
       "description": "Where Gulf Coast homeowners find the roof grant programs, the insurance rules and a free maintenance calendar, Texas to Florida.",
       "inLanguage": "en-US"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which Gulf states will pay toward a new roof?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Four of the five. Mississippi, Alabama and Louisiana each put up to $10,000 toward rebuilding a roof to the FORTIFIED standard, and Florida's My Safe Florida Home pairs a free wind inspection with a grant of up to $10,000. Texas has no statewide roof grant and runs a windstorm coverage system instead. Every one of them is administered by a state agency, not by us, and the rules change between funding rounds."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you run any of these programs, or decide who qualifies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, and neither does any other website. Eligibility is decided by the state agency that runs the program, on its own application. What this site does is organize the question, point you at the people who answer it, and stamp each page with the date its facts were last checked against that agency's own pages."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are the calendars really free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and they stay free. Four subscribe-able calendars, no signup, no card, no trial: Must Do, Should Do, Going Above and the Monthly Rounds. They are not a sample of the printable kit and they are not a way to collect your email."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does hurricane prep here start in May rather than June?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because a new flood policy generally takes 30 days to take effect. Buy one in June and you are uninsured for the opening weeks of the season, so May 1 is the real deadline."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will this work outside the Gulf Coast?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Some of it. The structure works anywhere, but the timing, the lifespans and about half the tasks are specific to long humid summers, termite pressure and hurricane season. Inland Gulf South, most of it still applies. Further north, the Big Ticket Watch List is where the value is, and the grant pages are for these five states only."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you make money, and does it change what you write?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Three printables on Etsy, and that is all. There is no advertising here, no affiliate link, and nothing on this site sells a lead: the free tools never ask for a phone number, an email or an account. The grant and insurance pages send you to government agencies, which pay us nothing, and they would say the same thing if the shop did not exist."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Something on a grant page no longer matches the agency. What now?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tell us and it gets fixed. The agency's page always wins over ours, which is why every resource page names the source and carries the date it was last checked."
+          }
+        }
+      ]
     }
   ]
 }
@@ -194,6 +257,9 @@
           <p class="nm-group">Free tools</p>
           <a href="calculator/">Borrowed Time Calculator</a>
           <a href="guides/">What's on the calendar</a>
+          <p class="nm-group">About</p>
+          <a href="about/">About this site</a>
+          <a href="privacy.html">Privacy</a>
         </nav>
       </details>
     </span>
@@ -549,6 +615,18 @@
       <a href="resources/texas-windstorm-coverage/">how Texas windstorm coverage works &#8594;</a>
     </p>
 
+    <!-- The date is written by build_chrome.py from the same table the resource
+         pages take their own checked dates from, so it cannot drift from them
+         and cannot be forgotten. The trust panel below promises exactly this;
+         until 1.36.0 the promise was kept on the detail pages and broken here,
+         which is the page that decides whether a stranger believes the rest. -->
+    <p class="center grants-checked">
+      We run none of these programs and decide nobody's eligibility. Each page
+      maps one program, sends you to the agency that does decide, and carries
+      its own checked date.
+      <span id="grants-checked">Most recently checked 22 August 2026.</span>
+    </p>
+
     <p class="center" style="margin-top:1.5rem">
       <a class="btn btn--dark btn--lg" href="resources/">All resources</a>
     </p>
@@ -633,6 +711,97 @@
      for $12.99 and $39 from an anonymous voice. These are the same words as the
      shop's About, trimmed, not embellished. The age is the detail that tells a
      reader this was taken seriously, so it stays. -->
+<!-- ===================== the questions ===================== -->
+<!-- Deleted as markup-only in 1.33.1, rebuilt as a real section in 1.36.0.
+     The rule that got broken the first time: the FAQPage node in the head
+     describes THIS section, and the two move together or not at all. If a
+     question changes here, change it there in the same edit. If this section
+     is ever removed, the node goes with it. -->
+<section id="questions" class="band">
+  <div class="wrap">
+    <div class="center">
+      <span class="sec-no">05 / Straight answers</span>
+      <h2>The questions people actually ask</h2>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary>Which Gulf states will pay toward a new roof?</summary>
+        <div class="faq-body">
+          <p>Four of the five. Mississippi, Alabama and Louisiana each put up
+          to $10,000 toward rebuilding a roof to the FORTIFIED standard, and
+          Florida's My Safe Florida Home pairs a free wind inspection with a
+          grant of up to $10,000. Texas has no statewide roof grant and runs a
+          windstorm coverage system instead. Every one of them is administered
+          by a state agency, not by us, and the rules change between funding
+          rounds. <a href="resources/">The programs, state by state.</a></p>
+        </div>
+      </details>
+      <details>
+        <summary>Do you run any of these programs, or decide who qualifies?</summary>
+        <div class="faq-body">
+          <p>No, and neither does any other website. Eligibility is decided by
+          the state agency that runs the program, on its own application. What
+          this site does is organize the question, point you at the people who
+          answer it, and stamp each page with the date its facts were last
+          checked against that agency's own pages.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Are the calendars really free?</summary>
+        <div class="faq-body">
+          <p>Yes, and they stay free. Four subscribe-able calendars, no signup,
+          no card, no trial: Must Do, Should Do, Going Above and the Monthly
+          Rounds. They are not a sample of the printable kit and they are not a
+          way to collect your email.
+          <a href="calendars/">Add them to your phone.</a></p>
+        </div>
+      </details>
+      <details>
+        <summary>Why does hurricane prep here start in May rather than June?</summary>
+        <div class="faq-body">
+          <p>Because a new flood policy generally takes 30 days to take effect.
+          Buy one in June and you are uninsured for the opening weeks of the
+          season, so May 1 is the real deadline.
+          <a href="resources/flood-insurance-30-day-rule/">The rule, its four
+          exceptions, and where to check your flood zone.</a></p>
+        </div>
+      </details>
+      <details>
+        <summary>Will this work outside the Gulf Coast?</summary>
+        <div class="faq-body">
+          <p>Some of it. The structure works anywhere, but the timing, the
+          lifespans and about half the tasks are specific to long humid
+          summers, termite pressure and hurricane season. Inland Gulf South,
+          most of it still applies. Further north, the Big Ticket Watch List is
+          where the value is, and the grant pages are for these five states
+          only.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How do you make money, and does it change what you write?</summary>
+        <div class="faq-body">
+          <p>Three printables on Etsy, and that is all. There is no advertising
+          here, no affiliate link, and nothing on this site sells a lead: the
+          free tools never ask for a phone number, an email or an account. The
+          grant and insurance pages send you to government agencies, which pay
+          us nothing, and they would say the same thing if the shop did not
+          exist.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Something on a grant page no longer matches the agency. What now?</summary>
+        <div class="faq-body">
+          <p>Tell us and it gets fixed. The agency's page always wins over
+          ours, which is why every resource page names the source and carries
+          the date it was last checked.
+          <a href="about/">How corrections work, and how to reach us.</a></p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
 <section id="who">
   <div class="wrap">
     <div class="duo">
@@ -781,6 +950,7 @@
       <div>
         <h3>About</h3>
         <ul>
+          <li><a href="about/">About this site</a></li>
           <li><a href="./#who">Who made this</a></li>
           <li><a href="https://www.etsy.com/shop/GulfCoastHomeCare" target="_blank" rel="noopener">Message the shop</a></li>
           <li><a href="privacy.html">Privacy</a></li>
@@ -791,7 +961,7 @@
     <p class="disclaimer">General maintenance guidance, not a substitute for a licensed inspector, contractor, or your insurance policy terms.</p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag.
          Shown so a tester can say which version they were looking at. -->
-    <p class="version">v1.35.0</p>
+    <p class="version">v1.36.0</p>
   </div>
 </footer>
 

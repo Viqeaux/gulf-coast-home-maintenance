@@ -34,6 +34,13 @@ and the fix was verified against a local server rather than only written:
 `M1` scroll-padding · `M4` aria-current · `M8` shim routing ·
 `M9` floir.gov · `M11` unclosed div
 
+**C5, H5, H8, H11's contact gap, M14 and M16's FAQ all shipped in v1.36.0**:
+`/storm/` rewritten from 274 words to 1,215, a real FAQ on the home page with
+matching markup, a month strip and seven contextual links on `/guides/`, a
+dated line under the home page grant cards, and an `/about/` page. One thing
+is deliberately unfinished: `CONTACT_EMAIL` in `site_chrome.py` is empty, and
+until it holds a real mailbox every contact route still says Etsy.
+
 **The first item of H7, the calculator's missing link to the grants shelf,
 shipped in v1.35.0.**
 
@@ -233,7 +240,7 @@ are about the printable kit, dating from before the site widened to grants.
 
 ---
 
-### C5. `/storm/` promises four phases of storm content and delivers 274 words and a buy button
+### C5. `/storm/` promises four phases of storm content and delivers 274 words and a buy button  ·  FIXED 1.36.0
 
 **Where:** [storm/index.html](docs/storm/index.html), whole page. Measured `main` word count: **274**.
 
@@ -422,7 +429,7 @@ is unchanged.
 
 ---
 
-### H5. Program facts and dollar figures on the homepage carry no last-checked date
+### H5. Program facts and dollar figures on the homepage carry no last-checked date  ·  FIXED 1.36.0
 
 **Where:** [index.html:175-212](docs/index.html:175) — the four grant cards and the Texas line.
 
@@ -538,7 +545,7 @@ site, then at most one paid one, and the paid one last.
 
 ---
 
-### H8. `/guides/` is 16 phone screens long, has no way to jump to a month, and contains exactly one link
+### H8. `/guides/` is 16 phone screens long, has no way to jump to a month, and contains exactly one link  ·  FIXED 1.36.0
 
 Measured at 390 × 844: document height **13,737 px = 16.3 screens**. January's
 first task sits at 711 px; December's last sits at **12,405 px**. There is no
@@ -949,7 +956,7 @@ it properly.
 
 ---
 
-### M14. The only way to contact this site is an Etsy storefront
+### M14. The only way to contact this site is an Etsy storefront  ·  PARTLY FIXED 1.36.0 (an /about/ page exists; the email is still empty)
 
 **Where:** every "get in touch" route on the site:
 

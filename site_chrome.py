@@ -63,6 +63,25 @@ NAV = [
 
 ETSY = "https://www.etsy.com/shop/GulfCoastHomeCare"
 
+# A real address for corrections and questions, and the one thing on this site
+# that cannot be written for Chad. Same contract as GA_ID in analytics.js:
+# empty means the feature is simply off. While it is empty every "get in touch"
+# route on the site says Etsy, which works but routes a correction about a state
+# agency through a retail storefront. Put a mailbox that somebody actually reads
+# between these quotes and every page starts offering it instead.
+CONTACT_EMAIL = ""
+
+
+def contact_html(prefix="", absolute=False):
+    """The one sentence that says how to reach a person."""
+    if CONTACT_EMAIL:
+        return ('Email <a href="mailto:%s">%s</a>, which reaches a person.'
+                % (CONTACT_EMAIL, CONTACT_EMAIL))
+    return ('Messages reach us through the '
+            '<a href="%s" target="_blank" rel="noopener">Etsy shop</a>, '
+            'which is where the printables are sold and where the message '
+            'box is.' % ETSY)
+
 FOOTER_COLUMNS = [
     ("Free", [
         ("calendars/",  "The free calendars"),
@@ -78,6 +97,7 @@ FOOTER_COLUMNS = [
     ]),
     ("Grants and programs", [("resources/", "All resources")] + RESOURCES),
     ("About", [
+        ("about/",       "About this site"),
         ("#who",         "Who made this"),
         (ETSY,           "Message the shop"),
         ("privacy.html", "Privacy"),
@@ -165,7 +185,9 @@ def topbar(prefix="", current=None, absolute=False):
     # which is why it carries every destination rather than a shortlist.
     groups = [("Pages", [(p, l) for p, l, _ in NAV]),
               ("Grants and programs", RESOURCES),
-              ("Free tools", TOOLS)]
+              ("Free tools", TOOLS),
+              ("About", [("about/", "About this site"),
+                         ("privacy.html", "Privacy")])]
     panel = []
     for title, links in groups:
         panel.append('          <p class="nm-group">%s</p>' % title)

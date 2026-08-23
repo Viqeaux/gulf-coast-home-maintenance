@@ -85,6 +85,22 @@
      patched per section: sand reads on the deep one, accent on paper. */
   .deck a { color: var(--accent); }
   .band .deck a, .hero .deck a { color: var(--sand-lift); }
+  /* Fourth time a link has come out unreadable because it was written on the
+     paper ground and then sat on the deep one: first a deck link, then the
+     wordmark, then .shop-free, then the privacy link on /about/, which landed
+     at 2.25:1. Patching them one at a time is what produced the first three,
+     so this is the general rule instead. Prose links only, and never a button:
+     .btn on a band is dark text on gold and repainting it would undo that. */
+  .band p a:not(.btn), .band li a:not(.btn) { color: var(--sand-lift); }
+  /* And back again inside anything that paints itself paper while sitting on a
+     band. This is the trap the palette notes warn about: pick the gold by the
+     ground the element is actually on, not by the section it is nested in. The
+     agent-edition line inside .buy on /shop/ is the one that caught it, at
+     2.66:1. Same list of self-painting cards as the shared card rule above. */
+  .band :is(.pcard, .tier, .buy, .picker, .storm-step, .grants-note) p a:not(.btn),
+  .band :is(.pcard, .tier, .buy, .picker, .storm-step, .grants-note) li a:not(.btn) {
+    color: var(--accent);
+  }
 
   /* section numbering, the field-guide device */
   .sec-no {
@@ -1041,6 +1057,116 @@
   .res-list { max-width: 54rem; }
   .tier { max-width: 54rem; }
   .preview-warning, .android-note { max-width: 54rem; }
+
+
+
+
+  /* --- /about/ ------------------------------------------------------------
+     Prose in the sans face at reading width. The page is the answer to "who is
+     telling me this", so it is written to be read rather than scanned, which
+     is the opposite of most of the site. */
+  .about-prose { max-width: 40rem; }
+  .about-prose p {
+    font: 400 1rem/1.75 var(--font-sans); color: var(--on-surface-mute);
+    margin: 0 0 1.15rem;
+  }
+  .about-prose strong { color: var(--on-surface); }
+  .about-prose .sig {
+    font: 600 .92rem/1.4 var(--font-sans); color: var(--on-surface);
+    margin-top: 1.6rem;
+  }
+
+  /* --- the home page questions -------------------------------------------
+     Disclosures rather than seven open answers: the list of questions is the
+     useful part at a glance, and the answers are long enough that all seven
+     open would bury the section below. Native <details>, so it is keyboard
+     operable and screen-reader announced without a script, and it works with
+     scripting off. */
+  .faq { max-width: 46rem; margin: 2.25rem auto 0; }
+  .faq details {
+    border-top: 1px solid var(--hairline);
+  }
+  .faq details:last-child { border-bottom: 1px solid var(--hairline); }
+  .faq summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: flex-start; gap: .75rem;
+    padding: 1.05rem 0; min-height: 44px; box-sizing: border-box;
+    font: 600 1rem/1.45 var(--font-sans); color: var(--on-surface);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::marker { content: ""; }
+  .faq summary::before {
+    content: "+"; flex: none; width: 1rem;
+    font: 400 1.25rem/1.25 var(--font-sans); color: var(--marker);
+  }
+  .faq details[open] summary::before { content: "\2212"; }
+  .faq summary:hover { color: var(--marker); }
+  .faq summary:focus-visible { outline: 2px solid var(--marker); outline-offset: 2px; }
+  .faq-body { padding: 0 0 1.15rem 1.75rem; }
+  .faq-body p {
+    font: 400 .95rem/1.7 var(--font-sans); color: var(--on-surface-mute);
+    margin: 0; max-width: 38rem;
+  }
+
+  /* The line under the grant cards. The audit's H5: this page asserted four
+     dollar figures and a county list with no date on any of them, while every
+     detail page dated the same facts correctly and the trust panel below
+     promised in so many words that it would. */
+  .grants-checked {
+    margin: 2rem auto 0; max-width: 42rem;
+    font: 400 .9rem/1.65 var(--font-sans); color: var(--on-surface-mute);
+  }
+  .grants-checked #grants-checked { display: block; margin-top: .35rem; opacity: .8; }
+
+  /* --- /storm/ ------------------------------------------------------------
+     The page used to be four one-sentence cards and a buy button, which the
+     audit called the strongest argument on the site that this is a storefront.
+     It carries the content its own title promises now, in the same pointer
+     form the resource pages use: organise the question, name the institution
+     that owns the answer, and date the check. */
+  .checked-line {
+    font: 400 .88rem/1.6 var(--font-sans);
+    color: var(--on-surface-mute); max-width: 40rem;
+    margin: 1.4rem 0 0; padding-top: 1rem;
+    border-top: 1px solid var(--hairline);
+  }
+  .storm-steps { display: grid; gap: 1rem; margin-top: 2rem; }
+  @media (min-width: 62rem) { .storm-steps { grid-template-columns: repeat(3, 1fr); } }
+  .storm-step {
+    background: var(--paper); border: 1px solid var(--rule);
+    border-top: 3px solid var(--accent); border-radius: 4px;
+    padding: 1.4rem 1.4rem 1.5rem;
+  }
+  .storm-step h3 { font-size: 1.02rem; margin-bottom: .5rem; }
+  .storm-step p {
+    font: 400 .93rem/1.6 var(--font-sans); color: var(--muted); margin: 0 0 .8rem;
+  }
+  .storm-step p:last-child { margin-bottom: 0; }
+  .storm-step strong { color: var(--ink); }
+  .storm-src {
+    font-size: .84rem !important; font-style: italic;
+    padding-top: .7rem; border-top: 1px solid var(--rule-soft);
+  }
+  .storm-links { list-style: none; margin: .2rem 0 0; padding: 0; }
+  .storm-links li { margin: 0 0 .45rem; font: 400 .93rem/1.4 var(--font-sans); }
+  .storm-plain {
+    margin: 1.8rem 0 0; padding: 0; list-style: none; max-width: 44rem;
+  }
+  .storm-plain li {
+    font: 400 .97rem/1.65 var(--font-sans); color: var(--on-surface-mute);
+    margin: 0 0 1rem; padding-left: 1.1rem; position: relative;
+  }
+  .storm-plain li::before {
+    content: ""; position: absolute; left: 0; top: .62em;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--marker);
+  }
+  .storm-plain strong { color: var(--on-surface); }
+  .storm-note {
+    margin: 2rem 0 0; max-width: 44rem;
+    font: 400 .95rem/1.65 var(--font-sans); color: var(--on-surface-mute);
+    border-left: 3px solid var(--marker); padding-left: 1rem;
+  }
+  .storm-note strong { color: var(--on-surface); }
 
   /* .foot-grid moved to nav.css in 1.34.0, with the rest of the footer. */
 

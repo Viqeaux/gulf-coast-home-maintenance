@@ -38,7 +38,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.35.0"
+VERSION = "1.36.0"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -707,7 +707,7 @@ GUIDES_TEMPLATE = """<!doctype html>
      thirty-six calendar reminders deep links into a task anchor on this page,
      twelve times a year, and the 31px being hidden was the tier tag: the one
      word that says whether this is a Must or a Should. */
-  html {{ scroll-padding-top: 4.5rem; }}
+  html {{ scroll-padding-top: 7.5rem; }}
   body {{
     margin: 0; background: var(--bg); color: var(--ink);
     font: 17px/1.65 var(--font-serif);
@@ -797,6 +797,37 @@ GUIDES_TEMPLATE = """<!doctype html>
     font: 400 .93rem/1.6 var(--font-sans);
     color: var(--muted); margin: 0;
   }}
+
+  /* The jump strip. Sticky under the bar so it is reachable from anywhere in
+     sixteen screens of page, and it scrolls sideways rather than wrapping to
+     three lines on a phone. */
+  .month-jump {{
+    position: sticky; top: 3.6rem; z-index: 20;
+    display: flex; gap: .25rem; overflow-x: auto;
+    margin: 0 -1.35rem 2rem; padding: .55rem 1.35rem;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule-soft);
+    scrollbar-width: none;
+  }}
+  .month-jump::-webkit-scrollbar {{ display: none; }}
+  .month-jump a {{
+    flex: none; display: inline-flex; align-items: center;
+    min-height: 34px; padding: 0 .6rem; border-radius: 2px;
+    font: 600 11px/1 var(--font-sans);
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    border: 1px solid var(--rule);
+  }}
+  .month-jump a:hover {{ color: var(--accent); border-color: var(--accent); }}
+  .month-jump a:focus-visible {{ outline: 2px solid var(--accent); outline-offset: 2px; }}
+
+  /* One link out of a task, where the task has somewhere real to go. */
+  .task-more {{
+    margin: .7rem 0 0 !important;
+    font: 600 .88rem/1.5 var(--font-sans) !important;
+  }}
+  .task-more a {{ color: var(--accent); text-decoration: none; }}
+  .task-more a:hover {{ text-decoration: underline; }}
 
   /* --- tailpiece ------------------------------------------------------- */
   .sr-only {{
@@ -1009,6 +1040,36 @@ def html_escape(text):
                 .replace(">", "&gt;").replace('"', "&quot;"))
 
 
+# Where a task on this page has a page of its own elsewhere on the site. The
+# body of this page ran to 1,763 words about termites, hurricane prep, insurance
+# verification and roof inspection, and contained one link, to the shop. These
+# are the ones a reader of that task would actually want next, and no others:
+# a link on every task would be noise and would stop meaning anything.
+TASK_LINKS = {
+    "may-insurance-hurricane-prep": (
+        "../resources/flood-insurance-30-day-rule/",
+        "Why May 1 is the real deadline, and the four exceptions"),
+    "may-generator-supplies": (
+        "../storm/",
+        "The three numbers to find before a storm is named"),
+    "may-secure-exterior": (
+        "../storm/",
+        "What to photograph, and why cause matters more than damage"),
+    "sep-roof-inspection": (
+        "../resources/",
+        "Four Gulf states pay toward a stronger roof"),
+    "nov-post-season-inspection": (
+        "../resources/wind-mitigation-discounts/",
+        "The premium credit most homeowners never ask for"),
+    "dec-watch-list": (
+        "../calculator/",
+        "What is already on borrowed time, from one number"),
+    "aug-photograph-valuables": (
+        "../storm/",
+        "Documenting what you own, before you need to prove it"),
+}
+
+
 def guide_section(task):
     """One task block: heading, the why, and whatever videos are picked."""
     month, _, tier, slug, title, body = task
@@ -1021,6 +1082,11 @@ def guide_section(task):
     ]
     for part in parts:
         out.append('        <p>{0}</p>'.format(html_escape(part)))
+
+    link = TASK_LINKS.get(slug)
+    if link:
+        out.append('        <p class="task-more"><a href="{0}">{1} &#8594;</a></p>'
+                   .format(link[0], html_escape(link[1])))
 
     # STEPS is deliberately not rendered here. The tools, the numbered steps
     # and the caution are the kit's content and the kit is the paid product, so
@@ -1104,9 +1170,20 @@ def build_guides():
     tasks = sorted(TASKS, key=lambda t: (t[0], TIER_ORDER[t[2]]))
     covered = sum(1 for t in TASKS if has_guide(t[3]))
 
-    body = []
+    # The jump strip. This page is sixteen phone screens tall and December sat
+    # at the bottom of all of them with no way to get there but the thumb. Each
+    # month section gets an id so the strip can reach it, and the calendar
+    # reminders keep landing on the task anchors inside as before.
+    strip = ['    <nav class="month-jump" aria-label="Jump to a month">']
+    for name in MONTH_NAMES:
+        strip.append('      <a href="#{0}">{1}</a>'.format(
+            name.lower()[:3], name[:3]))
+    strip.append('    </nav>')
+
+    body = list(strip)
     for index, name in enumerate(MONTH_NAMES, start=1):
-        body.append('    <section class="month">')
+        body.append('    <section class="month" id="{0}">'.format(
+            name.lower()[:3]))
         body.append('      <h2>{0}</h2>'.format(name))
         for task in [t for t in tasks if t[0] == index]:
             body.extend(guide_section(task))
