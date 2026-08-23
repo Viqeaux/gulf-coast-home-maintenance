@@ -199,7 +199,7 @@ FREE_TEMPLATE = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What in Your House Is on Borrowed Time</title>
+<title>How Long Do a Roof, A/C and Water Heater Last on the Gulf Coast?</title>
 <meta name="description" content="Free. Enter the year your house was built and see whether the roof, the a/c, the water heater or the furnace are already past their expected life on the Gulf Coast.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://{domain}/calculator/">
@@ -655,6 +655,12 @@ FREE_TEMPLATE = """<!doctype html>
 
 {footer}
 
+<!-- The signup handler is calendar-buttons.js: it binds .signup on any page and
+     returns early where there is no feed section. It was pasted in here and into
+     build_calendars.py as well, which made three copies of one honeypot
+     contract. -->
+<script src="../calendar-buttons.js"></script>
+
 <script>
 (function () {{
   'use strict';
@@ -809,27 +815,6 @@ FREE_TEMPLATE = """<!doctype html>
   }});
   years.forEach(function (input) {{ input.addEventListener('input', render); }});
 
-  // Same signup contract as the other two pages: post to MailerLite through a
-  // hidden frame so the visitor never leaves, and swap the form for the
-  // check-your-email line once the frame reports back.
-  var signup = document.querySelector('.signup');
-  if (signup) {{
-    signup.addEventListener('submit', function (event) {{
-      var hp = signup.querySelector('input[name="website"]');
-      var done = document.querySelector('.signup-done');
-      if (hp && hp.value) {{
-        event.preventDefault();
-        signup.hidden = true;
-        done.hidden = false;
-        return;
-      }}
-      if (hp) {{ hp.disabled = true; }}
-      var sink = document.querySelector('iframe[name="ml-sink"]');
-      var swap = function () {{ signup.hidden = true; done.hidden = false; }};
-      sink.addEventListener('load', swap, {{ once: true }});
-      setTimeout(swap, 2500);
-    }});
-  }}
 }})();
 </script>
 

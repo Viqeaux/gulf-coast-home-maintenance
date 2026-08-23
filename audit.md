@@ -34,6 +34,12 @@ and the fix was verified against a local server rather than only written:
 `M1` scroll-padding · `M4` aria-current · `M8` shim routing ·
 `M9` floir.gov · `M11` unclosed div
 
+**The medium and nitpick tier cleared in v1.37.0**:  extracted
+from seven pasted copies (two already drifted), social cards and breadcrumbs on
+the resource pages, four titles and seven descriptions rewritten for what gets
+typed and what Google renders, 245 lines of dead CSS gone, three copies of the
+signup handler reduced to one, and the 2.8MB unreferenced hero.png deleted.
+
 **C5, H5, H8, H11's contact gap, M14 and M16's FAQ all shipped in v1.36.0**:
 `/storm/` rewritten from 274 words to 1,215, a real FAQ on the home page with
 matching markup, a month strip and seven contextual links on `/guides/`, a

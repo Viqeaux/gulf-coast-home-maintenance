@@ -1,0 +1,104 @@
+/* =============================================================================
+   The resource pages: /resources/<slug>/.
+
+   Extracted from seven pasted copies in 1.37.0. They were 71 lines each, five
+   byte-identical and two already drifted: strengthen-mississippi-homes had
+   grown a .next p rule and wind-mitigation-discounts an h3 rule, which meant
+   wind-mitigation was the only page on the shelf where a subheading rendered
+   at all. The next page to add one would have got browser-default Times and
+   nobody would have found out by looking.
+
+   That is the fourth time this project has paid for a pasted copy, after
+   site.css, theme.css and nav.css, and the second time inside one audit.
+
+   Load order is theme.css, nav.css, then this. The bar and the footer come
+   from nav.css; everything here is the page between them.
+   ============================================================================= */
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.65 var(--font-serif);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 42rem; margin: 0 auto; padding: 0 1.35rem; }
+  a { color: var(--accent); }
+
+  header { background: var(--deep); color: var(--on-deep); padding: 3rem 0 2.5rem; }
+  header a.back {
+    font: 600 11px/1 var(--font-sans);
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--sand-lift); text-decoration: none;
+  }
+  header a.back:hover { text-decoration: underline; }
+  header h1 {
+    font-size: clamp(1.9rem, 5vw, 2.5rem); line-height: 1.1;
+    margin: 1rem 0 .9rem; letter-spacing: -.02em; color: #fff;
+  }
+  header p { color: var(--on-deep-mute); margin: 0; max-width: 36rem; }
+
+  main { padding: 2.75rem 0 1rem; }
+  h2 {
+    font: 700 1.25rem/1.25 var(--font-serif);
+    margin: 2.4rem 0 .6rem; letter-spacing: -.012em;
+  }
+  h3 {
+    font: 700 1.02rem/1.3 var(--font-serif);
+    margin: 1.6rem 0 .4rem; letter-spacing: -.008em; color: var(--ink);
+  }
+  p { margin: 0 0 1.05rem; color: var(--muted); }
+  p strong, li strong { color: var(--ink); font-weight: 600; }
+  ul, ol { margin: 0 0 1.05rem; padding-left: 1.2rem; color: var(--muted); }
+  li { margin-bottom: .55rem; }
+
+  .lede { font-size: 1.05rem; }
+  .lede strong { color: var(--ink); }
+
+  .checked {
+    font: 600 12px/1.5 var(--font-sans);
+    letter-spacing: .06em; text-transform: uppercase;
+    color: var(--ink); background: var(--paper-2);
+    border-left: 3px solid var(--accent);
+    padding: .7rem .9rem; margin: 0 0 1.6rem;
+  }
+
+  .next {
+    border: 1px solid var(--rule); background: var(--paper);
+    padding: 1.15rem 1.25rem; margin: 2.2rem 0 0;
+  }
+  .next .label {
+    font: 600 10.5px/1 var(--font-sans); letter-spacing: .15em;
+    text-transform: uppercase; color: var(--sand-ink);
+    display: block; margin-bottom: .7rem;
+  }
+  .next p { margin: 0 0 .6rem; font-size: .95rem; }
+  .next ul { list-style: none; margin: 0; padding: 0; }
+  .next li {
+    margin: 0; padding: .45rem 0; border-top: 1px solid var(--rule-soft);
+    font: 400 .93rem/1.5 var(--font-sans);
+  }
+  .next li:first-child { border-top: 0; padding-top: 0; }
+  .next li .what { color: var(--muted); }
+
+  footer {
+    background: var(--deep); color: var(--on-deep-mute);
+    padding: 2.5rem 0 3rem; margin-top: 3rem; font-size: .87rem;
+  }
+  footer p { color: var(--on-deep-mute); }
+  footer a { color: var(--sand-lift); }
+  footer .updated {
+    font: 600 11px/1 var(--font-sans);
+    letter-spacing: .12em; opacity: .55; margin: 0;
+  }
+
+  /* Breadcrumbs. These pages are three levels deep and are where the search
+     traffic lands, so the trail is worth showing on the page as well as in the
+     BreadcrumbList that goes with it. */
+  .crumbs {
+    font: 600 11px/1.5 var(--font-sans);
+    letter-spacing: .08em; text-transform: uppercase;
+    margin: 0 0 .2rem; color: var(--on-deep-mute);
+  }
+  .crumbs a { color: var(--sand-lift); text-decoration: none; }
+  .crumbs a:hover { text-decoration: underline; }
+  .crumbs .sep { opacity: .5; margin: 0 .4rem; }

@@ -7,7 +7,7 @@
      kit, which is the paid product, so a title promising "how to" would be
      advertising something this page no longer carries. The URL stays
      /guides/ because thirty-six live calendar events point at it. -->
-<title>What Is on the Calendar, Gulf Coast Home Maintenance</title>
+<title>Gulf Coast Home Maintenance Checklist, Month by Month</title>
 <meta name="description" content="All thirty-six jobs on the Gulf Coast home maintenance calendar, Texas to Florida, and the month each one falls in. Free to subscribe to.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://gulfcoasthomemaintenance.com/guides/">
@@ -275,7 +275,7 @@
           <a href="../guides/" aria-current="page">What's on the calendar</a>
         </span></span>
       </span>
-      <a href="../guides/" aria-current="page">Guide</a>
+      <a href="../guides/">Guide</a>
       <a href="../shop/">Shop</a>
     </nav>
     <span class="topbar-ctas">
@@ -288,7 +288,7 @@
           <a href="../resources/">Resources</a>
           <a href="../storm/">Storm prep</a>
           <a href="../calculator/">Tools</a>
-          <a href="../guides/" aria-current="page">Guide</a>
+          <a href="../guides/">Guide</a>
           <a href="../shop/">Shop</a>
           <p class="nm-group">Grants and programs</p>
           <a href="../resources/strengthen-mississippi-homes/">Mississippi roof grant</a>
@@ -300,7 +300,7 @@
           <a href="../resources/wind-mitigation-discounts/">Wind mitigation discounts</a>
           <p class="nm-group">Free tools</p>
           <a href="../calculator/">Borrowed Time Calculator</a>
-          <a href="../guides/" aria-current="page">What's on the calendar</a>
+          <a href="../guides/">What's on the calendar</a>
           <p class="nm-group">About</p>
           <a href="../about/">About this site</a>
           <a href="../privacy.html">Privacy</a>
@@ -729,34 +729,15 @@
     <p class="disclaimer">General maintenance guidance, not a substitute for a licensed inspector, contractor, or your insurance policy terms.</p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag.
          Shown so a tester can say which version they were looking at. -->
-    <p class="version">v1.36.0</p>
+    <p class="version">v1.37.0</p>
   </div>
 </footer>
 
-<script>
-  // The only script on this page. Same contract as the home page: post to
-  // MailerLite through a hidden frame so the visitor never leaves, and swap the
-  // form for the check-your-email line once the frame reports back.
-  (function () {
-    var signup = document.querySelector('.signup');
-    if (!signup) { return; }
-    signup.addEventListener('submit', function (event) {
-      var hp = signup.querySelector('input[name="website"]');
-      var done = document.querySelector('.signup-done');
-      if (hp && hp.value) {
-        event.preventDefault();
-        signup.hidden = true;
-        done.hidden = false;
-        return;
-      }
-      if (hp) { hp.disabled = true; }
-      var sink = document.querySelector('iframe[name="ml-sink"]');
-      var swap = function () { signup.hidden = true; done.hidden = false; };
-      sink.addEventListener('load', swap, { once: true });
-      setTimeout(swap, 2500);
-    });
-  })();
-</script>
+<!-- The signup handler is calendar-buttons.js, which binds .signup on any page
+     and returns early where there is no feed section. It used to be pasted here
+     as well, and into build_calculator.py, which made three copies of one
+     honeypot contract. -->
+<script src="../calendar-buttons.js"></script>
 
 <script type="application/ld+json">
 {

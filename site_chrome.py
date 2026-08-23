@@ -153,7 +153,22 @@ def _current(path, current):
 def topbar(prefix="", current=None, absolute=False):
     """The sticky bar. Same markup on every page, paths resolved per depth."""
     h = lambda p: _href(p, prefix, absolute)
-    c = lambda p: _current(p, current)
+
+    # Only one link may say aria-current="page", and two of them can point at
+    # the same place: /guides/ is both "Guide" in the bar and "What's on the
+    # calendar" in the Tools menu, so a screen reader announced the current page
+    # twice. The first one wins; the second is left plain. "true", which marks
+    # an ancestor rather than the page itself, is not limited this way, because
+    # a section really can contain the page you are on.
+    said = {"page": False}
+
+    def c(path):
+        value = _current(path, current)
+        if value.endswith('"page"'):
+            if said["page"]:
+                return ""
+            said["page"] = True
+        return value
 
     # On the home page the wordmark is a span: a link to the page you are on is
     # a link that does nothing.

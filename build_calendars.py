@@ -38,7 +38,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.36.0"
+VERSION = "1.37.0"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -663,7 +663,7 @@ GUIDES_TEMPLATE = """<!doctype html>
      kit, which is the paid product, so a title promising "how to" would be
      advertising something this page no longer carries. The URL stays
      /guides/ because thirty-six live calendar events point at it. -->
-<title>What Is on the Calendar, Gulf Coast Home Maintenance</title>
+<title>Gulf Coast Home Maintenance Checklist, Month by Month</title>
 <meta name="description" content="All thirty-six jobs on the Gulf Coast home maintenance calendar, Texas to Florida, and the month each one falls in. Free to subscribe to.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://gulfcoasthomemaintenance.com/guides/">
@@ -995,30 +995,11 @@ GUIDES_TEMPLATE = """<!doctype html>
 
 {footer}
 
-<script>
-  // The only script on this page. Same contract as the home page: post to
-  // MailerLite through a hidden frame so the visitor never leaves, and swap the
-  // form for the check-your-email line once the frame reports back.
-  (function () {{
-    var signup = document.querySelector('.signup');
-    if (!signup) {{ return; }}
-    signup.addEventListener('submit', function (event) {{
-      var hp = signup.querySelector('input[name="website"]');
-      var done = document.querySelector('.signup-done');
-      if (hp && hp.value) {{
-        event.preventDefault();
-        signup.hidden = true;
-        done.hidden = false;
-        return;
-      }}
-      if (hp) {{ hp.disabled = true; }}
-      var sink = document.querySelector('iframe[name="ml-sink"]');
-      var swap = function () {{ signup.hidden = true; done.hidden = false; }};
-      sink.addEventListener('load', swap, {{ once: true }});
-      setTimeout(swap, 2500);
-    }});
-  }})();
-</script>
+<!-- The signup handler is calendar-buttons.js, which binds .signup on any page
+     and returns early where there is no feed section. It used to be pasted here
+     as well, and into build_calculator.py, which made three copies of one
+     honeypot contract. -->
+<script src="../calendar-buttons.js"></script>
 
 <script type="application/ld+json">
 {structured}

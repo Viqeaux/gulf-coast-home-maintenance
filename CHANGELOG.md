@@ -27,6 +27,74 @@ Newest first.
 
 ---
 
+## [1.37.0], 2026-08-22
+
+**The audit's medium and nitpick tier, cleared.** None of it changes what the
+site says; all of it is the kind of thing that decides whether the next change
+goes in cleanly.
+
+**No feed changed**, and `SEQUENCE` stays at 2.
+
+### Added
+
+- **`docs/resources.css`.** The seven resource pages each carried their own
+  copy of the same 71 line stylesheet. Five were byte-identical and two had
+  already drifted: the Mississippi page had grown a `.next p` rule and the
+  wind mitigation page an `h3` rule, which meant wind mitigation was **the only
+  page on the shelf where a subheading rendered at all**. The next page to add
+  one would have got browser-default Times and nobody would have found out by
+  looking. Both drifted rules are folded in.
+- **Social cards on the seven resource pages.** They had no `og:image` and no
+  `twitter:card`, so the pages most likely to be shared into a neighbourhood
+  Facebook group rendered as a bare grey link.
+- **`BreadcrumbList` on all seven**, plus a visible trail replacing the bare
+  back arrow. These pages are three levels deep and are where the search
+  traffic lands.
+- **Keyboard access to the two scrolling regions**, the year diagram and the
+  kit page strips: `tabindex`, `role="group"`, an accessible name and a focus
+  ring. WCAG 2.1.1.
+
+### Changed
+
+- **Four titles rewritten for what a homeowner types.** "What in Your House Is
+  on Borrowed Time" became "How Long Do a Roof, A/C and Water Heater Last on
+  the Gulf Coast?"; "What Is on the Calendar" became "Gulf Coast Home
+  Maintenance Checklist, Month by Month"; "The Calendars" became "Free Gulf
+  Coast Home Maintenance Calendar for Google, Apple and Outlook". Two overlong
+  resource titles were cut to fit a search result.
+- **Seven meta descriptions cut from 162–254 characters to 151–156**, which is
+  what Google renders. They were being truncated mid-sentence, and the clause
+  being cut was the one naming the source the page was checked against.
+- **"Related tools" is "Read next".** The box was labelled as tools and holds
+  articles.
+- **The Mississippi page cites Senate Bill 2409 itself**, not only the
+  reporting on it. Every other institutional fact on the shelf is sourced to
+  the institution.
+
+### Fixed
+
+- **245 lines of dead CSS removed** from `site.css`: a whole alternate hero in
+  `.hero--split`, `.res-card` superseded by `.res-row`, `.month-card`,
+  `.mini-calc`, `.benefits`, `.get-grid`, `.pgrid--sm`, `.todo-cols`,
+  `.followup`, `.stats`, `.pcard-more`, the `.k--` and `.level--` colour sets,
+  and `.cta--alert`/`.cta--kit`, which **a comment claimed had already been
+  removed in 1.32.2 and which had not**. That comment is corrected. The classes
+  that only look dead because JavaScript builds them at runtime are named in a
+  note so the next sweep does not take them.
+- **Three copies of the mailing list handler are one.** `calendar-buttons.js`
+  already bound `.signup` on any page and returned early where there was no
+  feed section; `/guides/` and `/calculator/` were each carrying a pasted
+  duplicate of the same honeypot contract.
+- **`/guides/` announced its own page twice** to a screen reader, because both
+  "Guide" and the Tools menu's "What's on the calendar" point at it. Only the
+  first `aria-current="page"` is emitted now.
+- **`/404.html` has a `<main>` landmark**, and the hero image carries its
+  intrinsic dimensions like every other image on the site.
+- **`docs/img/hero.png` deleted**: 2.8MB, referenced by nothing, and returning
+  404 in production because it was never deployed.
+
+---
+
 ## [1.36.0], 2026-08-22
 
 **The last five things the audit was waiting on.** `/storm/` has content, the

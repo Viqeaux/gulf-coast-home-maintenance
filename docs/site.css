@@ -34,8 +34,7 @@
     overflow-x: hidden;
   }
   @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; animation: none !important; }
-  }
+    * { transition: none !important; animation: none !important; }}
 
   /* A floor under every link, so none can fall through to the browser default.
      This file had no bare a rule at all, and the gap kept being found one link
@@ -130,8 +129,7 @@
     --marker: var(--sand-lift);
   }
   @supports not (background: color-mix(in srgb, red 50%, transparent)) {
-    section.band { --hairline: #33454a; }
-  }
+    section.band { --hairline: #33454a; }}
   .band h2, .band h3 { color: var(--on-surface); }
   .band p, .band .muted { color: var(--on-surface-mute); }
   .band .sec-no { color: var(--sand-lift); }
@@ -180,8 +178,7 @@
   /* Older engines without color-mix would show an unreadable hero, so fall back
      to a flat scrim rather than a transparent one. */
   @supports not (background: color-mix(in srgb, red 50%, transparent)) {
-    .hero-media::after { background: rgba(14,36,41,.86); }
-  }
+    .hero-media::after { background: rgba(14,36,41,.86); }}
   .hero .wrap { position: relative; z-index: 2; }
   .hero .label { color: var(--sand-lift); }
   /* Hero copy sits over a photograph, so it runs brighter than the muted tone
@@ -227,25 +224,14 @@
   @keyframes season-pulse {
     0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--must-lift) 65%, transparent); }
     70%  { box-shadow: 0 0 0 7px color-mix(in srgb, var(--must-lift) 0%, transparent); }
-    100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--must-lift) 0%, transparent); }
-  }
+    100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--must-lift) 0%, transparent); }}
   @supports not (background: color-mix(in srgb, red 50%, transparent)) {
     .season { background: rgba(14,36,41,.62); border-color: #3d4f52; }
     .season-link { border-bottom-color: #7a5c22; }
     @keyframes season-pulse {
       0%   { box-shadow: 0 0 0 0 rgba(224,138,114,.65); }
       70%  { box-shadow: 0 0 0 7px rgba(224,138,114,0); }
-      100% { box-shadow: 0 0 0 0 rgba(224,138,114,0); }
-    }
-  }
-
-  /* stat strip under hero */
-  .stats {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
-    gap: 1px; margin-top: 2.75rem;
-    background: color-mix(in srgb, var(--on-deep) 14%, transparent);
-    border: 1px solid color-mix(in srgb, var(--on-deep) 14%, transparent);
-  }
+      100% { box-shadow: 0 0 0 0 rgba(224,138,114,0); }}}
   .stat { background: var(--deep); padding: 1.05rem 1.1rem; }
   .stat .n {
     font: 700 1.6rem/1 var(--font-serif); color: #fff;
@@ -331,8 +317,8 @@
     gap: 1px; margin-top: 2rem;
     background: var(--hairline); border: 1px solid var(--hairline);
   }
-  @media (min-width: 34rem) { .factors { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 60rem) { .factors { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 34rem) { .factors { grid-template-columns: repeat(2, 1fr); }}
+  @media (min-width: 60rem) { .factors { grid-template-columns: repeat(4, 1fr); }}
   .factor { background: var(--surface); padding: 1.5rem 1.4rem; }
   .factor svg { color: var(--accent); margin-bottom: .85rem; display: block; }
   .band .factor svg { color: var(--sand-lift); }
@@ -348,7 +334,7 @@
     gap: 1px; margin-top: 2rem;
     background: var(--hairline); border: 1px solid var(--hairline);
   }
-  @media (min-width: 46rem) { .points { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 46rem) { .points { grid-template-columns: repeat(3, 1fr); }}
   .point { background: var(--surface); padding: 1.5rem 1.4rem; }
   .point .pn {
     font: 700 1.45rem/1 var(--font-serif);
@@ -427,8 +413,7 @@
     padding-bottom: .4rem;
   }
   @media (min-width: 40rem) {
-    .prow { grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); overflow-x: visible; }
-  }
+    .prow { grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); overflow-x: visible; }}
   /* The three crops are not the same shape, because the pages are not. Rather
      than force a common aspect ratio, which would crop sideways into the page
      margins, the figures stretch to the row and the captions drop to the
@@ -462,7 +447,7 @@
   .shop { padding-top: 3.25rem; }
   .shop .label { color: var(--sand-ink); display: block; margin-bottom: 1.2rem; }
   .pgrid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-  @media (min-width: 46rem) { .pgrid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 46rem) { .pgrid { grid-template-columns: repeat(3, 1fr); }}
   .pcard {
     display: flex; flex-direction: column; overflow: hidden;
     background: var(--paper); border: 1px solid var(--rule);
@@ -488,12 +473,6 @@
     margin: 0 0 .8rem; letter-spacing: -.01em;
   }
   .pcard .btn { text-align: center; display: block; }
-  .pcard-more {
-    display: inline-block; margin-top: .75rem; font-size: .85rem;
-    color: var(--accent); text-decoration: none;
-    border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-  }
-  .pcard-more:hover { border-bottom-color: var(--accent); }
   /* On a phone three upright cards were 2.9 screens of contents list sitting
      directly on top of the sections it lists. Turned on its side the same card
      is a shelf row: the cover still identifies the product, the price and the
@@ -504,8 +483,7 @@
       width: 34%; max-width: 132px; flex: none; align-self: flex-start;
       border-bottom: 0; border-right: 1px solid var(--rule);
     }
-    .pcard-body { padding: .95rem 1.05rem 1.05rem; }
-  }
+    .pcard-body { padding: .95rem 1.05rem 1.05rem; }}
 
   .shop-free { margin: 1.4rem 0 0; font-size: .93rem; }
   /* Nothing had styled a bare link here before, so this one came out as the
@@ -513,9 +491,6 @@
      this sits on paper and wants the ink gold, not the lifted one. The comment
      here used to say "the deep ground", which measurement disproved. */
   .shop-free a { color: var(--sand-ink); }
-  @supports not (background: color-mix(in srgb, red 50%, transparent)) {
-    .pcard-more { border-bottom-color: #7fa6ad; }
-  }
 
   .pcard, .tier, .month-card, .buy, .preview-warning, .android-note,
   .picker, .followup {
@@ -566,36 +541,10 @@
   .tier .badge--free { color: var(--accent); border-color: var(--accent); }
   .tier p { margin: .45rem 0 0; color: var(--muted); font-size: .97rem; }
   .tier .actions { margin-top: 1.15rem; }
-
-  /* --- sample month ----------------------------------------------------- */
-  .month-card {
-    background: var(--paper); border: 1px solid var(--rule);
-    border-radius: 3px; box-shadow: var(--shadow-lg); overflow: hidden; margin-top: 2rem;
-  }
-  .month-card .head {
-    background: var(--paper-2); border-bottom: 1px solid var(--rule);
-    padding: 1.2rem 1.6rem;
-  }
-  .month-card .head .m {
-    font: 700 clamp(1.6rem,4vw,2rem)/1 var(--font-serif);
-    letter-spacing: -.02em; margin: 0 0 .35rem;
-  }
-  .month-card .head .sub { font: 600 .88rem/1.4 var(--font-sans); color: var(--must); margin: 0; }
-  .month-card .body { padding: .35rem 1.6rem 1.5rem; }
   .row { display: flex; gap: 1rem; padding: 1.15rem 0; border-bottom: 1px solid var(--rule-soft); }
   .row:last-child { border-bottom: 0; padding-bottom: .35rem; }
-  .row .k {
-    flex: none; width: 4.4rem; padding-top: .15rem;
-    font: 700 10px/1 var(--font-sans);
-    letter-spacing: .13em; text-transform: uppercase;
-  }
-  .k--must { color: var(--must); } .k--should { color: var(--should); } .k--above { color: var(--above); }
-  .row .v { font-size: .97rem; color: var(--muted); }
-  .row .v em { color: var(--ink); font-style: italic; }
   @media (max-width: 30rem) {
-    .row { flex-direction: column; gap: .35rem; }
-    .row .k { width: auto; }
-  }
+    .row { flex-direction: column; gap: .35rem; }}
 
   /* --- lifespan chart --------------------------------------------------- */
   .lifespans { margin-top: 2rem; }
@@ -637,8 +586,7 @@
     .ls { grid-template-columns: 1fr 3.9rem; row-gap: .3rem; }
     .ls .name { grid-column: 1 / -1; }
     .scale { grid-template-columns: 1fr 3.9rem; }
-    .scale .ticks { grid-column: 1; }
-  }
+    .scale .ticks { grid-column: 1; }}
 
   /* --- buy -------------------------------------------------------------- */
   .buy {
@@ -646,7 +594,6 @@
     box-shadow: var(--shadow-lg); padding: 2rem 1.8rem; margin-top: 2.25rem; text-align: center;
   }
   .buy h3 { font-size: 1.35rem; margin-bottom: .55rem; }
-  .buy-blurb { max-width: 32rem; margin-left: auto; margin-right: auto; }
 
   /* The price belongs next to the button. Set as a small uppercase label above
      the heading it read as a section eyebrow, because that is exactly how the
@@ -686,8 +633,7 @@
   }
   #buy-slot .btn--lg:hover, #binder-slot .btn--lg:hover, #agent-slot .btn--lg:hover { filter: brightness(1.06); }
   @supports not (background: color-mix(in srgb, red 50%, transparent)) {
-    #buy-slot .btn--lg, #binder-slot .btn--lg, #agent-slot .btn--lg { box-shadow: 0 2px 0 #7a5719; }
-  }
+    #buy-slot .btn--lg, #binder-slot .btn--lg, #agent-slot .btn--lg { box-shadow: 0 2px 0 #7a5719; }}
   .buy p { color: var(--muted); max-width: 30rem; margin-left: auto; margin-right: auto; font-size: .97rem; }
   .buy p:last-child { margin-bottom: 0; }
   /* --- signup ----------------------------------------------------------- */
@@ -738,30 +684,7 @@
   }
   .signup-done strong { display: block; color: var(--accent); margin-bottom: .2rem; }
   @media (max-width: 26rem) {
-    .signup-row input, .signup-row .btn { flex: 1 1 100%; }
-  }
-
-  /* The signup sits at the end of the free calendars rather than in the buy
-     card it started in. It began as a waitlist for the kit, the buy button
-     retired that job, and what is left is a general "tell me about the next
-     one" list. The moment to ask is right after someone has been handed three
-     free things, not while they are deciding whether to spend $12.99.
-
-     Deliberately not a fourth tier card, but distinguished without changing the
-     ground: no colored left bar, an uncolored heading, and no shadow, so it
-     sits flatter than the three cards above it. The ground stays --paper so the
-     --bg field keeps reading as inset. On --paper-2 both the field's fill and
-     its --rule border land within 1.2 of the block behind them, which leaves
-     the input invisible until it takes focus. */
-  .followup {
-    background: var(--paper); border: 1px solid var(--rule);
-    border-radius: 3px; padding: 1.75rem 1.6rem; margin-top: 2.25rem;
-    text-align: center;
-  }
-  .followup-blurb {
-    color: var(--muted); font-size: .97rem;
-    max-width: 30rem; margin: 0 auto 1.25rem;
-  }
+    .signup-row input, .signup-row .btn { flex: 1 1 100%; }}
 
   /* --- misc ------------------------------------------------------------- */
   .preview-warning {
@@ -878,7 +801,7 @@
      and it stays hidden until the script gives it real content: an empty card
      is worse than no card. On narrow screens it drops below the copy. */
   .hero-grid { display: grid; gap: 2.5rem; align-items: center; }
-  @media (min-width: 56rem) { .hero-grid { grid-template-columns: 7fr 5fr; } }
+  @media (min-width: 56rem) { .hero-grid { grid-template-columns: 7fr 5fr; }}
   .hero-month {
     background: color-mix(in srgb, var(--paper) 94%, transparent);
     color: var(--ink);
@@ -887,8 +810,7 @@
     max-width: 22rem; justify-self: end; width: 100%;
   }
   @supports not (background: color-mix(in srgb, red 50%, transparent)) {
-    .hero-month { background: var(--paper); }
-  }
+    .hero-month { background: var(--paper); }}
   .hero-month .label { color: var(--sand-ink); display: block; margin-bottom: .2rem; }
   .hero-month .hm-month {
     font: 600 1.55rem/1 var(--font-serif); letter-spacing: -.015em;
@@ -928,7 +850,7 @@
   .bigstats .grid {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.2rem 1.5rem;
   }
-  @media (min-width: 46rem) { .bigstats .grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 46rem) { .bigstats .grid { grid-template-columns: repeat(4, 1fr); }}
   .bigstats .n {
     display: block; font: 600 clamp(3rem, 7vw, 4.6rem)/1 var(--font-serif);
     letter-spacing: -.03em; color: var(--on-deep);
@@ -945,8 +867,8 @@
   /* The decision system: keep up, get ready, see what's aging. Each door names
      the reader's situation first and the thing behind it second. */
   .doors { display: grid; gap: 1rem; margin-top: 2rem; }
-  @media (min-width: 46rem) { .doors { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 72rem) { .doors { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 46rem) { .doors { grid-template-columns: repeat(2, 1fr); }}
+  @media (min-width: 72rem) { .doors { grid-template-columns: repeat(4, 1fr); }}
   .door {
     display: flex; flex-direction: column; text-decoration: none;
     background: var(--paper); border: 1px solid var(--rule);
@@ -965,34 +887,6 @@
   .door p { font: 400 .93rem/1.55 var(--font-sans); color: var(--muted); margin: 0 0 1.1rem; flex: 1; }
   .door .go { font: 600 .9rem/1.3 var(--font-sans); color: var(--door-color); }
 
-  /* --- this month --------------------------------------------------------- */
-  /* The month card, filled by month-tasks.js with the real tasks for the real
-     current month. The same three-tier shape the products use. Hidden until
-     the script has content, exactly like the hero card. */
-  .now-head { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
-  .now-head .free-tag { vertical-align: .35em; }
-
-  /* --- mini calculator ---------------------------------------------------- */
-  .mini-calc {
-    background: var(--paper); border: 1px solid var(--rule); border-radius: 4px;
-    box-shadow: var(--shadow-lg); padding: 2.2rem 1.8rem; margin-top: 2rem;
-    text-align: center;
-  }
-  .mini-calc h3 { font: 600 1.5rem/1.2 var(--font-serif); color: var(--ink); margin-bottom: .4rem; }
-  .mini-calc p { color: var(--muted); font-size: .95rem; max-width: 28rem; margin: 0 auto 1.3rem; }
-  .mini-calc-row {
-    display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap;
-  }
-  .mini-calc-row input {
-    font: 600 1.35rem/1 var(--font-serif); text-align: center;
-    width: 7.5rem; padding: .7rem .5rem; border-radius: 3px;
-    border: 1px solid var(--muted); background: var(--bg); color: var(--ink);
-  }
-  .mini-calc-row input:focus-visible {
-    outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
-  }
-  .mini-calc-note { font-size: .82rem !important; margin-top: .9rem !important; }
-
   /* --- the desk ----------------------------------------------------------- */
   /* Real page tops overlapping like sheets emptied onto a kitchen table. The
      images are the same protective crops build_site_images.py already makes;
@@ -1001,7 +895,7 @@
     position: relative; margin-top: 2.5rem;
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem;
   }
-  @media (min-width: 46rem) { .desk { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 46rem) { .desk { grid-template-columns: repeat(3, 1fr); }}
   .desk figure { margin: 0; position: relative; }
   .desk img {
     display: block; width: 100%; height: auto; background: #fff;
@@ -1019,47 +913,23 @@
   .desk-note a { color: var(--sand-lift); }
   section:not(.band) .desk-note a { color: var(--accent); }
 
-  /* --- useful right now --------------------------------------------------- */
-  .res-card {
-    display: block; text-decoration: none;
-    background: var(--paper); border: 1px solid var(--rule);
-    border-left: 3px solid var(--sand); border-radius: 4px;
-    box-shadow: var(--shadow); padding: 1.5rem 1.6rem; margin-top: 2rem;
-    color: var(--ink);
-  }
-  .res-card:hover { box-shadow: var(--shadow-lg); }
-  .res-card .label { color: var(--sand); display: block; margin-bottom: .5rem; }
-  .res-card h3 { font: 600 1.35rem/1.25 var(--font-serif); color: var(--ink); margin-bottom: .45rem; }
-  .res-card p { font: 400 .95rem/1.55 var(--font-sans); color: var(--muted); margin: 0 0 .9rem; }
-  .res-card .checked-chip {
-    font: 600 10.5px/1 var(--font-sans); letter-spacing: .1em;
-    text-transform: uppercase; color: var(--muted);
-    border: 1px solid var(--rule); border-radius: 2px;
-    padding: .35rem .5rem; display: inline-block;
-  }
-  /* Four cells, so the track count has to divide into four exactly, same
-     reason .factors carries its own counts: three tracks under four cells
-     leaves the grid's own ground showing as empty boxes. */
-  .points--four { grid-template-columns: 1fr; }
-  @media (min-width: 34rem) { .points--four { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 60rem) { .points--four { grid-template-columns: repeat(4, 1fr); } }
-
   /* --- width caps for the 71rem wrap --------------------------------------- */
   /* The grids scale with the wide layout; these are columns of text and
      controls, which do not. Each keeps roughly the width it was designed at
      and centers in the wider page. */
   .picker { max-width: 52rem; margin-left: auto; margin-right: auto; }
-  .month-card { max-width: 54rem; margin-left: auto; margin-right: auto; }
-  .mini-calc { max-width: 46rem; margin-left: auto; margin-right: auto; }
-  .followup { max-width: 44rem; margin-left: auto; margin-right: auto; }
   .buy { max-width: 48rem; margin-left: auto; margin-right: auto; }
-  .res-card { max-width: 54rem; }
   .res-list { max-width: 54rem; }
   .tier { max-width: 54rem; }
   .preview-warning, .android-note { max-width: 54rem; }
 
-
-
+  /* WCAG 2.1.1: a region that scrolls has to be reachable from a keyboard, and
+     these are the only two on the site. Both carry role="group" and an
+     aria-label in the markup; this is the ring that makes the tab stop visible
+     when it lands there. */
+  .scroll:focus-visible, .prow:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 3px;
+  }
 
   /* --- /about/ ------------------------------------------------------------
      Prose in the sans face at reading width. The page is the answer to "who is
@@ -1131,7 +1001,7 @@
     border-top: 1px solid var(--hairline);
   }
   .storm-steps { display: grid; gap: 1rem; margin-top: 2rem; }
-  @media (min-width: 62rem) { .storm-steps { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 62rem) { .storm-steps { grid-template-columns: repeat(3, 1fr); }}
   .storm-step {
     background: var(--paper); border: 1px solid var(--rule);
     border-top: 3px solid var(--accent); border-radius: 4px;
@@ -1167,85 +1037,12 @@
     border-left: 3px solid var(--marker); padding-left: 1rem;
   }
   .storm-note strong { color: var(--on-surface); }
-
-  /* .foot-grid moved to nav.css in 1.34.0, with the rest of the footer. */
-
-  /* =========================================================================
-     1.26.0: the approved mockup. Light split hero, centered section heads,
-     the five-row climate chart, chip tier cards, the fanned page spread with
-     benefit bullets, and outline "view details" buttons.
-     ========================================================================= */
-
-  /* --- split hero --------------------------------------------------------- */
-  /* The approved full-width layout: light ground, copy on the left inside the
-     wrap, and the photograph bleeding clean to the viewport's right edge with
-     no box around it. The month card floats on the photo. */
-  .hero--split {
-    background: var(--bg); color: var(--ink);
-    padding: 0; position: relative; overflow: hidden;
-  }
-  .hero--split .label { color: var(--sand); }
-  .hero--split h1 { color: var(--ink); text-shadow: none; }
-  .hero--split .deck { color: var(--muted); text-shadow: none; }
-  .hero--split .deck strong { color: var(--ink); }
-  .hero--split .hero-grid {
-    grid-template-columns: 1fr; align-items: stretch; gap: 0;
-  }
-  @media (min-width: 56rem) {
-    .hero--split .hero-grid { grid-template-columns: 11fr 10fr; gap: 0 3.5rem; }
-  }
-  .hero-copy { padding: 4rem 0 4rem; }
-  /* The bleed: the photo column throws its outer margin past the wrap's edge
-     to the viewport's. The distance is the wrap's outer gutter plus its
-     padding; a percentage would resolve against the grid column and
-     overshoot, which is exactly the bug this formula replaced. */
-  .hero-photo {
-    position: relative;
-    margin: 0 calc(-1 * ((100vw - min(100vw, 71rem)) / 2 + 1.35rem));
-  }
-  @media (min-width: 56rem) {
-    .hero-photo {
-      margin: 0 calc(-1 * ((100vw - min(100vw, 71rem)) / 2 + 1.35rem)) 0 0;
-    }
-  }
-  .hero-photo img {
-    display: block; width: 100%; height: 100%; min-height: 24rem;
-    object-fit: cover; object-position: 60% 30%;
-    border-radius: 0; box-shadow: none;
-  }
-  @media (min-width: 56rem) {
-    .hero-photo .hero-month {
-      position: absolute; right: 3rem; bottom: 3rem; max-width: 16rem;
-    }
-  }
-  @media (max-width: 55.98rem) {
-    /* On a phone the card slides up over the photo's bottom edge rather than
-       floating on it, so neither has to shrink. */
-    .hero-photo .hero-month {
-      position: relative; margin: -4.5rem 1.35rem 1.5rem auto; max-width: 17rem;
-    }
-  }
-  .hero--split .hero-month { background: var(--paper); }
-  /* The season pill, restyled for the light ground it now sits on. */
-  .hero--split .season {
-    background: var(--paper); border-color: var(--rule);
-    color: var(--muted); text-shadow: none;
-  }
-  .hero--split .season-num { color: var(--ink); }
-  .hero--split .season-link { color: var(--accent); border-bottom-color: color-mix(in srgb, var(--accent) 45%, transparent); }
   .btn--hero {
     background: var(--deep); border-color: var(--deep); color: var(--on-deep);
     text-transform: uppercase; letter-spacing: .09em; font-size: 12px;
     padding: 1rem 1.4rem;
   }
   .btn--hero:hover { filter: brightness(1.18); }
-  /* On the photographic hero the button sits on the scrim, so it keeps its
-     own solid ground and a hairline so it cannot sink into a dark canopy. */
-  .hero:not(.hero--split) .btn--hero { border: 1px solid color-mix(in srgb, var(--on-deep) 35%, transparent); }
-  .hero--split .hero-alt { color: var(--muted); margin: 0; max-width: 13rem; }
-  .hero--split .hero-alt a { color: var(--ink); font-weight: 600; }
-  .hero--split .free-line { color: var(--muted); text-transform: none; letter-spacing: .02em; font-weight: 400; font-size: 13px; }
-  .hero--split .free-line { margin-top: 1.1rem; }
 
   /* --- centered section heads --------------------------------------------- */
   .center { text-align: center; }
@@ -1259,15 +1056,13 @@
   .bigstats .grid > div { text-align: center; padding: 0 .5rem; }
   @media (min-width: 46rem) {
     .bigstats .grid { gap: 0; }
-    .bigstats .grid > div + div { border-left: 1px solid color-mix(in srgb, var(--on-deep) 18%, transparent); }
-  }
+    .bigstats .grid > div + div { border-left: 1px solid color-mix(in srgb, var(--on-deep) 18%, transparent); }}
 
   /* --- factors, borderless icon row ---------------------------------------- */
   .factors--plain { background: none; border: 0; gap: 1.5rem 0; margin-top: 2.5rem; }
   .factors--plain .factor { background: none; padding: 0 1.4rem; }
   @media (min-width: 60rem) {
-    .factors--plain .factor + .factor { border-left: 1px solid var(--hairline); }
-  }
+    .factors--plain .factor + .factor { border-left: 1px solid var(--hairline); }}
   .factors--plain .factor h3 {
     font: 700 11px/1.4 var(--font-sans); letter-spacing: .12em;
     text-transform: uppercase; margin-bottom: .3rem;
@@ -1277,7 +1072,7 @@
 
   /* --- the three levels ---------------------------------------------------- */
   .levels { display: grid; gap: 1rem; margin-top: 2.25rem; text-align: left; }
-  @media (min-width: 46rem) { .levels { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 46rem) { .levels { grid-template-columns: repeat(3, 1fr); }}
   .level {
     background: var(--paper); border: 1px solid var(--rule); border-radius: 4px;
     box-shadow: var(--shadow); padding: 1.5rem 1.5rem 1.35rem;
@@ -1288,9 +1083,6 @@
     display: flex; align-items: center; justify-content: center;
     background: var(--level-color); color: var(--on-tier);
   }
-  .level--must   { --level-color: var(--must); }
-  .level--should { --level-color: var(--sand); }
-  .level--above  { --level-color: var(--should); }
   .level h3 {
     font: 700 11.5px/1.3 var(--font-sans); letter-spacing: .13em;
     text-transform: uppercase; color: var(--level-color); margin-bottom: .55rem;
@@ -1301,13 +1093,6 @@
     font: 600 .88rem/1.3 var(--font-sans); color: var(--ink); text-decoration: none;
   }
   .level .go:hover { color: var(--level-color); }
-  .level--rounds { --level-color: var(--above); }
-
-  /* The month's checklist columns, section 04. Same cards as the levels, one
-     ticked list each. */
-  .todo-cols { display: grid; gap: 1rem; margin-top: 2rem; }
-  @media (min-width: 34rem) { .todo-cols { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 60rem) { .todo-cols { grid-template-columns: repeat(4, 1fr); } }
   .check-list { list-style: none; margin: 0 0 .4rem; padding: 0; }
   .check-list li {
     font: 400 .9rem/1.45 var(--font-sans); color: var(--muted);
@@ -1338,27 +1123,12 @@
   @media (max-width: 40rem) {
     .fan { flex-wrap: wrap; gap: 1rem; }
     .fan figure { width: 46%; }
-    .fan figure + figure { margin-left: 0; }
-  }
-  .benefits {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem;
-    margin: 2.75rem 0 0; text-align: center;
-  }
-  @media (min-width: 46rem) {
-    .benefits { grid-template-columns: repeat(4, 1fr); }
-    .benefits > div + div { border-left: 1px solid var(--hairline); }
-  }
+    .fan figure + figure { margin-left: 0; }}
   /* The full-width fan: bigger sheets, per Chad. On the band the white pages
      carry their own light, so the shadows can be deeper. */
   .fan--wide { margin-top: 2.5rem; }
   .fan--wide figure { width: 24%; min-width: 12rem; }
   .fan--wide img { box-shadow: 0 3px 6px rgba(0,0,0,.25), 0 24px 60px -18px rgba(0,0,0,.5); }
-  .benefits svg { color: var(--sand); margin-bottom: .5rem; }
-  .benefits h3 {
-    font: 700 11px/1.4 var(--font-sans); letter-spacing: .12em;
-    text-transform: uppercase; color: var(--on-surface); margin-bottom: .25rem;
-  }
-  .benefits p { font: 400 .85rem/1.5 var(--font-sans); color: var(--on-surface-mute); margin: 0; }
   .btn--dark {
     background: var(--deep); border-color: var(--deep); color: var(--on-deep);
     text-transform: uppercase; letter-spacing: .09em; font-size: 12px;
@@ -1401,7 +1171,6 @@
   }
   .res-row .meta .read { color: var(--accent); }
 
-
   /* =========================================================================
      1.29.0: the final mockup convergence. Two-panel bands, the inline
      borrowed-time panel, the footer signup, and the chips the widget shares
@@ -1409,7 +1178,7 @@
      ========================================================================= */
 
   .duo { display: grid; gap: 1rem; margin-top: 2rem; align-items: stretch; }
-  @media (min-width: 60rem) { .duo { grid-template-columns: 3fr 2fr; } }
+  @media (min-width: 60rem) { .duo { grid-template-columns: 3fr 2fr; }}
   .panel {
     background: var(--paper); border: 1px solid var(--rule); border-radius: 4px;
     box-shadow: var(--shadow); padding: 1.6rem 1.6rem 1.5rem;
@@ -1421,7 +1190,7 @@
   .panel .panel-sub { font: 400 .92rem/1.5 var(--font-sans); color: var(--muted); margin: 0 0 1.2rem; }
 
   .now-tiers { display: grid; gap: 1.25rem; }
-  @media (min-width: 34rem) { .now-tiers { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 34rem) { .now-tiers { grid-template-columns: repeat(3, 1fr); }}
   .now-tier h4 {
     font: 700 10.5px/1.3 var(--font-sans); letter-spacing: .13em;
     text-transform: uppercase; color: var(--tier-color, var(--accent));
@@ -1469,24 +1238,6 @@
   .chip--watch   { background: color-mix(in srgb, var(--sand) 78%, black); color: #fdfbf4; }
   .chip--ok      { background: var(--should); color: var(--on-tier); }
 
-  /* The getting section: fan left, compact product cards right. */
-  .get-grid { display: grid; gap: 1.5rem; margin-top: 2rem; align-items: start; }
-  @media (min-width: 60rem) { .get-grid { grid-template-columns: 11fr 9fr; } }
-  .get-grid .fan { margin: 0 0 1.25rem; }
-  .get-grid .fan figure { min-width: 0; }
-  .pgrid--sm { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; }
-  .pgrid--sm .pcard { flex-direction: column; }
-  .pgrid--sm .pcard img {
-    width: 100%; max-width: none; border-right: 0;
-    border-bottom: 1px solid var(--rule); align-self: auto;
-  }
-  .pgrid--sm .pcard-body { padding: .8rem .8rem .9rem; }
-  .pgrid--sm .pcard h3 { font-size: .92rem; }
-  .pgrid--sm .pcard .pcard-pages { font-size: .76rem; margin-bottom: .35rem; }
-  .pgrid--sm .pcard .pcard-price { font-size: 1.05rem; margin-bottom: .6rem; }
-  .pgrid--sm .btn { padding: .6rem .5rem; font-size: 10.5px; }
-  @media (max-width: 34rem) { .pgrid--sm { grid-template-columns: 1fr; } }
-
   /* Story left, the trust list right. */
   .trust-list { display: flex; flex-direction: column; gap: 1.1rem; }
   .trust-item { display: flex; gap: .85rem; align-items: flex-start; }
@@ -1501,7 +1252,7 @@
     display: grid; gap: 1.25rem; margin: 0 0 2.25rem; padding: 0 0 2.25rem;
     border-bottom: 1px solid color-mix(in srgb, var(--on-deep) 15%, transparent);
   }
-  @media (min-width: 52rem) { .foot-signup { grid-template-columns: 1fr auto; align-items: center; } }
+  @media (min-width: 52rem) { .foot-signup { grid-template-columns: 1fr auto; align-items: center; }}
   .foot-signup .fs-title {
     font: 600 11px/1.5 var(--font-sans); letter-spacing: .14em;
     text-transform: uppercase; color: var(--sand-lift); margin: 0 0 .3rem;
@@ -1511,3 +1262,16 @@
   footer .signup-note { color: var(--on-deep-mute) !important; }
   footer .signup-done { color: var(--on-deep-mute) !important; }
   footer .signup-done strong { color: var(--sand-lift); }
+
+  /* Removed in 1.37.0, all of it unreferenced by any page or script:
+     .hero--split and its .hero-copy/.hero-photo half of an alternate hero,
+     .res-card superseded by .res-row, .month-card, .mini-calc, .benefits,
+     .get-grid, .pgrid--sm, .todo-cols, .followup, .buy-blurb, .stats,
+     .pcard-more, .now-head, the .k-- and .level-- colour sets, .points--four,
+     and .cta--alert/.cta--kit, which a comment above claimed had already gone
+     with the 1.32.2 nav move and which had not.
+
+     .android-note, .preview-warning, .btn--copied, the .mini-* set and the
+     .chip-- set look unused by the same test and are not: calendar-buttons.js
+     and calc-widget.js build that markup at runtime. Do not sweep them.
+     ========================================================================= */
