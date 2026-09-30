@@ -226,6 +226,15 @@ footer .version {
   font: 600 11px/1 var(--font-sans);
   letter-spacing: .12em; opacity: .55; margin: 0;
 }
+/* The thermal tool is on its own subdomain, behind a password, and is not an
+   offer to a reader. It sits down here with the version because both are
+   furniture for whoever runs the site, and it is set quieter than a footer
+   column link so it does not read as one. */
+footer .private-tool {
+  font: 400 11.5px/1.5 var(--font-sans);
+  letter-spacing: .04em; opacity: .6; margin: 0 0 .5rem;
+}
+footer .private-tool a { color: var(--sand-lift); }
 /* The resource pages' one piece of page-specific footer copy: who to tell when
    a fact has gone stale, and the date the links were last checked. */
 footer .foot-correction { margin: 0 0 .4rem; max-width: 34rem; }

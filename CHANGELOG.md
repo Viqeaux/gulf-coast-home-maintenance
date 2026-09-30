@@ -27,6 +27,29 @@ Newest first.
 
 ---
 
+## [1.38.1], 2026-09-30
+
+**A way to reach the thermal report tool.** The tool runs on the office PC and
+is served at `thermal.gulfcoasthomemaintenance.com` behind a password. It had
+no link anywhere, which meant remembering the address. Now the footer carries
+one.
+
+It is deliberately not a page of this site and is not offered as one. It sits
+with the version marker rather than in the footer columns, because both are
+furniture for whoever runs the site rather than anything a reader is being
+handed, and the label says "private, password required" so that meeting a
+password box reads as intended rather than broken.
+
+**No feed changed**, and `SEQUENCE` stays at 2.
+
+### Added
+
+- `PRIVATE_TOOL` in `site_chrome.py`, rendered by `footer()` between the
+  disclaimer and the version. One constant, so the address lives in one place
+  and every page that has a footer has the link.
+- `footer .private-tool` in `docs/nav.css`, set smaller and dimmer than a
+  footer column link so it does not read as one.
+
 ## [1.38.0], 2026-08-22
 
 **Four new pages on the shelf, and the last of the audit's structural

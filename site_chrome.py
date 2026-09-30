@@ -111,6 +111,14 @@ FOOTER_COLUMNS = [
 DISCLAIMER = ("General maintenance guidance, not a substitute for a licensed "
               "inspector, contractor, or your insurance policy terms.")
 
+# The thermal report builder, which is not part of this site: it lives on its
+# own subdomain, is served from the office PC through a tunnel, and is behind a
+# password. It sits with the version marker rather than in the footer columns
+# for the same reason the version does, that both are furniture for whoever
+# runs the site rather than anything offered to a reader. The label says it is
+# private so that meeting a password box reads as intended rather than broken.
+PRIVATE_TOOL = ("https://thermal.gulfcoasthomemaintenance.com/", "Thermal report tool")
+
 HOUSE_SVG = (
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" '
     'stroke="currentColor" stroke-width="1.7" stroke-linecap="round" '
@@ -251,6 +259,10 @@ def footer(prefix="", version="", prelude="", absolute=False):
     grid = "\n".join(cols)
 
     pre = ("\n" + prelude.rstrip() + "\n") if prelude.strip() else ""
+    # New tab, like every other off-site link in this footer: it is a separate
+    # application on its own subdomain, not another page of the site.
+    tool = ('\n    <p class="private-tool"><a href="%s" target="_blank" rel="noopener">%s</a>'
+            ' &middot; private, password required</p>' % PRIVATE_TOOL)
     ver = ('\n    <!-- Bump on release, alongside the CHANGELOG entry and the git tag.\n'
            '         Shown so a tester can say which version they were looking at. -->\n'
            '    <p class="version">v%s</p>' % version) if version else ""
@@ -268,6 +280,6 @@ def footer(prefix="", version="", prelude="", absolute=False):
         '      <span class="label">Gulf Coast Home Maintenance</span>\n'
         '    </span>\n\n'
         '    <div class="foot-grid">\n%s\n    </div>\n\n'
-        '    <p class="disclaimer">%s</p>%s\n'
+        '    <p class="disclaimer">%s</p>%s%s\n'
         '  </div>\n'
-        '</footer>' % (pre, grid, DISCLAIMER, ver))
+        '</footer>' % (pre, grid, DISCLAIMER, tool, ver))

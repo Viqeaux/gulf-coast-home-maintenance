@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.38.0**. Everything below is live unless marked otherwise.
+Current version **v1.38.1**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -55,6 +55,15 @@ the strongest thing in the listing. Do not embellish it.
 - **Etsy listing, the storm binder:** <https://www.etsy.com/listing/4556502794/hurricane-prep-binder-printable-home>
   Published by Chad 2026-08-15, and on the site the same day in 1.11.0 as
   section 05.
+- **Thermal report tool:** <https://thermal.gulfcoasthomemaintenance.com>,
+  **not part of this site and not this repo.** It is a Next.js app in
+  `C:\Users\ChadL\Documents\thermal-report-app` (own repo,
+  <https://github.com/Viqeaux/thermal-report-app>), running on Chad's office PC
+  and reached through a free Cloudflare tunnel. Password gated in `src/proxy.ts`
+  and `noindex`. Two halves start at boot: the `cloudflared` Windows service and
+  the scheduled task "Thermal Report Builder". The only thing this repo knows
+  about it is `PRIVATE_TOOL` in `site_chrome.py`, which puts the footer link
+  there. Set up 2026-09-30, verified end to end.
 - **Email:** MailerLite, group **"General Signups"**, double opt-in on. It began
   as a waitlist for the kit and the buy button retired that job, so in 1.6.0 it
   became a general "hear about the next one" list living at the end of the free
@@ -63,13 +72,18 @@ the strongest thing in the listing. Do not embellish it.
 
 ## Build
 
-**A full site build is three commands, in this order.** `build_chrome.py` reads
-`site_chrome.py` and writes the bar and the footer into the fourteen
-hand-written pages; the other two generate `/guides/` and `/calculator/` and
-import the same functions, so the chrome cannot differ between them.
+**A full site build is four commands, and the order matters.**
+`build_resource_pages.py` writes whole pages without chrome and must go first,
+or `build_chrome.py` will inject into the old copies and the new ones will ship
+bare. `build_chrome.py` then reads `site_chrome.py` and writes the bar and the
+footer into the hand-written pages; the last two generate `/guides/` and
+`/calculator/` and import the same functions, so the chrome cannot differ
+between them. Getting this order wrong is silent: the build reports success and
+four resource pages lose their navigation.
 
 ```bash
-python build_chrome.py          # the shared bar and footer, into the 14 hand-written pages
+python build_resource_pages.py  # FIRST: the generated shelf pages, chrome-less
+python build_chrome.py          # the shared bar and footer, into the hand-written pages
 python build_calendars.py       # feeds + calendar contents page, into docs/
 python build_printables.py      # the kit PDF, into product/
 python build_fillable.py        # the fillable twin, needs the PDF above first
