@@ -61,9 +61,14 @@
      point: a tracker that arrives by paste rather than by decision does not
      work at all.
 
-     form-action names MailerLite explicitly. If the signup ever moves, this
-     line moves with it or the form silently stops submitting. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://assets.mailerlite.com; frame-src 'self'; base-uri 'none'; object-src 'none'">
+     MailerLite is named TWICE on purpose, and both are load-bearing.
+     form-action lets the signup POST there. frame-src lets the hidden
+     ml-sink iframe it targets actually load the response. Between 1.9.0
+     and 1.38.3 only the first was named, and the submission was blocked
+     for six weeks while the page kept saying "check your email": a
+     blocked frame navigation still fires load, so the success swap ran
+     anyway. If the signup ever moves, BOTH lines move with it. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action https://assets.mailerlite.com; frame-src 'self' https://assets.mailerlite.com; base-uri 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- The Measurement ID lives in this file and nowhere else. Empty means nothing
@@ -975,7 +980,7 @@
     <p class="private-tool"><a href="https://thermal.gulfcoasthomemaintenance.com/" target="_blank" rel="noopener nofollow">Thermal report tool</a> &middot; private, password required</p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag.
          Shown so a tester can say which version they were looking at. -->
-    <p class="version">v1.38.2</p>
+    <p class="version">v1.38.3</p>
   </div>
 </footer>
 

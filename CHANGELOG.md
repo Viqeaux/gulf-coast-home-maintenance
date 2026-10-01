@@ -27,6 +27,48 @@ Newest first.
 
 ---
 
+## [1.38.3], 2026-10-01
+
+**The signup has been dead since 1.9.0 and the page said otherwise.** Six and
+a half weeks, 2026-08-15 to today. Anyone who entered an address was told
+"Nearly there, check your email" and was never subscribed, and no email was
+ever coming.
+
+**What happened.** The form was added 2026-08-13. The security review two days
+later added a CSP that names MailerLite in `form-action` but not in
+`frame-src`. The form posts into a hidden iframe, and `frame-src 'self'`
+forbade that iframe from loading MailerLite, so the POST never left the
+browser.
+
+**Why nobody noticed.** A refused frame navigation still fires `load`. The
+handler treated `load` as proof the request completed, so the success swap ran
+on every failure. The one signal that said otherwise was a console violation
+nobody was reading.
+
+**How many signups were lost cannot be recovered**, because the requests never
+reached MailerLite to be logged. Anyone who signed up between those dates will
+have to do it again.
+
+Found while setting up GA4 key events, after the signup was tested by hand and
+no confirmation email arrived.
+
+**No feed changed**, and `SEQUENCE` stays at 2.
+
+### Fixed
+
+- `frame-src` names `https://assets.mailerlite.com` on the three pages that
+  carry the form: the home page, `/guides/` and `/calculator/`. The other
+  sixteen keep `'none'` or `'self'`, because a page without a form has no
+  business framing anything.
+- The submit handler no longer reads `load` as success. It listens for the
+  browser's own `securitypolicyviolation`, and on a refusal it keeps the form
+  up, says plainly that nothing was sent and that the address is not on the
+  list, and points at the Etsy message box. Scoped to `frame-src` violations
+  naming MailerLite, so an unrelated violation cannot fail a good signup.
+- The note above the CSP in `docs/index.html` now says MailerLite is named
+  twice on purpose and that both lines move together, which is the thing that
+  would have prevented this.
+
 ## [1.38.2], 2026-10-01
 
 **Stop sending Googlebot at a locked door.** The footer link added in 1.38.1

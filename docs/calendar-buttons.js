@@ -45,14 +45,53 @@
         if (hp) { hp.disabled = true; }
 
         var sink = document.querySelector('iframe[name="ml-sink"]');
+        var settled = false;
+
+        // A frame navigation the policy refuses still fires `load`, which is
+        // exactly how this signup stayed dead from 1.9.0 to 1.38.3: frame-src
+        // did not name MailerLite, the POST never left the browser, and the
+        // page said "check your email" to everyone who tried. The browser does
+        // announce the refusal, so listen for it and say the true thing.
+        // Scoped to this submit, and to this origin, so an unrelated violation
+        // elsewhere on the page cannot mark a good signup as failed.
+        var refused = false;
+        var onViolation = function (e) {
+          if (e.effectiveDirective === 'frame-src' &&
+              String(e.blockedURI).indexOf('assets.mailerlite.com') !== -1) {
+            refused = true;
+          }
+        };
+        document.addEventListener('securitypolicyviolation', onViolation);
+
         var swap = function () {
           signup.hidden = true;
           document.querySelector('.signup-done').hidden = false;
         };
-        sink.addEventListener('load', swap, { once: true });
+
+        // Keep the form up so the address is still in it and a second try
+        // costs nothing. role=alert so a screen reader hears this at once.
+        var refuse = function () {
+          var p = document.createElement('p');
+          p.className = 'signup-note';
+          p.setAttribute('role', 'alert');
+          p.textContent = 'That did not go through, and you are not on the ' +
+            'list. Nothing was sent. Please try again, and if it keeps ' +
+            'failing the shop on Etsy has a message box that reaches us.';
+          signup.parentNode.insertBefore(p, signup.nextSibling);
+        };
+
+        var settle = function () {
+          if (settled) { return; }
+          settled = true;
+          document.removeEventListener('securitypolicyviolation', onViolation);
+          if (refused) { refuse(); } else { swap(); }
+        };
+
+        sink.addEventListener('load', settle, { once: true });
         // If the frame never reports back, show it anyway rather than leaving
-        // them staring at a form that looks like it did nothing.
-        setTimeout(swap, 2500);
+        // them staring at a form that looks like it did nothing. A refusal is
+        // synchronous and has already been recorded by the time this runs.
+        setTimeout(settle, 2500);
       });
     }
 

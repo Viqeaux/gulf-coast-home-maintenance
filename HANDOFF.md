@@ -4,7 +4,7 @@ Everything a fresh session needs to pick this up. Read this first, then
 [README.md](README.md) for how the build works and [CHANGELOG.md](CHANGELOG.md)
 for why things are the way they are.
 
-Current version **v1.38.2**. Everything below is live unless marked otherwise.
+Current version **v1.38.3**. Everything below is live unless marked otherwise.
 
 ---
 
@@ -410,6 +410,25 @@ verified. Not every commit, and not a half-finished feature.
 subscribers. Hash them against the previous tag. It has caught real mistakes.
 
 ## Gotchas that cost time
+
+**A blocked frame navigation still fires `load`, so "it loaded" is not "it
+worked".** This cost six and a half weeks of signups. The form posts into a
+hidden iframe and the handler took the iframe's `load` event as proof the
+request completed. When the CSP refused the navigation the frame never went
+anywhere, fired `load` on the empty document it was already showing, and the
+page cheerfully said "check your email". Fixed in 1.38.3 by listening for
+`securitypolicyviolation`. **If anything else on this site is ever judged to
+have succeeded because a frame or an image fired an event, check what the
+console says before believing it.**
+
+**MailerLite has to be named TWICE in the CSP.** `form-action` lets the signup
+POST; `frame-src` lets the `ml-sink` iframe it targets load the answer. Naming
+only the first is what broke the signup from 1.9.0 to 1.38.3. The three pages
+that carry the form are the home page, `/guides/` and `/calculator/`, and their
+CSPs live in three different places: `docs/index.html` by hand,
+`build_calendars.py` and `build_calculator.py` in code. **Testing the signup
+means watching the console for a violation, not watching for the thank-you
+message, which appears either way.**
 
 **GitHub Pages silently misses build triggers.** Three times now the commit
 landed but no deployment was created. The tell: `raw.githubusercontent.com`
