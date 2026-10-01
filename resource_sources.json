@@ -257,21 +257,6 @@
         ]
       }
     },
-    "https://www.mid.ms.gov/mississippi-insurance-department/preparedness/mitigation/smh": {
-      "chars": 22738,
-      "hash": "c77b08874ae0a026",
-      "last_seen": "2026-08-23",
-      "signals": {
-        "dates": [],
-        "dollars": [
-          "$10,000"
-        ],
-        "status": [],
-        "years": [
-          "2026"
-        ]
-      }
-    },
     "https://www.msboc.us": {
       "chars": 5318,
       "hash": "05ad4df47eff2a9e",
@@ -400,6 +385,21 @@
         "status": [],
         "years": [
           "2023",
+          "2026"
+        ]
+      }
+    },
+    "https://www.mid.ms.gov/smh/": {
+      "chars": 22738,
+      "hash": "c77b08874ae0a026",
+      "last_seen": "2026-08-23",
+      "signals": {
+        "dates": [],
+        "dollars": [
+          "$10,000"
+        ],
+        "status": [],
+        "years": [
           "2026"
         ]
       }

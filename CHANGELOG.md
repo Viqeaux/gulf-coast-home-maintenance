@@ -27,6 +27,40 @@ Newest first.
 
 ---
 
+## [1.38.4], 2026-10-01
+
+**The Mississippi page was citing a dead link.** The Insurance Department
+rebuilt the Strengthen Mississippi Homes page and moved it from
+`/mississippi-insurance-department/preparedness/mitigation/smh` to
+`/smh/`. Anyone following the citation to check the claim for themselves got a
+404, which on the page whose whole promise is "here is where this came from"
+is the worst link on the site to have broken.
+
+Caught by `check_resources.py`, run for the first time since 2026-08-23 while
+preparing outreach to university extension services. The watcher earned its
+keep: nothing else would have noticed, because the program is fine and only its
+address moved.
+
+**The page's facts still hold.** Wind-pool policyholders only, three
+consecutive policy years, selection by lottery, SB 2409 — all still what the
+department says. Only the link was wrong.
+
+**The checked date deliberately did NOT move.** The department's new page keeps
+its detail behind collapsible sections that did not open to scripted reading,
+so the county list, the award ceiling and the residence rules were not
+re-verified against the source. The date on that page promises a person read
+it, and that has not happened yet. **Re-read it by hand and then move the
+date.**
+
+**No feed changed**, and `SEQUENCE` stays at 2.
+
+### Fixed
+
+- The two citation links on `docs/resources/strengthen-mississippi-homes/`
+  point at `https://www.mid.ms.gov/smh/`, which answers 200.
+- `resource_sources.json` tracks the new address, so the watcher follows the
+  page rather than reporting the same 404 every run.
+
 ## [1.38.3], 2026-10-01
 
 **The signup has been dead since 1.9.0 and the page said otherwise.** Six and
