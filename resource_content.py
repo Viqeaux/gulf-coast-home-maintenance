@@ -195,7 +195,9 @@ PAGES = [
       administered alongside it.
     </p>
     <ul>
-      <li><a href="https://www.mwua.org/" target="_blank" rel="noopener">mwua.org</a></li>
+      <li><a href="https://www.msplans.com/mwua/" target="_blank" rel="noopener">msplans.com/mwua</a>,
+        the association's own pages. It is not at mwua.org, which belongs to an
+        unrelated organisation in Maine.</li>
       <li><a href="https://msplans.com/" target="_blank" rel="noopener">msplans.com</a>, the shared administrator site</li>
     </ul>
 

@@ -34,7 +34,7 @@ RESOURCE_CHECKED = {
     "louisiana-fortify-homes":      ("the department's page", "22 August 2026"),
     "my-safe-florida-home":         ("the program's pages",   "22 August 2026"),
     "strengthen-alabama-homes":     ("the program's pages",   "22 August 2026"),
-    "strengthen-mississippi-homes": ("the department's page", "21 August 2026"),
+    "strengthen-mississippi-homes": ("the department's page", "1 October 2026"),
     "texas-windstorm-coverage":     ("the sources",           "22 August 2026"),
     "wind-mitigation-discounts":    ("the sources",           "22 August 2026"),
     "hurricane-deductibles":        ("the sources",           "22 August 2026"),

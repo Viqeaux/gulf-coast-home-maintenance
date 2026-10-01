@@ -27,6 +27,54 @@ Newest first.
 
 ---
 
+## [1.39.0], 2026-10-01
+
+**Two wrong links and an eligibility rule the department no longer publishes.**
+All three found by re-reading the Mississippi sources by hand, which is what
+`check_resources.py` exists to prompt and cannot do itself.
+
+**The wind pools page was sending people to Maine.** It cited `mwua.org` as the
+Mississippi Windstorm Underwriting Association. That domain belongs to the
+**Maine Water Utilities Association**, an unrelated organisation. The wind pool
+is at `msplans.com/mwua`. The initials collided and nobody followed the link.
+The page now names the right site and says plainly that mwua.org is not it, so
+the mistake does not get made again from the other direction.
+
+**The three-county rule is gone from the department's page.** This page said
+Hancock, Harrison and Jackson, "the lower three". The department's rebuilt page
+names no counties at all; the test it publishes is whether the wind pool
+carries your wind policy, and has for three consecutive years. Those overlap
+but they are not the same rule, and stating a county list the department has
+withdrawn risks turning away somebody who now qualifies. The page gives the
+wind pool test instead, and points at MWUA for its own territory.
+
+**Senate Bill 2409 is law, and it changed more than the name.** It set $10,000
+per home in statute, widened the covered damage from hurricanes alone to
+hurricane, tornado, hail and other catastrophic windstorm events, removed the
+repealer that had given the program an expiry date, and left the department to
+set eligibility by regulation. That last point is why the rules on this page
+are a phase and not a law, and it is worth a reader knowing.
+
+**Still not verified, and deliberately not claimed:** the residence rules.
+Whether townhomes, rentals, condominiums and mobile homes are still excluded,
+and what "good repair" means, sit in sections of the department's page that
+were not read this time.
+
+**No feed changed**, and `SEQUENCE` stays at 2.
+
+### Changed
+
+- `strengthen-mississippi-homes`: the wind pool test replaces the county list;
+  a paragraph on SB 2409; the costs above the award and the evaluator's fee
+  named as the homeowner's, which the department states and this page did not.
+- The checked date moves to 1 October 2026, in the page and in
+  `RESOURCE_CHECKED`, because a person read the sources this time.
+
+### Fixed
+
+- `gulf-wind-pools`: Mississippi points at `msplans.com/mwua`, not `mwua.org`.
+- `resource_sources.json` follows both corrected addresses.
+
 ## [1.38.4], 2026-10-01
 
 **The Mississippi page was citing a dead link.** The Insurance Department
