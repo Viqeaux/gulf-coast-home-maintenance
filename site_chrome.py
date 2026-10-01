@@ -261,7 +261,15 @@ def footer(prefix="", version="", prelude="", absolute=False):
     pre = ("\n" + prelude.rstrip() + "\n") if prelude.strip() else ""
     # New tab, like every other off-site link in this footer: it is a separate
     # application on its own subdomain, not another page of the site.
-    tool = ('\n    <p class="private-tool"><a href="%s" target="_blank" rel="noopener">%s</a>'
+    #
+    # nofollow, which the footer column links do not carry, because that
+    # subdomain answers 401 to everything including its own robots.txt. Without
+    # this, Googlebot follows the link from all twenty pages and bounces off a
+    # password every time. It could never index it either way, since a crawler
+    # that is refused at the door never reads the noindex header behind it, but
+    # there is no reason to send a crawler somewhere it cannot go.
+    tool = ('\n    <p class="private-tool"><a href="%s" target="_blank"'
+            ' rel="noopener nofollow">%s</a>'
             ' &middot; private, password required</p>' % PRIVATE_TOOL)
     ver = ('\n    <!-- Bump on release, alongside the CHANGELOG entry and the git tag.\n'
            '         Shown so a tester can say which version they were looking at. -->\n'

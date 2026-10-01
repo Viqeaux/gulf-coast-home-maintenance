@@ -27,6 +27,29 @@ Newest first.
 
 ---
 
+## [1.38.2], 2026-10-01
+
+**Stop sending Googlebot at a locked door.** The footer link added in 1.38.1
+was followable, and the subdomain it points at answers 401 to everything,
+including its own `robots.txt`. A crawler was being invited from all twenty
+pages to bounce off a password every time.
+
+It was never an indexing risk, because a crawler refused at the door never gets
+far enough to read the `noindex` header behind it. It was just pointless, and
+`rel="nofollow"` says so.
+
+Found while checking what Search Console would have to report on. The rest of
+that check came back clean: 20 of 20 pages in the sitemap, 20 unique titles,
+descriptions and canonicals, `www` and `http` both redirecting, a real 404, and
+the GA4 tag confirmed firing on the live site rather than merely installed.
+
+**No feed changed**, and `SEQUENCE` stays at 2.
+
+### Fixed
+
+- `PRIVATE_TOOL`'s link in `site_chrome.py` carries `rel="noopener nofollow"`.
+  The footer column links deliberately do not: those go to pages that answer.
+
 ## [1.38.1], 2026-09-30
 
 **A way to reach the thermal report tool.** The tool runs on the office PC and
