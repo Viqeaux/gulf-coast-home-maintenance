@@ -27,6 +27,51 @@ Newest first.
 
 ---
 
+## [1.39.1], 2026-10-01
+
+**The department's own FAQ, dated September 2026, settles what 1.39.0 had to
+hedge on.** Chad found it and the homeowner checklist on their site. Between
+them they answer every question the rebuilt page had buried, and they correct
+the correction 1.39.0 made an hour earlier.
+
+**The counties are back, and they mean something different.** 1.39.0 removed
+the three-county rule because the department's page no longer showed one. The
+FAQ shows why: eligibility is to "residents of Mississippi", statewide, with no
+county limit at all. What the six coastal counties carry (Hancock, Harrison,
+Jackson, Pearl River, Stone and George) is an extra condition, that the
+jurisdiction has adopted and enforces a building code meeting the FORTIFIED
+roof standard. So the old page restricted the program to three counties it was
+never restricted to, and 1.39.0 replaced that with wind pool geography that is
+really about the current round. The page now separates the two questions,
+because the department answers them in two different places and that is where
+the confusion starts.
+
+**The residence rules are confirmed exactly as written.** Owner-occupied,
+single-family, primary residence; townhomes, rentals, condominiums and mobile
+homes excluded. That claim has been carrying August's date without a re-read
+and it turns out to have been right.
+
+### Added
+
+- **Five things that cost people the grant**, all from the FAQ: you cannot do
+  the work yourself or use your own roofer, you cannot start before the award
+  letter, applying is online only with no paper or phone route, the evaluator's
+  fee is yours even if you walk away, and anything over $10,000 is your bill.
+  The opt-out window is 30 days from the award letter, in writing, before you
+  sign with a contractor.
+- One grant per household, ever. A FORTIFIED designation lasts five years.
+- Good repair is defined: well maintained, with any damage recent and
+  storm-related. A roof wrecked by a tornado does not disqualify you; neglect
+  does.
+- Wind coverage has to be in force at completion, not only at application.
+
+### Changed
+
+- "Interest form" becomes "application", and the phase language becomes round
+  language, which is what the department now says.
+- "Where the program is headed" cites the department's FAQ rather than press
+  reporting, which is a better source for the same claim.
+
 ## [1.39.0], 2026-10-01
 
 **Two wrong links and an eligibility rule the department no longer publishes.**
