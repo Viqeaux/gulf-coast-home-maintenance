@@ -49,6 +49,14 @@ nobody was reading.
 reached MailerLite to be logged. Anyone who signed up between those dates will
 have to do it again.
 
+**Checked the same day:** the list holds exactly one subscriber, dated
+2026-08-13 23:29, which is inside the two-day window between the form shipping
+and the CSP landing. So the outage is visible in the data as a clean absence,
+and with 0 search clicks over the same period the real loss is likely none. The
+one subscriber being already confirmed is also why testing the form by hand
+produced no email: MailerLite does not re-send a confirmation to an address it
+has already confirmed. Test with a plus-alias instead.
+
 Found while setting up GA4 key events, after the signup was tested by hand and
 no confirmation email arrived.
 
