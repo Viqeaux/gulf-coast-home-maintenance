@@ -27,7 +27,27 @@ Newest first.
 
 ---
 
-## [1.42.1], 2026-10-10
+## [1.43.0], 2026-10-10
+
+### Added
+
+- **A WPI-8 certificate page**, `/resources/wpi-8-certificate/`, the first
+  page chosen from Search Console data: about 150 impressions across 40
+  wordings of "wpi-8 lookup / search / cost", with nothing on the site built
+  for it. Which search to use by date of work (TDI's, or TWIA's for January
+  2017 to May 2020), the counties per TDI's fact sheet, cost (free TDI
+  inspector or a private one at unregulated rates), completed construction
+  certification, and what a buyer should ask. In the nav, the shelf index,
+  the sitemap, and linked from the Texas page.
+
+### Fixed
+
+- The Mississippi row on the shelf index still said "Checked August 21";
+  it now says October 1, matching the page.
+- `check_resources.py` now accepts PDFs. TDI answers 406 to an HTML-only
+  request for its fact sheet, which read as a dead link.
+
+, 2026-10-10
 
 ### Fixed
 

@@ -433,4 +433,114 @@ PAGES = [
         ],
         "limits": LIMITS,
     },
+    # ---------------------------------------------------------------- 5
+    {
+        "slug": "wpi-8-certificate",
+        "title": "WPI-8 Certificate Lookup: Which Texas Search to Use",
+        "description": "How to find a Texas WPI-8 windstorm certificate for a house: TDI's search, TWIA's lookup for 2017 to 2020 work, what one costs, and what to do if there isn't one.",
+        "og_title": "Finding a WPI-8 certificate, and which search to use",
+        "og_description": "Texas keeps windstorm certificates in two places, depending on when the work was done. Which one to search, what an inspection costs, and what to ask a seller.",
+        "h1": "Finding a WPI-8 certificate, and which search to use",
+        "standfirst": "On the Texas coast, the WPI-8 is the paper that shows a house, a repair or an addition was built to the windstorm code. Insurers look it up. Buyers should too. It lives in one of two databases, depending on when the work was done.",
+        "checked": CHECKED_LINE,
+        "body": """    <p class="lede">
+      <strong>Which search to use depends on when the work was
+      finished.</strong> TDI's own page sends work completed between January
+      2017 and May 2020 to TWIA's lookup, and everything else to TDI's. If you
+      do not know the date, search both. Each takes a minute.
+    </p>
+
+    <h2>The two searches</h2>
+    <ul>
+      <li><strong>TDI's certificate search.</strong> The Texas Department of
+      Insurance issues the WPI-8, for construction inspected while it was
+      built, and the WPI-8E, for construction certified after it was
+      finished. Both are in
+      <a href="https://appscenter.tdi.texas.gov/windstorm/p/searchForAppl" target="_blank" rel="noopener">TDI's windstorm certificate search</a>.</li>
+      <li><strong>TWIA's lookup, for 2017 to 2020.</strong> For a while the
+      Texas Windstorm Insurance Association issued its own certificate, the
+      WPI-8-C. TWIA's page says it accepted those applications from January 1,
+      2017 to May 31, 2020. They are in
+      <a href="https://www.twia.org/wpi-8-lookup/" target="_blank" rel="noopener">TWIA's WPI-8 lookup</a>,
+      searched by ZIP code and street number, and TWIA sends you a copy of
+      the certificate you request.</li>
+    </ul>
+    <p>
+      Both are linked from
+      <a href="https://www.tdi.texas.gov/wind/index.html" target="_blank" rel="noopener">TDI's windstorm inspections page</a>,
+      which is the page that decides everything on this one. For older
+      records TDI's page gives an address: engineering@tdi.texas.gov.
+    </p>
+
+    <h2>Who needs one</h2>
+    <p>
+      Per TDI's <a href="https://www.tdi.texas.gov/wind/documents/WPI-8-fact-sheet-eng-sp.pdf" target="_blank" rel="noopener">WPI-8 fact sheet</a>,
+      homeowners in Aransas, Brazoria, Calhoun, Cameron, Chambers, Galveston,
+      Jefferson, Kenedy, Kleberg, Matagorda, Nueces, Refugio, San Patricio and
+      Willacy counties, and in Harris County east of Highway 146. The fact
+      sheet also says the reason in one line: TWIA and insurance companies
+      can look certificates up to make sure the work is certified.
+    </p>
+    <p>
+      Not every repair needs one. The fact sheet's advice is to call your
+      local windstorm inspections office before starting any work and ask.
+    </p>
+
+    <h2>What one costs</h2>
+    <p>
+      The fact sheet gives two routes: request a free inspector from TDI, or
+      hire a Texas-licensed professional engineer or an appointed qualified
+      inspector. <strong>TDI does not regulate what those inspectors
+      charge</strong>, so a private inspection is priced like any other
+      professional service. Get the price in writing before the work starts.
+    </p>
+    <p>
+      Timing matters more than price. The certificate is easiest when the
+      inspections happen while the work is open, before the shingles cover
+      what needs seeing. That is the point of calling before work starts.
+    </p>
+
+    <h2>If there is no certificate</h2>
+    <p>
+      Finished work can still be certified. TDI calls it completed
+      construction certification, and its
+      <a href="https://www.tdi.texas.gov/wind/completed-construction-certificates.html" target="_blank" rel="noopener">completed construction page</a>
+      says the process changed on June 1, 2020. Per that page, TDI issues a
+      WPI-8E after receiving a signed WPI-2E application and a sealed
+      post-construction inspection report or sealed design, and any Texas
+      licensed professional engineer can do the inspection. Whether a given
+      house can be certified that way is a question for the engineer and for
+      TDI, at Windstorm@tdi.texas.gov.
+    </p>
+
+    <h2>Buying a house on the coast</h2>
+    <ol>
+      <li><strong>Search both databases before you make an offer
+      final.</strong> Then check the dates: a certificate for the house in 2009 says
+      nothing about a roof replaced in 2021.</li>
+      <li><strong>Ask the seller for the certificates.</strong> Sellers who
+      have them usually keep them with the house papers.</li>
+      <li><strong>Ask your agent how a missing certificate affects
+      coverage.</strong> TWIA's own advice is to talk to an agent about all
+      your options, and this is the question to bring.</li>
+    </ol>
+
+    <h2>Keep it with the house papers</h2>
+    <p>
+      A certificate is what makes compliant work visible to an insurer, and
+      it matters again when you sell. The rest of the Texas picture, TWIA and
+      the grant program Texas does not have, is on
+      <a href="../texas-windstorm-coverage/">the Texas windstorm page</a>.
+    </p>
+""",
+        "next": [
+            ("../texas-windstorm-coverage/", "Texas windstorm coverage",
+             "TWIA, the building standards, and the grant Texas does not have."),
+            ("../wind-mitigation-discounts/", "Wind mitigation discounts",
+             "what documented mitigation earns, state by state."),
+            ("../storm-contractors/", "Checking a contractor",
+             "the license lookup, and the paperwork worth refusing."),
+        ],
+        "limits": LIMITS,
+    },
 ]

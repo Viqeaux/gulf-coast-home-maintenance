@@ -41,6 +41,7 @@ RESOURCE_CHECKED = {
     "gulf-wind-pools":              ("the associations' own sites", "10 October 2026"),
     "storm-contractors":            ("the licensing boards",  "10 October 2026"),
     "roof-age-and-insurance":       ("the sources",           "10 October 2026"),
+    "wpi-8-certificate":            ("TDI's and TWIA's pages", "10 October 2026"),
 }
 
 SIGNUP = """    <div class="foot-signup">

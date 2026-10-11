@@ -41,6 +41,7 @@ RESOURCES = [
     ("resources/louisiana-fortify-homes/",      "Louisiana roof grant"),
     ("resources/my-safe-florida-home/",         "Florida inspections and grants"),
     ("resources/texas-windstorm-coverage/",     "Texas windstorm coverage"),
+    ("resources/wpi-8-certificate/",            "WPI-8 certificate lookup"),
     ("resources/flood-insurance-30-day-rule/",  "Flood insurance 30-day rule"),
     ("resources/wind-mitigation-discounts/",    "Wind mitigation discounts"),
     ("resources/hurricane-deductibles/",        "Hurricane deductibles"),

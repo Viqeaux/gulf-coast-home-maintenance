@@ -192,7 +192,10 @@ def fetch(url):
     """Return (ok, text_or_note). Never raises."""
     request = urllib.request.Request(url, headers={
         "User-Agent": UA,
-        "Accept": "text/html,application/xhtml+xml",
+        # PDFs too: TDI answers 406 to an HTML-only Accept for its fact sheet.
+        # A PDF fingerprints as its raw bytes, so any MOVED there means the
+        # file itself was replaced.
+        "Accept": "text/html,application/xhtml+xml,application/pdf;q=0.9,*/*;q=0.8",
         "Accept-Language": "en-US,en;q=0.9",
     })
     try:

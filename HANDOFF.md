@@ -916,6 +916,31 @@ that is the template and it repeats. If it does not, a day is lost rather than
 a strategy. The 25C and 25D status remains unverified because no page is being
 built on it; verify before ever writing one.
 
+## Search Console, first read 2026-10-10
+
+The export lives in `Search Console/`, gitignored on purpose: query data is
+private and this repo is public. **First read, 22 August to 10 October:**
+1,363 impressions, **zero clicks**, typical position 50 to 90. About a third
+of impressions are operator-laden queries (`+"grant" -"fema" -"sba"...`) from
+a rank tracker or scraper; discount them, they produce most of the flattering
+top-10 positions. Real searches: about 900.
+
+- Only resource pages appear. The calendar, guides and shop barely register.
+- **WPI-8 lookup/search/cost** was the biggest cluster with no page. Built in
+  1.43.0 as `/resources/wpi-8-certificate/`.
+- Louisiana and Alabama FORTIFIED, My Safe Florida Home, and the flood
+  waiting period all have exactly-matching pages that still rank on page 5
+  to 9. That is mostly a young domain with no inbound links. Next cheap step:
+  check titles and ledes against the words searched ("waiting period", "is it
+  too late", "lottery", "schedule").
+- Smaller clusters not yet served: FORTIFIED roof **cost** (the site prints
+  no costs, by rule), and Mississippi coast town searches (Waveland,
+  Pascagoula).
+- No winter queries yet, because there is no winter content. Freeze content
+  should be live by mid-November.
+
+Re-export monthly. Compare positions for the WPI-8 page first.
+
 ## The resource watcher, built 2026-08-23
 
 **`python check_resources.py` is what stops the shelf rotting.** The staleness

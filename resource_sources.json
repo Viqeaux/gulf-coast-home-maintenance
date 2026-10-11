@@ -14,6 +14,21 @@
         ]
       }
     },
+    "https://appscenter.tdi.texas.gov/windstorm/p/searchForAppl": {
+      "chars": 7203,
+      "hash": "70e15e82b6372881",
+      "last_seen": "2026-10-10",
+      "signals": {
+        "dates": [],
+        "dollars": [],
+        "status": [],
+        "years": [
+          "2017",
+          "2020",
+          "2030"
+        ]
+      }
+    },
     "https://floir.gov": {
       "chars": 1980,
       "hash": "1991a668703135f1",
@@ -32,7 +47,7 @@
     },
     "https://fortifiedhome.org": {
       "chars": 16526,
-      "hash": "fcef46e91f68c080",
+      "hash": "6288b2b62a1326be",
       "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
@@ -426,6 +441,45 @@
         ]
       }
     },
+    "https://www.tdi.texas.gov/wind/completed-construction-certificates.html": {
+      "chars": 4896,
+      "hash": "3b02be238bc88c8b",
+      "last_seen": "2026-10-10",
+      "signals": {
+        "dates": [
+          "january 1, 2017",
+          "june 1, 2020",
+          "may 31, 2020"
+        ],
+        "dollars": [],
+        "status": [],
+        "years": [
+          "2017",
+          "2020",
+          "2025"
+        ]
+      }
+    },
+    "https://www.tdi.texas.gov/wind/documents/WPI-8-fact-sheet-eng-sp.pdf": {
+      "chars": 52626,
+      "hash": "1759e935b024c58e",
+      "last_seen": "2026-10-10",
+      "signals": {
+        "dates": [],
+        "dollars": [
+          "$56",
+          "$0",
+          "$3",
+          "$6",
+          "$8"
+        ],
+        "status": [],
+        "years": [
+          "2018",
+          "2024"
+        ]
+      }
+    },
     "https://www.tdi.texas.gov/wind/index.html": {
       "chars": 3058,
       "hash": "8e3ac7167c96deaa",
@@ -470,6 +524,25 @@
         "status": [],
         "years": [
           "2026"
+        ]
+      }
+    },
+    "https://www.twia.org/wpi-8-lookup": {
+      "chars": 6090,
+      "hash": "96f7e3f3e5c88035",
+      "last_seen": "2026-10-10",
+      "signals": {
+        "dates": [
+          "january 1, 2017",
+          "may 31, 2020"
+        ],
+        "dollars": [],
+        "status": [],
+        "years": [
+          "2017",
+          "2018",
+          "2020",
+          "2061"
         ]
       }
     },

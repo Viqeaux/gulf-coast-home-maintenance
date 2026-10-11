@@ -45,3 +45,7 @@ docs/img/hero.png
 # same. build_brand.py remakes them in seconds, and binaries nothing in the
 # repo reads do not belong in it.
 product/brand/
+
+# Search Console exports: private query data, never published
+Search Console/
+search-console/
