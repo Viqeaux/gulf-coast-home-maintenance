@@ -27,7 +27,17 @@ Newest first.
 
 ---
 
-## [1.40.0], 2026-10-10
+## [1.40.1], 2026-10-10
+
+### Added
+
+- **Two more videos**, 28 of 36 now: a hose bibb repair from SharkBite for
+  the April spigot task, and the City of Cocoa's hurricane yard prep for the
+  May secure-the-exterior task. Indoor humidity stays without one: the best
+  candidates came from a humidifier maker, the wrong voice for a page telling
+  Gulf readers to dehumidify.
+
+, 2026-10-10
 
 ### Added
 

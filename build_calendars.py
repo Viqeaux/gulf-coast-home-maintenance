@@ -38,7 +38,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.40.0"
+VERSION = "1.40.1"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -489,10 +489,20 @@ GUIDES = {
          "https://www.youtube.com/watch?v=vDYyVhYfEyQ",
          "This Old House"),
     ],
+    "apr-spigots-irrigation": [
+        ("How to repair a leaky hose bibb",
+         "https://www.youtube.com/watch?v=4xCy8etz288",
+         "SharkBite Plumbing"),
+    ],
     "may-generator-supplies": [
         ("Getting your generator ready for hurricane season",
          "https://www.youtube.com/watch?v=BODupWwwpqw",
          "News4JAX"),
+    ],
+    "may-secure-exterior": [
+        ("Hurricane prep: five things to know about yard prep",
+         "https://www.youtube.com/watch?v=0rQfdNdXIpM",
+         "City of Cocoa, Florida"),
     ],
     "jun-condensate-line": [
         ("How to clean your AC condensate drain line",

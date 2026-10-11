@@ -1617,7 +1617,7 @@ build.
    and it has a September 10 deadline. Kit plus planner is the calm January
    pairing and can wait for the new year.
 
-2. ~~**Curated how-to videos.**~~ **Done in 1.40.0**, 26 of 36 tasks. Adding
+2. ~~**Curated how-to videos.**~~ **Done in 1.40.0**, now 28 of 36 tasks. Adding
    them did *not* need a `SEQUENCE` bump after all: every event already links
    to its guides anchor because `has_guide()` also counts `STEPS`, so the feeds
    stayed byte-identical. Run `check_links.py` every month or two.
