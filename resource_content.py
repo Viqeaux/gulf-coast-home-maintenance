@@ -11,7 +11,7 @@ send the reader to the document that decides. Do not print a figure that would
 be wrong for most readers in order to have a figure.
 """
 
-CHECKED_LINE = "Checked against the named sources on 22 August 2026"
+CHECKED_LINE = "Checked against the named sources on 10 October 2026"
 
 DOI_LINKS = """    <ul>
       <li><a href="https://www.mid.ms.gov/" target="_blank" rel="noopener">Mississippi Insurance Department</a></li>
@@ -197,7 +197,7 @@ PAGES = [
     <ul>
       <li><a href="https://www.msplans.com/mwua/" target="_blank" rel="noopener">msplans.com/mwua</a>,
         the association's own pages. It is not at mwua.org, which belongs to an
-        unrelated organisation in Maine.</li>
+        unrelated organization in Maine.</li>
       <li><a href="https://msplans.com/" target="_blank" rel="noopener">msplans.com</a>, the shared administrator site</li>
     </ul>
 
@@ -218,12 +218,26 @@ PAGES = [
     </p>
     <ul><li><a href="https://www.citizensfla.com/" target="_blank" rel="noopener">citizensfla.com</a></li></ul>
 
+    <h2>Do not wait for the storm</h2>
+    <p>
+      Like flood insurance, a wind pool will not sell you cover with a storm
+      already in the Gulf. On October 7, 2026, with Named Storm Isaias
+      approaching, the
+      <a href="https://www.aiua.org/" target="_blank" rel="noopener">AIUA homepage</a>
+      announced it had stopped accepting new business applications, and
+      <a href="https://www.twia.org" target="_blank" rel="noopener">TWIA's</a>
+      carried notices of a policy moratorium for the same storm, and of its
+      lifting. Each pool's own homepage
+      is where a suspension shows up, and the time to apply is while the map
+      is empty.
+    </p>
+
     <h2>Two things worth doing either way</h2>
     <ol>
       <li><strong>Ask an agent to shop the ordinary market first.</strong> A
       last resort is a last resort, and the pricing usually says so.</li>
       <li><strong>Ask what mitigation credits the pool itself offers.</strong>
-      Several of these associations recognise FORTIFIED construction or wind
+      Several of these associations recognize FORTIFIED construction or wind
       mitigation features, which is the same lever as
       <a href="../wind-mitigation-discounts/">the discounts page</a>, and the
       roof grant programs are the cheapest way to pull it.</li>
@@ -243,23 +257,23 @@ PAGES = [
     # ---------------------------------------------------------------- 3
     {
         "slug": "storm-contractors",
-        "title": "Checking a Roofer After a Storm: Licences, and the Deal to Walk Away From",
-        "description": "Contractors follow landfalls, and the good ones and the bad ones knock on the same doors. How to check a licence in each Gulf state, and the paperwork worth refusing.",
+        "title": "Checking a Roofer After a Storm: Licenses, and the Deal to Walk Away From",
+        "description": "Contractors follow landfalls, and the good ones and the bad ones knock on the same doors. How to check a license in each Gulf state, and the paperwork worth refusing.",
         "og_title": "How to check a roofer after a storm, in each Gulf state",
-        "og_description": "The licence lookup for each Gulf state, what a deposit demand tells you, and why signing your insurance claim over to a contractor is the paperwork to walk away from.",
+        "og_description": "The license lookup for each Gulf state, what a deposit demand tells you, and why signing your insurance claim over to a contractor is the paperwork to walk away from.",
         "h1": "Checking a contractor after a storm",
         "standfirst": "Contractors follow landfalls. Most are working honestly in a week when everyone needs them at once, and some are not, and they knock on the same doors on the same afternoon.",
         "checked": CHECKED_LINE,
         "body": """    <p class="lede">
       <strong>The check is free and it takes about five minutes.</strong> Every
-      Gulf state runs a public licence lookup, and the difference between a
+      Gulf state runs a public license lookup, and the difference between a
       licensed contractor and a truck with a magnetic sign is a search box.
     </p>
 
-    <h2>Look the licence up yourself</h2>
+    <h2>Look the license up yourself</h2>
     <p>
       Not the copy they hand you, and not the number on the card: the state's
-      own register. Ask for the legal business name and the licence number,
+      own register. Ask for the legal business name and the license number,
       then check it against the board that issues it. Requirements and
       thresholds differ by state and by the size of the job, so if you are not
       sure what a job needs, the board is the place to ask.
@@ -268,12 +282,12 @@ PAGES = [
       <li><a href="https://www.msboc.us/" target="_blank" rel="noopener">Mississippi State Board of Contractors</a></li>
       <li><a href="https://hblb.alabama.gov/" target="_blank" rel="noopener">Alabama Home Builders Licensure Board</a></li>
       <li><a href="https://lslbc.gov/" target="_blank" rel="noopener">Louisiana State Licensing Board for Contractors</a></li>
-      <li><a href="https://www2.myfloridalicense.com/" target="_blank" rel="noopener">Florida DBPR licence search</a></li>
+      <li><a href="https://www2.myfloridalicense.com/" target="_blank" rel="noopener">Florida DBPR license search</a></li>
       <li><a href="https://www.tdlr.texas.gov/" target="_blank" rel="noopener">Texas Department of Licensing and Regulation</a></li>
     </ul>
     <p>
       Texas is the one to read carefully rather than assume: it does not
-      license general residential contractors the way its neighbours do, so
+      license general residential contractors the way its neighbors do, so
       "licensed" means something narrower there, and checking what a particular
       trade actually requires matters more.
     </p>
@@ -287,7 +301,7 @@ PAGES = [
       signing rather than after.</li>
       <li><strong>A large deposit before materials are on site.</strong> Ask
       what the deposit buys and when the materials arrive. A schedule of
-      payments tied to work completed is normal; a big cheque tied to nothing
+      payments tied to work completed is normal; a big check tied to nothing
       is not.</li>
       <li><strong>An offer to cover your deductible.</strong> Your deductible
       is what you owe under the policy. Anyone offering to make it disappear is
@@ -300,7 +314,7 @@ PAGES = [
 
     <h2>What to keep</h2>
     <p>
-      A written scope of work and a written price. Proof of licence and
+      A written scope of work and a written price. Proof of license and
       insurance. Every invoice and receipt, including the emergency tarping.
       And a log of every call: the date, who you spoke to, and what they
       promised. That log is the single most useful thing a homeowner keeps
@@ -350,7 +364,7 @@ PAGES = [
 
     <h2>Why the roof and not the rest of the house</h2>
     <p>
-      Wind damage tends to start at an edge and work inwards. Once the covering
+      Wind damage tends to start at an edge and work inward. Once the covering
       or the deck goes, water follows, and a roof claim quickly becomes a
       contents and interior claim. That is why mitigation standards concentrate
       on how the deck is fastened and sealed and how the roof ties to the

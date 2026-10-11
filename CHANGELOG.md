@@ -27,7 +27,40 @@ Newest first.
 
 ---
 
-## [1.41.0], 2026-10-10
+## [1.42.0], 2026-10-10
+
+### Changed
+
+- **Re-checked ten resource pages against their sources**, all dated
+  10 October 2026. Mississippi was already re-checked on 1 October.
+  Louisiana, Texas, FloodSmart, the deductibles, roof age and contractor
+  pages held. What moved:
+  - **Florida.** Re-sourced to the program's FAQ, since the 2025-26 terms
+    document is no longer linked. "Two-thirds" is now the FAQ's "$2 for every
+    $1"; "permit before 2008" is now "built before January 1, 2008"; the 80
+    percent income line and the 24-month report validity are gone, because
+    the FAQ does not say them; the priority order is cut to the one group the
+    FAQ names first.
+  - **Alabama.** The round is now the schedule page's: Mobile October 6,
+    Baldwin October 8, then quarterly through July 2027. The bid step is
+    "choose three contractors within 7 days", per their site.
+  - **Wind mitigation discounts.** The five-year FORTIFIED certificate is now
+    credited to Louisiana's page, because Mississippi's no longer says it.
+    MWUA's endorsement now says what it does: pays toward a FORTIFIED roof
+    after a covered claim replaces the roof.
+
+### Added
+
+- **Wind pools: "Do not wait for the storm".** AIUA and TWIA both suspended
+  new business for Named Storm Isaias this week, the wind-pool version of the
+  flood 30-day rule.
+
+### Fixed
+
+- American spellings on the generated pages: license, neighbors, check,
+  organization, recognize, inward.
+
+, 2026-10-10
 
 ### Added
 

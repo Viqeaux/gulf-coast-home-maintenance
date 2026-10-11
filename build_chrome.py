@@ -30,17 +30,17 @@ DOCS = "docs"
 # the date they were checked, which is the promise those pages are built on.
 # Move the date when you re-check the facts, not when you edit the wording.
 RESOURCE_CHECKED = {
-    "flood-insurance-30-day-rule":  ("FEMA's pages",          "22 August 2026"),
-    "louisiana-fortify-homes":      ("the department's page", "22 August 2026"),
-    "my-safe-florida-home":         ("the program's pages",   "22 August 2026"),
-    "strengthen-alabama-homes":     ("the program's pages",   "22 August 2026"),
+    "flood-insurance-30-day-rule":  ("FEMA's pages",          "10 October 2026"),
+    "louisiana-fortify-homes":      ("the department's page", "10 October 2026"),
+    "my-safe-florida-home":         ("the program's pages",   "10 October 2026"),
+    "strengthen-alabama-homes":     ("the program's pages",   "10 October 2026"),
     "strengthen-mississippi-homes": ("the department's page", "1 October 2026"),
-    "texas-windstorm-coverage":     ("the sources",           "22 August 2026"),
-    "wind-mitigation-discounts":    ("the sources",           "22 August 2026"),
-    "hurricane-deductibles":        ("the sources",           "22 August 2026"),
-    "gulf-wind-pools":              ("the associations' own sites", "22 August 2026"),
-    "storm-contractors":            ("the licensing boards",  "22 August 2026"),
-    "roof-age-and-insurance":       ("the sources",           "22 August 2026"),
+    "texas-windstorm-coverage":     ("the sources",           "10 October 2026"),
+    "wind-mitigation-discounts":    ("the sources",           "10 October 2026"),
+    "hurricane-deductibles":        ("the sources",           "10 October 2026"),
+    "gulf-wind-pools":              ("the associations' own sites", "10 October 2026"),
+    "storm-contractors":            ("the licensing boards",  "10 October 2026"),
+    "roof-age-and-insurance":       ("the sources",           "10 October 2026"),
 }
 
 SIGNUP = """    <div class="foot-signup">

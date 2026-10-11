@@ -15,9 +15,9 @@
       }
     },
     "https://floir.gov": {
-      "chars": 2086,
-      "hash": "94bd9b9f2e6b05cf",
-      "last_seen": "2026-10-01",
+      "chars": 1980,
+      "hash": "1991a668703135f1",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [
@@ -32,8 +32,8 @@
     },
     "https://fortifiedhome.org": {
       "chars": 16526,
-      "hash": "5170021f9dcc801c",
-      "last_seen": "2026-10-01",
+      "hash": "fcef46e91f68c080",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [
@@ -49,7 +49,7 @@
     "https://fortifiedhome.org/incentives": {
       "chars": 12343,
       "hash": "840415f2f6d22f0f",
-      "last_seen": "2026-10-01",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [
@@ -67,9 +67,9 @@
       }
     },
     "https://hblb.alabama.gov": {
-      "chars": 1501,
-      "hash": "d565555ed6183b78",
-      "last_seen": "2026-10-01",
+      "chars": 1529,
+      "hash": "f444a5ee361e2a3f",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [],
@@ -82,7 +82,7 @@
     "https://lslbc.gov": {
       "chars": 4078,
       "hash": "6abe7aa74dc312f5",
-      "last_seen": "2026-10-01",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [],
@@ -94,23 +94,24 @@
       }
     },
     "https://magnoliatribune.com/2026/04/02/lawmakers-look-to-strengthen-mississippi-homes-with-new-mitigation-program": {
-      "chars": 8824,
-      "hash": "af3ad0e1524cdfd1",
-      "last_seen": "2026-10-01",
+      "chars": 8845,
+      "hash": "099bfd69a648320d",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [
           "april 2, 2026",
-          "october 1, 2026",
-          "september 22, 2026",
-          "september 23, 2026",
-          "september 24, 2026",
-          "september 25, 2026",
-          "september 28, 2026",
-          "september 30, 2026"
+          "october 2, 2026",
+          "october 6, 2026",
+          "october 7, 2026",
+          "october 8, 2026",
+          "october 9, 2026"
         ],
         "dollars": [
           "$10,000",
-          "$16"
+          "$502",
+          "$12",
+          "$16",
+          "$40"
         ],
         "status": [
           "lottery"
@@ -121,9 +122,9 @@
       }
     },
     "https://msc.fema.gov/portal/home": {
-      "chars": 3819,
-      "hash": "e01fc0d6cd5a3829",
-      "last_seen": "2026-10-01",
+      "chars": 4064,
+      "hash": "dd2038dafb657c25",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [],
@@ -134,7 +135,7 @@
     "https://msplans.com": {
       "chars": 0,
       "hash": "e3b0c44298fc1c14",
-      "last_seen": "2026-10-01",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [],
@@ -143,9 +144,9 @@
       }
     },
     "https://myfloridacfo.com/division/consumers": {
-      "chars": 2862,
-      "hash": "cb49c63190c594a5",
-      "last_seen": "2026-10-01",
+      "chars": 2894,
+      "hash": "3efa283ae5720f95",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [],
@@ -156,7 +157,7 @@
     "https://mysafeflhome.com": {
       "chars": 5869,
       "hash": "e90a8bbefca33f4a",
-      "last_seen": "2026-10-01",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [
@@ -169,12 +170,45 @@
         ]
       }
     },
-    "https://www.aiua.org": {
-      "chars": 1355,
-      "hash": "4a88cffe2e335d8f",
-      "last_seen": "2026-10-01",
+    "https://mysafeflhome.com/faqs-2": {
+      "chars": 12135,
+      "hash": "00ac597be2ad3974",
+      "last_seen": "2026-10-10",
       "signals": {
-        "dates": [],
+        "dates": [
+          "january 1, 2008"
+        ],
+        "dollars": [
+          "$10,000,",
+          "$700,000",
+          "$10,000",
+          "$15,000",
+          "$20,000",
+          "$3,000",
+          "$5,000",
+          "$6,000",
+          "$9,000",
+          "$1",
+          "$2"
+        ],
+        "status": [
+          "deadline"
+        ],
+        "years": [
+          "2008",
+          "2022",
+          "2026"
+        ]
+      }
+    },
+    "https://www.aiua.org": {
+      "chars": 1618,
+      "hash": "23f9a46aebe7ea00",
+      "last_seen": "2026-10-10",
+      "signals": {
+        "dates": [
+          "october 7, 2026"
+        ],
         "dollars": [],
         "status": [],
         "years": [
@@ -183,9 +217,9 @@
       }
     },
     "https://www.citizensfla.com": {
-      "chars": 7350,
-      "hash": "e870de37b33ace2f",
-      "last_seen": "2026-10-01",
+      "chars": 7092,
+      "hash": "5b58d62dd28aec7b",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [],
@@ -196,9 +230,9 @@
       }
     },
     "https://www.floodsmart.gov": {
-      "chars": 7133,
-      "hash": "bb38f80019ec64c2",
-      "last_seen": "2026-10-01",
+      "chars": 7375,
+      "hash": "464780b186f44a8d",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [],
@@ -207,9 +241,9 @@
       }
     },
     "https://www.floodsmart.gov/get-insured/buy-a-policy": {
-      "chars": 8182,
-      "hash": "10f522ce3db1d096",
-      "last_seen": "2026-10-01",
+      "chars": 8424,
+      "hash": "2d0d3685554411b5",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [
@@ -224,8 +258,8 @@
     },
     "https://www.lacitizens.com": {
       "chars": 2050,
-      "hash": "a477b71da7d848df",
-      "last_seen": "2026-10-01",
+      "hash": "3610586bce8c2692",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [
           "april 1, 2025"
@@ -242,15 +276,15 @@
       }
     },
     "https://www.mid.ms.gov": {
-      "chars": 14805,
-      "hash": "5f62d393a267a60c",
-      "last_seen": "2026-10-01",
+      "chars": 14454,
+      "hash": "76eac70338c9ec56",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [
           "july 22, 2026",
-          "may 21, 2026",
           "may 27, 2026",
-          "november 12, 2026"
+          "november 12, 2026",
+          "october 5, 2026"
         ],
         "dollars": [
           "$216",
@@ -258,6 +292,7 @@
         ],
         "status": [],
         "years": [
+          "2025",
           "2026"
         ]
       }
@@ -265,7 +300,7 @@
     "https://www.mid.ms.gov/smh": {
       "chars": 18478,
       "hash": "0fa9e08ca2008c99",
-      "last_seen": "2026-10-01",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [
@@ -298,7 +333,7 @@
     "https://www.msboc.us": {
       "chars": 7138,
       "hash": "52435e5356eac995",
-      "last_seen": "2026-10-01",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [],
@@ -311,7 +346,7 @@
     "https://www.msplans.com/mwua": {
       "chars": 0,
       "hash": "e3b0c44298fc1c14",
-      "last_seen": "2026-10-01",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [],
@@ -345,7 +380,7 @@
     "https://www.strengthenalabamahomes.com": {
       "chars": 13747,
       "hash": "519410822d7c6fc1",
-      "last_seen": "2026-10-01",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [
           "november 4, 2025"
@@ -363,10 +398,25 @@
         ]
       }
     },
+    "https://www.strengthenalabamahomes.com/Home/GrantSchedule": {
+      "chars": 1430,
+      "hash": "fe5277bf9c29e534",
+      "last_seen": "2026-10-10",
+      "signals": {
+        "dates": [],
+        "dollars": [],
+        "status": [],
+        "years": [
+          "2023",
+          "2026",
+          "2027"
+        ]
+      }
+    },
     "https://www.tdi.texas.gov/consumer/index.html": {
       "chars": 3587,
       "hash": "4c6add3ba0ad4c29",
-      "last_seen": "2026-10-01",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [],
@@ -379,7 +429,7 @@
     "https://www.tdi.texas.gov/wind/index.html": {
       "chars": 3058,
       "hash": "8e3ac7167c96deaa",
-      "last_seen": "2026-10-01",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [
           "june 1, 2020"
@@ -396,7 +446,7 @@
     "https://www.tdlr.texas.gov": {
       "chars": 4854,
       "hash": "1ff572f3f77db753",
-      "last_seen": "2026-10-01",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [],
         "dollars": [],
@@ -409,12 +459,12 @@
       }
     },
     "https://www.twia.org": {
-      "chars": 4741,
-      "hash": "659a80cdae4a7945",
-      "last_seen": "2026-10-01",
+      "chars": 4767,
+      "hash": "620d14c52bc69135",
+      "last_seen": "2026-10-10",
       "signals": {
         "dates": [
-          "october 8, 2026"
+          "november 10, 2026"
         ],
         "dollars": [],
         "status": [],
@@ -424,13 +474,11 @@
       }
     },
     "https://www2.myfloridalicense.com": {
-      "chars": 1953,
-      "hash": "88da494dc4b75fde",
-      "last_seen": "2026-10-01",
+      "chars": 1968,
+      "hash": "0661a8f13ad606f8",
+      "last_seen": "2026-10-10",
       "signals": {
-        "dates": [
-          "september 30, 2026"
-        ],
+        "dates": [],
         "dollars": [],
         "status": [],
         "years": [
@@ -440,5 +488,5 @@
       }
     }
   },
-  "updated": "2026-10-01"
+  "updated": "2026-10-10"
 }

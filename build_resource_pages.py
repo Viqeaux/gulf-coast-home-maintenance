@@ -33,8 +33,9 @@ import os
 import site_chrome
 
 OUT = os.path.join("docs", "resources")
-CHECKED = "22 August 2026"
-ISO = "2026-08-22"
+CHECKED = "10 October 2026"
+ISO = "2026-10-10"
+PUBLISHED = "2026-08-22"   # first published; ISO moves with each re-check
 
 SHELL = """<!doctype html>
 <html lang="en">
@@ -125,7 +126,7 @@ def article_ld(page):
                 "@type": "Article",
                 "headline": page["og_title"],
                 "description": page["og_description"],
-                "datePublished": ISO,
+                "datePublished": PUBLISHED,
                 "dateModified": ISO,
                 "author": {"@type": "Organization",
                            "name": "Gulf Coast Home Maintenance",
