@@ -980,7 +980,7 @@
     <p class="private-tool"><a href="https://thermal.gulfcoasthomemaintenance.com/" target="_blank" rel="noopener nofollow">Thermal report tool</a> &middot; private, password required</p>
     <!-- Bump on release, alongside the CHANGELOG entry and the git tag.
          Shown so a tester can say which version they were looking at. -->
-    <p class="version">v1.40.1</p>
+    <p class="version">v1.41.0</p>
   </div>
 </footer>
 
@@ -1078,15 +1078,25 @@
     if (!data) return;
     var name = MONTHS[m - 1];
 
+    // Each task links to its own entry on the guides page, where the why and
+    // any how-to videos live.
+    function taskItem(task) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.className = 'task-link';
+      a.href = 'guides/#' + task.slug;
+      a.textContent = task.title;
+      li.appendChild(a);
+      return li;
+    }
+
     var hero = document.querySelector('.hero-month');
     if (hero) {
       hero.querySelector('.hm-month').textContent = name;
       var list = hero.querySelector('ul');
       ['must', 'should', 'above'].forEach(function (tier) {
         if (data[tier] && data[tier][0]) {
-          var li = document.createElement('li');
-          li.textContent = data[tier][0];
-          list.appendChild(li);
+          list.appendChild(taskItem(data[tier][0]));
         }
       });
       var count = hero.querySelector('.hm-count');
@@ -1112,10 +1122,8 @@
       function fill(id, items) {
         var el = document.getElementById(id);
         if (!el || !items) return;
-        items.forEach(function (title) {
-          var li = document.createElement('li');
-          li.textContent = title;
-          el.appendChild(li);
+        items.forEach(function (task) {
+          el.appendChild(taskItem(task));
         });
       }
       fill('now-must', data.must);

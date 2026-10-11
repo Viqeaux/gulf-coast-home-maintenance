@@ -38,7 +38,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.40.1"
+VERSION = "1.41.0"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -1336,15 +1336,17 @@ def build_guides():
 def build_month_tasks():
     """Return docs/month-tasks.js, the data behind the home page's month cards.
 
-    Titles only, which is the free half: the feeds already publish every title
+    Titles and slugs only, which is the free half: the feeds already publish every title
     to anyone who subscribes. The step-by-step stays in task_steps.py and never
     reaches this file. The home page reads window.MONTH_TASKS to fill the hero
     card and the "this month" section for whatever month the visitor is in.
     """
     months = {}
-    for month, _day, tier, _slug, title, _body in TASKS:
+    for month, _day, tier, slug, title, _body in TASKS:
         months.setdefault(month, {"must": [], "should": [], "above": []})
-        months[month][tier].append(title)
+        # The slug is the task's anchor on the guides page, so each card line
+        # can link straight to its videos.
+        months[month][tier].append({"title": title, "slug": slug})
     # The rounds repeat every month, so they travel once rather than twelve
     # times. Titles only, with the "Monthly: " prefix trimmed because the
     # column they land in already says so.

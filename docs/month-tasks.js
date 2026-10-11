@@ -2,134 +2,242 @@
 window.MONTH_TASKS = {
   "1": {
     "must": [
-      "Test smoke and CO detectors"
+      {
+        "title": "Test smoke and CO detectors",
+        "slug": "jan-detectors"
+      }
     ],
     "should": [
-      "Freeze prep, find your water shutoff"
+      {
+        "title": "Freeze prep, find your water shutoff",
+        "slug": "jan-freeze-prep"
+      }
     ],
     "above": [
-      "Check the attic after winter rain"
+      {
+        "title": "Check the attic after winter rain",
+        "slug": "jan-attic-check"
+      }
     ]
   },
   "2": {
     "must": [
-      "Schedule the annual termite inspection"
+      {
+        "title": "Schedule the annual termite inspection",
+        "slug": "feb-termite-inspection"
+      }
     ],
     "should": [
-      "Replace the HVAC filter, test the A/C"
+      {
+        "title": "Replace the HVAC filter, test the A/C",
+        "slug": "feb-hvac-filter"
+      }
     ],
     "above": [
-      "Walk the exterior and re-caulk"
+      {
+        "title": "Walk the exterior and re-caulk",
+        "slug": "feb-caulk"
+      }
     ]
   },
   "3": {
     "must": [
-      "Service the HVAC before cooling season"
+      {
+        "title": "Service the HVAC before cooling season",
+        "slug": "mar-hvac-service"
+      }
     ],
     "should": [
-      "Clear the gutters, check the downspouts"
+      {
+        "title": "Clear the gutters, check the downspouts",
+        "slug": "mar-gutters"
+      }
     ],
     "above": [
-      "Check the grading around the house"
+      {
+        "title": "Check the grading around the house",
+        "slug": "mar-grading"
+      }
     ]
   },
   "4": {
     "must": [
-      "Swarm season, watch for termites"
+      {
+        "title": "Swarm season, watch for termites",
+        "slug": "apr-swarm-season"
+      }
     ],
     "should": [
-      "Wash the exterior, inspect the siding"
+      {
+        "title": "Wash the exterior, inspect the siding",
+        "slug": "apr-wash-exterior"
+      }
     ],
     "above": [
-      "Check spigots and service irrigation"
+      {
+        "title": "Check spigots and service irrigation",
+        "slug": "apr-spigots-irrigation"
+      }
     ]
   },
   "5": {
     "must": [
-      "Verify insurance, season opens June 1"
+      {
+        "title": "Verify insurance, season opens June 1",
+        "slug": "may-insurance-hurricane-prep"
+      }
     ],
     "should": [
-      "Test the generator, restock supplies"
+      {
+        "title": "Test the generator, restock supplies",
+        "slug": "may-generator-supplies"
+      }
     ],
     "above": [
-      "Inspect roof edges, secure loose items"
+      {
+        "title": "Inspect roof edges, secure loose items",
+        "slug": "may-secure-exterior"
+      }
     ]
   },
   "6": {
     "must": [
-      "Clear the A/C condensate drain line"
+      {
+        "title": "Clear the A/C condensate drain line",
+        "slug": "jun-condensate-line"
+      }
     ],
     "should": [
-      "Clean the condenser, clear vegetation"
+      {
+        "title": "Clean the condenser, clear vegetation",
+        "slug": "jun-condenser-coils"
+      }
     ],
     "above": [
-      "Check attic ventilation and insulation"
+      {
+        "title": "Check attic ventilation and insulation",
+        "slug": "jun-attic-ventilation"
+      }
     ]
   },
   "7": {
     "must": [
-      "Hunt for leaks"
+      {
+        "title": "Hunt for leaks",
+        "slug": "jul-leak-hunt"
+      }
     ],
     "should": [
-      "Inspect the crawlspace"
+      {
+        "title": "Inspect the crawlspace",
+        "slug": "jul-crawlspace"
+      }
     ],
     "above": [
-      "Check indoor humidity"
+      {
+        "title": "Check indoor humidity",
+        "slug": "jul-humidity"
+      }
     ]
   },
   "8": {
     "must": [
-      "Peak season, re-check kit and plan"
+      {
+        "title": "Peak season, re-check kit and plan",
+        "slug": "aug-peak-season-check"
+      }
     ],
     "should": [
-      "Clear the gutters again"
+      {
+        "title": "Clear the gutters again",
+        "slug": "aug-gutters-again"
+      }
     ],
     "above": [
-      "Photograph big-ticket items"
+      {
+        "title": "Photograph big-ticket items",
+        "slug": "aug-photograph-valuables"
+      }
     ]
   },
   "9": {
     "must": [
-      "Clean the dryer vent"
+      {
+        "title": "Clean the dryer vent",
+        "slug": "sep-dryer-vent"
+      }
     ],
     "should": [
-      "Inspect the roof from the ground"
+      {
+        "title": "Inspect the roof from the ground",
+        "slug": "sep-roof-inspection"
+      }
     ],
     "above": [
-      "Test the sump pump, clear drainage"
+      {
+        "title": "Test the sump pump, clear drainage",
+        "slug": "sep-sump-drainage"
+      }
     ]
   },
   "10": {
     "must": [
-      "Flush the water heater"
+      {
+        "title": "Flush the water heater",
+        "slug": "oct-flush-water-heater"
+      }
     ],
     "should": [
-      "Check weatherstripping and seals"
+      {
+        "title": "Check weatherstripping and seals",
+        "slug": "oct-weatherstripping"
+      }
     ],
     "above": [
-      "Service the fireplace or chimney"
+      {
+        "title": "Service the fireplace or chimney",
+        "slug": "oct-chimney"
+      }
     ]
   },
   "11": {
     "must": [
-      "Post-season inspection, season closed"
+      {
+        "title": "Post-season inspection, season closed",
+        "slug": "nov-post-season-inspection"
+      }
     ],
     "should": [
-      "Replace the filter, test the heat"
+      {
+        "title": "Replace the filter, test the heat",
+        "slug": "nov-filter-heat-test"
+      }
     ],
     "above": [
-      "Clear gutters, check fascia and trim"
+      {
+        "title": "Clear gutters, check fascia and trim",
+        "slug": "nov-gutters-fascia"
+      }
     ]
   },
   "12": {
     "must": [
-      "Freeze prep, protect the pipes"
+      {
+        "title": "Freeze prep, protect the pipes",
+        "slug": "dec-freeze-prep"
+      }
     ],
     "should": [
-      "Test GFCI outlets, label the panel"
+      {
+        "title": "Test GFCI outlets, label the panel",
+        "slug": "dec-gfci-breakers"
+      }
     ],
     "above": [
-      "Update the Big Ticket Watch List"
+      {
+        "title": "Update the Big Ticket Watch List",
+        "slug": "dec-watch-list"
+      }
     ]
   }
 };

@@ -27,7 +27,16 @@ Newest first.
 
 ---
 
-## [1.40.1], 2026-10-10
+## [1.41.0], 2026-10-10
+
+### Added
+
+- **The home page's month cards link to the guides page.** Each task in the
+  hero card and in "This month on the Gulf Coast" now goes straight to its own
+  entry, where the why and any how-to video live. `month-tasks.js` carries the
+  slug beside each title to make that possible. Feeds unchanged.
+
+, 2026-10-10
 
 ### Added
 

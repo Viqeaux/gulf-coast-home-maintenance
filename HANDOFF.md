@@ -1622,7 +1622,18 @@ build.
    to its guides anchor because `has_guide()` also counts `STEPS`, so the feeds
    stayed byte-identical. Run `check_links.py` every month or two.
 
-3. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
+3. **Point the kit at the videos.** Each task page in the kit and the realtor
+   edition could carry one line, "Watch it done:
+   gulfcoasthomemaintenance.com/guides/#slug", or a small QR code. Raised
+   2026-10-10, when the videos went live and only the free products reached
+   them. It makes the paid product more useful, and every buyer who scans
+   lands on the site, which is the traffic problem. The cost: rebuild both
+   PDFs and the fillable copy, new listing images, and Chad re-uploads both
+   Etsy listings. The guides page anchors are task slugs, so they are stable;
+   check that a printed URL survives `check_links.py`-style rot before
+   committing to it. **Chad's call, not decided yet.**
+
+4. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
    South regional rather than coastal-only, so a Texas or Florida edition is a
    retiming and a relabeling, not a rewrite. **The planner is already built for
    this**: `REGIONS` in `planner_data.py` carries a cost factor and a lifespan
