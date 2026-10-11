@@ -38,7 +38,7 @@ DTSTAMP = "20260813T000000Z"
 
 # Shown in the guides page footer. Keep in step with CHANGELOG.md, the git tag,
 # and the footer of docs/index.html.
-VERSION = "1.39.1"
+VERSION = "1.40.0"
 
 UID_DOMAIN = "gulfcoast-home-maintenance"
 
@@ -444,6 +444,136 @@ MONTHLY_ROUNDS = [
 # catch anything that has since been deleted or made private.
 
 GUIDES = {
+    "jan-detectors": [
+        ("Understanding smoke and carbon monoxide detectors",
+         "https://www.youtube.com/watch?v=LKmhqdq1YnI",
+         "This Old House"),
+    ],
+    "jan-freeze-prep": [
+        ("How to turn off the main water valve",
+         "https://www.youtube.com/watch?v=VLrku55gWr4",
+         "Ace Hardware"),
+    ],
+    "jan-attic-check": [
+        ("How to find a leak in the roof of your house",
+         "https://www.youtube.com/watch?v=GqRr4OhFEMc",
+         "Today's Homeowner"),
+    ],
+    "feb-hvac-filter": [
+        ("Replacing an HVAC filter on the wall, ceiling, or at the unit",
+         "https://www.youtube.com/watch?v=luNwfQls8fY",
+         "NVHomes"),
+    ],
+    "feb-caulk": [
+        ("How to remove and replace exterior caulk",
+         "https://www.youtube.com/watch?v=GdHfuL64zqw",
+         "HouseCalls"),
+    ],
+    "mar-gutters": [
+        ("How to properly clean your gutters",
+         "https://www.youtube.com/watch?v=Yyw2XN5Z-24",
+         "Homestead Roofing"),
+    ],
+    "mar-grading": [
+        ("How to grade around a foundation",
+         "https://www.youtube.com/watch?v=7wlslzFTQP0",
+         "This Old House"),
+    ],
+    "apr-swarm-season": [
+        ("Flying ants vs. flying termites",
+         "https://www.youtube.com/watch?v=TzZvDwUth4A",
+         "Dan the Bug Man"),
+    ],
+    "apr-wash-exterior": [
+        ("How to clean vinyl siding",
+         "https://www.youtube.com/watch?v=vDYyVhYfEyQ",
+         "This Old House"),
+    ],
+    "may-generator-supplies": [
+        ("Getting your generator ready for hurricane season",
+         "https://www.youtube.com/watch?v=BODupWwwpqw",
+         "News4JAX"),
+    ],
+    "jun-condensate-line": [
+        ("How to clean your AC condensate drain line",
+         "https://www.youtube.com/watch?v=LkHEOxpCu34",
+         "Sears PartsDirect"),
+    ],
+    "jun-condenser-coils": [
+        ("How to clean your condenser coils",
+         "https://www.youtube.com/watch?v=JEwZldAPfVc",
+         "Premier Comfort Solutions"),
+    ],
+    "jun-attic-ventilation": [
+        ("How soffit, rafter and ridge vents work",
+         "https://www.youtube.com/watch?v=hDB8qX9QNgY",
+         "The Fixer"),
+    ],
+    "jul-leak-hunt": [
+        ("Finding leaks using a water meter",
+         "https://www.youtube.com/watch?v=wzcTYPvEhTc",
+         "Portland Water Bureau"),
+    ],
+    "jul-crawlspace": [
+        ("Crawl spaces: what every homeowner should know",
+         "https://www.youtube.com/watch?v=1rxwSq5g3Wg",
+         "Dan the Bug Man"),
+    ],
+    "aug-gutters-again": [
+        ("How to properly clean your gutters",
+         "https://www.youtube.com/watch?v=Yyw2XN5Z-24",
+         "Homestead Roofing"),
+    ],
+    "sep-dryer-vent": [
+        ("How to clean dryer vents from inside and outside",
+         "https://www.youtube.com/watch?v=x_zEQ_KWhBI",
+         "Abbotts At Home"),
+    ],
+    "sep-roof-inspection": [
+        ("How to inspect your roof from the ground",
+         "https://www.youtube.com/watch?v=eWSbrsgIsBE",
+         "O'LYN Roofing"),
+    ],
+    "sep-sump-drainage": [
+        ("How to know if your sump pump is working",
+         "https://www.youtube.com/watch?v=tzkBN863DnI",
+         "Ace Hardware"),
+    ],
+    "oct-flush-water-heater": [
+        ("How to flush a water heater",
+         "https://www.youtube.com/watch?v=PjwENIksoWE",
+         "This Old House"),
+    ],
+    "oct-weatherstripping": [
+        ("How to weatherstrip a wood door",
+         "https://www.youtube.com/watch?v=JjmTlWE-6h8",
+         "This Old House"),
+    ],
+    "oct-chimney": [
+        ("How to inspect a wood burning fireplace",
+         "https://www.youtube.com/watch?v=OnRmBuSJrW0",
+         "Family Handyman"),
+    ],
+    "nov-filter-heat-test": [
+        ("Replacing an HVAC filter on the wall, ceiling, or at the unit",
+         "https://www.youtube.com/watch?v=luNwfQls8fY",
+         "NVHomes"),
+    ],
+    "nov-gutters-fascia": [
+        ("How to properly clean your gutters",
+         "https://www.youtube.com/watch?v=Yyw2XN5Z-24",
+         "Homestead Roofing"),
+    ],
+    "dec-freeze-prep": [
+        ("How to prevent frozen pipes",
+         "https://www.youtube.com/watch?v=BVItL66doqw",
+         "This Old House"),
+    ],
+    "dec-gfci-breakers": [
+        ("How to properly test a GFCI outlet",
+         "https://www.youtube.com/watch?v=RPxq1diEtK0",
+         "Golden Rule Plumbing, Heating, Cooling & Electrical"),
+    ],
 }
 
 # --- ICS generation --------------------------------------------------------

@@ -1617,10 +1617,10 @@ build.
    and it has a September 10 deadline. Kit plus planner is the calm January
    pairing and can wait for the new year.
 
-2. **Curated how-to videos.** `GUIDES` in `build_calendars.py` is empty and the
-   plumbing is done. Adding entries puts links on the guides page and into the
-   calendar events. **Adding the first one requires a `SEQUENCE` bump**, since
-   it changes what subscribers see. `check_links.py` finds dead ones.
+2. ~~**Curated how-to videos.**~~ **Done in 1.40.0**, 26 of 36 tasks. Adding
+   them did *not* need a `SEQUENCE` bump after all: every event already links
+   to its guides anchor because `has_guide()` also counts `STEPS`, so the feeds
+   stayed byte-identical. Run `check_links.py` every month or two.
 
 3. **Regional editions.** Chad's own plan, explicitly later. The content is Gulf
    South regional rather than coastal-only, so a Texas or Florida edition is a

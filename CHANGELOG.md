@@ -27,6 +27,22 @@ Newest first.
 
 ---
 
+## [1.40.0], 2026-10-10
+
+### Added
+
+- **How-to videos on the guides page.** 26 of the 36 tasks now list a video
+  under them, picked from This Old House, Ace Hardware, Today's Homeowner,
+  Family Handyman and others, and checked as watchable through oEmbed with
+  `check_links.py`. The ten left without one are paperwork, insurance or
+  hire-a-pro tasks where a video would not help.
+
+### Not changed
+
+- **The feeds.** Every event already linked to its guides anchor, because
+  `has_guide()` counts steps as well as videos, so no `DESCRIPTION` changed and
+  `SEQUENCE` stays at 2. The `.ics` files are byte-identical to 1.39.1.
+
 ## [1.39.1], 2026-10-01
 
 **The department's own FAQ, dated September 2026, settles what 1.39.0 had to
