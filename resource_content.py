@@ -32,11 +32,11 @@ PAGES = [
     # ---------------------------------------------------------------- 1
     {
         "slug": "hurricane-deductibles",
-        "title": "Your Hurricane Deductible, in Dollars: How the Percentage Works",
+        "title": "Hurricane Deductible: How the Percentage Works, in Dollars",
         "description": "A coastal hurricane deductible is usually a percentage of your dwelling limit, not a flat amount. How to work out yours in two minutes, and why it decides what a claim is worth.",
         "og_title": "Your hurricane deductible is a percentage, not a number",
         "og_description": "Most Gulf Coast policies carry a separate hurricane deductible set as a percentage of the dwelling limit. Here is how to find yours and turn it into a dollar figure.",
-        "h1": "Your hurricane deductible, in dollars",
+        "h1": "Your hurricane deductible, in dollars: how the percentage works",
         "standfirst": "Most homeowners can tell you their deductible and most of them are quoting the wrong one. On this coast there are usually two, and the one that applies to a named storm is not written as a dollar amount at all.",
         "checked": CHECKED_LINE,
         "body": """    <p class="lede">

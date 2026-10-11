@@ -27,7 +27,26 @@ Newest first.
 
 ---
 
-## [1.43.0], 2026-10-10
+## [1.43.1], 2026-10-10
+
+### Changed
+
+- **Titles, descriptions and headings now lead with what people search**,
+  per the first Search Console read. Seven pages: flood ("waiting period",
+  "is it too late"), Louisiana ("FORTIFIED roof program", "lottery"),
+  Alabama ("Strengthen Alabama Homes", "schedule"), Florida ("My Safe
+  Florida Home program"), Mississippi ("Strengthen Mississippi Homes"),
+  Texas ("windstorm insurance and inspections") and hurricane deductibles.
+  No facts changed.
+- The flood page answers "is it too late?" in its second paragraph: not to
+  buy, only for that policy to cover a storm already on the map.
+
+### Fixed
+
+- Florida's meta description still said "checked against the program's
+  terms"; it now says the FAQ, which is what 1.42.0 checked it against.
+
+, 2026-10-10
 
 ### Added
 
