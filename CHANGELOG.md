@@ -27,7 +27,22 @@ Newest first.
 
 ---
 
-## [1.42.0], 2026-10-10
+## [1.42.1], 2026-10-10
+
+### Fixed
+
+- **The storm page, re-checked.** Every outbound link resolves, and the
+  FloodSmart claim pages say what the page says they do. Three corrections:
+  - Evacuation zones: Florida's own Know Your Zone page loosely calls them
+    flood zones, so the line now says what the difference is (drawn around
+    surge, not the FEMA zone on your insurance) instead of flatly denying it.
+  - The insurance departments are now pointed at the hurricane deductibles
+    page, which lists each one's consumer help, instead of the wind
+    mitigation page, which links Florida's regulator rather than its
+    consumer office.
+  - American spellings: curb, license.
+
+, 2026-10-10
 
 ### Changed
 
